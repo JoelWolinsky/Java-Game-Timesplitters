@@ -20,6 +20,7 @@ public class MouseInput implements MouseInputListener{
 	
 	/**
 	 * The location of the mouse on the screen. X and Y coordinates can be accessed directly (i.e. <pre>MouseInput.mousePos.x</pre>)
+	 * This will be broadcast over the network
 	 */
 	public static Point mousePos;
 	
@@ -33,10 +34,12 @@ public class MouseInput implements MouseInputListener{
 	
 	/**
 	 * Broadcasts a mouseClick event to all MouseClickListener objects in the clickListers list
+	 * This will be replaced with a network send function
 	 */
 	public void mouseClicked(MouseEvent e) {
 		for(int i = 0; i < Listeners.mouseClickListeners.size(); i++) {
 			Listeners.mouseClickListeners.get(i).mouseClicked(e);
+//			Client.mouseEventBuffer.write(e);
 		}
 	}
 	

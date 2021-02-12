@@ -1,8 +1,6 @@
 package client;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.LinkedList;
 
 import server.Listeners;
 
@@ -15,20 +13,24 @@ import server.Listeners;
 public class KeyInput extends KeyAdapter{
 	
 	/**
-	 * Broadcasts keyPressed events to all KeyListener objects in the listener list
+	 * Broadcasts keyPressed events to all KeyListener objects in the listener list<br>
+	 * This will be replaced with a network send function
 	 */
 	public void keyPressed(KeyEvent e) {
 		for(int i = 0; i < Listeners.keyListeners.size(); i ++) {
 			Listeners.keyListeners.get(i).keyPressed(e);
+//			Client.keyEventBuffer.write(e);
 		}
 	}
 	
 	/**
-	 * Broadcasts keyReleased events to all KeyListener objects in the listener list
+	 * Broadcasts keyReleased events to all KeyListener objects in the listener list<br>
+	 * This will be replaced with a network send function
 	 */
 	public void keyReleased(KeyEvent e) {
 		for(int i = 0; i < Listeners.keyListeners.size(); i ++) {
 			Listeners.keyListeners.get(i).keyReleased(e);
+//			Client.keyEventBuffer.write(e);
 		}
 	}
 }
