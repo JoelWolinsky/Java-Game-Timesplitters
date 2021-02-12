@@ -1,8 +1,12 @@
+package client;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 
 import javax.swing.event.MouseInputListener;
+
+import server.Listeners;
+import server.MouseClickListener;
 
 /**
  * A mouse listener class.<br>
@@ -13,10 +17,6 @@ import javax.swing.event.MouseInputListener;
  * this.addMouseMotionListener(mouseInput);</pre>
  */
 public class MouseInput implements MouseInputListener{
-	/**
-	 * A list of objects implementing mouseClickListener. All mouse click events are broadcast to this list
-	 */
-	private static LinkedList<MouseClickListener> clickListeners = new LinkedList<MouseClickListener>();
 	
 	/**
 	 * The location of the mouse on the screen. X and Y coordinates can be accessed directly (i.e. <pre>MouseInput.mousePos.x</pre>)
@@ -32,27 +32,11 @@ public class MouseInput implements MouseInputListener{
 	}
 	
 	/**
-	 * Adds a MouseClickListener to the clickListeners list
-	 * @param m The MouseClickListener to be added
-	 */
-	public void addClickListener(MouseClickListener m) {
-		clickListeners.add(m);
-	}
-	
-	/**
-	 * Removes a MouseClickListener from the clickListeners list
-	 * @param m The MouseClickListener to be removed
-	 */
-	public void removeClickListener(MouseClickListener m) {
-		clickListeners.remove(m);
-	}
-	
-	/**
 	 * Broadcasts a mouseClick event to all MouseClickListener objects in the clickListers list
 	 */
 	public void mouseClicked(MouseEvent e) {
-		for(int i = 0; i < clickListeners.size(); i++) {
-			clickListeners.get(i).mouseClicked(e);
+		for(int i = 0; i < Listeners.mouseClickListeners.size(); i++) {
+			Listeners.mouseClickListeners.get(i).mouseClicked(e);
 		}
 	}
 	

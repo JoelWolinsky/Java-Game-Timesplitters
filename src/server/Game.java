@@ -1,8 +1,14 @@
+package server;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
+import java.util.Timer;
+
+import client.KeyInput;
+import client.MouseInput;
+import client.Window;
 
 /**
  *The main class. All setup is done here and global constants are held here. 
@@ -34,8 +40,8 @@ public class Game extends Canvas implements Runnable{
 	 * Try to abstract everything to class-level tick() functions, rather than here
 	 * @param delta The delta time generated in the run function
 	 */
-	private void tick(double delta) {
-		handler.tick(delta);
+	private void tick() {
+		handler.tick();
 	}
 	
 	/**
@@ -92,66 +98,47 @@ public class Game extends Canvas implements Runnable{
 		}
 	}
 	
-	public void run() {
-		long lastTime = System.nanoTime();
-		double amountOfTicks = 60.0;
-		double ns = 1000000000 / amountOfTicks;
-		double delta = 0;
-		long timer = System.currentTimeMillis();
-		int frames = 0;
-		while(running) {
-			long now = System.nanoTime();
-			delta += (now-lastTime)/ns;
-			lastTime = now;
-			while(delta >= 1) {
-				tick(delta);
-				delta--;
-			}
-			if(running) {
-				render();
-				frames ++;
-				
-			
-				if(System.currentTimeMillis() - timer >1000) {
-					timer += 1000;
-					System.out.println(frames);
-					frames = 0;
-				}
-			}
-		}
-		stop();		
-	}
-	
 //	public void run() {
-//		double targetFPS = 60;
-//		double timePerFrame = 1000/targetFPS;
-//		long sleepTime = 0;
-//		long overtime = 0;
-//		long time1 = System.currentTimeMillis();
+//		long t1 = System.currentTimeMillis();
+//		long t2, delta;
+//		int FPS = 30;
+//		int desiredDelta = 1000/FPS;
+//		int frames = 0;
+//		long framesTimer = System.currentTimeMillis();
 //		while(running) {
 //			tick(1);
 //			render();
-//			
-//			sleepTime = (long) (timePerFrame - (System.currentTimeMillis() - time1) + overtime);
-//			if(sleepTime > 0) {
-//				time1 = System.currentTimeMillis();
+//			frames ++;
+//			t2 = System.currentTimeMillis();
+//			delta = t2-t1;
+//			if(delta > desiredDelta) {
+//				System.out.println("Frame took " + delta + " ms, sleeping for " + (delta-desiredDelta) + " ms");
 //				try {
-//					Thread.sleep(sleepTime);
-//				}catch(Exception e) {
+//					Thread.sleep(delta-desiredDelta);
+//				} catch (InterruptedException e) {
 //					e.printStackTrace();
 //				}
-//				overtime = sleepTime - (System.currentTimeMillis() - time1);
-//			}else if(sleepTime < 0) {
-//				overtime = sleepTime;
-//				while(-overtime >= timePerFrame) {
-//					tick(1);
-//					render();
-//					overtime = (long) (overtime + timePerFrame);
-//				}
 //			}
-//			time1 = System.currentTimeMillis();
+//			if(System.currentTimeMillis()-framesTimer > 1000) {
+//				framesTimer += 1000;
+//				System.out.println("FPS: "+frames);
+//				frames = 0;
+//			}
 //		}
 //		stop();
 //	}
-
+	public void run() {
+		int fps = 30;
+		long frameTime = 1000 / fps;
+		long currentTime = System.currentTimeMillis();
+		long nextFrame;
+		while(running) {
+			nextFrame = currentTime + frameTime;
+			tick();
+			render();
+			while(System.currentTimeMillis() <= nextFrame) {};
+			currentTime = System.currentTimeMillis();
+		}
+		stop();
+	}
 }

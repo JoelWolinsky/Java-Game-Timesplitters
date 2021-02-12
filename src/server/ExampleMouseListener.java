@@ -1,7 +1,10 @@
+package server;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+
+import client.MouseInput;
 
 public class ExampleMouseListener extends GameObject implements GraphicalObject, SolidCollider{
 
@@ -17,7 +20,7 @@ public class ExampleMouseListener extends GameObject implements GraphicalObject,
 	}
 
 	@Override
-	public void tick(double delta) {
+	public void tick() {
 		CollidingObject.getCollisions(this);
 		this.x = (float) (MouseInput.mousePos.x - (0.5*this.width));
 		this.y = (float) (MouseInput.mousePos.y - (0.5*this.height));

@@ -1,3 +1,4 @@
+package server;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -17,22 +18,22 @@ public class ExampleKeyListener extends GameObject implements KeyListener, Graph
 		this.velY = 0;
 		sprite = this.loadImage(ExampleKeyListener.url);
 		CollidingObject.addCollider(this);
-		Game.keyInput.addListener(this);
+		Listeners.addKeyListener(this);
 		Game.handler.addObject(this);
 	}
 
-	public void tick(double delta) {
-		move(delta);
+	public void tick() {
+		move();
 		CollidingObject.getCollisions(this);
 		
 	}
 	
-	private void move(double delta) {
-		if(!SolidCollider.willCauseSolidCollision(this, delta * this.velX, true)) {
-			this.x += (delta * this.velX);
+	private void move() {
+		if(!SolidCollider.willCauseSolidCollision(this, this.velX, true)) {
+			this.x += (this.velX);
 		}
-		if(!SolidCollider.willCauseSolidCollision(this, delta * this.velY, false)) {
-			this.y += (delta * this.velY);
+		if(!SolidCollider.willCauseSolidCollision(this, this.velY, false)) {
+			this.y += (this.velY);
 		}
 	}
 

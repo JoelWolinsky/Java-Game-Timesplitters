@@ -1,3 +1,4 @@
+package server;
 import java.awt.Graphics;
 
 /**
@@ -30,9 +31,8 @@ public abstract class GameObject {
 	/**
 	 * Required function for all subclasses<br>
 	 * Performs any operations that should be performed every frame
-	 * @param delta Delta time - used to synchronise tick operations
 	 */
-	public abstract void tick(double delta);
+	public abstract void tick();
 	
 	/**
 	 * Required function for all subclasses<br>
