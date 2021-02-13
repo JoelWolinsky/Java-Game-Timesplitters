@@ -9,7 +9,7 @@ public class ExampleMouseListener extends GameObject implements GraphicalObject,
 	static String url = "./img/Cursor.png";
 	
 	public ExampleMouseListener() {
-		super(0, 100, 10, 32, 32);
+		super(0, 0, 10, 32, 32);
 		sprite = this.loadImage(ExampleMouseListener.url);
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
