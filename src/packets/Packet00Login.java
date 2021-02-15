@@ -1,8 +1,8 @@
 package packets;
 
 
-import network.GameClient;
-import network.GameServer;
+import client.GameClient;
+import server.GameServer;
 
 public class Packet00Login extends Packet{
 	
