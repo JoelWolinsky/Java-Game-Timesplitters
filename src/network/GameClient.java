@@ -49,4 +49,5 @@ public class GameClient extends Thread {
 			e.printStackTrace();
 		}
 	}
+
 }
