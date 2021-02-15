@@ -1,7 +1,4 @@
 package network;
-
-
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -9,7 +6,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-import game.Game;
+import server.Game;
 
 public class GameServer extends Thread {
 	private DatagramSocket socket;

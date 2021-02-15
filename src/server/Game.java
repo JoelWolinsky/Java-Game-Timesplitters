@@ -6,9 +6,13 @@ import java.awt.Rectangle;
 import java.awt.image.BufferStrategy;
 import java.util.Timer;
 
+import javax.swing.JOptionPane;
+
 import client.KeyInput;
 import client.MouseInput;
 import client.Window;
+import network.GameClient;
+import network.GameServer;
 
 /**
  *The main class. All setup is done here and global constants are held here. 
@@ -31,6 +35,9 @@ public class Game extends Canvas implements Runnable{
 	public static Handler handler = new Handler();
 	public static KeyInput keyInput = new KeyInput();
 	public static MouseInput mouseInput = new MouseInput();
+	
+	private GameClient socketClient;
+	private GameServer socketServer;
 	
 	ExampleKeyListener e1;
 	ExampleMouseListener e2;
@@ -76,6 +83,9 @@ public class Game extends Canvas implements Runnable{
 		this.addMouseMotionListener(mouseInput);
 		e1 = new ExampleKeyListener(100, 100, 2);
 		e2 = new ExampleMouseListener();
+		
+		socketClient.sendData("ping".getBytes());
+
 	}
 	
 	public static void main(String[] args){
@@ -87,6 +97,15 @@ public class Game extends Canvas implements Runnable{
 		thread.start();
 		running = true;
 		this.requestFocus();
+		
+		if(JOptionPane.showConfirmDialog(this, "Do you want to start the server?") == 0) {
+			socketServer = new GameServer(this);
+			socketServer.start();
+		}
+		
+		socketClient = new GameClient(this, "localhost");
+		socketClient.start();
+		
 	}
 	
 	public synchronized void stop() {

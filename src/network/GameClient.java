@@ -7,7 +7,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-import game.Game;
+import server.Game;
 
 public class GameClient extends Thread {
 	private InetAddress ipAddress;
