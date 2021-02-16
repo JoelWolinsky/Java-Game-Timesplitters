@@ -64,6 +64,9 @@ public interface SolidCollider extends CollidingObject{
 		}
 		for(int i = 0; i < solidColliders.size(); i ++) {
 			SolidCollider s = solidColliders.get(i);
+			if(s.equals(o)) {
+				continue;
+			}
 			if(newBounds.intersects(s.getBounds())) {
 				return true;
 			}

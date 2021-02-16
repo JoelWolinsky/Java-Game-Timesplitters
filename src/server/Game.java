@@ -18,10 +18,9 @@ public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = -8921419424614180143L;
 
 	
-	public static final int WIDTH_BORDER = 14;
-	public static final int HEIGHT_BORDER = 37;
+
 	public static final int WIDTH = 640;
-	public static final int HEIGHT = WIDTH / 12 * 9;
+	public static final int HEIGHT = 480;
 	public static final String TITLE = "Engine";
 	public static Rectangle windowRect = new Rectangle(0,0,Game.WIDTH, Game.HEIGHT);
 		
@@ -32,8 +31,8 @@ public class Game extends Canvas implements Runnable{
 	public static KeyInput keyInput = new KeyInput();
 	public static MouseInput mouseInput = new MouseInput();
 	
-	ExampleKeyListener e1;
-	ExampleMouseListener e2;
+	public Player player;
+	public FloorTile floor;
 	
 	/**
 	 * For everything that you want performed every frame.<br>
@@ -70,12 +69,12 @@ public class Game extends Canvas implements Runnable{
 	 * Constructors should be called here
 	 */
 	public Game() {
-		new Window(WIDTH+WIDTH_BORDER, HEIGHT+HEIGHT_BORDER, TITLE, this);
+		new Window(WIDTH, HEIGHT, TITLE, this);
 		this.addKeyListener(keyInput);
 		this.addMouseListener(mouseInput);
 		this.addMouseMotionListener(mouseInput);
-		e1 = new ExampleKeyListener(100, 100, 2);
-		e2 = new ExampleMouseListener();
+		player = new Player(100,100);
+		floor = new FloorTile(0, Game.HEIGHT-32, Game.WIDTH, 32);
 	}
 	
 	public static void main(String[] args){
@@ -106,39 +105,23 @@ public class Game extends Canvas implements Runnable{
 //		int frames = 0;
 //		long framesTimer = System.currentTimeMillis();
 //		while(running) {
-//			tick(1);
+//			tick();
 //			render();
-//			frames ++;
-//			t2 = System.currentTimeMillis();
-//			delta = t2-t1;
-//			if(delta > desiredDelta) {
-//				System.out.println("Frame took " + delta + " ms, sleeping for " + (delta-desiredDelta) + " ms");
-//				try {
-//					Thread.sleep(delta-desiredDelta);
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//			if(System.currentTimeMillis()-framesTimer > 1000) {
-//				framesTimer += 1000;
-//				System.out.println("FPS: "+frames);
-//				frames = 0;
-//			}
 //		}
 //		stop();
 //	}
 	public void run() {
 		int fps = 30;
-		long frameTime = 1000 / fps;
-		long currentTime = System.currentTimeMillis();
+		long frameTime = 1000000000 / fps;
+		long currentTime = System.nanoTime();
 		long nextFrame;
 		while(running) {
 			nextFrame = currentTime + frameTime;
 			tick();
 			render();
-			while(System.currentTimeMillis() <= nextFrame) {};
-			currentTime = System.currentTimeMillis();
+			while(System.nanoTime() <= nextFrame) {};
+			currentTime = System.nanoTime();
 		}
-		stop();
+		stop();	   
 	}
 }
