@@ -1,38 +1,35 @@
 package server;
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
-public class ExampleMouseListener extends GameObject implements GraphicalObject, SolidCollider{
+public class ExampleFloor extends GameObject implements GraphicalObject, SolidCollider{
 
-	static BufferedImage sprite;
-	static String url = "./img/Cursor.png";
-	
-	public ExampleMouseListener() {
-		super(0, 100, 10, 32, 32);
-		sprite = this.loadImage(ExampleMouseListener.url);
+	private static BufferedImage sprite;
+	private static String url = "./img/Grass2.png";
+
+
+	public ExampleFloor(float x, float y, int z) {
+		super(x, y, z, 640, 32);
+		sprite = this.loadImage(ExampleFloor.url);
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
 		Game.handler.addObject(this);
 	}
 
-	@Override
 	public void tick(double delta) {
 		CollidingObject.getCollisions(this);
-		this.x = (float) (MouseInput.mousePos.x - (0.5*this.width));
-		this.y = (float) (MouseInput.mousePos.y - (0.5*this.height));
+		
 	}
 
-	@Override
 	public void render(Graphics g) {
 		this.drawSprite(g, sprite, (int)this.x, (int)this.y);
 	}
 
+
 	@Override
 	public void handleCollisions(LinkedList<CollidingObject> collisions) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

@@ -41,6 +41,9 @@ public class Game extends Canvas implements Runnable{
 	
 	ExampleKeyListener e1;
 	ExampleMouseListener e2;
+	ExampleFloor e3,e4,e5;
+
+
 	
 	/**
 	 * For everything that you want performed every frame.<br>
@@ -81,8 +84,11 @@ public class Game extends Canvas implements Runnable{
 		this.addKeyListener(keyInput);
 		this.addMouseListener(mouseInput);
 		this.addMouseMotionListener(mouseInput);
-		e1 = new ExampleKeyListener(100, 100, 2);
+		e1 = new ExampleKeyListener(100, 200, 2);
 		e2 = new ExampleMouseListener();
+		e3 = new ExampleFloor(0, 450, 2);
+		e4 = new ExampleFloor(400, 420, 2);
+		e5 = new ExampleFloor(-480, 320, 2);
 		
 		socketClient.sendData("ping".getBytes());
 
