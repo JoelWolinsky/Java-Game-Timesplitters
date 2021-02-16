@@ -8,7 +8,7 @@ package server;
  */
 public interface GravityObject {
 	
-	public float gravityRate = 0.01f;
+	public float gravityRate = 0.005f;
 
 	
 	default void fall(GravityObject o) {

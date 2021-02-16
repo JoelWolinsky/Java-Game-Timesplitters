@@ -73,5 +73,25 @@ public interface SolidCollider extends CollidingObject{
 		}
 		return false;
 	}
+	
+	static CollidingObject nextCollision(CollidingObject o, double vel, boolean xAxis) {
+		Rectangle oBounds = o.getBounds();
+		Rectangle newBounds;
+		if(xAxis) {
+			newBounds = new Rectangle((int)(oBounds.x + vel), oBounds.y, oBounds.width, oBounds.height);
+		}else {
+			newBounds = new Rectangle(oBounds.x, (int)(oBounds.y + vel), oBounds.width, oBounds.height);
+		}
+		for(int i = 0; i < solidColliders.size(); i ++) {
+			SolidCollider s = solidColliders.get(i);
+			if(s.equals(o)) {
+				continue;
+			}
+			if(newBounds.intersects(s.getBounds())) {
+				return s;
+			}
+		}
+		return null;
+	}
 
 }

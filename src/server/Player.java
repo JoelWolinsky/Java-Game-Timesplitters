@@ -13,9 +13,9 @@ public class Player extends GameObject implements GraphicalObject, SolidCollider
 	
 	private float velX = 0;
 	private float velY = 0;
-	private float maxVelX = 6;
+	private float maxVelX = 10;
 	private float maxVelY = 10;
-	
+	private float jumpVel = -100;
 	//{Up, right, down, left}
 	private boolean[] arrowKeysPressed = {false, false, false, false};
 	
@@ -31,7 +31,6 @@ public class Player extends GameObject implements GraphicalObject, SolidCollider
 	@Override
 	public void tick() {
 //		CollidingObject.getCollisions(this);
-		fall(this);
 		if(this.arrowKeysPressed[1]) {
 			this.velX = this.maxVelX;
 		}else if(this.arrowKeysPressed[3]) {
@@ -39,12 +38,32 @@ public class Player extends GameObject implements GraphicalObject, SolidCollider
 		}else {
 			this.velX = 0;
 		}
+		if(this.arrowKeysPressed[0]) {
+			if(SolidCollider.willCauseSolidCollision(this, 1, false)) {
+				this.velY = this.jumpVel;
+			}
+		}
 		if(!SolidCollider.willCauseSolidCollision(this, this.velX, true)) {
 			this.x += this.velX;
+		}else {
+			Rectangle s = SolidCollider.nextCollision(this, this.velX, true).getBounds();
+			if(this.velX > 0) {
+				this.x = s.x - this.width;
+			}else {
+				this.x = s.x + s.width;
+			}
 		}
 		if(!SolidCollider.willCauseSolidCollision(this, this.velY, false)) {
 			this.y += this.velY;
+		}else {
+			Rectangle s = SolidCollider.nextCollision(this, this.velY, false).getBounds();
+			if(this.velY > 0) {
+				this.y = s.y - this.height;
+			}else {
+				this.y = s.y + s.height;
+			}
 		}
+		fall(this);
 	}
 
 	@Override
@@ -68,8 +87,12 @@ public class Player extends GameObject implements GraphicalObject, SolidCollider
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_D) {
 			this.arrowKeysPressed[1] = true;
-		}else if(e.getKeyCode() == KeyEvent.VK_A) {
+		}
+		if(e.getKeyCode() == KeyEvent.VK_A) {
 			this.arrowKeysPressed[3] = true;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_W) {
+			this.arrowKeysPressed[0] = true;
 		}
 	}
 
@@ -77,8 +100,12 @@ public class Player extends GameObject implements GraphicalObject, SolidCollider
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_D) {
 			this.arrowKeysPressed[1] = false;
-		}else if(e.getKeyCode() == KeyEvent.VK_A) {
+		}
+		if(e.getKeyCode() == KeyEvent.VK_A) {
 			this.arrowKeysPressed[3] = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_W) {
+			this.arrowKeysPressed[0] = false;
 		}
 	}
 
