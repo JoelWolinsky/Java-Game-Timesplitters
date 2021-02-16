@@ -17,7 +17,8 @@ public class ExampleFloor extends GameObject implements GraphicalObject, SolidCo
 		SolidCollider.addSolidCollider(this);
 		Game.handler.addObject(this);
 	}
-
+	
+	
 	public void tick(double delta) {
 		CollidingObject.getCollisions(this);
 		
@@ -36,5 +37,7 @@ public class ExampleFloor extends GameObject implements GraphicalObject, SolidCo
 	public Rectangle getBounds() {
 		return new Rectangle((int)this.x, (int)this.y, this.width, this.height);
 	}
+
+	
 
 }

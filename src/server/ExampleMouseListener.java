@@ -4,6 +4,8 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
+import client.MouseInput;
+
 public class ExampleMouseListener extends GameObject implements GraphicalObject, SolidCollider{
 
 	static BufferedImage sprite;
@@ -39,5 +41,6 @@ public class ExampleMouseListener extends GameObject implements GraphicalObject,
 	public Rectangle getBounds() {
 		return new Rectangle((int)this.x, (int)this.y, this.width, this.height);
 	}
+
 
 }

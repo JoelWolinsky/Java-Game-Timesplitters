@@ -1,4 +1,5 @@
 package server;
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.Collections;
@@ -20,11 +21,12 @@ public class Handler {
 	/**
 	 * Tick function that is called every frame.<br>
 	 * This calls the tick() function of every member of the objects list
+	 * @param delta The delta value generated in the main run thread
 	 */
-	public void tick() {
+	public void tick(double delta) {
 		for(int i = 0; i< objects.size(); i++) {
 			GameObject object = objects.get(i);
-			object.tick();
+			object.tick(delta);
 		}
 	}
 	
@@ -72,3 +74,4 @@ public class Handler {
 		this.objects.remove(object);
 	}
 }
+

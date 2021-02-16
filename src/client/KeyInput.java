@@ -1,8 +1,9 @@
 package client;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.LinkedList;
 
-import server.Listeners;
+import server.KeyListener;
 
 /**
  * A keyboard listener class.<br>
@@ -13,24 +14,42 @@ import server.Listeners;
 public class KeyInput extends KeyAdapter{
 	
 	/**
-	 * Broadcasts keyPressed events to all KeyListener objects in the listener list<br>
-	 * This will be replaced with a network send function
+	 * A LinkedList maintaining all classes implementing KeyListener
+	 * @see KeyListener
+	 */
+	private LinkedList<KeyListener> listeners = new LinkedList<KeyListener>();
+	
+	/**
+	 * Broadcasts keyPressed events to all KeyListener objects in the listener list
 	 */
 	public void keyPressed(KeyEvent e) {
-		for(int i = 0; i < Listeners.keyListeners.size(); i ++) {
-			Listeners.keyListeners.get(i).keyPressed(e);
-//			Client.keyEventBuffer.write(e);
+		for(int i = 0; i < listeners.size(); i ++) {
+			listeners.get(i).keyPressed(e);
 		}
 	}
 	
 	/**
-	 * Broadcasts keyReleased events to all KeyListener objects in the listener list<br>
-	 * This will be replaced with a network send function
+	 * Broadcasts keyReleased events to all KeyListener objects in the listener list
 	 */
 	public void keyReleased(KeyEvent e) {
-		for(int i = 0; i < Listeners.keyListeners.size(); i ++) {
-			Listeners.keyListeners.get(i).keyReleased(e);
-//			Client.keyEventBuffer.write(e);
+		for(int i = 0; i < listeners.size(); i ++) {
+			listeners.get(i).keyReleased(e);
 		}
+	}
+	
+	/**
+	 * Adds a KeyListener object to the listeners list
+	 * @param k The KeyListener object to be added to the listeners list
+	 */
+	public void addListener(KeyListener k) {
+		listeners.add(k);
+	}
+	
+	/**
+	 * Removes a KeyListener object from the listeners list
+	 * @param k The object to be removed from the listeners list
+	 */
+	public void removeListener(KeyListener k) {
+		listeners.remove(listeners.indexOf(k));
 	}
 }

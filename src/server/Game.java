@@ -50,9 +50,10 @@ public class Game extends Canvas implements Runnable{
 	 * Try to abstract everything to class-level tick() functions, rather than here
 	 * @param delta The delta time generated in the run function
 	 */
-	private void tick() {
-		handler.tick();
+	private void tick(double delta) {
+		handler.tick(delta);
 	}
+
 	
 	/**
 	 * Primary function is to clear the screen, and then call class-level render functions via the handler
@@ -80,6 +81,7 @@ public class Game extends Canvas implements Runnable{
 	 * Constructors should be called here
 	 */
 	public Game() {
+		System.out.println("Game");
 		new Window(WIDTH+WIDTH_BORDER, HEIGHT+HEIGHT_BORDER, TITLE, this);
 		this.addKeyListener(keyInput);
 		this.addMouseListener(mouseInput);
@@ -90,7 +92,7 @@ public class Game extends Canvas implements Runnable{
 		e4 = new ExampleFloor(400, 420, 2);
 		e5 = new ExampleFloor(-480, 320, 2);
 		
-		socketClient.sendData("ping".getBytes());
+		//socketClient.sendData("ping".getBytes());
 
 	}
 	
@@ -153,17 +155,33 @@ public class Game extends Canvas implements Runnable{
 //		stop();
 //	}
 	public void run() {
-		int fps = 30;
-		long frameTime = 1000 / fps;
-		long currentTime = System.currentTimeMillis();
-		long nextFrame;
+		long lastTime = System.nanoTime();
+		double amountOfTicks = 60.0;
+		double ns = 1000000000 / amountOfTicks;
+		double delta = 0;
+		long timer = System.currentTimeMillis();
+		int frames = 0;
 		while(running) {
-			nextFrame = currentTime + frameTime;
-			tick();
-			render();
-			while(System.currentTimeMillis() <= nextFrame) {};
-			currentTime = System.currentTimeMillis();
+			long now = System.nanoTime();
+			delta += (now-lastTime)/ns;
+			lastTime = now;
+			while(delta >= 1) {
+				tick(delta);
+				delta--;
+			}
+			if(running) {
+				render();
+				frames ++;
+				
+			
+				if(System.currentTimeMillis() - timer >1000) {
+					timer += 1000;
+					System.out.println(frames);
+					frames = 0;
+				}
+			}
 		}
-		stop();
+		stop();		
 	}
+
 }
