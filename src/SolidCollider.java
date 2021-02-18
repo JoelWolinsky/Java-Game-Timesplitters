@@ -59,7 +59,7 @@ public interface SolidCollider extends CollidingObject{
 		if(xAxis) {
 			newBounds = new Rectangle((int)(oBounds.x + vel), oBounds.y, oBounds.width, oBounds.height);
 		}else {
-			newBounds = new Rectangle(oBounds.x, (int)(oBounds.y + vel), oBounds.width, oBounds.height);
+			newBounds = new Rectangle(oBounds.x, (int)(oBounds.y + vel*1.5), oBounds.width, oBounds.height);
 		}
 		for(int i = 0; i < solidColliders.size(); i ++) {
 			SolidCollider s = solidColliders.get(i);

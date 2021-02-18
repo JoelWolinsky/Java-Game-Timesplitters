@@ -2,14 +2,14 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-public class ExampleKeyListener extends JumpingCharacter {
+public class ExampleKeyListener2 extends JumpingCharacter {
 	
 	private static BufferedImage sprite;
-	private static String url = "./img/player1.png";
+	private static String url = "./img/player1inv.png";
 
-	public ExampleKeyListener(float x, float y, int z) {
+	public ExampleKeyListener2(float x, float y, int z) {
 		super(x, y, z);
-        sprite = this.loadImage(ExampleKeyListener.url);
+        sprite = this.loadImage(ExampleKeyListener2.url);
 	}
 
     @Override
@@ -17,18 +17,18 @@ public class ExampleKeyListener extends JumpingCharacter {
 		this.drawSprite(g, sprite, (int)this.x, (int)this.y);
 	}
 
-    // This example key listener uses WASD to move.
+    // This example key listener uses arrow keys to move.
     // Controls can be adjusted.
     @Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		if (key == KeyEvent.VK_D) {
+		if (key == KeyEvent.VK_RIGHT) {
 			this.velX = DEFAULT_X_VELOCITY;
-		} else if (key == KeyEvent.VK_A) {
+		} else if (key == KeyEvent.VK_LEFT) {
 			this.velX = -DEFAULT_X_VELOCITY;
-		} else if (key == KeyEvent.VK_S) {
+		} else if (key == KeyEvent.VK_DOWN) {
 			this.velY = 10;
-		} else if (key == KeyEvent.VK_W) {
+		} else if (key == KeyEvent.VK_UP) {
 			if (cd==false)
 			{
 				this.velY = JUMP_GRAVITY;
@@ -42,7 +42,7 @@ public class ExampleKeyListener extends JumpingCharacter {
 											and one is released the character doesn't stop */
 		int key = e.getKeyCode();
 		
-		if(key == KeyEvent.VK_D || key == KeyEvent.VK_A) {
+		if(key == KeyEvent.VK_RIGHT || key == KeyEvent.VK_LEFT) {
 			this.velX = 0;
 		}		
 	}
