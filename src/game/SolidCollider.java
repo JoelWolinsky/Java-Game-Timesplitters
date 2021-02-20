@@ -1,4 +1,4 @@
-package server;
+package game;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 
