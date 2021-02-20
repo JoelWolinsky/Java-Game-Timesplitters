@@ -1,3 +1,4 @@
+package game;
 import java.awt.Graphics;
 
 /**
@@ -30,16 +31,15 @@ public abstract class GameObject {
 	/**
 	 * Required function for all subclasses<br>
 	 * Performs any operations that should be performed every frame
-	 * @param delta Delta time - used to synchronise tick operations
 	 */
-	public abstract void tick(double delta);
+	public abstract void tick();
 	
 	/**
 	 * Required function for all subclasses<br>
 	 * Performs any rendering
 	 * @param g The Graphics object onto which the object will be rendered
 	 */
-	public abstract void render(Graphics g);
+	public abstract void render(Graphics g, int xOffset, int yOffset);
 
 	public float getX() {
 		return x;
