@@ -6,15 +6,14 @@ import java.util.LinkedList;
 
 public class ExampleFloor extends GameObject implements GraphicalObject, SolidCollider{
 
-	private static BufferedImage sprite;
-	private static String url = "./img/Grass2.png";
-
-
-	public ExampleFloor(float x, float y, int z) {
-		super(x, y, z, 640, 32);
-		sprite = this.loadImage(ExampleFloor.url);
-		CollidingObject.addCollider(this);
-		SolidCollider.addSolidCollider(this);
+	static BufferedImage sprite;
+	static String url = "./img/Cursor.png";
+	
+	public ExampleMouseListener() {
+		super(0, 100, 10, 32, 32);
+		sprite = this.loadImage(ExampleMouseListener.url);
+		CollidingObject.addCollider(this);	
+		SolidCollider.addCollider(this); 
 		Game.handler.addObject(this);
 	}
 	
