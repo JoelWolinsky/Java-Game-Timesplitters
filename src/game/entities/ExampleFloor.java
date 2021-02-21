@@ -24,9 +24,6 @@ public void tick(double delta) {
     
 }
 
-public void render(Graphics g) {
-    this.drawSprite(g, sprite, (int)this.x, (int)this.y);
-}
 
 @Override
 public void handleCollisions(LinkedList<CollidingObject> collisions) {
@@ -44,8 +41,8 @@ public void tick() {
 }
 
 @Override
-public void render(Graphics g, int xOffset, int yOffset) {
-	// TODO Auto-generated method stub
+public void render(Graphics g, float xOffset, float yOffset) {
+	this.drawSprite(g, sprite, (int)(this.x+xOffset), (int)(this.y+yOffset));
 	
 }
 }

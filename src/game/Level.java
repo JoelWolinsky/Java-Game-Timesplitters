@@ -15,21 +15,21 @@ public class Level {
 		}
 	}
 	
-	public void render(Graphics g, int xOffset, int yOffset) {
+	public void render(Graphics g, float f, float h) {
 		//Render the platforms first, so they are below the entities
-		renderPlatforms(g, xOffset, yOffset);
-		renderEntities(g, xOffset, yOffset);
+		renderPlatforms(g, f, h);
+		renderEntities(g, f, h);
 	}
 	
-	public void renderEntities(Graphics g, int xOffset, int yOffset) {
+	public void renderEntities(Graphics g, float f, float h) {
 		for(GameObject o : entities) {
-			o.render(g, xOffset, yOffset);
+			o.render(g, f, h);
 		}
 	}
 	
-	public void renderPlatforms(Graphics g, int xOffset, int yOffset) {
+	public void renderPlatforms(Graphics g, float f, float h) {
 		for(Platform p : platforms) {
-			p.render(g, xOffset, yOffset);
+			p.render(g, f, h);
 		}
 	}
 	

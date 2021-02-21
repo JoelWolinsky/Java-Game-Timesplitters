@@ -4,13 +4,13 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.LinkedList;
 
 import game.entities.Platform;
 import game.entities.Player;
 
 public class Game extends Canvas implements Runnable{
 	
+	private static final long serialVersionUID = -772676358550096683L;
 	private Thread thread;
 	private boolean running = false;
 	
@@ -19,26 +19,31 @@ public class Game extends Canvas implements Runnable{
 	
 	private int xOffset = 0, yOffset = 0;
 	
-	private LinkedList<Level> levels = new LinkedList<>();
+//	private LinkedList<Level> levels = new LinkedList<>();
 	private Level currentLevel = new Level();
 	
 	private Player player;
 	
+	private Camera camera;
+	
 	public Game() {
-		new Window(this);
-		this.addKeyListener(keyInput);
-		this.addMouseListener(mouseInput);
-		this.addMouseMotionListener(mouseInput);
 		player = new Player(100, 100);
 		currentLevel.addEntity(player);
 		Platform p = new Platform(0, Window.HEIGHT-32, Window.WIDTH, 32);
 		currentLevel.addPlatform(p);
 		p = new Platform(100, Window.HEIGHT-96, 150, 32);
 		currentLevel.addPlatform(p);
+		camera = new Camera();
+		camera.addTarget(player);
+		new Window(this);
+		this.addKeyListener(keyInput);
+		this.addMouseListener(mouseInput);
+		this.addMouseMotionListener(mouseInput);
 	}
 	
 	private void tick() {
 		currentLevel.tick();
+		camera.tick();
 	}
 	
 	private void render() {
@@ -54,7 +59,7 @@ public class Game extends Canvas implements Runnable{
 		g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 		
 		
-		currentLevel.render(g, xOffset, yOffset);
+		currentLevel.render(g, camera.getXOffset(), camera.getYOffset());
 		
 		g.dispose();
 		bs.show();
@@ -66,7 +71,7 @@ public class Game extends Canvas implements Runnable{
 		double ns = 1000000000 / amountOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
-		int frames = 0;
+//		int frames = 0;
 		while(running) {
 			long now = System.nanoTime();
 			delta += (now-lastTime)/ns;
@@ -77,13 +82,13 @@ public class Game extends Canvas implements Runnable{
 			}
 			if(running) {
 				render();
-				frames ++;
+//				frames ++;
 				
 			
 				if(System.currentTimeMillis() - timer >1000) {
 					timer += 1000;
 //					System.out.println(frames);
-					frames = 0;
+//					frames = 0;
 				}
 			}
 		}

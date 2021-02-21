@@ -39,7 +39,7 @@ public abstract class GameObject {
 	 * Performs any rendering
 	 * @param g The Graphics object onto which the object will be rendered
 	 */
-	public abstract void render(Graphics g, int xOffset, int yOffset);
+	public abstract void render(Graphics g, float f, float h);
 
 	public float getX() {
 		return x;

@@ -15,8 +15,8 @@ public class ExampleKeyListener2 extends JumpingCharacter {
 	}
 
     @Override
-	public void render(Graphics g) {
-		this.drawSprite(g, sprite, (int)this.x, (int)this.y);
+	public void render(Graphics g, float xOffset, float yOffset) {
+		this.drawSprite(g, sprite, (int)(this.x+xOffset), (int)(this.y+yOffset));
 	}
 
     // This example key listener uses arrow keys to move.

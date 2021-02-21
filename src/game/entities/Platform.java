@@ -20,9 +20,9 @@ public class Platform extends GameObject implements SolidCollider{
 	public void tick() {
 	}
 
-	public void render(Graphics g, int xOffset, int yOffset) {
+	public void render(Graphics g, float xOffset, float yOffset) {
 		g.setColor(Color.white);
-		g.fillRect((int)this.x + xOffset, (int)this.y + yOffset, width, height);
+		g.fillRect((int)(this.x + xOffset), (int)(this.y + yOffset), width, height);
 	}
 
 	public void handleCollisions(LinkedList<CollidingObject> collisions) {		

@@ -55,7 +55,6 @@ public class JumpingCharacter extends GameObject implements GraphicalObject, Col
 		}	
 	}
 
-	public void render(Graphics g) {}
     public void keyPressed(KeyEvent e) {} 
 	public void keyReleased(KeyEvent e) {}
 
@@ -74,7 +73,7 @@ public class JumpingCharacter extends GameObject implements GraphicalObject, Col
 	}
 
 	@Override
-	public void render(Graphics g, int xOffset, int yOffset) {
+	public void render(Graphics g, float xOffset, float yOffset) {
 		// TODO Auto-generated method stub
 		
 	}

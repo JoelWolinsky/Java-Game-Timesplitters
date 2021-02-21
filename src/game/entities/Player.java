@@ -2,7 +2,6 @@ package game.entities;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
@@ -24,7 +23,7 @@ public class Player extends GameObject implements GraphicalObject, SolidCollider
 	
 	public Player(float x, float y) {
 		super(x, y, 1, 64, 32);
-		sprite = this.loadImage(this.url);
+		sprite = this.loadImage(Player.url);
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
 	}
@@ -99,8 +98,8 @@ public class Player extends GameObject implements GraphicalObject, SolidCollider
 		return this.terminalVelY;
 	}
 
-	public void render(Graphics g, int xOffset, int yOffset) {
-		this.drawSprite(g, sprite, (int)this.x+xOffset, (int)this.y+yOffset);
+	public void render(Graphics g, float xOffset, float yOffset) {
+		this.drawSprite(g, sprite, (int)(this.x+xOffset), (int)(this.y+yOffset));
 		
 	}
 	
