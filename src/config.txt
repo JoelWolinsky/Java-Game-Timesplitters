@@ -1,0 +1,2 @@
+toggleSoundEffects=True
+toggleMusic=True
