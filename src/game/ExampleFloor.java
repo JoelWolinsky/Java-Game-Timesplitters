@@ -1,3 +1,5 @@
+package game;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
@@ -10,7 +12,6 @@ public ExampleFloor(float x, float y, int z) {
     sprite = this.loadImage(ExampleFloor.url);
     CollidingObject.addCollider(this);
     SolidCollider.addSolidCollider(this);
-    Game.handler.addObject(this);
 }
 
 public void tick(double delta) {
@@ -29,5 +30,17 @@ public void handleCollisions(LinkedList<CollidingObject> collisions) {
 @Override
 public Rectangle getBounds() {
     return new Rectangle((int)this.x, (int)this.y, this.width, this.height);
+}
+
+@Override
+public void tick() {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void render(Graphics g, int xOffset, int yOffset) {
+	// TODO Auto-generated method stub
+	
 }
 }

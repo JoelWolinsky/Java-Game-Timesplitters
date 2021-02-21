@@ -1,9 +1,11 @@
+package game;
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 
-public class JumpingCharacter extends GameObject implements KeyListener, GraphicalObject, CollidingObject{
+public class JumpingCharacter extends GameObject implements GraphicalObject, CollidingObject{
 	
 	protected float velX, velY;
 	
@@ -20,8 +22,6 @@ public class JumpingCharacter extends GameObject implements KeyListener, Graphic
 		this.velX = 0.0f;
 		this.velY = DEFAULT_Y_VELOCITY;
 		CollidingObject.addCollider(this);
-		Game.keyInput.addListener(this);
-		Game.handler.addObject(this);
 	}
 
 	public void tick(double delta) {
@@ -60,5 +60,17 @@ public class JumpingCharacter extends GameObject implements KeyListener, Graphic
 	@Override
 	public Rectangle getBounds() {
 		return new Rectangle((int)this.x, (int)this.y, this.width, this.height);
+	}
+
+	@Override
+	public void tick() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void render(Graphics g, int xOffset, int yOffset) {
+		// TODO Auto-generated method stub
+		
 	}
 }

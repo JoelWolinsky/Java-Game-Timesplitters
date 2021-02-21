@@ -57,7 +57,11 @@ public class Player extends GameObject implements GraphicalObject, SolidCollider
 		if(!SolidCollider.willCauseSolidCollision(this, this.velY, false)) {
 			this.y += this.velY;
 		}else {
-			Rectangle s = SolidCollider.nextCollision(this, this.velY, false).getBounds();
+			CollidingObject o = SolidCollider.nextCollision(this,  this.velY, false);
+			if(o == null) {
+				return;
+			}
+			Rectangle s = o.getBounds();
 			if(this.velY > 0) {
 				this.y = s.y - this.height;
 				this.velY = 0;
