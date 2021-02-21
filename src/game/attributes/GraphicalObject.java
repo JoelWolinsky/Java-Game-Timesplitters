@@ -5,6 +5,8 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+import game.graphics.Image;
+
 /**
  * /**
  * Interface to be implemented by any objects that are to display sprites<br>
@@ -30,14 +32,7 @@ public interface GraphicalObject {
 	 * @return A BufferedImage object of the loaded sprite, or null if there was an error
 	 */
 	default BufferedImage loadImage(String url) {
-		try {
-			BufferedImage sprite = ImageIO.read(new File(url));;
-			return sprite;
-		}catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("Error in loading " + url);
-			return null;
-		}
+		return Image.loadImage(url);
 	}
 	/**
 	 * Renders a sprite

@@ -2,18 +2,21 @@ package game.entities;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import game.Game;
 import game.GameObject;
+import game.attributes.AnimatedObject;
 import game.attributes.CollidingObject;
-import game.attributes.GraphicalObject;
 import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
+import game.graphics.Animation;
+import game.graphics.AnimationStates;
 
-public class Player extends GameObject implements GraphicalObject, SolidCollider, GravityObject{
+public class Player extends GameObject implements AnimatedObject, SolidCollider, GravityObject{
 	
 	static BufferedImage sprite;
 	static String url = "./img/Anglerfish.png";
@@ -22,9 +25,14 @@ public class Player extends GameObject implements GraphicalObject, SolidCollider
 	private float velY = 0;
 	private float terminalVelY = 15;
 	
+	private static int animationTimer = 0;
+	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
+	private static AnimationStates currentAnimationState = defaultAnimationState;
+	private static HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
+	
 	public Player(float x, float y) {
 		super(x, y, 1, 64, 32);
-		sprite = this.loadImage(this.url);
+		animations.put(AnimationStates.IDLE, new Animation(20, "./img/Anglerfish.png", "./img/Anglerfish2.png", "./img/Anglerfish3.png", "./img/Anglerfish4.png"));
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
 	}
@@ -100,12 +108,33 @@ public class Player extends GameObject implements GraphicalObject, SolidCollider
 	}
 
 	public void render(Graphics g, int xOffset, int yOffset) {
-		this.drawSprite(g, sprite, (int)this.x+xOffset, (int)this.y+yOffset);
+		this.renderAnim(g, (int)this.x+xOffset, (int)this.y+yOffset);
 		
 	}
 	
 	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, width, height);
+	}
+
+	public int getAnimationTimer() {
+		return this.animationTimer;
+	}
+
+	public void setAnimationTimer(int animationTimer) {
+		this.animationTimer = animationTimer;
+		
+	}
+
+	public AnimationStates getCurrentAnimationState() {
+		return this.currentAnimationState;
+	}
+
+	public AnimationStates getDefaultAnimationState() {
+		return this.defaultAnimationState;
+	}
+
+	public Animation getAnimation(AnimationStates state) {
+		return animations.get(state);
 	}
 
 }
