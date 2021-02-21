@@ -1,4 +1,4 @@
-package game;
+package game.attributes;
 import java.awt.event.MouseEvent;
 
 /**

@@ -1,10 +1,17 @@
-package game;
+package game.entities;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+
+import game.Game;
+import game.GameObject;
+import game.attributes.CollidingObject;
+import game.attributes.GraphicalObject;
+import game.attributes.GravityObject;
+import game.attributes.SolidCollider;
 
 public class Player extends GameObject implements GraphicalObject, SolidCollider, GravityObject{
 	

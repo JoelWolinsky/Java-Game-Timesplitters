@@ -1,4 +1,4 @@
-package game;
+package game.entities;
 
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;

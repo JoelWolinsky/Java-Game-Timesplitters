@@ -1,9 +1,13 @@
-package game;
+package game.entities;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.LinkedList;
+
+import game.GameObject;
+import game.attributes.CollidingObject;
+import game.attributes.SolidCollider;
 
 public class Platform extends GameObject implements SolidCollider{
 

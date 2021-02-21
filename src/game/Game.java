@@ -6,6 +6,9 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.LinkedList;
 
+import game.entities.Platform;
+import game.entities.Player;
+
 public class Game extends Canvas implements Runnable{
 	
 	private Thread thread;

@@ -1,4 +1,4 @@
-package game;
+package game.attributes;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 

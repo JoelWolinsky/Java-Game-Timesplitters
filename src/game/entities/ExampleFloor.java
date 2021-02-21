@@ -1,8 +1,13 @@
-package game;
+package game.entities;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+
+import game.GameObject;
+import game.attributes.CollidingObject;
+import game.attributes.GraphicalObject;
+import game.attributes.SolidCollider;
 
 public class ExampleFloor extends GameObject implements GraphicalObject, SolidCollider{
 private static BufferedImage sprite;

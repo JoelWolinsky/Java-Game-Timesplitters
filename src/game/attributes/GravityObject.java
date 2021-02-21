@@ -1,4 +1,4 @@
-package game;
+package game.attributes;
 /**
  * An interface to be extended by any object that is to be affected by gravity<br>
  * <br>

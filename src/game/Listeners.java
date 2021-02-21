@@ -2,6 +2,8 @@ package game;
 
 import java.util.LinkedList;
 
+import game.attributes.MouseClickListener;
+
 
 public class Listeners {
 	

@@ -3,6 +3,8 @@ package game;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import game.entities.Platform;
+
 public class Level {
 	private LinkedList<GameObject> entities = new LinkedList<>();
 	private LinkedList<Platform> platforms = new LinkedList<>();
