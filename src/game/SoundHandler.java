@@ -1,3 +1,5 @@
+package game;
+
 import java.io.*;
 import javax.sound.sampled.*;
 
