@@ -3,6 +3,7 @@ package game;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
+import game.entities.MovingPlatform;
 import game.entities.Platform;
 
 public class Level {
@@ -12,6 +13,11 @@ public class Level {
 	public void tick() {
 		for(GameObject o : entities) {
 			o.tick();
+		}
+		for(Platform p : platforms) {
+			if(p instanceof MovingPlatform) {
+				p.tick();
+			}
 		}
 	}
 	

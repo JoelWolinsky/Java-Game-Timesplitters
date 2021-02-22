@@ -39,7 +39,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	
 	//TODO: Fix sticking into wall when moving in the air
 	public void tick() {
+		//Gather all collisions
 		CollidingObject.getCollisions(this);
+		
+		//Check for keyboard input along the x-axis
 		if(Game.keyInput.right.isPressed()) {
 			this.velX = 3.5f;
 		}else if(Game.keyInput.left.isPressed()) {
@@ -47,31 +50,39 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}else {
 			this.velX = 0;
 		}
+		
+		//Check for keyboard input along the y-axis
 		if(Game.keyInput.down.isPressed()) {
 			this.velY = 10;
 		}else if(Game.keyInput.up.isPressed()) {
+			//You can only jump if you're on ground
 			if(isOnGround()) {
 				this.velY = -7.5f;
 			}
 		}
+		
+		//If you're not on ground, you should fall
 		if(!isOnGround()) {
 			fall(this);
+		}else {
+			CollidingObject o = SolidCollider.nextCollision(this, 5, false);
+			if(o instanceof MovingPlatform) {
+				if(((MovingPlatform) o).getXAxis()) {
+					this.x += ((MovingPlatform) o).getVelocity();
+				}else {
+					this.y += ((MovingPlatform) o).getVelocity();
+				}
+			}
 		}
+		
+		//Move player if it will not cause a collision
 		if(!SolidCollider.willCauseSolidCollision(this, velX, true)) {
 			this.x += velX;
-//		}else {
-//			Rectangle s = SolidCollider.nextCollision(this, this.velX, true).getBounds();
-//			if(this.velX > 0) {
-//				this.x = s.x - this.width;
-//				this.velX = 0;
-//			}else {
-//				this.x = s.x + s.width;
-//				this.velX = 0;
-//			}
 		}
 		if(!SolidCollider.willCauseSolidCollision(this, this.velY, false)) {
 			this.y += this.velY;
 		}else {
+			//Stop player falling through the floor
 			CollidingObject o = SolidCollider.nextCollision(this,  this.velY, false);
 			if(o == null) {
 				return;

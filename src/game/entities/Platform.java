@@ -25,7 +25,7 @@ public class Platform extends GameObject implements SolidCollider{
 		g.fillRect((int)(this.x + xOffset), (int)(this.y + yOffset), width, height);
 	}
 
-	public void handleCollisions(LinkedList<CollidingObject> collisions) {		
+	public void handleCollisions(LinkedList<CollidingObject> collisions) {	
 	}
 
 	public Rectangle getBounds() {

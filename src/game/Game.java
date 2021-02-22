@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import game.entities.MovingPlatform;
 import game.entities.Platform;
 import game.entities.Player;
 
@@ -32,6 +33,8 @@ public class Game extends Canvas implements Runnable{
 		Platform p = new Platform(0, Window.HEIGHT-32, Window.WIDTH, 32);
 		currentLevel.addPlatform(p);
 		p = new Platform(100, Window.HEIGHT-96, 150, 32);
+		currentLevel.addPlatform(p);
+		p = new MovingPlatform(300, Window.HEIGHT-96, 150, 32, 50, true, 1);
 		currentLevel.addPlatform(p);
 		camera = new Camera();
 		camera.addTarget(player);
@@ -95,21 +98,6 @@ public class Game extends Canvas implements Runnable{
 		stop();		
 	}
 
-	
-//	public void run() {
-//		int fps = 30;
-//		long frameTime = 1000000000 / fps;
-//		long currentTime = System.nanoTime();
-//		long nextFrame;
-//		while(running) {
-//			nextFrame = currentTime + frameTime;
-//			tick();
-//			render();
-//			while(System.nanoTime() <= nextFrame) {};
-//			currentTime = System.nanoTime();
-//		}
-//		stop();	   
-//	}
 	
 	public synchronized void start() {
 		//The server is started in this function

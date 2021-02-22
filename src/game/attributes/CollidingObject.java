@@ -42,10 +42,14 @@ public interface CollidingObject {
 				continue;
 			}
 			if(object.getBounds().intersects(o.getBounds())) {
+				System.out.println("hello");
 				out.add(o);
 			}
 		}
-		if(out.size() > 0) object.handleCollisions(out);
+		if(out.size() > 0) {
+			
+			object.handleCollisions(out);
+		}
 	}
 	
 	/**
