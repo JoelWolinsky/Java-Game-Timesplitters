@@ -107,8 +107,8 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		return this.terminalVelY;
 	}
 
-	public void render(Graphics g, int xOffset, int yOffset) {
-		this.renderAnim(g, (int)this.x+xOffset, (int)this.y+yOffset);
+	public void render(Graphics g, float xOffset, float yOffset) {
+		this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
 		
 	}
 	
