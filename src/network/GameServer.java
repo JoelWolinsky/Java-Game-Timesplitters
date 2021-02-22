@@ -5,12 +5,19 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 import game.Game;
+import game.entities.PlayerMP;
+import game.network.packets.Packet;
+import game.network.packets.Packet.PacketTypes;
+import game.network.packets.Packet00Login;
 
 public class GameServer extends Thread {
 	private DatagramSocket socket;
 	private Game game;
+	private List<PlayerMP> connectedPlayers = new ArrayList<PlayerMP>();
 	
 	public GameServer(Game game) {
 		this.game = game;
@@ -30,22 +37,78 @@ public class GameServer extends Thread {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			String message = new String(packet.getData());
-			if(message.trim().equalsIgnoreCase("ping")) {
-				System.out.println("Client ["+packet.getAddress().getHostAddress()+":"+packet.getPort()+"]-> " + message);
-				sendData("pong".getBytes(), packet.getAddress(), packet.getPort());
-				
-
-			}
+			
+			this.parsePacket(packet.getData(), packet.getAddress(), packet.getPort());
+//			String message = new String(packet.getData());
+//			if(message.trim().equalsIgnoreCase("ping")) {
+//				System.out.println("Client ["+packet.getAddress().getHostAddress()+":"+packet.getPort()+"]-> " + message);
+//				sendData("pong".getBytes(), packet.getAddress(), packet.getPort());
+//				
+//
+//			}
 		}
 	}
 	
+	private void parsePacket(byte[] data, InetAddress address, int port) {
+		String message = new String(data).trim();
+		PacketTypes type = Packet.lookupPacket(message.substring(0,2));
+
+		Packet packet = null;
+		switch (type) {
+		default:
+		case INVALID:
+			break;
+		case LOGIN:
+			packet = new Packet00Login(data);
+			System.out.println("[" + address.getHostAddress() + ":" + port + "] " + ((Packet00Login) packet).getUsername() + " has connected...");
+			PlayerMP player = new PlayerMP (100, 100, ((Packet00Login) packet).getUsername(), address, port);
+			this.addConnection(player, (Packet00Login) packet);
+			break;
+		case DISCONNECT:
+			break;
+		}
+	}
+
+	public void addConnection(PlayerMP player, Packet00Login packet) {
+
+		boolean alreadyConnected = false;
+		for (PlayerMP p : this.connectedPlayers) {
+			if(player.getUsername().equalsIgnoreCase(p.getUsername())) {
+				if(p.ipAddress == null) {
+					p.ipAddress = player.ipAddress;
+				}
+				if(p.port == -1) {
+					p.port = player.port;
+				}
+				alreadyConnected = true;
+			} else {
+				sendData(packet.getData(),p.ipAddress, p.port);
+				
+				packet = new Packet00Login(p.getUsername());
+                sendData(packet.getData(), player.ipAddress, player.port);
+			}
+		}
+		if (!alreadyConnected) {
+
+            this.connectedPlayers.add(player);
+        }
+
+
+	}
+
 	public void sendData(byte[] data, InetAddress ipAddress, int port) {
 		DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, port);
 		try {
 			this.socket.send(packet);
+			System.out.println("server packet sent to " + ipAddress +":"+port);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public void sendDataToAllClients(byte[] data) {
+		for (PlayerMP p : connectedPlayers) {
+			sendData(data, p.ipAddress, p.port);
 		}
 	}
 }

@@ -8,6 +8,7 @@ import java.util.LinkedList;
 
 import game.Game;
 import game.GameObject;
+import game.KeyInput;
 import game.attributes.CollidingObject;
 import game.attributes.GraphicalObject;
 import game.attributes.GravityObject;
@@ -22,8 +23,14 @@ public class Player extends GameObject implements GraphicalObject, SolidCollider
 	private float velY = 0;
 	private float terminalVelY = 15;
 	
-	public Player(float x, float y) {
+	//private KeyInput keyInput;
+	private String username;
+	
+	public Player(float x, float y, String username) {
 		super(x, y, 1, 64, 32);
+		//this.keyInput = keyInput;
+		this.username = username;
+		
 		sprite = this.loadImage(this.url);
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
@@ -106,6 +113,10 @@ public class Player extends GameObject implements GraphicalObject, SolidCollider
 	
 	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, width, height);
+	}
+
+	public String getUsername() {
+		return this.username;
 	}
 
 }

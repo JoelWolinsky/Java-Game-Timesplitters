@@ -7,7 +7,8 @@ import java.awt.Graphics;
  */
 public abstract class GameObject {
 	
-	protected float x,y;
+	public float x;
+	public float y;
 	protected int z,width,height;
 	
 	/**

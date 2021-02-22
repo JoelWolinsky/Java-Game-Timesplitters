@@ -6,8 +6,15 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
+import game.entities.ExampleKeyListener2;
 import game.entities.Platform;
 import game.entities.Player;
+import game.entities.PlayerMP;
+import game.network.packets.Packet00Login;
+import network.GameClient;
+import network.GameServer;
 
 public class Game extends Canvas implements Runnable{
 	
@@ -20,21 +27,39 @@ public class Game extends Canvas implements Runnable{
 	private int xOffset = 0, yOffset = 0;
 	
 	private LinkedList<Level> levels = new LinkedList<>();
-	private Level currentLevel = new Level();
+	public Level currentLevel = new Level();
 	
 	private Player player;
+	
+	private GameClient socketClient;
+	private GameServer socketServer;
+	
+
 	
 	public Game() {
 		new Window(this);
 		this.addKeyListener(keyInput);
 		this.addMouseListener(mouseInput);
 		this.addMouseMotionListener(mouseInput);
-		player = new Player(100, 100);
+		
+		
+		player = new PlayerMP(100, 100, JOptionPane.showInputDialog(this, "Please enter a username"), null, -1);
 		currentLevel.addEntity(player);
+		
+		
 		Platform p = new Platform(0, Window.HEIGHT-32, Window.WIDTH, 32);
 		currentLevel.addPlatform(p);
 		p = new Platform(100, Window.HEIGHT-96, 150, 32);
 		currentLevel.addPlatform(p);
+		
+		Packet00Login loginPacket = new Packet00Login(player.getUsername());
+		
+		if(socketServer != null) {
+			socketServer.addConnection((PlayerMP) player, loginPacket);
+		}
+		//socketClient.sendData("ping".getBytes());
+		
+		loginPacket.writeData(socketClient);
 	}
 	
 	private void tick() {
@@ -112,6 +137,14 @@ public class Game extends Canvas implements Runnable{
 		thread.start();
 		running = true;
 		this.requestFocus();
+		
+		if (JOptionPane.showConfirmDialog(this,"Do you want to run the server") == 0) {
+			socketServer = new GameServer(this);
+			socketServer.start();
+		}
+		
+		socketClient = new GameClient(this, "localhost");
+		socketClient.start();
 	}
 	
 	public synchronized void stop() {
