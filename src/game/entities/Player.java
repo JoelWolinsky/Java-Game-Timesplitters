@@ -44,11 +44,21 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		
 		//Check for keyboard input along the x-axis
 		if(Game.keyInput.right.isPressed()) {
-			this.velX = 3.5f;
+			this.velX = 3.6f;
 		}else if(Game.keyInput.left.isPressed()) {
-			this.velX = -3.5f;
+			this.velX = -3.6f;
 		}else {
-			this.velX = 0;
+			/* Beware: Java floating point representation makes it difficult to have perfect numbers 
+			( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
+			if (this.velX >= -0.1f && this.velX <= 0.1f) {
+				this.velX = 0;	 
+			}
+			else if (this.velX > 0.1f) {
+				this.velX -= 0.2f;
+			}
+			else {
+				this.velX += 0.2f;
+			}
 		}
 		
 		//Check for keyboard input along the y-axis
