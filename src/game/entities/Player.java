@@ -24,6 +24,11 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private float velX = 0;
 	private float velY = 0;
 	private float terminalVelY = 15;
+
+	private static final float SLIDING_VEL = 0.2f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
+	private static final float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
+	private static final float RUN_SPEED = 3.6f; 		// Default run speed
+	private static final float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
 	
 	private static int animationTimer = 0;
 	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
@@ -38,26 +43,36 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	}
 	
 	//TODO: Fix sticking into wall when moving in the air
+	//TODO: Fix moving through the up-and-down moving platform when you jump underneath it
 	public void tick() {
 		//Gather all collisions
 		CollidingObject.getCollisions(this);
 		
 		//Check for keyboard input along the x-axis
 		if(Game.keyInput.right.isPressed()) {
-			this.velX = 3.5f;
+			this.velX = RUN_SPEED;
 		}else if(Game.keyInput.left.isPressed()) {
-			this.velX = -3.5f;
+			this.velX = -RUN_SPEED;
 		}else {
-			this.velX = 0;
+			/* Beware: Java floating point representation makes it difficult to have perfect numbers 
+			( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
+			if (this.velX >= -0.1f && this.velX <= 0.1f) {
+				this.velX = 0;	 
+			}
+			else if (this.velX > 0.1f) {
+				this.velX -= SLIDING_VEL;
+			}
+			else {
+				this.velX += SLIDING_VEL;
+			}
 		}
 		
 		//Check for keyboard input along the y-axis
 		if(Game.keyInput.down.isPressed()) {
-			this.velY = 10;
+			this.velY = DOWN_SPEED;
 		}else if(Game.keyInput.up.isPressed()) {
-			//You can only jump if you're on ground
-			if(isOnGround()) {
-				this.velY = -7.5f;
+			if(isOnGround() && !hasCeilingAbove()) {
+				this.velY = JUMP_GRAVITY;
 			}
 		}
 		
@@ -93,14 +108,17 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				this.velY = 0;
 			}else if(this.velY < 0 && !isOnGround()){
 				this.y = s.y - s.height;
-				this.terminalVelY = 0;
-				System.out.println("This is my fault");
+				this.velY = 0;
 			}
 		}
 	}
 	
 	private boolean isOnGround() {
 		return SolidCollider.willCauseSolidCollision(this, 5, false);
+	}
+
+	private boolean hasCeilingAbove() {
+		return SolidCollider.willCauseSolidCollision(this, -5, false);
 	}
 
 	public void handleCollisions(LinkedList<CollidingObject> collisions) {
