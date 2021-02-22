@@ -93,8 +93,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				this.velY = 0;
 			}else if(this.velY < 0 && !isOnGround()){
 				this.y = s.y - s.height;
-				this.terminalVelY = 0;
-				System.out.println("This is my fault");
+				this.velY = 0;
 			}
 		}
 	}
