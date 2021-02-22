@@ -36,6 +36,8 @@ public class Game extends Canvas implements Runnable{
 		currentLevel.addPlatform(p);
 		p = new MovingPlatform(300, Window.HEIGHT-96, 150, 32, 50, true, 1);
 		currentLevel.addPlatform(p);
+		p = new MovingPlatform(500, Window.HEIGHT-96, 150, 32, 50, false, 1);
+		currentLevel.addPlatform(p);
 		camera = new Camera();
 		camera.addTarget(player);
 		new Window(this);
