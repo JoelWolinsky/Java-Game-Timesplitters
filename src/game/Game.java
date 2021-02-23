@@ -64,7 +64,7 @@ public class Game extends Canvas implements Runnable{
 				mapUrl = "./src/game/".concat(bruh[randomNumber]).concat(".txt");
 
 				//generate the predefined segment
-				mapParser(426,384,currentLevel,mapUrl);
+				mapParser(0,0,currentLevel,mapUrl);
 			}
 		}
 
@@ -137,7 +137,7 @@ public class Game extends Canvas implements Runnable{
 		Chunk c = new Chunk();
 
 		try {
-			File myObj = new File(url);
+			File myObj = new File(url); //
 			Scanner myReader = new Scanner(myObj);
 			while (myReader.hasNextLine()) {
 
@@ -146,12 +146,9 @@ public class Game extends Canvas implements Runnable{
 
 				switch (splited[0]){
 					case "Theme":
-						if (Integer.parseInt(splited[2])!=masterOffsetX && Integer.parseInt(splited[3]) != masterOffsetY)
-						{
 						newOffsetX = Integer.parseInt(splited[2]);
 						newOffsetY = Integer.parseInt(splited[3]);
 						t = 1;
-						}
 						break;
 					case "Chunk":
 						currentLevel.addChunk(c);
@@ -177,6 +174,9 @@ public class Game extends Canvas implements Runnable{
 						t--;
 						break;
 					case "Platform":
+						System.out.println(masterOffsetX);
+						System.out.println(newOffsetX);
+						System.out.println(horizontalIndex);
 						p = new Platform(horizontalIndex + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , Integer.parseInt(splited[3]), Integer.parseInt(splited[4]));
 						c.addPlatform(p);
 						break;
