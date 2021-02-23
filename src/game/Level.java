@@ -10,15 +10,15 @@ import game.entities.PlayerMP;
 import game.network.packets.Packet01Disconnect;
 
 public class Level {
-	private LinkedList<GameObject> entities = new LinkedList<>();
-	private LinkedList<Platform> platforms = new LinkedList<>();
+	private LinkedList<GameObject> entities = new LinkedList<GameObject>();
+	private LinkedList<Platform> platforms = new LinkedList<Platform>();
 	
 	
-	public synchronized List<GameObject> getGameObjects(){
+	public synchronized LinkedList<GameObject> getGameObjects(){
 		return this.entities;
 	}
 	
-	public synchronized List<Platform> getPlatforms(){
+	public synchronized LinkedList<Platform> getPlatforms(){
 		return this.platforms;
 	}
 	public void tick() {
@@ -29,7 +29,7 @@ public class Level {
 	
 	public void render(Graphics g, int xOffset, int yOffset) {
 		//Render the platforms first, so they are below the getGameObjects()
-		//renderPlatforms(g, xOffset, yOffset);
+		renderPlatforms(g, xOffset, yOffset);
 		renderEntitites(g, xOffset, yOffset);
 	}
 	
