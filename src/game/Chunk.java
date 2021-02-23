@@ -1,21 +1,23 @@
 package game;
 
-import java.awt.Graphics;
-import java.util.LinkedList;
-
 import game.entities.MovingPlatform;
 import game.entities.Platform;
 
-public class Level {
+import java.awt.*;
+import java.util.LinkedList;
+
+public class Chunk {
 	private LinkedList<GameObject> entities = new LinkedList<>();
-	private LinkedList<Chunk> chunks = new LinkedList<>();
+	private LinkedList<Platform> platforms = new LinkedList<>();
 	
 	public void tick() {
 		for(GameObject o : entities) {
 			o.tick();
 		}
-		for(Chunk c : chunks) {
-			c.tick();
+		for(Platform p : platforms) {
+			if(p instanceof MovingPlatform) {
+				p.tick();
+			}
 		}
 	}
 	
@@ -32,8 +34,8 @@ public class Level {
 	}
 	
 	public void renderPlatforms(Graphics g, float f, float h) {
-		for(Chunk c : chunks) {
-			c.render(g, f, h);
+		for(Platform p : platforms) {
+			p.render(g, f, h);
 		}
 	}
 	
@@ -43,11 +45,11 @@ public class Level {
 	public void removeEntity(GameObject o) {
 		entities.remove(o);
 	}
-	public void addChunk(Chunk c) {
-		chunks.add(c);
+	public void addPlatform(Platform p) {
+		platforms.add(p);
 	}
-	public void removeChunk(Chunk c) {
-		chunks.remove(c);
+	public void removePlatform(Platform p) {
+		platforms.remove(p);
 	}
 	
 }

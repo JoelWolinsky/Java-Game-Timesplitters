@@ -31,8 +31,8 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private static HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
 	
 	public Player(float x, float y) {
-		super(x, y, 1, 64, 32);
-		animations.put(AnimationStates.IDLE, new Animation(20, "./img/Anglerfish.png", "./img/Anglerfish2.png", "./img/Anglerfish3.png", "./img/Anglerfish4.png"));
+		super(x, y, 1, 50, 37);
+		animations.put(AnimationStates.IDLE, new Animation(20, "./img/adventurer-idle-00.png", "./img/adventurer-idle-01.png", "./img/adventurer-idle-02.png"));
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
 	}
