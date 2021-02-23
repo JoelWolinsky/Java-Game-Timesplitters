@@ -10,6 +10,7 @@ public abstract class GameObject {
 	public float x;
 	public float y;
 	protected int z,width,height;
+	public Level level;
 	
 	/**
 	 * GameObject constructor.<br>
@@ -21,7 +22,8 @@ public abstract class GameObject {
 	 * @param width The width of the object
 	 * @param height The height of the object
 	 */
-	public GameObject(float x, float y, int z, int width, int height) {
+	public GameObject(Level level, float x, float y, int z, int width, int height) {
+		this.level = level;
 		this.x = x;
 		this.y = y;
 		this.z = z;

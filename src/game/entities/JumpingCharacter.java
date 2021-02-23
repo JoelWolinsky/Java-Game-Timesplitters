@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 
 import game.GameObject;
+import game.Level;
 import game.attributes.CollidingObject;
 import game.attributes.GraphicalObject;
 import game.attributes.SolidCollider;
@@ -22,8 +23,8 @@ public class JumpingCharacter extends GameObject implements GraphicalObject, Col
 
 	protected boolean cd = false; // Is the character in mid-air
 
-	public JumpingCharacter(float x, float y, int z) {
-		super(x, y, z, 64, 32);
+	public JumpingCharacter(Level level, float x, float y, int z) {
+		super(level, x, y, z, 64, 32);
 		this.velX = 0.0f;
 		this.velY = DEFAULT_Y_VELOCITY;
 		CollidingObject.addCollider(this);

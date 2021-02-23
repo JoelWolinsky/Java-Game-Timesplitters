@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.LinkedList;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import game.entities.ExampleKeyListener2;
@@ -23,33 +24,41 @@ public class Game extends Canvas implements Runnable{
 	
 	public static KeyInput keyInput = new KeyInput();
 	public static MouseInput mouseInput = new MouseInput();
+	public static Game game;
 	
 	private int xOffset = 0, yOffset = 0;
 	
 	private LinkedList<Level> levels = new LinkedList<>();
 	public Level currentLevel = new Level();
 	
-	private Player player;
+	public Player player;
 	
-	private GameClient socketClient;
-	private GameServer socketServer;
+	public GameClient socketClient;
+	public GameServer socketServer;
+	
+	
+	//public JFrame frame;
+	
+	//public WindowHandler windowHandler;
+	
 	
 
 	
 	public Game() {
+		game = this;
 		new Window(this);
 		this.addKeyListener(keyInput);
 		this.addMouseListener(mouseInput);
 		this.addMouseMotionListener(mouseInput);
 		
 		
-		player = new PlayerMP(100, 100, JOptionPane.showInputDialog(this, "Please enter a username"), null, -1);
+		player = new PlayerMP(this.currentLevel, 300, 300, keyInput, JOptionPane.showInputDialog(this, "Please enter a username"), null, -1);
 		currentLevel.addEntity(player);
 		
 		
-		Platform p = new Platform(0, Window.HEIGHT-32, Window.WIDTH, 32);
+		Platform p = new Platform(currentLevel, 0, Window.HEIGHT-32, Window.WIDTH, 32);
 		currentLevel.addPlatform(p);
-		p = new Platform(100, Window.HEIGHT-96, 150, 32);
+		p = new Platform(currentLevel, 100, Window.HEIGHT-96, 150, 32);
 		currentLevel.addPlatform(p);
 		
 		Packet00Login loginPacket = new Packet00Login(player.getUsername());
@@ -60,6 +69,7 @@ public class Game extends Canvas implements Runnable{
 		//socketClient.sendData("ping".getBytes());
 		
 		loginPacket.writeData(socketClient);
+		//windowHandler = new WindowHandler(this);
 	}
 	
 	private void tick() {

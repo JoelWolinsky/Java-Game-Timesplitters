@@ -5,17 +5,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 import game.entities.Platform;
+import game.entities.Player;
+import game.entities.PlayerMP;
+import game.network.packets.Packet01Disconnect;
 
 public class Level {
 	private LinkedList<GameObject> entities = new LinkedList<>();
 	private LinkedList<Platform> platforms = new LinkedList<>();
 	
 	
-	public synchronized List<GameObject>getGameObjects(){
+	public synchronized List<GameObject> getGameObjects(){
 		return this.entities;
 	}
 	
-	public synchronized List<Platform>getPlatforms(){
+	public synchronized List<Platform> getPlatforms(){
 		return this.platforms;
 	}
 	public void tick() {
@@ -26,9 +29,10 @@ public class Level {
 	
 	public void render(Graphics g, int xOffset, int yOffset) {
 		//Render the platforms first, so they are below the getGameObjects()
-		renderPlatforms(g, xOffset, yOffset);
+		//renderPlatforms(g, xOffset, yOffset);
 		renderEntitites(g, xOffset, yOffset);
 	}
+	
 	
 	public void renderEntitites(Graphics g, int xOffset, int yOffset) {
 		for(GameObject o : getGameObjects()) {
@@ -53,6 +57,35 @@ public class Level {
 	}
 	public void removePlatform(Platform p) {
 		this.getPlatforms().remove(p);
+	}
+
+	public void removePlayerMP(String username) {
+		int index = 0;
+		for(GameObject e : getGameObjects()) {
+			if(e instanceof PlayerMP && ((PlayerMP)e).getUsername().equals(username)) {
+				break;
+			}
+			index++;
+		}
+		this.getGameObjects().remove(index);
+	}
+	
+	private int getPlayerMPIndex(String username) {
+		int index = 0;
+		for (GameObject e : getGameObjects()) {
+			if(e instanceof PlayerMP && ((PlayerMP)e).getUsername().equals(username)) {
+				break;
+			}
+			index++;
+		}
+		return index;
+	}
+	
+	public void movePlayer(String username, float x, float y) {
+		int index = getPlayerMPIndex(username);
+		this.getGameObjects().get(index).x = x;
+		this.getGameObjects().get(index).y =y;
+		
 	}
 	
 }

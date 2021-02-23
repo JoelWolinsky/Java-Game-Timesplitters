@@ -6,13 +6,14 @@ import java.awt.Rectangle;
 import java.util.LinkedList;
 
 import game.GameObject;
+import game.Level;
 import game.attributes.CollidingObject;
 import game.attributes.SolidCollider;
 
 public class Platform extends GameObject implements SolidCollider{
 
-	public Platform(float x, float y, int width, int height) {
-		super(x, y, -1, width, height);
+	public Platform(Level level, float x, float y, int width, int height) {
+		super(level, x, y, -1, width, height);
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
 	}

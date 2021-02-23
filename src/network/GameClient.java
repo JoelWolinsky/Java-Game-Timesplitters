@@ -11,6 +11,8 @@ import game.Game;
 import game.entities.PlayerMP;
 import game.network.packets.Packet;
 import game.network.packets.Packet00Login;
+import game.network.packets.Packet01Disconnect;
+import game.network.packets.Packet02Move;
 import game.network.packets.Packet.PacketTypes;
 
 public class GameClient extends Thread {
@@ -58,13 +60,20 @@ public class GameClient extends Thread {
 
 			packet = new Packet00Login(data);
 			System.out.println("[" + address.getHostAddress() + ":" + port + "] " + ((Packet00Login) packet).getUsername() + " has joined the game...");
-			PlayerMP player = new PlayerMP (100, 100, ((Packet00Login) packet).getUsername(), address, port);
+			PlayerMP player = new PlayerMP (game.currentLevel, 100, 100, ((Packet00Login) packet).getUsername(), address, port);
 			game.currentLevel.addEntity(player);
 			break;
 		case DISCONNECT:
+			packet = new Packet01Disconnect(data);
+			System.out.println("[" + address.getHostAddress() + ":" + port + "] " + ((Packet01Disconnect) packet).getUsername() + " has left the world...");
+			game.currentLevel.removePlayerMP(((Packet01Disconnect) packet).getUsername());
 			break;
+		case MOVE:
+			packet = new Packet02Move(data);
+			handleMove((Packet02Move)packet);
 		}		
 	}
+
 
 
 
@@ -75,6 +84,10 @@ public class GameClient extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private void handleMove(Packet02Move packet) {
+		this.game.currentLevel.movePlayer(packet.getUsername(), packet.getX(), packet.getY());
 	}
 
 }

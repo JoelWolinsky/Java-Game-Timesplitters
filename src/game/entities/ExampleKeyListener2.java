@@ -4,13 +4,15 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
+import game.Level;
+
 public class ExampleKeyListener2 extends JumpingCharacter {
 	
 	private static BufferedImage sprite;
 	private static String url = "./img/player1inv.png";
 
-	public ExampleKeyListener2(float x, float y, int z) {
-		super(x, y, z);
+	public ExampleKeyListener2(Level level, float x, float y, int z) {
+		super(level, x, y, z);
         sprite = this.loadImage(ExampleKeyListener2.url);
 	}
 
