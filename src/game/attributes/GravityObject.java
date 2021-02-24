@@ -20,11 +20,6 @@ public interface GravityObject {
 		}else {
 			o.setVelY(newVelY);
 		}
-//		if(o.getVelY() + gravityRate >= o.getTerminalVel()) {
-//			o.setVelY(o.getVelY()+gravityRate);
-//		}else {
-//			o.setVelY(o.getTerminalVel());
-//		}
 	}
 	
 	void setVelY(float velY);

@@ -5,7 +5,6 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 
 import game.Game;
 import game.GameObject;
@@ -15,6 +14,7 @@ import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
+import game.input.KeyInput;
 
 public class Player extends GameObject implements AnimatedObject, SolidCollider, GravityObject{
 	
@@ -43,9 +43,9 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		CollidingObject.getCollisions(this);
 		
 		//Check for keyboard input along the x-axis
-		if(Game.keyInput.right.isPressed()) {
+		if(KeyInput.right.isPressed()) {
 			this.velX = 3.6f;
-		}else if(Game.keyInput.left.isPressed()) {
+		}else if(KeyInput.left.isPressed()) {
 			this.velX = -3.6f;
 		}else {
 			/* Beware: Java floating point representation makes it difficult to have perfect numbers 
@@ -62,9 +62,9 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}
 		
 		//Check for keyboard input along the y-axis
-		if(Game.keyInput.down.isPressed()) {
+		if(KeyInput.down.isPressed()) {
 			this.velY = 10;
-		}else if(Game.keyInput.up.isPressed()) {
+		}else if(KeyInput.up.isPressed()) {
 			//You can only jump if you're on ground
 			if(isOnGround()) {
 				this.velY = -7.5f;

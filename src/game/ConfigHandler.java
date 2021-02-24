@@ -23,6 +23,10 @@ public class ConfigHandler {
 		this.musicToggle = null;
 	}
 	
+	/**
+	 * Returns the value of toggleSoundEffects from the config file
+	 * @return A boolean value of toggleSoundEffects
+	 */
 	public Boolean getSoundEffectsToggle() {
 		createConfigFile();
 		
@@ -47,6 +51,10 @@ public class ConfigHandler {
 		return null;
 	}
 	
+	/**
+	 * Returns the value of toggleMusic from the config file
+	 * @return A boolean value of toggleMusic
+	 */
 	public Boolean getMusicToggle() {
 		createConfigFile();
 		
@@ -73,6 +81,11 @@ public class ConfigHandler {
 		return null;
 	}
 	
+	/**
+	 * Updates the value of a given option in the config file
+	 * @param option The option to be updated
+	 * @param value The value to which the option should be updated
+	 */
 	public void updateConfigValue(ConfigOption option, String value) {
 		
 		String updatedFile = "";
@@ -111,6 +124,10 @@ public class ConfigHandler {
 		
 	}
 	
+	/**
+	 * Creates a config file and populates it with default values
+	 * @return True if successful, False if not
+	 */
 	public Boolean createConfigFile() {
 		try {
 			File configFile = new File(this.fileName);

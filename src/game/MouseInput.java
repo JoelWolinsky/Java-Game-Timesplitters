@@ -5,11 +5,10 @@ import java.awt.event.MouseEvent;
 import javax.swing.event.MouseInputListener;
 
 /**
- * A mouse listener class.<br>
- * <br>
- * <b>This should be public and static in the game class, and registered as a mouse listener and mouse motion listener in the Game constructor</b><br>
- * Contains a public static Point storing the position of the mouse on the screen<br>
- * <pre>this.addMouseListener(mouseInput);
+ * A mouse listener class.
+ * This should be public and static in the game class, and registered as a mouse listener and mouse motion listener in the Game constructor.
+ * Contains a public static Point storing the position of the mouse on the screen
+ * <pre>this.addMouseListener(mouseInput);<br>
  * this.addMouseMotionListener(mouseInput);</pre>
  */
 public class MouseInput implements MouseInputListener{

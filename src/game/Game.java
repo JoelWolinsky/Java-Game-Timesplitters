@@ -12,6 +12,7 @@ import java.util.Scanner;
 import game.display.Window;
 import game.entities.Platform;
 import game.entities.Player;
+import game.input.KeyInput;
 
 public class Game extends Canvas implements Runnable{
 
@@ -22,11 +23,6 @@ public class Game extends Canvas implements Runnable{
 	public static KeyInput keyInput = new KeyInput();
 	public static MouseInput mouseInput = new MouseInput();
 
-	private int horizontalIndex = 0;
-	private int verticalIndex = 0;
-	private int newOffsetX = 0;
-	private int newOffsetY = 0;
-	private int t = 0;
 	
 	public static GameState state = GameState.MainMenu;
 
@@ -37,17 +33,17 @@ public class Game extends Canvas implements Runnable{
 
 	private Camera camera;
 
+	/**
+	 * Initialises game entities and objects that must appear at the start of the game
+	 */
 	public Game() {
-		player = new Player(0, 0);
-		currentLevel.addEntity(player);
-
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 		String mapMode = "default";
 		String mapUrl = "./src/game/map.txt";
 
 		//keep default for now until we sort randomly generated
 		if (mapMode.equals("default"))
-			mapParser(0,0, currentLevel,mapUrl);
+			Map.mapParser(0,0, currentLevel,mapUrl);
 
 			//WORK IN PROGRESS
 		else if (mapMode.equals("randomlyGenerated"))
@@ -65,25 +61,38 @@ public class Game extends Canvas implements Runnable{
 				mapUrl = "./src/game/".concat(bruh[randomNumber]).concat(".txt");
 
 				//generate the predefined segment
-				mapParser(0,0,currentLevel,mapUrl);
+				Map.mapParser(0,0,currentLevel,mapUrl);
 			}
 		}
+		
+		//Initialise player character at 0,0 in the first chunk
+		player = new Player(0, 0);
+		Chunk c = currentLevel.firstChunk();
+		c.addEntity(player);
 
 		camera = new Camera();
 		camera.addTarget(player);
+		
+		//This section should always be last
 		new Window(this);
 		this.addKeyListener(keyInput);
 		this.addMouseListener(mouseInput);
 		this.addMouseMotionListener(mouseInput);
 	}
-
+	
+	/**
+	 * Called every frame, this tells certain lists, objects, or entities to call their own tick function.
+	 */
 	private void tick() {
-		if(this.state == GameState.Playing) {
+		if(this.state == GameState.Playing) { 
 			currentLevel.tick();
 			camera.tick();
 		}
 	}
-
+	
+	/**
+	 * Responsible for all rendering. This generates a Graphics object, refreshes the screen, and renders the correct objects based on the play state.
+	 */
 	private void render() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
@@ -93,7 +102,7 @@ public class Game extends Canvas implements Runnable{
 
 		Graphics g = bs.getDrawGraphics();
 
-		
+		//Rendering code happens here
 
 		if(this.state == GameState.Playing) {
 			g.setColor(new Color(100,100,100));
@@ -103,11 +112,16 @@ public class Game extends Canvas implements Runnable{
 			g.setColor(new Color(255,255,255));
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 		}
+		
+		//Rendering code stops here
 
 		g.dispose();
 		bs.show();
 	}
 
+	/**
+	 * The game loop, calls tick and render regularly
+	 */
 	public void run() {
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60.0;
@@ -133,68 +147,6 @@ public class Game extends Canvas implements Runnable{
 			}
 		}
 		stop();
-	}
-
-	public void mapParser(int masterOffsetX, int masterOffsetY, Level currentLevel, String url)
-	{
-
-		Platform p;
-		Chunk c = new Chunk();
-
-		try {
-			File myObj = new File(url); //
-			Scanner myReader = new Scanner(myObj);
-			while (myReader.hasNextLine()) {
-
-				String data = myReader.nextLine();
-				String[] splited = data.split("\\s+");
-
-				switch (splited[0]){
-					case "Theme":
-						newOffsetX = Integer.parseInt(splited[2]);
-						newOffsetY = Integer.parseInt(splited[3]);
-						t = 1;
-						break;
-					case "Chunk":
-						currentLevel.addChunk(c);
-						c = new Chunk();
-						if (t==0) {
-							masterOffsetX = newOffsetX;
-							masterOffsetY = newOffsetY;
-						}
-						switch (splited[2]){
-							case "E":
-								horizontalIndex= horizontalIndex + masterOffsetX;
-								break;
-							case "W":
-								horizontalIndex= horizontalIndex - masterOffsetX;
-								break;
-							case "N":
-								verticalIndex = verticalIndex - masterOffsetY;
-								break;
-							case "S":
-								verticalIndex = verticalIndex + masterOffsetY;
-								break;
-						}
-						t--;
-						break;
-					case "Platform":
-						System.out.println(masterOffsetX);
-						System.out.println(newOffsetX);
-						System.out.println(horizontalIndex);
-						p = new Platform(horizontalIndex + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , Integer.parseInt(splited[3]), Integer.parseInt(splited[4]));
-						c.addPlatform(p);
-						break;
-				}
-				System.out.println(data);
-
-			}
-			currentLevel.addChunk(c);
-			myReader.close();
-		} catch (FileNotFoundException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
-		}
 	}
 
 
