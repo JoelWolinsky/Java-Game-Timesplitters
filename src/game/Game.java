@@ -9,7 +9,7 @@ import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
 
-import game.entities.MovingPlatform;
+import game.display.Window;
 import game.entities.Platform;
 import game.entities.Player;
 
@@ -22,12 +22,13 @@ public class Game extends Canvas implements Runnable{
 	public static KeyInput keyInput = new KeyInput();
 	public static MouseInput mouseInput = new MouseInput();
 
-	private int xOffset = 0, yOffset = 0;
 	private int horizontalIndex = 0;
 	private int verticalIndex = 0;
 	private int newOffsetX = 0;
 	private int newOffsetY = 0;
 	private int t = 0;
+	
+	public static GameState state = GameState.MainMenu;
 
 	//	private LinkedList<Level> levels = new LinkedList<>();
 	private Level currentLevel = new Level();
@@ -77,8 +78,10 @@ public class Game extends Canvas implements Runnable{
 	}
 
 	private void tick() {
-		currentLevel.tick();
-		camera.tick();
+		if(this.state == GameState.Playing) {
+			currentLevel.tick();
+			camera.tick();
+		}
 	}
 
 	private void render() {
@@ -90,11 +93,16 @@ public class Game extends Canvas implements Runnable{
 
 		Graphics g = bs.getDrawGraphics();
 
-		g.setColor(new Color(100,100,100));
-		g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
+		
 
-
-		currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+120);
+		if(this.state == GameState.Playing) {
+			g.setColor(new Color(100,100,100));
+			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
+			currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+120);
+		}else {
+			g.setColor(new Color(255,255,255));
+			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
+		}
 
 		g.dispose();
 		bs.show();
@@ -117,13 +125,10 @@ public class Game extends Canvas implements Runnable{
 			}
 			if(running) {
 				render();
-//				frames ++;
 
 
 				if(System.currentTimeMillis() - timer >1000) {
 					timer += 1000;
-//					System.out.println(frames);
-//					frames = 0;
 				}
 			}
 		}

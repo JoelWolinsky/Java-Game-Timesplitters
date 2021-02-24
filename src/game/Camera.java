@@ -1,5 +1,7 @@
 package game;
 
+import game.display.Window;
+
 public class Camera {
 	private float xOffset, yOffset;
 	private GameObject target = null;
