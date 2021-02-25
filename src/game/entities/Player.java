@@ -1,6 +1,8 @@
 package game.entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -102,7 +104,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				this.y = s.y - this.height;
 				this.velY = 0;
 			}else if(this.velY < 0 && !isOnGround()){
-				this.y = s.y - s.height;
+				this.y = s.y + s.height;
 				this.velY = 0;
 			}
 		}
@@ -130,10 +132,21 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public void render(Graphics g, float xOffset, float yOffset) {
 		this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
 		
+		Graphics2D g2d = (Graphics2D) g;
+		g.setColor(Color.RED);
+
+		g2d.draw(getBounds(xOffset, yOffset));
+
+
+
 	}
 	
 	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, width, height);
+	}
+
+	public Rectangle getBounds(float xOffset, float yOffset) {
+		return new Rectangle((int)(this.x+xOffset), (int)(this.y + yOffset), width, height);
 	}
 
 	public int getAnimationTimer() {
