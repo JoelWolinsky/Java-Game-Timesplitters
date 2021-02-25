@@ -120,7 +120,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	}
 
 	private boolean hasCeilingAbove() {
-		return SolidCollider.willCauseSolidCollision(this, -5, false);
+		return SolidCollider.willCauseSolidCollision(this, -10, false);
 	}
 
 	public void handleCollisions(LinkedList<CollidingObject> collisions) {
@@ -141,13 +141,6 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public void render(Graphics g, float xOffset, float yOffset) {
 		this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
 		
-		Graphics2D g2d = (Graphics2D) g;
-		g.setColor(Color.RED);
-
-		g2d.draw(getBounds(xOffset, yOffset));
-
-
-
 	}
 	
 	public Rectangle getBounds() {
