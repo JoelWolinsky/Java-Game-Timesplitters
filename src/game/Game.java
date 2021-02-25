@@ -174,8 +174,6 @@ public class Game extends Canvas implements Runnable{
 						break;
 
 					case "Chunk":
-						c = new Chunk(horizontalIndex,verticalIndex,setX,setY,splited[3]);
-						currentLevel.addChunk(c);
 
 						switch (splited[2]){
 							case "E":
@@ -191,7 +189,8 @@ public class Game extends Canvas implements Runnable{
 								verticalIndex = verticalIndex + setY;
 								break;
 						}
-
+						c = new Chunk(horizontalIndex-setX,verticalIndex,setX,setY,splited[3]);
+						currentLevel.addChunk(c);
 
 						break;
 
