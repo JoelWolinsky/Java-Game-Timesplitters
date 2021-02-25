@@ -1,35 +1,22 @@
-Theme A 426 384
-Chunk 1 E
-Platform 100 325 100 20
-Platform 280 310 50 20
-Platform 0 384 426 20
-Enemy 100 300
-Chunk 2 E
-Platform 10 325 100 15
-Platform 110 310 100 15
-Platform 300 55 100 10
-Platform 0 384 426 20
-Theme B 527 400
-Chunk 3 E
-Platform 100 325 100 10
-Platform 200 225 100 10
-Platform 0 55 100 10
-Platform 100 125 100 10
-Platform 280 310 50 10
-Platform 0 384 527 36
-Chunk 4 E
-Platform 10 325 100 10
-Platform 110 310 100 10
-Platform 0 384 527 20
-Theme C 727 700
-Chunk 5 E
-Platform 100 325 100 10
-Platform 200 225 100 10
-Platform 0 55 100 10
-Platform 100 125 100 10
-Platform 280 310 50 10
-Platform 0 384 727 36
-Chunk 6 E
-Platform 10 325 100 10
-Platform 110 310 100 10
-Platform 0 384 727 20
+=================
+Theme A 426 384 ./img/platformA.png ./img/invPlatformA.png ./img/floorA.png ./img/backgroundA.png
+-----DRAW--------
+Chunk 1 E ./img/backgroundA.png
+Platform Default 100 325
+Platform Inverted 132 325
+Floor
+Chunk 3 W ./img/backgroundA.png
+Platform Custom 400 0 10 384 dsfsadg
+Platform Custom 400 384 32 64 ./img/stairsA.png
+Chunk 1 S ./img/backgroundA.png
+Chunk 2 E ./img/backgroundAextended2.png
+
+
+//Chunk 2 E ./img/backgroundAextended.png
+//Chunk 2 S ./img/backgroundAextended.png
+//Platform Default 100 325
+//Platform Inverted 132 325
+//Platform Custom 170 325 100 20 ./img/stairsA.png
+//Floor
+//Chunk 2 E ./img/backgroundA.png
+//Chunk 2 N ./img/backgroundAextended.png
