@@ -1,0 +1,18 @@
+Theme A 426 384 ./img/platformA.png ./img/invPlatformA.png ./img/floorA.png ./img/background1.png
+Chunk 1 E ./img/background1.png
+Platform Default 100 325
+Platform Inverted 132 325
+Floor
+Chunk 1 E ./img/background1.png
+Platform Default 100 325
+Platform Inverted 132 325
+Floor
+Theme B 500 400 ./img/platformA.png ./img/invPlatformA.png ./img/floorA.png ./img/backgroundA.png
+Chunk 1 E ./img/backgroundA.png
+Platform Default 100 325
+Platform Inverted 132 325
+Floor
+Chunk 1 E ./img/backgroundA.png
+Platform Default 100 325
+Platform Inverted 132 325
+Floor

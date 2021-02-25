@@ -29,10 +29,10 @@ public class Game extends Canvas implements Runnable{
 	private int xOffset = 0, yOffset = 0;
 	private int horizontalIndex = 0;
 	private int verticalIndex = 0;
-	private int newOffsetX = 0;
-	private int newOffsetY = 0;
+	private int setX = 426;
+	private int setY = 384;
 	private int t = 0;
-	private String currentTheme="";
+	private String currentTheme="A";
 
 	//	private LinkedList<Level> levels = new LinkedList<>();
 	private Level currentLevel = new Level();
@@ -47,7 +47,7 @@ public class Game extends Canvas implements Runnable{
 
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 		String mapMode = "default";
-		String mapUrl = "./src/game/map.txt";
+		String mapUrl = "./src/game/segmentA1.txt";
 
 		//keep default for now until we sort randomly generated
 		if (mapMode.equals("default"))
@@ -156,13 +156,17 @@ public class Game extends Canvas implements Runnable{
 				switch (splited[0]){
 
 					case "Theme":
-						if (Integer.parseInt(splited[2])!=masterOffsetX && Integer.parseInt(splited[3]) != masterOffsetY)
+						if (!splited[1].equals(currentTheme))
+						//if (Integer.parseInt(splited[2])!=masterOffsetX && Integer.parseInt(splited[3]) != masterOffsetY)
 						{
-							newOffsetX = Integer.parseInt(splited[2]);
-							newOffsetY = Integer.parseInt(splited[3]);
+							setX = Integer.parseInt(splited[2]);
+							setY = Integer.parseInt(splited[3]);
 							t = 1;
+							currentTheme = splited[1];
 						}
-						currentTheme = splited[1];
+						else
+						{
+						}
 						texturePlatformDefault = splited[4];
 						texturePlatformInverted = splited[5];
 						textureFloor = splited[6];
@@ -170,27 +174,25 @@ public class Game extends Canvas implements Runnable{
 						break;
 
 					case "Chunk":
-						c = new Chunk(horizontalIndex,verticalIndex,newOffsetX,newOffsetY,splited[3]);
+						c = new Chunk(horizontalIndex,verticalIndex,setX,setY,splited[3]);
 						currentLevel.addChunk(c);
-						if (t==0) {
-							masterOffsetX = newOffsetX;
-							masterOffsetY = newOffsetY;
-						}
+
 						switch (splited[2]){
 							case "E":
-								horizontalIndex= horizontalIndex + masterOffsetX;
+								horizontalIndex= horizontalIndex + setX;
 								break;
 							case "W":
-								horizontalIndex= horizontalIndex - masterOffsetX;
+								horizontalIndex= horizontalIndex - setX;
 								break;
 							case "N":
-								verticalIndex = verticalIndex - masterOffsetY;
+								verticalIndex = verticalIndex - setY;
 								break;
 							case "S":
-								verticalIndex = verticalIndex + masterOffsetY;
+								verticalIndex = verticalIndex + setY;
 								break;
 						}
-						t--;
+
+
 						break;
 
 					case "Platform":
@@ -217,13 +219,13 @@ public class Game extends Canvas implements Runnable{
 								break;
 						}
 
-						p = new Platform(horizontalIndex + Integer.parseInt(splited[2]), verticalIndex + Integer.parseInt(splited[3]) , width	, height, goUrl);
+						p = new Platform(horizontalIndex-setX+ Integer.parseInt(splited[2]), verticalIndex + Integer.parseInt(splited[3]) , width	, height, goUrl);
 						currentLevel.addPlatform(p);
 						break;
 
 					case "Floor":
 						goUrl=textureFloor;
-						p = new Platform(horizontalIndex , verticalIndex + newOffsetY , newOffsetX, 32, goUrl);
+						p = new Platform(horizontalIndex-setX , verticalIndex +setY , setX, 32, goUrl);
 						currentLevel.addPlatform(p);
 						break;
 					/*
