@@ -33,7 +33,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private static HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
 	
 	public Player(float x, float y) {
-		super(x, y, 1, 50, 37);
+		super(x, y, 1, 27, 37);
 		animations.put(AnimationStates.IDLE, new Animation(20, "./img/adventurer-idle-00.png", "./img/adventurer-idle-01.png", "./img/adventurer-idle-02.png"));
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
@@ -142,11 +142,11 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	}
 	
 	public Rectangle getBounds() {
-		return new Rectangle((int)x, (int)y, width, height);
+		return new Rectangle((int)x+10, (int)y, width, height);
 	}
 
 	public Rectangle getBounds(float xOffset, float yOffset) {
-		return new Rectangle((int)(this.x+xOffset), (int)(this.y + yOffset), width, height);
+		return new Rectangle((int)(this.x+xOffset)+10, (int)(this.y + yOffset), width, height);
 	}
 
 	public int getAnimationTimer() {
