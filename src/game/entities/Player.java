@@ -94,7 +94,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		//If you're not on ground, you should fall
 		if(!isOnGround()) {
 			fall(this);
-		}else {
+		} else {
 			CollidingObject o = SolidCollider.nextCollision(this, 5, false);
 			if(o instanceof MovingPlatform) {
 				if(((MovingPlatform) o).getXAxis()) {
@@ -111,23 +111,21 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}
 		if(!SolidCollider.willCauseSolidCollision(this, this.velY, false)) { 
 			this.y += this.velY;
-		}else { 
-			
+		} else { 	
 			// Stop player falling through the floor
 			CollidingObject o = SolidCollider.nextCollision(this,  this.velY, false);
 			if(o == null) {
 				return;
 			}
 			Rectangle s = o.getBounds();
+			
 			if(this.velY > 0 && !isOnWall()) {
-					this.y = s.y - this.height;
-					this.velY = 0;
-			}else if(this.velY < 0) { 
-				if (!isOnWall()){ // this is what causes getting stuck on the wall
-					this.velY = 0;
-				}	
-			}else {	// When velY == 0 and velX == 0 the sticking to the wall bug occurs.
-					// Rebounds the player off the wall to avoid sticking.
+				this.y = s.y - this.height;
+				this.velY = 0;
+			} else if(this.velY < 0 && !isOnWall()) { 
+				this.velY = 0;
+			} else {	// When velY == 0 and velX == 0 the sticking to the wall bug occurs.
+						// Rebounds the player off the wall to avoid sticking.
 				if (SolidCollider.willCauseSolidCollision(this, 5, true)) { 
 					this.velX = -2.0f;
 				} else if (SolidCollider.willCauseSolidCollision(this, -5, true)) {
@@ -172,22 +170,20 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public void render(Graphics g, float xOffset, float yOffset) {
 		this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
 
+		/* -- To visualise the boundary box, uncomment these and getBounds(float xOffset, float yOffset) as well.
 		Graphics2D g2d = (Graphics2D) g;
-
 		g.setColor(Color.RED);		
-
-		g2d.draw(getBounds(xOffset, yOffset));
-
-
-		
+		g2d.draw(getBounds(xOffset, yOffset)); */
 	}
 	
-	public Rectangle getBounds() {
-		return new Rectangle((int)x+16, (int)y, width, height);
-	}
-
+	/* -- To visualise the player boundary box, adjusted for camera offset.
 	public Rectangle getBounds(float xOffset, float yOffset) {
 		return new Rectangle((int)(this.x+xOffset)+16, (int)(this.y + yOffset), width, height);
+	}
+	*/
+
+	public Rectangle getBounds() {  // For some reason changing x is fine but changing the y messes up the collisions
+		return new Rectangle((int)x+16, (int)y, width, height);
 	}
 
 	public int getAnimationTimer() {
