@@ -44,7 +44,6 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		SolidCollider.addSolidCollider(this);
 	}
 	
-	//TODO: Fix sticking into wall when moving in the air
 	//TODO: Fix moving through the up-and-down moving platform when you jump underneath it
 	public void tick() {
 		//Gather all collisions
@@ -58,9 +57,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}else {
 			/* Beware: Java floating point representation makes it difficult to have perfect numbers 
 			( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
-			
+
+			// For sliding effect on ground
 			if (!SolidCollider.willCauseSolidCollision(this, this.velX, true) && isOnGround()){
-				if (this.velX >= -0.08f && this.velX <= 0.08f) {
+				if (this.velX >= -0.1f && this.velX <= 0.1f) {
 					this.velX = 0;	 
 				}
 				else if (this.velX > 0.1f) {
@@ -70,7 +70,8 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 					this.velX += SLIDING_VEL;
 				}
 			}
-			else if (!SolidCollider.willCauseSolidCollision(this, this.velX, true) && !isOnGroundPrime()) {
+			// Sliding in mid-air to represent air resistence. Half the rate of decrease as on ground.
+			else if (!SolidCollider.willCauseSolidCollision(this, this.velX, true) && !isOnGround() && !isOnWall()) {
 				if (this.velX >= -0.1f && this.velX <= 0.1f) {
 					this.velX = 0;	 
 				}
@@ -90,7 +91,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		if(Game.keyInput.down.isPressed()) {
 			this.velY = DOWN_SPEED;
 		}else if(Game.keyInput.up.isPressed()) {
-			if(isOnGround() && !hasCeilingAbove()) {
+			if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
 				this.velY = JUMP_GRAVITY;
 			}
 		}
@@ -115,7 +116,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}
 		if(!SolidCollider.willCauseSolidCollision(this, this.velY, false)) { 
 			this.y += this.velY;
-		}else { //if moving up/down in that direction will cause a collision
+		}else { 
 			
 			// Stop player falling through the floor
 			CollidingObject o = SolidCollider.nextCollision(this,  this.velY, false);
@@ -123,51 +124,20 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				return;
 			}
 			Rectangle s = o.getBounds();
-			if(this.velY > 0) {
-				
-				if (!isOnWall()){
+			if(this.velY > 0 && !isOnWall()) {
 					this.y = s.y - this.height;
 					this.velY = 0;
-				}	
-				//else ()
-			}
-			else if(this.velY < 0) { 
-				
+			}else if(this.velY < 0) { 
 				if (!isOnWall()){ // this is what causes getting stuck on the wall
-					
 					this.velY = 0;
 				}	
-				else { // not this case
-
-					if (this.velX >= -0.1f && this.velX <= 0.1f) {
-						this.velX = 0;	 
-					}
-					else if (this.velX > 0.1f) {
-						this.velX = -RUN_SPEED/2;
-					}
-					else {
-						this.velX = RUN_SPEED/2;
-					}
-										 // may be able to remove
-										// check to see if this works as expected
-										//this.velY = 0;
-
-				}
-
-			}
-			else { // velY == 0. this causes the sticking to wall bug
-			
-				if (SolidCollider.willCauseSolidCollision(this, 5, true)) { // the wall is on the right
+			}else {	// When velY == 0 and velX == 0 the sticking to the wall bug occurs.
+					// Rebounds the player off the wall to avoid sticking.
+				if (SolidCollider.willCauseSolidCollision(this, 5, true)) { 
 					this.velX = -2.0f;
-				}
-				else if (SolidCollider.willCauseSolidCollision(this, -5, true)) {
+				} else if (SolidCollider.willCauseSolidCollision(this, -5, true)) {
 					this.velX = 2.0f;
 				}
-
-					// it's this case when velX == 0 and velY == 0!!!!!
-
-					
-				
 			}
 		}
 	}
@@ -176,29 +146,11 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		return SolidCollider.willCauseSolidCollision(this, 5, false);
 	}
 
-	private boolean isOnGroundPrime() {
-		if (SolidCollider.willCauseSolidCollision(this, 5, false) ){
-			if (!isOnWall()) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-
-		else {
-			return false;
-		}	
-	}
-
-
-
-	private boolean isOnWall() { // this is not accurate enough
+	private boolean isOnWall() {
 		if ((SolidCollider.willCauseSolidCollision(this, this.velX, true) || SolidCollider.willCauseSolidCollision(this, -this.velX, true))
-				&& (!SolidCollider.willCauseSolidCollision(this, 5, false) && !SolidCollider.willCauseSolidCollision(this, -5, false))){
+				&& !isOnGround()){
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
