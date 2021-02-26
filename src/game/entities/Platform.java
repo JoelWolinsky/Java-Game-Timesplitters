@@ -30,16 +30,18 @@ public class Platform extends GameObject implements SolidCollider{
 
 	public void render(Graphics g, float xOffset, float yOffset) {
 
-		/*
-		ENABLE THIS TO VIEW PLATFORM COLLISION BOXES
+		/* ENABLE THIS TO DEBUG COLLISION BOX
 		g.setColor(Color.magenta);
 		g.fillRect((int)(this.x + xOffset),(int)(this.y + yOffset),width,height);
-		 */
+		*/
 
 		BufferedImage img=null;
 		try
 		{
+			//sets the width and hight of the platform based on the provided image width and height
 			img = ImageIO.read( new File("./img/".concat(url)));
+			width = img.getWidth();
+			height = img.getHeight();
 		}
 		catch ( IOException exc )
 		{

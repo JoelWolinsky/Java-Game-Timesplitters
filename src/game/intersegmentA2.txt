@@ -1,8 +1,9 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA1.png
-Chunk 1 E intersegmentA1.png
+Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA2.png
+Chunk 1 E intersegmentA2.png
 Platform Custom 0 384 customFloor1.png
 Platform Custom 333 384 customFloor1.png
 Platform Custom 70 50 wall1.png
+Platform Custom 86 284 smallplatform1.png
 Platform Custom 338 50 wall1inv.png
 Platform Custom 53 0 corner2.png
 Platform Custom 307 0 corner2inv.png
@@ -14,6 +15,12 @@ Platform Default 162 100
 Platform Default 226 100
 Platform Custom 259 100 edge1inv.png
 Platform Custom 130 100 edge1.png
+
+
+Platform Custom 181 116 wall1inv.png
+Platform Custom 165 350 smallplatform1inv.png
+Platform Custom 229 116 wall1.png
+
 
 Chunk 1 N skyA.png
 Revert

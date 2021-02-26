@@ -1,36 +1,30 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA1.png
-Chunk 1 E segmentA1alt.png
-Platform Custom 82 325 16 16 edge2.png
--Platform Custom 130 300 16 16 edge2inv.png
-
-Platform Custom -67 150 96 64 corner1.png
-Platform Custom 29 140 397 32 top1.png
-
-Platform Custom 214 265 32 16 edge1.png
+Chunk 1 E segmentA1.png
+Platform Custom 82 325 edge2.png
+Platform Custom -67 140 corner1.png
+Platform Custom 29 140 top1.png
+Platform Custom 214 265 edge1.png
 Platform Default 246 265
 Platform Inverted 278 265
 Platform Default 294 265
 Platform Inverted 326 265
 Platform Default 342 265
-Platform Custom 374 265 32 16 edge1inv.png
-
+Platform Custom 374 265 edge1inv.png
 Floor
 
 Chunk 1 N skyA.png
 Chunk 1 E skyA.png
+
 Chunk 1 S segmentA1.png
-
-Platform Custom 0 140 397 32 top1.png
-Platform Custom 397 150 96 64 corner1inv.png
-
-Platform Custom 130 325 16 16 edge2inv.png
-Platform Custom 82 270 16 16 edge2.png
-Platform Custom 230 265 32 16 edge1.png
+Platform Custom 0 140 top1.png
+Platform Custom 397 140 corner1inv.png
+Platform Custom 130 325 edge2inv.png
+Platform Custom 82 270 edge2.png
+Platform Custom 230 265 edge1.png
 Platform Inverted 262 265
 Platform Default 278 265
 Platform Default 310 265
 Platform Inverted 342 265
-Platform Custom 358 265 32 16 edge1inv.png
-
+Platform Custom 358 265 edge1inv.png
 Floor
 

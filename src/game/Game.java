@@ -30,6 +30,7 @@ public class Game extends Canvas implements Runnable{
 	private int verticalIndex = 0;
 	private int setX = 426;
 	private int setY = 384;
+	private String lastDirection="";
 	private String currentTheme="A";
 
 	//	private LinkedList<Level> levels = new LinkedList<>();
@@ -40,22 +41,17 @@ public class Game extends Canvas implements Runnable{
 	private Camera camera;
 
 	public Game() {
-		player = new Player(0, 340);
+		player = new Player(0, 340,0,0,"./img/adventurer-idle-00.png", "./img/adventurer-idle-01.png", "./img/adventurer-idle-02.png");
 		currentLevel.addEntity(player);
 
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 		String mapMode = "default";
-		String mapUrl = "./src/game/intersegmentA1.txt";
+		String mapUrl = "./src/game/intersegmentA2.txt";
 
 		//keep default for now until we sort randomly generated
 		if (mapMode.equals("default")) {
-			mapParser(currentLevel, "./src/game/segmentA1.txt");
-			mapParser(currentLevel, "./src/game/segmentA1.txt");
-			mapParser(currentLevel, "./src/game/segmentA1.txt");
-			mapParser(currentLevel, "./src/game/segmentA1.txt");
-			mapParser(currentLevel, "./src/game/segmentA1.txt");
-			mapParser(currentLevel, "./src/game/segmentA1.txt");
-			mapParser(currentLevel, "./src/game/intersegmentA1.txt");
+
+			mapParser(currentLevel, "./src/game/intersegmentA2.txt");
 
 
 		}	//WORK IN PROGRESS
@@ -103,9 +99,9 @@ public class Game extends Canvas implements Runnable{
 		g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 
 
-		System.out.println("X:" + player.getX()+ "Y:"+ player.getY());
+		//System.out.println("X:" + player.getX()+ "Y:"+ player.getY());
 		//System.out.println("X:" + camera.getXOffset()+ "Y:"+ camera.getYOffset());
-		currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+140,player.getX(),player.getY());
+		currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+100,player.getX(),player.getY());
 
 		g.dispose();
 		bs.show();
@@ -174,7 +170,7 @@ public class Game extends Canvas implements Runnable{
 						break;
 
 					case "Chunk":
-
+						lastDirection= splited[2];
 						switch (splited[2]){
 							case "E":
 								horizontalIndex= horizontalIndex + setX;
@@ -195,36 +191,27 @@ public class Game extends Canvas implements Runnable{
 						break;
 
 					case "Platform":
-						int width=0;
-						int height=0;
-
 						Platform p;
 
 						switch (splited[1]){
 							case "Default":
-								width=32;
-								height=16;
-								goUrl=texturePlatformDefault;
+								goUrl = texturePlatformDefault;
 								break;
 							case "Inverted":
-								width=16;
-								height=32;
 								goUrl = texturePlatformInverted;
 								break;
 							case "Custom":
-								width= Integer.parseInt(splited[4]);
-								height = Integer.parseInt(splited[5]);
-								goUrl = splited[6];
+								goUrl = splited[4];
 								break;
 						}
 
-						p = new Platform(horizontalIndex-setX+ Integer.parseInt(splited[2]), verticalIndex + Integer.parseInt(splited[3]) , width	, height, goUrl);
+						p = new Platform(horizontalIndex-setX+ Integer.parseInt(splited[2]), verticalIndex + Integer.parseInt(splited[3]) , 0, 0, goUrl);
 						currentLevel.addPlatform(p);
 						break;
 
 					case "Floor":
 						goUrl=textureFloor;
-						p = new Platform(horizontalIndex-setX , verticalIndex +setY , setX, 32, goUrl);
+						p = new Platform(horizontalIndex-setX , verticalIndex +setY , setX, 0, goUrl);
 						currentLevel.addPlatform(p);
 						break;
 					/*
@@ -232,6 +219,24 @@ public class Game extends Canvas implements Runnable{
 						MovingPlatform xd = new MovingPlatform(horizontalIndex + Integer.parseInt(splited[2]), verticalIndex + Integer.parseInt(splited[3]) , 32,16,20,true,1	,"./img/platformA.png");
 						currentLevel.addPlatform(xd);
 					*/
+					case "Revert":
+						switch (lastDirection)
+						{
+							case "E":
+								horizontalIndex= horizontalIndex - setX;
+								break;
+							case "W":
+								horizontalIndex= horizontalIndex + setX;
+								break;
+							case "N":
+								verticalIndex = verticalIndex + setY;
+								break;
+							case "S":
+								verticalIndex = verticalIndex - setY;
+								break;
+
+						}
+						break;
 				}
 				System.out.println(data);
 			}
