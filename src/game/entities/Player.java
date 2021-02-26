@@ -51,22 +51,39 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		CollidingObject.getCollisions(this);
 		
 		//Check for keyboard input along the x-axis
-		if(Game.keyInput.right.isPressed()) {
+		if(Game.keyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
 			this.velX = RUN_SPEED;
-		}else if(Game.keyInput.left.isPressed()) {
+		}else if(Game.keyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
 			this.velX = -RUN_SPEED;
 		}else {
 			/* Beware: Java floating point representation makes it difficult to have perfect numbers 
 			( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
-			if (this.velX >= -0.1f && this.velX <= 0.1f) {
-				this.velX = 0;	 
+			
+			if (!SolidCollider.willCauseSolidCollision(this, this.velX, true) && isOnGround()){
+				if (this.velX >= -0.08f && this.velX <= 0.08f) {
+					this.velX = 0;	 
+				}
+				else if (this.velX > 0.1f) {
+					this.velX -= SLIDING_VEL;
+				}
+				else {
+					this.velX += SLIDING_VEL;
+				}
 			}
-			else if (this.velX > 0.1f) {
-				this.velX -= SLIDING_VEL;
+			else if (!SolidCollider.willCauseSolidCollision(this, this.velX, true) && !isOnGroundPrime()) {
+				if (this.velX >= -0.1f && this.velX <= 0.1f) {
+					this.velX = 0;	 
+				}
+				else if (this.velX > 0.1f) {
+					this.velX -= SLIDING_VEL / 2;
+				}
+				else {
+					this.velX += SLIDING_VEL / 2;
+				}
 			}
 			else {
-				this.velX += SLIDING_VEL;
-			}
+				this.velX = 0;	 
+			}	
 		}
 		
 		//Check for keyboard input along the y-axis
@@ -96,27 +113,94 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		if(!SolidCollider.willCauseSolidCollision(this, velX, true)) {
 			this.x += velX;
 		}
-		if(!SolidCollider.willCauseSolidCollision(this, this.velY, false)) {
+		if(!SolidCollider.willCauseSolidCollision(this, this.velY, false)) { 
 			this.y += this.velY;
-		}else {
-			//Stop player falling through the floor
+		}else { //if moving up/down in that direction will cause a collision
+			
+			// Stop player falling through the floor
 			CollidingObject o = SolidCollider.nextCollision(this,  this.velY, false);
 			if(o == null) {
 				return;
 			}
 			Rectangle s = o.getBounds();
 			if(this.velY > 0) {
-				this.y = s.y - this.height;
-				this.velY = 0;
-			}else if(this.velY < 0 && !isOnGround()){
-				this.y = s.y + s.height;
-				this.velY = 0;
+				
+				if (!isOnWall()){
+					this.y = s.y - this.height;
+					this.velY = 0;
+				}	
+				//else ()
+			}
+			else if(this.velY < 0) { 
+				
+				if (!isOnWall()){ // this is what causes getting stuck on the wall
+					
+					this.velY = 0;
+				}	
+				else { // not this case
+
+					if (this.velX >= -0.1f && this.velX <= 0.1f) {
+						this.velX = 0;	 
+					}
+					else if (this.velX > 0.1f) {
+						this.velX = -RUN_SPEED/2;
+					}
+					else {
+						this.velX = RUN_SPEED/2;
+					}
+										 // may be able to remove
+										// check to see if this works as expected
+										//this.velY = 0;
+
+				}
+
+			}
+			else { // velY == 0. this causes the sticking to wall bug
+			
+				if (SolidCollider.willCauseSolidCollision(this, 5, true)) { // the wall is on the right
+					this.velX = -2.0f;
+				}
+				else if (SolidCollider.willCauseSolidCollision(this, -5, true)) {
+					this.velX = 2.0f;
+				}
+
+					// it's this case when velX == 0 and velY == 0!!!!!
+
+					
+				
 			}
 		}
 	}
 	
 	private boolean isOnGround() {
 		return SolidCollider.willCauseSolidCollision(this, 5, false);
+	}
+
+	private boolean isOnGroundPrime() {
+		if (SolidCollider.willCauseSolidCollision(this, 5, false) ){
+			if (!isOnWall()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+
+		else {
+			return false;
+		}	
+	}
+
+
+
+	private boolean isOnWall() { // this is not accurate enough
+		if ((SolidCollider.willCauseSolidCollision(this, this.velX, true) || SolidCollider.willCauseSolidCollision(this, -this.velX, true))
+				&& (!SolidCollider.willCauseSolidCollision(this, 5, false) && !SolidCollider.willCauseSolidCollision(this, -5, false))){
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private boolean hasCeilingAbove() {
