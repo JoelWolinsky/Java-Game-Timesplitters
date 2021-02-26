@@ -8,11 +8,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Random;
 import java.util.Scanner;
-
+import javax.imageio.ImageIO;
 import game.display.Window;
 import game.entities.Platform;
 import game.entities.Player;
 import game.input.KeyInput;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Game extends Canvas implements Runnable{
 
@@ -22,6 +24,15 @@ public class Game extends Canvas implements Runnable{
 
 	public static KeyInput keyInput = new KeyInput();
 	public static MouseInput mouseInput = new MouseInput();
+
+
+	private int horizontalIndex = 0;
+	private int verticalIndex = 0;
+	private int setX = 426;
+	private int setY = 384;
+	private String lastDirection="";
+	private String currentTheme="A";
+
 
 	
 	public static GameState state = GameState.MainMenu;
@@ -39,36 +50,23 @@ public class Game extends Canvas implements Runnable{
 	public Game() {
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 		String mapMode = "default";
-		String mapUrl = "./src/game/map.txt";
 
 		//keep default for now until we sort randomly generated
-		if (mapMode.equals("default"))
-			Map.mapParser(0,0, currentLevel,mapUrl);
+		if (mapMode.equals("default")) {
+			mapParser(currentLevel, "./src/game/segmentA1.txt");
+			mapParser(currentLevel, "./src/game/segmentA2.txt");
+			mapParser(currentLevel, "./src/game/intersegmentA1.txt");
+			mapParser(currentLevel, "./src/game/intersegmentA2.txt");
+			mapParser(currentLevel, "./src/game/intersegmentA2.txt");
 
-			//WORK IN PROGRESS
+		}	//WORK IN PROGRESS
 		else if (mapMode.equals("randomlyGenerated"))
 		{
-			//set to 3 just for example
-			for (int i =0 ;i<3;i++)
-			{
-				//pool of predefined segments
-				String[] bruh = {"Mage","Sewer"};
 
-				//pick random predefined segment
-				Random r=new Random();
-				int randomNumber=r.nextInt(bruh.length);
-				System.out.println(bruh[randomNumber]);
-				mapUrl = "./src/game/".concat(bruh[randomNumber]).concat(".txt");
-
-				//generate the predefined segment
-				Map.mapParser(0,0,currentLevel,mapUrl);
-			}
 		}
-		
-		//Initialise player character at 0,0 in the first chunk
-		player = new Player(0, 0);
-		Chunk c = currentLevel.firstChunk();
-		c.addEntity(player);
+
+		player = new Player(0, 340,0,0,"./img/adventurer-idle-00.png", "./img/adventurer-idle-01.png", "./img/adventurer-idle-02.png");
+		currentLevel.addEntity(player);
 
 		camera = new Camera();
 		camera.addTarget(player);
@@ -96,7 +94,7 @@ public class Game extends Canvas implements Runnable{
 	private void render() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
-			this.createBufferStrategy(3);
+			this.createBufferStrategy(4);
 			return;
 		}
 
@@ -105,9 +103,9 @@ public class Game extends Canvas implements Runnable{
 		//Rendering code happens here
 
 		if(this.state == GameState.Playing) {
-			g.setColor(new Color(100,100,100));
+			g.setColor(Color.black);
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
-			currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+120);
+			currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+100,player.getX(),player.getY());
 		}else {
 			g.setColor(new Color(255,255,255));
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
@@ -149,6 +147,115 @@ public class Game extends Canvas implements Runnable{
 		stop();
 	}
 
+	public void mapParser(Level currentLevel, String url)
+	{
+		Chunk c;
+		String goUrl ="";
+		String texturePlatformDefault="";
+		String texturePlatformInverted="";
+		String textureFloor ="";
+		String textureBackground="";
+
+		try {
+			File myObj = new File(url);
+			Scanner myReader = new Scanner(myObj);
+			while (myReader.hasNextLine()) {
+
+				String data = myReader.nextLine();
+				String[] splited = data.split("\\s+");
+
+				switch (splited[0]){
+
+					case "Theme":
+						if (!splited[1].equals(currentTheme))
+						{
+							setX = Integer.parseInt(splited[2]);
+							setY = Integer.parseInt(splited[3]);
+							currentTheme = splited[1];
+						}
+						texturePlatformDefault = splited[4];
+						texturePlatformInverted = splited[5];
+						textureFloor = splited[6];
+						textureBackground = splited[7];
+						break;
+
+					case "Chunk":
+						lastDirection= splited[2];
+						switch (splited[2]){
+							case "E":
+								horizontalIndex= horizontalIndex + setX;
+								break;
+							case "W":
+								horizontalIndex= horizontalIndex - setX;
+								break;
+							case "N":
+								verticalIndex = verticalIndex - setY;
+								break;
+							case "S":
+								verticalIndex = verticalIndex + setY;
+								break;
+						}
+						c = new Chunk(horizontalIndex-setX,verticalIndex,setX,setY,splited[3]);
+						currentLevel.addChunk(c);
+
+						break;
+
+					case "Platform":
+						Platform p;
+
+						switch (splited[1]){
+							case "Default":
+								goUrl = texturePlatformDefault;
+								break;
+							case "Inverted":
+								goUrl = texturePlatformInverted;
+								break;
+							case "Custom":
+								goUrl = splited[4];
+								break;
+						}
+
+						p = new Platform(horizontalIndex-setX+ Integer.parseInt(splited[2]), verticalIndex + Integer.parseInt(splited[3]) , 0, 0, goUrl);
+						currentLevel.addPlatform(p);
+						break;
+
+					case "Floor":
+						goUrl=textureFloor;
+						p = new Platform(horizontalIndex-setX , verticalIndex +setY , setX, 0, goUrl);
+						currentLevel.addPlatform(p);
+						break;
+					/*
+					case "Moving":
+						MovingPlatform xd = new MovingPlatform(horizontalIndex + Integer.parseInt(splited[2]), verticalIndex + Integer.parseInt(splited[3]) , 32,16,20,true,1	,"./img/platformA.png");
+						currentLevel.addPlatform(xd);
+					*/
+					case "Revert":
+						switch (lastDirection)
+						{
+							case "E":
+								horizontalIndex= horizontalIndex - setX;
+								break;
+							case "W":
+								horizontalIndex= horizontalIndex + setX;
+								break;
+							case "N":
+								verticalIndex = verticalIndex + setY;
+								break;
+							case "S":
+								verticalIndex = verticalIndex - setY;
+								break;
+
+						}
+						break;
+				}
+				System.out.println(data);
+			}
+			myReader.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
 
 	public synchronized void start() {
 		//The server is started in this function
