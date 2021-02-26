@@ -13,6 +13,7 @@ public class Camera {
 		if(target != null) {
 			this.xOffset = -(this.target.getX() + (this.target.getWidth() /2) - (Window.WIDTH/2));
 			this.yOffset = -(this.target.getY() + (this.target.getHeight() /2) - (Window.HEIGHT/2));
+			//this.yOffset = 150-Window.HEIGHT/2;
 		}
 	}
 	

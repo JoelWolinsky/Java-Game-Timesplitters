@@ -19,7 +19,6 @@ import game.graphics.AnimationStates;
 public class Player extends GameObject implements AnimatedObject, SolidCollider, GravityObject{
 	
 	static BufferedImage sprite;
-	static String url = "./img/Anglerfish.png";
 	
 	private float velX = 0;
 	private float velY = 0;

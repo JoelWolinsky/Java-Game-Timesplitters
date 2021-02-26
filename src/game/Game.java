@@ -26,12 +26,10 @@ public class Game extends Canvas implements Runnable{
 	public static KeyInput keyInput = new KeyInput();
 	public static MouseInput mouseInput = new MouseInput();
 
-	private int xOffset = 0, yOffset = 0;
 	private int horizontalIndex = 0;
 	private int verticalIndex = 0;
 	private int setX = 426;
 	private int setY = 384;
-	private int t = 0;
 	private String currentTheme="A";
 
 	//	private LinkedList<Level> levels = new LinkedList<>();
@@ -47,13 +45,20 @@ public class Game extends Canvas implements Runnable{
 
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 		String mapMode = "default";
-		String mapUrl = "./src/game/segmentA1.txt";
+		String mapUrl = "./src/game/intersegmentA1.txt";
 
 		//keep default for now until we sort randomly generated
-		if (mapMode.equals("default"))
-			mapParser(0,0, currentLevel,mapUrl);
+		if (mapMode.equals("default")) {
+			mapParser(currentLevel, "./src/game/segmentA1.txt");
+			mapParser(currentLevel, "./src/game/segmentA1.txt");
+			mapParser(currentLevel, "./src/game/segmentA1.txt");
+			mapParser(currentLevel, "./src/game/segmentA1.txt");
+			mapParser(currentLevel, "./src/game/segmentA1.txt");
+			mapParser(currentLevel, "./src/game/segmentA1.txt");
+			mapParser(currentLevel, "./src/game/intersegmentA1.txt");
 
-			//WORK IN PROGRESS
+
+		}	//WORK IN PROGRESS
 		else if (mapMode.equals("randomlyGenerated"))
 		{
 			//set to 3 just for example
@@ -69,7 +74,7 @@ public class Game extends Canvas implements Runnable{
 				mapUrl = "./src/game/".concat(bruh[randomNumber]).concat(".txt");
 
 				//generate the predefined segment
-				mapParser(426,384,currentLevel,mapUrl);
+
 			}
 		}
 
@@ -98,9 +103,9 @@ public class Game extends Canvas implements Runnable{
 		g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 
 
-
-
-		currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+140);
+		System.out.println("X:" + player.getX()+ "Y:"+ player.getY());
+		//System.out.println("X:" + camera.getXOffset()+ "Y:"+ camera.getYOffset());
+		currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+140,player.getX(),player.getY());
 
 		g.dispose();
 		bs.show();
@@ -136,9 +141,9 @@ public class Game extends Canvas implements Runnable{
 		stop();
 	}
 
-	public void mapParser(int masterOffsetX, int masterOffsetY, Level currentLevel, String url)
+	public void mapParser(Level currentLevel, String url)
 	{
-		Chunk c = null;
+		Chunk c;
 		String goUrl ="";
 		String texturePlatformDefault="";
 		String texturePlatformInverted="";
@@ -157,15 +162,10 @@ public class Game extends Canvas implements Runnable{
 
 					case "Theme":
 						if (!splited[1].equals(currentTheme))
-						//if (Integer.parseInt(splited[2])!=masterOffsetX && Integer.parseInt(splited[3]) != masterOffsetY)
 						{
 							setX = Integer.parseInt(splited[2]);
 							setY = Integer.parseInt(splited[3]);
-							t = 1;
 							currentTheme = splited[1];
-						}
-						else
-						{
 						}
 						texturePlatformDefault = splited[4];
 						texturePlatformInverted = splited[5];

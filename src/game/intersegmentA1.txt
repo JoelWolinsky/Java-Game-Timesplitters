@@ -1,0 +1,23 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA1.png
+Chunk 1 E intersegmentA1.png
+Platform Custom 0 384 93 32 customFloor1.png
+Platform Custom 333 384 93 32 customFloor1.png
+
+Platform Custom 68 100 16 200 wall1.png
+Platform Custom 332 100 16 200 wall1inv.png
+
+Platform Custom 61 40 64 64 corner2.png
+Platform Custom 300 40 64 64 corner2inv.png
+
+Platform Custom 124 8 96 64 corner1.png
+Platform Custom 204 8 96 64 corner1inv.png
+
+Platform Custom 194 384 32 16 thinPlatformA.png
+
+Platform Default 194 160
+Platform Default 162 160
+Platform Default 226 160
+Platform Custom 259 160 32 16 edge1inv.png
+Platform Custom 130 160 32 16 edge1.png
+
+Chunk 1 N skyA.png

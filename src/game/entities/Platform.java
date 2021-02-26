@@ -17,14 +17,12 @@ import javax.imageio.ImageIO;
 public class Platform extends GameObject implements SolidCollider{
 
 	private String url;
-	private int theme;
 
 	public Platform(float x, float y, int width, int height, String url) {
 		super(x, y, -1, width, height);
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
 		this.url = url;
-		this.theme = theme;
 	}
 
 	public void tick() {
@@ -32,16 +30,16 @@ public class Platform extends GameObject implements SolidCollider{
 
 	public void render(Graphics g, float xOffset, float yOffset) {
 
-		//ENABLE THIS TO DEBUG PLATFORM TEXTURES WITH PLATFORM COLLISIONS
-
+		/*
+		ENABLE THIS TO VIEW PLATFORM COLLISION BOXES
 		g.setColor(Color.magenta);
 		g.fillRect((int)(this.x + xOffset),(int)(this.y + yOffset),width,height);
-
+		 */
 
 		BufferedImage img=null;
 		try
 		{
-			img = ImageIO.read( new File(url));
+			img = ImageIO.read( new File("./img/".concat(url)));
 		}
 		catch ( IOException exc )
 		{
