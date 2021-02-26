@@ -12,6 +12,7 @@ import java.util.Scanner;
 import game.display.Window;
 import game.entities.Platform;
 import game.entities.Player;
+import game.graphics.Assets;
 import game.input.KeyInput;
 
 public class Game extends Canvas implements Runnable{
@@ -38,6 +39,7 @@ public class Game extends Canvas implements Runnable{
 	 */
 	public Game() {
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
+		
 		String mapMode = "default";
 		String mapUrl = "./src/game/map.txt";
 
@@ -135,10 +137,12 @@ public class Game extends Canvas implements Runnable{
 			lastTime = now;
 			while(delta >= 1) {
 				tick();
+				//Can we change the render to here?? Animations are a lot more relative to speed by doing this --Marek
+				render();
 				delta--;
 			}
 			if(running) {
-				render();
+				///render(); ***ORIGINAL PLACE --Marek
 
 
 				if(System.currentTimeMillis() - timer >1000) {

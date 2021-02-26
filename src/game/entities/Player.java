@@ -14,6 +14,7 @@ import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
+import game.graphics.Assets;
 import game.input.KeyInput;
 
 public class Player extends GameObject implements AnimatedObject, SolidCollider, GravityObject{
@@ -32,7 +33,14 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	
 	public Player(float x, float y) {
 		super(x, y, 1, 50, 37);
-		animations.put(AnimationStates.IDLE, new Animation(20, "./img/adventurer-idle-00.png", "./img/adventurer-idle-01.png", "./img/adventurer-idle-02.png"));
+		
+		//Initialise Assets class
+		Assets.init();
+		
+		animations.put(AnimationStates.IDLE, new Animation(20, Assets.player_idle));
+		animations.put(AnimationStates.RIGHT, new Animation(20, Assets.player_right));
+		animations.put(AnimationStates.LEFT, new Animation(20, Assets.player_left));
+		
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
 	}
@@ -41,13 +49,16 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public void tick() {
 		//Gather all collisions
 		CollidingObject.getCollisions(this);
-		
+
 		//Check for keyboard input along the x-axis
 		if(KeyInput.right.isPressed()) {
+			currentAnimationState = AnimationStates.RIGHT;
 			this.velX = 3.6f;
 		}else if(KeyInput.left.isPressed()) {
+			currentAnimationState = AnimationStates.LEFT;
 			this.velX = -3.6f;
 		}else {
+			currentAnimationState = AnimationStates.IDLE;
 			/* Beware: Java floating point representation makes it difficult to have perfect numbers 
 			( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
 			if (this.velX >= -0.1f && this.velX <= 0.1f) {
