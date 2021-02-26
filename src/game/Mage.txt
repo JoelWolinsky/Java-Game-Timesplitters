@@ -1,5 +1,0 @@
-Theme A 426 384
-Chunk 2 E
-Platform 10 325 100 10
-Platform 110 310 100 10
-Platform 0 384 426 10

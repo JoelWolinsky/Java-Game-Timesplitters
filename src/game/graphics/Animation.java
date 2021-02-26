@@ -7,6 +7,10 @@ public class Animation {
 	private LinkedList<BufferedImage> frames;
 	private int ticksPerFrame;
 	
+	/**
+	 * @param ticksPerFrame The number of ticks before the next frame is shown, allows you to control the speed of animation
+	 * @param urls A sequence of urls of the frames of animation, in order
+	 */
 	public Animation(int ticksPerFrame, String...urls) {
 		frames = new LinkedList<BufferedImage>();
 		this.ticksPerFrame = ticksPerFrame;
@@ -18,14 +22,24 @@ public class Animation {
 		}
 	}
 	
+	/**
+	 * @return The number of ticks per frame
+	 */
 	public int getTicksPerFrame() {
 		return this.ticksPerFrame;
 	}
 	
+	/**
+	 * @param index The index of the image in the frames list you would like to access
+	 * @return The BufferedImage stored at index in the frames list
+	 */
 	public BufferedImage getFrame(int index) {
 		return frames.get(index);
 	}
 	
+	/**
+	 * @return The number of frames of animation
+	 */
 	public int getNumberOfFrames() {
 		return frames.size();
 	}

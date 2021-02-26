@@ -4,18 +4,17 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
-
-import game.entities.MovingPlatform;
+import javax.imageio.ImageIO;
+import game.display.Window;
 import game.entities.Platform;
 import game.entities.Player;
-
-import javax.imageio.ImageIO;
+import game.input.KeyInput;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Game extends Canvas implements Runnable{
 
@@ -26,12 +25,17 @@ public class Game extends Canvas implements Runnable{
 	public static KeyInput keyInput = new KeyInput();
 	public static MouseInput mouseInput = new MouseInput();
 
+
 	private int horizontalIndex = 0;
 	private int verticalIndex = 0;
 	private int setX = 426;
 	private int setY = 384;
 	private String lastDirection="";
 	private String currentTheme="A";
+
+
+	
+	public static GameState state = GameState.MainMenu;
 
 	//	private LinkedList<Level> levels = new LinkedList<>();
 	private Level currentLevel = new Level();
@@ -40,53 +44,53 @@ public class Game extends Canvas implements Runnable{
 
 	private Camera camera;
 
+	/**
+	 * Initialises game entities and objects that must appear at the start of the game
+	 */
 	public Game() {
-		player = new Player(0, 340,0,0,"./img/adventurer-idle-00.png", "./img/adventurer-idle-01.png", "./img/adventurer-idle-02.png");
-		currentLevel.addEntity(player);
-
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 		String mapMode = "default";
-		String mapUrl = "./src/game/intersegmentA2.txt";
 
 		//keep default for now until we sort randomly generated
 		if (mapMode.equals("default")) {
-
+			mapParser(currentLevel, "./src/game/segmentA1.txt");
+			mapParser(currentLevel, "./src/game/segmentA2.txt");
+			mapParser(currentLevel, "./src/game/intersegmentA1.txt");
 			mapParser(currentLevel, "./src/game/intersegmentA2.txt");
-
+			mapParser(currentLevel, "./src/game/intersegmentA2.txt");
 
 		}	//WORK IN PROGRESS
 		else if (mapMode.equals("randomlyGenerated"))
 		{
-			//set to 3 just for example
-			for (int i =0 ;i<3;i++)
-			{
-				//pool of predefined segments
-				String[] bruh = {"Mage","Sewer"};
 
-				//pick random predefined segment
-				Random r=new Random();
-				int randomNumber=r.nextInt(bruh.length);
-				System.out.println(bruh[randomNumber]);
-				mapUrl = "./src/game/".concat(bruh[randomNumber]).concat(".txt");
-
-				//generate the predefined segment
-
-			}
 		}
+
+		player = new Player(0, 340,0,0,"./img/adventurer-idle-00.png", "./img/adventurer-idle-01.png", "./img/adventurer-idle-02.png");
+		currentLevel.addEntity(player);
 
 		camera = new Camera();
 		camera.addTarget(player);
+		
+		//This section should always be last
 		new Window(this);
 		this.addKeyListener(keyInput);
 		this.addMouseListener(mouseInput);
 		this.addMouseMotionListener(mouseInput);
 	}
-
+	
+	/**
+	 * Called every frame, this tells certain lists, objects, or entities to call their own tick function.
+	 */
 	private void tick() {
-		currentLevel.tick();
-		camera.tick();
+		if(this.state == GameState.Playing) { 
+			currentLevel.tick();
+			camera.tick();
+		}
 	}
-
+	
+	/**
+	 * Responsible for all rendering. This generates a Graphics object, refreshes the screen, and renders the correct objects based on the play state.
+	 */
 	private void render() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
@@ -95,18 +99,27 @@ public class Game extends Canvas implements Runnable{
 		}
 
 		Graphics g = bs.getDrawGraphics();
-		g.setColor(Color.black);
-		g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 
+		//Rendering code happens here
 
-		//System.out.println("X:" + player.getX()+ "Y:"+ player.getY());
-		//System.out.println("X:" + camera.getXOffset()+ "Y:"+ camera.getYOffset());
-		currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+100,player.getX(),player.getY());
+		if(this.state == GameState.Playing) {
+			g.setColor(Color.black);
+			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
+			currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+100,player.getX(),player.getY());
+		}else {
+			g.setColor(new Color(255,255,255));
+			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
+		}
+		
+		//Rendering code stops here
 
 		g.dispose();
 		bs.show();
 	}
 
+	/**
+	 * The game loop, calls tick and render regularly
+	 */
 	public void run() {
 		long lastTime = System.nanoTime();
 		double amountOfTicks = 60.0;
@@ -124,13 +137,10 @@ public class Game extends Canvas implements Runnable{
 			}
 			if(running) {
 				render();
-//				frames ++;
 
 
 				if(System.currentTimeMillis() - timer >1000) {
 					timer += 1000;
-//					System.out.println(frames);
-//					frames = 0;
 				}
 			}
 		}
@@ -246,7 +256,6 @@ public class Game extends Canvas implements Runnable{
 			e.printStackTrace();
 		}
 	}
-
 
 	public synchronized void start() {
 		//The server is started in this function

@@ -74,6 +74,13 @@ public interface SolidCollider extends CollidingObject{
 		return false;
 	}
 	
+	/**
+	 * This returns the next object that a given object will collide with given a velocity and direciton
+	 * @param o The object for which you would like to gather the next collision
+	 * @param vel The velocity the object is moving
+	 * @param xAxis Whether the velocity is occuring along the X axis
+	 * @return The CollidingObject that o will next collide into
+	 */
 	static CollidingObject nextCollision(CollidingObject o, double vel, boolean xAxis) {
 		Rectangle oBounds = o.getBounds();
 		Rectangle newBounds;
