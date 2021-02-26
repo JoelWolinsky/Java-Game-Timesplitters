@@ -38,7 +38,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private static HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
 	
 	public Player(float x, float y) {
-		super(x, y, 1, 27, 37);
+		super(x, y, 1, 18, 37);
 		animations.put(AnimationStates.IDLE, new Animation(20, "./img/adventurer-idle-00.png", "./img/adventurer-idle-01.png", "./img/adventurer-idle-02.png"));
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
@@ -62,27 +62,22 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			if (!SolidCollider.willCauseSolidCollision(this, this.velX, true) && isOnGround()){
 				if (this.velX >= -0.1f && this.velX <= 0.1f) {
 					this.velX = 0;	 
-				}
-				else if (this.velX > 0.1f) {
+				} else if (this.velX > 0.1f) {
 					this.velX -= SLIDING_VEL;
-				}
-				else {
+				} else {
 					this.velX += SLIDING_VEL;
 				}
 			}
-			// Sliding in mid-air to represent air resistence. Half the rate of decrease as on ground.
+			// 'Sliding' in mid-air to represent air resistance. Half the rate of decrease as on ground.
 			else if (!SolidCollider.willCauseSolidCollision(this, this.velX, true) && !isOnGround() && !isOnWall()) {
 				if (this.velX >= -0.1f && this.velX <= 0.1f) {
 					this.velX = 0;	 
-				}
-				else if (this.velX > 0.1f) {
+				} else if (this.velX > 0.1f) {
 					this.velX -= SLIDING_VEL / 2;
-				}
-				else {
+				} else {
 					this.velX += SLIDING_VEL / 2;
 				}
-			}
-			else {
+			} else {
 				this.velX = 0;	 
 			}	
 		}
@@ -156,7 +151,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	}
 
 	private boolean hasCeilingAbove() {
-		return SolidCollider.willCauseSolidCollision(this, -10, false);
+		return SolidCollider.willCauseSolidCollision(this, -5, false);
 	}
 
 	public void handleCollisions(LinkedList<CollidingObject> collisions) {
@@ -176,15 +171,23 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 	public void render(Graphics g, float xOffset, float yOffset) {
 		this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
+
+		Graphics2D g2d = (Graphics2D) g;
+
+		g.setColor(Color.RED);		
+
+		g2d.draw(getBounds(xOffset, yOffset));
+
+
 		
 	}
 	
 	public Rectangle getBounds() {
-		return new Rectangle((int)x+10, (int)y, width, height);
+		return new Rectangle((int)x+16, (int)y, width, height);
 	}
 
 	public Rectangle getBounds(float xOffset, float yOffset) {
-		return new Rectangle((int)(this.x+xOffset)+10, (int)(this.y + yOffset), width, height);
+		return new Rectangle((int)(this.x+xOffset)+16, (int)(this.y + yOffset), width, height);
 	}
 
 	public int getAnimationTimer() {
