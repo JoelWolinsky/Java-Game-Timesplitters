@@ -72,7 +72,7 @@ public class Window extends Canvas{
 		backButtonPanel.setVisible(false);
 		
 		// Handling the main screen background image
-		ImageIcon background = new ImageIcon("img/background.jpg");
+		ImageIcon background = new ImageIcon("img/background.png");
 	    Image img = background.getImage();
 	    Image temp = img.getScaledInstance(WIDTH,HEIGHT,Image.SCALE_SMOOTH);
 	    background = new ImageIcon(temp);

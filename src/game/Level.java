@@ -3,11 +3,13 @@ package game;
 import java.awt.*;
 import java.util.LinkedList;
 import game.entities.Platform;
+import game.entities.Player;
 
 public class Level extends Canvas {
 	private LinkedList<GameObject> entities = new LinkedList<>();
 	private LinkedList<Chunk> chunks = new LinkedList<>();
 	private LinkedList<Platform> platforms = new LinkedList<>();
+	private LinkedList<RespawnPoint> respawnPoints = new LinkedList<>();
 
 	public void tick() {
 		for(Chunk c : chunks) {
@@ -18,10 +20,11 @@ public class Level extends Canvas {
 		}
 	}
 	
-	public void render(Graphics g, float f, float h,float jeh, float buh) {
-		//rendering order chunks->platforms->entities
-		renderChunks(g,f,h,jeh,buh);
-		renderPlatforms(g,f,h,jeh,buh);
+	public void render(Graphics g, float f, float h, Player player) {
+
+		renderChunks(g,f,h,player);
+		renderPlatforms(g,f,h,player);
+		renderRespawnPoints(g,f,h,player);
 		renderEntities(g, f, h);
 
 	}
@@ -32,23 +35,38 @@ public class Level extends Canvas {
 		}
 	}
 	
-	public void renderChunks(Graphics g, float f, float h,float jeh,float buh) {
+	public void renderChunks(Graphics g, float f, float h,Player player) {
 		for(Chunk c : chunks) {
-			//CAMERA RENDERING
+			//CAMERA PROXIMITY RENDERING
 			//if (c.getX()- 640<f*(-1) && f*(-1)<c.getX()+ 640 && c.getY()-380<h*(-1) && h*(-1)<c.getY()+ 740)
-			//PLAYER POSITION RENDERING
-			if (c.getX()- 640<jeh && jeh<c.getX()+ 800 && c.getY()-480<buh && buh<c.getY()+ 740)
+			//PLAYER POSITION PROXIMITY RENDERING
+			if (c.getX()- 640<player.getX() && player.getX()<c.getX()+ 800 && c.getY()-480<player.getY() && player.getY()<c.getY()+ 740)
 			{c.render(g, f, h);}
+
 		}
 	}
-	public void renderPlatforms(Graphics g, float f, float h,float jeh,float buh) {
+	public void renderPlatforms(Graphics g, float f, float h,Player player) {
 		for(Platform p : platforms) {
-			////CAMERA RENDERING
+			////CAMERA PROXIMITY RENDERING
 			//if (p.getX()-650<f*(-1) && f*(-1)<p.getX()+800 && p.getY()-380<h*(-1) && h*(-1)<p.getY()+ 740)
-			//PLAYER POSITION RENDERING
-			if (p.getX()-650<jeh && jeh<p.getX()+800 && p.getY()-480<buh && buh<p.getY()+ 740)
+			//PLAYER POSITION PROXIMITY RENDERING
+			if (p.getX()-650<player.getX() && player.getX()<p.getX()+800 && p.getY()-480<player.getY() && player.getY()<p.getY()+ 740)
 			{p.render(g, f, h);}
 		}
+	}
+
+	public void renderRespawnPoints(Graphics g, float f, float h,Player player) {
+		for(RespawnPoint o : respawnPoints) {
+
+			if ((int)o.getX()-10<(int)player.getX() && (int)player.getX() <(int)o.getX()+10)
+			{
+				player.setRespawnX((int) o.getX());
+				o.activate();
+			}
+
+			o.render(g,f,h);
+		}
+
 	}
 
 
@@ -73,6 +91,14 @@ public class Level extends Canvas {
 
 	public void removePlatform(Platform p) {
 		platforms.remove(p);
+	}
+
+	public void addRespawnPoint(RespawnPoint rp) {
+		respawnPoints.add(rp);
+	}
+
+	public void removeRespawnPoint(RespawnPoint rp) {
+		respawnPoints.remove(rp);
 	}
 	
 }

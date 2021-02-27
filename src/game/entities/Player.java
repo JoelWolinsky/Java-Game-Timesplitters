@@ -2,7 +2,6 @@ package game.entities;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -18,7 +17,6 @@ import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
-import game.input.KeyInput;
 
 import javax.imageio.ImageIO;
 
@@ -34,7 +32,11 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private static final float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
 	private static final float RUN_SPEED = 3.6f; 		// Default run speed
 	private static final float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
-	
+
+	private int respawnX=0;
+	private int respawnY=340;
+	private int deathFromFallThreshold;
+
 	private static int animationTimer = 0;
 	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
 	private static AnimationStates currentAnimationState = defaultAnimationState;
@@ -132,6 +134,15 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				this.velY = 0;
 			}
 		}
+
+		//quick little respawn when falling below level
+		if (this.y >respawnY+300)
+		{
+			this.x = respawnX;
+			this.y = respawnY;
+		}
+
+
 	}
 	
 	private boolean isOnGround() {
@@ -193,6 +204,22 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 	public Animation getAnimation(AnimationStates state) {
 		return animations.get(state);
+	}
+
+	public void setRespawnX(int x) {
+		this.respawnX = x;
+	}
+
+	public void setRespawnY(int y) {
+		this.respawnY = y;
+	}
+
+	public int getRespawnX() {
+		return this.respawnX;
+	}
+
+	public int getRespawnY() {
+		return this.respawnY;
 	}
 
 }

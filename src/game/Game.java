@@ -19,6 +19,7 @@ public class Game extends Canvas implements Runnable{
 	//	private LinkedList<Level> levels = new LinkedList<>();
 	private Level currentLevel = new Level();
 
+
 	private Player player;
 
 	private Camera camera;
@@ -37,7 +38,14 @@ public class Game extends Canvas implements Runnable{
 		//keep default for now until we sort randomly generated
 		if (mapMode.equals("default")) {
 
+
+
 			m.mapParser(currentLevel, "./src/game/intersegmentA2.txt");
+			m.mapParser(currentLevel, "./src/game/intersegmentA2.txt");
+			m.mapParser(currentLevel, "./src/game/intersegmentA2.txt");
+
+
+
 
 		}	//WORK IN PROGRESS
 		else if (mapMode.equals("randomlyGenerated"))
@@ -83,7 +91,7 @@ public class Game extends Canvas implements Runnable{
 		if(this.state == GameState.Playing) {
 			g.setColor(Color.black);
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
-			currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+100,player.getX(),player.getY());
+			currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+100,player);
 		}else {
 			g.setColor(new Color(255,255,255));
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);

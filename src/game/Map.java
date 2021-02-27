@@ -97,6 +97,10 @@ public class Map {
 						MovingPlatform xd = new MovingPlatform(horizontalIndex + Integer.parseInt(splited[2]), verticalIndex + Integer.parseInt(splited[3]) , 32,16,20,true,1	,"./img/platformA.png");
 						currentLevel.addPlatform(xd);
 					*/
+                    case "Respawn":
+                        RespawnPoint rp = new RespawnPoint(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,splited[3]);
+                        currentLevel.addRespawnPoint(rp);
+                        break;
                     case "Revert":
                         switch (lastDirection) {
                             case "E":
@@ -114,8 +118,8 @@ public class Map {
 
                         }
                         break;
+
                 }
-                System.out.println(data);
             }
             myReader.close();
         } catch (FileNotFoundException e) {
