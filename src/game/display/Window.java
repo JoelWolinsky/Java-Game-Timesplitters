@@ -72,11 +72,8 @@ public class Window extends Canvas{
 		backButtonPanel.setVisible(false);
 		
 		// Handling the main screen background image
-<<<<<<< HEAD
-		ImageIcon background = new ImageIcon("img/background.png");
-=======
-		ImageIcon background = new ImageIcon("./img/background.jpg");
->>>>>>> multiplayer-screen
+
+		ImageIcon background = new ImageIcon("./img/background.png");
 	    Image img = background.getImage();
 	    Image temp = img.getScaledInstance(WIDTH,HEIGHT,Image.SCALE_SMOOTH);
 	    background = new ImageIcon(temp);
@@ -108,9 +105,9 @@ public class Window extends Canvas{
 		singleplayerButton.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
+		    	sHandler.playSound("button1", 1f);
 		    	mainMenu.setVisible(false);
 		    	back.setVisible(false);
-		    	sHandler.playSound("button1", 1f);
 		    	
 		    	Game.state = GameState.Playing;
 		    }
