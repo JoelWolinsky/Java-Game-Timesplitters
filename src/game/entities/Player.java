@@ -52,7 +52,6 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			img = ImageIO.read( new File(urls[0]));
 			this.width = img.getWidth();
 			this.height = img.getHeight();
-			System.out.println(this.width);
 		}
 		catch ( IOException exc )
 		{
@@ -135,12 +134,16 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			}
 		}
 
-		//quick little respawn when falling below level
+		/*
+		Falling below the current height threshold kills the player
+		We should only put checkpoints after successfully completing a segment not during segments since climbing
+		segments can pose a problem respawning the player mid fall which is not what we want. The player should reach
+		the bottom when failing.
+		The main idea is that most respawn points will be at ground level on each specific floor so the +300 will
+		work everytime. (Falling 300 blocks below the floor/respawnY will kill the player)
+		 */
 		if (this.y >respawnY+300)
-		{
-			this.x = respawnX;
-			this.y = respawnY;
-		}
+			respawn();
 
 		// press r to respawn -- used for debugging
 		if(Game.keyInput.r.isPressed())
@@ -149,6 +152,11 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			this.y = respawnY;
 		}
 
+	}
+
+	public void respawn(){
+		this.x = respawnX;
+		this.y = respawnY;
 	}
 	
 	private boolean isOnGround() {
