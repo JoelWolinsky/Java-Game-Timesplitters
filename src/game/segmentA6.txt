@@ -1,0 +1,32 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA5p1.png
+Chunk 1 E segmentA6p1.png
+Platform Custom 0 92 corner1.png
+Platform Custom 96 92 top1.png
+Platform Custom 330 92 corner1inv.png
+
+Platform Custom 46 300 edge3.png
+Platform Custom 46 460 edge3.png
+Platform Custom 170 380 edge3inv.png
+Platform Custom 170 250 edge3inv.png
+Platform Custom 170 510 edge3inv.png
+
+Platform Custom 370 480 edge3inv.png
+Platform Custom 370 320 edge3inv.png
+
+Chunk 1 N skyA.png
+Chunk 1 E skyA.png
+Chunk 1 S segmentA6p2.png
+
+Platform Custom 0 92 corner1.png
+Platform Custom 96 92 top2.png
+Platform Custom 330 92 corner1inv.png
+
+
+Platform Custom 20 400 edge3.png
+Platform Custom 145 340 edge3inv.png
+Platform Custom 145 480 edge3inv.png
+
+Platform Custom 225 260 edge3.png
+Platform Custom 225 410 edge3.png
+
+Platform Custom 350 330 edge3inv.png

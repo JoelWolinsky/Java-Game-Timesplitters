@@ -1,0 +1,25 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA8p1.png
+Chunk 1 E segmentA8p1.png
+Platform Custom 0 92 corner1.png
+Platform Custom 96 92 top1.png
+Platform Custom 330 92 corner1inv.png
+Platform Custom 0 384 floordissapear.png
+Platform Custom 50 420 thinplatform2.png
+Platform Custom 140 460 thinplatform2.png
+Platform Custom 240 500 thinplatform2.png
+Platform Custom 330 540 thinplatform2.png
+
+Chunk 1 N skyA.png
+Chunk 1 E skyA.png
+Chunk 1 S segmentA8p2.png
+
+Platform Custom 0 92 corner1.png
+Platform Custom 96 92 top2.png
+Platform Custom 330 92 corner1inv.png
+Platform Custom 0 384 floordissapear.png
+
+Platform Custom 330 410 thinplatform2.png
+Platform Custom 240 450 thinplatform2.png
+Platform Custom 140 490 thinplatform2.png
+Platform Custom 50 530 thinplatform2.png
+
