@@ -58,9 +58,10 @@ public class Level extends Canvas {
 	public void renderRespawnPoints(Graphics g, float f, float h,Player player) {
 		for(RespawnPoint o : respawnPoints) {
 
-			if ((int)o.getX()-10<(int)player.getX() && (int)player.getX() <(int)o.getX()+10)
+			if ((int)o.getX()-10<(int)player.getX() && (int)player.getX() <(int)o.getX()+10 && (int)o.getY()-10<(int)player.getY() && (int)player.getY() <(int)o.getY()+10)
 			{
 				player.setRespawnX((int) o.getX());
+				player.setRespawnY((int) o.getY());
 				o.activate();
 			}
 

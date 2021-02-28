@@ -98,7 +98,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				this.velY = JUMP_GRAVITY;
 			}
 		}
-		
+
 		//If you're not on ground, you should fall
 		if(!isOnGround()) {
 			fall(this);
@@ -142,6 +142,12 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			this.y = respawnY;
 		}
 
+		// press r to respawn -- used for debugging
+		if(Game.keyInput.r.isPressed())
+		{
+			this.x = respawnX;
+			this.y = respawnY;
+		}
 
 	}
 	

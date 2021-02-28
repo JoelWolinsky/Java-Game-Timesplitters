@@ -26,5 +26,7 @@ Platform Default 278 265
 Platform Default 310 265
 Platform Inverted 342 265
 Platform Custom 358 265 edge1inv.png
+Platform Custom 260 336 smallpillar1.png
+Platform Custom 342 292 smallpillar1.png
 Floor
 
