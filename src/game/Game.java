@@ -38,9 +38,9 @@ public class Game extends Canvas implements Runnable{
 		//keep default for now until we sort randomly generated
 		if (mapMode.equals("default")) {
 
-			m.mapParser(currentLevel, "./src/game/intersegmentA3.txt");
 			
-			m.mapParser(currentLevel, "./src/game/segmentA8.txt");
+			
+			m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");
 
 
 

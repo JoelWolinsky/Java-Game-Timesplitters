@@ -16,13 +16,24 @@ import javax.imageio.ImageIO;
 
 public class Platform extends GameObject implements SolidCollider{
 
-	private String url;
+	private BufferedImage img;
 
 	public Platform(float x, float y, int width, int height, String url) {
 		super(x, y, -1, width, height);
+		try
+		{
+			//sets the width and height of the platform based on the provided image width and height
+			img = ImageIO.read( new File("./img/".concat(url)));
+			this.width = img.getWidth();
+			this.height = img.getHeight();
+		}
+		catch ( IOException exc )
+		{
+			//TODO: Handle exception.
+		}
+
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
-		this.url = url;
 	}
 
 	public void tick() {
@@ -30,23 +41,11 @@ public class Platform extends GameObject implements SolidCollider{
 
 	public void render(Graphics g, float xOffset, float yOffset) {
 
-		/* ENABLE THIS TO DEBUG COLLISION BOX
+		//ENABLE THIS TO DEBUG COLLISION BOX
+		/*
 		g.setColor(Color.magenta);
 		g.fillRect((int)(this.x + xOffset),(int)(this.y + yOffset),width,height);
 		*/
-
-		BufferedImage img=null;
-		try
-		{
-			//sets the width and hight of the platform based on the provided image width and height
-			img = ImageIO.read( new File("./img/".concat(url)));
-			width = img.getWidth();
-			height = img.getHeight();
-		}
-		catch ( IOException exc )
-		{
-			//TODO: Handle exception.
-		}
 		g.drawImage(img,(int)(this.x + xOffset),(int)(this.y + yOffset),null);
 	}
 

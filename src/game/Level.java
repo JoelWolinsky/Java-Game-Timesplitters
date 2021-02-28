@@ -10,6 +10,7 @@ public class Level extends Canvas {
 	private LinkedList<Chunk> chunks = new LinkedList<>();
 	private LinkedList<Platform> platforms = new LinkedList<>();
 	private LinkedList<RespawnPoint> respawnPoints = new LinkedList<>();
+	private LinkedList<AreaDmg> areaDmgs = new LinkedList<>();
 
 	public void tick() {
 		for(Chunk c : chunks) {
@@ -18,6 +19,12 @@ public class Level extends Canvas {
 		for(GameObject o : entities) {
 			o.tick();
 		}
+		for(AreaDmg ad: areaDmgs) {
+			ad.tick();
+		}
+		for (Platform p:platforms)
+			p.tick();
+
 	}
 	
 	public void render(Graphics g, float f, float h, Player player) {
@@ -25,6 +32,7 @@ public class Level extends Canvas {
 		renderChunks(g,f,h,player);
 		renderPlatforms(g,f,h,player);
 		renderRespawnPoints(g,f,h,player);
+		renderAreaDmgs(g,f,h,player);
 		renderEntities(g, f, h);
 
 	}
@@ -58,16 +66,38 @@ public class Level extends Canvas {
 	public void renderRespawnPoints(Graphics g, float f, float h,Player player) {
 		for(RespawnPoint o : respawnPoints) {
 
-			if ((int)o.getX()-10<(int)player.getX() && (int)player.getX() <(int)o.getX()+10 && (int)o.getY()-10<(int)player.getY() && (int)player.getY() <(int)o.getY()+10)
+			if (o.getReached()==false) //delete this if you want to allow players to activate previously reached respawn points
+			if ((int)o.getX()<(int)player.getX()+player.getWidth() && (int)player.getX()<o.getX()+o.getWidth() && (int)o.getY()-100<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)o.getY()+o.getHeight())
 			{
 				player.setRespawnX((int) o.getX());
 				player.setRespawnY((int) o.getY());
-				o.activate();
+				o.setReached(true);
+				o.setCurrentActive(true);
+				for (RespawnPoint oo: respawnPoints)
+					if (oo != o)
+						oo.setCurrentActive(false);
 			}
 
-			o.render(g,f,h);
+			if (o.getCurrentActive()==true)
+				o.render(g,f,h);
 		}
 
+	}
+
+	public void renderAreaDmgs(Graphics g, float f, float h,Player player) {
+		for(AreaDmg o : areaDmgs) {
+			if(o.getActive()==true)
+			{
+				//only render if is active
+				o.render(g, f, h);
+				//if player comes in contact with the area he gets respawned
+				if ((int)o.getX()<(int)player.getX()+player.getWidth() && (int)player.getX()<o.getX()+o.getWidth() && (int)o.getY()<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)o.getY()+o.getHeight())
+					player.respawn();
+			}
+
+
+
+		}
 	}
 
 
@@ -100,6 +130,14 @@ public class Level extends Canvas {
 
 	public void removeRespawnPoint(RespawnPoint rp) {
 		respawnPoints.remove(rp);
+	}
+
+	public void addAreaDmg(AreaDmg ad) {
+		areaDmgs.add(ad);
+	}
+
+	public void removeAreaDmg(AreaDmg ad) {
+		areaDmgs.remove(ad);
 	}
 	
 }

@@ -6,12 +6,26 @@ import java.io.File;
 import java.io.IOException;
 
 public class RespawnPoint extends GameObject {
-	private String url;
 	private BufferedImage img;
+	private boolean reached = false;
+	private boolean currentActive = false;
 
 	public RespawnPoint(float x, float y, int width, int height, String url) {
 		super(x, y, -2, width, height);
-		this.url=url;
+
+		try
+		{
+			//sets the width and height of the platform based on the provided image width and height
+			img = ImageIO.read( new File("./img/".concat(url)));
+			this.width = img.getWidth();
+			this.height = img.getHeight();
+		}
+		catch ( IOException exc )
+		{
+			//TODO: Handle exception.
+		}
+
+
 	}
 
 	public void tick() {
@@ -21,23 +35,28 @@ public class RespawnPoint extends GameObject {
 
 			g.setColor(Color.magenta);
 			g.fillRect((int)(this.x + f),(int)(this.y + h),width,height);
-
 			g.drawImage(img,(int)(this.x + f),(int)(this.y + h),null);
 
 	}
 
-	public void activate()
+	public void setCurrentActive(boolean currentActive)
 	{
-		try
-		{
-			img = ImageIO.read( new File("./img/".concat(url)));
-			//width = img.getWidth();
-			//height = img.getHeight();
-		}
-		catch ( IOException exc )
-		{
-			//TODO: Handle exception.
-		}
-
+		this.currentActive = currentActive;
 	}
+
+	public boolean getCurrentActive()
+	{
+		return this.currentActive;
+	}
+
+	public void setReached(boolean reached)
+	{
+		this.reached = reached;
+	}
+
+	public boolean getReached()
+	{
+		return this.reached;
+	}
+
 }

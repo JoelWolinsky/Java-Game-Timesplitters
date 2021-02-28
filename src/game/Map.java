@@ -1,5 +1,6 @@
 package game;
 
+import game.entities.MovingPlatform;
 import game.entities.Platform;
 
 import java.io.File;
@@ -92,14 +93,16 @@ public class Map {
                         p = new Platform(horizontalIndex - setX, verticalIndex + setY, setX, 0, goUrl);
                         currentLevel.addPlatform(p);
                         break;
-					/*
-					case "Moving":
-						MovingPlatform xd = new MovingPlatform(horizontalIndex + Integer.parseInt(splited[2]), verticalIndex + Integer.parseInt(splited[3]) , 32,16,20,true,1	,"./img/platformA.png");
-						currentLevel.addPlatform(xd);
-					*/
+					case "MovingPlatform":
+						MovingPlatform mp = new MovingPlatform(horizontalIndex + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,Integer.parseInt(splited[3]),Boolean.parseBoolean(splited[4]),Integer.parseInt(splited[5])	,splited[6]);
+						currentLevel.addPlatform(mp);
                     case "Respawn":
                         RespawnPoint rp = new RespawnPoint(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,splited[3]);
                         currentLevel.addRespawnPoint(rp);
+                        break;
+                    case "AreaDmg":
+                        AreaDmg ad = new AreaDmg(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,"./img/diamond-01.png", "./img/diamond-02.png", "./img/diamond-03.png","./img/diamond-04.png","./img/diamond-05.png");
+                        currentLevel.addAreaDmg(ad);
                         break;
                     case "Revert":
                         switch (lastDirection) {

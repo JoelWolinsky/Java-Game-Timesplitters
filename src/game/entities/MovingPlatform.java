@@ -9,7 +9,7 @@ public class MovingPlatform extends Platform implements SolidCollider{
 	private boolean xAxis;
 
 	public MovingPlatform(float x, float y, int width, int height, int movingRange, boolean xAxis, float velocity, String url) {
-		super(x, y, width, height, url						);
+		super(x, y, width, height, url);
 		this.movingRange = movingRange;
 		this.xAxis = xAxis;
 		if(xAxis) {
@@ -18,6 +18,7 @@ public class MovingPlatform extends Platform implements SolidCollider{
 			this.basePos = this.y;
 		}
 		this.velocity = velocity;
+
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
 	}
