@@ -54,7 +54,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public void tick() {
 		//Gather all collisions
 		CollidingObject.getCollisions(this);
-		
+
 		//Check for keyboard input along the x-axis
 		if(Game.keyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
 
@@ -62,19 +62,19 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
 
 				// Simulates acceleration when you run right
-				if (this.velX <= (RUN_SPEED+0.1f) && this.velX >= (RUN_SPEED-0.1f)){
+				if (this.velX >= RUN_SPEED){
 					this.velX = RUN_SPEED;
-				} else if (this.velX < (RUN_SPEED-0.1f)){
-					this.velX += RUN_SPEED/6;
+				} else {
+					this.velX += RUN_SPEED/3;
 				}
 
 		} else if(Game.keyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
 				
 				// Simulates acceleration when you run left
-				if (this.velX <= -(RUN_SPEED+0.1f) && this.velX >= -(RUN_SPEED-0.1f)){
+				if (this.velX <= -RUN_SPEED){
 					this.velX = -RUN_SPEED;
-				} else if (this.velX > -(RUN_SPEED-0.1f)){
-					this.velX -= RUN_SPEED/6;
+				} else {
+					this.velX -= RUN_SPEED/3;
 				}
 
 		} else {	
