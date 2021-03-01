@@ -42,58 +42,71 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private static AnimationStates currentAnimationState = defaultAnimationState;
 	private static HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
 
-	public Player(float x, float y, int width,int height,String...urls) {
-		super(x, y, 1, width, height);
-
-		BufferedImage img;
-		try
-		{
-			//sets the width and hight of the platform based on the provided image width and height
-			img = ImageIO.read( new File(urls[0]));
-			this.width = img.getWidth();
-			this.height = img.getHeight();
-		}
-		catch ( IOException exc )
-		{
-			//TODO: Handle exception.
-		}
-
-
-		animations.put(AnimationStates.IDLE, new Animation(20, urls));
+	
+	public Player(float x, float y) {
+		super(x, y, 1, 18, 37);
+		animations.put(AnimationStates.IDLE, new Animation(20, "./img/adventurer-idle-00.png", "./img/adventurer-idle-01.png", "./img/adventurer-idle-02.png"));
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
 	}
 	
-	//TODO: Fix sticking into wall when moving in the air
 	//TODO: Fix moving through the up-and-down moving platform when you jump underneath it
 	public void tick() {
 		//Gather all collisions
 		CollidingObject.getCollisions(this);
 		
 		//Check for keyboard input along the x-axis
-		if(Game.keyInput.right.isPressed()) {
-			this.velX = RUN_SPEED;
-		}else if(Game.keyInput.left.isPressed()) {
-			this.velX = -RUN_SPEED;
-		}else {
-			/* Beware: Java floating point representation makes it difficult to have perfect numbers 
-			( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
-			if (this.velX >= -0.1f && this.velX <= 0.1f) {
+		if(Game.keyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
+
+		/* Beware: Java floating point representation makes it difficult to have perfect numbers 
+		( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
+
+				// Simulates acceleration when you run right
+				if (this.velX <= (RUN_SPEED+0.1f) && this.velX >= (RUN_SPEED-0.1f)){
+					this.velX = RUN_SPEED;
+				} else if (this.velX < (RUN_SPEED-0.1f)){
+					this.velX += RUN_SPEED/6;
+				}
+
+		} else if(Game.keyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
+				
+				// Simulates acceleration when you run left
+				if (this.velX <= -(RUN_SPEED+0.1f) && this.velX >= -(RUN_SPEED-0.1f)){
+					this.velX = -RUN_SPEED;
+				} else if (this.velX > -(RUN_SPEED-0.1f)){
+					this.velX -= RUN_SPEED/6;
+				}
+
+		} else {	
+			// For sliding effect on ground
+			if (!SolidCollider.willCauseSolidCollision(this, this.velX, true) && isOnGround()){
+				if (this.velX >= -0.1f && this.velX <= 0.1f) {
+					this.velX = 0;	 
+				} else if (this.velX > 0.1f) {
+					this.velX -= SLIDING_VEL;
+				} else {
+					this.velX += SLIDING_VEL;
+				}
+			}
+			// 'Sliding' in mid-air to represent air resistance. Half the rate of decrease as on ground.
+			else if (!SolidCollider.willCauseSolidCollision(this, this.velX, true) && !isOnGround() && !isOnWall()) {
+				if (this.velX >= -0.1f && this.velX <= 0.1f) {
+					this.velX = 0;	 
+				} else if (this.velX > 0.1f) {
+					this.velX -= SLIDING_VEL / 2;
+				} else {
+					this.velX += SLIDING_VEL / 2;
+				}
+			} else {
 				this.velX = 0;	 
-			}
-			else if (this.velX > 0.1f) {
-				this.velX -= SLIDING_VEL;
-			}
-			else {
-				this.velX += SLIDING_VEL;
-			}
+			}	
 		}
 		
 		//Check for keyboard input along the y-axis
 		if(Game.keyInput.down.isPressed()) {
 			this.velY = DOWN_SPEED;
 		}else if(Game.keyInput.up.isPressed()) {
-			if(isOnGround() && !hasCeilingAbove()) {
+			if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
 				this.velY = JUMP_GRAVITY;
 			}
 		}
@@ -101,7 +114,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		//If you're not on ground, you should fall
 		if(!isOnGround()) {
 			fall(this);
-		}else {
+		} else {
 			CollidingObject o = SolidCollider.nextCollision(this, 5, false);
 			if(o instanceof MovingPlatform) {
 				if(((MovingPlatform) o).getXAxis()) {
@@ -118,19 +131,26 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}
 		if(!SolidCollider.willCauseSolidCollision(this, this.velY+1, false)) {
 			this.y += this.velY;
-		}else {
-			//Stop player falling through the floor
+		} else { 	
+			// Stop player falling through the floor
 			CollidingObject o = SolidCollider.nextCollision(this,  this.velY, false);
 			if(o == null) {
 				return;
 			}
 			Rectangle s = o.getBounds();
-			if(this.velY > 0) {
+			
+			if(this.velY > 0 && !isOnWall()) {
 				this.y = s.y - this.height;
 				this.velY = 0;
-			}else if(this.velY < 0 && !isOnGround()){
-				this.y = s.y + s.height;
+			} else if(this.velY < 0 && !isOnWall()) { 
 				this.velY = 0;
+			} else {	// When velY == 0 and velX == 0 the sticking to the wall bug occurs.
+						// Rebounds the player off the wall to avoid sticking.
+				if (SolidCollider.willCauseSolidCollision(this, 5, true)) { 
+					this.velX = -2.0f;
+				} else if (SolidCollider.willCauseSolidCollision(this, -5, true)) {
+					this.velX = 2.0f;
+				}
 			}
 		}
 
@@ -163,8 +183,17 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		return SolidCollider.willCauseSolidCollision(this, 5, false);
 	}
 
+	private boolean isOnWall() {
+		if ((SolidCollider.willCauseSolidCollision(this, this.velX, true) || SolidCollider.willCauseSolidCollision(this, -this.velX, true))
+				&& !isOnGround()){
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	private boolean hasCeilingAbove() {
-		return SolidCollider.willCauseSolidCollision(this, -10, false);
+		return SolidCollider.willCauseSolidCollision(this, -5, false);
 	}
 
 	public void handleCollisions(LinkedList<CollidingObject> collisions) {
@@ -188,16 +217,17 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		g.fillRect((int)(this.x + xOffset),(int)(this.y + yOffset),width,height);
 
 		this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
-		
+
+		/* -- To visualise the boundary box, uncomment these and getBounds(float xOffset, float yOffset) as well.
+		Graphics2D g2d = (Graphics2D) g;
+		g.setColor(Color.RED);		
+		g2d.draw(getBounds(xOffset, yOffset)); */
 	}
 	
 	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, width, height);
 	}
 
-	public Rectangle getBounds(float xOffset, float yOffset) {
-		return new Rectangle((int)(this.x+xOffset), (int)(this.y + yOffset), width, height);
-	}
 
 	public int getAnimationTimer() {
 		return this.animationTimer;

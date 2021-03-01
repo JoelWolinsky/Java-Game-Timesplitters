@@ -29,7 +29,7 @@ public class Game extends Canvas implements Runnable{
 	 */
 	public Game() {
 
-		player = new Player(0, 340,0,0,"./img/adventurer-idle-00.png", "./img/adventurer-idle-01.png", "./img/adventurer-idle-02.png");
+		player = new Player(0, 340);
 		currentLevel.addEntity(player);
 
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
