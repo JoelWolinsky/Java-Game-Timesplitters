@@ -21,13 +21,12 @@ import game.input.KeyInput;
 public class Player extends GameObject implements AnimatedObject, SolidCollider, GravityObject{
 	
 	static BufferedImage sprite;
-	static String url = "./img/Anglerfish.png";
 	
 	private float velX = 0;
 	private float velY = 0;
 	private float terminalVelY = 15;
 
-	private static final float SLIDING_VEL = 0.2f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
+	private static final float DECELERATION = 0.2f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
 	private static final float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
 	private static final float RUN_SPEED = 3.6f; 		// Default run speed
 	private static final float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
@@ -72,24 +71,14 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				}
 
 		} else {	
-			// For sliding effect on ground
-			if (!SolidCollider.willCauseSolidCollision(this, this.velX, true) && isOnGround()){
+			// For deceleration effect
+			if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
 				if (this.velX >= -0.1f && this.velX <= 0.1f) {
 					this.velX = 0;	 
 				} else if (this.velX > 0.1f) {
-					this.velX -= SLIDING_VEL;
+					this.velX -= DECELERATION;
 				} else {
-					this.velX += SLIDING_VEL;
-				}
-			}
-			// 'Sliding' in mid-air to represent air resistance. Half the rate of decrease as on ground.
-			else if (!SolidCollider.willCauseSolidCollision(this, this.velX, true) && !isOnGround() && !isOnWall()) {
-				if (this.velX >= -0.1f && this.velX <= 0.1f) {
-					this.velX = 0;	 
-				} else if (this.velX > 0.1f) {
-					this.velX -= SLIDING_VEL / 2;
-				} else {
-					this.velX += SLIDING_VEL / 2;
+					this.velX += DECELERATION;
 				}
 			} else {
 				this.velX = 0;	 
