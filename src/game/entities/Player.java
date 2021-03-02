@@ -42,10 +42,25 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private static AnimationStates currentAnimationState = defaultAnimationState;
 	private static HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
 
-	
-	public Player(float x, float y) {
-		super(x, y, 1, 18, 37);
-		animations.put(AnimationStates.IDLE, new Animation(20, "./img/adventurer-idle-00.png", "./img/adventurer-idle-01.png", "./img/adventurer-idle-02.png"));
+
+	public Player(float x, float y, int width,int height,String...urls) {
+		super(x, y, 1, width, height);
+
+		BufferedImage img;
+		try
+		{
+			//sets the width and hight of the platform based on the provided image width and height
+			img = ImageIO.read( new File(urls[0]));
+			this.width = img.getWidth();
+			this.height = img.getHeight();
+		}
+		catch ( IOException exc )
+		{
+			//TODO: Handle exception.
+		}
+
+
+		animations.put(AnimationStates.IDLE, new Animation(20, urls));
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
 	}

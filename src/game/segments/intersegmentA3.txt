@@ -5,7 +5,7 @@ AreaDmg 60 364  -1 3 ./img/spike1.png ./img/spike2.png ./img/spike3.png ./img/sp
 Platform Custom 0 124 corner1inv.png
 Platform Custom 96 156 top2.png
 Platform Custom 330 124 corner1.png
-
+Respawn 220 363 flag1.png
 Floor
 Chunk 1 N skyA.png
 Revert
