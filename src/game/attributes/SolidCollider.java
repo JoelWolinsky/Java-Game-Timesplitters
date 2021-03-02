@@ -37,7 +37,9 @@ public interface SolidCollider extends CollidingObject{
 	static void addSolidCollider(SolidCollider s) {
 		solidColliders.add(s);
 	}
-	
+	static void removeSolidCollider(SolidCollider s) {
+		solidColliders.remove(s);
+	}
 	/**
 	 * Determines if a given movement along a single axis will cause a collision with a solid object<br>
 	 * Should be used to determine if a given movement can be performed e.g.<br>

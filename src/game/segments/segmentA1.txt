@@ -3,7 +3,7 @@ Chunk 1 E segmentA1.png
 Platform Custom 82 325 edge2.png
 Platform Custom -67 140 corner1.png
 Platform Custom 29 140 top1.png
-Platform Custom 214 265 edge1.png
+Platform Custom 214 265 edge1.pn
 Platform Default 246 265
 Platform Inverted 278 265
 Platform Default 294 265

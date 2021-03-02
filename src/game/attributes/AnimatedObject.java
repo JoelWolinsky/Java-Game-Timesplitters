@@ -40,6 +40,19 @@ public interface AnimatedObject {
 		}
 		setAnimationTimer(animationTimer);
 	}
+
+	default void renderAnimAlt(Graphics g, int x, int y, Animation anim) {
+		Animation currentAnimation = anim;
+		int animationTimer = getAnimationTimer();
+		int frame = (animationTimer / currentAnimation.getTicksPerFrame());
+		BufferedImage currentImage = currentAnimation.getFrame(frame);
+		g.drawImage(currentImage, (int)x, (int)y, null);
+		animationTimer ++;
+		if (animationTimer >= currentAnimation.getTicksPerFrame() * currentAnimation.getNumberOfFrames()) {
+			animationTimer = 0;
+		}
+		setAnimationTimer(animationTimer);
+	}
 	
 	int getAnimationTimer();
 	void setAnimationTimer(int animationTimer);

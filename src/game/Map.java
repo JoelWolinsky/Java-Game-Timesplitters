@@ -2,9 +2,12 @@ package game;
 
 import game.entities.MovingPlatform;
 import game.entities.Platform;
+import game.entities.TimerPlatform;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Map {
@@ -94,14 +97,27 @@ public class Map {
                         currentLevel.addPlatform(p);
                         break;
 					case "MovingPlatform":
-						MovingPlatform mp = new MovingPlatform(horizontalIndex + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,Integer.parseInt(splited[3]),Boolean.parseBoolean(splited[4]),Integer.parseInt(splited[5])	,splited[6]);
+						MovingPlatform mp = new MovingPlatform(horizontalIndex - setX  + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,Integer.parseInt(splited[3]),Boolean.parseBoolean(splited[4]),Integer.parseInt(splited[5])	,splited[6]);
 						currentLevel.addPlatform(mp);
+						break;
+                    case "TimerPlatform":
+                        TimerPlatform tp = new TimerPlatform(horizontalIndex - setX + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,splited[3],Integer.parseInt(splited[4]));
+                        currentLevel.addPlatform(tp);
+                        break;
                     case "Respawn":
                         RespawnPoint rp = new RespawnPoint(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,splited[3]);
                         currentLevel.addRespawnPoint(rp);
                         break;
                     case "AreaDmg":
-                        AreaDmg ad = new AreaDmg(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,"./img/diamond-01.png", "./img/diamond-02.png", "./img/diamond-03.png","./img/diamond-04.png","./img/diamond-05.png");
+                        AreaDmg ad;
+                        List<String> list = new ArrayList<String>();
+                        for (int i = 5;i < 5+Integer.parseInt(splited[4]);i++)
+                            list.add(splited[i]);
+
+                        String[] arr = list.toArray(new String[0]);
+
+                        ad = new AreaDmg(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),arr);
+
                         currentLevel.addAreaDmg(ad);
                         break;
                     case "Revert":

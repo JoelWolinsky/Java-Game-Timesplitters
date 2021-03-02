@@ -1,0 +1,62 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA9p1.png
+Chunk 1 E segmentA10p1.png
+
+Platform Custom 0 240 top4.png
+
+TimerPlatform 60 370 thinplatform2.png 2
+Platform Custom 200 410 thinPlatform2.png
+TimerPlatform 340 370 thinplatform2.png 2
+
+AreaDmg 0 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 22 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 44 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 66 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 88 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 110 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 132 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 154 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 176 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 198 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 220 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 242 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 264 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 286 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 308 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 330 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 352 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 374 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 396 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 418 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+
+Chunk 1 N skyA.png
+Chunk 1 E skyA.png
+Chunk 1 S segmentA10p2.png
+
+
+Platform Custom 0 240 top4.png
+
+Platform Custom 60 410 thinPlatform2.png
+TimerPlatform 180 340 thinplatform2.png 2
+Platform Custom 180 420 thinplatform2.png
+TimerPlatform 300 370 thinplatform2.png 2
+
+AreaDmg 0 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 22 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 44 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 66 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 88 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 110 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 132 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 154 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 176 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 198 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 220 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 242 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 264 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 286 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 308 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 330 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 352 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 374 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 396 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
+AreaDmg 418 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
