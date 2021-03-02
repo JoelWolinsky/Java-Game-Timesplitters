@@ -1,6 +1,7 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA9p1.png
 Chunk 1 E segmentA9p1.png
 
+Platform Custom 0 240 top4.png
 
 
 Floor
@@ -8,6 +9,6 @@ Chunk 1 N skyA.png
 Chunk 1 E skyA.png
 Chunk 1 S segmentA9p2.png
 
-
+Platform Custom 0 240 top4.png
 
 Floor

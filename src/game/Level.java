@@ -4,6 +4,7 @@ import java.awt.*;
 import java.util.LinkedList;
 import game.entities.Platform;
 import game.entities.Player;
+import game.entities.TimerPlatform;
 
 public class Level extends Canvas {
 	private LinkedList<GameObject> entities = new LinkedList<>();
@@ -23,7 +24,13 @@ public class Level extends Canvas {
 			ad.tick();
 		}
 		for (Platform p:platforms)
-			p.tick();
+		{
+
+			if (p instanceof TimerPlatform)
+			{
+				p.tick();}
+
+		}
 
 	}
 	
@@ -59,7 +66,17 @@ public class Level extends Canvas {
 			//if (p.getX()-650<f*(-1) && f*(-1)<p.getX()+800 && p.getY()-380<h*(-1) && h*(-1)<p.getY()+ 740)
 			//PLAYER POSITION PROXIMITY RENDERING
 			if (p.getX()-650<player.getX() && player.getX()<p.getX()+800 && p.getY()-480<player.getY() && player.getY()<p.getY()+ 740)
-			{p.render(g, f, h);}
+			{
+				if (p instanceof TimerPlatform) {
+					if (((TimerPlatform) p).getActive() == true) {
+						p.render(g, f, h);
+					}
+				}
+				else
+
+				p.render(g, f, h);
+			}
+
 		}
 	}
 
@@ -70,7 +87,7 @@ public class Level extends Canvas {
 			if ((int)o.getX()<(int)player.getX()+player.getWidth() && (int)player.getX()<o.getX()+o.getWidth() && (int)o.getY()-100<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)o.getY()+o.getHeight())
 			{
 				player.setRespawnX((int) o.getX());
-				player.setRespawnY((int) o.getY());
+				player.setRespawnY((int) o.getY()-10);
 				o.setReached(true);
 				o.setCurrentActive(true);
 				for (RespawnPoint oo: respawnPoints)
