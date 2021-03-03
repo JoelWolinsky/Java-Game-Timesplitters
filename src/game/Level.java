@@ -34,7 +34,7 @@ public class Level {
 	}
 	
 	
-	public void renderEntitites(Graphics g, int xOffset, int yOffset) {
+	public synchronized void renderEntitites(Graphics g, int xOffset, int yOffset) {
 		for(GameObject o : getGameObjects()) {
 			o.render(g, xOffset, yOffset);
 		}
