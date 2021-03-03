@@ -37,6 +37,7 @@ public class GameServer extends Thread {
 			try {
 				socket.receive(packet);
 			} catch (IOException e) {
+				System.out.println("Exception receiving packet in server run");
 				e.printStackTrace();
 			}
 			

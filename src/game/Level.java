@@ -60,32 +60,47 @@ public class Level {
 	}
 
 	public void removePlayerMP(String username) {
-		int index = 0;
-		for(GameObject e : getGameObjects()) {
-			if(e instanceof PlayerMP && ((PlayerMP)e).getUsername().equals(username)) {
-				break;
+		try {
+			int index = 0;
+			for(GameObject e : getGameObjects()) {
+				if(e instanceof PlayerMP && ((PlayerMP)e).getUsername().equals(username)) {
+					break;
+				}
+				index++;
 			}
-			index++;
+			this.getGameObjects().remove(index);
+		} catch (Exception e) {
+			System.out.println("Exception in removePlayerMP. Player " + username);
+			e.printStackTrace();
 		}
-		this.getGameObjects().remove(index);
 	}
 	
 	private int getPlayerMPIndex(String username) {
-		int index = 0;
-		for (GameObject e : getGameObjects()) {
-			if(e instanceof PlayerMP && ((PlayerMP)e).getUsername().equals(username)) {
-				break;
+		try {
+			int index = 0;
+			for (GameObject e : getGameObjects()) {
+				if(e instanceof PlayerMP && ((PlayerMP)e).getUsername().equals(username)) {
+					break;
+				}
+				index++;
 			}
-			index++;
+			return index;
+		} catch (Exception e) {
+			System.out.println("Exception in getPlayerMPIndex. Player " + username);
+			e.printStackTrace();
+			return -1;
 		}
-		return index;
 	}
 	
 	public void movePlayer(String username, float x, float y) {
-		int index = getPlayerMPIndex(username);
-		this.getGameObjects().get(index).x = x;
-		this.getGameObjects().get(index).y =y;
-		
+		try {
+			int index = getPlayerMPIndex(username);
+			this.getGameObjects().get(index).x = x;
+			this.getGameObjects().get(index).y = y;
+		} catch (Exception e) {
+			System.out.println("Exception in movePlayer when moving player " + username);
+			e.printStackTrace();
+		}
 	}
 	
 }
