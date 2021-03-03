@@ -7,6 +7,7 @@ public class MovingPlatform extends Platform implements SolidCollider{
 	
 	private float basePos, movingRange, velocity;
 	private boolean xAxis;
+	private boolean charging = false;
 
 	public MovingPlatform(float x, float y, int width, int height, int movingRange, boolean xAxis, float velocity, String url) {
 		super(x, y, width, height, url);
@@ -32,7 +33,7 @@ public class MovingPlatform extends Platform implements SolidCollider{
 	
 	public void tick() {
 		if(this.xAxis) {
-			this.x += this.velocity;
+				this.x += this.velocity;
 			if(Math.abs(this.x - this.basePos) >= this.movingRange) {
 				this.velocity = -this.velocity;
 			}
@@ -40,6 +41,7 @@ public class MovingPlatform extends Platform implements SolidCollider{
 			this.y += this.velocity;
 			if(Math.abs(this.y - this.basePos) >= this.movingRange) {
 				this.velocity = -this.velocity;
+
 			}
 		}
 	}

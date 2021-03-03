@@ -36,6 +36,8 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private int respawnX=0;
 	private int respawnY=340;
 	private int deathFromFallThreshold;
+	private boolean immunity=false;
+	private int i=0;
 
 	private static int animationTimer = 0;
 	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
@@ -60,7 +62,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}
 
 
-		animations.put(AnimationStates.IDLE, new Animation(20, urls));
+		animations.put(AnimationStates.IDLE, new Animation(1660, urls));
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
 	}
@@ -69,6 +71,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public void tick() {
 		//Gather all collisions
 		CollidingObject.getCollisions(this);
+		if (i<100)
+			i++;
+		else
+			immunity=false;
 
 		//Check for keyboard input along the x-axis
 		if(Game.keyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
@@ -183,15 +189,20 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		// press r to respawn -- used for debugging
 		if(Game.keyInput.r.isPressed())
 		{
-			this.x = respawnX;
-			this.y = respawnY;
+			respawn();
 		}
+
 
 	}
 
 	public void respawn(){
-		this.x = respawnX;
-		this.y = respawnY;
+		if (immunity==false)
+		{
+			this.x = respawnX;
+			this.y = respawnY;
+			immunity=true;
+			i=0;
+		}
 	}
 	
 	private boolean isOnGround() {
@@ -228,10 +239,27 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 	public void render(Graphics g, float xOffset, float yOffset) {
 
-		g.setColor(Color.magenta);
-		g.fillRect((int)(this.x + xOffset),(int)(this.y + yOffset),width,height);
 
-		this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
+		if (immunity==true)
+		{
+			if (0<i && i <10 || 30<i && i <40 || 60<i && i<70)
+			{
+
+
+			}
+			else
+			{
+
+
+				this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
+
+			}
+		}
+		else
+		{
+
+			this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
+		}
 
 		/* -- To visualise the boundary box, uncomment these and getBounds(float xOffset, float yOffset) as well.
 		Graphics2D g2d = (Graphics2D) g;

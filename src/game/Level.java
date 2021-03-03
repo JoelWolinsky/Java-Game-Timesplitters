@@ -2,9 +2,8 @@ package game;
 
 import java.awt.*;
 import java.util.LinkedList;
-import game.entities.Platform;
-import game.entities.Player;
-import game.entities.TimerPlatform;
+
+import game.entities.*;
 
 public class Level extends Canvas {
 	private LinkedList<GameObject> entities = new LinkedList<>();
@@ -12,6 +11,7 @@ public class Level extends Canvas {
 	private LinkedList<Platform> platforms = new LinkedList<>();
 	private LinkedList<RespawnPoint> respawnPoints = new LinkedList<>();
 	private LinkedList<AreaDmg> areaDmgs = new LinkedList<>();
+	private LinkedList<CollisionlessAnimObject> collisionlessAnimObjects = new LinkedList<>();
 
 	public void tick() {
 		for(Chunk c : chunks) {
@@ -27,8 +27,11 @@ public class Level extends Canvas {
 		{
 
 			if (p instanceof TimerPlatform)
-			{
-				p.tick();}
+				p.tick();
+			if (p instanceof CrushingPlatform)
+				p.tick();
+			if (p instanceof MovingPlatform)
+				p.tick();
 
 		}
 
@@ -40,6 +43,7 @@ public class Level extends Canvas {
 		renderPlatforms(g,f,h,player);
 		renderRespawnPoints(g,f,h,player);
 		renderAreaDmgs(g,f,h,player);
+		renderCollisionlessAnimObject(g,f,h,player);
 		renderEntities(g, f, h);
 
 	}
@@ -60,6 +64,17 @@ public class Level extends Canvas {
 
 		}
 	}
+	public void renderCollisionlessAnimObject(Graphics g, float f, float h,Player player) {
+		for(CollisionlessAnimObject c : collisionlessAnimObjects) {
+			//CAMERA PROXIMITY RENDERING
+			//if (c.getX()- 640<f*(-1) && f*(-1)<c.getX()+ 640 && c.getY()-380<h*(-1) && h*(-1)<c.getY()+ 740)
+			//PLAYER POSITION PROXIMITY RENDERING
+			if (c.getX()- 640<player.getX() && player.getX()<c.getX()+ 800 && c.getY()-480<player.getY() && player.getY()<c.getY()+ 740)
+			{c.render(g, f, h);}
+
+		}
+	}
+
 	public void renderPlatforms(Graphics g, float f, float h,Player player) {
 		for(Platform p : platforms) {
 			////CAMERA PROXIMITY RENDERING
@@ -72,7 +87,12 @@ public class Level extends Canvas {
 						p.render(g, f, h);
 					}
 				}
-				else
+				else if (p instanceof CrushingPlatform)
+				{
+					if ((int)p.getX()<(int)player.getX()+player.getWidth() && (int)player.getX()<p.getX()+p.getWidth() && (int)p.getY()+p.getHeight()<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)p.getY()+p.getHeight())
+						player.respawn();
+					p.render(g,f,h);
+				}else
 
 				p.render(g, f, h);
 			}
@@ -155,6 +175,14 @@ public class Level extends Canvas {
 
 	public void removeAreaDmg(AreaDmg ad) {
 		areaDmgs.remove(ad);
+	}
+
+	public void addCollisionlessAnimObject(CollisionlessAnimObject cao) {
+		collisionlessAnimObjects.add(cao);
+	}
+
+	public void removeCollisionlessAnimObject(CollisionlessAnimObject cao) {
+		collisionlessAnimObjects.remove(cao);
 	}
 	
 }

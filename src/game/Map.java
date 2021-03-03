@@ -1,5 +1,6 @@
 package game;
 
+import game.entities.CrushingPlatform;
 import game.entities.MovingPlatform;
 import game.entities.Platform;
 import game.entities.TimerPlatform;
@@ -97,12 +98,16 @@ public class Map {
                         currentLevel.addPlatform(p);
                         break;
 					case "MovingPlatform":
-						MovingPlatform mp = new MovingPlatform(horizontalIndex - setX  + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,Integer.parseInt(splited[3]),Boolean.parseBoolean(splited[4]),Integer.parseInt(splited[5])	,splited[6]);
+						MovingPlatform mp = new MovingPlatform(horizontalIndex - setX  + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,Integer.parseInt(splited[3]),Boolean.parseBoolean(splited[4]),Float.parseFloat(splited[5])	,splited[6]);
 						currentLevel.addPlatform(mp);
 						break;
                     case "TimerPlatform":
-                        TimerPlatform tp = new TimerPlatform(horizontalIndex - setX + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,splited[3],Integer.parseInt(splited[4]));
+                        TimerPlatform tp = new TimerPlatform(horizontalIndex - setX + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,splited[3],Integer.parseInt(splited[4]), Integer.parseInt(splited[5]));
                         currentLevel.addPlatform(tp);
+                        break;
+                    case "CrushingPlatform":
+                        CrushingPlatform cp = new CrushingPlatform(horizontalIndex - setX  + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,Integer.parseInt(splited[3]),Boolean.parseBoolean(splited[4]),Float.parseFloat(splited[5])	,splited[6],Integer.parseInt(splited[7]));
+                        currentLevel.addPlatform(cp);
                         break;
                     case "Respawn":
                         RespawnPoint rp = new RespawnPoint(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,splited[3]);
@@ -119,6 +124,18 @@ public class Map {
                         ad = new AreaDmg(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),arr);
 
                         currentLevel.addAreaDmg(ad);
+                        break;
+                    case "CollisionslessAnimObject":
+                        CollisionlessAnimObject cao;
+                        List<String> list2 = new ArrayList<String>();
+                        for (int i = 5;i < 5+Integer.parseInt(splited[3]);i++)
+                            list2.add(splited[i]);
+
+                        String[] arr2 = list2.toArray(new String[0]);
+
+                        cao = new CollisionlessAnimObject(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,arr2);
+
+                        currentLevel.addCollisionlessAnimObject(cao);
                         break;
                     case "Revert":
                         switch (lastDirection) {

@@ -3,9 +3,9 @@ Chunk 1 E segmentA10p1.png
 
 Platform Custom 0 240 top4.png
 
-TimerPlatform 60 370 thinplatform2.png 2
+TimerPlatform 60 370 thinplatform2.png 2 20
 Platform Custom 200 410 thinPlatform2.png
-TimerPlatform 340 370 thinplatform2.png 2
+TimerPlatform 340 370 thinplatform2.png 2 50
 
 AreaDmg 0 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
 AreaDmg 22 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
@@ -36,9 +36,9 @@ Chunk 1 S segmentA10p2.png
 Platform Custom 0 240 top4.png
 
 Platform Custom 60 410 thinPlatform2.png
-TimerPlatform 180 340 thinplatform2.png 2
+TimerPlatform 180 340 thinplatform2.png 2 90
 Platform Custom 180 420 thinplatform2.png
-TimerPlatform 300 370 thinplatform2.png 2
+TimerPlatform 300 370 thinplatform2.png 2 120
 
 AreaDmg 0 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png
 AreaDmg 22 480  -1 4 ./img/waste1.png ./img/waste2.png ./img/waste3.png ./img/waste4.png

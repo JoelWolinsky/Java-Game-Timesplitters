@@ -8,32 +8,40 @@ public class TimerPlatform extends Platform {
 	private int timer=0;
 	private boolean active = true;
 	private int speed = 0;
-	public TimerPlatform(float x, float y, int width, int height,String url, int speed) {
+	private int startOffset;
+	private int i=0;
+	public TimerPlatform(float x, float y, int width, int height,String url, int speed,int startOffset) {
 		super(x, y, width, height, url);
 		this.speed = speed;
+		this.startOffset=startOffset;
 	}
 	
 	public void tick() {
 
-
-		if (timer==100)
+		if (i<startOffset)
+			i++;
+		else
 		{
-			if (this.active == true)
+			if (timer==100)
 			{
-				this.active = false;
-				//CollidingObject.removeCollider(this);
-				SolidCollider.removeSolidCollider(this);
+				if (this.active == true)
+				{
+					this.active = false;
+					//CollidingObject.removeCollider(this);
+					SolidCollider.removeSolidCollider(this);
+				}
+				else
+				{
+					this.active = true;
+					//CollidingObject.addCollider(this);
+					SolidCollider.addSolidCollider(this);
+				}
+				timer = 0;
 			}
-			else
-			{
-				this.active = true;
-				//CollidingObject.addCollider(this);
-				SolidCollider.addSolidCollider(this);
-			}
-			timer = 0;
+
+			timer+=speed;
 		}
 
-		timer+=speed;
 	}
 
 	public boolean getActive(){
