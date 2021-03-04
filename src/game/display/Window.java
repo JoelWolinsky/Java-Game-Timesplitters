@@ -43,9 +43,7 @@ public class Window extends Canvas{
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
-		frame.setLocationRelativeTo(null);
 		
-		SoundHandler sHandler = new SoundHandler();
 
 		String buttonFont = "Bauhaus 93";
 		
@@ -70,6 +68,13 @@ public class Window extends Canvas{
 		backButtonPanel.setBounds(WIDTH / 23, HEIGHT - (HEIGHT / 7), panelWidth, panelHeight / 5);
 		backButtonPanel.setOpaque(false);
 		backButtonPanel.setVisible(false);
+		
+		// The panel that holds the multiplayer buttons
+		JPanel multiplayerButtonPanel = new JPanel(new FlowLayout());
+		multiplayerButtonPanel.setBounds(WIDTH / 4, HEIGHT / 10, panelWidth, panelHeight * 2);
+		multiplayerButtonPanel.setOpaque(false);
+		multiplayerButtonPanel.setVisible(false);
+		((FlowLayout)multiplayerButtonPanel.getLayout()).setVgap(panelHeight / 6);
 		
 		// Handling the main screen background image
 
@@ -105,7 +110,7 @@ public class Window extends Canvas{
 		singleplayerButton.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	sHandler.playSound("button1", 1f);
+		    	SoundHandler.playSound("button1", 1f);
 		    	mainMenu.setVisible(false);
 		    	back.setVisible(false);
 		    	
@@ -120,6 +125,18 @@ public class Window extends Canvas{
 		multiplayerButton.setFont(new Font(buttonFont, Font.BOLD, 12));
 		multiplayerButton.setText("MULTIPLAYER");
 		multiplayerButton.setFocusPainted(false);
+		
+		multiplayerButton.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	mainMenu.setVisible(false);
+		    	back.setVisible(false);
+		    	backOptions.setVisible(true);
+		    	backButtonPanel.setVisible(true);
+		    	multiplayerButtonPanel.setVisible(true);
+		    	SoundHandler.playSound("button1", 1f);
+		    }
+		});
 		
 		JButton optionsButton = new JButton();
 		optionsButton.setBackground(Color.DARK_GRAY);
@@ -137,7 +154,7 @@ public class Window extends Canvas{
 		    	backOptions.setVisible(true);
 		    	optionButtonPanel.setVisible(true);
 		    	backButtonPanel.setVisible(true);
-		    	sHandler.playSound("button1", 1f);
+		    	SoundHandler.playSound("button1", 1f);
 		    }
 		});
 		
@@ -152,7 +169,7 @@ public class Window extends Canvas{
 		quitButton.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	sHandler.playSound("button1", 1f);
+		    	SoundHandler.playSound("button1", 1f);
 		    	System.exit(0);
 		    }
 		});
@@ -170,10 +187,11 @@ public class Window extends Canvas{
 		    public void actionPerformed(ActionEvent e) {
 		    	backButtonPanel.setVisible(false);
 		    	optionButtonPanel.setVisible(false);
+		    	multiplayerButtonPanel.setVisible(false);
 		    	mainMenu.setVisible(true);
 		    	backOptions.setVisible(false);
 		    	back.setVisible(true);
-		    	sHandler.playSound("button1", 1f);
+		    	SoundHandler.playSound("button1", 1f);
 		    }
 		});
 		
@@ -193,7 +211,7 @@ public class Window extends Canvas{
 		toggleSoundEffectsButton.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	sHandler.playSound("button1", 1f);
+		    	SoundHandler.playSound("button1", 1f);
 		    	if (Launcher.cHandler.getSoundEffectsToggle()) {
 		    		toggleSoundEffectsButton.setText("<html><center>SOUND EFFECTS:<br>OFF</center></html>");
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.SOUNDEFFECTS, "False");
@@ -220,7 +238,7 @@ public class Window extends Canvas{
 		toggleMusicButton.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		    	sHandler.playSound("button1", 1f);
+		    	SoundHandler.playSound("button1", 1f);
 		    	if (Launcher.cHandler.getMusicToggle()) {
 		    		toggleMusicButton.setText("<html><center>MUSIC:<br>OFF</center></html>");
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.MUSIC, "False");
@@ -231,6 +249,22 @@ public class Window extends Canvas{
 		    }
 		});
 		
+		JButton createGameButton = new JButton();
+		createGameButton.setBackground(Color.DARK_GRAY);
+		createGameButton.setForeground(Color.black);
+		createGameButton.setPreferredSize(new Dimension(panelWidth, panelHeight / 3));
+		createGameButton.setFont(new Font(buttonFont, Font.BOLD, 12));
+		createGameButton.setFocusPainted(false);
+		createGameButton.setText("CREATE GAME");
+		
+		JButton joinGameButton = new JButton();
+		joinGameButton.setBackground(Color.DARK_GRAY);
+		joinGameButton.setForeground(Color.black);
+		joinGameButton.setPreferredSize(new Dimension(panelWidth, panelHeight / 3));
+		joinGameButton.setFont(new Font(buttonFont, Font.BOLD, 12));
+		joinGameButton.setFocusPainted(false);
+		joinGameButton.setText("JOIN GAME");
+		
 		// Add all components then set the frame to visible
 		mainMenu.add(singleplayerButton);
 		mainMenu.add(multiplayerButton);
@@ -239,15 +273,21 @@ public class Window extends Canvas{
 		backButtonPanel.add(backButton);
 		optionButtonPanel.add(toggleSoundEffectsButton);
 		optionButtonPanel.add(toggleMusicButton);
+		multiplayerButtonPanel.add(createGameButton);
+		multiplayerButtonPanel.add(joinGameButton);
 		c.add(mainMenu);
 		c.add(optionButtonPanel);
+		c.add(multiplayerButtonPanel);
 		c.add(backButtonPanel);
 		c.add(back);
 		c.add(backOptions);
 		
+		
 		frame.add(game);
-		frame.setVisible(true);
 		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+
 		game.start();
 	}
 

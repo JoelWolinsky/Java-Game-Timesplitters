@@ -5,7 +5,6 @@ import javax.sound.sampled.*;
 
 /**
  * The class used to handle audio (.wav) files.
- *  Object is called with a default constructor, then <pre>playSound(String fileName, float volume)</pre> is used to play sounds.
  */
 public class SoundHandler {
 	
@@ -14,7 +13,7 @@ public class SoundHandler {
 	 * @param fileName The string name of the sound file. Does not include the path or file extension.
 	 * @param volume The float volume of the sound played, between 0f and 1f.
 	 */	
-	public void playSound(String fileName, float volume) {
+	public static void playSound(String fileName, float volume) {
 		try {
 			// Load the audio file
 			File file = new File("./audio/" + fileName + ".wav");
