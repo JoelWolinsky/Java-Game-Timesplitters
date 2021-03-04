@@ -1,6 +1,15 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA1.png
 Chunk 1 E intersegmentA1.png
 Respawn 40 363 flag1.png
+Projectile 100 100 -3 3 500 200 0 4 ./img/arrow1.png ./img/arrow2.png ./img/arrow1.png ./img/arrow2.png
+Projectile 100 100  3 -3 500 200 80 4 ./img/arrow1.png ./img/arrow2.png ./img/arrow1.png ./img/arrow2.png
+Projectile 100 100  3 3 500 200 40 4 ./img/arrow1.png ./img/arrow2.png ./img/arrow1.png ./img/arrow2.png
+Projectile 100 100 -3 -3 500 200 120 4 ./img/arrow1.png ./img/arrow2.png ./img/arrow1.png ./img/arrow2.png
+Projectile 200 100 0 -3 500 300 20 4 ./img/arrow1.png ./img/arrow2.png ./img/arrow1.png ./img/arrow2.png
+Projectile 200 100 0 -3 500 300 100 4 ./img/arrow1.png ./img/arrow2.png ./img/arrow1.png ./img/arrow2.png
+Projectile 200 100 0 -3 500 300 60 4 ./img/arrow1.png ./img/arrow2.png ./img/arrow1.png ./img/arrow2.png
+Projectile 200 100 0 -3 500 300 140 4 ./img/arrow1.png ./img/arrow2.png ./img/arrow1.png ./img/arrow2.png
+
 Platform Custom 0 384 customFloor1.png
 Platform Custom 333 384 customFloor1.png
 Platform Custom 70 50 wall1.png

@@ -29,8 +29,8 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private float terminalVelY = 15;
 
 	private static final float SLIDING_VEL = 0.2f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
-	private static final float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
-	private static final float RUN_SPEED = 3.6f; 		// Default run speed
+	private static float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
+	private static float RUN_SPEED = 3.6f; 		// Default run speed
 	private static final float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
 
 	private int respawnX=0;
@@ -38,6 +38,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private int deathFromFallThreshold;
 	private boolean immunity=false;
 	private int i=0;
+	private boolean cc=false;
 
 	private static int animationTimer = 0;
 	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
@@ -183,8 +184,11 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		The main idea is that most respawn points will be at ground level on each specific floor so the +300 will
 		work everytime. (Falling 300 blocks below the floor/respawnY will kill the player)
 		 */
-		if (this.y >respawnY+300)
-			respawn();
+		if (this.y >respawnY+300) {
+			this.x = respawnX;
+			this.y = respawnY;
+			i=0;
+		}
 
 		// press r to respawn -- used for debugging
 		if(Game.keyInput.r.isPressed())
@@ -204,6 +208,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			i=0;
 		}
 	}
+
 	
 	private boolean isOnGround() {
 		return SolidCollider.willCauseSolidCollision(this, 5, false);
@@ -308,5 +313,6 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public int getRespawnY() {
 		return this.respawnY;
 	}
+
 
 }

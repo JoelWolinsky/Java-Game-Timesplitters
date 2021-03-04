@@ -106,34 +106,46 @@ public class Map {
                         currentLevel.addPlatform(tp);
                         break;
                     case "CrushingPlatform":
-                        CrushingPlatform cp = new CrushingPlatform(horizontalIndex - setX  + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,Integer.parseInt(splited[3]),Boolean.parseBoolean(splited[4]),Float.parseFloat(splited[5])	,splited[6],Integer.parseInt(splited[7]));
+                        CrushingPlatform cp = new CrushingPlatform(horizontalIndex - setX  + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,Integer.parseInt(splited[3]),Float.parseFloat(splited[4])	,splited[5],Integer.parseInt(splited[6]),splited[7], Float.parseFloat(splited[8]));
                         currentLevel.addPlatform(cp);
                         break;
                     case "Respawn":
                         RespawnPoint rp = new RespawnPoint(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,splited[3]);
                         currentLevel.addRespawnPoint(rp);
                         break;
-                    case "AreaDmg":
-                        AreaDmg ad;
-                        List<String> list = new ArrayList<String>();
-                        for (int i = 5;i < 5+Integer.parseInt(splited[4]);i++)
-                            list.add(splited[i]);
+                    case "Area":
 
+                        //prepares a string array with the urls
+                        List<String> list = new ArrayList<String>();
+                        for (int i = 6;i < 6+Integer.parseInt(splited[5]);i++)
+                            list.add(splited[i]);
                         String[] arr = list.toArray(new String[0]);
 
-                        ad = new AreaDmg(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),arr);
-
+                        Area ad;
+                        ad = new Area(horizontalIndex - setX + Integer.parseInt(splited[2]),verticalIndex + Integer.parseInt(splited[3]),0,0,Integer.parseInt(splited[4]),splited[1],arr);
                         currentLevel.addAreaDmg(ad);
+
+                        break;
+                    case "Projectile":
+
+                        List<String> list2 = new ArrayList<String>();
+                        for (int j = 9;j < 9+Integer.parseInt(splited[8]);j++)
+                            list2.add(splited[j]);
+                        String[] arr2 = list2.toArray(new String[0]);
+
+                        Projectile pj;
+                        pj = new Projectile(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Float.parseFloat(splited[4]),Float.parseFloat(splited[5]),Float.parseFloat(splited[6]), Integer.parseInt(splited[7]),arr2);
+                        currentLevel.addAreaDmg(pj);
                         break;
                     case "CollisionslessAnimObject":
                         CollisionlessAnimObject cao;
-                        List<String> list2 = new ArrayList<String>();
-                        for (int i = 5;i < 5+Integer.parseInt(splited[3]);i++)
-                            list2.add(splited[i]);
+                        List<String> list3 = new ArrayList<String>();
+                        for (int l = 4;l < 4+Integer.parseInt(splited[3]);l++)
+                            list3.add(splited[l]);
 
-                        String[] arr2 = list2.toArray(new String[0]);
+                        String[] arr3 = list3.toArray(new String[0]);
 
-                        cao = new CollisionlessAnimObject(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,arr2);
+                        cao = new CollisionlessAnimObject(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,arr3);
 
                         currentLevel.addCollisionlessAnimObject(cao);
                         break;

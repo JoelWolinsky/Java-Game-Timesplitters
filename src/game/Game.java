@@ -20,7 +20,7 @@ public class Game extends Canvas implements Runnable{
 	private Level currentLevel = new Level();
 
 
-	private Player player;
+	private Player player,player2;
 
 	private Camera camera;
 
@@ -29,8 +29,10 @@ public class Game extends Canvas implements Runnable{
 	 */
 	public Game() {
 
-		player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+		player = new Player(110, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+		player2 = new Player(100, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
 		currentLevel.addEntity(player);
+		currentLevel.addEntity(player2);
 
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 		String mapMode = "default";
@@ -38,9 +40,11 @@ public class Game extends Canvas implements Runnable{
 		//keep default for now until we sort randomly generated
 		if (mapMode.equals("default")) {
 
-			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA10.txt");
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA10.txt");
 			m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");
+
 
 
 

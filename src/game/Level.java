@@ -10,7 +10,7 @@ public class Level extends Canvas {
 	private LinkedList<Chunk> chunks = new LinkedList<>();
 	private LinkedList<Platform> platforms = new LinkedList<>();
 	private LinkedList<RespawnPoint> respawnPoints = new LinkedList<>();
-	private LinkedList<AreaDmg> areaDmgs = new LinkedList<>();
+	private LinkedList<Area> areaDmgs = new LinkedList<>();
 	private LinkedList<CollisionlessAnimObject> collisionlessAnimObjects = new LinkedList<>();
 
 	public void tick() {
@@ -20,8 +20,10 @@ public class Level extends Canvas {
 		for(GameObject o : entities) {
 			o.tick();
 		}
-		for(AreaDmg ad: areaDmgs) {
+		for(Area ad: areaDmgs) {
 			ad.tick();
+			if (ad instanceof Projectile)
+				ad.tick();
 		}
 		for (Platform p:platforms)
 		{
@@ -39,12 +41,34 @@ public class Level extends Canvas {
 	
 	public void render(Graphics g, float f, float h, Player player) {
 
-		renderChunks(g,f,h,player);
-		renderPlatforms(g,f,h,player);
-		renderRespawnPoints(g,f,h,player);
-		renderAreaDmgs(g,f,h,player);
-		renderCollisionlessAnimObject(g,f,h,player);
-		renderEntities(g, f, h);
+		for (GameObject k: entities)
+		{
+			if (k instanceof Player)
+			{
+				renderChunks(g,f,h,(Player)k);
+				renderPlatforms(g,f,h,(Player)k);
+				renderRespawnPoints(g,f,h,(Player)k);
+				renderCollisionlessAnimObject(g,f,h,(Player)k);
+				renderEntities(g, f, h);
+			}
+
+			for(Area o : areaDmgs) {
+
+				if (o.getActive()==true)
+				{
+
+					if (o.getInteraction((Player)k)) {
+						if (o.getAreaScope().equals("Dmg"))
+							((Player)k).respawn();
+						//if (o.getAreaScope().equals("Slow"))
+
+					}
+				}
+			}
+
+		}
+
+		renderAreaDmgs(g,f,h);
 
 	}
 
@@ -59,7 +83,7 @@ public class Level extends Canvas {
 			//CAMERA PROXIMITY RENDERING
 			//if (c.getX()- 640<f*(-1) && f*(-1)<c.getX()+ 640 && c.getY()-380<h*(-1) && h*(-1)<c.getY()+ 740)
 			//PLAYER POSITION PROXIMITY RENDERING
-			if (c.getX()- 640<player.getX() && player.getX()<c.getX()+ 800 && c.getY()-480<player.getY() && player.getY()<c.getY()+ 740)
+			//if (c.getX()- 640<player.getX() && player.getX()<c.getX()+ 800 && c.getY()-480<player.getY() && player.getY()<c.getY()+ 740)
 			{c.render(g, f, h);}
 
 		}
@@ -80,7 +104,7 @@ public class Level extends Canvas {
 			////CAMERA PROXIMITY RENDERING
 			//if (p.getX()-650<f*(-1) && f*(-1)<p.getX()+800 && p.getY()-380<h*(-1) && h*(-1)<p.getY()+ 740)
 			//PLAYER POSITION PROXIMITY RENDERING
-			if (p.getX()-650<player.getX() && player.getX()<p.getX()+800 && p.getY()-480<player.getY() && player.getY()<p.getY()+ 740)
+			//if (p.getX()-650<player.getX() && player.getX()<p.getX()+800 && p.getY()-480<player.getY() && player.getY()<p.getY()+ 740)
 			{
 				if (p instanceof TimerPlatform) {
 					if (((TimerPlatform) p).getActive() == true) {
@@ -89,7 +113,7 @@ public class Level extends Canvas {
 				}
 				else if (p instanceof CrushingPlatform)
 				{
-					if ((int)p.getX()<(int)player.getX()+player.getWidth() && (int)player.getX()<p.getX()+p.getWidth() && (int)p.getY()+p.getHeight()<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)p.getY()+p.getHeight())
+					if (((CrushingPlatform) p).getInteraction(player))
 						player.respawn();
 					p.render(g,f,h);
 				}else
@@ -121,16 +145,17 @@ public class Level extends Canvas {
 
 	}
 
-	public void renderAreaDmgs(Graphics g, float f, float h,Player player) {
-		for(AreaDmg o : areaDmgs) {
-			if(o.getActive()==true)
-			{
-				//only render if is active
-				o.render(g, f, h);
-				//if player comes in contact with the area he gets respawned
-				if ((int)o.getX()<(int)player.getX()+player.getWidth() && (int)player.getX()<o.getX()+o.getWidth() && (int)o.getY()<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)o.getY()+o.getHeight())
-					player.respawn();
-			}
+	public void renderAreaDmgs(Graphics g, float f, float h) {
+		for(Area o : areaDmgs) {
+
+				if (o.getActive()==true)
+				{
+
+					//only render if is active
+					o.render(g, f, h);
+
+
+				}
 
 
 
@@ -169,11 +194,11 @@ public class Level extends Canvas {
 		respawnPoints.remove(rp);
 	}
 
-	public void addAreaDmg(AreaDmg ad) {
+	public void addAreaDmg(Area ad) {
 		areaDmgs.add(ad);
 	}
 
-	public void removeAreaDmg(AreaDmg ad) {
+	public void removeAreaDmg(Area ad) {
 		areaDmgs.remove(ad);
 	}
 

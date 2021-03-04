@@ -1,5 +1,6 @@
 package game;
 import game.attributes.AnimatedObject;
+import game.entities.Player;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
 
@@ -10,7 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class AreaDmg extends GameObject implements AnimatedObject {
+public class Area extends GameObject implements AnimatedObject {
 	private BufferedImage img;
 	private int timer=0;
 	private static int animationTimer = 0;
@@ -18,12 +19,14 @@ public class AreaDmg extends GameObject implements AnimatedObject {
 	private static AnimationStates currentAnimationState = defaultAnimationState;
 	private static HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
 	private Animation anim;
+	private int increment = 0;
 	private boolean active = true;
-	private int speed = 0;
+	private String areaScope;
 
-	public AreaDmg(float x, float y, int width, int height, int speed,String...urls) {
+	public Area(float x, float y, int width, int height, int increment, String areaScope, String...urls) {
 		super(x, y, -2, width, height);
-		this.speed=speed;
+		this.increment=increment;
+		this.areaScope=areaScope;
 		try
 		{
 			//sets the width and height of the platform based on the provided image width and height
@@ -35,17 +38,15 @@ public class AreaDmg extends GameObject implements AnimatedObject {
 		{
 			//TODO: Handle exception.
 		}
-		anim = new Animation(1, urls);
-		animations.put(AnimationStates.IDLE, new Animation(1, urls));
-
+		anim = new Animation(30000, urls);
 
 	}
 
 	public void tick() {
 
-		//sets the on/off timer for the area dmg
-		if (speed!=-1)
+		if (increment!=0)
 		{
+			//sets the on/off timer for the area dmg
 			if (timer==100)
 			{
 				if (this.active == true)
@@ -55,7 +56,7 @@ public class AreaDmg extends GameObject implements AnimatedObject {
 				timer = 0;
 			}
 
-			timer+=speed;
+			timer+=increment;
 		}
 
 	}
@@ -91,11 +92,20 @@ public class AreaDmg extends GameObject implements AnimatedObject {
 		return animations.get(state);
 	}
 
+	public boolean getInteraction(Player player){
+		return ((int)this.x<(int)player.getX()+player.getWidth() && (int)player.getX()<this.x+this.width && (int)this.y<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)this.y+this.height);
+	}
+
+
 	public boolean getActive(){
 		return this.active;
 	}
 
 	public void setActive(boolean active){
 		this.active = active;
+	}
+
+	public String getAreaScope() {
+		return areaScope;
 	}
 }
