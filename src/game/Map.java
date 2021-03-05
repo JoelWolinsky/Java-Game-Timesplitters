@@ -1,9 +1,10 @@
 package game;
 
-import game.entities.CrushingPlatform;
-import game.entities.MovingPlatform;
-import game.entities.Platform;
-import game.entities.TimerPlatform;
+import game.entities.areas.*;
+import game.entities.platforms.CrushingPlatform;
+import game.entities.platforms.MovingPlatform;
+import game.entities.platforms.Platform;
+import game.entities.platforms.TimerPlatform;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,7 +24,8 @@ public class Map {
 
 
     public void mapParser(Level currentLevel, String url) {
-        Chunk c;
+
+        Area a;
         String goUrl = "";
         String texturePlatformDefault = "";
         String texturePlatformInverted = "";
@@ -68,8 +70,8 @@ public class Map {
                                 verticalIndex = verticalIndex + setY;
                                 break;
                         }
-                        c = new Chunk(horizontalIndex - setX, verticalIndex, setX, setY, splited[3]);
-                        currentLevel.addChunk(c);
+                        a = new Area(horizontalIndex - setX, verticalIndex, setX, setY, "./img/".concat(splited[3]));
+                        currentLevel.addArea(a);
 
                         break;
 
@@ -110,44 +112,55 @@ public class Map {
                         currentLevel.addPlatform(cp);
                         break;
                     case "Respawn":
-                        RespawnPoint rp = new RespawnPoint(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,splited[3]);
-                        currentLevel.addRespawnPoint(rp);
+                        RespawnPoint rp = new RespawnPoint(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,"./img/".concat(splited[3]));
+                        currentLevel.addArea(rp);
                         break;
                     case "Area":
 
                         //prepares a string array with the urls
-                        List<String> list = new ArrayList<String>();
-                        for (int i = 6;i < 6+Integer.parseInt(splited[5]);i++)
-                            list.add(splited[i]);
-                        String[] arr = list.toArray(new String[0]);
 
                         Area ad;
-                        ad = new Area(horizontalIndex - setX + Integer.parseInt(splited[2]),verticalIndex + Integer.parseInt(splited[3]),0,0,Integer.parseInt(splited[4]),splited[1],arr);
-                        currentLevel.addAreaDmg(ad);
+                        ad = new Area(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,"./img/".concat(splited[3]));
+                        currentLevel.addArea(ad);
+
+                        break;
+                    case "TimerDamageZone":
+
+                        //prepares a string array with the urls
+                        List<String> list = new ArrayList<String>();
+                        for (int l = 5;l < 5+Integer.parseInt(splited[4]);l++)
+                            list.add("./img/".concat(splited[l]));
+
+                        String[] arr = list.toArray(new String[0]);
+
+
+                        TimerDamageZone tmz;
+                        tmz = new TimerDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),arr);
+                        currentLevel.addArea(tmz);
 
                         break;
                     case "Projectile":
 
                         List<String> list2 = new ArrayList<String>();
                         for (int j = 9;j < 9+Integer.parseInt(splited[8]);j++)
-                            list2.add(splited[j]);
+                            list2.add("./img/".concat(splited[j]));
                         String[] arr2 = list2.toArray(new String[0]);
 
                         Projectile pj;
                         pj = new Projectile(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Float.parseFloat(splited[4]),Float.parseFloat(splited[5]),Float.parseFloat(splited[6]), Integer.parseInt(splited[7]),arr2);
-                        currentLevel.addAreaDmg(pj);
+                        currentLevel.addArea(pj);
                         break;
-                    case "CollisionslessAnimObject":
-                        CollisionlessAnimObject cao;
+                    case "AnimArea":
+                        AnimArea cao;
                         List<String> list3 = new ArrayList<String>();
                         for (int l = 4;l < 4+Integer.parseInt(splited[3]);l++)
-                            list3.add(splited[l]);
+                            list3.add("./img/".concat(splited[l]));
 
                         String[] arr3 = list3.toArray(new String[0]);
 
-                        cao = new CollisionlessAnimObject(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,arr3);
+                        cao = new AnimArea(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,arr3);
 
-                        currentLevel.addCollisionlessAnimObject(cao);
+                        currentLevel.addArea(cao);
                         break;
                     case "Revert":
                         switch (lastDirection) {

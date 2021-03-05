@@ -1,6 +1,5 @@
 package game.entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -10,11 +9,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import game.Game;
-import game.GameObject;
 import game.attributes.AnimatedObject;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
+import game.entities.platforms.MovingPlatform;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
 

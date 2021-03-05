@@ -12,8 +12,6 @@ Platform Custom 213 -31 corner1inv.png
 Platform Custom 150 550 thinPlatformA.png
 Platform Custom 213 469 thinPlatformA.png
 Platform Default 194 100
---CollisionslessAnimObject 194 50 4 ./img/torch1.png ./img/torch2.png ./img/torch3.png ./img/torch4.png
-Projectile 250 330 0 1 100 3 ./img/arrow1.png ./img/arrow2.png ./img/arrow3.png ./img/arrow4.png
 Platform Custom 226 100 edge1inv.png
 Platform Custom 162 100 edge1.png
 

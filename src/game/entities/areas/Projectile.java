@@ -1,16 +1,15 @@
-package game;
+package game.entities.areas;
 
-public class Projectile extends Area {
+public class Projectile extends TimerDamageZone {
 	private float baseposX,baseposY;
 	private float velX,velY;
 	private float distance;
 	private float randomRange;
-	private static int animationTimer = 0;
 	private int startOffset;
 	private int i=0;
 
 	public Projectile(float x, float y, int width, int height, float velocityX, float velocityY, float distance, float randomRange, int startOffset, String...urls) {
-		super(x, y, width, height,0,"Dmg",urls);
+		super(x, y, width, height,0,urls);
 		this.randomRange=randomRange;
 		this.startOffset=startOffset;
 		this.baseposX=x;

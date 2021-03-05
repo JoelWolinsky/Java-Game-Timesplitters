@@ -1,7 +1,8 @@
-package game.entities;
+package game.entities.platforms;
 
 import game.attributes.CollidingObject;
 import game.attributes.SolidCollider;
+import game.entities.Player;
 
 public class CrushingPlatform extends Platform implements SolidCollider{
 

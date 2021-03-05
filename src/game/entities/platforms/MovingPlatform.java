@@ -1,4 +1,4 @@
-package game.entities;
+package game.entities.platforms;
 
 import game.attributes.CollidingObject;
 import game.attributes.SolidCollider;
