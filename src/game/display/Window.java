@@ -9,6 +9,11 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -44,15 +49,21 @@ public class Window extends Canvas{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		
-
-		String buttonFont = "Bauhaus 93";
+		Font buttonFont = null;
+		try {
+		InputStream is = new FileInputStream("./img/PressStart2P.ttf");
+		buttonFont = Font.createFont(Font.TRUETYPE_FONT, is);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Font sizedFont = buttonFont.deriveFont(11f);
 		
 		int panelWidth = WIDTH / 2;
 		int panelHeight = ((HEIGHT / 2) - (WIDTH / 10));
 		
 		// The panel that holds the 4 buttons on this page
 		JPanel mainMenu = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		mainMenu.setBounds(WIDTH / 20, (HEIGHT / 2) + 60, panelWidth, panelHeight);
+		mainMenu.setBounds(WIDTH / 23, (HEIGHT / 2) + 50, panelWidth, panelHeight);
 		mainMenu.setOpaque(false);
 		((FlowLayout)mainMenu.getLayout()).setVgap(panelHeight / 19);
 		
@@ -98,87 +109,153 @@ public class Window extends Canvas{
 	    backOptions.setVisible(false);
 	    
 	    // Declaring buttons and their respective behaviour
+		ImageIcon button1Icon = new ImageIcon("./img/button1.png");
+		Image scaledButton1 = button1Icon.getImage().getScaledInstance(panelWidth - 50, (panelHeight / 4) - 10,Image.SCALE_SMOOTH);
+		button1Icon = new ImageIcon(scaledButton1);
+		final ImageIcon button1Inner = button1Icon;
 		
-		JButton singleplayerButton = new JButton();
-		singleplayerButton.setBackground(Color.DARK_GRAY);
-		singleplayerButton.setForeground(Color.black);
-		singleplayerButton.setPreferredSize(new Dimension(panelWidth - 50, (panelHeight / 4) - 15));
-		singleplayerButton.setFont(new Font(buttonFont, Font.BOLD, 12));
+		ImageIcon button1ClickedIcon = new ImageIcon("./img/button1Clicked.png");
+		Image scaledbutton1ClickedIcon = button1ClickedIcon.getImage().getScaledInstance(panelWidth - 50, (panelHeight / 4) - 10,Image.SCALE_SMOOTH);
+		button1ClickedIcon = new ImageIcon(scaledbutton1ClickedIcon);
+		final ImageIcon button1ClickedInner = button1ClickedIcon;
+		
+		ImageIcon button1HoverIcon = new ImageIcon("./img/button1Hover.png");
+		Image scaledButton1HoverIcon = button1HoverIcon.getImage().getScaledInstance(panelWidth - 50, (panelHeight / 4) - 10,Image.SCALE_SMOOTH);
+		button1HoverIcon = new ImageIcon(scaledButton1HoverIcon);
+		final ImageIcon button1HoverInner = button1HoverIcon;
+		
+		JLabel singleplayerButton = new JLabel(button1Icon);
+		singleplayerButton.setFont(sizedFont);
 		singleplayerButton.setText("SINGLEPLAYER");
-		singleplayerButton.setFocusPainted(false);
+		singleplayerButton.setHorizontalTextPosition(JLabel.CENTER);
+		singleplayerButton.setForeground(Color.black);
 		
-		singleplayerButton.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		    	SoundHandler.playSound("button1", 1f);
-		    	mainMenu.setVisible(false);
-		    	back.setVisible(false);
-		    	
-		    	Game.state = GameState.Playing;
-		    }
+		singleplayerButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				singleplayerButton.setIcon(button1ClickedInner);
+				SoundHandler.playSound("button1", 1f);
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				mainMenu.setVisible(false);
+				back.setVisible(false);
+					    	
+				Game.state = GameState.Playing;
+			}
+				  
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				singleplayerButton.setIcon(button1HoverInner);
+			}
+				  
+			@Override
+			public void mouseExited(MouseEvent e) {
+				singleplayerButton.setIcon(button1Inner);
+			}
 		});
 		
-		JButton multiplayerButton = new JButton();
-		multiplayerButton.setBackground(Color.DARK_GRAY);
+		JLabel multiplayerButton = new JLabel(button1Icon);
 		multiplayerButton.setForeground(Color.black);
-		multiplayerButton.setPreferredSize(new Dimension(panelWidth - 50, (panelHeight / 4) - 15));
-		multiplayerButton.setFont(new Font(buttonFont, Font.BOLD, 12));
+		multiplayerButton.setFont(sizedFont);
 		multiplayerButton.setText("MULTIPLAYER");
-		multiplayerButton.setFocusPainted(false);
+		multiplayerButton.setHorizontalTextPosition(JLabel.CENTER);
 		
-		multiplayerButton.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
+		multiplayerButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				multiplayerButton.setIcon(button1ClickedInner);
+		    	SoundHandler.playSound("button1", 1f);
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
 		    	mainMenu.setVisible(false);
 		    	back.setVisible(false);
 		    	backOptions.setVisible(true);
 		    	backButtonPanel.setVisible(true);
 		    	multiplayerButtonPanel.setVisible(true);
-		    	SoundHandler.playSound("button1", 1f);
-		    }
+			}
+				  
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				multiplayerButton.setIcon(button1HoverInner);
+			}
+				  
+			@Override
+			public void mouseExited(MouseEvent e) {
+				multiplayerButton.setIcon(button1Inner);
+			}
 		});
 		
-		JButton optionsButton = new JButton();
-		optionsButton.setBackground(Color.DARK_GRAY);
+		JLabel optionsButton = new JLabel(button1Icon);
 		optionsButton.setForeground(Color.black);
-		optionsButton.setPreferredSize(new Dimension(panelWidth - 50, (panelHeight / 4) - 15));
-		optionsButton.setFont(new Font(buttonFont, Font.BOLD, 12));
+		optionsButton.setFont(sizedFont);
 		optionsButton.setText("OPTIONS");
-		optionsButton.setFocusPainted(false);
+		optionsButton.setHorizontalTextPosition(JLabel.CENTER);
 		
-		optionsButton.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
+		optionsButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				optionsButton.setIcon(button1ClickedInner);
+		    	SoundHandler.playSound("button1", 1f);
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
 		    	mainMenu.setVisible(false);
 		    	back.setVisible(false);
 		    	backOptions.setVisible(true);
 		    	optionButtonPanel.setVisible(true);
 		    	backButtonPanel.setVisible(true);
-		    	SoundHandler.playSound("button1", 1f);
-		    }
+			}
+				  
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				optionsButton.setIcon(button1HoverInner);
+			}
+				  
+			@Override
+			public void mouseExited(MouseEvent e) {
+				optionsButton.setIcon(button1Inner);
+			}
 		});
 		
-		JButton quitButton = new JButton();
-		quitButton.setBackground(Color.DARK_GRAY);
+		JLabel quitButton = new JLabel(button1Icon);
 		quitButton.setForeground(Color.black);
-		quitButton.setPreferredSize(new Dimension(panelWidth - 50, (panelHeight / 4) - 15));
-		quitButton.setFont(new Font(buttonFont, Font.BOLD, 12));
+		quitButton.setFont(sizedFont);
 		quitButton.setText("QUIT GAME");
-		quitButton.setFocusPainted(false);
+		quitButton.setHorizontalTextPosition(JLabel.CENTER);
 		
-		quitButton.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
+		quitButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				quitButton.setIcon(button1ClickedInner);
 		    	SoundHandler.playSound("button1", 1f);
-		    	System.exit(0);
-		    }
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				System.exit(0);
+			}
+				  
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				quitButton.setIcon(button1HoverInner);
+			}
+				  
+			@Override
+			public void mouseExited(MouseEvent e) {
+				quitButton.setIcon(button1Inner);
+			}
 		});
 		
 		JButton backButton = new JButton();
 		backButton.setBackground(Color.DARK_GRAY);
 		backButton.setForeground(Color.black);
 		backButton.setPreferredSize(new Dimension(panelWidth / 2, (panelHeight / 5) - 5));
-		backButton.setFont(new Font(buttonFont, Font.BOLD, 12));
+		backButton.setFont(sizedFont);
 		backButton.setText("BACK");
 		backButton.setFocusPainted(false);
 		
@@ -199,7 +276,7 @@ public class Window extends Canvas{
 		toggleSoundEffectsButton.setBackground(Color.DARK_GRAY);
 		toggleSoundEffectsButton.setForeground(Color.black);
 		toggleSoundEffectsButton.setPreferredSize(new Dimension(panelWidth / 2, panelHeight / 3));
-		toggleSoundEffectsButton.setFont(new Font(buttonFont, Font.BOLD, 12));
+		toggleSoundEffectsButton.setFont(sizedFont);
 		toggleSoundEffectsButton.setFocusPainted(false);
 		
 		if (Launcher.cHandler.getSoundEffectsToggle()) {
@@ -226,7 +303,7 @@ public class Window extends Canvas{
 		toggleMusicButton.setBackground(Color.DARK_GRAY);
 		toggleMusicButton.setForeground(Color.black);
 		toggleMusicButton.setPreferredSize(new Dimension(panelWidth / 2, panelHeight / 3));
-		toggleMusicButton.setFont(new Font(buttonFont, Font.BOLD, 12));
+		toggleMusicButton.setFont(sizedFont);
 		toggleMusicButton.setFocusPainted(false);
 		
 		if (Launcher.cHandler.getSoundEffectsToggle()) {
@@ -253,7 +330,7 @@ public class Window extends Canvas{
 		createGameButton.setBackground(Color.DARK_GRAY);
 		createGameButton.setForeground(Color.black);
 		createGameButton.setPreferredSize(new Dimension(panelWidth, panelHeight / 3));
-		createGameButton.setFont(new Font(buttonFont, Font.BOLD, 12));
+		createGameButton.setFont(sizedFont);
 		createGameButton.setFocusPainted(false);
 		createGameButton.setText("CREATE GAME");
 		
@@ -261,7 +338,7 @@ public class Window extends Canvas{
 		joinGameButton.setBackground(Color.DARK_GRAY);
 		joinGameButton.setForeground(Color.black);
 		joinGameButton.setPreferredSize(new Dimension(panelWidth, panelHeight / 3));
-		joinGameButton.setFont(new Font(buttonFont, Font.BOLD, 12));
+		joinGameButton.setFont(sizedFont);
 		joinGameButton.setFocusPainted(false);
 		joinGameButton.setText("JOIN GAME");
 		
@@ -282,7 +359,6 @@ public class Window extends Canvas{
 		c.add(back);
 		c.add(backOptions);
 		
-		
 		frame.add(game);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
@@ -290,5 +366,7 @@ public class Window extends Canvas{
 
 		game.start();
 	}
+	
+	
 
 }
