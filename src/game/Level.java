@@ -31,8 +31,6 @@ public class Level extends Canvas {
 						k.respawn();
 			}
 
-
-
 			for(Area o : areas) {
 
 				if (o instanceof RespawnPoint)
@@ -52,18 +50,8 @@ public class Level extends Canvas {
 					if (((TimerDamageZone) o).getActive())
 						if (o.getInteraction(k))
 							k.respawn();
-
-
 			}
-
 		}
-
-
-
-
-
-
-
 
 		for(Player p : players) {
 			p.tick();
@@ -73,18 +61,9 @@ public class Level extends Canvas {
 		}
 		for(Area ad: areas) {
 			ad.tick();
-
 		}
-		for (Platform p:platforms)
-		{
-
-			if (p instanceof TimerPlatform)
-				p.tick();
-			if (p instanceof CrushingPlatform)
-				p.tick();
-			if (p instanceof MovingPlatform)
-				p.tick();
-
+		for (Platform p:platforms) {
+			p.tick();
 		}
 
 	}
@@ -106,7 +85,6 @@ public class Level extends Canvas {
 
 	public void renderEntities(Graphics g, float f, float h) {
 		for(GameObject o : entities) {
-
 			o.render(g, f, h);
 		}
 	}
@@ -119,17 +97,13 @@ public class Level extends Canvas {
 			//if (p.getX()-650<f*(-1) && f*(-1)<p.getX()+800 && p.getY()-380<h*(-1) && h*(-1)<p.getY()+ 740)
 			//PLAYER POSITION PROXIMITY RENDERING
 			//if (p.getX()-650<player.getX() && player.getX()<p.getX()+800 && p.getY()-480<player.getY() && player.getY()<p.getY()+ 740)
-
-
-				if (p instanceof TimerPlatform)
-				{
-					if (((TimerPlatform) p).getActive() == true)
-						p.render(g, f, h);
-				}
-				else
+			if (p instanceof TimerPlatform)
+			{
+				if (((TimerPlatform) p).getActive() == true)
 					p.render(g, f, h);
-
-
+			}
+			else
+				p.render(g, f, h);
 		}
 	}
 
@@ -137,18 +111,16 @@ public class Level extends Canvas {
 	public void renderAreas(Graphics g, float f, float h) {
 		for(Area o : areas) {
 
-
 			if (o instanceof RespawnPoint) {
 				if (((RespawnPoint) o).getCurrentActive())
 					o.render(g, f, h);
 			}
 			else if (o instanceof TimerDamageZone) {
 				if (((TimerDamageZone) o).getActive())
-					((TimerDamageZone) o).render(g, f, h);
+					o.render(g, f, h);
 			}
 			else
 				o.render(g,f,h);
-
 		}
 	}
 

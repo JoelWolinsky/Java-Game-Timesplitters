@@ -25,7 +25,6 @@ public class Map {
 
     public void mapParser(Level currentLevel, String url) {
 
-        Area a;
         String goUrl = "";
         String texturePlatformDefault = "";
         String texturePlatformInverted = "";
@@ -55,6 +54,8 @@ public class Map {
                         break;
 
                     case "Chunk":
+
+                        Area a;
                         lastDirection = splited[2];
                         switch (splited[2]) {
                             case "E":
@@ -72,7 +73,6 @@ public class Map {
                         }
                         a = new Area(horizontalIndex - setX, verticalIndex, setX, setY, "./img/".concat(splited[3]));
                         currentLevel.addArea(a);
-
                         break;
 
                     case "Platform":
@@ -116,8 +116,6 @@ public class Map {
                         currentLevel.addArea(rp);
                         break;
                     case "Area":
-
-                        //prepares a string array with the urls
 
                         Area ad;
                         ad = new Area(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,"./img/".concat(splited[3]));

@@ -16,7 +16,6 @@ public class Game extends Canvas implements Runnable{
 	public static KeyInput keyInput = new KeyInput();
 	public static MouseInput mouseInput = new MouseInput();
 	public static GameState state = GameState.MainMenu;
-	//	private LinkedList<Level> levels = new LinkedList<>();
 	private Level currentLevel = new Level();
 
 
@@ -43,10 +42,10 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");
 
 
-		}	//WORK IN PROGRESS
+		}
 		else if (mapMode.equals("randomlyGenerated"))
 		{
-
+			//WORK IN PROGRESS
 		}
 
 
