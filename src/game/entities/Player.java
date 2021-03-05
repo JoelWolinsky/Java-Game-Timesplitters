@@ -86,7 +86,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				if (this.velX >= RUN_SPEED){
 					this.velX = RUN_SPEED;
 				} else {
-					this.velX += RUN_SPEED/3;
+					this.velX += RUN_SPEED/6;
 				}
 
 		} else if(Game.keyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
@@ -95,7 +95,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				if (this.velX <= -RUN_SPEED){
 					this.velX = -RUN_SPEED;
 				} else {
-					this.velX -= RUN_SPEED/3;
+					this.velX -= RUN_SPEED/6;
 				}
 
 		} else {	
