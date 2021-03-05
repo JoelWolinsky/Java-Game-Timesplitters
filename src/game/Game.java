@@ -30,7 +30,7 @@ public class Game extends Canvas implements Runnable{
 	public Game() {
 
 		player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
-		currentLevel.addEntity(player);
+		currentLevel.addPlayer(player);
 
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 		String mapMode = "default";
@@ -38,10 +38,9 @@ public class Game extends Canvas implements Runnable{
 		//keep default for now until we sort randomly generated
 		if (mapMode.equals("default")) {
 
-			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA10.txt");
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA10.txt");
 			m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");
-
 
 
 		}	//WORK IN PROGRESS
@@ -88,7 +87,7 @@ public class Game extends Canvas implements Runnable{
 		if(this.state == GameState.Playing) {
 			g.setColor(Color.black);
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
-			currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+100,player);
+			currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+100);
 		}else {
 			g.setColor(new Color(255,255,255));
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);

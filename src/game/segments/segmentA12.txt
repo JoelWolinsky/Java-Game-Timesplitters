@@ -5,9 +5,9 @@ Platform Custom 0 92 corner1.png
 Platform Custom 96 92 top2.png
 Platform Custom 330 92 corner1inv.png
 
-CrushingPlatform 100 270 50 false 10 bookshelf1.png 25
-CrushingPlatform 200 270 50 false 10 bookshelf1.png 0
-CrushingPlatform 300 270 50 false 10 bookshelf1.png 40
+CrushingPlatform 100 270 50 10 bookshelf1.png 25 RIGHT 7.5
+CrushingPlatform 200 270 50 10 bookshelf1.png 0 BOTTOM 7.5
+CrushingPlatform 300 270 50 10 bookshelf1.png 40 TOP 7.5
 
 
 Floor
@@ -20,9 +20,9 @@ Platform Custom 0 92 corner1.png
 Platform Custom 96 92 top2.png
 Platform Custom 330 92 corner1inv.png
 
-CrushingPlatform 100 270 50 false 10 bookshelf1.png 25
-CrushingPlatform 200 270 50 false 10 bookshelf1.png 0
-CrushingPlatform 300 270 50 false 10 bookshelf1.png 40
+CrushingPlatform 100 270 50 10 bookshelf1.png 25 LEFT 7.5
+CrushingPlatform 200 270 50 10 bookshelf1.png 0 BOTTOM 7.5
+CrushingPlatform 300 270 50 10 bookshelf1.png 40 TOP 7.5
 
 
 Floor

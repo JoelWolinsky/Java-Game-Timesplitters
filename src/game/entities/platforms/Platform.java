@@ -1,6 +1,5 @@
-package game.entities;
+package game.entities.platforms;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -8,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
-import game.GameObject;
+import game.entities.GameObject;
 import game.attributes.CollidingObject;
 import game.attributes.SolidCollider;
 

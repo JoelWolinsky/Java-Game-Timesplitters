@@ -1,8 +1,9 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA3.png
 Chunk 1 E intersegmentA3.png
 Respawn 10 363 flag1.png
--CollisionslessAnimObject 194 250 3 ./img/torch1.png ./img/torch2.png ./img/torch3.png ./img/torch4.png
-AreaDmg 60 364  -1 3 ./img/spike1.png ./img/spike2.png ./img/spike3.png ./img/spike4.png ./img/spike5.png ./img/spike6.png
+AnimArea 194 250 4 torch1.png torch2.png torch3.png torch4.png
+TimerDamageZone 60 364 0 4 spike1.png spike2.png spike3.png spike4.png spike5.png spike6.png
+TimerDamageZone 202 364 0 4 waste1.png waste2.png waste3.png waste4.png
 Platform Custom 0 124 corner1inv.png
 Platform Custom 96 156 top2.png
 Platform Custom 330 124 corner1.png

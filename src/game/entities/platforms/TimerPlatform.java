@@ -1,6 +1,5 @@
-package game.entities;
+package game.entities.platforms;
 
-import game.attributes.CollidingObject;
 import game.attributes.SolidCollider;
 
 public class TimerPlatform extends Platform {
