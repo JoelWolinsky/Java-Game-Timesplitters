@@ -4,6 +4,14 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.LinkedList;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import game.entities.Player;
+import game.entities.PlayerMP;
+import game.network.packets.Packet00Login;
+import network.GameClient;
+import network.GameServer;
 import game.display.Window;
 import game.entities.Player;
 import game.input.KeyInput;
@@ -19,7 +27,7 @@ public class Game extends Canvas implements Runnable{
 	private Level currentLevel = new Level();
 
 
-	private Player player;
+	private Player player,player2;
 
 	private Camera camera;
 
@@ -51,24 +59,39 @@ public class Game extends Canvas implements Runnable{
 
 		camera = new Camera();
 		camera.addTarget(player);
-		
+
 		//This section should always be last
 		new Window(this);
 		this.addKeyListener(keyInput);
 		this.addMouseListener(mouseInput);
 		this.addMouseMotionListener(mouseInput);
+
+
+		player2 = new PlayerMP(this.currentLevel, 300, 300, keyInput, JOptionPane.showInputDialog(this, "Please enter a username"), null, -1);
+		currentLevel.addEntity(player2);
+
+
+		Packet00Login loginPacket = new Packet00Login(player.getUsername());
+
+		if(socketServer != null) {
+			socketServer.addConnection((PlayerMP) player, loginPacket);
+		}
+		//socketClient.sendData("ping".getBytes());
+
+		loginPacket.writeData(socketClient);
+		//windowHandler = new WindowHandler(this);
 	}
-	
+
 	/**
 	 * Called every frame, this tells certain lists, objects, or entities to call their own tick function.
 	 */
 	private void tick() {
-		if(this.state == GameState.Playing) { 
+		if(this.state == GameState.Playing) {
 			currentLevel.tick();
 			camera.tick();
 		}
 	}
-	
+
 	/**
 	 * Responsible for all rendering. This generates a Graphics object, refreshes the screen, and renders the correct objects based on the play state.
 	 */
@@ -91,7 +114,7 @@ public class Game extends Canvas implements Runnable{
 			g.setColor(new Color(255,255,255));
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 		}
-		
+
 		//Rendering code stops here
 
 		g.dispose();
@@ -136,6 +159,14 @@ public class Game extends Canvas implements Runnable{
 		thread.start();
 		running = true;
 		this.requestFocus();
+
+		if (JOptionPane.showConfirmDialog(this,"Do you want to run the server") == 0) {
+			socketServer = new GameServer(this);
+			socketServer.start();
+		}
+
+		socketClient = new GameClient(this, "localhost");
+		socketClient.start();
 	}
 
 	public synchronized void stop() {

@@ -2,6 +2,7 @@ package game;
 
 import java.awt.*;
 import java.util.LinkedList;
+import java.util.List;
 
 import game.entities.*;
 import game.entities.areas.Area;
@@ -67,7 +68,7 @@ public class Level extends Canvas {
 		}
 
 	}
-	
+
 	public void render(Graphics g, float f, float h) {
 
 		renderAreas(g,f,h);
@@ -88,7 +89,7 @@ public class Level extends Canvas {
 			o.render(g, f, h);
 		}
 	}
-	
+
 
 
 	public void renderPlatforms(Graphics g, float f, float h) {
@@ -124,12 +125,12 @@ public class Level extends Canvas {
 		}
 	}
 
-	
+
 	public void addEntity(GameObject o) {
-		entities.add(o);
+		this.getGameObjects().add(o);
 	}
 	public void removeEntity(GameObject o) {
-		entities.remove(o);
+		this.getGameObjects().remove(o);
 	}
 
 	public void addPlayer(Player p) {
@@ -141,11 +142,55 @@ public class Level extends Canvas {
 
 
 	public void addPlatform(Platform p) {
-		platforms.add(p);
+		this.getPlatforms().add(p);
 	}
 
 	public void removePlatform(Platform p) {
-		platforms.remove(p);
+		this.getPlatforms().remove(p);
+	}
+
+	public void removePlayerMP(String username) {
+		try {
+			int index = 0;
+			for(GameObject e : getGameObjects()) {
+				if(e instanceof PlayerMP && ((PlayerMP)e).getUsername().equals(username)) {
+					break;
+				}
+				index++;
+			}
+			this.getGameObjects().remove(index);
+		} catch (Exception e) {
+			System.out.println("Exception in removePlayerMP. Player " + username);
+			e.printStackTrace();
+		}
+	}
+
+	private int getPlayerMPIndex(String username) {
+		try {
+			int index = 0;
+			for (GameObject e : getGameObjects()) {
+				if(e instanceof PlayerMP && ((PlayerMP)e).getUsername().equals(username)) {
+					break;
+				}
+				index++;
+			}
+			return index;
+		} catch (Exception e) {
+			System.out.println("Exception in getPlayerMPIndex. Player " + username);
+			e.printStackTrace();
+			return -1;
+		}
+	}
+
+	public void movePlayer(String username, float x, float y) {
+		try {
+			int index = getPlayerMPIndex(username);
+			this.getGameObjects().get(index).x = x;
+			this.getGameObjects().get(index).y = y;
+		} catch (Exception e) {
+			System.out.println("Exception in movePlayer when moving player " + username);
+			e.printStackTrace();
+		}
 	}
 
 
