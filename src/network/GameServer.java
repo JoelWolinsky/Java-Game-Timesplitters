@@ -103,7 +103,7 @@ public class GameServer extends Thread {
 				} else {
 					sendData(packet.getData(),p.ipAddress, p.port);
 					
-					packet = new Packet00Login(p.getUsername());
+					packet = new Packet00Login(p.getUsername(), p.x, p.y);
 	                sendData(packet.getData(), player.ipAddress, player.port);
 				}
 			}
@@ -173,7 +173,9 @@ public class GameServer extends Thread {
 	public void sendDataToAllClients(byte[] data) {
 		try {
 			for (PlayerMP p : connectedPlayers) {
-				sendData(data, p.ipAddress, p.port);
+				if (p.port != -1) {
+					sendData(data, p.ipAddress, p.port);
+				}
 			}
 		} catch (Exception e) {
 			System.out.println("Exception in GameServer.sendDataToAllClients");
