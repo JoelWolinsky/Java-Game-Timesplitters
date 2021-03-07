@@ -8,6 +8,7 @@ public class KeyInput extends KeyAdapter{
 	public static Key down = new Key();
 	public static Key left = new Key();
 	public static Key right = new Key();
+    public static Key r = new Key();
 	
 	/**
 	 * Sets the pressed value of a given key based on a keyCode
@@ -26,6 +27,9 @@ public class KeyInput extends KeyAdapter{
         }
         if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) {
             right.setPressed(isPressed);
+        }
+        if (keyCode == KeyEvent.VK_R) {
+            r.setPressed(isPressed);
         }
     }
     

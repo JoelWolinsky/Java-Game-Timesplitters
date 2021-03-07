@@ -1,0 +1,62 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA9p1.png
+Chunk 1 E segmentA10p1.png
+
+Platform Custom 0 240 top4.png
+
+TimerPlatform 60 370 thinplatform2.png 2 20
+Platform Custom 200 410 thinPlatform2.png
+TimerPlatform 340 370 thinplatform2.png 2 50
+
+TimerDamageZone 0 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 22 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 44 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 66 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 88 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 110 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 132 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 154 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 176 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 198 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 220 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 242 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 264 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 286 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 308 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 330 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 352 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 374 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 396 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 418 480 0 4 waste1.png waste2.png waste3.png waste4.png
+
+Chunk 1 N skyA.png
+Chunk 1 E skyA.png
+Chunk 1 S segmentA10p2.png
+
+
+Platform Custom 0 240 top4.png
+
+Platform Custom 60 410 thinPlatform2.png
+TimerPlatform 180 340 thinplatform2.png 2 90
+Platform Custom 180 420 thinplatform2.png
+TimerPlatform 300 370 thinplatform2.png 2 120
+
+TimerDamageZone 0 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 22 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 44 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 66 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 88 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 110 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 132 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 154 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 176 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 198 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 220 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 242 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 264 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 286 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 308 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 330 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 352 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 374 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 396 480 0 4 waste1.png waste2.png waste3.png waste4.png
+TimerDamageZone 418 480 0 4 waste1.png waste2.png waste3.png waste4.png

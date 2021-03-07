@@ -1,22 +1,23 @@
 package game.entities;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 import game.Game;
-import game.GameObject;
 import game.attributes.AnimatedObject;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
+import game.entities.platforms.MovingPlatform;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
-import game.input.KeyInput;
+
+import javax.imageio.ImageIO;
 
 public class Player extends GameObject implements AnimatedObject, SolidCollider, GravityObject{
 	
@@ -30,15 +31,38 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private static final float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
 	private static final float RUN_SPEED = 3.6f; 		// Default run speed
 	private static final float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
-	
+
+	private int respawnX=0;
+	private int respawnY=340;
+	private int deathFromFallThreshold;
+	private boolean immunity=false;
+	private int i=0;
+	private boolean cc=false;
+
 	private static int animationTimer = 0;
 	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
 	private static AnimationStates currentAnimationState = defaultAnimationState;
 	private static HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
-	
-	public Player(float x, float y) {
-		super(x, y, 1, 18, 37);
-		animations.put(AnimationStates.IDLE, new Animation(20, "./img/adventurer-idle-00.png", "./img/adventurer-idle-01.png", "./img/adventurer-idle-02.png"));
+
+
+	public Player(float x, float y, int width,int height,String...urls) {
+		super(x, y, 1, width, height);
+
+		BufferedImage img;
+		try
+		{
+			//sets the width and hight of the platform based on the provided image width and height
+			img = ImageIO.read( new File(urls[0]));
+			this.width = img.getWidth();
+			this.height = img.getHeight();
+		}
+		catch ( IOException exc )
+		{
+			//TODO: Handle exception.
+		}
+
+
+		animations.put(AnimationStates.IDLE, new Animation(1660, urls));
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
 	}
@@ -47,6 +71,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public void tick() {
 		//Gather all collisions
 		CollidingObject.getCollisions(this);
+		if (i<100)
+			i++;
+		else
+			immunity=false;
 
 		//Check for keyboard input along the x-axis
 		if(Game.keyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
@@ -58,7 +86,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				if (this.velX >= RUN_SPEED){
 					this.velX = RUN_SPEED;
 				} else {
-					this.velX += RUN_SPEED/3;
+					this.velX += RUN_SPEED/6;
 				}
 
 		} else if(Game.keyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
@@ -67,7 +95,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				if (this.velX <= -RUN_SPEED){
 					this.velX = -RUN_SPEED;
 				} else {
-					this.velX -= RUN_SPEED/3;
+					this.velX -= RUN_SPEED/6;
 				}
 
 		} else {	
@@ -93,7 +121,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				this.velY = JUMP_GRAVITY;
 			}
 		}
-		
+
 		//If you're not on ground, you should fall
 		if(!isOnGround()) {
 			fall(this);
@@ -109,10 +137,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}
 		
 		//Move player if it will not cause a collision
-		if(!SolidCollider.willCauseSolidCollision(this, velX, true)) {
+		if(!SolidCollider.willCauseSolidCollision(this, this.velX+1, true)) {
 			this.x += velX;
 		}
-		if(!SolidCollider.willCauseSolidCollision(this, this.velY, false)) { 
+		if(!SolidCollider.willCauseSolidCollision(this, this.velY+1, false)) {
 			this.y += this.velY;
 		} else { 	
 			// Stop player falling through the floor
@@ -136,7 +164,40 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				}
 			}
 		}
+
+		/*
+		Falling below the current height threshold kills the player
+		We should only put checkpoints after successfully completing a segment not during segments since climbing
+		segments can pose a problem respawning the player mid fall which is not what we want. The player should reach
+		the bottom when failing.
+		The main idea is that most respawn points will be at ground level on each specific floor so the +300 will
+		work everytime. (Falling 300 blocks below the floor/respawnY will kill the player)
+		 */
+		if (this.y >respawnY+300) {
+			this.x = respawnX;
+			this.y = respawnY;
+			i=0;
+		}
+
+		// press r to respawn -- used for debugging
+		if(Game.keyInput.r.isPressed())
+		{
+			respawn();
+		}
+
+
 	}
+
+	public void respawn(){
+		if (immunity==false)
+		{
+			this.x = respawnX;
+			this.y = respawnY;
+			immunity=true;
+			i=0;
+		}
+	}
+
 	
 	private boolean isOnGround() {
 		return SolidCollider.willCauseSolidCollision(this, 5, false);
@@ -171,7 +232,28 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	}
 
 	public void render(Graphics g, float xOffset, float yOffset) {
-		this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
+
+
+		if (immunity==true)
+		{
+			if (0<i && i <10 || 30<i && i <40 || 60<i && i<70)
+			{
+
+
+			}
+			else
+			{
+
+
+				this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
+
+			}
+		}
+		else
+		{
+
+			this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
+		}
 
 		/* -- To visualise the boundary box, uncomment these and getBounds(float xOffset, float yOffset) as well.
 		Graphics2D g2d = (Graphics2D) g;
@@ -179,15 +261,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		g2d.draw(getBounds(xOffset, yOffset)); */
 	}
 	
-	/* -- To visualise the player boundary box, adjusted for camera offset.
-	public Rectangle getBounds(float xOffset, float yOffset) {
-		return new Rectangle((int)(this.x+xOffset)+16, (int)(this.y + yOffset), width, height);
+	public Rectangle getBounds() {
+		return new Rectangle((int)x, (int)y, width, height);
 	}
-	*/
 
-	public Rectangle getBounds() {  // For some reason changing x is fine but changing the y messes up the collisions
-		return new Rectangle((int)x+16, (int)y, width, height);
-	}
 
 	public int getAnimationTimer() {
 		return this.animationTimer;
@@ -209,5 +286,22 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public Animation getAnimation(AnimationStates state) {
 		return animations.get(state);
 	}
+
+	public void setRespawnX(int x) {
+		this.respawnX = x;
+	}
+
+	public void setRespawnY(int y) {
+		this.respawnY = y;
+	}
+
+	public int getRespawnX() {
+		return this.respawnX;
+	}
+
+	public int getRespawnY() {
+		return this.respawnY;
+	}
+
 
 }

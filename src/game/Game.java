@@ -4,13 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Random;
-import java.util.Scanner;
-
 import game.display.Window;
-import game.entities.Platform;
 import game.entities.Player;
 import game.input.KeyInput;
 
@@ -19,15 +13,11 @@ public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = -772676358550096683L;
 	private Thread thread;
 	private boolean running = false;
-
 	public static KeyInput keyInput = new KeyInput();
 	public static MouseInput mouseInput = new MouseInput();
-
-	
 	public static GameState state = GameState.MainMenu;
-
-	//	private LinkedList<Level> levels = new LinkedList<>();
 	private Level currentLevel = new Level();
+
 
 	private Player player;
 
@@ -37,38 +27,27 @@ public class Game extends Canvas implements Runnable{
 	 * Initialises game entities and objects that must appear at the start of the game
 	 */
 	public Game() {
+
+		player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+		currentLevel.addPlayer(player);
+
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 		String mapMode = "default";
-		String mapUrl = "./src/game/map.txt";
-
+		Map m = new Map();
 		//keep default for now until we sort randomly generated
-		if (mapMode.equals("default"))
-			Map.mapParser(0,0, currentLevel,mapUrl);
+		if (mapMode.equals("default")) {
 
-			//WORK IN PROGRESS
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA10.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");
+
+
+		}
 		else if (mapMode.equals("randomlyGenerated"))
 		{
-			//set to 3 just for example
-			for (int i =0 ;i<3;i++)
-			{
-				//pool of predefined segments
-				String[] bruh = {"Mage","Sewer"};
-
-				//pick random predefined segment
-				Random r=new Random();
-				int randomNumber=r.nextInt(bruh.length);
-				System.out.println(bruh[randomNumber]);
-				mapUrl = "./src/game/".concat(bruh[randomNumber]).concat(".txt");
-
-				//generate the predefined segment
-				Map.mapParser(0,0,currentLevel,mapUrl);
-			}
+			//WORK IN PROGRESS
 		}
-		
-		//Initialise player character at 0,0 in the first chunk
-		player = new Player(0, 0);
-		Chunk c = currentLevel.firstChunk();
-		c.addEntity(player);
+
 
 		camera = new Camera();
 		camera.addTarget(player);
@@ -96,7 +75,7 @@ public class Game extends Canvas implements Runnable{
 	private void render() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
-			this.createBufferStrategy(3);
+			this.createBufferStrategy(4);
 			return;
 		}
 
@@ -105,9 +84,9 @@ public class Game extends Canvas implements Runnable{
 		//Rendering code happens here
 
 		if(this.state == GameState.Playing) {
-			g.setColor(new Color(100,100,100));
+			g.setColor(Color.black);
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
-			currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+120);
+			currentLevel.render(g, camera.getXOffset(), camera.getYOffset()+100);
 		}else {
 			g.setColor(new Color(255,255,255));
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
@@ -148,6 +127,7 @@ public class Game extends Canvas implements Runnable{
 		}
 		stop();
 	}
+
 
 
 	public synchronized void start() {

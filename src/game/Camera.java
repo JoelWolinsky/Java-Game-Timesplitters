@@ -1,6 +1,7 @@
 package game;
 
 import game.display.Window;
+import game.entities.GameObject;
 
 
 public class Camera {

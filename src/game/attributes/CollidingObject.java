@@ -28,7 +28,8 @@ public interface CollidingObject {
 	static void addCollider(CollidingObject object) {
 		colliders.add(object);
 	}
-	
+	static void removeCollider(CollidingObject object) { colliders.remove(object);
+	}
 	/**
 	 * Checks for bounding box collisions between a given object and all other CollidingObject classes<br>
 	 * Calls the object's collision handler with a list of CollidingObject classes with which it intersects
