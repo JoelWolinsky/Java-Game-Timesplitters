@@ -27,7 +27,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private float velY = 0;
 	private float terminalVelY = 15;
 
-	private static final float DECELERATION = 0.2f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
+	private static final float DECELERATION = 0.4f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
 	private static final float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
 	private static final float RUN_SPEED = 3.6f; 		// Default run speed
 	private static final float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
