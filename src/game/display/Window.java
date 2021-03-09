@@ -76,7 +76,7 @@ public class Window extends Canvas{
 		
 		// The panel that holds the "back" button
 		JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		backButtonPanel.setBounds(WIDTH / 23, HEIGHT - (HEIGHT / 7), panelWidth, panelHeight / 5);
+		backButtonPanel.setBounds(WIDTH / 23, HEIGHT - (HEIGHT / 7), panelWidth, panelHeight / 4 + 20);
 		backButtonPanel.setOpaque(false);
 		backButtonPanel.setVisible(false);
 		
@@ -108,7 +108,7 @@ public class Window extends Canvas{
 	    backOptions.setBounds(0,0,WIDTH,HEIGHT);
 	    backOptions.setVisible(false);
 	    
-	    // Declaring buttons and their respective behaviour
+	    // Importing button graphics
 		ImageIcon button1Icon = new ImageIcon("./img/button1.png");
 		Image scaledButton1 = button1Icon.getImage().getScaledInstance(panelWidth - 50, (panelHeight / 4) - 10,Image.SCALE_SMOOTH);
 		button1Icon = new ImageIcon(scaledButton1);
@@ -123,6 +123,21 @@ public class Window extends Canvas{
 		Image scaledButton1HoverIcon = button1HoverIcon.getImage().getScaledInstance(panelWidth - 50, (panelHeight / 4) - 10,Image.SCALE_SMOOTH);
 		button1HoverIcon = new ImageIcon(scaledButton1HoverIcon);
 		final ImageIcon button1HoverInner = button1HoverIcon;
+		
+		ImageIcon button2Icon = new ImageIcon("./img/button2.png");
+		Image scaledButton2 = button2Icon.getImage().getScaledInstance(panelWidth / 2, (panelHeight / 4) , Image.SCALE_SMOOTH);
+		button2Icon = new ImageIcon(scaledButton2);
+		final ImageIcon button2Inner = button2Icon;
+		
+		ImageIcon button2HoverIcon = new ImageIcon("./img/button2Hover.png");
+		Image scaledButton2Hover = button2HoverIcon.getImage().getScaledInstance(panelWidth / 2, (panelHeight / 4) , Image.SCALE_SMOOTH);
+		button2HoverIcon = new ImageIcon(scaledButton2Hover);
+		final ImageIcon button2HoverInner = button2HoverIcon;
+		
+		ImageIcon button2ClickedIcon = new ImageIcon("./img/button2Clicked.png");
+		Image scaledButton2Clicked = button2HoverIcon.getImage().getScaledInstance(panelWidth / 2, (panelHeight / 4) , Image.SCALE_SMOOTH);
+		button2ClickedIcon = new ImageIcon(scaledButton2Clicked);
+		final ImageIcon button2ClickedInner = button2ClickedIcon;
 		
 		JLabel singleplayerButton = new JLabel(button1Icon);
 		singleplayerButton.setFont(sizedFont);
@@ -251,25 +266,39 @@ public class Window extends Canvas{
 			}
 		});
 		
-		JButton backButton = new JButton();
-		backButton.setBackground(Color.DARK_GRAY);
+		JLabel backButton = new JLabel(button2Icon);
 		backButton.setForeground(Color.black);
-		backButton.setPreferredSize(new Dimension(panelWidth / 2, (panelHeight / 5) - 5));
 		backButton.setFont(sizedFont);
 		backButton.setText("BACK");
-		backButton.setFocusPainted(false);
+		backButton.setHorizontalTextPosition(JLabel.CENTER);
 		
-		backButton.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
+		backButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				backButton.setIcon(button2ClickedInner);
+				SoundHandler.playSound("button1", 1f);
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				backButton.setIcon(button2Inner);
 		    	backButtonPanel.setVisible(false);
 		    	optionButtonPanel.setVisible(false);
 		    	multiplayerButtonPanel.setVisible(false);
 		    	mainMenu.setVisible(true);
 		    	backOptions.setVisible(false);
 		    	back.setVisible(true);
-		    	SoundHandler.playSound("button1", 1f);
-		    }
+			}
+				  
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				backButton.setIcon(button2HoverInner);
+			}
+				  
+			@Override
+			public void mouseExited(MouseEvent e) {
+				backButton.setIcon(button2Inner);
+			}
 		});
 		
 		JButton toggleSoundEffectsButton = new JButton();
