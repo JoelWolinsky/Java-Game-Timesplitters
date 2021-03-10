@@ -16,13 +16,14 @@ import game.attributes.SolidCollider;
 import game.entities.platforms.MovingPlatform;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
-
+import game.graphics.Assets;
+import game.input.KeyInput;
 import javax.imageio.ImageIO;
 
 public class Player extends GameObject implements AnimatedObject, SolidCollider, GravityObject{
-	
+
 	static BufferedImage sprite;
-	
+
 	private float velX = 0;
 	private float velY = 0;
 	private float terminalVelY = 15;
@@ -62,11 +63,16 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}
 
 
-		animations.put(AnimationStates.IDLE, new Animation(1660, urls));
+		Assets.init();
+
+		animations.put(AnimationStates.IDLE, new Animation(20, Assets.player_idle));
+		animations.put(AnimationStates.RIGHT, new Animation(20, Assets.player_right));
+		animations.put(AnimationStates.LEFT, new Animation(20, Assets.player_left));
+
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
 	}
-	
+
 	//TODO: Fix moving through the up-and-down moving platform when you jump underneath it
 	public void tick() {
 		//Gather all collisions
@@ -79,7 +85,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		//Check for keyboard input along the x-axis
 		if(Game.keyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
 
-		/* Beware: Java floating point representation makes it difficult to have perfect numbers 
+		/* Beware: Java floating point representation makes it difficult to have perfect numbers
 		( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
 
 				// Simulates acceleration when you run right
@@ -88,31 +94,34 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				} else {
 					this.velX += RUN_SPEED/6;
 				}
+				currentAnimationState = AnimationStates.RIGHT;
 
 		} else if(Game.keyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
-				
+
 				// Simulates acceleration when you run left
 				if (this.velX <= -RUN_SPEED){
 					this.velX = -RUN_SPEED;
 				} else {
 					this.velX -= RUN_SPEED/6;
 				}
+				currentAnimationState = AnimationStates.LEFT;
 
-		} else {	
+		} else {
 			// For deceleration effect
 			if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
 				if (this.velX >= -0.1f && this.velX <= 0.1f) {
-					this.velX = 0;	 
+					this.velX = 0;
 				} else if (this.velX > 0.1f) {
 					this.velX -= DECELERATION;
 				} else {
 					this.velX += DECELERATION;
 				}
 			} else {
-				this.velX = 0;	 
-			}	
+				this.velX = 0;
+				currentAnimationState = AnimationStates.IDLE;
+			}
 		}
-		
+
 		//Check for keyboard input along the y-axis
 		if(Game.keyInput.down.isPressed()) {
 			this.velY = DOWN_SPEED;
@@ -135,29 +144,29 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				}
 			}
 		}
-		
+
 		//Move player if it will not cause a collision
 		if(!SolidCollider.willCauseSolidCollision(this, this.velX+1, true)) {
 			this.x += velX;
 		}
 		if(!SolidCollider.willCauseSolidCollision(this, this.velY+1, false)) {
 			this.y += this.velY;
-		} else { 	
+		} else {
 			// Stop player falling through the floor
 			CollidingObject o = SolidCollider.nextCollision(this,  this.velY, false);
 			if(o == null) {
 				return;
 			}
 			Rectangle s = o.getBounds();
-			
+
 			if(this.velY > 0 && !isOnWall()) {
 				this.y = s.y - this.height;
 				this.velY = 0;
-			} else if(this.velY < 0 && !isOnWall()) { 
+			} else if(this.velY < 0 && !isOnWall()) {
 				this.velY = 0;
 			} else {	// When velY == 0 and velX == 0 the sticking to the wall bug occurs.
 						// Rebounds the player off the wall to avoid sticking.
-				if (SolidCollider.willCauseSolidCollision(this, 5, true)) { 
+				if (SolidCollider.willCauseSolidCollision(this, 5, true)) {
 					this.velX = -2.0f;
 				} else if (SolidCollider.willCauseSolidCollision(this, -5, true)) {
 					this.velX = 2.0f;
@@ -198,7 +207,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}
 	}
 
-	
+
 	private boolean isOnGround() {
 		return SolidCollider.willCauseSolidCollision(this, 5, false);
 	}
@@ -218,7 +227,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 	public void handleCollisions(LinkedList<CollidingObject> collisions) {
 	}
-	
+
 	public void setVelY(float velY) {
 		this.velY = velY;
 	}
@@ -257,10 +266,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 		/* -- To visualise the boundary box, uncomment these and getBounds(float xOffset, float yOffset) as well.
 		Graphics2D g2d = (Graphics2D) g;
-		g.setColor(Color.RED);		
+		g.setColor(Color.RED);
 		g2d.draw(getBounds(xOffset, yOffset)); */
 	}
-	
+
 	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, width, height);
 	}
@@ -272,7 +281,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 	public void setAnimationTimer(int animationTimer) {
 		this.animationTimer = animationTimer;
-		
+
 	}
 
 	public AnimationStates getCurrentAnimationState() {
