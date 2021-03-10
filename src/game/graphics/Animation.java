@@ -16,13 +16,19 @@ public class Animation {
 		this.ticksPerFrame = ticksPerFrame;
 		this.frames = animList;
 
-		///for(String url : urls) {
-			//BufferedImage b = Image.loadImage(url);
-			///if(b!=null) {
-				//frames.add(b);
-			//}
-		//}
-		
+	}
+
+	public Animation(int ticksPerFrame, String... urls) {
+
+		frames = new LinkedList<BufferedImage>();
+		this.ticksPerFrame = ticksPerFrame;
+		for(String url : urls) {
+			BufferedImage b = Image.loadImage(url);
+			if(b!=null) {
+				frames.add(b);
+			}
+		}
+
 	}
 	
 	/**

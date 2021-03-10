@@ -40,8 +40,8 @@ public class Game extends Canvas implements Runnable{
 		if (mapMode.equals("default")) {
 
 			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA10.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA4.txt");
 
 
 		}

@@ -1,7 +1,6 @@
 package game.entities;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +43,8 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
 	private static AnimationStates currentAnimationState = defaultAnimationState;
 	private static HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
-
+	private int currentFrame;
+	private Assets s = new Assets();
 
 	public Player(float x, float y, int width,int height,String...urls) {
 		super(x, y, 1, width, height);
@@ -54,16 +54,14 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		{
 			//sets the width and hight of the platform based on the provided image width and height
 			img = ImageIO.read( new File(urls[0]));
-			this.width = img.getWidth();
-			this.height = img.getHeight();
+
 		}
 		catch ( IOException exc )
 		{
 			//TODO: Handle exception.
 		}
 
-
-		Assets.init();
+		s.init();
 
 		animations.put(AnimationStates.IDLE, new Animation(20, Assets.player_idle));
 		animations.put(AnimationStates.RIGHT, new Animation(20, Assets.player_right));
@@ -81,6 +79,13 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			i++;
 		else
 			immunity=false;
+
+
+			this.width = getAnimation(currentAnimationState).getFrame(currentFrame).getWidth();
+			this.height = getAnimation(currentAnimationState).getFrame(currentFrame).getHeight();
+
+
+
 
 		//Check for keyboard input along the x-axis
 		if(Game.keyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
@@ -111,6 +116,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
 				if (this.velX >= -0.1f && this.velX <= 0.1f) {
 					this.velX = 0;
+					currentAnimationState = AnimationStates.IDLE;
 				} else if (this.velX > 0.1f) {
 					this.velX -= DECELERATION;
 				} else {
@@ -243,6 +249,9 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public void render(Graphics g, float xOffset, float yOffset) {
 
 
+		//-- To visualise the boundary box, uncomment these and getBounds(float xOffset, float yOffset) as well.
+		g.setColor(Color.magenta);
+		g.fillRect((int)(this.x + xOffset),(int)(this.y + yOffset),this.width,this.height);
 		if (immunity==true)
 		{
 			if (0<i && i <10 || 30<i && i <40 || 60<i && i<70)
@@ -254,20 +263,16 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			{
 
 
-				this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
+				this.currentFrame= this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
 
 			}
 		}
 		else
 		{
 
-			this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
+			this.currentFrame= this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
 		}
 
-		/* -- To visualise the boundary box, uncomment these and getBounds(float xOffset, float yOffset) as well.
-		Graphics2D g2d = (Graphics2D) g;
-		g.setColor(Color.RED);
-		g2d.draw(getBounds(xOffset, yOffset)); */
 	}
 
 	public Rectangle getBounds() {

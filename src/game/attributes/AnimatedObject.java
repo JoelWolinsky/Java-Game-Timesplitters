@@ -24,7 +24,7 @@ import game.graphics.AnimationStates;
  */
 public interface AnimatedObject {
 	
-	default void renderAnim(Graphics g, int x, int y) {
+	default int renderAnim(Graphics g, int x, int y) {
 		AnimationStates currentState = getCurrentAnimationState();
 		Animation currentAnimation = getAnimation(currentState);
 		if(currentAnimation == null) {
@@ -39,6 +39,7 @@ public interface AnimatedObject {
 			animationTimer = 0;
 		}
 		setAnimationTimer(animationTimer);
+		return frame;
 	}
 
 	default void renderAnimAlt(Graphics g, int x, int y, Animation anim) {
