@@ -43,12 +43,12 @@ public class Assets {
 		
 		player_left = new LinkedList<BufferedImage>();
 		
-		player_left.add(sheet.crop(xOffset, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_left.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_left.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_left.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_left.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
 		player_left.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_left.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_left.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_left.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_left.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_left.add(sheet.crop(xOffset+xDistance*0, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
 	}
 
 
