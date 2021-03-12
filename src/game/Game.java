@@ -83,8 +83,7 @@ public class Game extends Canvas implements Runnable{
 		camera = new Camera();
 		camera.addTarget(player);
 
-		
-		currentLevel.addEntity(player);
+
 		//windowHandler = new WindowHandler(this);
 		
 		this.addKeyListener(keyInput);
