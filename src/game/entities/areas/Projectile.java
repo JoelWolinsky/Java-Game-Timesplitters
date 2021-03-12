@@ -38,7 +38,7 @@ public class Projectile extends DamageZone {
 						this.x=this.baseposX;
 					else
 						this.x = (int)(Math.random() * (this.baseposX - randomRange + 1)) + randomRange;
-					System.out.println(this.x);
+					//System.out.println(this.x);
 				}
 			}
 
@@ -54,7 +54,7 @@ public class Projectile extends DamageZone {
 						this.x=this.baseposX;
 					else
 						this.x = (int)(Math.random() * (this.baseposX - randomRange + 1)) + randomRange;
-					System.out.println(this.x);
+					//System.out.println(this.x);
 				}
 			}
 			else if (velY==0)
@@ -71,7 +71,7 @@ public class Projectile extends DamageZone {
 						this.x=this.baseposX;
 					else
 						this.x = (int)(Math.random() * (this.baseposX - randomRange + 1)) + randomRange;
-					System.out.println(this.x);
+					//System.out.println(this.x);
 				}
 
 				else
@@ -86,7 +86,7 @@ public class Projectile extends DamageZone {
 						this.x=this.baseposX;
 					else
 						this.x = (int)(Math.random() * (this.baseposX - randomRange + 1)) + randomRange;
-					System.out.println(this.x);
+					//System.out.println(this.x);
 				}
 			}
 		}

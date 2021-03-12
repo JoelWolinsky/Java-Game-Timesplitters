@@ -7,11 +7,18 @@ import java.awt.image.BufferStrategy;
 import java.util.Collections;
 import java.util.Comparator;
 
+import javax.swing.JOptionPane;
+
 import game.display.Window;
 import game.entities.GameObject;
 import game.entities.Player;
+import game.entities.platforms.Platform;
 import game.graphics.Assets;
 import game.input.KeyInput;
+import game.network.packets.Packet00Login;
+import network.GameClient;
+import network.GameServer;
+import game.entities.PlayerMP;
 
 public class Game extends Canvas implements Runnable{
 
@@ -21,8 +28,12 @@ public class Game extends Canvas implements Runnable{
 	public static KeyInput keyInput = new KeyInput();
 	public static MouseInput mouseInput = new MouseInput();
 	public static GameState state = GameState.MainMenu;
-	private Level currentLevel = new Level();
+	public Level currentLevel = new Level();
+	
+	public static GameClient socketClient;
+	public static GameServer socketServer;
 
+	public static Boolean isMultiplayer = false;
 
 	private Player player;
 
@@ -32,10 +43,21 @@ public class Game extends Canvas implements Runnable{
 	 * Initialises game entities and objects that must appear at the start of the game
 	 */
 	public Game() {
+		new Window(this);
 
-		player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
-		currentLevel.addEntity(player);
-		currentLevel.addPlayer(player);
+		
+		if(isMultiplayer == false) {
+			player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+			
+			currentLevel.addEntity(player);
+			currentLevel.addPlayer(player);
+			
+		}else {
+			player = new PlayerMP(this.currentLevel, 300, 300, null, -1, "./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+			currentLevel.addEntity(player);
+			currentLevel.addPlayer(player);
+		}
+		
 
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 		
@@ -60,12 +82,15 @@ public class Game extends Canvas implements Runnable{
 
 		camera = new Camera();
 		camera.addTarget(player);
+
 		
-		//This section should always be last
-		new Window(this);
+		currentLevel.addEntity(player);
+		//windowHandler = new WindowHandler(this);
+		
 		this.addKeyListener(keyInput);
 		this.addMouseListener(mouseInput);
 		this.addMouseMotionListener(mouseInput);
+		this.start();
 	}
 	
 	/**

@@ -13,6 +13,11 @@ public class Level extends Canvas {
 
 	private LinkedList<GameObject> entities = new LinkedList<>();
 	private LinkedList<Player> players = new LinkedList<>();
+	
+	public synchronized LinkedList<GameObject> getGameObjects(){
+		return this.entities;
+	}
+
 	public void tick() {
 
 		for (GameObject k: entities)
@@ -99,6 +104,7 @@ public class Level extends Canvas {
 
 	
 	public void addEntity(GameObject o) {
+//		System.out.println("Adding entitiy to level");
 		entities.add(o);
 	}
 
@@ -112,4 +118,49 @@ public class Level extends Canvas {
 	public LinkedList<GameObject> getEntities() {
 		return entities;
 	}
+	
+	public void removePlayerMP(String username) {
+		try {
+			int index = 0;
+			for(GameObject e : getGameObjects()) {
+				if(e instanceof PlayerMP && ((PlayerMP)e).getUsername().equals(username)) {
+					break;
+				}
+				index++;
+			}
+			this.getGameObjects().remove(index);
+		} catch (Exception e) {
+			System.out.println("Exception in removePlayerMP. Player " + username);
+			e.printStackTrace();
+		}
+	}
+	
+	private int getPlayerMPIndex(String username) {
+		try {
+			int index = 0;
+			for (GameObject e : getGameObjects()) {
+				if(e instanceof PlayerMP && ((PlayerMP)e).getUsername().equals(username)) {
+					break;
+				}
+				index++;
+			}
+			return index;
+		} catch (Exception e) {
+			System.out.println("Exception in getPlayerMPIndex. Player " + username);
+			e.printStackTrace();
+			return -1;
+		}
+	}
+	
+	public void movePlayer(String username, float x, float y) {
+		try {
+			int index = getPlayerMPIndex(username);
+			this.getGameObjects().get(index).setX(x);
+			this.getGameObjects().get(index).setY(y);;
+		} catch (Exception e) {
+			System.out.println("Exception in movePlayer when moving player " + username);
+			e.printStackTrace();
+		}
+	}
+
 }

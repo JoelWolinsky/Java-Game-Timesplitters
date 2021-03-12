@@ -21,6 +21,8 @@ import game.Game;
 import game.GameState;
 import game.Launcher;
 import game.SoundHandler;
+import network.GameClient;
+import network.GameServer;
 
 public class Window extends Canvas{
 	
@@ -256,6 +258,22 @@ public class Window extends Canvas{
 		createGameButton.setFont(new Font(buttonFont, Font.BOLD, 12));
 		createGameButton.setFocusPainted(false);
 		createGameButton.setText("CREATE GAME");
+		createGameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SoundHandler.playSound("button1", 1f);
+				
+				Game.socketServer = new GameServer(game);
+				Game.socketServer.start();
+				Game.socketClient = new GameClient(game, "localhost");
+				Game.socketClient.start();
+				
+				backOptions.setVisible(false);
+		    	backButtonPanel.setVisible(false);
+		    	multiplayerButtonPanel.setVisible(false);
+		    	Game.state = GameState.Playing;
+		    	Game.isMultiplayer = true;
+			}
+		});
 		
 		JButton joinGameButton = new JButton();
 		joinGameButton.setBackground(Color.DARK_GRAY);
@@ -264,6 +282,20 @@ public class Window extends Canvas{
 		joinGameButton.setFont(new Font(buttonFont, Font.BOLD, 12));
 		joinGameButton.setFocusPainted(false);
 		joinGameButton.setText("JOIN GAME");
+		joinGameButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SoundHandler.playSound("button1", 1f);
+				
+				Game.socketClient = new GameClient(game, "localhost");
+				Game.socketClient.start();
+				
+				backOptions.setVisible(false);
+		    	backButtonPanel.setVisible(false);
+		    	multiplayerButtonPanel.setVisible(false);
+		    	Game.state = GameState.Playing;
+		    	Game.isMultiplayer = true;
+			}
+		});
 		
 		// Add all components then set the frame to visible
 		mainMenu.add(singleplayerButton);
@@ -287,8 +319,6 @@ public class Window extends Canvas{
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-
-		game.start();
 	}
 
 }

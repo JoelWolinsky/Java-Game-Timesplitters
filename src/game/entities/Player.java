@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.UUID;
 
 import game.Game;
 import game.attributes.AnimatedObject;
@@ -17,6 +18,8 @@ import game.graphics.Animation;
 import game.graphics.AnimationStates;
 import game.graphics.Assets;
 import game.input.KeyInput;
+import game.network.packets.Packet02Move;
+
 import javax.imageio.ImageIO;
 
 public class Player extends GameObject implements AnimatedObject, SolidCollider, GravityObject{
@@ -45,9 +48,15 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private static HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
 	private int currentFrame;
 	private Assets s = new Assets();
+	
+	private Point prevPos;
+	
+	private String username;
 
-	public Player(float x, float y, int width,int height,String...urls) {
+	public Player(float x, float y, int width,int height, String...urls) {
 		super(x, y, 2, width, height);
+		
+		this.username = UUID.randomUUID().toString();;
 
 		BufferedImage img;
 		try
@@ -75,20 +84,20 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public void tick() {
 		//Gather all collisions
 		CollidingObject.getCollisions(this);
-		if (i<100)
+		if (i<100) {
 			i++;
-		else
+		}else {
 			immunity=false;
+		}
+
+		this.width = getAnimation(currentAnimationState).getFrame(currentFrame).getWidth();
+		this.height = getAnimation(currentAnimationState).getFrame(currentFrame).getHeight();
 
 
-			this.width = getAnimation(currentAnimationState).getFrame(currentFrame).getWidth();
-			this.height = getAnimation(currentAnimationState).getFrame(currentFrame).getHeight();
-
-
-
+		this.prevPos = new Point((int)this.x, (int)this.y);
 
 		//Check for keyboard input along the x-axis
-		if(Game.keyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
+		if(KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
 
 		/* Beware: Java floating point representation makes it difficult to have perfect numbers
 		( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
@@ -101,7 +110,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				}
 				currentAnimationState = AnimationStates.RIGHT;
 
-		} else if(Game.keyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
+		} else if(KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
 
 				// Simulates acceleration when you run left
 				if (this.velX <= -RUN_SPEED){
@@ -129,9 +138,9 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}
 
 		//Check for keyboard input along the y-axis
-		if(Game.keyInput.down.isPressed()) {
+		if(KeyInput.down.isPressed()) {
 			this.velY = DOWN_SPEED;
-		}else if(Game.keyInput.up.isPressed()) {
+		}else if(KeyInput.up.isPressed()) {
 			if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
 				this.velY = JUMP_GRAVITY;
 			}
@@ -160,23 +169,29 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		} else {
 			// Stop player falling through the floor
 			CollidingObject o = SolidCollider.nextCollision(this,  this.velY, false);
-			if(o == null) {
-				return;
-			}
-			Rectangle s = o.getBounds();
-
-			if(this.velY > 0 && !isOnWall()) {
-				this.y = s.y - this.height;
-				this.velY = 0;
-			} else if(this.velY < 0 && !isOnWall()) {
-				this.velY = 0;
-			} else {	// When velY == 0 and velX == 0 the sticking to the wall bug occurs.
-						// Rebounds the player off the wall to avoid sticking.
-				if (SolidCollider.willCauseSolidCollision(this, 5, true)) {
-					this.velX = -2.0f;
-				} else if (SolidCollider.willCauseSolidCollision(this, -5, true)) {
-					this.velX = 2.0f;
+			if(o != null) {
+				Rectangle s = o.getBounds();
+	
+				if(this.velY > 0 && !isOnWall()) {
+					this.y = s.y - this.height;
+					this.velY = 0;
+				} else if(this.velY < 0 && !isOnWall()) {
+					this.velY = 0;
+				} else {	// When velY == 0 and velX == 0 the sticking to the wall bug occurs.
+							// Rebounds the player off the wall to avoid sticking.
+					if (SolidCollider.willCauseSolidCollision(this, 5, true)) {
+						this.velX = -2.0f;
+					} else if (SolidCollider.willCauseSolidCollision(this, -5, true)) {
+						this.velX = 2.0f;
+					}
 				}
+			}
+		}
+		
+		if(Game.isMultiplayer) {
+			if((int)this.x != this.prevPos.x || (int)this.y != this.prevPos.y) {
+				Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y);
+				packet.writeData(Game.socketClient);
 			}
 		}
 
@@ -195,10 +210,13 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}
 
 		// press r to respawn -- used for debugging
-		if(Game.keyInput.r.isPressed())
+		if(KeyInput.r.isPressed())
 		{
 			respawn();
 		}
+		
+		
+
 
 
 	}
@@ -281,20 +299,20 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 
 	public int getAnimationTimer() {
-		return this.animationTimer;
+		return Player.animationTimer;
 	}
 
 	public void setAnimationTimer(int animationTimer) {
-		this.animationTimer = animationTimer;
+		Player.animationTimer = animationTimer;
 
 	}
 
 	public AnimationStates getCurrentAnimationState() {
-		return this.currentAnimationState;
+		return Player.currentAnimationState;
 	}
 
 	public AnimationStates getDefaultAnimationState() {
-		return this.defaultAnimationState;
+		return Player.defaultAnimationState;
 	}
 
 	public Animation getAnimation(AnimationStates state) {
@@ -315,6 +333,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 	public int getRespawnY() {
 		return this.respawnY;
+	}
+
+	public String getUsername() {
+		return this.username;
 	}
 
 
