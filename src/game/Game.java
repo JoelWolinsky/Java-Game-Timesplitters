@@ -4,7 +4,11 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.Collections;
+import java.util.Comparator;
+
 import game.display.Window;
+import game.entities.GameObject;
 import game.entities.Player;
 import game.graphics.Assets;
 import game.input.KeyInput;
@@ -30,6 +34,7 @@ public class Game extends Canvas implements Runnable{
 	public Game() {
 
 		player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+		currentLevel.addEntity(player);
 		currentLevel.addPlayer(player);
 
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
@@ -39,9 +44,9 @@ public class Game extends Canvas implements Runnable{
 		//keep default for now until we sort randomly generated
 		if (mapMode.equals("default")) {
 
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA3.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA4.txt");
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA1.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");
 
 
 		}
@@ -49,6 +54,8 @@ public class Game extends Canvas implements Runnable{
 		{
 			//WORK IN PROGRESS
 		}
+
+		Collections.sort(currentLevel.getEntities(), Comparator.comparingInt(GameObject::getZ));
 
 
 		camera = new Camera();

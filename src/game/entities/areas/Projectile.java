@@ -1,6 +1,6 @@
 package game.entities.areas;
 
-public class Projectile extends TimerDamageZone {
+public class Projectile extends DamageZone {
 	private float baseposX,baseposY;
 	private float velX,velY;
 	private float distance;
@@ -9,7 +9,7 @@ public class Projectile extends TimerDamageZone {
 	private int i=0;
 
 	public Projectile(float x, float y, int width, int height, float velocityX, float velocityY, float distance, float randomRange, int startOffset, String...urls) {
-		super(x, y, width, height,0,urls);
+		super(x, y, width, height,0,0,0,startOffset,urls);
 		this.randomRange=randomRange;
 		this.startOffset=startOffset;
 		this.baseposX=x;

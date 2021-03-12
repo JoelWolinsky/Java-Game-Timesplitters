@@ -47,7 +47,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private Assets s = new Assets();
 
 	public Player(float x, float y, int width,int height,String...urls) {
-		super(x, y, 1, width, height);
+		super(x, y, 2, width, height);
 
 		BufferedImage img;
 		try
@@ -250,8 +250,8 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 
 		//-- To visualise the boundary box, uncomment these and getBounds(float xOffset, float yOffset) as well.
-		g.setColor(Color.magenta);
-		g.fillRect((int)(this.x + xOffset),(int)(this.y + yOffset),this.width,this.height);
+		//g.setColor(Color.magenta);
+		//g.fillRect((int)(this.x + xOffset),(int)(this.y + yOffset),this.width,this.height);
 		if (immunity==true)
 		{
 			if (0<i && i <10 || 30<i && i <40 || 60<i && i<70)

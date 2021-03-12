@@ -18,7 +18,7 @@ public class Platform extends GameObject implements SolidCollider{
 	private BufferedImage img;
 
 	public Platform(float x, float y, int width, int height, String url) {
-		super(x, y, -1, width, height);
+		super(x, y, 1, width, height);
 		try
 		{
 			//sets the width and height of the platform based on the provided image width and height
