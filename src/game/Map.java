@@ -126,14 +126,14 @@ public class Map {
 
                         //prepares a string array with the urls
                         List<String> list = new ArrayList<String>();
-                        for (int l = 8;l < 8+Integer.parseInt(splited[7]);l++)
+                        for (int l = 9;l < 9+Integer.parseInt(splited[8]);l++)
                             list.add("./img/".concat(splited[l]));
 
                         String[] arr = list.toArray(new String[0]);
 
 
                         DamageZone tmz;
-                        tmz = new DamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),Integer.parseInt(splited[5]),Integer.parseInt(splited[6]),arr);
+                        tmz = new DamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),Integer.parseInt(splited[5]),Integer.parseInt(splited[6]),splited[7],arr);
                         currentLevel.addEntity(tmz);
 
                         break;
@@ -141,14 +141,14 @@ public class Map {
 
                         //prepares a string array with the urls
                         List<String> list4 = new ArrayList<String>();
-                        for (int l = 5;l < 5+Integer.parseInt(splited[4]);l++)
+                        for (int l = 7;l < 7+Integer.parseInt(splited[6]);l++)
                             list4.add("./img/".concat(splited[l]));
 
                         String[] arr4 = list4.toArray(new String[0]);
 
 
                         EventDamageZone edz;
-                        edz = new EventDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,splited[3],arr4);
+                        edz = new EventDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),splited[5],arr4);
                         currentLevel.addEntity(edz);
                         currentLevel.addEntity(edz.getEventArea());
 
@@ -156,12 +156,12 @@ public class Map {
                     case "Projectile":
 
                         List<String> list2 = new ArrayList<String>();
-                        for (int j = 9;j < 9+Integer.parseInt(splited[8]);j++)
+                        for (int j = 11;j < 11+Integer.parseInt(splited[10]);j++)
                             list2.add("./img/".concat(splited[j]));
                         String[] arr2 = list2.toArray(new String[0]);
 
                         Projectile pj;
-                        pj = new Projectile(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Float.parseFloat(splited[4]),Float.parseFloat(splited[5]),Float.parseFloat(splited[6]), Integer.parseInt(splited[7]),arr2);
+                        pj = new Projectile(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Float.parseFloat(splited[4]),Float.parseFloat(splited[5]),Float.parseFloat(splited[6]),Float.parseFloat(splited[7]), Integer.parseInt(splited[8]),splited[9],arr2);
                         currentLevel.addEntity(pj);
                         break;
                     case "AnimArea":

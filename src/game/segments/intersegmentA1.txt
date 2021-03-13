@@ -1,14 +1,17 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA1.png
 Chunk 1 E intersegmentA1.png
 Respawn 40 363 flag1.png
-Projectile 100 100 0 3 500 200 0 4 rocks1.png rocks1.png rocks1.png rocks1.png
-Projectile 100 100 0 3 500 200 80 4 arrow1.png arrow2.png arrow1.png arrow2.png
-Projectile 100 100 0 3 500 200 40 4 rocks1.png rocks1.png rocks1.png rocks1.png
-Projectile 100 100 0 3 500 200 120 4 arrow1.png arrow2.png arrow1.png arrow2.png
-Projectile 200 100 0 3 500 300 20 4 arrow1.png arrow2.png arrow1.png arrow2.png
-Projectile 200 100 0 3 500 300 100 4 arrow1.png arrow2.png arrow1.png arrow2.png
-Projectile 200 100 0 3 500 300 60 4 rocks1.png rocks1.png rocks1.png rocks1.png
-Projectile 200 100 0 3 500 300 140 4 arrow1.png arrow2.png arrow1.png arrow2.png
+AnimArea 140 67 4 skeletonreact1.png skeletonreact1.png skelethrow3.png skelethrow4.png
+AnimArea 200 67 4 skeletonreact1inv.png skeletonreact2inv.png skeletonreact3inv.png skeletonreact4inv.png
+AnimArea 260 67 4 skeletonreact1inv.png skeletonreact1inv.png skelethrow2inv.png skelethrow3inv.png
+Projectile 100 100 0 3 500 200 0 0 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
+Projectile 100 100 0 3 500 200 0 80 nopicture.png 4 arrow1.png arrow1.png arrow1.png arrow1.png
+Projectile 100 100 0 3 500 200 0 40 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
+Projectile 100 100 0 3 500 200 0 120 nopicture.png 4 arrow1.png arrow1.png arrow1.png arrow1.png
+Projectile 200 100 0 3 500 300 0 20 nopicture.png 4 arrow1.png arrow1.png arrow1.png arrow1.png
+Projectile 200 100 0 3 500 300 0 100 nopicture.png 4 arrow1.png arrow1.png arrow1.png arrow1.png
+Projectile 200 100 0 3 500 300 0 60 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
+Projectile 200 100 0 3 500 300 0 140 nopicture.png 4 arrow1.png arrow1.png arrow1.png arrow1.png
 
 Platform Custom 0 384 customFloor1.png
 Platform Custom 333 384 customFloor1.png

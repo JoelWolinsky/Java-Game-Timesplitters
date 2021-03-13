@@ -16,7 +16,7 @@ public class AnimArea extends Area implements AnimatedObject {
 
 	public AnimArea(float x, float y, int width, int height, String...urls) {
 		super(x, y, width, height,urls[0]);
-		anim = new Animation(3, urls);
+		anim = new Animation(10, urls);
 	}
 
 	public void tick() {

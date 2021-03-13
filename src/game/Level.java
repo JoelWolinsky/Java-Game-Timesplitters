@@ -83,7 +83,6 @@ public class Level extends Canvas {
 			}
 			else if (o instanceof DamageZone)
 			{
-				if (((DamageZone) o).getActive())
 					o.render(g, f, h);
 			}
 			else if (o instanceof TimerPlatform)

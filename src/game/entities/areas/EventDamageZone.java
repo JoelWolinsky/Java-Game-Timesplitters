@@ -17,9 +17,13 @@ public class EventDamageZone extends AnimArea{
 	private Area a;
 	private boolean triggered;
 	private BufferedImage img;
+	private int noticeDelay,onDuration;
 
-	public EventDamageZone(float x, float y, int width, int height, String notice, String...urls) {
+	public EventDamageZone(float x, float y, int width, int height, int noticeDelay, int onDuration ,String notice, String...urls) {
 		super(x, y, width, height,urls);
+
+		this.noticeDelay=noticeDelay;
+		this.onDuration=onDuration;
 
 		a = new Area(x-180,y-70,1,100,"");
 		try
@@ -38,12 +42,12 @@ public class EventDamageZone extends AnimArea{
 
 		if (triggered)
 		{
-			if (timer>50)
+			if (timer>noticeDelay)
 			{
 				this.active=true;
 			}
 
-			if (timer >200) {
+			if (timer >onDuration) {
 				triggered = false;
 				this.active = false;
 				timer=0;
@@ -59,7 +63,7 @@ public class EventDamageZone extends AnimArea{
 		//g.setColor(Color.magenta);
 		//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
 		if (triggered)
-			if (1 < timer && timer < 50)
+			if (1 < timer && timer < noticeDelay)
 				g.drawImage(img, (int) (this.x + f), (int) (this.y + h), null);
 		if (active)
 				super.render(g,f,h);
