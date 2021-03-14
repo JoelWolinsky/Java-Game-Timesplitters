@@ -10,10 +10,10 @@ import java.io.IOException;
 
 public class Area extends GameObject {
 	private BufferedImage img;
-	private boolean active = true;
+	private boolean visible = true;
 
 	public Area(float x, float y, int width, int height, String url) {
-		super(x, y, -2, width, height);
+		super(x, y, 0, width, height);
 
 		try
 		{

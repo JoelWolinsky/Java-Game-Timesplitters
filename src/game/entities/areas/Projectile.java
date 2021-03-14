@@ -1,16 +1,18 @@
 package game.entities.areas;
 
-public class Projectile extends TimerDamageZone {
+public class Projectile extends DamageZone {
 	private float baseposX,baseposY;
 	private float velX,velY;
 	private float distance;
-	private float randomRange;
+	private float randomRangeX;
+	private float randomRangeY;
 	private int startOffset;
 	private int i=0;
 
-	public Projectile(float x, float y, int width, int height, float velocityX, float velocityY, float distance, float randomRange, int startOffset, String...urls) {
-		super(x, y, width, height,0,urls);
-		this.randomRange=randomRange;
+	public Projectile(float x, float y, int width, int height, float velocityX, float velocityY, float distance, float randomRangeX,float randomRangeY, int startOffset, String notice, String...urls) {
+		super(x, y, width, height,0,0,0,startOffset, notice, urls);
+		this.randomRangeX=randomRangeX;
+		this.randomRangeY=randomRangeY;
 		this.startOffset=startOffset;
 		this.baseposX=x;
 		this.baseposY=y;
@@ -24,7 +26,8 @@ public class Projectile extends TimerDamageZone {
 		if (i<startOffset)
 			i++;
 		else{
-
+			if (!super.getActive())
+				super.setActive(true);
 			if (velY<0)
 			{
 				if (this.x < (this.baseposX + this.distance) && this.y > (this.baseposY -this.distance)) {
@@ -33,12 +36,21 @@ public class Projectile extends TimerDamageZone {
 				}
 				else
 				{
-					this.y = this.baseposY;
-					if (randomRange==0)
+					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (this.baseposX - randomRange + 1)) + randomRange;
-					System.out.println(this.x);
+						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
+
+					if (randomRangeY==0)
+						this.y=this.baseposY;
+					else
+						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
+
+					if (!super.getNotice().equals("nopicture.png"))
+					{
+						i=0;
+						super.setActive(false);
+					}
 				}
 			}
 
@@ -49,12 +61,21 @@ public class Projectile extends TimerDamageZone {
 				}
 				else
 				{
-					this.y = this.baseposY;
-					if (randomRange==0)
+					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (this.baseposX - randomRange + 1)) + randomRange;
-					System.out.println(this.x);
+						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
+
+					if (randomRangeY==0)
+						this.y=this.baseposY;
+					else
+						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
+
+					if (!super.getNotice().equals("nopicture.png"))
+					{
+						i=0;
+						super.setActive(false);
+					}
 				}
 			}
 			else if (velY==0)
@@ -66,12 +87,21 @@ public class Projectile extends TimerDamageZone {
 				}
 				else
 				{
-					this.y = this.baseposY;
-					if (randomRange==0)
+					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (this.baseposX - randomRange + 1)) + randomRange;
-					System.out.println(this.x);
+						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
+
+					if (randomRangeY==0)
+						this.y=this.baseposY;
+					else
+						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
+
+					if (!super.getNotice().equals("nopicture.png"))
+					{
+						i=0;
+						super.setActive(false);
+					}
 				}
 
 				else
@@ -81,12 +111,21 @@ public class Projectile extends TimerDamageZone {
 				}
 				else
 				{
-					this.y = this.baseposY;
-					if (randomRange==0)
+					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (this.baseposX - randomRange + 1)) + randomRange;
-					System.out.println(this.x);
+						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
+
+					if (randomRangeY==0)
+						this.y=this.baseposY;
+					else
+						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
+
+					if (!super.getNotice().equals("nopicture.png"))
+					{
+						i=0;
+						super.setActive(false);
+					}
 				}
 			}
 		}

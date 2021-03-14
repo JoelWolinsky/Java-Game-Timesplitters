@@ -1,28 +1,47 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA12p1.png
-Chunk 1 E segmentA12p1.png
-Respawn 10 363 flag1.png
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA11p1.png
+Chunk 1 E segmentA11p1.png
+
 Platform Custom 0 92 corner1.png
-Platform Custom 96 92 top2.png
-Platform Custom 330 92 corner1inv.png
+Platform Custom 96 60 corner1.png
+Platform Custom 192 28 corner1.png
+Platform Custom 288 28 top3.png
+Platform Custom 70 352 bookshelf2.png
+Platform Custom 120 335 bookshelf3.png
+Platform Custom 160 320 bookshelf1.png
+Platform Custom 180 285 bookshelf2.png
+Platform Custom 210 320 bookshelf1.png
+Platform Custom 230 285 bookshelf2.png
+Platform Custom 280 335 bookshelf3.png
+Platform Custom 315 320 bookshelf1.png
+Platform Custom 280 260 bookshelf1.png
+Platform Custom 330 270 bookshelf3.png
+Platform Custom 330 235 bookshelf2.png
+Platform Custom 330 170 bookshelf1.png
+Platform Custom 380 210 bookshelf2.png
+Platform Custom 380 150 bookshelf1.png
+Platform Custom 360 335 bookshelf3.png
+Platform Custom 395 335 bookshelf3.png
+Platform Custom 370 310 bookshelf2.png
+Platform Custom 380 240 bookshelf1.png
 
-CrushingPlatform 100 270 50 10 bookshelf1.png 25 RIGHT 7.5
-CrushingPlatform 200 270 50 10 bookshelf1.png 0 BOTTOM 7.5
-CrushingPlatform 300 270 50 10 bookshelf1.png 40 TOP 7.5
-
-
+MovingPlatform 180 180 5 false 0.15 bookshelf2.png
 Floor
 
 Chunk 1 N skyA.png
 Chunk 1 E skyA.png
-Chunk 1 S segmentA12p2.png
+Chunk 1 S segmentA11p2.png
 
-Platform Custom 0 92 corner1.png
-Platform Custom 96 92 top2.png
+Platform Custom 0 28 top3.png
+Platform Custom 138 28 corner1inv.png
+Platform Custom 234 60 corner1inv.png
 Platform Custom 330 92 corner1inv.png
 
-CrushingPlatform 100 270 50 10 bookshelf1.png 25 LEFT 7.5
-CrushingPlatform 200 270 50 10 bookshelf1.png 0 BOTTOM 7.5
-CrushingPlatform 300 270 50 10 bookshelf1.png 40 TOP 7.5
+Platform Custom 10 230 bookshelf1.png
+Platform Custom 10 290 bookshelf2.png
+Platform Custom 10 320 bookshelf1.png
 
+MovingPlatform 180 210 20 true 1 bookshelf3.png
+Platform Custom 360 350 bookshelf2.png
+Platform Custom 320 320 bookshelf1.png
 
 Floor

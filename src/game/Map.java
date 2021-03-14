@@ -72,7 +72,7 @@ public class Map {
                                 break;
                         }
                         a = new Area(horizontalIndex - setX, verticalIndex, setX, setY, "./img/".concat(splited[3]));
-                        currentLevel.addArea(a);
+                        currentLevel.addEntity(a);
                         break;
 
                     case "Platform":
@@ -91,62 +91,78 @@ public class Map {
                         }
 
                         p = new Platform(horizontalIndex - setX + Integer.parseInt(splited[2]), verticalIndex + Integer.parseInt(splited[3]), 0, 0, goUrl);
-                        currentLevel.addPlatform(p);
+                        currentLevel.addEntity(p);
                         break;
 
                     case "Floor":
                         goUrl = textureFloor;
                         p = new Platform(horizontalIndex - setX, verticalIndex + setY, setX, 0, goUrl);
-                        currentLevel.addPlatform(p);
+                        currentLevel.addEntity(p);
                         break;
 					case "MovingPlatform":
 						MovingPlatform mp = new MovingPlatform(horizontalIndex - setX  + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,Integer.parseInt(splited[3]),Boolean.parseBoolean(splited[4]),Float.parseFloat(splited[5])	,splited[6]);
-						currentLevel.addPlatform(mp);
+						currentLevel.addEntity(mp);
 						break;
                     case "TimerPlatform":
                         TimerPlatform tp = new TimerPlatform(horizontalIndex - setX + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,splited[3],Integer.parseInt(splited[4]), Integer.parseInt(splited[5]));
-                        currentLevel.addPlatform(tp);
+                        currentLevel.addEntity(tp);
                         break;
                     case "CrushingPlatform":
                         CrushingPlatform cp = new CrushingPlatform(horizontalIndex - setX  + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,Integer.parseInt(splited[3]),Float.parseFloat(splited[4])	,splited[5],Integer.parseInt(splited[6]),splited[7], Float.parseFloat(splited[8]));
-                        currentLevel.addPlatform(cp);
+                        currentLevel.addEntity(cp);
                         break;
                     case "Respawn":
                         RespawnPoint rp = new RespawnPoint(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,"./img/".concat(splited[3]));
-                        currentLevel.addArea(rp);
+                        currentLevel.addEntity(rp);
                         break;
                     case "Area":
 
                         Area ad;
                         ad = new Area(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,"./img/".concat(splited[3]));
-                        currentLevel.addArea(ad);
+                        currentLevel.addEntity(ad);
 
                         break;
-                    case "TimerDamageZone":
+                    case "DamageZone":
 
                         //prepares a string array with the urls
                         List<String> list = new ArrayList<String>();
-                        for (int l = 5;l < 5+Integer.parseInt(splited[4]);l++)
+                        for (int l = 9;l < 9+Integer.parseInt(splited[8]);l++)
                             list.add("./img/".concat(splited[l]));
 
                         String[] arr = list.toArray(new String[0]);
 
 
-                        TimerDamageZone tmz;
-                        tmz = new TimerDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),arr);
-                        currentLevel.addArea(tmz);
+                        DamageZone tmz;
+                        tmz = new DamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),Integer.parseInt(splited[5]),Integer.parseInt(splited[6]),splited[7],arr);
+                        currentLevel.addEntity(tmz);
+
+                        break;
+                    case "EventDamageZone":
+
+                        //prepares a string array with the urls
+                        List<String> list4 = new ArrayList<String>();
+                        for (int l = 7;l < 7+Integer.parseInt(splited[6]);l++)
+                            list4.add("./img/".concat(splited[l]));
+
+                        String[] arr4 = list4.toArray(new String[0]);
+
+
+                        EventDamageZone edz;
+                        edz = new EventDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),splited[5],arr4);
+                        currentLevel.addEntity(edz);
+                        currentLevel.addEntity(edz.getEventArea());
 
                         break;
                     case "Projectile":
 
                         List<String> list2 = new ArrayList<String>();
-                        for (int j = 9;j < 9+Integer.parseInt(splited[8]);j++)
+                        for (int j = 11;j < 11+Integer.parseInt(splited[10]);j++)
                             list2.add("./img/".concat(splited[j]));
                         String[] arr2 = list2.toArray(new String[0]);
 
                         Projectile pj;
-                        pj = new Projectile(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Float.parseFloat(splited[4]),Float.parseFloat(splited[5]),Float.parseFloat(splited[6]), Integer.parseInt(splited[7]),arr2);
-                        currentLevel.addArea(pj);
+                        pj = new Projectile(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Float.parseFloat(splited[4]),Float.parseFloat(splited[5]),Float.parseFloat(splited[6]),Float.parseFloat(splited[7]), Integer.parseInt(splited[8]),splited[9],arr2);
+                        currentLevel.addEntity(pj);
                         break;
                     case "AnimArea":
                         AnimArea cao;
@@ -158,7 +174,7 @@ public class Map {
 
                         cao = new AnimArea(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,arr3);
 
-                        currentLevel.addArea(cao);
+                        currentLevel.addEntity(cao);
                         break;
                     case "Revert":
                         switch (lastDirection) {
