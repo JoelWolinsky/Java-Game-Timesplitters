@@ -91,8 +91,10 @@ public class Window extends Canvas{
 		multiplayerButtonPanel.setVisible(false);
 		((FlowLayout)multiplayerButtonPanel.getLayout()).setVgap(panelHeight / 3);
 		
+		
+		// disabled due to graphical b
 		// Handling the main screen background image
-		ImageIcon background = new ImageIcon("./img/backgroundMain.gif");
+		ImageIcon background = new ImageIcon("./img/background.gif");
 	    Image img = background.getImage();
 	    Image temp = img.getScaledInstance(WIDTH,HEIGHT,Image.SCALE_DEFAULT);
 	    background = new ImageIcon(temp);
@@ -112,7 +114,7 @@ public class Window extends Canvas{
 	    backOptions.setVisible(false);
 	    
 	    // Handling the multiplayer screen background
-	    ImageIcon multiplayerBackground = new ImageIcon("./img/backgroundMultiplayer.gif");
+	    ImageIcon multiplayerBackground = new ImageIcon("./img/background.gif");
 	    Image img3 = multiplayerBackground.getImage();
 	    Image temp3 = img3.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
 	    multiplayerBackground = new ImageIcon(temp3);
