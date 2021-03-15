@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 
 /*
 This class extends AnimArea instead of DamageZone to avoid some rendering issues due to the fact that we use this class to
@@ -18,14 +19,17 @@ public class EventDamageZone extends AnimArea{
 	private boolean triggered;
 	private BufferedImage img;
 	private int noticeDelay,onDuration;
+	private LinkedList<Area> areas = new LinkedList<>();
+	private int noticeX,noticeY;
 
-	public EventDamageZone(float x, float y, int width, int height, int noticeDelay, int onDuration ,String notice, String...urls) {
+	public EventDamageZone(float x, float y, int width, int height, int noticeDelay, int onDuration ,String notice, int noticeX, int noticeY, String...urls) {
 		super(x, y, width, height,urls);
 
 		this.noticeDelay=noticeDelay;
 		this.onDuration=onDuration;
+		this.noticeX=noticeX;
+		this.noticeY=noticeY;
 
-		a = new Area(x-180,y-70,1,100,"");
 		try
 		{
 			img = ImageIO.read( new File("./img/".concat(notice)));
@@ -64,7 +68,8 @@ public class EventDamageZone extends AnimArea{
 		//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
 		if (triggered)
 			if (1 < timer && timer < noticeDelay)
-				g.drawImage(img, (int) (this.x + f), (int) (this.y + h), null);
+				if (!(noticeX==0 && noticeY==0))
+					g.drawImage(img, (int) (this.x+ noticeX + f), (int) (this.y+ noticeY + h), null);
 		if (active)
 				super.render(g,f,h);
 	}
@@ -75,7 +80,8 @@ public class EventDamageZone extends AnimArea{
 	public void setActive(boolean active){
 		this.active = active;
 	}
-	public Area getEventArea(){return this.a;}
+	public LinkedList<Area> getEventAreas(){return this.areas;}
 	public void setTriggered(boolean triggered){this.triggered=triggered;}
+	public void addArea(Area area){ areas.add(area);}
 
 }

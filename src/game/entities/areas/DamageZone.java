@@ -57,6 +57,10 @@ public class DamageZone extends AnimArea{
 
 				timer+=increment;
 			}
+			else
+			{
+				this.active=true;
+			}
 		}
 	}
 
@@ -68,7 +72,7 @@ public class DamageZone extends AnimArea{
 		//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
 		if (this.active==false && timer >= (offDuration/1.5))
 			g.drawImage(img, (int) (this.x + f), (int) (this.y + h), null);
-		else if (this.active)
+		else if (active)
 			super.render(g,f,h);
 		else{}
 

@@ -32,6 +32,13 @@ public class Level extends Canvas {
 
 					if (l instanceof Area)
 					{
+
+						if (l instanceof OnReachAnimArea)
+							if (((OnReachAnimArea) l).getInteraction(((Player) k)))
+								((OnReachAnimArea) l).setActive(true);
+							else
+								((OnReachAnimArea) l).setActive(false);
+
 						if (l instanceof RespawnPoint)
 							//if (o.getReached()==false) //comment this out if you want to allow players to activate previously reached respawn points
 							if (((RespawnPoint) l).getInteraction(((Player) k)))
@@ -53,7 +60,9 @@ public class Level extends Canvas {
 
 						//player interaction with event damage zones
 						if (l instanceof EventDamageZone) {
-							if (((EventDamageZone) l).getEventArea().getInteraction(((Player) k))) {
+
+							for (Area xd: ((EventDamageZone) l).getEventAreas() )
+							if (xd.getInteraction(((Player) k))) {
 								((EventDamageZone) l).setTriggered(true);
 							}
 							if (((EventDamageZone) l).getActive())
@@ -88,6 +97,11 @@ public class Level extends Canvas {
 			else if (o instanceof TimerPlatform)
 			{
 				if (((TimerPlatform) o).getActive())
+					o.render(g, f, h);
+			}
+			else if (o instanceof OnReachAnimArea)
+			{
+				if (((OnReachAnimArea) o).isActive())
 					o.render(g, f, h);
 			}
 			else
