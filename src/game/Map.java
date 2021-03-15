@@ -115,6 +115,10 @@ public class Map {
                         RespawnPoint rp = new RespawnPoint(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,"./img/".concat(splited[3]));
                         currentLevel.addEntity(rp);
                         break;
+                    case "Waypoint":
+                        Waypoint wp = new Waypoint(horizontalIndex - setX + Float.parseFloat(splited[1]),verticalIndex + Float.parseFloat(splited[2]),0,0,"./img/".concat(splited[3]), splited[4], splited[5], Integer.parseInt(splited[6]));
+                        currentLevel.addEntity(wp);
+                        break;
                     case "Area":
 
                         Area ad;

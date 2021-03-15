@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import game.display.Window;
 import game.entities.GameObject;
 import game.entities.Player;
+import game.entities.AIPlayer;
 import game.entities.platforms.Platform;
 import game.graphics.Assets;
 import game.input.KeyInput;
@@ -36,6 +37,7 @@ public class Game extends Canvas implements Runnable{
 	public static Boolean isMultiplayer = false;
 
 	private Player player;
+	private AIPlayer aiPlayer;
 
 	private Camera camera;
 
@@ -48,14 +50,19 @@ public class Game extends Canvas implements Runnable{
 		
 		if(isMultiplayer == false) {
 			player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+			aiPlayer = new AIPlayer(50, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
 			
 			currentLevel.addEntity(player);
+			currentLevel.addEntity(aiPlayer);
+
 			currentLevel.addPlayer(player);
+			currentLevel.addAIPlayer(aiPlayer);
 			
-		}else {
+		} else {
 			player = new PlayerMP(this.currentLevel, 300, 300, null, -1, "./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
 			currentLevel.addEntity(player);
 			currentLevel.addPlayer(player);
+
 		}
 		
 
@@ -66,10 +73,16 @@ public class Game extends Canvas implements Runnable{
 		//keep default for now until we sort randomly generated
 		if (mapMode.equals("default")) {
 
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA9.txt");
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");
-
+			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt"); 		// basic first one
+			m.mapParser(currentLevel, "./src/game/segments/segmentA7.txt"); 		// platforms
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); 	// basic intersegment
+			m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt"); 		// crushing bookshelves
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); 	// basic intersegment
+			m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt"); 		// disappearing floors -- 
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); 	// basic intersegment
+			m.mapParser(currentLevel, "./src/game/segments/segmentA6.txt"); 		// ghosts
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); 	// basic intersegment
+			
 
 		}
 		else if (mapMode.equals("randomlyGenerated"))
