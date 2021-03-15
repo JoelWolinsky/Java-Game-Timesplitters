@@ -103,26 +103,6 @@ public class Window extends Canvas{
 	    back.setBounds(0,0,WIDTH,HEIGHT);
 	    back.setVisible(true);
 	    
-	    // Handling the options screen background
-		ImageIcon optionsBackground = new ImageIcon("./img/background.gif");
-	    Image img2 = optionsBackground.getImage();
-	    Image temp2 = img2.getScaledInstance(WIDTH,HEIGHT,Image.SCALE_DEFAULT);
-	    optionsBackground = new ImageIcon(temp2);
-	    JLabel backOptions = new JLabel(optionsBackground);
-	    backOptions.setLayout(null);
-	    backOptions.setBounds(0,0,WIDTH,HEIGHT);
-	    backOptions.setVisible(false);
-	    
-	    // Handling the multiplayer screen background
-	    ImageIcon multiplayerBackground = new ImageIcon("./img/background.gif");
-	    Image img3 = multiplayerBackground.getImage();
-	    Image temp3 = img3.getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
-	    multiplayerBackground = new ImageIcon(temp3);
-	    JLabel backMultiplayer = new JLabel(multiplayerBackground);
-	    backMultiplayer.setLayout(null);
-	    backMultiplayer.setBounds(0,0,WIDTH,HEIGHT);
-	    backMultiplayer.setVisible(false);
-	    
 	    // Importing button graphics
 		ImageIcon button1Icon = new ImageIcon("./img/button1.png");
 		Image scaledButton1 = button1Icon.getImage().getScaledInstance(panelWidth - 50, (panelHeight / 4) - 10,Image.SCALE_SMOOTH);
@@ -227,11 +207,9 @@ public class Window extends Canvas{
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				backMultiplayer.setVisible(true);
 		    	backButtonPanel.setVisible(true);
 		    	multiplayerButtonPanel.setVisible(true);
 				mainMenu.setVisible(false);
-		    	back.setVisible(false);
 			}
 				  
 			@Override
@@ -261,7 +239,6 @@ public class Window extends Canvas{
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				backOptions.setVisible(true);
 		    	optionButtonPanel.setVisible(true);
 		    	backButtonPanel.setVisible(true);
 				mainMenu.setVisible(false);
@@ -325,13 +302,10 @@ public class Window extends Canvas{
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				backButton.setIcon(button2Inner);
-				back.setVisible(true);
 				mainMenu.setVisible(true);
 		    	backButtonPanel.setVisible(false);
 		    	optionButtonPanel.setVisible(false);
 		    	multiplayerButtonPanel.setVisible(false);
-		    	backOptions.setVisible(false);
-		    	backMultiplayer.setVisible(false);
 			}
 				  
 			@Override
@@ -507,9 +481,7 @@ public class Window extends Canvas{
 		c.add(optionButtonPanel);
 		c.add(multiplayerButtonPanel);
 		c.add(backButtonPanel);
-		c.add(backOptions);
-		c.add(back);
-		c.add(backMultiplayer);
+		c.add(back);;
 		
 		frame.add(game);
 		frame.pack();
