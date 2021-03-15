@@ -8,17 +8,12 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -173,7 +168,7 @@ public class Window extends Canvas{
 			public void mouseReleased(MouseEvent e) {
 				mainMenu.setVisible(false);
 				back.setVisible(false);
-				game.start();
+				
 				Game.state = GameState.Playing;
 			}
 			
@@ -415,22 +410,6 @@ public class Window extends Canvas{
 		createGameButton.setFont(sizedFont);
 		createGameButton.setHorizontalTextPosition(JLabel.CENTER);
 		createGameButton.setText("CREATE GAME");
-		createGameButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				SoundHandler.playSound("button1", 1f);
-				
-				Game.socketServer = new GameServer(game);
-				Game.socketServer.start();
-				Game.socketClient = new GameClient(game, "localhost");
-				Game.socketClient.start();
-				
-				backOptions.setVisible(false);
-		    	backButtonPanel.setVisible(false);
-		    	multiplayerButtonPanel.setVisible(false);
-		    	Game.state = GameState.Playing;
-		    	Game.isMultiplayer = true;
-			}
-		});
 		
 		createGameButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -442,6 +421,18 @@ public class Window extends Canvas{
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				createGameButton.setIcon(button3HoverInner);
+				
+				Game.socketServer = new GameServer(game);
+				Game.socketServer.start();
+				Game.socketClient = new GameClient(game, "localhost");
+				Game.socketClient.start();
+				
+				back.setVisible(false);
+		    	backButtonPanel.setVisible(false);
+		    	multiplayerButtonPanel.setVisible(false);
+		    	
+		    	Game.state = GameState.Playing;
+		    	Game.isMultiplayer = true;
 			}
 				  
 			@Override
@@ -461,20 +452,6 @@ public class Window extends Canvas{
 		joinGameButton.setFont(sizedFont);
 		joinGameButton.setHorizontalTextPosition(JLabel.CENTER);
 		joinGameButton.setText("JOIN GAME");
-		joinGameButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				SoundHandler.playSound("button1", 1f);
-				
-				Game.socketClient = new GameClient(game, "localhost");
-				Game.socketClient.start();
-				
-				backOptions.setVisible(false);
-		    	backButtonPanel.setVisible(false);
-		    	multiplayerButtonPanel.setVisible(false);
-		    	Game.state = GameState.Playing;
-		    	Game.isMultiplayer = true;
-			}
-		});
 		
 		joinGameButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -486,6 +463,16 @@ public class Window extends Canvas{
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				joinGameButton.setIcon(button3HoverInner);
+				
+				Game.socketClient = new GameClient(game, "localhost");
+				Game.socketClient.start();
+				
+				back.setVisible(false);
+		    	backButtonPanel.setVisible(false);
+		    	multiplayerButtonPanel.setVisible(false);
+		    	
+		    	Game.state = GameState.Playing;
+		    	Game.isMultiplayer = true;
 			}
 				  
 			@Override
