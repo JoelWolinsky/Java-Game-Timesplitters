@@ -170,6 +170,7 @@ public class Window extends Canvas{
 				back.setVisible(false);
 				
 				Game.state = GameState.Playing;
+				game.start();
 			}
 			
 			// This handles when the mouse enters the JLabel
@@ -329,7 +330,7 @@ public class Window extends Canvas{
 		}
 		
 		toggleSoundEffectsButton.addMouseListener(new MouseAdapter() {
-			@Override
+			@Override 
 			public void mousePressed(MouseEvent e) {
 				toggleSoundEffectsButton.setIcon(button3ClickedInner);
 				SoundHandler.playSound("button1", 1f);
@@ -433,6 +434,8 @@ public class Window extends Canvas{
 		    	
 		    	Game.state = GameState.Playing;
 		    	Game.isMultiplayer = true;
+		    	
+		    	game.start();
 			}
 				  
 			@Override
@@ -473,6 +476,8 @@ public class Window extends Canvas{
 		    	
 		    	Game.state = GameState.Playing;
 		    	Game.isMultiplayer = true;
+		    	
+		    	game.start();
 			}
 				  
 			@Override

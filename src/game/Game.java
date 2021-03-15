@@ -45,51 +45,8 @@ public class Game extends Canvas implements Runnable{
 	public Game() {
 		new Window(this);
 
-		
-		if(isMultiplayer == false) {
-			player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
-			
-			currentLevel.addEntity(player);
-			currentLevel.addPlayer(player);
-			
-		}else {
-			player = new PlayerMP(this.currentLevel, 300, 300, null, -1, "./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
-			currentLevel.addEntity(player);
-			currentLevel.addPlayer(player);
-		}
-		
-
-		//make this as a player choice in the menu either MAP 1 or Randomly Generated
-		
-		String mapMode = "default";
-		Map m = new Map();
-		//keep default for now until we sort randomly generated
-		if (mapMode.equals("default")) {
-
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA9.txt");
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");
-
-
-		}
-		else if (mapMode.equals("randomlyGenerated"))
-		{
-			//WORK IN PROGRESS
-		}
-
-		Collections.sort(currentLevel.getEntities(), Comparator.comparingInt(GameObject::getZ));
-
-
-		camera = new Camera();
-		camera.addTarget(player);
-
-
-		//windowHandler = new WindowHandler(this);
-		
-		this.addKeyListener(keyInput);
-		this.addMouseListener(mouseInput);
-		this.addMouseMotionListener(mouseInput);
-		this.start();
+		System.out.println("window open");
+		//this.start();
 	}
 	
 	/**
@@ -166,6 +123,53 @@ public class Game extends Canvas implements Runnable{
 
 
 	public synchronized void start() {
+		System.out.println("start()");
+		
+		if(isMultiplayer == false) {
+			System.out.println("not mp");
+			player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+			
+			currentLevel.addEntity(player);
+			currentLevel.addPlayer(player);
+			
+		}else {
+			System.out.println("mp");
+			player = new PlayerMP(this.currentLevel, 300, 300, null, -1, "./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+			currentLevel.addEntity(player);
+			currentLevel.addPlayer(player);
+		}
+		
+
+		//make this as a player choice in the menu either MAP 1 or Randomly Generated
+		
+		String mapMode = "default";
+		Map m = new Map();
+		//keep default for now until we sort randomly generated
+		if (mapMode.equals("default")) {
+
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA9.txt");
+			//m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");
+
+
+		}
+		else if (mapMode.equals("randomlyGenerated"))
+		{
+			//WORK IN PROGRESS
+		}
+
+		Collections.sort(currentLevel.getEntities(), Comparator.comparingInt(GameObject::getZ));
+
+
+		camera = new Camera();
+		camera.addTarget(player);
+
+
+		//windowHandler = new WindowHandler(this);
+		
+		this.addKeyListener(keyInput);
+		this.addMouseListener(mouseInput);
+		this.addMouseMotionListener(mouseInput);
 		//The server is started in this function
 		thread = new Thread(this);
 		thread.start();
