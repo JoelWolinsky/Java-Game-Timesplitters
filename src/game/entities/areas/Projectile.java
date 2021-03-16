@@ -39,12 +39,12 @@ public class Projectile extends DamageZone {
 					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
+						this.x = (int)(Math.random() * (randomRangeX - this.baseposX)) + this.baseposX;
 
 					if (randomRangeY==0)
 						this.y=this.baseposY;
 					else
-						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
+						this.y = (int)(Math.random() * (randomRangeY - this.baseposY)) + this.baseposY;
 
 					if (!super.getNotice().equals("nopicture.png"))
 					{
@@ -64,12 +64,12 @@ public class Projectile extends DamageZone {
 					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
+						this.x = (int)(Math.random() * (randomRangeX - this.baseposX)) + this.baseposX;
 
 					if (randomRangeY==0)
 						this.y=this.baseposY;
 					else
-						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
+						this.y = (int)(Math.random() * (randomRangeY - this.baseposY)) + this.baseposY;
 
 					if (!super.getNotice().equals("nopicture.png"))
 					{
@@ -83,19 +83,22 @@ public class Projectile extends DamageZone {
 				if (velX<0)
 
 				if (this.x > (this.baseposX - this.distance)) {
+
 					this.x += this.velX;
 				}
 				else
 				{
+
+					System.out.println(randomRangeX);
 					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
+						this.x = (int)(Math.random() * (randomRangeX - this.baseposX)) + this.baseposX;
 
 					if (randomRangeY==0)
 						this.y=this.baseposY;
 					else
-						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
+						this.y = (int)(Math.random() * (randomRangeY - this.baseposY)) + this.baseposY;
 
 					if (!super.getNotice().equals("nopicture.png"))
 					{
@@ -111,15 +114,16 @@ public class Projectile extends DamageZone {
 				}
 				else
 				{
+
 					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
+						this.x = (int)(Math.random() * (randomRangeX - this.baseposX)) + this.baseposX;
 
 					if (randomRangeY==0)
 						this.y=this.baseposY;
 					else
-						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
+						this.y = (int)(Math.random() * (randomRangeY - this.baseposY)) + this.baseposY;
 
 					if (!super.getNotice().equals("nopicture.png"))
 					{

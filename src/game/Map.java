@@ -213,7 +213,7 @@ public class Map {
                         String[] arr2 = list2.toArray(new String[0]);
 
                         Projectile pj;
-                        pj = new Projectile(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Float.parseFloat(splited[4]),Float.parseFloat(splited[5]),Float.parseFloat(splited[6]),Float.parseFloat(splited[7]), Integer.parseInt(splited[8]),splited[9],arr2);
+                        pj = new Projectile(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Float.parseFloat(splited[4]),Float.parseFloat(splited[5]),horizontalIndex - setX + Float.parseFloat(splited[6]),Float.parseFloat(splited[7])+verticalIndex, Integer.parseInt(splited[8]),splited[9],arr2);
                         currentLevel.addEntity(pj);
                         break;
                     case "AnimArea":
