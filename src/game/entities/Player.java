@@ -53,7 +53,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	
 	private String username;
 
-	public Player(float x, float y, int width,int height, String...urls) {
+	public Player(float x, float y, int width,int height) {
 		super(x, y, 2, width, height);
 		
 		this.username = UUID.randomUUID().toString();;
@@ -62,7 +62,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		try
 		{
 			//sets the width and height of the platform based on the provided image width and height
-			img = ImageIO.read( new File(urls[0]));
+			img = ImageIO.read( new File("./img/adventurer-idle0.png"));
 
 		}
 		catch ( IOException exc )

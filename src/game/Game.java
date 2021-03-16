@@ -127,16 +127,23 @@ public class Game extends Canvas implements Runnable{
 		
 		if(isMultiplayer == false) {
 			System.out.println("not mp");
-			player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+			player = new Player(0, 340, 0 ,0);
 			
 			currentLevel.addEntity(player);
 			currentLevel.addPlayer(player);
 			
 		}else {
 			System.out.println("mp");
-			player = new PlayerMP(this.currentLevel, 300, 300, null, -1, "./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+			player = new PlayerMP(this.currentLevel, 300, 300, null, -1);
 			currentLevel.addEntity(player);
 			currentLevel.addPlayer(player);
+			Packet00Login loginPacket = new Packet00Login(player.getUsername(), 300, 300);
+	        if (socketServer != null) {
+	        	socketServer.addConnection((PlayerMP) player, loginPacket);
+	        }
+	        loginPacket.writeData(socketClient);
+	        
+			
 		}
 		
 

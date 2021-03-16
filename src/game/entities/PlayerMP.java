@@ -12,17 +12,17 @@ public class PlayerMP extends Player {
 	public int port;
 	
 	
-	public PlayerMP(Level level, float x, float y, InetAddress ipAddress, int port, String...urls) {
-		super(x, y, 32, 64, urls);
+	public PlayerMP(Level level, float x, float y, InetAddress ipAddress, int port) {
+		super(x, y, 32, 64);
 		this.ipAddress = ipAddress;
 		this.port = port;
-		Packet00Login loginPacket = new Packet00Login(this.getUsername(), x, y);
+		//Packet00Login loginPacket = new Packet00Login(this.getUsername(), x, y);
+		//]]System.out.println("new mp");
+		//if(Game.socketServer != null) {
+		//	Game.socketServer.addConnection(this, loginPacket);
+		//}
 		
-		if(Game.socketServer != null) {
-			Game.socketServer.addConnection(this, loginPacket);
-		}
-		
-		loginPacket.writeData(Game.socketClient);
+		//loginPacket.writeData(Game.socketClient);
 	}
 	@Override
 	public void tick() {
