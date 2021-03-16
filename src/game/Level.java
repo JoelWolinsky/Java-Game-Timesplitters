@@ -90,6 +90,43 @@ public class Level extends Canvas {
 							}
 						}
 					}
+
+					if (l instanceof Platform)
+						if (l instanceof CrushingPlatform)
+							if (((CrushingPlatform) l).getInteraction(((AIPlayer) k)))
+								((AIPlayer) k).respawn();
+
+					if (l instanceof Area)
+					{
+						if (l instanceof RespawnPoint)
+							//if (o.getReached()==false) //comment this out if you want to allow players to activate previously reached respawn points
+							if (((RespawnPoint) l).getInteraction(((AIPlayer) k)))
+							{
+								((AIPlayer) k).setRespawnX((int) l.getX());
+								((AIPlayer) k).setRespawnY((int) l.getY()-10);
+								((RespawnPoint)l).setReached(true);
+								((RespawnPoint)l).setCurrentActive(true);
+								//for (RespawnPoint oo: respawnPoints)
+								//	if (oo != o)
+								//		oo.setCurrentActive(false);
+							}
+
+						//player interaction with damage zones
+						if (l instanceof DamageZone)
+							if (((DamageZone) l).getActive())
+								if (((DamageZone) l).getInteraction(((AIPlayer) k)))
+									((AIPlayer) k).respawn();
+
+						//player interaction with event damage zones
+						if (l instanceof EventDamageZone) {
+							if (((EventDamageZone) l).getEventArea().getInteraction(((AIPlayer) k))) {
+								((EventDamageZone) l).setTriggered(true);
+							}
+							if (((EventDamageZone) l).getActive())
+								if (((EventDamageZone) l).getInteraction(((AIPlayer) k)))
+									((AIPlayer) k).respawn();
+						}
+					}
 				}
 			}
 		}

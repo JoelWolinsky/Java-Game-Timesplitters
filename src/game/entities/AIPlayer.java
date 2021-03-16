@@ -161,14 +161,9 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 				}
 			}
 
-			//Check for keyboard input along the y-axis
-			/* if(KeyInput.down.isPressed()) {
-				this.velY = DOWN_SPEED;
-			}else if(KeyInput.up.isPressed()) {
-				if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
-					this.velY = JUMP_GRAVITY;
-				}
-			} */
+			// For moving downwards quickly
+			  /* 	if(KeyInput.down.isPressed()) {
+						this.velY = DOWN_SPEED; 	} */
 
 			if(jump.equals("Y")) {
 				if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
@@ -176,7 +171,6 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 				}
 				this.jump = "N";
 			}
-
 		}
 
 		//If you're not on ground, you should fall
