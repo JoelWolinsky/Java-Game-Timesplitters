@@ -168,7 +168,7 @@ public class Level extends Canvas {
 			else if (o instanceof Waypoint)
 			{
 				// if (((Waypoint) o).getCurrentActive()) 
-					o.render(g, f, h);
+				//	o.render(g, f, h);
 			}
 			else if (o instanceof DamageZone)
 			{
