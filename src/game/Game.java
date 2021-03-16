@@ -67,7 +67,27 @@ public class Game extends Canvas implements Runnable{
 		if (mapMode.equals("default")) {
 
 			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA1.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt");
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA2.txt");
 			m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA2.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA4.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA5.txt");
+
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA6.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA7.txt");
+
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA8.txt");
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA10.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");
+
 			//m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");
 
 

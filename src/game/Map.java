@@ -140,19 +140,30 @@ public class Map {
                         currentLevel.addEntity(tmz);
 
                         break;
-                    case "ArcDamageZone":
+                    case "ScriptedDamageZone":
 
                         //prepares a string array with the urls
                         List<String> list5 = new ArrayList<String>();
-                        for (int l = 9;l < 9+Integer.parseInt(splited[8]);l++)
+                        for (int l = 6+(3*Integer.parseInt(splited[5])) + 1 ;l < 6+(3*Integer.parseInt(splited[5])) + 1 +Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]);l++)
                             list5.add("./img/".concat(splited[l]));
 
                         String[] arr5 = list5.toArray(new String[0]);
 
 
-                        ArcDamageZone adz;
-                        adz = new ArcDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),Float.parseFloat(splited[5]),Float.parseFloat(splited[6]),Integer.parseInt(splited[7]),arr5);
+                        ScriptedDamageZone adz;
+                        adz = new ScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Integer.parseInt(splited[4]),arr5);
                         currentLevel.addEntity(adz);
+
+                        Point adak;
+
+
+                        adz.addPoint(new Point(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),1));
+
+                        for (int l = 6;l < 6+(3*Integer.parseInt(splited[5]));l+=3)
+                        {
+                            adak= new Point(horizontalIndex - setX + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]));
+                            adz.addPoint(adak);
+                        }
 
                         break;
                     case "EventDamageZone":

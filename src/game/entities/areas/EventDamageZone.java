@@ -68,8 +68,7 @@ public class EventDamageZone extends AnimArea{
 		//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
 		if (triggered)
 			if (1 < timer && timer < noticeDelay)
-				if (!(noticeX==0 && noticeY==0))
-					g.drawImage(img, (int) (this.x+ noticeX + f), (int) (this.y+ noticeY + h), null);
+				g.drawImage(img, (int) (this.x+ noticeX + f), (int) (this.y+ noticeY + h), null);
 		if (active)
 				super.render(g,f,h);
 	}
