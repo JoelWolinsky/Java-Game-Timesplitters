@@ -155,47 +155,43 @@ public class Game extends Canvas implements Runnable{
 		if (mapMode.equals("default")) {
 
 
+			// FOR DEMO PURPOSES
+			m.mapParser(currentLevel, "./src/game/segments/segmentA1X.txt"); 		// 1 - basic first one (numbers for demo)
+			// TODO: Fix glitch on falling rocks where you teleport into wall
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA2X.txt");	// 2 - falling rocks
+			m.mapParser(currentLevel, "./src/game/segments/segmentA2X.txt");		// 3 - electric one
+			m.mapParser(currentLevel, "./src/game/segments/segmentA7X.txt"); 		// 4 - platforms
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3X.txt"); 	// 5 - hands intersegment
+			m.mapParser(currentLevel, "./src/game/segments/segmentA13X.txt"); 		// 6 - crushing bookshelves
+			m.mapParser(currentLevel, "./src/game/segments/segmentA6X.txt"); 		// 8 - ghosts - easier - add segment before
+			m.mapParser(currentLevel, "./src/game/segments/segmentEND.txt"); 		// 7 - END
+			
+			// m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt"); 		// 9 - disappearing floors
+			
+			
 			/*
-			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt"); 		// basic first one (numbers for demo)
-			m.mapParser(currentLevel, "./src/game/segments/segmentA7.txt"); 		// platforms
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); 	// basic intersegment
-			m.mapParser(currentLevel, "./src/game/segments/segmentA13X.txt"); 		// crushing bookshelves
-			// m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt"); 	// disappearing floors -- 
-			// m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); // basic intersegment
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3X.txt"); 	// basic intersegment before ghosts
-			// m.mapParser(currentLevel, "./src/game/segments/segmentA6.txt"); 		// 6 - ghosts
-			m.mapParser(currentLevel, "./src/game/segments/segmentA6X.txt"); 		// ghosts - easier
-			// m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); // basic intersegment
-			m.mapParser(currentLevel, "./src/game/segments/segmentA4.txt"); 		// 7 - aesthetic hall
-			*/
+			// m.mapParser(currentLevel, "./src/game/segments/intersegmentA1.txt"); 	// falling objects - hard for AI
+			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt");			// basic segment
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA2.txt");	// falling rocks
+			m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");			// electric one
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA2.txt");	// falling rocks
+			m.mapParser(currentLevel, "./src/game/segments/segmentA3.txt");			// aesthetic hall 1
+			m.mapParser(currentLevel, "./src/game/segments/segmentA4.txt");			// aesthetic hall 2
+			m.mapParser(currentLevel, "./src/game/segments/segmentA5.txt");			// aesthetic hall 3
 
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");	// hands one
+			m.mapParser(currentLevel, "./src/game/segments/segmentA6.txt");			// ghosts
+			m.mapParser(currentLevel, "./src/game/segments/segmentA7.txt");			// platforms
 
-
-
-
-
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA1.txt"); // falling objects - hard for AI
-			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt");
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA2.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA2.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA3.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA4.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA5.txt");
-
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA6.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA7.txt");
-
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA8.txt");
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA10.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");	// hands one
+			m.mapParser(currentLevel, "./src/game/segments/segmentA8.txt");			// disappearing long and small platforms
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");	// hands one
+			m.mapParser(currentLevel, "./src/game/segments/segmentA10.txt");		// long corridor
+			m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt");		// disappearing platforms over acid
+			m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");		// bookshelf pyramid
+			m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");		// crushing bookshelves
 			//m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");
-
+			*/
 
 		}
 		else if (mapMode.equals("randomlyGenerated"))

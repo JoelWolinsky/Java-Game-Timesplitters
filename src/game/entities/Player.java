@@ -72,9 +72,9 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 		s.init();
 
-		animations.put(AnimationStates.IDLE, new Animation(20, Assets.player_idle));
-		animations.put(AnimationStates.RIGHT, new Animation(20, Assets.player_right));
-		animations.put(AnimationStates.LEFT, new Animation(20, Assets.player_left));
+		animations.put(AnimationStates.IDLE, new Animation(15, Assets.player_idle));
+		animations.put(AnimationStates.RIGHT, new Animation(15, Assets.player_right));
+		animations.put(AnimationStates.LEFT, new Animation(15, Assets.player_left));
 
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);

@@ -1,0 +1,47 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA2.png
+Chunk 1 E intersegmentA2.png
+Respawn 40 363 flag1.png
+Waypoint 40 363 flag3.png R N 0
+Waypoint 90 363 flag3.png R Y 20
+Platform Custom 0 384 customFloor1.png
+Platform Custom 333 384 customFloor1.png
+Platform Custom 70 50 wall1.png
+Platform Custom 338 50 wall1inv.png
+Platform Custom 53 0 corner2.png
+Platform Custom 307 0 corner2inv.png
+Platform Custom 117 -31 corner1.png
+Platform Custom 213 -31 corner1inv.png
+Platform Custom 150 550 thinPlatformA.png
+Platform Custom 213 469 thinPlatformA.png
+Platform Default 194 100
+AnimArea 197 50 4 torch1.png torch2.png torch3.png torch4.png
+Projectile 120 0 0 3 500 0 35 0 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
+Projectile 285 0 0 3 500 0 70 0 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
+
+
+Platform Custom 226 100 edge1inv.png
+Platform Custom 162 100 edge1.png
+
+
+Platform Custom 86 284 smallplatform1.png
+Waypoint 86 264 flag3.png R Y 60
+Platform Custom 86 154 smallplatform1.png
+Waypoint 90 134 flag3.png R Y 60
+Platform Custom 165 350 smallplatform1inv.png
+Waypoint 165 330 flag3.png L Y 20
+Platform Custom 165 220 smallplatform1inv.png
+Waypoint 165 200 flag3.png L Y 20
+Platform Custom 181 116 wall1inv.png
+Platform Custom 229 116 wall1.png
+
+Platform Custom 320 284 smallplatform1inv.png
+Waypoint 320 264 flag3.png L N 60
+Platform Custom 320 154 smallplatform1inv.png
+Waypoint 320 134 flag3.png L N 60
+Platform Custom 246 350 smallplatform1.png
+Waypoint 246 330 flag3.png R N 10
+Platform Custom 246 220 smallplatform1.png
+Waypoint 246 200 flag3.png R N 10
+
+Chunk 1 N skyA.png
+Revert
