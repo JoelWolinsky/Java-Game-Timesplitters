@@ -40,7 +40,7 @@ public class GameServer extends Thread {
 				System.out.println("Exception receiving packet in server run");
 				e.printStackTrace();
 			}
-			
+			//System.out.println("packet");
 			this.parsePacket(packet.getData(), packet.getAddress(), packet.getPort());
 //			String message = new String(packet.getData());
 //			if(message.trim().equalsIgnoreCase("ping")) {

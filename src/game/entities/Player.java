@@ -61,7 +61,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		BufferedImage img;
 		try
 		{
-			//sets the width and hight of the platform based on the provided image width and height
+			//sets the width and height of the platform based on the provided image width and height
 			img = ImageIO.read( new File(urls[0]));
 
 		}
