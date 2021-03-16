@@ -2,7 +2,7 @@ Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA2.png
 Chunk 1 E intersegmentA2.png
 Respawn 40 363 flag1.png
 Waypoint 40 363 flag3.png R N 0
-Waypoint 90 363 flag3.png R Y 20
+Waypoint 85 363 flag3.png R Y 25
 Platform Custom 0 384 customFloor1.png
 Platform Custom 333 384 customFloor1.png
 Platform Custom 70 50 wall1.png
@@ -24,9 +24,9 @@ Platform Custom 162 100 edge1.png
 
 
 Platform Custom 86 284 smallplatform1.png
-Waypoint 86 264 flag3.png R Y 60
+Waypoint 86 264 flag3.png R Y 65
 Platform Custom 86 154 smallplatform1.png
-Waypoint 90 134 flag3.png R Y 60
+Waypoint 90 134 flag3.png R Y 65
 Platform Custom 165 350 smallplatform1inv.png
 Waypoint 165 330 flag3.png L Y 20
 Platform Custom 165 220 smallplatform1inv.png
@@ -35,9 +35,9 @@ Platform Custom 181 116 wall1inv.png
 Platform Custom 229 116 wall1.png
 
 Platform Custom 320 284 smallplatform1inv.png
-Waypoint 320 264 flag3.png L N 60
+Waypoint 320 264 flag3.png L N 65
 Platform Custom 320 154 smallplatform1inv.png
-Waypoint 320 134 flag3.png L N 60
+Waypoint 320 134 flag3.png L N 65
 Platform Custom 246 350 smallplatform1.png
 Waypoint 246 330 flag3.png R N 10
 Platform Custom 246 220 smallplatform1.png
