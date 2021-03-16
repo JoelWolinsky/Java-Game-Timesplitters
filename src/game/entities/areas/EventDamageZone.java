@@ -1,8 +1,6 @@
 package game.entities.areas;
 import javax.imageio.ImageIO;
 
-import game.entities.platforms.CrushingPlatform;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
