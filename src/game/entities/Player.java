@@ -52,10 +52,12 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private Point prevPos;
 	
 	private String username;
+	private KeyInput input;
 
-	public Player(float x, float y, int width,int height) {
+	public Player(float x, float y, KeyInput input, int width,int height) {
 		super(x, y, 2, width, height);
 		
+		this.input = input;
 		this.username = UUID.randomUUID().toString();;
 
 		BufferedImage img;
