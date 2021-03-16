@@ -2,6 +2,9 @@ package game.attributes;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 
+import game.entities.AIPlayer;
+import game.entities.Player;
+
 /**
  * Interface to be implemented by any object that must not allow an object to pass through it<br>
  * This interface extends CollidingObject, so you only need to implement this one.<br>
@@ -57,22 +60,24 @@ public interface SolidCollider extends CollidingObject{
 	 * @return A boolean representing whether a collision will occur by a proposed action
 	 */
 	static boolean willCauseSolidCollision(CollidingObject o, double vel, boolean xAxis) {
-		Rectangle oBounds = o.getBounds();
-		Rectangle newBounds;
-		if(xAxis) {
-			newBounds = new Rectangle((int)(oBounds.x + vel), oBounds.y, oBounds.width, oBounds.height);
-		}else {
-			newBounds = new Rectangle(oBounds.x, (int)(oBounds.y + vel), oBounds.width, oBounds.height); 
-		}
-		for(int i = 0; i < solidColliders.size(); i ++) {
-			SolidCollider s = solidColliders.get(i);
-			if(s.equals(o)) {
-				continue;
+			
+			Rectangle oBounds = o.getBounds();
+			Rectangle newBounds;
+			if(xAxis) {
+				newBounds = new Rectangle((int)(oBounds.x + vel), oBounds.y, oBounds.width, oBounds.height);
+			}else {
+				newBounds = new Rectangle(oBounds.x, (int)(oBounds.y + vel), oBounds.width, oBounds.height); 
 			}
-			if(newBounds.intersects(s.getBounds())) {
-				return true;
+			for(int i = 0; i < solidColliders.size(); i ++) {
+				SolidCollider s = solidColliders.get(i);
+				if(s.equals(o) || s instanceof Player || s instanceof AIPlayer ) {
+					continue;
+				}
+				if(newBounds.intersects(s.getBounds())) {
+					return true;
+				}
 			}
-		}
+
 		return false;
 	}
 	
@@ -84,6 +89,7 @@ public interface SolidCollider extends CollidingObject{
 	 * @return The CollidingObject that o will next collide into
 	 */
 	static CollidingObject nextCollision(CollidingObject o, double vel, boolean xAxis) {
+		
 		Rectangle oBounds = o.getBounds();
 		Rectangle newBounds;
 		if(xAxis) {
@@ -93,7 +99,7 @@ public interface SolidCollider extends CollidingObject{
 		}
 		for(int i = 0; i < solidColliders.size(); i ++) {
 			SolidCollider s = solidColliders.get(i);
-			if(s.equals(o)) {
+			if(s.equals(o) || s instanceof Player || s instanceof AIPlayer) {
 				continue;
 			}
 			if(newBounds.intersects(s.getBounds())) {

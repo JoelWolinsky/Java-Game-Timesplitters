@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import game.display.Window;
 import game.entities.GameObject;
 import game.entities.Player;
+import game.entities.AIPlayer;
 import game.entities.platforms.Platform;
 import game.graphics.Assets;
 import game.input.KeyInput;
@@ -36,6 +37,7 @@ public class Game extends Canvas implements Runnable{
 	public static Boolean isMultiplayer = false;
 
 	private Player player;
+	private AIPlayer aiPlayer;
 
 	private Camera camera;
 
@@ -129,9 +131,13 @@ public class Game extends Canvas implements Runnable{
 		if(isMultiplayer == false) {
 			System.out.println("not mp");
 			player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+			aiPlayer = new AIPlayer(50, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
 
 			currentLevel.addEntity(player);
 			currentLevel.addPlayer(player);
+			
+			currentLevel.addEntity(aiPlayer);
+			currentLevel.addAIPlayer(aiPlayer);
 
 		}else {
 			System.out.println("mp");
@@ -147,6 +153,26 @@ public class Game extends Canvas implements Runnable{
 		Map m = new Map();
 		//keep default for now until we sort randomly generated
 		if (mapMode.equals("default")) {
+
+
+			/*
+			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt"); 		// 1 - basic first one (numbers for demo)
+			m.mapParser(currentLevel, "./src/game/segments/segmentA7.txt"); 		// 2 - platforms
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); 	// 3 - basic intersegment
+			m.mapParser(currentLevel, "./src/game/segments/segmentA13X.txt"); 		// 4 - crushing bookshelves
+			// m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt"); 		// disappearing floors -- 
+			// m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); 	// basic intersegment
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3X.txt"); 	// basic intersegment before ghosts
+			// m.mapParser(currentLevel, "./src/game/segments/segmentA6.txt"); 		// 6 - ghosts
+			m.mapParser(currentLevel, "./src/game/segments/segmentA6X.txt"); 		// ghosts - easier
+			// m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); 	// basic intersegment
+			m.mapParser(currentLevel, "./src/game/segments/segmentA4.txt"); 	// 7 - aesthetic hall
+			*/
+
+
+
+
+
 
 			m.mapParser(currentLevel, "./src/game/segments/intersegmentA1.txt");
 			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt");

@@ -6,8 +6,10 @@ Platform Custom 96 92 top2.png
 Platform Custom 330 92 corner1inv.png
 
 CrushingPlatform 100 270 50 10 bookshelf1.png 25 RIGHT 7.5
+Waypoint 160 363 flag3.png R N 30
 CrushingPlatform 200 270 50 10 bookshelf1.png 0 BOTTOM 7.5
-CrushingPlatform 300 270 50 10 bookshelf1.png 40 TOP 7.5
+Waypoint 260 363 flag3.png R N 60
+CrushingPlatform 300 270 50 10 bookshelf1.png 0 BOTTOM 7.5
 
 
 Floor
@@ -21,8 +23,10 @@ Platform Custom 96 92 top2.png
 Platform Custom 330 92 corner1inv.png
 
 CrushingPlatform 100 270 50 10 bookshelf1.png 25 LEFT 7.5
+Waypoint 160 363 flag3.png R N 30
 CrushingPlatform 200 270 50 10 bookshelf1.png 0 BOTTOM 7.5
-CrushingPlatform 300 270 50 10 bookshelf1.png 40 TOP 7.5
+Waypoint 160 363 flag3.png R N 60
+CrushingPlatform 300 270 50 10 bookshelf1.png 0 BOTTOM 7.5
 
 
 Floor

@@ -1,6 +1,7 @@
 package game.entities.areas;
 import game.entities.GameObject;
 import game.entities.Player;
+import game.entities.AIPlayer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -41,7 +42,17 @@ public class Area extends GameObject {
 	}
 
 	public boolean getInteraction(Player player){
-		return ((int)this.x<(int)player.getX()+player.getWidth() && (int)player.getX()<this.x+this.width && (int)this.y<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)this.y+this.height);
+		return ((int)this.x < (int)player.getX()+player.getWidth() && 
+				(int)player.getX() < this.x+this.width && 
+				(int)this.y < (int)player.getY()+player.getHeight() && 
+				(int)player.getY() < (int)this.y+this.height);
+	}
+
+	public boolean getInteraction(AIPlayer aiPlayer){
+		return ((int)this.x < (int)aiPlayer.getX()+aiPlayer.getWidth() && 
+				(int)aiPlayer.getX() < this.x+this.width && 
+				(int)this.y < (int)aiPlayer.getY()+aiPlayer.getHeight() && 
+				(int)aiPlayer.getY() < (int)this.y+this.height);
 	}
 
 }
