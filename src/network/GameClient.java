@@ -52,6 +52,7 @@ public class GameClient extends Thread {
 	
 	private void parsePacket(byte[] data, InetAddress address, int port) {
 		try {
+			System.out.println("client parse");
 			String message = new String(data).trim();
 			PacketTypes type = Packet.lookupPacket(message.substring(0,2));
 			Packet packet = null;
@@ -80,6 +81,7 @@ public class GameClient extends Thread {
 	}
 	
 	public void sendData(byte[] data) {
+		System.out.println("client send");
 		DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, 1331);
 		try {
 			socket.send(packet);
