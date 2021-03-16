@@ -156,17 +156,17 @@ public class Game extends Canvas implements Runnable{
 
 
 			/*
-			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt"); 		// 1 - basic first one (numbers for demo)
-			m.mapParser(currentLevel, "./src/game/segments/segmentA7.txt"); 		// 2 - platforms
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); 	// 3 - basic intersegment
-			m.mapParser(currentLevel, "./src/game/segments/segmentA13X.txt"); 		// 4 - crushing bookshelves
-			// m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt"); 		// disappearing floors -- 
-			// m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); 	// basic intersegment
+			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt"); 		// basic first one (numbers for demo)
+			m.mapParser(currentLevel, "./src/game/segments/segmentA7.txt"); 		// platforms
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); 	// basic intersegment
+			m.mapParser(currentLevel, "./src/game/segments/segmentA13X.txt"); 		// crushing bookshelves
+			// m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt"); 	// disappearing floors -- 
+			// m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); // basic intersegment
 			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3X.txt"); 	// basic intersegment before ghosts
 			// m.mapParser(currentLevel, "./src/game/segments/segmentA6.txt"); 		// 6 - ghosts
 			m.mapParser(currentLevel, "./src/game/segments/segmentA6X.txt"); 		// ghosts - easier
-			// m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); 	// basic intersegment
-			m.mapParser(currentLevel, "./src/game/segments/segmentA4.txt"); 	// 7 - aesthetic hall
+			// m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt"); // basic intersegment
+			m.mapParser(currentLevel, "./src/game/segments/segmentA4.txt"); 		// 7 - aesthetic hall
 			*/
 
 
@@ -174,7 +174,7 @@ public class Game extends Canvas implements Runnable{
 
 
 
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA1.txt");
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA1.txt"); // falling objects - hard for AI
 			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt");
 			m.mapParser(currentLevel, "./src/game/segments/intersegmentA2.txt");
 			m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");
