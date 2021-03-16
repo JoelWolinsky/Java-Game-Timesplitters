@@ -35,7 +35,7 @@ public class Game extends Canvas implements Runnable{
 
 	public static Boolean isMultiplayer = false;
 
-	private Player player;
+	public Player player;
 
 	private Camera camera;
 
@@ -127,14 +127,14 @@ public class Game extends Canvas implements Runnable{
 		
 		if(isMultiplayer == false) {
 			System.out.println("not mp");
-			player = new Player(0, 340, 0 ,0);
+			player = new Player(0, 340, keyInput, 0 ,0);
 			
 			currentLevel.addEntity(player);
 			currentLevel.addPlayer(player);
 			
 		}else {
 			System.out.println("mp");
-			player = new PlayerMP(this.currentLevel, 300, 300, null, -1);
+			player = new PlayerMP(this.currentLevel, 300, 300, keyInput, null, -1);
 			currentLevel.addEntity(player);
 			currentLevel.addPlayer(player);
 			Packet00Login loginPacket = new Packet00Login(player.getUsername(), 300, 300);

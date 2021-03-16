@@ -52,7 +52,7 @@ public class GameClient extends Thread {
 	
 	private void parsePacket(byte[] data, InetAddress address, int port) {
 		try {
-			System.out.println("client parse");
+			//System.out.println("client parse");
 			String message = new String(data).trim();
 			PacketTypes type = Packet.lookupPacket(message.substring(0,2));
 			Packet packet = null;
@@ -71,6 +71,7 @@ public class GameClient extends Thread {
 				game.currentLevel.removePlayerMP(((Packet01Disconnect) packet).getUsername());
 				break;
 			case MOVE:
+				
 				packet = new Packet02Move(data);
 				handleMove((Packet02Move)packet);
 			}	
@@ -81,7 +82,7 @@ public class GameClient extends Thread {
 	}
 	
 	public void sendData(byte[] data) {
-		System.out.println("client send");
+		//System.out.println("client send");
 		DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, 1331);
 		try {
 			socket.send(packet);
@@ -91,12 +92,16 @@ public class GameClient extends Thread {
 	}
 	
 	private void handleMove(Packet02Move packet) {
-		try {
-			this.game.currentLevel.movePlayer(packet.getUsername(), packet.getX(), packet.getY());
-		} catch (Exception e) {
-			System.out.println("Exception in handleMove. Packet " + packet);
-			e.printStackTrace();
+		System.out.println(this.game.player.getUsername() +" Client handle move " + packet.getUsername());
+		if (this.game.player.getUsername()== packet.getUsername()) {
+			try {
+				this.game.currentLevel.movePlayer(packet.getUsername(), packet.getX(), packet.getY());
+			} catch (Exception e) {
+				System.out.println("Exception in handleMove. Packet " + packet);
+				e.printStackTrace();
+			}
 		}
+		
 	}
 
 	

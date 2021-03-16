@@ -59,7 +59,8 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		
 		this.input = input;
 		this.username = UUID.randomUUID().toString();;
-
+		
+		
 		BufferedImage img;
 		try
 		{
@@ -99,55 +100,57 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		this.prevPos = new Point((int)this.x, (int)this.y);
 
 		//Check for keyboard input along the x-axis
-		if(KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
-
-		/* Beware: Java floating point representation makes it difficult to have perfect numbers
-		( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
-
-				// Simulates acceleration when you run right
-				if (this.velX >= RUN_SPEED){
-					this.velX = RUN_SPEED;
+		
+		if (this.input != null) {
+			if(KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
+	
+			/* Beware: Java floating point representation makes it difficult to have perfect numbers
+			( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
+	
+					// Simulates acceleration when you run right
+					if (this.velX >= RUN_SPEED){
+						this.velX = RUN_SPEED;
+					} else {
+						this.velX += RUN_SPEED/6;
+					}
+					currentAnimationState = AnimationStates.RIGHT;
+	
+			} else if(KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
+	
+					// Simulates acceleration when you run left
+					if (this.velX <= -RUN_SPEED){
+						this.velX = -RUN_SPEED;
+					} else {
+						this.velX -= RUN_SPEED/6;
+					}
+					currentAnimationState = AnimationStates.LEFT;
+	
+			} else {
+				// For deceleration effect
+				if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
+					if (this.velX >= -0.1f && this.velX <= 0.1f) {
+						this.velX = 0;
+						currentAnimationState = AnimationStates.IDLE;
+					} else if (this.velX > 0.1f) {
+						this.velX -= DECELERATION;
+					} else {
+						this.velX += DECELERATION;
+					}
 				} else {
-					this.velX += RUN_SPEED/6;
-				}
-				currentAnimationState = AnimationStates.RIGHT;
-
-		} else if(KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
-
-				// Simulates acceleration when you run left
-				if (this.velX <= -RUN_SPEED){
-					this.velX = -RUN_SPEED;
-				} else {
-					this.velX -= RUN_SPEED/6;
-				}
-				currentAnimationState = AnimationStates.LEFT;
-
-		} else {
-			// For deceleration effect
-			if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
-				if (this.velX >= -0.1f && this.velX <= 0.1f) {
 					this.velX = 0;
 					currentAnimationState = AnimationStates.IDLE;
-				} else if (this.velX > 0.1f) {
-					this.velX -= DECELERATION;
-				} else {
-					this.velX += DECELERATION;
 				}
-			} else {
-				this.velX = 0;
-				currentAnimationState = AnimationStates.IDLE;
+			}
+	
+			//Check for keyboard input along the y-axis
+			if(KeyInput.down.isPressed()) {
+				this.velY = DOWN_SPEED;
+			}else if(KeyInput.up.isPressed()) {
+				if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
+					this.velY = JUMP_GRAVITY;
+				}
 			}
 		}
-
-		//Check for keyboard input along the y-axis
-		if(KeyInput.down.isPressed()) {
-			this.velY = DOWN_SPEED;
-		}else if(KeyInput.up.isPressed()) {
-			if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
-				this.velY = JUMP_GRAVITY;
-			}
-		}
-
 		//If you're not on ground, you should fall
 		if(!isOnGround()) {
 			fall(this);

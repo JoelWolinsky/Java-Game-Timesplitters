@@ -27,7 +27,7 @@ public class GameServer extends Thread {
 		try {
 			this.socket = new DatagramSocket(1331);
 		} catch (SocketException e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 	}
 	
@@ -56,7 +56,7 @@ public class GameServer extends Thread {
 	
 	private void parsePacket(byte[] data, InetAddress address, int port) {
 		try {
-			System.out.println("server parse");
+			//System.out.println("server parse");
 			String message = new String(data).trim();
 			PacketTypes type = Packet.lookupPacket(message.substring(0,2));
 	
@@ -172,7 +172,7 @@ public class GameServer extends Thread {
 		}
 	}
 	public void sendData(byte[] data, InetAddress ipAddress, int port) {
-		System.out.println("server send packet");
+		//System.out.println("server send packet");
 		if(port != -1) {
 			DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, port);
 
@@ -186,7 +186,7 @@ public class GameServer extends Thread {
 	}
 
 	public void sendDataToAllClients(byte[] data) {
-		System.out.println("Server Send to all");
+		//System.out.println("Server Send to all");
 		try {
 			for (PlayerMP p : connectedPlayers) {
 				if (p.port != -1) {
@@ -201,7 +201,7 @@ public class GameServer extends Thread {
 	
 	private void handleMove(Packet02Move packet) {
 		try {
-			System.out.println("server handle move");
+			//System.out.println("server handle move");
 			System.out.println(packet.getUsername());
 			if(getPlayerMP(packet.getUsername()) != null) {
 				System.out.println("packet name not null");

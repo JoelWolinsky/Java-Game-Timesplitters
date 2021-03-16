@@ -20,10 +20,10 @@ public class Level extends Canvas {
 
 	public void tick() {
 
-		for (GameObject k: entities)
+		for (GameObject k: getGameObjects())
 		{
 			if (k instanceof Player)
-				for (GameObject l:entities)
+				for (GameObject l:getGameObjects())
 				{
 					if (l instanceof Platform)
 						if (l instanceof CrushingPlatform)
@@ -66,7 +66,7 @@ public class Level extends Canvas {
 
 		}
 
-		for(GameObject o : entities) {
+		for(GameObject o : getGameObjects()) {
 			o.tick();
 		}
 
@@ -74,7 +74,7 @@ public class Level extends Canvas {
 	
 	public void render(Graphics g, float f, float h) {
 
-		for(GameObject o : entities) {
+		for(GameObject o : getGameObjects()) {
 
 			if (o instanceof RespawnPoint)
 			{
@@ -104,18 +104,18 @@ public class Level extends Canvas {
 	
 	public void addEntity(GameObject o) {
 //		System.out.println("Adding entitiy to level");
-		entities.add(o);
+		getGameObjects().add(o);
 	}
 
 	public void addPlayer(Player p) {
-		players.add(p);
+		getGameObjects().add(p);
 	}
 	public void removeEntity(GameObject o) {
-		entities.remove(o);
+		getGameObjects().remove(o);
 	}
 
 	public LinkedList<GameObject> getEntities() {
-		return entities;
+		return getGameObjects();
 	}
 	
 	public void removePlayerMP(String username) {
@@ -139,10 +139,14 @@ public class Level extends Canvas {
 			int index = 0;
 			for (GameObject e : getGameObjects()) {
 				if(e instanceof PlayerMP && ((PlayerMP)e).getUsername().equals(username)) {
+					System.out.println("username");
+					System.out.println(((PlayerMP)e).getUsername());
+					System.out.println(username);
 					break;
 				}
 				index++;
 			}
+			System.out.println("index: " + index);
 			return index;
 		} catch (Exception e) {
 			System.out.println("Exception in getPlayerMPIndex. Player " + username);
@@ -154,8 +158,12 @@ public class Level extends Canvas {
 	public void movePlayer(String username, float x, float y) {
 		try {
 			int index = getPlayerMPIndex(username);
-			this.getGameObjects().get(index).setX(x);
-			this.getGameObjects().get(index).setY(y);;
+			System.out.println(getGameObjects().size());
+			if(index == getGameObjects().size() && getGameObjects().size() > 50 ) {
+				index--;
+			}
+			getGameObjects().get(index).setX(x);
+			getGameObjects().get(index).setY(y);;
 		} catch (Exception e) {
 			System.out.println("Exception in movePlayer when moving player " + username);
 			e.printStackTrace();
