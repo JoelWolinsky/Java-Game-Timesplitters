@@ -1,5 +1,8 @@
 package game.entities.areas;
 import javax.imageio.ImageIO;
+
+import game.entities.platforms.CrushingPlatform;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -79,8 +82,9 @@ public class EventDamageZone extends AnimArea{
 	public void setActive(boolean active){
 		this.active = active;
 	}
-	public LinkedList<Area> getEventAreas(){return this.areas;}
+	public LinkedList<Area> getEventArea(){return this.areas;}
 	public void setTriggered(boolean triggered){this.triggered=triggered;}
 	public void addArea(Area area){ areas.add(area);}
+
 
 }
