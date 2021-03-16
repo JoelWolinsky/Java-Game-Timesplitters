@@ -4,12 +4,12 @@ import game.attributes.SolidCollider;
 
 public class TimerPlatform extends Platform {
 
-	private int timer=0;
+	private float timer=0;
 	private boolean active = true;
-	private int speed = 0;
+	private float speed = 0;
 	private int startOffset;
 	private int i=0;
-	public TimerPlatform(float x, float y, int width, int height,String url, int speed,int startOffset) {
+	public TimerPlatform(float x, float y, int width, int height,String url, float speed,int startOffset) {
 		super(x, y, width, height, url);
 		this.speed = speed;
 		this.startOffset=startOffset;
@@ -21,7 +21,7 @@ public class TimerPlatform extends Platform {
 			i++;
 		else
 		{
-			if (timer==100)
+			if (timer>=100)
 			{
 				if (this.active == true)
 				{

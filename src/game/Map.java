@@ -6,8 +6,11 @@ import game.entities.platforms.MovingPlatform;
 import game.entities.platforms.Platform;
 import game.entities.platforms.TimerPlatform;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -104,7 +107,7 @@ public class Map {
 						currentLevel.addEntity(mp);
 						break;
                     case "TimerPlatform":
-                        TimerPlatform tp = new TimerPlatform(horizontalIndex - setX + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,splited[3],Integer.parseInt(splited[4]), Integer.parseInt(splited[5]));
+                        TimerPlatform tp = new TimerPlatform(horizontalIndex - setX + Integer.parseInt(splited[1]), verticalIndex + Integer.parseInt(splited[2]) , 0,0,splited[3],Float.parseFloat(splited[4]), Integer.parseInt(splited[5]));
                         currentLevel.addEntity(tp);
                         break;
                     case "CrushingPlatform":
@@ -137,20 +140,69 @@ public class Map {
                         currentLevel.addEntity(tmz);
 
                         break;
+                    case "ScriptedDamageZone":
+
+                        //prepares a string array with the urls
+                        List<String> list5 = new ArrayList<String>();
+                        for (int l = 6+(3*Integer.parseInt(splited[5])) + 1 ;l < 6+(3*Integer.parseInt(splited[5])) + 1 +Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]);l++)
+                            list5.add("./img/".concat(splited[l]));
+
+                        String[] arr5 = list5.toArray(new String[0]);
+
+
+                        ScriptedDamageZone adz;
+                        adz = new ScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Integer.parseInt(splited[4]),arr5);
+                        currentLevel.addEntity(adz);
+
+                        Point adak;
+
+
+                        adz.addPoint(new Point(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),1));
+
+                        for (int l = 6;l < 6+(3*Integer.parseInt(splited[5]));l+=3)
+                        {
+                            adak= new Point(horizontalIndex - setX + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]));
+                            adz.addPoint(adak);
+                        }
+
+                        break;
                     case "EventDamageZone":
 
                         //prepares a string array with the urls
                         List<String> list4 = new ArrayList<String>();
-                        for (int l = 7;l < 7+Integer.parseInt(splited[6]);l++)
+                        for (int l = 10+(2*Integer.parseInt(splited[9])) + 1;l < 10+(2*Integer.parseInt(splited[9])) + 1 + Integer.parseInt(splited[10+(2*Integer.parseInt(splited[9]))]);l++)
                             list4.add("./img/".concat(splited[l]));
 
                         String[] arr4 = list4.toArray(new String[0]);
 
 
                         EventDamageZone edz;
-                        edz = new EventDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),splited[5],arr4);
+                        edz = new EventDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),splited[5],Integer.parseInt(splited[6]),Integer.parseInt(splited[7]),arr4);
+
+
+                        BufferedImage img;
+                        int awidth=0,aheight=0;
+                        try
+                        {
+                            //sets the width and height of the platform based on the provided image width and height
+                            img = ImageIO.read( new File("./img/".concat(splited[8])));
+                            awidth = img.getWidth();
+                            aheight = img.getHeight();
+                        }
+                        catch ( IOException exc )
+                        {
+                            //TODO: Handle exception.
+                        }
+
+                        Area alol;
+                        for (int l = 10;l < 10+(2*Integer.parseInt(splited[9]));l+=2)
+                        {
+                            alol= new Area(horizontalIndex - setX + Integer.parseInt(splited[1]) + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[2]) + Integer.parseInt(splited[l+1]),awidth,aheight,"");
+                            edz.addArea(alol);
+                            currentLevel.addEntity(alol);
+                        }
+
                         currentLevel.addEntity(edz);
-                        currentLevel.addEntity(edz.getEventArea());
 
                         break;
                     case "Projectile":
@@ -175,6 +227,18 @@ public class Map {
                         cao = new AnimArea(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,arr3);
 
                         currentLevel.addEntity(cao);
+                        break;
+                    case "OnReachAnimArea":
+                        OnReachAnimArea oraa;
+                        List<String> list6 = new ArrayList<String>();
+                        for (int l = 4;l < 4+Integer.parseInt(splited[3]);l++)
+                            list6.add("./img/".concat(splited[l]));
+
+                        String[] arr6 = list6.toArray(new String[0]);
+
+                        oraa = new OnReachAnimArea(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,arr6);
+
+                        currentLevel.addEntity(oraa);
                         break;
                     case "Revert":
                         switch (lastDirection) {

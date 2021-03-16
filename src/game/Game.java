@@ -29,7 +29,7 @@ public class Game extends Canvas implements Runnable{
 	public static MouseInput mouseInput = new MouseInput();
 	public static GameState state = GameState.MainMenu;
 	public Level currentLevel = new Level();
-	
+
 	public static GameClient socketClient;
 	public static GameServer socketServer;
 
@@ -48,17 +48,17 @@ public class Game extends Canvas implements Runnable{
 		System.out.println("window open");
 		//this.start();
 	}
-	
+
 	/**
 	 * Called every frame, this tells certain lists, objects, or entities to call their own tick function.
 	 */
 	private void tick() {
-		if(this.state == GameState.Playing) { 
+		if(this.state == GameState.Playing) {
 			currentLevel.tick();
 			camera.tick();
 		}
 	}
-	
+
 	/**
 	 * Responsible for all rendering. This generates a Graphics object, refreshes the screen, and renders the correct objects based on the play state.
 	 */
@@ -81,7 +81,7 @@ public class Game extends Canvas implements Runnable{
 			g.setColor(new Color(255,255,255));
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 		}
-		
+
 		//Rendering code stops here
 
 		g.dispose();
@@ -123,32 +123,51 @@ public class Game extends Canvas implements Runnable{
 
 
 	public synchronized void start() {
+
 		System.out.println("start()");
-		
+
 		if(isMultiplayer == false) {
 			System.out.println("not mp");
 			player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
-			
+
 			currentLevel.addEntity(player);
 			currentLevel.addPlayer(player);
-			
+
 		}else {
 			System.out.println("mp");
 			player = new PlayerMP(this.currentLevel, 300, 300, null, -1, "./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
 			currentLevel.addEntity(player);
 			currentLevel.addPlayer(player);
 		}
-		
+
 
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
-		
+
 		String mapMode = "default";
 		Map m = new Map();
 		//keep default for now until we sort randomly generated
 		if (mapMode.equals("default")) {
 
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA1.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt");
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA2.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA2.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA4.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA5.txt");
+
 			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA9.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA6.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA7.txt");
+
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA8.txt");
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA10.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");
 			//m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");
 
 
@@ -166,7 +185,7 @@ public class Game extends Canvas implements Runnable{
 
 
 		//windowHandler = new WindowHandler(this);
-		
+
 		this.addKeyListener(keyInput);
 		this.addMouseListener(mouseInput);
 		this.addMouseMotionListener(mouseInput);

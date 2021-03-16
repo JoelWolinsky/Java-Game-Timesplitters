@@ -2,10 +2,11 @@ Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA3.png
 Chunk 1 E intersegmentA3.png
 Respawn 10 363 flag1.png
 AnimArea 194 250 4 torch1.png torch2.png torch3.png torch4.png
+ScriptedDamageZone 60 360 1 0 3 10 360 6 100 360 6 60 360 1 4 hand1.png hand1.png hand1.png hand1.png
+ScriptedDamageZone 140 360 1 20 3 90 360 4 180 360 4 140 360 1 4 hand1.png hand1.png hand1.png hand1.png
 Platform Custom 0 124 corner1inv.png
 Platform Custom 96 156 top2.png
 Platform Custom 330 124 corner1.png
-Respawn 220 363 flag1.png
 Floor
 Chunk 1 N skyA.png
 Revert
