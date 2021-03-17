@@ -35,11 +35,11 @@ public class Game extends Canvas implements Runnable{
 	public static GameServer socketServer;
 
 	public static Boolean isMultiplayer = false;
+	public static Game game;
 
-	private Player player;
-	private AIPlayer aiPlayer;
-
-	private Camera camera;
+	public static Player player;
+	public static AIPlayer aiPlayer;
+	public static Camera camera;
 
 	/**
 	 * Initialises game entities and objects that must appear at the start of the game
@@ -48,7 +48,7 @@ public class Game extends Canvas implements Runnable{
 		new Window(this);
 
 		System.out.println("window open");
-		//this.start();
+//		this.start();
 	}
 
 	/**
@@ -130,8 +130,11 @@ public class Game extends Canvas implements Runnable{
 
 		if(isMultiplayer == false) {
 			System.out.println("not mp");
-			player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+			
+//			player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
 			aiPlayer = new AIPlayer(50, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+
+			player = new Player(0, 340, keyInput, 0 ,0);
 
 			currentLevel.addEntity(player);
 			currentLevel.addPlayer(player);
@@ -141,11 +144,19 @@ public class Game extends Canvas implements Runnable{
 
 		}else {
 			System.out.println("mp");
-			player = new PlayerMP(this.currentLevel, 300, 300, null, -1, "./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+			player = new PlayerMP(this.currentLevel, 300, 300, keyInput, null, -1);
 			currentLevel.addEntity(player);
 			currentLevel.addPlayer(player);
+			Packet00Login loginPacket = new Packet00Login(player.getUsername(), 300, 300);
+	        if (socketServer != null) {
+	        	socketServer.addConnection((PlayerMP) player, loginPacket);
+	        }
+	        loginPacket.writeData(socketClient);
+	        
+			
 		}
 
+		game = this;
 
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 

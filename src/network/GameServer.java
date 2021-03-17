@@ -20,13 +20,14 @@ public class GameServer extends Thread {
 	private DatagramSocket socket;
 	private Game game;
 	private List<PlayerMP> connectedPlayers = new ArrayList<PlayerMP>();
+	private List<String> playerIDs= new ArrayList<String>();
 	
 	public GameServer(Game game) {
 		this.game = game;
 		try {
 			this.socket = new DatagramSocket(1331);
 		} catch (SocketException e) {
-			e.printStackTrace();
+			e.printStackTrace(); 
 		}
 	}
 	
@@ -36,11 +37,12 @@ public class GameServer extends Thread {
 			DatagramPacket packet = new DatagramPacket(data, data.length);
 			try {
 				socket.receive(packet);
+				System.out.println("Server recieve");
 			} catch (IOException e) {
 				System.out.println("Exception receiving packet in server run");
 				e.printStackTrace();
 			}
-			
+			//System.out.println("packet");
 			this.parsePacket(packet.getData(), packet.getAddress(), packet.getPort());
 //			String message = new String(packet.getData());
 //			if(message.trim().equalsIgnoreCase("ping")) {
@@ -54,6 +56,7 @@ public class GameServer extends Thread {
 	
 	private void parsePacket(byte[] data, InetAddress address, int port) {
 		try {
+			//System.out.println("server parse");
 			String message = new String(data).trim();
 			PacketTypes type = Packet.lookupPacket(message.substring(0,2));
 	
@@ -63,6 +66,7 @@ public class GameServer extends Thread {
 			case INVALID:
 				break;
 			case LOGIN:
+				System.out.println("Server handle login");
 				packet = new Packet00Login(data);
 				System.out.println("[" + address.getHostAddress() + ":" + port + "] " + ((Packet00Login) packet).getUsername() + " has connected...");
 				PlayerMP player = new PlayerMP (game.currentLevel, 100, 100, address, port);
@@ -89,27 +93,33 @@ public class GameServer extends Thread {
 	
 
 	public void addConnection(PlayerMP player, Packet00Login packet) {
+		System.out.println("Ser add con");
 		try {
 			boolean alreadyConnected = false;
-			for (PlayerMP p : this.connectedPlayers) {
-				if(player.getUsername().equalsIgnoreCase(p.getUsername())) {
-					if(p.ipAddress == null) {
-						p.ipAddress = player.ipAddress;
+			for (String p : this.playerIDs) {
+				System.out.println(this.connectedPlayers.size());
+				if(packet.getUsername().equalsIgnoreCase(p)) {
+					if(this.connectedPlayers.get(getPlayerMPIndex(p)).ipAddress == null) {
+						this.connectedPlayers.get(getPlayerMPIndex(p)).ipAddress = player.ipAddress;
 					}
-					if(p.port == -1) {
-						p.port = player.port;
+					if(this.connectedPlayers.get(getPlayerMPIndex(p)).port == -1) {
+						this.connectedPlayers.get(getPlayerMPIndex(p)).port = player.port;
 					}
 					alreadyConnected = true;
 				} else {
-					sendData(packet.getData(),p.ipAddress, p.port);
+					System.out.print("Adding and send \n");
+					sendData(packet.getData(),this.connectedPlayers.get(getPlayerMPIndex(p)).ipAddress, this.connectedPlayers.get(getPlayerMPIndex(p)).port);
 					
-					packet = new Packet00Login(p.getUsername(), p.getX(), p.getY());
+					packet = new Packet00Login(this.connectedPlayers.get(getPlayerMPIndex(p)).getUsername(), this.connectedPlayers.get(getPlayerMPIndex(p)).getX(), this.connectedPlayers.get(getPlayerMPIndex(p)).getY());
 	                sendData(packet.getData(), player.ipAddress, player.port);
 				}
 			}
+			System.out.println("already connected = " + alreadyConnected);
 			if (!alreadyConnected) {
 	
 	            this.connectedPlayers.add(player);
+	            this.playerIDs.add(packet.getUsername());
+	            System.out.println("adding to ids" + packet.getUsername());
 	        }
 		} catch (Exception e) {
 			System.out.println("Exception in GameServer.addConnection");
@@ -120,19 +130,20 @@ public class GameServer extends Thread {
 	
 	public void removeConnection(Packet01Disconnect packet) {
 		try {
-			PlayerMP player = getPlayerMP(packet.getUsername());
-			this.connectedPlayers.remove(getPlayerMPIndex(packet.getUsername()));
-			packet.writeData(this);
+			//PlayerMP player = getPlayerMP(packet.getUsername());
+			//this.connectedPlayers.remove(getPlayerMPIndex(packet.getUsername()));
+			//this.playerIDs.remove(getPlayerMPIndex(packet.getUsername()));
+			//packet.writeData(this);
 		} catch (Exception e) {
 			System.out.println("Exception in GameServer.removeConnection");
 			e.printStackTrace();
 		}
 	}
 	
-	public PlayerMP getPlayerMP(String username) {
+	public String getPlayerMP(String username) {
 		try {
-			for(PlayerMP player : this.connectedPlayers) {
-				if(player.getUsername().equals(username)) {
+			for(String player : this.playerIDs) {
+				if(player.equals(username)) {
 					return player;
 				}
 			}
@@ -147,8 +158,8 @@ public class GameServer extends Thread {
 	public int getPlayerMPIndex(String username) {
 		try {
 			int index = 0;
-			for(PlayerMP player : this.connectedPlayers) {
-				if(player.getUsername().equals(username)) {
+			for(String player : this.playerIDs) {
+				if(player.equals(username)) {
 					break;
 				}
 				index++;
@@ -161,19 +172,25 @@ public class GameServer extends Thread {
 		}
 	}
 	public void sendData(byte[] data, InetAddress ipAddress, int port) {
-		DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, port);
-		try {
-			this.socket.send(packet);
-			//System.out.println("server packet sent to " + ipAddress +":"+port);
-		} catch (IOException e) {
-			e.printStackTrace();
+		//System.out.println("server send packet");
+		if(port != -1) {
+			DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, port);
+
+			try {
+				this.socket.send(packet);
+				//System.out.println("server packet sent to " + ipAddress +":"+port);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	public void sendDataToAllClients(byte[] data) {
+		System.out.println("Server Send to all");
 		try {
 			for (PlayerMP p : connectedPlayers) {
 				if (p.port != -1) {
+					System.out.println("Sent to " + p.getUsername());
 					sendData(data, p.ipAddress, p.port);
 				}
 			}
@@ -185,12 +202,20 @@ public class GameServer extends Thread {
 	
 	private void handleMove(Packet02Move packet) {
 		try {
-			if(getPlayerMP(packet.getUsername()) != null) {
+			System.out.println("server handle move");
+			System.out.println(packet.getUsername());
+			//if(getPlayerMP(packet.getUsername()) != null) {
+				System.out.println("packet name not null");
 				int index = getPlayerMPIndex(packet.getUsername());
+				if(index >= this.connectedPlayers.size()) {
+					index--;
+				}
 				this.connectedPlayers.get(index).setX(packet.getX());
 				this.connectedPlayers.get(index).setY(packet.getY());
 				packet.writeData(this);
-			}
+//			} else {
+//				System.out.println("packet name  null");
+//			}
 		} catch (Exception e) {
 			System.out.println("Exception in GameServer.handleMove");
 			e.printStackTrace();

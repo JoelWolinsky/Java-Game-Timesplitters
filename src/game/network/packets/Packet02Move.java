@@ -29,11 +29,13 @@ public class Packet02Move extends Packet {
 
 	@Override
 	public void writeData(GameClient client) {
+		System.out.println("packet02 write to client");
 		client.sendData(getData());
 	}
 
 	@Override
 	public void writeData(GameServer server) {
+		System.out.println("packet02 write data");
 		server.sendDataToAllClients(getData());
 	}
 

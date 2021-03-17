@@ -7,13 +7,17 @@ public class Packet00Login extends Packet {
 
 	private String username;
 	private float x,y;
+	private String[] urls;
 	
 	public Packet00Login(byte[] data) {
 		super(00);
 		String[] dataArray = readData(data).split(",");
+		
+		System.out.println(readData(data));
 		this.username = dataArray[0];
 		this.x = Float.parseFloat(dataArray[1]);
 		this.y = Float.parseFloat(dataArray[2]);
+		//this.urls = new String[]{dataArray[3], dataArray[4], dataArray[5]};
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -22,6 +26,8 @@ public class Packet00Login extends Packet {
 		this.username = username;
 		this.x = x;
 		this.y = y;
+		//this.urls = urls;
+		//System.out.println(urls);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -32,11 +38,13 @@ public class Packet00Login extends Packet {
 
 	@Override
 	public void writeData(GameServer server) {
+		System.out.println("packet00 writedata");
 		server.sendDataToAllClients(getData());
 	}
 
 	@Override
 	public byte[] getData() {
+		//System.out.println(("00" + this.username+","+getX()+","+getY()+getURLs()));
 		return ("00" + this.username+","+getX()+","+getY()).getBytes();
 	}
 
@@ -52,4 +60,7 @@ public class Packet00Login extends Packet {
 		return y;
 	}
 	
+	public String[] getURLs() {
+		return urls;
+	}
 }

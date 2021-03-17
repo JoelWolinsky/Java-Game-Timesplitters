@@ -52,17 +52,20 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private Point prevPos;
 	
 	private String username;
+	private KeyInput input;
 
-	public Player(float x, float y, int width,int height, String...urls) {
+	public Player(float x, float y, KeyInput input, int width,int height) {
 		super(x, y, 2, width, height);
 		
+		this.input = input;
 		this.username = UUID.randomUUID().toString();;
-
+		
+		
 		BufferedImage img;
 		try
 		{
-			//sets the width and hight of the platform based on the provided image width and height
-			img = ImageIO.read( new File(urls[0]));
+			//sets the width and height of the platform based on the provided image width and height
+			img = ImageIO.read( new File("./img/adventurer-idle0.png"));
 
 		}
 		catch ( IOException exc )
@@ -97,55 +100,57 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		this.prevPos = new Point((int)this.x, (int)this.y);
 
 		//Check for keyboard input along the x-axis
-		if(KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
-
-		/* Beware: Java floating point representation makes it difficult to have perfect numbers
-		( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
-
-				// Simulates acceleration when you run right
-				if (this.velX >= RUN_SPEED){
-					this.velX = RUN_SPEED;
+		
+		if (this.input != null) {
+			if(KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
+	
+			/* Beware: Java floating point representation makes it difficult to have perfect numbers
+			( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
+	
+					// Simulates acceleration when you run right
+					if (this.velX >= RUN_SPEED){
+						this.velX = RUN_SPEED;
+					} else {
+						this.velX += RUN_SPEED/6;
+					}
+					currentAnimationState = AnimationStates.RIGHT;
+	
+			} else if(KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
+	
+					// Simulates acceleration when you run left
+					if (this.velX <= -RUN_SPEED){
+						this.velX = -RUN_SPEED;
+					} else {
+						this.velX -= RUN_SPEED/6;
+					}
+					currentAnimationState = AnimationStates.LEFT;
+	
+			} else {
+				// For deceleration effect
+				if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
+					if (this.velX >= -0.1f && this.velX <= 0.1f) {
+						this.velX = 0;
+						currentAnimationState = AnimationStates.IDLE;
+					} else if (this.velX > 0.1f) {
+						this.velX -= DECELERATION;
+					} else {
+						this.velX += DECELERATION;
+					}
 				} else {
-					this.velX += RUN_SPEED/6;
-				}
-				currentAnimationState = AnimationStates.RIGHT;
-
-		} else if(KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
-
-				// Simulates acceleration when you run left
-				if (this.velX <= -RUN_SPEED){
-					this.velX = -RUN_SPEED;
-				} else {
-					this.velX -= RUN_SPEED/6;
-				}
-				currentAnimationState = AnimationStates.LEFT;
-
-		} else {
-			// For deceleration effect
-			if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
-				if (this.velX >= -0.1f && this.velX <= 0.1f) {
 					this.velX = 0;
 					currentAnimationState = AnimationStates.IDLE;
-				} else if (this.velX > 0.1f) {
-					this.velX -= DECELERATION;
-				} else {
-					this.velX += DECELERATION;
 				}
-			} else {
-				this.velX = 0;
-				currentAnimationState = AnimationStates.IDLE;
+			}
+	
+			//Check for keyboard input along the y-axis
+			if(KeyInput.down.isPressed()) {
+				this.velY = DOWN_SPEED;
+			}else if(KeyInput.up.isPressed()) {
+				if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
+					this.velY = JUMP_GRAVITY;
+				}
 			}
 		}
-
-		//Check for keyboard input along the y-axis
-		if(KeyInput.down.isPressed()) {
-			this.velY = DOWN_SPEED;
-		}else if(KeyInput.up.isPressed()) {
-			if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
-				this.velY = JUMP_GRAVITY;
-			}
-		}
-
 		//If you're not on ground, you should fall
 		if(!isOnGround()) {
 			fall(this);
@@ -191,7 +196,8 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		if(Game.isMultiplayer) {
 			if((int)this.x != this.prevPos.x || (int)this.y != this.prevPos.y) {
 				Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y);
-				packet.writeData(Game.socketClient);
+				System.out.println("Player move usr " + this.getUsername());
+				packet.writeData(Game.game.socketClient);
 			}
 		}
 
