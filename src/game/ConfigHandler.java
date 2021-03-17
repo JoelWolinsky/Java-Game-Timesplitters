@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class ConfigHandler {
 	
 	String fileName;
-	Boolean soundEffectsToggle;
-	Boolean musicToggle;
+	public Boolean soundEffectsToggle;
+	public Boolean musicToggle;
 	
 	public enum ConfigOption {
 		SOUNDEFFECTS,
@@ -19,8 +19,8 @@ public class ConfigHandler {
 	
 	public ConfigHandler(String fileNameArg) {
 		this.fileName = fileNameArg;
-		this.soundEffectsToggle = null;
-		this.musicToggle = null;
+		this.soundEffectsToggle = getSoundEffectsToggle();
+		this.musicToggle = getMusicToggle();
 	}
 	
 	/**
@@ -39,8 +39,10 @@ public class ConfigHandler {
 			reader.close();
 			
 			if (toggle.equals("True")) {
+				this.soundEffectsToggle = true;
 				return true;
 			} else {
+				this.soundEffectsToggle = false;
 				return false;
 			}
 		}
@@ -68,9 +70,10 @@ public class ConfigHandler {
 			reader.close();
 			
 			if (toggle.equals("True")) {
-				
+				this.musicToggle = true;
 				return true;
 			} else {
+				this.musicToggle = false;
 				return false;
 			}
 		}

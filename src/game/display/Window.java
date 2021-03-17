@@ -323,7 +323,7 @@ public class Window extends Canvas{
 		toggleSoundEffectsButton.setFont(sizedFont);
 		toggleSoundEffectsButton.setHorizontalTextPosition(JLabel.CENTER);
 		
-		if (Launcher.cHandler.getSoundEffectsToggle()) {
+		if (Launcher.cHandler.soundEffectsToggle) {
 			toggleSoundEffectsButton.setText("<html><center>SOUND EFFECTS:<br><p style='margin-top:8'>ON</center></html>");
 		} else {
 			toggleSoundEffectsButton.setText("<html><center>SOUND EFFECTS:<br><p style='margin-top:8'>OFF</center></html>");
@@ -339,12 +339,14 @@ public class Window extends Canvas{
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				
-		    	if (Launcher.cHandler.getSoundEffectsToggle()) {
+		    	if (Launcher.cHandler.soundEffectsToggle) {
 		    		toggleSoundEffectsButton.setText("<html><center>SOUND EFFECTS:<br><p style='margin-top:8'>OFF</center></html>");
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.SOUNDEFFECTS, "False");
+		    		Launcher.cHandler.soundEffectsToggle = false;
 		    	} else {
 		    		toggleSoundEffectsButton.setText("<html><center>SOUND EFFECTS:<br><p style='margin-top:8'>ON</center></html>");
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.SOUNDEFFECTS, "True");
+		    		Launcher.cHandler.soundEffectsToggle = true;
 		    	}
 	
 		    	toggleSoundEffectsButton.setIcon(button3HoverInner);
@@ -367,7 +369,7 @@ public class Window extends Canvas{
 		toggleMusicButton.setFont(sizedFont);
 		toggleMusicButton.setHorizontalTextPosition(JLabel.CENTER);
 		
-		if (Launcher.cHandler.getMusicToggle()) {
+		if (Launcher.cHandler.musicToggle) {
 			toggleMusicButton.setText("<html><center>MUSIC:<br><p style='margin-top:8'>ON</center></html>");
 		} else {
 			toggleMusicButton.setText("<html><center>MUSIC:<br><p style='margin-top:8'>OFF</center></html>");
@@ -383,12 +385,14 @@ public class Window extends Canvas{
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				
-		    	if (Launcher.cHandler.getMusicToggle()) {
+		    	if (Launcher.cHandler.musicToggle) {
 		    		toggleMusicButton.setText("<html><center>MUSIC:<br><p style='margin-top:8'>OFF</center></html>");
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.MUSIC, "False");
+		    		Launcher.cHandler.musicToggle = false;
 		    	} else {
 		    		toggleMusicButton.setText("<html><center>MUSIC:<br><p style='margin-top:8'>ON</center></html>");
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.MUSIC, "True");
+		    		Launcher.cHandler.musicToggle = true;
 		    	}
 	
 		    	toggleMusicButton.setIcon(button3HoverInner);
