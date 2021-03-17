@@ -160,7 +160,7 @@ public class Level extends Canvas {
 			int index = getPlayerMPIndex(username);
 			System.out.println(getGameObjects().size());
 			if(index == getGameObjects().size() && getGameObjects().get(index-1) instanceof PlayerMP) {
-				
+				System.out.println("too big");
 				index--;
 			}
 			getGameObjects().get(index).setX(x);

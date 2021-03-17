@@ -47,7 +47,7 @@ public class Game extends Canvas implements Runnable{
 		new Window(this);
 
 		System.out.println("window open");
-		//this.start();
+		this.start();
 	}
 	
 	/**

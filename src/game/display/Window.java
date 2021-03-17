@@ -435,7 +435,7 @@ public class Window extends Canvas{
 		    	Game.state = GameState.Playing;
 		    	Game.isMultiplayer = true;
 		    	
-		    	game.start();
+		    	//game.start();
 			}
 				  
 			@Override
@@ -477,7 +477,7 @@ public class Window extends Canvas{
 		    	Game.state = GameState.Playing;
 		    	Game.isMultiplayer = true;
 		    	
-		    	game.start();
+		    	//game.start();
 			}
 				  
 			@Override
