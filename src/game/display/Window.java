@@ -47,6 +47,7 @@ public class Window extends Canvas{
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
+		c.setBackground(Color.BLACK);
 		
 		// Creating a new Font from the PressStart2P.ttf file that can be used in HTML JLabels
 		Font buttonFont = null;
@@ -88,17 +89,30 @@ public class Window extends Canvas{
 		multiplayerButtonPanel.setVisible(false);
 		((FlowLayout)multiplayerButtonPanel.getLayout()).setVgap(panelHeight / 3);
 		
-		
-		// disabled due to graphical b
 		// Handling the main screen background image
-		ImageIcon background = new ImageIcon("./img/background.gif");
-	    Image img = background.getImage();
-	    Image temp = img.getScaledInstance(WIDTH,HEIGHT,Image.SCALE_DEFAULT);
-	    background = new ImageIcon(temp);
-	    JLabel back = new JLabel(background);
+		ImageIcon backgroundMain = new ImageIcon("./img/backgroundMain.gif");
+	    Image temp = backgroundMain.getImage().getScaledInstance(WIDTH,HEIGHT,Image.SCALE_DEFAULT);
+	    backgroundMain = new ImageIcon(temp);
+	    JLabel back = new JLabel(backgroundMain);
 	    back.setLayout(null);
 	    back.setBounds(0,0,WIDTH,HEIGHT);
 	    back.setVisible(true);
+	    
+	    ImageIcon backgroundOptions = new ImageIcon("./img/backgroundOptions.gif");
+	    Image temp2 = backgroundOptions.getImage().getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
+	    backgroundOptions = new ImageIcon(temp2);
+	    JLabel backOptions = new JLabel(backgroundOptions);
+	    backOptions.setLayout(null);
+	    backOptions.setBounds(0,0,WIDTH,HEIGHT);
+	    backOptions.setVisible(false);
+	    
+	    ImageIcon backgroundMultiplayer = new ImageIcon("./img/backgroundMultiplayer.gif");
+	    Image temp3 = backgroundMultiplayer.getImage().getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
+	    backgroundMultiplayer = new ImageIcon(temp3);
+	    JLabel backMultiplayer = new JLabel(backgroundMultiplayer);
+	    backMultiplayer.setLayout(null);
+	    backMultiplayer.setBounds(0, 0, WIDTH, HEIGHT);
+	    backMultiplayer.setVisible(false);
 	    
 	    // Importing button graphics
 		ImageIcon button1Icon = new ImageIcon("./img/button1.png");
@@ -168,6 +182,8 @@ public class Window extends Canvas{
 			public void mouseReleased(MouseEvent e) {
 				mainMenu.setVisible(false);
 				back.setVisible(false);
+				backOptions.setVisible(false);
+				backMultiplayer.setVisible(false);
 				
 				Game.state = GameState.Playing;
 				game.start();
@@ -201,13 +217,15 @@ public class Window extends Canvas{
 			public void mousePressed(MouseEvent e) {
 				multiplayerButton.setIcon(button1ClickedInner);
 		    	SoundHandler.playSound("button1", 1f);
+		    	backMultiplayer.setVisible(true);
 			}
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-		    	backButtonPanel.setVisible(true);
+				backButtonPanel.setVisible(true);
 		    	multiplayerButtonPanel.setVisible(true);
 				mainMenu.setVisible(false);
+				back.setVisible(false);
 			}
 				  
 			@Override
@@ -233,13 +251,15 @@ public class Window extends Canvas{
 			public void mousePressed(MouseEvent e) {
 				optionsButton.setIcon(button1ClickedInner);
 		    	SoundHandler.playSound("button1", 1f);
+		    	backOptions.setVisible(true);
 			}
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-		    	optionButtonPanel.setVisible(true);
+				optionButtonPanel.setVisible(true);
 		    	backButtonPanel.setVisible(true);
 				mainMenu.setVisible(false);
+				back.setVisible(false);
 			}
 				  
 			@Override
@@ -299,11 +319,14 @@ public class Window extends Canvas{
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
+				back.setVisible(true);
 				backButton.setIcon(button2Inner);
 				mainMenu.setVisible(true);
 		    	backButtonPanel.setVisible(false);
 		    	optionButtonPanel.setVisible(false);
 		    	multiplayerButtonPanel.setVisible(false);
+		    	backOptions.setVisible(false);
+		    	backMultiplayer.setVisible(false);
 			}
 				  
 			@Override
@@ -435,6 +458,8 @@ public class Window extends Canvas{
 				back.setVisible(false);
 		    	backButtonPanel.setVisible(false);
 		    	multiplayerButtonPanel.setVisible(false);
+		    	backOptions.setVisible(false);
+				backMultiplayer.setVisible(false);
 		    	
 		    	Game.state = GameState.Playing;
 		    	Game.isMultiplayer = true;
@@ -477,6 +502,8 @@ public class Window extends Canvas{
 				back.setVisible(false);
 		    	backButtonPanel.setVisible(false);
 		    	multiplayerButtonPanel.setVisible(false);
+		    	backOptions.setVisible(false);
+				backMultiplayer.setVisible(false);
 		    	
 		    	Game.state = GameState.Playing;
 		    	Game.isMultiplayer = true;
@@ -509,7 +536,9 @@ public class Window extends Canvas{
 		c.add(optionButtonPanel);
 		c.add(multiplayerButtonPanel);
 		c.add(backButtonPanel);
-		c.add(back);;
+		c.add(back);
+		c.add(backOptions);
+		c.add(backMultiplayer);
 		
 		frame.add(game);
 		frame.pack();
