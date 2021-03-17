@@ -170,7 +170,7 @@ public class Window extends Canvas{
 				back.setVisible(false);
 				
 				Game.state = GameState.Playing;
-				game.start();
+				//game.start();
 			}
 			
 			// This handles when the mouse enters the JLabel
