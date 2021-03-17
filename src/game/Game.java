@@ -34,6 +34,7 @@ public class Game extends Canvas implements Runnable{
 	public static GameServer socketServer;
 
 	public static Boolean isMultiplayer = false;
+	public static Game game;
 
 	public Player player;
 
@@ -145,7 +146,7 @@ public class Game extends Canvas implements Runnable{
 	        
 			
 		}
-		
+		game = this;
 
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 		

@@ -186,10 +186,11 @@ public class GameServer extends Thread {
 	}
 
 	public void sendDataToAllClients(byte[] data) {
-		//System.out.println("Server Send to all");
+		System.out.println("Server Send to all");
 		try {
 			for (PlayerMP p : connectedPlayers) {
 				if (p.port != -1) {
+					System.out.println("Sent to " + p.getUsername());
 					sendData(data, p.ipAddress, p.port);
 				}
 			}
@@ -201,17 +202,20 @@ public class GameServer extends Thread {
 	
 	private void handleMove(Packet02Move packet) {
 		try {
-			//System.out.println("server handle move");
+			System.out.println("server handle move");
 			System.out.println(packet.getUsername());
-			if(getPlayerMP(packet.getUsername()) != null) {
+			//if(getPlayerMP(packet.getUsername()) != null) {
 				System.out.println("packet name not null");
 				int index = getPlayerMPIndex(packet.getUsername());
+				if(index >= this.connectedPlayers.size()) {
+					index--;
+				}
 				this.connectedPlayers.get(index).setX(packet.getX());
 				this.connectedPlayers.get(index).setY(packet.getY());
 				packet.writeData(this);
-			} else {
-				System.out.println("packet name  null");
-			}
+//			} else {
+//				System.out.println("packet name  null");
+//			}
 		} catch (Exception e) {
 			System.out.println("Exception in GameServer.handleMove");
 			e.printStackTrace();
