@@ -87,7 +87,7 @@ public class Window extends Canvas{
 		multiplayerButtonPanel.setBounds(WIDTH / 4, HEIGHT / 10, panelWidth, panelHeight * 2);
 		multiplayerButtonPanel.setOpaque(false);
 		multiplayerButtonPanel.setVisible(false);
-		((FlowLayout)multiplayerButtonPanel.getLayout()).setVgap(panelHeight / 3);
+		((FlowLayout)multiplayerButtonPanel.getLayout()).setVgap(panelHeight / 4);
 		
 		// Handling the main screen background image
 		ImageIcon backgroundMain = new ImageIcon("./img/backgroundMain.gif");
@@ -432,6 +432,42 @@ public class Window extends Canvas{
 			}
 		});
 		
+		// The play vs computer button on the multiplayer screen
+		JLabel playVSComputerButton = new JLabel(button3Icon);
+		playVSComputerButton.setForeground(Color.black);
+		playVSComputerButton.setFont(sizedFont);
+		playVSComputerButton.setHorizontalTextPosition(JLabel.CENTER);
+		playVSComputerButton.setText("PLAY VS COMPUTER");
+		
+		playVSComputerButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				playVSComputerButton.setIcon(button3ClickedInner);
+				SoundHandler.playSound("button1", 1f);
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				playVSComputerButton.setIcon(button3HoverInner);
+				
+				back.setVisible(false);
+		    	backButtonPanel.setVisible(false);
+		    	multiplayerButtonPanel.setVisible(false);
+		    	backOptions.setVisible(false);
+				backMultiplayer.setVisible(false);
+			}
+				  
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				playVSComputerButton.setIcon(button3HoverInner);
+			}
+				  
+			@Override
+			public void mouseExited(MouseEvent e) {
+				playVSComputerButton.setIcon(button3Inner);
+			}
+		});
+		
 		// The create game button on the multiplayer screen
 		JLabel createGameButton = new JLabel(button3Icon);
 		createGameButton.setForeground(Color.black);
@@ -530,6 +566,7 @@ public class Window extends Canvas{
 		backButtonPanel.add(backButton);
 		optionButtonPanel.add(toggleSoundEffectsButton);
 		optionButtonPanel.add(toggleMusicButton);
+		multiplayerButtonPanel.add(playVSComputerButton);
 		multiplayerButtonPanel.add(createGameButton);
 		multiplayerButtonPanel.add(joinGameButton);
 		c.add(mainMenu);
