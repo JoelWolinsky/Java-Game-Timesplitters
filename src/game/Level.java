@@ -13,6 +13,7 @@ public class Level extends Canvas {
 
 	private LinkedList<GameObject> entities = new LinkedList<>();
 	private LinkedList<Player> players = new LinkedList<>();
+	private int i =0;
 	
 	public synchronized LinkedList<GameObject> getGameObjects(){
 		return this.entities;
@@ -32,6 +33,19 @@ public class Level extends Canvas {
 
 					if (l instanceof Area)
 					{
+
+						if (l instanceof Portal)
+							if (((Portal) l).getInteraction(((Player) k)))
+							{
+								((Player) k).setRespawnX((int) l.getX());
+								((Player) k).setRespawnY((int)l.getY() + ((Portal) l).getDestination());
+								k.setY( l.getY() + ((Portal) l).getDestination());
+								if (((Portal) l).getDestination()>0)
+									k.setX( l.getX()-60);
+								//for (RespawnPoint oo: respawnPoints)
+								//	if (oo != o)
+								//		oo.setCurrentActive(false);
+							}
 
 						if (l instanceof OnReachAnimArea)
 							if (((OnReachAnimArea) l).getInteraction(((Player) k)))
@@ -72,6 +86,26 @@ public class Level extends Canvas {
 								if (((EventDamageZone) l).getInteraction(((Player) k)))
 									((Player) k).respawn();
 						}
+
+						if (l instanceof DetectionDamageZone) {
+								if (((DetectionDamageZone) l).getArea().getInteraction(((Player) k))) {
+									//((DetectionDamageZone) l).setTriggered(true);
+									((DetectionDamageZone) l).getArea().setVisibile(true);
+									((Player) k).respawn();
+									i=0;
+								}
+								else {
+									if (i<50)
+										i++;
+									else
+									((DetectionDamageZone) l).getArea().setVisibile(false);
+								}
+							if (((DetectionDamageZone) l).getActive())
+								if (((DetectionDamageZone) l).getInteraction(((Player) k)))
+									((Player) k).respawn();
+
+						}
+
 					}
 
 				}

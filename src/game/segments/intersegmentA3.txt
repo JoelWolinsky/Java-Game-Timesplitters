@@ -7,6 +7,7 @@ ScriptedDamageZone 140 360 1 20 3 90 360 4 180 360 4 140 360 1 4 hand1.png hand1
 Platform Custom 0 124 corner1inv.png
 Platform Custom 96 156 top2.png
 Platform Custom 330 124 corner1.png
+Portal 400 345 3 4 portal1.png portal1.png portal1.png portal1.png
 Floor
 Chunk 1 N skyA.png
 Revert

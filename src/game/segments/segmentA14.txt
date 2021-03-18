@@ -1,0 +1,127 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA12p1.png
+
+Chunk 1 E seasdgasd1.png
+Chunk 1 S seasdgasd1.png
+Chunk 1 S segmentA14p1.png
+Chunk 1 W segmentA14p1.png
+Revert
+Chunk 1 S segmentA14p1.png
+
+
+1ST ONE
+
+Platform Custom -140 383 thinfloor1.png
+
+Platform Custom 150 -124 bookshelf1.png
+Platform Custom 140 -60 bookshelf1.png
+Platform Custom 130 4 bookshelf1.png
+Platform Custom 145 68 bookshelf1.png
+Platform Custom 161 132 bookshelf1.png
+Platform Custom 155 196 bookshelf1.png
+Platform Custom 155 250 bookshelf2.png
+
+Platform Custom 150 350 bookshelf2.png
+Platform Custom 145 382 bookshelf1.png
+Platform Custom 161 446 bookshelf1.png
+Platform Custom 148 510 bookshelf1.png
+Platform Custom 155 574 bookshelf1.png
+Platform Custom 153 638 bookshelf1.png
+Platform Custom 142 702 bookshelf1.png
+
+2ND ONE
+
+Platform Custom 340 -124 bookshelf1.png
+Platform Custom 348 -60 bookshelf1.png
+Platform Custom 361 4 bookshelf1.png
+Platform Custom 355 68 bookshelf1.png
+Platform Custom 352 132 bookshelf1.png
+Platform Custom 359 196 bookshelf1.png
+Platform Custom 359 250 bookshelf2.png
+
+Platform Custom 350 370 bookshelf2.png
+Platform Custom 350 382 bookshelf1.png
+Platform Custom 347 446 bookshelf1.png
+Platform Custom 358 510 bookshelf1.png
+Platform Custom 355 574 bookshelf1.png
+Platform Custom 361 638 bookshelf1.png
+Platform Custom 348 702 bookshelf1.png
+
+Chunk 1 W segmentA14p1.png
+Portal 290 343 -3 4 portal1.png portal2.png portal3.png portal1.png
+Respawn 340 363 flag1.png
+Chunk 1 W segmentA14p1.png
+Chunk 1 S segmentA14p1.png
+Projectile 350 -600 0 10 1500 426 -590 100 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
+Chunk 1 E segmentA14p2.png
+Projectile 0 -600 0 10 1500 90 -590 20 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
+Projectile 150 -600 0 10 1500 200 -590 210 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
+Chunk 1 E segmentA14p2.png
+Projectile 20 -600 0 10 1000 100 -590 0 nopicture.png 4 books1.png books1.png books1.png books1.png
+Projectile 20 -600 0 10 1000 100 -590 40 nopicture.png 4 books1.png books1.png books1.png books1.png
+Projectile 20 -600 0 10 1500 80 -590 100 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
+
+Projectile 220 -600 0 10 1500 280 -590 110 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
+Projectile 220 600 0 -10 1500 280 590 10 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
+
+Chunk 1 E segmentA14p1.png
+
+
+
+Chunk 1 N segmentA14p2.png
+Platform Custom 102 -124 bookshelf1.png
+Platform Custom 94 -60 bookshelf1.png
+Platform Custom 105 4 bookshelf1.png
+Platform Custom 110 68 bookshelf1.png
+Platform Custom 98 132 bookshelf1.png
+Platform Custom 102 196 bookshelf1.png
+Platform Custom 102 220 bookshelf2.png
+
+Platform Custom 100 310 bookshelf2.png
+Platform Custom 100 342 bookshelf2.png
+Platform Custom 102 362 bookshelf2.png
+Platform Custom 98 382 bookshelf1.png
+Platform Custom 96 446 bookshelf1.png
+Platform Custom 102 510 bookshelf1.png
+Platform Custom 99 574 bookshelf1.png
+Platform Custom 103 638 bookshelf1.png
+Platform Custom 100 702 bookshelf1.png
+
+
+
+
+
+
+
+
+Platform Custom 340 -124 bookshelf1.png
+Platform Custom 348 -60 bookshelf1.png
+Platform Custom 361 4 bookshelf1.png
+Platform Custom 355 68 bookshelf1.png
+Platform Custom 352 132 bookshelf1.png
+Platform Custom 359 196 bookshelf1.png
+Platform Custom 359 250 bookshelf2.png
+
+Platform Custom 345 370 bookshelf2.png
+Platform Custom 345 382 bookshelf1.png
+Platform Custom 347 446 bookshelf1.png
+Platform Custom 358 510 bookshelf1.png
+Platform Custom 355 574 bookshelf1.png
+Platform Custom 361 638 bookshelf1.png
+Platform Custom 348 702 bookshelf1.png
+
+
+Chunk 1 N segmentA14p1.png
+
+
+Projectile -10 0 0 10 1000 60 20 0 nopicture.png 4 books1.png books1.png books1.png books1.png
+Projectile -10 0 0 10 1000 60 20 30 nopicture.png 4 books1.png books1.png books1.png books1.png
+Projectile -10 1000 0 -10 1000 60 1000 90 nopicture.png 4 books1.png books1.png books1.png books1.png
+
+Revert
+
+Platform Custom 500 383 thinfloor1.png
+Portal 550 343 -3 4 portal1.png portal2.png portal3.png portal1.png
+
+Chunk 1 N seasdgasd1.png
+Chunk 1 N seasdgasd1.png
+Chunk 1 N seasdgasd1.png
