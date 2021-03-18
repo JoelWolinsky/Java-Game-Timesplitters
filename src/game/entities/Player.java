@@ -126,11 +126,11 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 					currentAnimationState = AnimationStates.LEFT;
 	
 			} else {
+				currentAnimationState = AnimationStates.IDLE;
 				// For deceleration effect
 				if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
 					if (this.velX >= -0.1f && this.velX <= 0.1f) {
 						this.velX = 0;
-						currentAnimationState = AnimationStates.IDLE;
 					} else if (this.velX > 0.1f) {
 						this.velX -= DECELERATION;
 					} else {
@@ -138,7 +138,6 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 					}
 				} else {
 					this.velX = 0;
-					currentAnimationState = AnimationStates.IDLE;
 				}
 			}
 	
