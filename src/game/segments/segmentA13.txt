@@ -9,6 +9,35 @@ CrushingPlatform 100 270 50 10 bookshelf1.png 25 RIGHT 7.5
 CrushingPlatform 200 270 50 10 bookshelf1.png 0 BOTTOM 7.5
 CrushingPlatform 300 270 50 10 bookshelf1.png 0 BOTTOM 7.5
 
+DamageZone 411 372 3 1000 350 0 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 396 372 3 1000 350 3 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 385 372 3 1000 350 6 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 374 372 3 1000 350 9 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 363 372 3 1000 350 12 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 352 372 3 1000 350 15 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 341 372 3 1000 350 18 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 330 372 3 1000 350 21 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 319 372 3 1000 350 24 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+
+DamageZone 308 372 3 1000 350 27 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 297 372 3 1000 350 30 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 286 372 3 1000 350 33 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 275 372 3 1000 350 36 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 264 372 3 1000 350 39 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 253 372 3 1000 350 42 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 242 372 3 1000 350 45 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 231 372 3 1000 350 48 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 220 372 3 1000 350 51 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+
+DamageZone 209 372 3 1000 350 54 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 198 372 3 1000 350 57 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 187 372 3 1000 350 60 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 176 372 3 1000 350 63 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 165 372 3 1000 350 66 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 154 372 3 1000 350 69 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 143 372 3 1000 350 71 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 132 372 3 1000 350 74 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 121 372 3 1000 350 77 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
 
 Floor
 

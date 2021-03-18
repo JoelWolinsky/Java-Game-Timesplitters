@@ -17,17 +17,18 @@ public class ScriptedDamageZone extends AnimArea{
 	private float originalX;
 	private float speed,speed2;
 	private boolean lockX=false, lockY=false;
-	private LinkedList<Point> points = new LinkedList<>();
+	private LinkedList<Point> points;
 
 	int k=0;
 
-	public ScriptedDamageZone(float x, float y, int width, int height, float speed, int startOffset, String...urls) {
+	public ScriptedDamageZone(float x, float y, int width, int height, float speed, LinkedList<Point> points, int startOffset, String...urls) {
 		super(x, y, width, height, urls);
 		this.startOffset = startOffset;
 		this.originalX=x;
 		this.originalY=y;
 		this.speed=speed;
 		this.speed2=speed;
+		this.points = (LinkedList) points.clone();
 
 	}
 

@@ -15,7 +15,8 @@ public class Level extends Canvas {
 	private LinkedList<Player> players = new LinkedList<>();
 	private LinkedList<AIPlayer> aiPlayers = new LinkedList<>();
 	private LinkedList<Waypoint> waypoints = new LinkedList<>();
-	
+	private int i =0;
+
 	public synchronized LinkedList<GameObject> getGameObjects(){
 		return this.entities;
 	}
@@ -34,6 +35,19 @@ public class Level extends Canvas {
 
 					if (l instanceof Area)
 					{
+
+						if (l instanceof Portal)
+							if (((Portal) l).getInteraction(((Player) k)))
+							{
+								((Player) k).setRespawnX((int) l.getX());
+								((Player) k).setRespawnY((int)l.getY() + ((Portal) l).getDestination());
+								k.setY( l.getY() + ((Portal) l).getDestination());
+								if (((Portal) l).getDestination()>0)
+									k.setX( l.getX()-60);
+								//for (RespawnPoint oo: respawnPoints)
+								//	if (oo != o)
+								//		oo.setCurrentActive(false);
+							}
 
 						if (l instanceof OnReachAnimArea)
 							if (((OnReachAnimArea) l).getInteraction(((Player) k)))
@@ -74,11 +88,31 @@ public class Level extends Canvas {
 								if (((EventDamageZone) l).getInteraction(((Player) k)))
 									((Player) k).respawn();
 						}
+
+						if (l instanceof DetectionDamageZone) {
+								if (((DetectionDamageZone) l).getArea().getInteraction(((Player) k))) {
+									//((DetectionDamageZone) l).setTriggered(true);
+									((DetectionDamageZone) l).getArea().setVisibile(true);
+									((Player) k).respawn();
+									i=0;
+								}
+								else {
+									if (i<50)
+										i++;
+									else
+									((DetectionDamageZone) l).getArea().setVisibile(false);
+								}
+							if (((DetectionDamageZone) l).getActive())
+								if (((DetectionDamageZone) l).getInteraction(((Player) k)))
+									((Player) k).respawn();
+
+						}
+
 					}
 
 				}
-			} 
-			
+			}
+
 			if (k instanceof AIPlayer) {
 
 				for (GameObject l:entities)
@@ -87,17 +121,17 @@ public class Level extends Canvas {
 					if (l instanceof Waypoint) {
 						//if (o.getReached()==false) //comment this out if you want to allow players to activate previously reached respawn points
 						if (((Waypoint) l).getInteraction((AIPlayer) k))
-						{	
+						{
 
 							((AIPlayer) k).setDirection(((Waypoint) l).getDirection());
 							((AIPlayer) k).setJump(((Waypoint) l).getJump());
 
 							// Means a waypoint only has an effect once until player touches another one
 							if (!waypoints.contains((Waypoint) l)) {
-							
+
 								waypoints.clear();
 								waypoints.add((Waypoint) l);
-								((AIPlayer) k).setWait(((Waypoint) l).getWait());								
+								((AIPlayer) k).setWait(((Waypoint) l).getWait());
 
 							}
 						}
@@ -155,7 +189,7 @@ public class Level extends Canvas {
 		}
 
 	}
-	
+
 	public void render(Graphics g, float f, float h) {
 
 		for(GameObject o : getGameObjects()) {
@@ -167,7 +201,7 @@ public class Level extends Canvas {
 			}
 			else if (o instanceof Waypoint)
 			{
-				// if (((Waypoint) o).getCurrentActive()) 
+				// if (((Waypoint) o).getCurrentActive())
 				//	o.render(g, f, h);
 			}
 			else if (o instanceof DamageZone)
@@ -195,7 +229,7 @@ public class Level extends Canvas {
 	//if (p.getX()-650<player.getX() && player.getX()<p.getX()+800 && p.getY()-480<player.getY() && player.getY()<p.getY()+ 740)
 
 
-	
+
 	public void addEntity(GameObject o) {
 //		System.out.println("Adding entitiy to level");
 		getGameObjects().add(o);
@@ -214,7 +248,7 @@ public class Level extends Canvas {
 	public LinkedList<GameObject> getEntities() {
 		return getGameObjects();
 	}
-	
+
 	public void removePlayerMP(String username) {
 		try {
 			int index = 0;
@@ -230,7 +264,7 @@ public class Level extends Canvas {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private int getPlayerMPIndex(String username) {
 		try {
 			int index = 0;
@@ -251,7 +285,7 @@ public class Level extends Canvas {
 			return -1;
 		}
 	}
-	
+
 	public void movePlayer(String username, float x, float y) {
 		try {
 			int index = getPlayerMPIndex(username);

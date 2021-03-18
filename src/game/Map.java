@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -154,20 +155,55 @@ public class Map {
                         String[] arr5 = list5.toArray(new String[0]);
 
 
-                        ScriptedDamageZone adz;
-                        adz = new ScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Integer.parseInt(splited[4]),arr5);
-                        currentLevel.addEntity(adz);
+                        LinkedList<Point> points = new LinkedList<>();
 
                         Point adak;
-
-
-                        adz.addPoint(new Point(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),1));
+                        points.add(new Point(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),1));
 
                         for (int l = 6;l < 6+(3*Integer.parseInt(splited[5]));l+=3)
                         {
                             adak= new Point(horizontalIndex - setX + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]));
-                            adz.addPoint(adak);
+                            points.add(adak);
                         }
+
+
+                        ScriptedDamageZone adz;
+                        adz = new ScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),points,Integer.parseInt(splited[4]),arr5);
+                        currentLevel.addEntity(adz);
+
+
+                        break;
+                    case "DetectionDamageZone":
+
+                        //prepares a string array with the urls
+                        List<String> list7 = new ArrayList<String>();
+                        for (int l = 6+(3*Integer.parseInt(splited[5])) + 1 ;l < 6+(3*Integer.parseInt(splited[5])) + 1 +Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]);l++)
+                            list7.add("./img/".concat(splited[l]));
+
+                        String[] arr7 = list7.toArray(new String[0]);
+
+                        LinkedList<Point> points2 = new LinkedList<>();
+
+                        Point ddzs;
+
+                        points2.add(new Point(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),1));
+
+                        for (int l = 6;l < 6+(3*Integer.parseInt(splited[5]));l+=3)
+                        {
+                            ddzs= new Point(horizontalIndex - setX + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]));
+                            points2.add(ddzs);
+                        }
+
+                        DetectionDamageZone ddz;
+                        ddz = new DetectionDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),points2,Integer.parseInt(splited[4]),arr7);
+                        currentLevel.addEntity(ddz);
+
+                        AnimArea bbb;
+                        bbb  = new AnimArea(horizontalIndex - setX + Integer.parseInt(splited[1])+20,verticalIndex + Integer.parseInt(splited[2]),100,100,arr7);
+                        currentLevel.addEntity(bbb);
+                        bbb.setVisibile(false);
+                        ddz.setArea(bbb);
+
 
                         break;
                     case "EventDamageZone":
@@ -217,7 +253,7 @@ public class Map {
                         String[] arr2 = list2.toArray(new String[0]);
 
                         Projectile pj;
-                        pj = new Projectile(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Float.parseFloat(splited[4]),Float.parseFloat(splited[5]),Float.parseFloat(splited[6]),Float.parseFloat(splited[7]), Integer.parseInt(splited[8]),splited[9],arr2);
+                        pj = new Projectile(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Float.parseFloat(splited[4]),Float.parseFloat(splited[5]),horizontalIndex - setX + Float.parseFloat(splited[6]),Float.parseFloat(splited[7])+verticalIndex, Integer.parseInt(splited[8]),splited[9],arr2);
                         currentLevel.addEntity(pj);
                         break;
                     case "AnimArea":
@@ -231,6 +267,18 @@ public class Map {
                         cao = new AnimArea(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,arr3);
 
                         currentLevel.addEntity(cao);
+                        break;
+                    case "Portal":
+                        Portal por;
+                        List<String> list8 = new ArrayList<String>();
+                        for (int l = 5;l < 5+Integer.parseInt(splited[4]);l++)
+                            list8.add("./img/".concat(splited[l]));
+
+                        String[] arr8 = list8.toArray(new String[0]);
+
+                        por = new Portal(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3])*setY,arr8);
+
+                        currentLevel.addEntity(por);
                         break;
                     case "OnReachAnimArea":
                         OnReachAnimArea oraa;

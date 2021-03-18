@@ -13,6 +13,7 @@ public class AnimArea extends Area implements AnimatedObject {
 	private static AnimationStates currentAnimationState = defaultAnimationState;
 	private static HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
 	private Animation anim;
+	private boolean visibile=true;
 
 	public AnimArea(float x, float y, int width, int height, String...urls) {
 		super(x, y, width, height,urls[0]);
@@ -26,8 +27,8 @@ public class AnimArea extends Area implements AnimatedObject {
 
 		//g.setColor(Color.magenta);
 		//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
-
-		this.renderAnimAlt(g, (int)(this.x+f), (int)(this.y+h),anim);
+		if (isVisibile())
+			this.renderAnimAlt(g, (int)(this.x+f), (int)(this.y+h),anim);
 	}
 
 	public int getAnimationTimer() {
@@ -49,5 +50,13 @@ public class AnimArea extends Area implements AnimatedObject {
 
 	public Animation getAnimation(AnimationStates state) {
 		return animations.get(state);
+	}
+
+	public boolean isVisibile() {
+		return visibile;
+	}
+
+	public void setVisibile(boolean visibile) {
+		this.visibile = visibile;
 	}
 }
