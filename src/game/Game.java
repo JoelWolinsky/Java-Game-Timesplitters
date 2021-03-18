@@ -137,16 +137,12 @@ public class Game extends Canvas implements Runnable{
 			player = new Player(0, 340, keyInput, 0 ,0);
 
 			currentLevel.addEntity(player);
-			currentLevel.addPlayer(player);
-
 			currentLevel.addEntity(aiPlayer);
-			currentLevel.addAIPlayer(aiPlayer);
 
 		}else {
 			System.out.println("mp");
 			player = new PlayerMP(this.currentLevel, 300, 300, keyInput, null, -1);
 			currentLevel.addEntity(player);
-			currentLevel.addPlayer(player);
 			Packet00Login loginPacket = new Packet00Login(player.getUsername(), 300, 300);
 	        if (socketServer != null) {
 	        	socketServer.addConnection((PlayerMP) player, loginPacket);
@@ -175,7 +171,7 @@ public class Game extends Canvas implements Runnable{
 			//m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");
 			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
 
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA1X.txt"); 		// 1 - basic first one (numbers for demo)
+		//	m.mapParser(currentLevel, "./src/game/segments/segmentA1X.txt"); 		// 1 - basic first one (numbers for demo)
 			// TODO: Fix glitch on falling rocks where you teleport into wall
 			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA2X.txt");	// 2 - falling rocks
 			//m.mapParser(currentLevel, "./src/game/segments/segmentA2X.txt");		// 3 - electric one
@@ -218,7 +214,7 @@ public class Game extends Canvas implements Runnable{
 			//WORK IN PROGRESS
 		}
 
-		Collections.sort(currentLevel.getEntities(), Comparator.comparingInt(GameObject::getZ));
+		Collections.sort(currentLevel.getGameObjects(), Comparator.comparingInt(GameObject::getZ));
 
 
 		camera = new Camera();

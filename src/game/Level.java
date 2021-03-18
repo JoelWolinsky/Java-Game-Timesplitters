@@ -12,8 +12,6 @@ import game.entities.platforms.TimerPlatform;
 public class Level extends Canvas {
 
 	private LinkedList<GameObject> entities = new LinkedList<>();
-	private LinkedList<Player> players = new LinkedList<>();
-	private LinkedList<AIPlayer> aiPlayers = new LinkedList<>();
 	private LinkedList<Waypoint> waypoints = new LinkedList<>();
 	private int i =0;
 
@@ -235,18 +233,8 @@ public class Level extends Canvas {
 		getGameObjects().add(o);
 	}
 
-	public void addPlayer(Player p) {
-		getGameObjects().add(p);
-	}
-	public void addAIPlayer(AIPlayer p) {
-		aiPlayers.add(p);
-	}
 	public void removeEntity(GameObject o) {
 		getGameObjects().remove(o);
-	}
-
-	public LinkedList<GameObject> getEntities() {
-		return getGameObjects();
 	}
 
 	public void removePlayerMP(String username) {
