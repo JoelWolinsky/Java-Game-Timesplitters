@@ -165,7 +165,7 @@ public class Game extends Canvas implements Runnable{
 			// FOR DEMO PURPOSES
 
 			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
-
+			m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");
 			m.mapParser(currentLevel, "./src/game/segments/segmentA14.txt");
 			//m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");
 			//m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");
@@ -205,7 +205,7 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt");		// disappearing platforms over acid
 			m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");		// bookshelf pyramid
 			m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");		// crushing bookshelves
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA14.txt");
 			*/
 
 		}
