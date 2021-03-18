@@ -266,7 +266,7 @@ public class Level extends Canvas {
 				index++;
 			}
 			System.out.println("index: " + index);
-			return index;
+			return (index);
 		} catch (Exception e) {
 			System.out.println("Exception in getPlayerMPIndex. Player " + username);
 			e.printStackTrace();
