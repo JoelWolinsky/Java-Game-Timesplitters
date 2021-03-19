@@ -116,7 +116,7 @@ public class Map {
                         currentLevel.addEntity(cp);
                         break;
                     case "Respawn":
-                        RespawnPoint rp = new RespawnPoint(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,"./img/".concat(splited[3]));
+                        RespawnPoint rp = new RespawnPoint(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),"./img/".concat(splited[5]));
                         currentLevel.addEntity(rp);
                         break;
                     case "Waypoint":
@@ -278,12 +278,12 @@ public class Map {
                     case "Portal":
                         Portal por;
                         List<String> list8 = new ArrayList<String>();
-                        for (int l = 5;l < 5+Integer.parseInt(splited[4]);l++)
+                        for (int l = 7;l < 7+Integer.parseInt(splited[6]);l++)
                             list8.add("./img/".concat(splited[l]));
 
                         String[] arr8 = list8.toArray(new String[0]);
 
-                        por = new Portal(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3])*setY,arr8);
+                        por = new Portal(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3])*setY,Integer.parseInt(splited[4]),Integer.parseInt(splited[5]),horizontalIndex - setX,verticalIndex,arr8);
 
                         currentLevel.addEntity(por);
                         break;

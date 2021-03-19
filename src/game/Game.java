@@ -164,10 +164,11 @@ public class Game extends Canvas implements Runnable{
 
 			// FOR DEMO PURPOSES
 
-			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA4.txt");
 			//m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA14.txt");
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");
+			m.mapParser(currentLevel, "./src/game/segments/introDimension.txt");
+			m.mapParser(currentLevel, "./src/game/segments/segmentA14.txt");
 			//m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");
 			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
 
@@ -183,7 +184,7 @@ public class Game extends Canvas implements Runnable{
 
 			// m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt"); 		// 9 - disappearing floors
 
-
+/*
 
 			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt");			// basic segment
 			m.mapParser(currentLevel, "./src/game/segments/intersegmentA1.txt"); 	// falling objects - hard for AI
@@ -207,6 +208,8 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "./src/game/segments/segmentA14.txt");
 
 
+
+ */
 		}
 		else if (mapMode.equals("randomlyGenerated"))
 		{

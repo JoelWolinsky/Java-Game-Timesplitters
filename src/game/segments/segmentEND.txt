@@ -1,6 +1,6 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA3.png
 Chunk 1 E segmentA3p1.png
-Respawn 10 363 flag1.png
+Respawn 10 363 0 0 flag1.png
 Waypoint 50 363 flag3.png N Y 0
 Platform Custom 0 92 corner1.png
 Platform Custom 96 92 top2.png

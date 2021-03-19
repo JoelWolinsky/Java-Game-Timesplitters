@@ -1,6 +1,6 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA2.png
 Chunk 1 E intersegmentA2.png
-Respawn 40 363 flag1.png
+Respawn 40 363 0 0 flag1.png
 Platform Custom 0 384 customFloor1.png
 Platform Custom 333 384 customFloor1.png
 Platform Custom 70 50 wall1.png

@@ -6,9 +6,12 @@ public class RespawnPoint extends Area {
 
 	private boolean reached = false;
 	private boolean currentActive = false;
+	private float pointX,pointY;
 
-	public RespawnPoint(float x, float y, int width, int height, String url) {
+	public RespawnPoint(float x, float y, int width, int height, int pointX, int pointY, String url) {
 		super(x, y, width, height, url);
+		this.pointX=pointX;
+		this.pointY=pointY;
 	}
 
 	public void tick() {
@@ -40,6 +43,14 @@ public class RespawnPoint extends Area {
 
 	public boolean getInteraction(AIPlayer aiPlayer){
 		return ((int)this.x<(int)aiPlayer.getX()+aiPlayer.getWidth() && (int)aiPlayer.getX()<this.x+this.width && (int)this.y-100<(int)aiPlayer.getY()+aiPlayer.getHeight() && (int)aiPlayer.getY() <(int)this.y+this.height);
+	}
+
+	public float getExtraPointX() {
+		return pointX;
+	}
+
+	public float getExtraPointY() {
+		return pointY;
 	}
 
 }

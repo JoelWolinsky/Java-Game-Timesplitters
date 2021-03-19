@@ -13,8 +13,6 @@ public class Projectile extends DamageZone {
 		super(x, y, width, height,0,0,0,startOffset, notice, urls);
 		this.randomRangeX=randomRangeX;
 		this.randomRangeY=randomRangeY;
-		System.out.println(randomRangeX);
-		System.out.println(randomRangeY);
 		this.startOffset=startOffset;
 		this.baseposX=x;
 		this.baseposY=y;
@@ -91,7 +89,6 @@ public class Projectile extends DamageZone {
 				else
 				{
 
-					System.out.println(randomRangeX);
 					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else

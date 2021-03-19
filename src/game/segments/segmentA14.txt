@@ -1,25 +1,30 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA12p1.png
 
-Chunk 1 E seasdgasd1.png
-Chunk 1 S seasdgasd1.png
-Chunk 1 S segmentA14p1.png
-Chunk 1 W segmentA14p1.png
-Revert
-Chunk 1 S segmentA14p1.png
+Chunk 1 E segmentA14p1.png
 
 
 1ST ONE
 
 Platform Custom -140 383 thinfloor1.png
 
-Platform Custom 150 -124 bookshelf1.png
-Platform Custom 140 -60 bookshelf1.png
+Platform Custom 162 -764 bookshelf1.png
+Platform Custom 155 -700 bookshelf1.png
+Platform Custom 150 -636 bookshelf1.png
+Platform Custom 168 -572 bookshelf1.png
+Platform Custom 153 -508 bookshelf1.png
+Platform Custom 141 -444 bookshelf1.png
+Platform Custom 162 -380 bookshelf1.png
+Platform Custom 149 -316 bookshelf1.png
+Platform Custom 140 -252 bookshelf1.png
+Platform Custom 158 -188 bookshelf1.png
+Platform Custom 139 -124 bookshelf1.png
+Platform Custom 145 -60 bookshelf1.png
 Platform Custom 130 4 bookshelf1.png
 Platform Custom 145 68 bookshelf1.png
 Platform Custom 161 132 bookshelf1.png
 Platform Custom 155 196 bookshelf1.png
 Platform Custom 155 250 bookshelf2.png
-
+GAP
 Platform Custom 150 350 bookshelf2.png
 Platform Custom 145 382 bookshelf1.png
 Platform Custom 161 446 bookshelf1.png
@@ -33,29 +38,37 @@ Platform Custom 142 702 bookshelf1.png
 Platform Custom 340 -124 bookshelf1.png
 Platform Custom 348 -60 bookshelf1.png
 Platform Custom 361 4 bookshelf1.png
-Platform Custom 355 68 bookshelf1.png
+Platform Custom 350 68 bookshelf1.png
 Platform Custom 352 132 bookshelf1.png
 Platform Custom 359 196 bookshelf1.png
 Platform Custom 359 250 bookshelf2.png
-
+GAP
 Platform Custom 350 370 bookshelf2.png
 Platform Custom 350 382 bookshelf1.png
-Platform Custom 347 446 bookshelf1.png
+Platform Custom 342 446 bookshelf1.png
 Platform Custom 358 510 bookshelf1.png
 Platform Custom 355 574 bookshelf1.png
 Platform Custom 361 638 bookshelf1.png
 Platform Custom 348 702 bookshelf1.png
 
-Chunk 1 W segmentA14p1.png
-Portal 290 343 -3 4 portal1.png portal2.png portal3.png portal1.png
-Respawn 340 363 flag1.png
-Chunk 1 W segmentA14p1.png
+
 Chunk 1 S segmentA14p1.png
-Projectile 350 -600 0 10 1500 426 -590 100 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
+Revert
+Chunk 1 N segmentA14p1.png
+
+Projectile 20 -500 0 10 1700 80 0 20 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
+Projectile 20 -500 0 10 1900 80 0 60 nopicture.png 4 books1.png books1.png books1.png books1.png
+Projectile 20 -500 0 10 2000 80 0 100 nopicture.png 4 books1.png books1.png books1.png books1.png
+
+Projectile 20 -400 -10 10 800 80 0 100 nopicture.png 4 books1.png books1.png books1.png books1.png
+Projectile 20 0 -10 10 1000 80 0 0 nopicture.png 4 books1.png books1.png books1.png books1.png
+
+Projectile -700 -400 10 10 800 80 0 100 nopicture.png 4 books1.png books1.png books1.png books1.png
+
+Revert
+
 Chunk 1 E segmentA14p2.png
-Projectile 0 -600 0 10 1500 90 -590 20 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
-Projectile 150 -600 0 10 1500 200 -590 210 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
-Chunk 1 E segmentA14p2.png
+
 Projectile 20 -600 0 10 1000 100 -590 0 nopicture.png 4 books1.png books1.png books1.png books1.png
 Projectile 20 -600 0 10 1000 100 -590 40 nopicture.png 4 books1.png books1.png books1.png books1.png
 Projectile 20 -600 0 10 1500 80 -590 100 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
@@ -63,11 +76,6 @@ Projectile 20 -600 0 10 1500 80 -590 100 nopicture.png 4 bookshelf1.png bookshel
 Projectile 220 -600 0 10 1500 280 -590 110 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
 Projectile 220 600 0 -10 1500 280 590 10 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
 
-Chunk 1 E segmentA14p1.png
-
-
-
-Chunk 1 N segmentA14p2.png
 Platform Custom 102 -124 bookshelf1.png
 Platform Custom 94 -60 bookshelf1.png
 Platform Custom 105 4 bookshelf1.png
@@ -87,12 +95,6 @@ Platform Custom 103 638 bookshelf1.png
 Platform Custom 100 702 bookshelf1.png
 
 
-
-
-
-
-
-
 Platform Custom 340 -124 bookshelf1.png
 Platform Custom 348 -60 bookshelf1.png
 Platform Custom 361 4 bookshelf1.png
@@ -109,8 +111,11 @@ Platform Custom 355 574 bookshelf1.png
 Platform Custom 361 638 bookshelf1.png
 Platform Custom 348 702 bookshelf1.png
 
-
+Chunk 1 S segmentA14p1.png
+Revert
 Chunk 1 N segmentA14p1.png
+Revert
+
 
 
 Projectile -10 0 0 10 1000 60 20 0 nopicture.png 4 books1.png books1.png books1.png books1.png
@@ -119,9 +124,4 @@ Projectile -10 1000 0 -10 1000 60 1000 90 nopicture.png 4 books1.png books1.png 
 
 Revert
 
-Platform Custom 500 383 thinfloor1.png
-Portal 550 343 -3 4 portal1.png portal2.png portal3.png portal1.png
-
-Chunk 1 N seasdgasd1.png
-Chunk 1 N seasdgasd1.png
-Chunk 1 N seasdgasd1.png
+-Portal 550 343 -3 4 portal1.png portal2.png portal3.png portal1.png

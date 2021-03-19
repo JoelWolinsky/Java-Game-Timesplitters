@@ -14,6 +14,7 @@ public class Level extends Canvas {
 	private LinkedList<GameObject> entities = new LinkedList<>();
 	private LinkedList<Waypoint> waypoints = new LinkedList<>();
 	private int i =0;
+	private int j=0;
 
 	public synchronized LinkedList<GameObject> getGameObjects(){
 		return this.entities;
@@ -34,18 +35,57 @@ public class Level extends Canvas {
 					if (l instanceof Area)
 					{
 
-						if (l instanceof Portal)
-							if (((Portal) l).getInteraction(((Player) k)))
-							{
-								((Player) k).setRespawnX((int) l.getX());
-								((Player) k).setRespawnY((int)l.getY() + ((Portal) l).getDestination());
-								k.setY( l.getY() + ((Portal) l).getDestination());
-								if (((Portal) l).getDestination()>0)
-									k.setX( l.getX()-60);
+						if (l instanceof Portal) {
+							if (((Portal) l).getInteraction(((Player) k))) {
+								((Player) k).setRespawnX(((Portal) l).getCurrentX() + ((Portal) l).getDestinationX());
+								((Player) k).setRespawnY((int) ((Portal) l).getCurrentY() + ((Portal) l).getDestinationLevel() + ((Portal) l).getDestinationY());
+								k.setY(((Portal) l).getCurrentY() + ((Portal) l).getDestinationLevel() + ((Portal) l).getDestinationY());
+								k.setX(k.getX());
 								//for (RespawnPoint oo: respawnPoints)
 								//	if (oo != o)
 								//		oo.setCurrentActive(false);
 							}
+
+							if (((Portal) l).getInteractionEffect(((Player) k)))
+							{
+								switch (j){
+									case 0:
+										k.setX(k.getX()+15);
+										j++;
+										break;
+									case 1:
+										k.setX(k.getX()-15);
+										j++;
+										break;
+									case 2:
+										k.setX(k.getX()+15);
+										j++;
+										break;
+									case 3:
+										k.setX(k.getX()-15);
+										j++;
+										break;
+									case 4:
+										k.setX(k.getX()+15);
+										j++;
+										break;
+									case 5:
+										k.setX(k.getX()-15);
+										j++;
+										break;
+									case 6:
+										k.setX(k.getX()+15);
+										j++;
+										break;
+									case 7:
+										k.setX(k.getX()-15);
+										j++;
+										break;
+								}
+
+							}
+
+						}
 
 						if (l instanceof OnReachAnimArea)
 							if (((OnReachAnimArea) l).getInteraction(((Player) k)))
@@ -57,8 +97,8 @@ public class Level extends Canvas {
 							//if (o.getReached()==false) //comment this out if you want to allow players to activate previously reached respawn points
 							if (((RespawnPoint) l).getInteraction(((Player) k)))
 							{
-								((Player) k).setRespawnX((int) l.getX());
-								((Player) k).setRespawnY((int) l.getY()-10);
+								((Player) k).setRespawnX((int) l.getX() + (int)((RespawnPoint) l).getExtraPointX());
+								((Player) k).setRespawnY((int) l.getY()-40 + (int) ((RespawnPoint) l).getExtraPointY());
 								((RespawnPoint)l).setReached(true);
 								((RespawnPoint)l).setCurrentActive(true);
 								//for (RespawnPoint oo: respawnPoints)

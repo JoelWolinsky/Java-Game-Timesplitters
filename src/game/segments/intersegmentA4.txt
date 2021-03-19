@@ -1,0 +1,40 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA2.png
+Chunk 1 E intersegmentA4alt.png
+Respawn -40 363 0 0 flag1.png
+Respawn 0 400 213 0 invisibleRespawn.png
+Respawn 0 500 213 0 invisibleRespawn.png
+Respawn 0 600 213 0 invisibleRespawn.png
+Respawn 0 700 213 0 invisibleRespawn.png
+Respawn 0 800 213 0 invisibleRespawn.png
+Respawn 0 900 213 0 invisibleRespawn.png
+Respawn 0 1000 213 0 invisibleRespawn.png
+Respawn 0 1100 213 0 invisibleRespawn.png
+Respawn 0 1200 213 0 invisibleRespawn.png
+Respawn 0 1300 213 0 invisibleRespawn.png
+Respawn 0 1400 213 0 invisibleRespawn.png
+Respawn 0 1500 213 0 invisibleRespawn.png
+
+
+Platform Custom -32 -128 wall2.png
+Platform Custom -32 0 wall2.png
+Platform Custom -32 395 wall2.png
+Chunk 1 N intersegmentA4.png
+
+
+
+Revert
+
+Chunk 1 S intersegmentA4.png
+Chunk 1 S intersegmentA4alt.png
+Chunk 1 S intersegmentA4alt.png
+Projectile 100 -1500 0 10 1800 60 0 0 nopicture.png 4 books1.png books1.png books1.png books1.png
+Projectile 180 -1500 0 10 1800 60 0 20 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
+Projectile 80 -1500 0 10 1800 60 0 110 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
+Projectile 250 -1500 0 10 1800 60 0 50 nopicture.png 4 books1.png books1.png books1.png books1.png
+Projectile 340 -1500 0 10 1800 60 0 90 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
+Projectile 290 -1500 0 10 1800 60 0 140 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
+Portal 10 350 3 200 200 4 bigportal.png bigportal.png bigportal.png bigportal.png
+-AnimArea 0 0 4 intersegmentA4portalalt1.png intersegmentA4portalalt2.png intersegmentA4portalalt3.png intersegmentA4portalalt4.png
+Chunk 1 S flareia4.png
+AnimArea 0 -384 4 intersegmentA4portal1.png intersegmentA4portal2.png intersegmentA4portal3.png intersegmentA4portal4.png
+-AnimArea 0 0 4 intersegmentA4portalaltalt1.png intersegmentA4portalaltalt1.png intersegmentA4portalaltalt1.png intersegmentA4portalaltalt1.png
