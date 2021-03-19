@@ -164,12 +164,12 @@ public class Game extends Canvas implements Runnable{
 
 			// FOR DEMO PURPOSES
 
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA14.txt");
+			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			//m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");
+			//m.mapParser(currentLevel, "./src/game/segments/segmentA14.txt");
 			//m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");
 			//m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
 
 		//	m.mapParser(currentLevel, "./src/game/segments/segmentA1X.txt"); 		// 1 - basic first one (numbers for demo)
 			// TODO: Fix glitch on falling rocks where you teleport into wall
@@ -184,10 +184,9 @@ public class Game extends Canvas implements Runnable{
 			// m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt"); 		// 9 - disappearing floors
 
 
-			/*
-			// m.mapParser(currentLevel, "./src/game/segments/intersegmentA1.txt"); 	// falling objects - hard for AI
+
 			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt");			// basic segment
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA2.txt");	// falling rocks
+			m.mapParser(currentLevel, "./src/game/segments/intersegmentA1.txt"); 	// falling objects - hard for AI
 			m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");			// electric one
 			m.mapParser(currentLevel, "./src/game/segments/intersegmentA2.txt");	// falling rocks
 			m.mapParser(currentLevel, "./src/game/segments/segmentA3.txt");			// aesthetic hall 1
@@ -206,7 +205,7 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");		// bookshelf pyramid
 			m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");		// crushing bookshelves
 			m.mapParser(currentLevel, "./src/game/segments/segmentA14.txt");
-			*/
+
 
 		}
 		else if (mapMode.equals("randomlyGenerated"))

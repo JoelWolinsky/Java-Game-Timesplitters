@@ -13,8 +13,8 @@ Platform Custom 150 550 thinPlatformA.png
 Platform Custom 213 469 thinPlatformA.png
 Platform Default 194 100
 AnimArea 197 50 4 torch1.png torch2.png torch3.png torch4.png
-Projectile 120 0 0 3 500 0 35 0 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
-Projectile 285 0 0 3 500 0 70 0 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
+Projectile 120 0 0 3 500 0 0 0 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
+Projectile 285 0 0 3 500 0 0 0 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
 
 
 Platform Custom 226 100 edge1inv.png

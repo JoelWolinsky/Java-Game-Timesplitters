@@ -13,6 +13,8 @@ public class Projectile extends DamageZone {
 		super(x, y, width, height,0,0,0,startOffset, notice, urls);
 		this.randomRangeX=randomRangeX;
 		this.randomRangeY=randomRangeY;
+		System.out.println(randomRangeX);
+		System.out.println(randomRangeY);
 		this.startOffset=startOffset;
 		this.baseposX=x;
 		this.baseposY=y;
@@ -39,12 +41,12 @@ public class Projectile extends DamageZone {
 					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (randomRangeX - this.baseposX)) + this.baseposX;
+						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
 
 					if (randomRangeY==0)
 						this.y=this.baseposY;
 					else
-						this.y = (int)(Math.random() * (randomRangeY - this.baseposY)) + this.baseposY;
+						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
 
 					if (!super.getNotice().equals("nopicture.png"))
 					{
@@ -64,12 +66,12 @@ public class Projectile extends DamageZone {
 					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (randomRangeX - this.baseposX)) + this.baseposX;
+						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
 
 					if (randomRangeY==0)
 						this.y=this.baseposY;
 					else
-						this.y = (int)(Math.random() * (randomRangeY - this.baseposY)) + this.baseposY;
+						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
 
 					if (!super.getNotice().equals("nopicture.png"))
 					{
@@ -93,12 +95,12 @@ public class Projectile extends DamageZone {
 					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (randomRangeX - this.baseposX)) + this.baseposX;
+						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
 
 					if (randomRangeY==0)
 						this.y=this.baseposY;
 					else
-						this.y = (int)(Math.random() * (randomRangeY - this.baseposY)) + this.baseposY;
+						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
 
 					if (!super.getNotice().equals("nopicture.png"))
 					{
@@ -118,12 +120,12 @@ public class Projectile extends DamageZone {
 					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (randomRangeX - this.baseposX)) + this.baseposX;
+						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
 
 					if (randomRangeY==0)
 						this.y=this.baseposY;
 					else
-						this.y = (int)(Math.random() * (randomRangeY - this.baseposY)) + this.baseposY;
+						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
 
 					if (!super.getNotice().equals("nopicture.png"))
 					{

@@ -6,7 +6,7 @@ Platform Custom -67 140 corner1.png
 Platform Custom 29 140 top1.png
 Platform Custom 214 265 edge1.png
 EventDamageZone 327 228 50 200 notice.png 0 0 activated1.png 1 -180 -70 4 skele1.png skele2.png skele4.png skele2.png
-DetectionDamageZone 140 360 0 0 1 170 360 1 4 hand1.png hand1.png hand1.png hand1.png
+-DetectionDamageZone 140 360 0 0 1 170 360 1 4 hand1.png hand1.png hand1.png hand1.png
 Platform Default 246 265
 Platform Inverted 278 265
 Platform Default 294 265
