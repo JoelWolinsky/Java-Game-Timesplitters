@@ -42,7 +42,7 @@ public class RespawnPoint extends Area {
 	}
 
 	public boolean getInteraction(AIPlayer aiPlayer){
-		return ((int)this.x<(int)aiPlayer.getX()+aiPlayer.getWidth() && (int)aiPlayer.getX()<this.x+this.width && (int)this.y-100<(int)aiPlayer.getY()+aiPlayer.getHeight() && (int)aiPlayer.getY() <(int)this.y+this.height);
+		return ((int)this.x<(int)aiPlayer.getX()+aiPlayer.getWidth() && (int)aiPlayer.getX()<this.x+this.width && (int)this.y-200<(int)aiPlayer.getY()+aiPlayer.getHeight() && (int)aiPlayer.getY() <(int)this.y+this.height);
 	}
 
 	public float getExtraPointX() {
