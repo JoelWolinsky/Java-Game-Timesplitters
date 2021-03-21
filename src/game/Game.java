@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 
 import javax.swing.JOptionPane;
 
@@ -158,18 +159,21 @@ public class Game extends Canvas implements Runnable{
 
 		String mapMode = "default";
 		Map m = new Map();
-		//keep default for now until we sort randomly generated
+		//keep default for now untwil we sort randomly generated
 		if (mapMode.equals("default")) {
 
 
 			// FOR DEMO PURPOSES
 
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
 			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA4.txt");
 			//m.mapParser(currentLevel, "./src/game/segments/introDimension.txt");
 			//m.mapParser(currentLevel, "./src/game/segments/segmentA14.txt");
-			m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+
+			m.mapParser(currentLevel, "segmentA1");
+
+			m.mapParser(currentLevel, "intersegmentA2");
+
 			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
 
 		//	m.mapParser(currentLevel, "./src/game/segments/segmentA1X.txt"); 		// 1 - basic first one (numbers for demo)
@@ -214,6 +218,56 @@ public class Game extends Canvas implements Runnable{
 		else if (mapMode.equals("randomlyGenerated"))
 		{
 			//WORK IN PROGRESS
+			//m.parseCommand(currentLevel,"Chunk 1 E ground1.png");
+			m.mapParser(currentLevel, "segmentA1");
+			//m.parseCommand(currentLevel,"Chunk 1 E ground1.png");
+			m.mapParser(currentLevel, "intersegmentA1");
+
+			String [] array = new String[]{"segmentA1","segmentA2"};
+			String [] array2 = new String[]{"intersegmentA1","intersegmentA2d","intersegmentA2u"};
+			String [] array3 = new String[]{"N"};;
+			int x;
+			String y="";
+			int index=0;
+			int n = (int) ((Math.random() * (4 - 1)) + 1);
+			System.out.println("n="+n);
+			int rnd1,rnd2;
+			for (int i =0 ;i <n;i++) {
+
+
+
+
+
+				//m.parseCommand(currentLevel,"Chunk 1 ".concat(array3[x]).concat(" ").concat(y));
+
+				rnd1 = new Random().nextInt(array.length);
+				m.mapParser(currentLevel, array[rnd1]);
+
+
+				if (index ==0) {
+					array3 = new String[]{"N"};
+					y = "ground1.png";
+				}
+				else if (index>1) {
+					array3 = new String[]{"N","S"};
+					y = "sky1.png";
+				}
+
+				x = new Random().nextInt(array3.length);
+
+				if (array3[x].equals("N"))
+					index++;
+				else if (array3[x].equals("S"))
+					index--;
+
+				System.out.println(array3[x]);
+
+				rnd2 = new Random().nextInt(array2.length);
+				System.out.println(array2[rnd2]);
+				m.mapParser(currentLevel, array2[rnd2]);
+
+			}
+
 		}
 
 		Collections.sort(currentLevel.getGameObjects(), Comparator.comparingInt(GameObject::getZ));

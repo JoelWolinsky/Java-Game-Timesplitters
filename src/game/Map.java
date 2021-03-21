@@ -27,6 +27,35 @@ public class Map {
     private String currentTheme = "A";
 
 
+    public void parseCommand(Level currentLevel, String command)
+    {
+        String[] splitted = command.split("\\s+");
+
+        switch (splitted[0]){
+            case "Chunk":
+
+                Area a;
+                lastDirection = splitted[2];
+                switch (splitted[2]) {
+                    case "E":
+                        horizontalIndex = horizontalIndex + setX;
+                        break;
+                    case "W":
+                        horizontalIndex = horizontalIndex - setX;
+                        break;
+                    case "N":
+                        verticalIndex = verticalIndex - setY;
+                        break;
+                    case "S":
+                        verticalIndex = verticalIndex + setY;
+                        break;
+                }
+                a = new Area(horizontalIndex - setX, verticalIndex, setX, setY, "./img/".concat(splitted[3]));
+                currentLevel.addEntity(a);
+                break;
+        }
+    }
+
     public void mapParser(Level currentLevel, String url) {
 
         String goUrl = "";
@@ -36,7 +65,7 @@ public class Map {
         String textureBackground = "";
 
         try {
-            File myObj = new File(url);
+            File myObj = new File("./src/game/segments/".concat(url).concat(".txt"));
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
 
