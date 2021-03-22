@@ -1,37 +1,54 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA2.png
 Chunk 1 E intersegmentA2.png
 Respawn 40 363 0 0 flag1.png
-Platform Custom 0 384 customFloor1.png
-Platform Custom 333 384 customFloor1.png
-Platform Custom 70 50 wall1.png
-Platform Custom 338 50 wall1inv.png
-Platform Custom 53 0 corner2.png
-Platform Custom 307 0 corner2inv.png
-Platform Custom 117 -31 corner1.png
-Platform Custom 213 -31 corner1inv.png
+
+//OUTER WALLS
+Platform Custom 70 19 wall1.png
+Platform Custom 338 19 wall1inv.png
+
+//BOTTOM WALLS
+Platform Custom 70 401 wall3.png
+Platform Custom 338 401 wall3inv.png
+
+//ROOF
+Platform Custom 53 -45 corner2.png
+Platform Custom 307 -45 corner2inv.png
+Platform Custom 117 -76 corner1.png
+Platform Custom 213 -76 corner1inv.png
+
+//BOTTOM SHORTCUT PLATFORMS
 Platform Custom 150 550 thinPlatformA.png
 Platform Custom 213 469 thinPlatformA.png
-Platform Default 194 100
+
+//TORCH AND FALLING ROCKS
 AnimArea 197 50 4 torch1.png torch2.png torch3.png torch4.png
 Projectile 120 0 0 3 500 0 0 0 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
 Projectile 285 0 0 3 500 0 0 0 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
 
-
+//WINDOW PLATFORMS
+Platform Default 194 100
 Platform Custom 226 100 edge1inv.png
 Platform Custom 162 100 edge1.png
 
+//INNER WALL
+Platform Custom 181 116 wall1inv.png
+Platform Custom 229 116 wall1.png
 
+//CLIMBING PLATFORMS LEFT
 Platform Custom 86 284 smallplatform1.png
 Platform Custom 86 154 smallplatform1.png
 Platform Custom 165 350 smallplatform1inv.png
 Platform Custom 165 220 smallplatform1inv.png
-Platform Custom 181 116 wall1inv.png
-Platform Custom 229 116 wall1.png
 
+//CLIMBING PLATFORMS RIGHT
 Platform Custom 320 284 smallplatform1inv.png
 Platform Custom 320 154 smallplatform1inv.png
 Platform Custom 246 350 smallplatform1.png
 Platform Custom 246 220 smallplatform1.png
+
+//FLOORS
+Platform Custom 0 384 customFloor1.png
+Platform Custom 333 384 customFloor1.png
 
 Chunk 1 N intersegmentA2sky.png
 Revert
