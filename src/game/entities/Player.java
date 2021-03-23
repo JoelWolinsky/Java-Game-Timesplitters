@@ -36,6 +36,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private static final float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
 
 	private int respawnX=0;
+	private int respawnThreshold=340;
 	private int respawnY=340;
 	private int deathFromFallThreshold;
 	private boolean immunity=false;
@@ -210,7 +211,9 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		The main idea is that most respawn points will be at ground level on each specific floor so the +300 will
 		work everytime. (Falling 300 blocks below the floor/respawnY will kill the player)
 		 */
-		if (this.y >respawnY+300) {
+
+
+		if (this.y >respawnThreshold+300) {
 			this.x = respawnX;
 			this.y = respawnY;
 			i=0;
@@ -346,5 +349,11 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		return this.username;
 	}
 
+	public void addRespawnThreshold(int respawnThreshold) {
+		this.respawnThreshold = this.respawnThreshold + respawnThreshold;
+	}
 
+	public void setRespawnThreshold(int respawnThreshold) {
+		this.respawnThreshold = respawnThreshold;
+	}
 }

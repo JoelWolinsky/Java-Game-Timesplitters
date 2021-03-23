@@ -54,7 +54,7 @@ Platform Custom 338 0 wall4.png
 Platform Custom 0 384 customFloor1.png
 Platform Custom 353 384 customFloor1.png
 
-
+EventDamageZone 200 218 40 200 notice.png 0 0 1 100 80 1 100 4 skele1.png skele2.png skele4.png skele2.png
 Chunk 1 N intersegmentA2upsky.png
 -Platform Custom 338 384 customFloor1.png
 Platform Custom 341 384 edge1inv.png

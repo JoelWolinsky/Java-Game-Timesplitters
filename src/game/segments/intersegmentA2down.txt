@@ -1,54 +1,92 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA2.png
-Chunk 1 E intersegmentA2.png
-Respawn 40 363 0 0 flag1.png
+Chunk 1 E intersegmentA2upsky.png
+Respawn 50 363 0 0 flag1.png
 
-//FLOORS
-Platform Custom 0 384 customFloor1.png
-Platform Custom 333 384 customFloor1.png
+-Platform Custom 0 384 customFloor1.png
 
-//OUTER WALLS
-Platform Custom 70 19 wall1.png
-Platform Custom 338 19 wall1inv.png
+//3RD FLOOR
+
+Platform Custom 213 384 edge1inv.png
+Platform Custom 181 384 edge1.png
+
+
+//WALLS UPPER
+Platform Custom 338 250 wall1inv.png
+
+//ROOF
+Platform Custom 53 221 corner2.png
+Platform Custom 307 221 corner2inv.png
+Platform Custom 117 190 corner1.png
+Platform Custom 213 190 corner1inv.png
+
+AnimArea 197 310 4 torch1.png torch2.png torch3.png torch4.png
+
+
+Chunk 1 N skyA.png
+Revert
+Chunk 1 S intersegmentA2up.png
+
 
 //BOTTOM WALLS
 Platform Custom 70 401 wall3.png
 Platform Custom 338 401 wall3inv.png
 
-//ROOF
-Platform Custom 53 -45 corner2.png
-Platform Custom 307 -45 corner2inv.png
-Platform Custom 117 -76 corner1.png
-Platform Custom 213 -76 corner1inv.png
 
 //BOTTOM SHORTCUT PLATFORMS
-Platform Custom 150 550 thinPlatformA.png
-Platform Custom 213 469 thinPlatformA.png
+Platform Custom 213 430 edge1inv.png
+Platform Custom 181 430 edge1.png
 
 //TORCH AND FALLING ROCKS
-AnimArea 197 50 4 torch1.png torch2.png torch3.png torch4.png
-Projectile 120 0 0 3 500 0 0 0 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
-Projectile 285 0 0 3 500 0 0 0 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
-
-//WINDOW PLATFORMS
-Platform Default 194 100
-Platform Custom 226 100 edge1inv.png
-Platform Custom 162 100 edge1.png
-
-//INNER WALL
-Platform Custom 181 116 wall1inv.png
-Platform Custom 229 116 wall1.png
+AnimArea 197 60 4 torch1.png torch2.png torch3.png torch4.png
+-AnimArea 197 210 4 torch1.png torch2.png torch3.png torch4.png
+-AnimArea 197 340 4 torch1.png torch2.png torch3.png torch4.png
+-Projectile 120 0 0 3 500 0 0 0 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
 
 //CLIMBING PLATFORMS LEFT
-Platform Custom 86 284 smallplatform1.png
-Platform Custom 86 154 smallplatform1.png
-Platform Custom 165 350 smallplatform1inv.png
-Platform Custom 165 220 smallplatform1inv.png
+Platform Custom 90 224 smallplatform1.png
+Platform Custom 320 224 smallplatform1inv.png
 
 //CLIMBING PLATFORMS RIGHT
-Platform Custom 320 284 smallplatform1inv.png
-Platform Custom 320 154 smallplatform1inv.png
-Platform Custom 246 350 smallplatform1.png
-Platform Custom 246 220 smallplatform1.png
+Platform Custom 320 384 smallplatform1inv.png
+Platform Custom 90 384 smallplatform1.png
+Platform Custom 320 64 smallplatform1inv.png
+Platform Custom 90 64 smallplatform1.png
 
-Chunk 1 N intersegmentA2sky.png
-Revert
+
+//1ST FLOOR
+
+Platform Custom 213 284 edge1inv.png
+Platform Custom 181 284 edge1.png
+ExtendRespawn 85 284 250 1 invisibleRespawn.png
+
+
+//2ND FLOOR
+Platform Custom 213 130 edge1inv.png
+Platform Custom 181 130 edge1.png
+ExtendRespawn 85 130 250 1 invisibleRespawn.png
+
+
+
+
+//OUTER WALLS
+Platform Custom 338 19 wall1inv.png
+Platform Custom 70 0 wall4inv.png
+
+Platform Custom 50 0 edge1.png
+
+//FLOORS
+Platform Custom -23 384 customFloor1.png
+Platform Custom 338 384 customFloor1.png
+
+EventDamageZone 190 384 10 200 notice.png 0 0 1 -100 -100 200 1 4 skele1.png skele2.png skele4.png skele2.png
+
+Projectile 120 -135 0 4 650 150 0 50 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
+Projectile 260 -135 0 4 700 285 0 20 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
+Projectile 120 -135 0 4 620 150 0 80 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
+Projectile 260 -135 0 4 600 285 0 110 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
+Projectile 120 -135 0 4 710 150 0 130 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
+Projectile 260 -135 0 4 640 285 0 150 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
+Projectile 120 -135 0 4 700 150 0 170 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
+Projectile 260 -135 0 4 620 285 0 190 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
+
+

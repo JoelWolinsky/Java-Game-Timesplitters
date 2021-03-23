@@ -4,9 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Random;
+import java.util.*;
 
 import javax.swing.JOptionPane;
 
@@ -157,24 +155,12 @@ public class Game extends Canvas implements Runnable{
 
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 
-		String mapMode = "default";
+		String mapMode = "RNG";
 		Map m = new Map();
 		//keep default for now untwil we sort randomly generated
 		if (mapMode.equals("default")) {
 
-
-			// FOR DEMO PURPOSES
-
-			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
-			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA4.txt");
-			//m.mapParser(currentLevel, "./src/game/segments/introDimension.txt");
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA14.txt");
-
-			//m.mapParser(currentLevel, "segmentA1");
-
-			m.mapParser(currentLevel, "intersegmentA2up");
-			m.mapParser(currentLevel, "intersegmentA2");
-			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");
+			//m.mapParser(currentLevel, "segmentA13");
 
 		//	m.mapParser(currentLevel, "./src/game/segments/segmentA1X.txt"); 		// 1 - basic first one (numbers for demo)
 			// TODO: Fix glitch on falling rocks where you teleport into wall
@@ -190,60 +176,59 @@ public class Game extends Canvas implements Runnable{
 
 /*
 
-			m.mapParser(currentLevel, "./src/game/segments/segmentA1.txt");			// basic segment
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA1.txt"); 	// falling objects - hard for AI
-			m.mapParser(currentLevel, "./src/game/segments/segmentA2.txt");			// electric one
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA2.txt");	// falling rocks
-			m.mapParser(currentLevel, "./src/game/segments/segmentA3.txt");			// aesthetic hall 1
-			m.mapParser(currentLevel, "./src/game/segments/segmentA4.txt");			// aesthetic hall 2
-			m.mapParser(currentLevel, "./src/game/segments/segmentA5.txt");			// aesthetic hall 3
+			m.mapParser(currentLevel, "segmentA1");			// basic segment
+			m.mapParser(currentLevel, "intersegmentA1"); 	// falling objects - hard for AI
+			m.mapParser(currentLevel, "segmentA2");			// electric one
+			m.mapParser(currentLevel, "intersegmentA2");	// falling rocks
+			m.mapParser(currentLevel, "segmentA3");			// aesthetic hall 1
+			m.mapParser(currentLevel, "segmentA4");			// aesthetic hall 2
+			m.mapParser(currentLevel, "segmentA5");			// aesthetic hall 3
 
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");	// hands one
-			m.mapParser(currentLevel, "./src/game/segments/segmentA6.txt");			// ghosts
-			m.mapParser(currentLevel, "./src/game/segments/segmentA7.txt");			// platforms
+			m.mapParser(currentLevel, "intersegmentA3");	// hands one
+			m.mapParser(currentLevel, "segmentA6");			// ghosts
+			m.mapParser(currentLevel, "segmentA7");			// platforms
 
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");	// hands one
-			m.mapParser(currentLevel, "./src/game/segments/segmentA8.txt");			// disappearing long and small platforms
-			m.mapParser(currentLevel, "./src/game/segments/intersegmentA3.txt");	// hands one
-			m.mapParser(currentLevel, "./src/game/segments/segmentA10.txt");		// long corridor
-			m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt");		// disappearing platforms over acid
-			m.mapParser(currentLevel, "./src/game/segments/segmentA12.txt");		// bookshelf pyramid
-			m.mapParser(currentLevel, "./src/game/segments/segmentA13.txt");		// crushing bookshelves
-			m.mapParser(currentLevel, "./src/game/segments/segmentA14.txt");
+			m.mapParser(currentLevel, "intersegmentA3");	// hands one
+			m.mapParser(currentLevel, "segmentA8");			// disappearing long and small platforms
+			m.mapParser(currentLevel, "intersegmentA3");	// hands one
+			m.mapParser(currentLevel, "segmentA10");		// long corridor
+			m.mapParser(currentLevel, "segmentA11");		// disappearing platforms over acid
+			m.mapParser(currentLevel, "segmentA12");		// bookshelf pyramid
+			m.mapParser(currentLevel, "segmentA13");		// crushing bookshelves
+			m.mapParser(currentLevel, "intersegmentA3");
+			m.mapParser(currentLevel, "introDimension");
+			m.mapParser(currentLevel, "segmentA14");
 
 
 
  */
 		}
-		else if (mapMode.equals("randomlyGenerated"))
+		else if (mapMode.equals("RNG"))
 		{
 			//WORK IN PROGRESS
 			//m.parseCommand(currentLevel,"Chunk 1 E ground1.png");
-			m.mapParser(currentLevel, "segmentA1");
 			//m.parseCommand(currentLevel,"Chunk 1 E ground1.png");
-			m.mapParser(currentLevel, "intersegmentA1");
+			//m.mapParser(currentLevel, "intersegmentA1");
 
-			String [] array = new String[]{"segmentA1","segmentA2"};
-			String [] array2 = new String[]{"intersegmentA1","intersegmentA2d","intersegmentA2u"};
 			String [] array3 = new String[]{"N"};;
+			ArrayList<String> segments = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","segmentA1"));
 			int x;
 			String y="";
 			int index=0;
-			int n = (int) ((Math.random() * (4 - 1)) + 1);
-			System.out.println("n="+n);
-			int rnd1,rnd2;
-			for (int i =0 ;i <n;i++) {
-
-
-
+			int n = (int) ((Math.random() * (5 - 1)) + 1);
+			System.out.println("nr of segments: "+n);
+			int rnd1;
+			while (!segments.isEmpty()){
 
 
 				//m.parseCommand(currentLevel,"Chunk 1 ".concat(array3[x]).concat(" ").concat(y));
 
-				rnd1 = new Random().nextInt(array.length);
-				m.mapParser(currentLevel, array[rnd1]);
+				rnd1 = new Random().nextInt(segments.size());
+				m.mapParser(currentLevel, segments.get(rnd1));
+				segments.remove(rnd1);
 
 
+	/*
 				if (index ==0) {
 					array3 = new String[]{"N"};
 					y = "ground1.png";
@@ -261,10 +246,7 @@ public class Game extends Canvas implements Runnable{
 					index--;
 
 				System.out.println(array3[x]);
-
-				rnd2 = new Random().nextInt(array2.length);
-				System.out.println(array2[rnd2]);
-				m.mapParser(currentLevel, array2[rnd2]);
+				*/
 
 			}
 

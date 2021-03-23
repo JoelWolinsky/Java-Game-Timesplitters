@@ -39,6 +39,7 @@ public class Level extends Canvas {
 							if (((Portal) l).getInteraction(((Player) k))) {
 								((Player) k).setRespawnX(((Portal) l).getCurrentX() + ((Portal) l).getDestinationX());
 								((Player) k).setRespawnY((int) ((Portal) l).getCurrentY() + ((Portal) l).getDestinationLevel() + ((Portal) l).getDestinationY());
+								((Player) k).setRespawnThreshold((int)((Portal) l).getCurrentY() + ((Portal) l).getDestinationLevel() + ((Portal) l).getDestinationY());
 								k.setY(((Portal) l).getCurrentY() + ((Portal) l).getDestinationLevel() + ((Portal) l).getDestinationY());
 								k.setX(k.getX());
 								//for (RespawnPoint oo: respawnPoints)
@@ -95,12 +96,26 @@ public class Level extends Canvas {
 
 						if (l instanceof RespawnPoint)
 							//if (o.getReached()==false) //comment this out if you want to allow players to activate previously reached respawn points
+							//if (((RespawnPoint) l).getReached()==false)
 							if (((RespawnPoint) l).getInteraction(((Player) k)))
 							{
 								((Player) k).setRespawnX((int) l.getX() + (int)((RespawnPoint) l).getExtraPointX());
 								((Player) k).setRespawnY((int) l.getY()-40 + (int) ((RespawnPoint) l).getExtraPointY());
+								((Player) k).setRespawnThreshold((int)l.getY());
 								((RespawnPoint)l).setReached(true);
 								((RespawnPoint)l).setCurrentActive(true);
+								//for (RespawnPoint oo: respawnPoints)
+								//	if (oo != o)
+								//		oo.setCurrentActive(false);
+							}
+
+						if (l instanceof ExtendedRespawnPoint)
+							//if (((ExtendedRespawnPoint) l).getReached()==false)
+							if (((ExtendedRespawnPoint) l).getInteraction(((Player) k)))
+							{
+								((Player) k).setRespawnThreshold((int)l.getY());
+								((ExtendedRespawnPoint)l).setReached(true);
+								((ExtendedRespawnPoint)l).setCurrentActive(true);
 								//for (RespawnPoint oo: respawnPoints)
 								//	if (oo != o)
 								//		oo.setCurrentActive(false);
@@ -235,6 +250,11 @@ public class Level extends Canvas {
 			if (o instanceof RespawnPoint)
 			{
 				if (((RespawnPoint) o).getCurrentActive())
+					o.render(g, f, h);
+			}
+			else if (o instanceof ExtendedRespawnPoint)
+			{
+				if (((ExtendedRespawnPoint) o).getCurrentActive())
 					o.render(g, f, h);
 			}
 			else if (o instanceof Waypoint)

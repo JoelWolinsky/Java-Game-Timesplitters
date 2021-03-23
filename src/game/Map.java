@@ -148,6 +148,10 @@ public class Map {
                         RespawnPoint rp = new RespawnPoint(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),"./img/".concat(splited[5]));
                         currentLevel.addEntity(rp);
                         break;
+                    case "ExtendRespawn":
+                        ExtendedRespawnPoint er = new ExtendedRespawnPoint(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),"./img/".concat(splited[3]));
+                        currentLevel.addEntity(er);
+                        break;
                     case "Waypoint":
                         Waypoint wp = new Waypoint(horizontalIndex - setX + Float.parseFloat(splited[1]),verticalIndex + Float.parseFloat(splited[2]),0,0,"./img/".concat(splited[3]), splited[4], splited[5], Integer.parseInt(splited[6]));
                         currentLevel.addEntity(wp);
@@ -239,7 +243,7 @@ public class Map {
 
                         //prepares a string array with the urls
                         List<String> list4 = new ArrayList<String>();
-                        for (int l = 10+(2*Integer.parseInt(splited[9])) + 1;l < 10+(2*Integer.parseInt(splited[9])) + 1 + Integer.parseInt(splited[10+(2*Integer.parseInt(splited[9]))]);l++)
+                        for (int l = 9+(4*Integer.parseInt(splited[8])) + 1;l < 9+(4*Integer.parseInt(splited[8])) + 1 + Integer.parseInt(splited[9+(4*Integer.parseInt(splited[8]))]);l++)
                             list4.add("./img/".concat(splited[l]));
 
                         String[] arr4 = list4.toArray(new String[0]);
@@ -249,24 +253,10 @@ public class Map {
                         edz = new EventDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),splited[5],Integer.parseInt(splited[6]),Integer.parseInt(splited[7]),arr4);
 
 
-                        BufferedImage img;
-                        int awidth=0,aheight=0;
-                        try
-                        {
-                            //sets the width and height of the platform based on the provided image width and height
-                            img = ImageIO.read( new File("./img/".concat(splited[8])));
-                            awidth = img.getWidth();
-                            aheight = img.getHeight();
-                        }
-                        catch ( IOException exc )
-                        {
-                            //TODO: Handle exception.
-                        }
-
                         Area alol;
-                        for (int l = 10;l < 10+(2*Integer.parseInt(splited[9]));l+=2)
+                        for (int l = 9;l < 9+(4*Integer.parseInt(splited[8]));l+=4)
                         {
-                            alol= new Area(horizontalIndex - setX + Integer.parseInt(splited[1]) + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[2]) + Integer.parseInt(splited[l+1]),awidth,aheight,"");
+                            alol= new Area(horizontalIndex - setX + Integer.parseInt(splited[1]) + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[2]) + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]),Integer.parseInt(splited[l+3]),"");
                             edz.addArea(alol);
                             currentLevel.addEntity(alol);
                         }
