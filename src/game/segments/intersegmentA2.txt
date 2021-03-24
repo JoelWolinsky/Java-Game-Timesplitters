@@ -1,14 +1,14 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA2.png
 Chunk 1 E intersegmentA2.png
-Respawn 40 363 0 0 flag1.png
+Respawn 54 363 0 0 flag1.png
 
 //OUTER WALLS
 Platform Custom 70 19 wall1.png
 Platform Custom 338 19 wall1inv.png
 
 //BOTTOM WALLS
-Platform Custom 70 401 wall3.png
-Platform Custom 338 401 wall3inv.png
+Platform Custom 70 384 wall5.png
+Platform Custom 338 384 wall5inv.png
 
 //ROOF
 Platform Custom 53 -45 corner2.png
@@ -46,9 +46,7 @@ Platform Custom 320 154 smallplatform1inv.png
 Platform Custom 246 350 smallplatform1.png
 Platform Custom 246 220 smallplatform1.png
 
-//FLOORS
-Platform Custom 0 384 customFloor1.png
-Platform Custom 333 384 customFloor1.png
+
 
 Chunk 1 N intersegmentA2sky.png
 Revert

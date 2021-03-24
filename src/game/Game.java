@@ -161,9 +161,9 @@ public class Game extends Canvas implements Runnable{
 		if (mapMode.equals("default")) {
 
 			//m.mapParser(currentLevel, "segmentA13");
-			m.mapParser(currentLevel, "intersegmentA3");
-			m.mapParser(currentLevel, "introDimension");
-			m.mapParser(currentLevel, "segmentA14");
+			//m.mapParser(currentLevel, "intersegmentA3");
+			//m.mapParser(currentLevel, "introDimension");
+			//m.mapParser(currentLevel, "segmentA14");
 		//	m.mapParser(currentLevel, "./src/game/segments/segmentA1X.txt"); 		// 1 - basic first one (numbers for demo)
 			// TODO: Fix glitch on falling rocks where you teleport into wall
 			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA2X.txt");	// 2 - falling rocks
@@ -175,7 +175,12 @@ public class Game extends Canvas implements Runnable{
 		//	m.mapParser(currentLevel, "./src/game/segments/segmentEND.txt"); 		// 7 - END
 
 			// m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt"); 		// 9 - disappearing floors
-
+			//m.mapParser(currentLevel, "segmentA1");			// basic segment
+			//m.mapParser(currentLevel, "intersegmentA1"); 	// falling objects - hard for AI
+			//m.mapParser(currentLevel, "segmentA2");			// electric one
+			m.mapParser(currentLevel, "intersegmentA2up");
+			m.mapParser(currentLevel, "intersegmentA2");
+			//m.mapParser(currentLevel, "intersegmentA2down");
 /*
 
 			m.mapParser(currentLevel, "segmentA1");			// basic segment
@@ -212,14 +217,16 @@ public class Game extends Canvas implements Runnable{
 			//m.parseCommand(currentLevel,"Chunk 1 E ground1.png");
 
 			String [] array3 = new String[]{"N"};;
-			ArrayList<String> segments = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","segmentA1"));
+			ArrayList<String> segments = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","intersegmentA2up","intersegmentA2down"));
+			//ArrayList<String> segments = new ArrayList<String>(Arrays.asList("segmentA1","intersegmentA2down"));
 			int x;
 			String y="";
 			int index=0;
 			boolean firstIteration=false;
 			int rnd1;
+			boolean half=false;
 			String top="",mid="",bottom="";
-
+			String lastone="";
 
 			while (!segments.isEmpty()){
 
@@ -227,9 +234,9 @@ public class Game extends Canvas implements Runnable{
 				//m.parseCommand(currentLevel,"Chunk 1 ".concat(array3[x]).concat(" ").concat(y));
 
 
-				if (!firstIteration) {
-					m.parseCommand(currentLevel, "Chunk 1 E asdgasdg.png");
-				}
+
+				m.parseCommand(currentLevel, "Chunk 1 E asdgasdg.png");
+
 
 				rnd1 = new Random().nextInt(segments.size());
 
@@ -240,56 +247,240 @@ public class Game extends Canvas implements Runnable{
 
 				if (segments.get(rnd1).equals("intersegmentA2up"))
 				{
+					if (index==0) {
+						m.parseCommand(currentLevel, "Platform Custom -86 384 customFloor3.png");
+						m.parseCommand(currentLevel, "Platform Custom 340 384 customFloor3.png");
+					}
+					else
+					{
+						m.parseCommand(currentLevel, "Platform Custom 54 384 edge1.png");
+						m.parseCommand(currentLevel, "Platform Custom 340 384 customFloor3.png");
+					}
+
 
 					switch (index) {
 						case 0:
 							top="skyA.png";
 							mid="intro.png";
-							m.parseCommand(currentLevel, "Area 0 0 intro.png");
-							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
-							m.parseCommand(currentLevel, "Area 0 -768 skyA.png");
+							if (half)
+							{
+								m.parseCommand(currentLevel, "Area 0 0 ground2.png");
+								m.parseCommand(currentLevel, "Area 0 -384 sky2.png");
+								m.parseCommand(currentLevel, "Area 0 -768 sky4.png");
+								m.parseCommand(currentLevel, "Area -426 -768 sky3.png");
+							}
+							else
+							{
+								m.parseCommand(currentLevel, "Area 0 0 ground1.png");
+								m.parseCommand(currentLevel, "Area 0 -384 sky1.png");
+								m.parseCommand(currentLevel, "Area 0 -768 sky3.png");
+								m.parseCommand(currentLevel, "Area -426 -768 sky4.png");
+							}
+
 							break;
 						case 1:
 							//mid
-							m.parseCommand(currentLevel, "Area 0 384 intro.png");
-							m.parseCommand(currentLevel, "Area 0 0 skyA.png");
-							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
-							m.parseCommand(currentLevel, "Area 0 -768 skyA.png");
+							if (half)
+							{
+								m.parseCommand(currentLevel, "Area 0 384 ground2.png");
+							//	m.parseCommand(currentLevel, "Area 426 384 ground1.png"); // ?
+								m.parseCommand(currentLevel, "Area 0 0 sky2.png");
+								m.parseCommand(currentLevel, "Area 0 -384 sky4.png");
+								m.parseCommand(currentLevel, "Area 0 -768 sky6.png");
+								m.parseCommand(currentLevel, "Area -426 -768 sky5.png");
+							}
+							else
+							{
+								m.parseCommand(currentLevel, "Area 0 384 ground1.png");
+							//	m.parseCommand(currentLevel, "Area 426 384 ground2.png"); // ?
+								m.parseCommand(currentLevel, "Area 0 0 sky1.png");
+								m.parseCommand(currentLevel, "Area 0 -384 sky3.png");
+								m.parseCommand(currentLevel, "Area 0 -768 sky5.png");
+								m.parseCommand(currentLevel, "Area -426 -768 sky6.png");
+							}
+
+							//m.parseCommand(currentLevel,"Area 426 384 pillars.png");
+
 							break;
 						case 2:
 							//mid
-							m.parseCommand(currentLevel, "Area 0 384 skyA.png");
-							m.parseCommand(currentLevel, "Area 0 0 skyA.png");
-							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
-							m.parseCommand(currentLevel, "Area 0 -768 skyA.png");
+							if (half)
+							{
+								m.parseCommand(currentLevel, "Area 0 384 sky2.png");
+								m.parseCommand(currentLevel, "Area 0 768 ground2.png");
+							//	m.parseCommand(currentLevel, "Area 426 384 sky1.png"); // ?
+								m.parseCommand(currentLevel, "Area 0 0 sky4.png");
+								m.parseCommand(currentLevel, "Area 0 -384 sky6.png");
+								m.parseCommand(currentLevel, "Area 0 -768 sky5.png");
+								m.parseCommand(currentLevel, "Area -426 -768 sky6.png");
+							}
+							else
+							{
+								m.parseCommand(currentLevel, "Area 0 384 sky1.png");
+								m.parseCommand(currentLevel, "Area 0 768 ground1.png");
+							//	m.parseCommand(currentLevel, "Area 426 384 sky2.png"); // ?
+								m.parseCommand(currentLevel, "Area 0 0 sky3.png");
+								m.parseCommand(currentLevel, "Area 0 -384 sky5.png");
+								m.parseCommand(currentLevel, "Area 0 -768 sky6.png");
+								m.parseCommand(currentLevel, "Area -426 -768 sky5.png");
+							}
+							//m.parseCommand(currentLevel,"Area 426 384 pillars.png");
 							break;
 					}
 
 					if (index!=2)
 						index++;
+					if(!half)
+						half = true;
+					else
+						half = false;
 
 				}
 				else if (segments.get(rnd1).equals("intersegmentA2down"))
 				{
 
+					if (index==1) {
+						m.parseCommand(currentLevel, "Platform Custom -86 768 customFloor3.png");
+						m.parseCommand(currentLevel, "Platform Custom 340 768 customFloor3.png");
+					}
+					else
+					{
+						m.parseCommand(currentLevel, "Platform Custom 338 768 edge1inv.png");
+						m.parseCommand(currentLevel, "Platform Custom -86 768 customFloor3.png");
+					}
+
+
 					switch (index) {
 						case 1:
 							//mid
-							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
-							m.parseCommand(currentLevel, "Area 0 0 skyA.png");
-							m.parseCommand(currentLevel, "Area 0 384 intro.png");
+							if (half)
+							{
+								m.parseCommand(currentLevel, "Area 0 -384 sky4.png");
+								m.parseCommand(currentLevel, "Area 426 -384 sky3.png");
+								m.parseCommand(currentLevel, "Area 0 0 sky2.png");
+								m.parseCommand(currentLevel, "Area 0 384 ground2.png");
+							}
+							else
+							{
+								m.parseCommand(currentLevel, "Area 0 -384 sky3.png");
+								m.parseCommand(currentLevel, "Area 426 -384 sky4.png");
+								m.parseCommand(currentLevel, "Area 0 0 sky1.png");
+								m.parseCommand(currentLevel, "Area 0 384 ground1.png");
+							}
 							break;
 						case 2:
 							//mid
-							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
-							m.parseCommand(currentLevel, "Area 0 0 skyA.png");
-							m.parseCommand(currentLevel, "Area 0 384 skyA.png");
-							m.parseCommand(currentLevel, "Area 0 768 intro.png");
+							if (half)
+							{
+								m.parseCommand(currentLevel, "Area 0 -384 sky6.png");
+								m.parseCommand(currentLevel, "Area 426 -384 sky5.png");
+								m.parseCommand(currentLevel, "Area 0 0 sky4.png");
+								m.parseCommand(currentLevel, "Area 0 384 sky2.png");
+								m.parseCommand(currentLevel, "Area 0 768 ground2.png");
+
+								//if (!lastone.equals("intersegmentA2up") && !lastone.equals("intersegmentA2") && !lastone.equals("intersegmentA1"))
+								//{
+								//	m.parseCommand(currentLevel, "Area -426 768 ground1.png");
+								//	m.parseCommand(currentLevel,"Area -426 768 pillars.png");
+
+								//}
+							}
+							else
+							{
+								m.parseCommand(currentLevel, "Area 0 -384 sky5.png");
+								m.parseCommand(currentLevel, "Area 426 -384 sky6.png");
+								m.parseCommand(currentLevel, "Area 0 0 sky3.png");
+								m.parseCommand(currentLevel, "Area 0 384 sky1.png");
+								m.parseCommand(currentLevel, "Area 0 768 ground1.png");
+
+								//if (!lastone.equals("intersegmentA2up") && !lastone.equals("intersegmentA2") && !lastone.equals("intersegmentA1"))
+								//{
+								//	m.parseCommand(currentLevel, "Area -426 768 ground2.png");
+								//	m.parseCommand(currentLevel,"Area -426 768 pillars.png");
+								//}
+							}
+
 							break;
 					}
 
 					if (index!=0)
 						index--;
+					if(!half)
+						half = true;
+					else
+						half = false;
+
+				}
+				else if (segments.get(rnd1).equals("intersegmentA2") || segments.get(rnd1).equals("intersegmentA1"))
+				{
+					if (index==0) {
+						m.parseCommand(currentLevel, "Platform Custom -86 384 customFloor3.png");
+						m.parseCommand(currentLevel, "Platform Custom 340 384 customFloor3.png");
+					}
+					else
+					{
+						m.parseCommand(currentLevel, "Platform Custom 54 384 edge1.png");
+						m.parseCommand(currentLevel, "Platform Custom 338 384 edge1inv.png");
+
+					}
+					switch (index) {
+						case 0:
+							//mid
+							if (half)
+							{
+								m.parseCommand(currentLevel, "Area 0 -384 sky2.png");
+								m.parseCommand(currentLevel, "Area 0 0 ground2.png");
+
+							}
+							else
+							{
+								m.parseCommand(currentLevel, "Area 0 -384 sky1.png");
+								m.parseCommand(currentLevel, "Area 0 0 ground1.png");
+							}
+							break;
+						case 1:
+							//mid
+							if (half)
+							{
+								m.parseCommand(currentLevel, "Area 0 -384 sky4.png");
+								m.parseCommand(currentLevel, "Area 0 0 sky2.png");
+								m.parseCommand(currentLevel, "Area 0 384 ground2.png");
+
+							}
+							else
+							{
+								m.parseCommand(currentLevel, "Area 0 -384 sky3.png");
+								m.parseCommand(currentLevel, "Area 0 0 sky1.png");
+								m.parseCommand(currentLevel, "Area 0 384 ground1.png");
+							}
+
+							break;
+						case 2:
+							//mid
+							if (half)
+							{
+								m.parseCommand(currentLevel, "Area 0 -384 sky6.png");
+								m.parseCommand(currentLevel, "Area 0 0 sky4.png");
+								m.parseCommand(currentLevel, "Area 0 384 sky2.png");
+								m.parseCommand(currentLevel, "Area 0 768 ground2.png");
+
+							}
+							else
+							{
+								m.parseCommand(currentLevel, "Area 0 -384 sky5.png");
+								m.parseCommand(currentLevel, "Area 0 0 sky3.png");
+								m.parseCommand(currentLevel, "Area 0 384 sky1.png");
+								m.parseCommand(currentLevel, "Area 0 768 ground1.png");
+							}
+
+							break;
+					}
+
+					if(!half)
+						half = true;
+					else
+						half = false;
+
 
 				}
 				else
@@ -299,44 +490,108 @@ public class Game extends Canvas implements Runnable{
 							top="skyA.png";
 							mid="intro.png";
 							//mid
-							m.parseCommand(currentLevel, "Area 0 0 intro.png");
-							m.parseCommand(currentLevel,"Area 426 0 intro.png");
+							if (half)
+							{
+								m.parseCommand(currentLevel, "Area 0 0 ground2.png");
+								m.parseCommand(currentLevel,"Area 426 0 ground1.png");
+
+								m.parseCommand(currentLevel, "Area 0 -384 sky2.png");
+								m.parseCommand(currentLevel,"Area 426 -384 sky1.png");
+							}
+							else
+							{
+								m.parseCommand(currentLevel, "Area 0 0 ground1.png");
+								m.parseCommand(currentLevel,"Area 426 0 ground2.png");
+
+								m.parseCommand(currentLevel, "Area 0 -384 sky1.png");
+								m.parseCommand(currentLevel,"Area 426 -384 sky2.png");
+							}
 							//top
-							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
-							m.parseCommand(currentLevel,"Area 426 -384 skyA.png");
 							break;
 						case 1:
+
+							if (half)
+							{
+								m.parseCommand(currentLevel, "Area 0 0 sky2.png");
+								m.parseCommand(currentLevel,"Area 426 0 sky1.png");
+								//top
+								m.parseCommand(currentLevel, "Area 0 -384 sky4.png");
+								m.parseCommand(currentLevel,"Area 426 -384 sky3.png");
+								//bot
+								m.parseCommand(currentLevel,"Area 0 384 ground2.png");
+								m.parseCommand(currentLevel,"Area 426 384 ground1.png");
+							}
+							else
+							{
+								m.parseCommand(currentLevel, "Area 0 0 sky1.png");
+								m.parseCommand(currentLevel,"Area 426 0 sky2.png");
+								//top
+								m.parseCommand(currentLevel, "Area 0 -384 sky3.png");
+								m.parseCommand(currentLevel,"Area 426 -384 sky4.png");
+								//bot
+								m.parseCommand(currentLevel,"Area 0 384 ground1.png");
+								m.parseCommand(currentLevel,"Area 426 384 ground2.png");
+
+							}
 							//mid
-							m.parseCommand(currentLevel, "Area 0 0 skyA.png");
-							m.parseCommand(currentLevel,"Area 426 0 skyA.png");
-							//top
-							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
-							m.parseCommand(currentLevel,"Area 426 -384 skyA.png");
-							//bot
-							m.parseCommand(currentLevel,"Area 0 384 intro.png");
-							m.parseCommand(currentLevel,"Area 426 384 intro.png");
+							m.parseCommand(currentLevel,"Area 0 384 pillars.png");
+							m.parseCommand(currentLevel,"Platform Custom 0 768 floorA.png");
+							m.parseCommand(currentLevel,"Area 426 384 pillars.png");
+							m.parseCommand(currentLevel,"Platform Custom 426 768 floorA.png");
+
 							break;
 						case 2:
 							//mid
-							m.parseCommand(currentLevel, "Area 0 0 skyA.png");
-							m.parseCommand(currentLevel,"Area 426 0 skyA.png");
-							//top
-							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
-							m.parseCommand(currentLevel,"Area 426 -384 skyA.png");
-							//bot
-							m.parseCommand(currentLevel,"Area 0 384 skyA.png");
-							m.parseCommand(currentLevel,"Area 426 384 skyA.png");
+							if (half)
+							{
+								m.parseCommand(currentLevel, "Area 0 0 sky4.png");
+								m.parseCommand(currentLevel,"Area 426 0 sky3.png");
+								//top
+								m.parseCommand(currentLevel, "Area 0 -384 sky6.png");
+								m.parseCommand(currentLevel,"Area 426 -384 sky5.png");
+								//bot
+								m.parseCommand(currentLevel,"Area 0 384 sky2.png");
+								m.parseCommand(currentLevel,"Area 426 384 sky1.png");
+
+								m.parseCommand(currentLevel,"Area 0 768 ground2.png");
+								m.parseCommand(currentLevel,"Area 0 768 pillars.png");
+								m.parseCommand(currentLevel,"Area 426 768 ground1.png");
+								m.parseCommand(currentLevel,"Area 426 768 pillars.png");
+
+							}
+							else
+							{
+								m.parseCommand(currentLevel, "Area 0 0 sky3.png");
+								m.parseCommand(currentLevel,"Area 426 0 sky4.png");
+								//top
+								m.parseCommand(currentLevel, "Area 0 -384 sky5.png");
+								m.parseCommand(currentLevel,"Area 426 -384 sky6.png");
+								//bot
+								m.parseCommand(currentLevel,"Area 0 384 sky1.png");
+								m.parseCommand(currentLevel,"Area 426 384 sky2.png");
+
+								m.parseCommand(currentLevel,"Area 0 768 ground1.png");
+								m.parseCommand(currentLevel,"Area 0 768 pillars.png");
+								m.parseCommand(currentLevel,"Area 426 768 ground2.png");
+								m.parseCommand(currentLevel,"Area 426 768 pillars.png");
+
+							}
+
+							m.parseCommand(currentLevel,"Area 0 384 pillars.png");
+							m.parseCommand(currentLevel,"Area 426 384 pillars.png");
+							m.parseCommand(currentLevel,"Platform Custom 0 768 floorA.png");
+							m.parseCommand(currentLevel,"Platform Custom 426 768 floorA.png");
 							break;
 					}
 				}
 
-				if(!firstIteration)
-				{
-					m.parseCommand(currentLevel, "Revert");
-					firstIteration=true;
-				}
+
+				m.parseCommand(currentLevel, "Revert");
+
 
 				m.mapParser(currentLevel, segments.get(rnd1));
+
+				lastone=segments.get(rnd1);
 				segments.remove(rnd1);
 
 

@@ -1,6 +1,6 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA1.png
-Chunk 1 E intersegmentA1.png
-Respawn 40 363 0 0 flag1.png
+Chunk 1 E intersegmentA2.png
+Respawn 54 363 0 0 flag1.png
 AnimArea 140 67 4 skeletonreact1.png skeletonreact1.png skelethrow3.png skelethrow4.png
 AnimArea 200 67 4 skeletonreact1inv.png skeletonreact2inv.png skeletonreact3inv.png skeletonreact4inv.png
 AnimArea 260 67 4 skeletonreact1inv.png skeletonreact1inv.png skelethrow2inv.png skelethrow3inv.png
@@ -13,14 +13,22 @@ Projectile 200 100 0 3 500 300 0 100 nopicture.png 4 arrow1.png arrow1.png arrow
 Projectile 200 100 0 3 500 300 0 60 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
 Projectile 200 100 0 3 500 300 0 140 nopicture.png 4 arrow1.png arrow1.png arrow1.png arrow1.png
 
-Platform Custom 0 384 customFloor1.png
-Platform Custom 333 384 customFloor1.png
-Platform Custom 70 50 wall1.png
-Platform Custom 338 50 wall1inv.png
-Platform Custom 53 0 corner2.png
-Platform Custom 307 0 corner2inv.png
-Platform Custom 117 -31 corner1.png
-Platform Custom 213 -31 corner1inv.png
+
+//OUTER WALLS
+Platform Custom 70 19 wall1.png
+Platform Custom 338 19 wall1inv.png
+
+//BOTTOM WALLS
+Platform Custom 70 384 wall5.png
+Platform Custom 338 384 wall5inv.png
+
+//ROOF
+Platform Custom 53 -45 corner2.png
+Platform Custom 307 -45 corner2inv.png
+Platform Custom 117 -76 corner1.png
+Platform Custom 213 -76 corner1inv.png
+
+
 Platform Custom 194 384 thinPlatformA.png
 Platform Default 194 100
 Platform Default 162 100
@@ -28,5 +36,5 @@ Platform Default 226 100
 Platform Custom 259 100 edge1inv.png
 Platform Custom 130 100 edge1.png
 
-Chunk 1 N sky1.png
+Chunk 1 N intersegmentA2sky.png
 Revert

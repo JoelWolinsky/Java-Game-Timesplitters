@@ -76,6 +76,13 @@ public class Map {
 
                 }
                 break;
+            case "Platform":
+                Platform p;
+
+
+                p = new Platform(horizontalIndex - setX + Integer.parseInt(splitted[2]), verticalIndex + Integer.parseInt(splitted[3]), 0, 0, splitted[4]);
+                currentLevel.addEntity(p);
+                break;
         }
     }
 
