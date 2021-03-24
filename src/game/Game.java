@@ -161,7 +161,9 @@ public class Game extends Canvas implements Runnable{
 		if (mapMode.equals("default")) {
 
 			//m.mapParser(currentLevel, "segmentA13");
-
+			m.mapParser(currentLevel, "intersegmentA3");
+			m.mapParser(currentLevel, "introDimension");
+			m.mapParser(currentLevel, "segmentA14");
 		//	m.mapParser(currentLevel, "./src/game/segments/segmentA1X.txt"); 		// 1 - basic first one (numbers for demo)
 			// TODO: Fix glitch on falling rocks where you teleport into wall
 			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA2X.txt");	// 2 - falling rocks
@@ -208,22 +210,132 @@ public class Game extends Canvas implements Runnable{
 			//WORK IN PROGRESS
 			//m.parseCommand(currentLevel,"Chunk 1 E ground1.png");
 			//m.parseCommand(currentLevel,"Chunk 1 E ground1.png");
-			//m.mapParser(currentLevel, "intersegmentA1");
 
 			String [] array3 = new String[]{"N"};;
 			ArrayList<String> segments = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","segmentA1"));
 			int x;
 			String y="";
 			int index=0;
-			int n = (int) ((Math.random() * (5 - 1)) + 1);
-			System.out.println("nr of segments: "+n);
+			boolean firstIteration=false;
 			int rnd1;
+			String top="",mid="",bottom="";
+
+
 			while (!segments.isEmpty()){
 
 
 				//m.parseCommand(currentLevel,"Chunk 1 ".concat(array3[x]).concat(" ").concat(y));
 
+
+				if (!firstIteration) {
+					m.parseCommand(currentLevel, "Chunk 1 E asdgasdg.png");
+				}
+
 				rnd1 = new Random().nextInt(segments.size());
+
+				//if it rolls into going down on level 0 keep rolling till something else
+				if (index==0)
+					while (segments.get(rnd1).equals("intersegmentA2down"))
+						rnd1 = new Random().nextInt(segments.size());
+
+				if (segments.get(rnd1).equals("intersegmentA2up"))
+				{
+
+					switch (index) {
+						case 0:
+							top="skyA.png";
+							mid="intro.png";
+							m.parseCommand(currentLevel, "Area 0 0 intro.png");
+							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
+							m.parseCommand(currentLevel, "Area 0 -768 skyA.png");
+							break;
+						case 1:
+							//mid
+							m.parseCommand(currentLevel, "Area 0 384 intro.png");
+							m.parseCommand(currentLevel, "Area 0 0 skyA.png");
+							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
+							m.parseCommand(currentLevel, "Area 0 -768 skyA.png");
+							break;
+						case 2:
+							//mid
+							m.parseCommand(currentLevel, "Area 0 384 skyA.png");
+							m.parseCommand(currentLevel, "Area 0 0 skyA.png");
+							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
+							m.parseCommand(currentLevel, "Area 0 -768 skyA.png");
+							break;
+					}
+
+					if (index!=2)
+						index++;
+
+				}
+				else if (segments.get(rnd1).equals("intersegmentA2down"))
+				{
+
+					switch (index) {
+						case 1:
+							//mid
+							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
+							m.parseCommand(currentLevel, "Area 0 0 skyA.png");
+							m.parseCommand(currentLevel, "Area 0 384 intro.png");
+							break;
+						case 2:
+							//mid
+							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
+							m.parseCommand(currentLevel, "Area 0 0 skyA.png");
+							m.parseCommand(currentLevel, "Area 0 384 skyA.png");
+							m.parseCommand(currentLevel, "Area 0 768 intro.png");
+							break;
+					}
+
+					if (index!=0)
+						index--;
+
+				}
+				else
+				{
+					switch (index) {
+						case 0:
+							top="skyA.png";
+							mid="intro.png";
+							//mid
+							m.parseCommand(currentLevel, "Area 0 0 intro.png");
+							m.parseCommand(currentLevel,"Area 426 0 intro.png");
+							//top
+							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
+							m.parseCommand(currentLevel,"Area 426 -384 skyA.png");
+							break;
+						case 1:
+							//mid
+							m.parseCommand(currentLevel, "Area 0 0 skyA.png");
+							m.parseCommand(currentLevel,"Area 426 0 skyA.png");
+							//top
+							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
+							m.parseCommand(currentLevel,"Area 426 -384 skyA.png");
+							//bot
+							m.parseCommand(currentLevel,"Area 0 384 intro.png");
+							m.parseCommand(currentLevel,"Area 426 384 intro.png");
+							break;
+						case 2:
+							//mid
+							m.parseCommand(currentLevel, "Area 0 0 skyA.png");
+							m.parseCommand(currentLevel,"Area 426 0 skyA.png");
+							//top
+							m.parseCommand(currentLevel, "Area 0 -384 skyA.png");
+							m.parseCommand(currentLevel,"Area 426 -384 skyA.png");
+							//bot
+							m.parseCommand(currentLevel,"Area 0 384 skyA.png");
+							m.parseCommand(currentLevel,"Area 426 384 skyA.png");
+							break;
+					}
+				}
+
+				if(!firstIteration)
+				{
+					m.parseCommand(currentLevel, "Revert");
+					firstIteration=true;
+				}
+
 				m.mapParser(currentLevel, segments.get(rnd1));
 				segments.remove(rnd1);
 

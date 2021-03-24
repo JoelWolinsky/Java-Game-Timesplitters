@@ -53,6 +53,29 @@ public class Map {
                 a = new Area(horizontalIndex - setX, verticalIndex, setX, setY, "./img/".concat(splitted[3]));
                 currentLevel.addEntity(a);
                 break;
+            case "Area":
+
+                Area aa;
+                aa= new Area(horizontalIndex - setX + Integer.parseInt(splitted[1]), verticalIndex + Integer.parseInt(splitted[2]), setX, setY, "./img/".concat(splitted[3]));
+                currentLevel.addEntity(aa);
+                break;
+            case "Revert":
+                switch (lastDirection) {
+                    case "E":
+                        horizontalIndex = horizontalIndex - setX;
+                        break;
+                    case "W":
+                        horizontalIndex = horizontalIndex + setX;
+                        break;
+                    case "N":
+                        verticalIndex = verticalIndex + setY;
+                        break;
+                    case "S":
+                        verticalIndex = verticalIndex - setY;
+                        break;
+
+                }
+                break;
         }
     }
 
