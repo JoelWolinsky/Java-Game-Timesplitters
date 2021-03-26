@@ -1,0 +1,15 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA1.png
+
+Chunk 1 W ground1.png
+Area 0 -384 sky1.png
+Area 0 384 introStairs.png
+Area -426 -384 sky2.png
+Area -426 384 forest2.png
+Area -426 0 ground2.png
+Revert
+Area 0 0 ground2.png
+Platform Custom 0 384 floorA.png
+Platform Custom 0 0 1 500
+Area 0 -384 sky2.png
+
+

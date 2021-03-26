@@ -25,6 +25,7 @@ public class Map {
     private int setY = 384;
     private String lastDirection = "";
     private String currentTheme = "A";
+    String goUrl = "";
 
 
     public void parseCommand(Level currentLevel, String command)
@@ -78,17 +79,26 @@ public class Map {
                 break;
             case "Platform":
                 Platform p;
+                int tempWidth=0,tempHeight=0;
+
+                        if (splitted.length==5)
+                            goUrl = splitted[4];
+                        else if (splitted.length==6) {
+                            tempWidth = Integer.parseInt(splitted[4]);
+                            tempHeight = Integer.parseInt(splitted[5]);
+                        }
 
 
-                p = new Platform(horizontalIndex - setX + Integer.parseInt(splitted[2]), verticalIndex + Integer.parseInt(splitted[3]), 0, 0, splitted[4]);
+                p = new Platform(horizontalIndex - setX + Integer.parseInt(splitted[2]), verticalIndex + Integer.parseInt(splitted[3]), tempWidth, tempHeight, goUrl);
                 currentLevel.addEntity(p);
                 break;
+
+
         }
     }
 
     public void mapParser(Level currentLevel, String url) {
 
-        String goUrl = "";
         String texturePlatformDefault = "";
         String texturePlatformInverted = "";
         String textureFloor = "";
@@ -140,7 +150,8 @@ public class Map {
 
                     case "Platform":
                         Platform p;
-
+                        goUrl = "";
+                        int tempWidth=0,tempHeight=0;
                         switch (splited[1]) {
                             case "Default":
                                 goUrl = texturePlatformDefault;
@@ -149,11 +160,16 @@ public class Map {
                                 goUrl = texturePlatformInverted;
                                 break;
                             case "Custom":
-                                goUrl = splited[4];
+                                if (splited.length==5)
+                                    goUrl = splited[4];
+                                else if (splited.length==6) {
+                                    tempWidth = Integer.parseInt(splited[4]);
+                                    tempHeight = Integer.parseInt(splited[5]);
+                                }
                                 break;
                         }
 
-                        p = new Platform(horizontalIndex - setX + Integer.parseInt(splited[2]), verticalIndex + Integer.parseInt(splited[3]), 0, 0, goUrl);
+                        p = new Platform(horizontalIndex - setX + Integer.parseInt(splited[2]), verticalIndex + Integer.parseInt(splited[3]), tempWidth, tempHeight, goUrl);
                         currentLevel.addEntity(p);
                         break;
 

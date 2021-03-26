@@ -31,6 +31,11 @@ public class Platform extends GameObject implements SolidCollider{
 			//TODO: Handle exception.
 		}
 
+		if (url.equals("")) {
+			this.width = width;
+			this.height = height;
+		}
+
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
 	}
