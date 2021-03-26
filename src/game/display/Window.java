@@ -28,8 +28,8 @@ import network.GameServer;
 
 public class Window extends Canvas{
 	
-	public static final int WIDTH = 1640;
-	public static final int HEIGHT = 1480;
+	public static final int WIDTH = 640;
+	public static final int HEIGHT = 480;
 	public static final String TITLE = "Engine";
 	public static Rectangle windowRect = new Rectangle(0,0,Game.WIDTH, Game.HEIGHT);
 
@@ -455,6 +455,11 @@ public class Window extends Canvas{
 		    	multiplayerButtonPanel.setVisible(false);
 		    	backOptions.setVisible(false);
 				backMultiplayer.setVisible(false);
+
+				Game.state = GameState.Playing;
+		    	Game.againstComputer = true;
+				game.start();
+
 			}
 				  
 			@Override
