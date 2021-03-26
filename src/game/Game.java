@@ -167,60 +167,64 @@ public class Game extends Canvas implements Runnable{
 
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 
-		String mapMode = "RNG";
+		String mapMode = "default";
 		Map m = new Map();
 		//keep default for now untwil we sort randomly generated
 		if (mapMode.equals("default")) {
-
-			//m.mapParser(currentLevel, "segmentA13");
-			//m.mapParser(currentLevel, "intersegmentA3");
-			//m.mapParser(currentLevel, "introDimension");
-			//m.mapParser(currentLevel, "segmentA14");
-		//	m.mapParser(currentLevel, "./src/game/segments/segmentA1X.txt"); 		// 1 - basic first one (numbers for demo)
-			// TODO: Fix glitch on falling rocks where you teleport into wall
-			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA2X.txt");	// 2 - falling rocks
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA2X.txt");		// 3 - electric one
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA7X.txt"); 		// 4 - platforms
-			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA3X.txt"); 	// 5 - hands intersegment
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA13X.txt"); 		// 6 - crushing bookshelves
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA6X.txt"); 		// 8 - ghosts - easier - add segment before
-		//	m.mapParser(currentLevel, "./src/game/segments/segmentEND.txt"); 		// 7 - END
-
-			// m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt"); 		// 9 - disappearing floors
-			//m.mapParser(currentLevel, "segmentA1");			// basic segment
-			//m.mapParser(currentLevel, "intersegmentA1"); 	// falling objects - hard for AI
-			//m.mapParser(currentLevel, "segmentA2");			// electric one
-			//m.mapParser(currentLevel, "intersegmentA2up");
-			//m.mapParser(currentLevel, "intersegmentA2");
-			//m.mapParser(currentLevel, "intersegmentA2down");
-			m.mapParser(currentLevel, "intro2");
-			m.mapParser(currentLevel, "segmentA3");			// aesthetic hall 1
-			m.mapParser(currentLevel, "segmentA4");			// aesthetic hall 2
-			m.mapParser(currentLevel, "segmentA5");			// aesthetic hall 3
-/*
-
-			m.mapParser(currentLevel, "segmentA1");			// basic segment
-			m.mapParser(currentLevel, "intersegmentA1"); 	// falling objects - hard for AI
+			
+			m.mapParser(currentLevel, "segmentA6X");			
+			
+			/*
+			
 			m.mapParser(currentLevel, "segmentA2");			// electric one
-			m.mapParser(currentLevel, "intersegmentA2");	// falling rocks
 			m.mapParser(currentLevel, "segmentA3");			// aesthetic hall 1
 			m.mapParser(currentLevel, "segmentA4");			// aesthetic hall 2
 			m.mapParser(currentLevel, "segmentA5");			// aesthetic hall 3
-
-			m.mapParser(currentLevel, "intersegmentA3");	// hands one
 			m.mapParser(currentLevel, "segmentA6");			// ghosts
 			m.mapParser(currentLevel, "segmentA7");			// platforms
-
-			m.mapParser(currentLevel, "intersegmentA3");	// hands one
 			m.mapParser(currentLevel, "segmentA8");			// disappearing long and small platforms
-			m.mapParser(currentLevel, "intersegmentA3");	// hands one
+			m.mapParser(currentLevel, "segmentA9");			// ??
 			m.mapParser(currentLevel, "segmentA10");		// long corridor
 			m.mapParser(currentLevel, "segmentA11");		// disappearing platforms over acid
 			m.mapParser(currentLevel, "segmentA12");		// bookshelf pyramid
 			m.mapParser(currentLevel, "segmentA13");		// crushing bookshelves
-			m.mapParser(currentLevel, "intersegmentA3");
+			m.mapParser(currentLevel, "segmentA14");		// ??
+
+			*/
+			
+			/*
+
+			LEGEND
+
+			
+			
+			m.mapParser(currentLevel, "goN");				// Skeletons throwing objects down
+			
+			m.mapParser(currentLevel, "intro1");			// No go zone
+			m.mapParser(currentLevel, "intro2");			// Basic chandelier room
+			m.mapParser(currentLevel, "introDimension");	// Pink portal
+
+			m.mapParser(currentLevel, "segmentA1");			// basic segment
+			m.mapParser(currentLevel, "segmentA2");			// electric one
+			m.mapParser(currentLevel, "segmentA3");			// aesthetic hall 1
+			m.mapParser(currentLevel, "segmentA4");			// aesthetic hall 2
+			m.mapParser(currentLevel, "segmentA5");			// aesthetic hall 3
+			m.mapParser(currentLevel, "segmentA6");			// ghosts
+			m.mapParser(currentLevel, "segmentA7");			// platforms
+			m.mapParser(currentLevel, "segmentA8");			// disappearing long and small platforms
+			m.mapParser(currentLevel, "segmentA9");			// ??
+			m.mapParser(currentLevel, "segmentA10");		// long corridor
+			m.mapParser(currentLevel, "segmentA11");		// disappearing platforms over acid
+			m.mapParser(currentLevel, "segmentA12");		// bookshelf pyramid
+			m.mapParser(currentLevel, "segmentA13");		// crushing bookshelves
+			m.mapParser(currentLevel, "segmentA14");		// ??
+			
+			m.mapParser(currentLevel, "intersegmentA1"); 	// falling objects - hard for AI
+			m.mapParser(currentLevel, "intersegmentA2");	// falling rocks
+			m.mapParser(currentLevel, "intersegmentA3");	// hands one
+			
 			m.mapParser(currentLevel, "introDimension");
-			m.mapParser(currentLevel, "segmentA14");
+			
 
 
 
