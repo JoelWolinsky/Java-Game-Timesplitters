@@ -41,7 +41,11 @@ public class Game extends Canvas implements Runnable{
 	public static Player player;
 	public static AIPlayer aiPlayer;
 	public static Camera camera;
-
+	int index = 0;
+	int stateIndex=0;
+	int bottom;
+	int top;
+	BackgroundController ctrlr;
 	/**
 	 * Initialises game entities and objects that must appear at the start of the game
 	 */
@@ -150,43 +154,16 @@ public class Game extends Canvas implements Runnable{
 	        }
 	        loginPacket.writeData(socketClient);
 
-
 		}
 
 		game = this;
 
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
-
 		String mapMode = "RNG";
 		Map m = new Map();
 		//keep default for now untwil we sort randomly generated
 		if (mapMode.equals("default")) {
 
-			//m.mapParser(currentLevel, "segmentA13");
-			//m.mapParser(currentLevel, "intersegmentA3");
-			//m.mapParser(currentLevel, "introDimension");
-			//m.mapParser(currentLevel, "segmentA14");
-		//	m.mapParser(currentLevel, "./src/game/segments/segmentA1X.txt"); 		// 1 - basic first one (numbers for demo)
-			// TODO: Fix glitch on falling rocks where you teleport into wall
-			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA2X.txt");	// 2 - falling rocks
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA2X.txt");		// 3 - electric one
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA7X.txt"); 		// 4 - platforms
-			//m.mapParser(currentLevel, "./src/game/segments/intersegmentA3X.txt"); 	// 5 - hands intersegment
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA13X.txt"); 		// 6 - crushing bookshelves
-			//m.mapParser(currentLevel, "./src/game/segments/segmentA6X.txt"); 		// 8 - ghosts - easier - add segment before
-		//	m.mapParser(currentLevel, "./src/game/segments/segmentEND.txt"); 		// 7 - END
-
-			// m.mapParser(currentLevel, "./src/game/segments/segmentA11.txt"); 		// 9 - disappearing floors
-			//m.mapParser(currentLevel, "segmentA1");			// basic segment
-			//m.mapParser(currentLevel, "intersegmentA1"); 	// falling objects - hard for AI
-			//m.mapParser(currentLevel, "segmentA2");			// electric one
-			//m.mapParser(currentLevel, "intersegmentA2up");
-			//m.mapParser(currentLevel, "intersegmentA2");
-			//m.mapParser(currentLevel, "intersegmentA2down");
-			m.mapParser(currentLevel, "intro2");
-			m.mapParser(currentLevel, "segmentA3");			// aesthetic hall 1
-			m.mapParser(currentLevel, "segmentA4");			// aesthetic hall 2
-			m.mapParser(currentLevel, "segmentA5");			// aesthetic hall 3
 /*
 
 			m.mapParser(currentLevel, "segmentA1");			// basic segment
@@ -217,254 +194,42 @@ public class Game extends Canvas implements Runnable{
  */
 		}
 		else if (mapMode.equals("RNG")) {
-			;
+
+			//create different segment pools for the different parts of the game
+			//we want them separated in order to keep a specific order in our game
 			ArrayList<String> segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","intersegmentA2up","intersegmentA2down"));
-			//ArrayList<String> segments1 = new ArrayList<String>(Arrays.asList("segmentA1", "segmentA2"));
 			ArrayList<String> segments2 = new ArrayList<String>(Arrays.asList("segmentA3", "segmentA4", "segmentA4"));
 			ArrayList<String> intro2 = new ArrayList<String>(Arrays.asList("intro2"));
 			ArrayList<String> throneRoom = new ArrayList<String>(Arrays.asList("segmentA5"));
 
-			int index = 0;
-			int rnd1;
+			//load up the images that are going to be used for dynamic background generation onto individual levels
+			//**it is important that all levels have the same amount of images
+			BackgroundStates level0 = new BackgroundStates("ground1.png","ground2.png");
+			BackgroundStates level1 = new BackgroundStates("sky1.png","sky2.png");
+			BackgroundStates level2 = new BackgroundStates("sky3.png","sky4.png");
+			BackgroundStates level3 = new BackgroundStates("sky5.png","sky6.png");
 
-			String level0="";
-			String level1="";
-			String level2="";
-			String level3="";
-			String oplevel0="";
-			String oplevel1="";
-			String oplevel2="";
-			String oplevel3="";
+			//choose the limits of your map this should also be related to how many levels you have defined
+			//eg. you don't want to have 20 levels but a top limit of only 2 since 17 of the leves will never be used
+			bottom=0;
+			top=2;
 
+			//add levels to the background controller which manages the current position within the horizontal panorama
+			ctrlr = new BackgroundController(level0,level1,level2,level3);
 
+			//generate the segment pools
 			m.mapParser(currentLevel, "intro1");
-
-			while (!segments1.isEmpty()) {
-
-
-				if (half) {
-
-					level0="ground2.png";
-					level1="sky2.png";
-					level2="sky4.png";
-					level3="sky6.png";
-
-					oplevel0="ground1.png";
-					oplevel1="sky1.png";
-					oplevel2="sky3.png";
-					oplevel3="sky5.png";
-
-				} else {
-
-					level0="ground1.png";
-					level1="sky1.png";
-					level2="sky3.png";
-					level3="sky5.png";
-
-					oplevel0="ground2.png";
-					oplevel1="sky2.png";
-					oplevel2="sky4.png";
-					oplevel3="sky6.png";
-
-				}
-
-
-				m.parseCommand(currentLevel, "Chunk 1 E asdgasdg.png");
-
-				rnd1 = new Random().nextInt(segments1.size());
-
-				if (index == 0)
-					while (segments1.get(rnd1).equals("intersegmentA2down"))
-						rnd1 = new Random().nextInt(segments1.size());
-
-
-				if (segments1.get(rnd1).equals("intersegmentA2up")) {
-
-					if (index == 0) {
-						m.parseCommand(currentLevel, "Platform Custom -86 384 customFloor3.png");
-						m.parseCommand(currentLevel, "Platform Custom 340 384 customFloor3.png");
-					} else {
-						m.parseCommand(currentLevel, "Platform Custom 54 384 edge1.png");
-						m.parseCommand(currentLevel, "Platform Custom 340 384 customFloor3.png");
-					}
-
-					switch (index) {
-						case 0:
-							m.parseCommand(currentLevel, "Area 0 0 ".concat(level0));
-							m.parseCommand(currentLevel, "Area 0 -384 ".concat(level1));
-							m.parseCommand(currentLevel, "Area 0 -768 ".concat(level2));
-							m.parseCommand(currentLevel, "Area -426 -768 ".concat(oplevel2));
-							break;
-						case 1:
-
-							m.parseCommand(currentLevel, "Area 0 384 ".concat(level0));
-							m.parseCommand(currentLevel, "Area 0 0 ".concat(level1));
-							m.parseCommand(currentLevel, "Area 0 -384 ".concat(level2));
-							m.parseCommand(currentLevel, "Area 0 -768 ".concat(level3));
-							m.parseCommand(currentLevel, "Area -426 -768 ".concat(oplevel3));
-							break;
-						case 2:
-
-							m.parseCommand(currentLevel, "Area 0 768 ".concat(level0));
-							m.parseCommand(currentLevel, "Area 0 384 ".concat(level1));
-							m.parseCommand(currentLevel, "Area 0 0 ".concat(level2));
-							m.parseCommand(currentLevel, "Area 0 -384 ".concat(level3));
-							m.parseCommand(currentLevel, "Area 0 -768 ".concat(oplevel3)); // ?
-							m.parseCommand(currentLevel, "Area -426 -768 ".concat(level3));
-							break;
-					}
-
-					if (index != 2)
-						index++;
-					if (!half)
-						half = true;
-					else
-						half = false;
-
-				} else if (segments1.get(rnd1).equals("intersegmentA2down")) {
-
-					if (index == 1) {
-						m.parseCommand(currentLevel, "Platform Custom -86 768 customFloor3.png");
-						m.parseCommand(currentLevel, "Platform Custom 340 768 customFloor3.png");
-					} else {
-						m.parseCommand(currentLevel, "Platform Custom 338 768 edge1inv.png");
-						m.parseCommand(currentLevel, "Platform Custom -86 768 customFloor3.png");
-					}
-
-					switch (index) {
-						case 1:
-
-							m.parseCommand(currentLevel, "Area 0 -384 ".concat(level2));
-							m.parseCommand(currentLevel, "Area 426 -384 ".concat(oplevel2));
-							m.parseCommand(currentLevel, "Area 0 0 ".concat(level1));
-							m.parseCommand(currentLevel, "Area 0 384 ".concat(level0));
-							break;
-						case 2:
-
-							m.parseCommand(currentLevel, "Area 0 -384 ".concat(level3));
-							m.parseCommand(currentLevel, "Area 426 -384 ".concat(oplevel3));
-							m.parseCommand(currentLevel, "Area 0 0 ".concat(level2));
-							m.parseCommand(currentLevel, "Area 0 384 ".concat(level1));
-							m.parseCommand(currentLevel, "Area 0 768 ".concat(level0));
-							break;
-					}
-
-					if (index != 0)
-						index--;
-					if (!half)
-						half = true;
-					else
-						half = false;
-
-				} else if (segments1.get(rnd1).equals("intersegmentA2") || segments1.get(rnd1).equals("intersegmentA1")) {
-					if (index == 0) {
-						m.parseCommand(currentLevel, "Platform Custom -86 384 customFloor3.png");
-						m.parseCommand(currentLevel, "Platform Custom 340 384 customFloor3.png");
-					} else {
-						m.parseCommand(currentLevel, "Platform Custom 54 384 edge1.png");
-						m.parseCommand(currentLevel, "Platform Custom 338 384 edge1inv.png");
-
-					}
-
-					switch (index) {
-						case 0:
-
-							m.parseCommand(currentLevel, "Area 0 -384 ".concat(level1));
-							m.parseCommand(currentLevel, "Area 0 0 ".concat(level0));
-							break;
-						case 1:
-
-							m.parseCommand(currentLevel, "Area 0 -384 ".concat(level2));
-							m.parseCommand(currentLevel, "Area 0 0 ".concat(level1));
-							m.parseCommand(currentLevel, "Area 0 384 ".concat(level0));
-							break;
-						case 2:
-
-							m.parseCommand(currentLevel, "Area 0 -384 ".concat(level3));
-							m.parseCommand(currentLevel, "Area 0 0 ".concat(level2));
-							m.parseCommand(currentLevel, "Area 0 384 ".concat(level1));
-							m.parseCommand(currentLevel, "Area 0 768 ".concat(level0));
-							break;
-					}
-
-					if (!half)
-						half = true;
-					else
-						half = false;
-
-
-				} else {
-					switch (index) {
-						case 0:
-
-							m.parseCommand(currentLevel, "Area 0 0 ".concat(level0));
-							m.parseCommand(currentLevel, "Area 0 -384 ".concat(level1));
-							m.parseCommand(currentLevel, "Area 426 0 ".concat(oplevel0));
-							m.parseCommand(currentLevel, "Area 426 -384 ".concat(oplevel1));
-							break;
-						case 1:
-
-							m.parseCommand(currentLevel, "Area 0 -384 ".concat(level2));
-							m.parseCommand(currentLevel, "Area 426 -384 ".concat(oplevel2));
-							m.parseCommand(currentLevel, "Area 0 0 ".concat(level1));
-							m.parseCommand(currentLevel, "Area 426 0 ".concat(oplevel1));
-							m.parseCommand(currentLevel, "Area 0 384 ".concat(level0));
-							m.parseCommand(currentLevel, "Area 426 384 ".concat(oplevel0));
-
-
-							m.parseCommand(currentLevel, "Area 0 384 pillars.png");
-							m.parseCommand(currentLevel, "Platform Custom 0 768 floorA.png");
-							m.parseCommand(currentLevel, "Area 426 384 pillars.png");
-							m.parseCommand(currentLevel, "Platform Custom 426 768 floorA.png");
-
-							break;
-						case 2:
-
-							m.parseCommand(currentLevel, "Area 0 -384 ".concat(level3));
-							m.parseCommand(currentLevel, "Area 426 -384 ".concat(oplevel3));
-							m.parseCommand(currentLevel, "Area 0 0 ".concat(level2));
-							m.parseCommand(currentLevel, "Area 426 0 ".concat(oplevel2));
-							m.parseCommand(currentLevel, "Area 0 384 ".concat(level1));
-							m.parseCommand(currentLevel, "Area 426 384 ".concat(oplevel1));
-
-							m.parseCommand(currentLevel, "Area 0 768 ".concat(level0));
-							m.parseCommand(currentLevel, "Area 0 768 pillars.png");
-							m.parseCommand(currentLevel, "Area 426 768 ".concat(oplevel0));
-							m.parseCommand(currentLevel, "Area 426 768 pillars.png");
-
-
-
-							m.parseCommand(currentLevel, "Area 0 384 pillars.png");
-							m.parseCommand(currentLevel, "Area 426 384 pillars.png");
-							m.parseCommand(currentLevel, "Platform Custom 0 768 floorA.png");
-							m.parseCommand(currentLevel, "Platform Custom 426 768 floorA.png");
-							break;
-					}
-				}
-
-
-				m.parseCommand(currentLevel, "Revert");
-
-
-				m.mapParser(currentLevel, segments1.get(rnd1));
-				segments1.remove(rnd1);
-
-
-			}
-
+			randomGenerate(m,segments1);
 			randomGenerate(m,intro2);
 			randomGenerate(m,segments2);
 			randomGenerate(m,throneRoom);
-
 
 		}
 
 		Collections.sort(currentLevel.getGameObjects(), Comparator.comparingInt(GameObject::getZ));
 
-
 		camera = new Camera();
 		camera.addTarget(player);
-
 
 		//windowHandler = new WindowHandler(this);
 
@@ -478,66 +243,176 @@ public class Game extends Canvas implements Runnable{
 		this.requestFocus();
 	}
 
-	public void randomGenerate(Map m,ArrayList<String> mapPool) {
+	public void randomGenerate(Map m,ArrayList<String> segmentPool) {
 
 
 		int rnd1;
 
-		while (!mapPool.isEmpty()) {
+		while (!segmentPool.isEmpty()) {
 
+			//advance by 1 block
 			m.parseCommand(currentLevel, "Chunk 1 E asdgasdg.png");
+			//choose segment at random from segment pool
+			rnd1 = new Random().nextInt(segmentPool.size());
 
-			rnd1 = new Random().nextInt(mapPool.size());
+			//if picked segment is not allowed when on top level or bottom level reroll till it's something valid
+			//when the map is on level 0 we don't want to go further down
+			if (index == bottom)
+				while (segmentPool.get(rnd1).equals("intersegmentA2down")) {
+					rnd1 = new Random().nextInt(segmentPool.size());
+				}
 
-			File myObj = new File("./src/game/segments/".concat(mapPool.get(rnd1)).concat(".txt"));
-			Scanner myReader;
+			//when the map is on the top most level chosen we don't want to go further up
+			if (index == top)
+				while (segmentPool.get(rnd1).equals("intersegmentA2up")) {
+					rnd1 = new Random().nextInt(segmentPool.size());
+				}
+
 			try {
+
+				//initialize object to read first line of the picked segment
+				File myObj = new File("./src/game/segments/".concat(segmentPool.get(rnd1)).concat(".txt"));
+				Scanner myReader;
 				myReader = new Scanner(myObj);
 				String data = myReader.nextLine();
 				String[] splix = data.split("\\s+");
-				if (Integer.parseInt(splix[8]) == 2) {
-					if (half) {
-						m.parseCommand(currentLevel, "Area 0 0 ground2.png");
-						m.parseCommand(currentLevel, "Area 426 0 ground1.png");
 
-						m.parseCommand(currentLevel, "Area 0 -384 sky2.png");
-						m.parseCommand(currentLevel, "Area 426 -384 sky1.png");
-					} else {
-						m.parseCommand(currentLevel, "Area 0 0 ground1.png");
-						m.parseCommand(currentLevel, "Area 426 0 ground2.png");
+				//check if segment is of size 1 or 2 or custom and generate background accordingly
+				switch (splix[8]){
 
-						m.parseCommand(currentLevel, "Area 0 -384 sky1.png");
-						m.parseCommand(currentLevel, "Area 426 -384 sky2.png");
-					}
+					//default 1 block size segment -- no level change
+					case "1":
+
+						if (index == 0) {
+							m.parseCommand(currentLevel, "Platform Custom -86 384 customFloor3.png");
+							m.parseCommand(currentLevel, "Platform Custom 340 384 customFloor3.png");
+						}
+						else {
+							m.parseCommand(currentLevel, "Platform Custom 54 384 edge1.png");
+							m.parseCommand(currentLevel, "Platform Custom 338 384 edge1inv.png");
+						}
+
+						m.parseCommand(currentLevel, "Area 0 -384 ".concat(ctrlr.getCurrent(index+1)));
+						m.parseCommand(currentLevel, "Area 0 0 ".concat(ctrlr.getCurrent(index)));
+
+						if (index>0)
+						{
+							m.parseCommand(currentLevel, "Area 0 384 ".concat(ctrlr.getCurrent(index-1)));
+							if (index>1)
+								m.parseCommand(currentLevel, "Area 0 768 ".concat(ctrlr.getCurrent(index-2)));
+						}
+
+						ctrlr.incrementStateIndex();
+						break;
+
+					//default 2 block size segment -- no level change
+					case "2":
+
+						m.parseCommand(currentLevel, "Area 0 -384 ".concat(ctrlr.getCurrent(index+1)));
+						m.parseCommand(currentLevel, "Area 426 -384 ".concat(ctrlr.getNext(index+1)));
+
+						m.parseCommand(currentLevel, "Area 0 0 ".concat(ctrlr.getCurrent(index)));
+						m.parseCommand(currentLevel, "Area 426 0 ".concat(ctrlr.getNext(index)));
+
+						if (index>0)
+						{
+							m.parseCommand(currentLevel, "Area 0 384 ".concat(ctrlr.getCurrent(index-1)));
+							m.parseCommand(currentLevel, "Area 426 384 ".concat(ctrlr.getNext(index-1)));
+
+							m.parseCommand(currentLevel, "Area 0 384 pillars.png");
+							m.parseCommand(currentLevel, "Area 426 384 pillars.png");
+							m.parseCommand(currentLevel, "Platform Custom 0 768 floorA.png");
+							m.parseCommand(currentLevel, "Platform Custom 426 768 floorA.png");
+
+							if (index>1)
+							{
+								m.parseCommand(currentLevel, "Area 0 768 ".concat(ctrlr.getCurrent(index-2)));
+								m.parseCommand(currentLevel, "Area 426 768 ".concat(ctrlr.getNext(index-2)));
+
+								m.parseCommand(currentLevel, "Area 0 768 pillars.png");
+								m.parseCommand(currentLevel, "Area 426 768 pillars.png");
+
+							}
+						}
+
+						ctrlr.incrementStateIndex();
+						ctrlr.incrementStateIndex();
+						break;
+
+					case "Custom":
+
+						//here you can define special behaviour for certain segments
+						switch (splix[9]){
+
+							//this segment elevates the level
+							case "intersegmentA2up":
+								if (index == 0) {
+									m.parseCommand(currentLevel, "Platform Custom -86 384 customFloor3.png");
+									m.parseCommand(currentLevel, "Platform Custom 340 384 customFloor3.png");
+								} else {
+									m.parseCommand(currentLevel, "Platform Custom 54 384 edge1.png");
+									m.parseCommand(currentLevel, "Platform Custom 340 384 customFloor3.png");
+								}
+
+								if (index>0)
+								{
+									m.parseCommand(currentLevel, "Area 0 384 ".concat(ctrlr.getCurrent(index-1)));
+									if (index>1)
+										m.parseCommand(currentLevel, "Area 0 768 ".concat(ctrlr.getCurrent(index-2)));
+								}
+
+								m.parseCommand(currentLevel, "Area 0 0 ".concat(ctrlr.getCurrent(index)));
+								m.parseCommand(currentLevel, "Area 0 -384 ".concat(ctrlr.getCurrent(index+1)));
+								m.parseCommand(currentLevel, "Area 0 -768 ".concat(ctrlr.getCurrent(index+2)));
+								m.parseCommand(currentLevel, "Area -426 -768 ".concat(ctrlr.getPrevious(index+2)));
 
 
-				} else if (Integer.parseInt(splix[8]) == 1) {
-					if (half) {
-						m.parseCommand(currentLevel, "Area 0 -384 sky2.png");
-						m.parseCommand(currentLevel, "Area 0 0 ground2.png");
+								index++;
 
-					} else {
-						m.parseCommand(currentLevel, "Area 0 -384 sky1.png");
-						m.parseCommand(currentLevel, "Area 0 0 ground1.png");
-					}
+								ctrlr.incrementStateIndex();
+								break;
 
+							//this segment decreses elevation of the level
+							case "intersegmentA2down":
+								if (index == 1) {
+									m.parseCommand(currentLevel, "Platform Custom -86 768 customFloor3.png");
+									m.parseCommand(currentLevel, "Platform Custom 340 768 customFloor3.png");
+								} else {
+									m.parseCommand(currentLevel, "Platform Custom 338 768 edge1inv.png");
+									m.parseCommand(currentLevel, "Platform Custom -86 768 customFloor3.png");
+								}
 
-					if (!half)
-						half = true;
-					else
-						half = false;
+								m.parseCommand(currentLevel, "Area 0 -384 ".concat(ctrlr.getCurrent(index+1)));
+								m.parseCommand(currentLevel, "Area 426 -384 ".concat(ctrlr.getNext(index+1)));
+								m.parseCommand(currentLevel, "Area 0 0 ".concat(ctrlr.getCurrent(index)));
+								if (index>0)
+								{
+									m.parseCommand(currentLevel, "Area 0 384 ".concat(ctrlr.getCurrent(index-1)));
+									if(index>1)
+										m.parseCommand(currentLevel, "Area 0 768 ".concat(ctrlr.getCurrent(index-2)));
+								}
 
+								index--;
+
+								ctrlr.incrementStateIndex();
+								break;
+						}
+						break;
 				}
 
 
-			} catch (FileNotFoundException e) {
+			}
+			catch (FileNotFoundException e)
+			{
 			}
 
 
+			//revert the 1 block advancement at the start of the while loop
 			m.parseCommand(currentLevel, "Revert");
-
-			m.mapParser(currentLevel, mapPool.get(rnd1));
-			mapPool.remove(rnd1);
+			//draw the contents of the segment
+			m.mapParser(currentLevel, segmentPool.get(rnd1));
+			//rremove the segment from the segment pool
+			segmentPool.remove(rnd1);
 
 		}
 	}

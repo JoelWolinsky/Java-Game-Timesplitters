@@ -1,4 +1,4 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA1.png
+Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA1.png 1
 Chunk 1 E intersegmentA2.png
 Respawn 54 363 0 0 flag1.png
 AnimArea 140 67 4 skeletonreact1.png skeletonreact1.png skelethrow3.png skelethrow4.png
