@@ -58,6 +58,8 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 	
 	private String username;
 
+	private int respawnThreshold;
+
 	public AIPlayer(float x, float y, int width,int height, String...urls) {
 		super(x, y, 2, width, height);
 		
@@ -384,6 +386,10 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 
 	public String getUsername() {
 		return this.username;
+	}
+
+	public void setRespawnThreshold(int respawnThreshold) {
+		this.respawnThreshold = respawnThreshold;
 	}
 
 

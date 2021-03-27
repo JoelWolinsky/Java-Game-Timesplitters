@@ -1,6 +1,7 @@
 package game.entities.areas;
 import game.attributes.AnimatedObject;
 import game.entities.Player;
+import game.entities.AIPlayer;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
 
@@ -28,6 +29,10 @@ public class Portal extends AnimArea{
 
 
 	public boolean getInteractionEffect(Player player){
+		return ((int)this.x<(int)player.getX()+player.getWidth() && (int)player.getX()<this.x+this.width && (int)this.y-200<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)this.y+this.height);
+	}
+
+	public boolean getInteractionEffect(AIPlayer player){
 		return ((int)this.x<(int)player.getX()+player.getWidth() && (int)player.getX()<this.x+this.width && (int)this.y-200<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)this.y+this.height);
 	}
 

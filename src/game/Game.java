@@ -172,35 +172,21 @@ public class Game extends Canvas implements Runnable{
 		//keep default for now untwil we sort randomly generated
 		if (mapMode.equals("default")) {
 			
-			m.mapParser(currentLevel, "segmentA6X");			
-			
-			/*
-			
-			m.mapParser(currentLevel, "segmentA2");			// electric one
-			m.mapParser(currentLevel, "segmentA3");			// aesthetic hall 1
-			m.mapParser(currentLevel, "segmentA4");			// aesthetic hall 2
-			m.mapParser(currentLevel, "segmentA5");			// aesthetic hall 3
-			m.mapParser(currentLevel, "segmentA6");			// ghosts
-			m.mapParser(currentLevel, "segmentA7");			// platforms
-			m.mapParser(currentLevel, "segmentA8");			// disappearing long and small platforms
-			m.mapParser(currentLevel, "segmentA9");			// ??
-			m.mapParser(currentLevel, "segmentA10");		// long corridor
-			m.mapParser(currentLevel, "segmentA11");		// disappearing platforms over acid
-			m.mapParser(currentLevel, "segmentA12");		// bookshelf pyramid
-			m.mapParser(currentLevel, "segmentA13");		// crushing bookshelves
-			m.mapParser(currentLevel, "segmentA14");		// ??
+			m.mapParser(currentLevel, "intersegmentA3");			
+			m.mapParser(currentLevel, "intersegmentA1");			
+			m.mapParser(currentLevel, "goNX");			
+			m.mapParser(currentLevel, "segmentA1X");			
 
-			*/
+			
+			// TODO: Fix segment A7
 			
 			/*
 
 			LEGEND
 
-			
-			
 			m.mapParser(currentLevel, "goN");				// Skeletons throwing objects down
 			
-			m.mapParser(currentLevel, "intro1");			// No go zone
+			m.mapParser(currentLevel, "intro1");			// No go zone 						-- Don't think I need AI version
 			m.mapParser(currentLevel, "intro2");			// Basic chandelier room
 			m.mapParser(currentLevel, "introDimension");	// Pink portal
 
@@ -210,20 +196,18 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "segmentA4");			// aesthetic hall 2
 			m.mapParser(currentLevel, "segmentA5");			// aesthetic hall 3
 			m.mapParser(currentLevel, "segmentA6");			// ghosts
-			m.mapParser(currentLevel, "segmentA7");			// platforms
+			m.mapParser(currentLevel, "segmentA7");			// platforms						-- CAUSES PROGRAM TO CRASH
 			m.mapParser(currentLevel, "segmentA8");			// disappearing long and small platforms
-			m.mapParser(currentLevel, "segmentA9");			// ??
+			m.mapParser(currentLevel, "segmentA9");			// spinning fireball one 			-- NOT DOING AI VERSION
 			m.mapParser(currentLevel, "segmentA10");		// long corridor
 			m.mapParser(currentLevel, "segmentA11");		// disappearing platforms over acid
 			m.mapParser(currentLevel, "segmentA12");		// bookshelf pyramid
-			m.mapParser(currentLevel, "segmentA13");		// crushing bookshelves
-			m.mapParser(currentLevel, "segmentA14");		// ??
+			m.mapParser(currentLevel, "segmentA13");		// wizard and crushing bookshelves 	-- NOT DOING AI VERSION
+			m.mapParser(currentLevel, "segmentA14");		// interstellar bookshelf columns 	-- WAIT UNTIL DEBUGGED
 			
-			m.mapParser(currentLevel, "intersegmentA1"); 	// falling objects - hard for AI
+			m.mapParser(currentLevel, "intersegmentA1"); 	// skeletons throwing objects down
 			m.mapParser(currentLevel, "intersegmentA2");	// falling rocks
 			m.mapParser(currentLevel, "intersegmentA3");	// hands one
-			
-			m.mapParser(currentLevel, "introDimension");
 			
 
 
@@ -231,7 +215,7 @@ public class Game extends Canvas implements Runnable{
  */
 		}
 		else if (mapMode.equals("RNG")) {
-			;
+			// ;
 			ArrayList<String> segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","intersegmentA2up","intersegmentA2down"));
 			//ArrayList<String> segments1 = new ArrayList<String>(Arrays.asList("segmentA1", "segmentA2"));
 			ArrayList<String> segments2 = new ArrayList<String>(Arrays.asList("segmentA3", "segmentA4", "segmentA4"));

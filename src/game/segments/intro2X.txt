@@ -1,0 +1,14 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA1.png 1
+Chunk 1 E intro2.png
+Respawn 10 363 0 0 flag1.png
+Waypoint 10 363 flag3.png R N 0
+Waypoint 60 363 flag3.png R N 0
+
+Platform Custom 0 92 corner1.png
+Platform Custom 96 92 top2.png
+Platform Custom 330 92 corner1inv.png
+
+Area 175 90 chandelier.png
+
+Floor
+
