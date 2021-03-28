@@ -1,5 +1,5 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA8p1.png
-Chunk 1 E segmentA99p1.png
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA8p1.png 2
+Chunk 1 E segmentA9p1.png
 Platform Custom 0 92 corner1.png
 Platform Custom 96 92 top1.png
 Platform Custom 330 92 corner1inv.png
@@ -15,12 +15,10 @@ Platform Custom 340 600 thinplatform2.png
 Platform Custom 355 290 floorcage1.png
 
 Platform Custom 355 300 floorcage4.png
+Platform Custom 0 384 wall5.png
+Platform Custom 198 660 floorcage5.png
 
-
-
-Chunk 1 N skyA.png
-Chunk 1 E skyA.png
-Chunk 1 S segmentA99p2.png
+Chunk 1 E segmentA9p2.png
 
 Platform Custom 20 570 thinplatform2.png
 Platform Custom 100 500 thinplatform2.png
@@ -56,7 +54,7 @@ Projectile -10 360 -3 1 400 0 0 100 nopicture.png 4 bloodcell1.png bloodcell2.pn
 Projectile -10 360 -3 2 400 0 0 120 nopicture.png 4 bloodcell1.png bloodcell2.png bloodcell3.png bloodcell4.png
 Projectile -10 360 -3 3 400 0 0 140 nopicture.png 4 bloodcell1.png bloodcell2.png bloodcell3.png bloodcell4.png
 
-
+Platform Custom 410 384 wall5inv.png
 
 
 Platform Custom 63 300 floorcage3.png

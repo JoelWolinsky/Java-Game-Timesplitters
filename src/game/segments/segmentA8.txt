@@ -1,4 +1,4 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA8p1.png
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA8p1.png 2
 Chunk 1 E segmentA8p1.png
 Platform Custom 0 92 corner1.png
 Platform Custom 96 92 top1.png
@@ -8,11 +8,20 @@ TimerPlatform 50 420 thinplatform2.png 0.7 140
 TimerPlatform 140 460 thinplatform2.png 0.7 140
 TimerPlatform 240 500 thinplatform2.png 0.7 140
 TimerPlatform 330 540 thinplatform2.png 0.7 140
+Platform Custom 0 384 wall5.png
 
 
-Chunk 1 N skyA.png
-Chunk 1 E skyA.png
-Chunk 1 S segmentA8p2.png
+EventScriptedDamageZone 150 120 1 20 2 150 384 6 150 120 2 4 bateye1.png bateye2.png bateye3.png bateye4.png 2 -100 70 16 200 100 70 16 200
+EventScriptedDamageZone 250 120 1 20 2 250 384 6 250 120 2 4 bateye1.png bateye2.png bateye3.png bateye4.png 2 -100 70 16 200 100 70 16 200
+
+
+Chunk 1 E segmentA8p2.png
+
+
+EventScriptedDamageZone 150 120 1 20 2 150 384 6 150 120 2 4 bateye1.png bateye2.png bateye3.png bateye4.png 2 -100 70 16 200 100 70 16 200
+EventScriptedDamageZone 250 120 1 20 2 250 384 6 250 120 2 4 bateye1.png bateye2.png bateye3.png bateye4.png 2 -100 70 16 200 100 70 16 200
+
+Platform Custom 410 384 wall5inv.png
 
 Platform Custom 0 92 corner1.png
 Platform Custom 96 92 top2.png

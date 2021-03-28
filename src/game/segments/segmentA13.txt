@@ -1,5 +1,5 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA12p1.png
-Chunk 1 E segmentA12p1.png
+Chunk 1 E segmentA13p1.png
 Respawn 10 363 0 0 flag1.png
 Platform Custom 0 92 corner1.png
 Platform Custom 96 92 top2.png
@@ -55,7 +55,7 @@ Floor
 
 Chunk 1 N skyA.png
 Chunk 1 E skyA.png
-Chunk 1 S segmentA12p2.png
+Chunk 1 S segmentA13p2.png
 
 Platform Custom -24 354 bookshelf2.png
 Platform Custom -16 305 bookshelf3.png

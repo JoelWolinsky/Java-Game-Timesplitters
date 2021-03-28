@@ -131,6 +131,18 @@ public class Level extends Canvas {
 								if (((ScriptedDamageZone) l).getInteraction(((Player) k)))
 									((Player) k).respawn();
 						//player interaction with event damage zones
+						if (l instanceof EventScriptedDamageZone) {
+
+							for (Area xd: ((EventScriptedDamageZone) l).getEventArea() )
+								if (xd.getInteraction(((Player) k))) {
+									((EventScriptedDamageZone) l).setActivated(true);
+								}
+							if (((EventScriptedDamageZone) l).getActivated())
+								if (((EventScriptedDamageZone) l).getInteraction(((Player) k)))
+									((Player) k).respawn();
+						}
+
+
 						if (l instanceof EventDamageZone) {
 
 							for (Area xd: ((EventDamageZone) l).getEventArea() )

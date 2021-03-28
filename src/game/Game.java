@@ -41,6 +41,7 @@ public class Game extends Canvas implements Runnable{
 	public static Player player;
 	public static AIPlayer aiPlayer;
 	public static Camera camera;
+	ArrayList<String> segments3,segments1,segments2;
 	int index = 0;
 	int stateIndex=0;
 	int bottom;
@@ -166,7 +167,10 @@ public class Game extends Canvas implements Runnable{
 
 		//keep default for now untwil we sort randomly generated
 		if (mapMode.equals("debug")) {
-
+			m.mapParser(currentLevel, "intersegmentA3");
+			m.mapParser(currentLevel, "segmentA10");
+			m.mapParser(currentLevel, "segmentA6");// long corridor
+			m.mapParser(currentLevel, "segmentA11");
 /*
 			m.mapParser(currentLevel, "intersegmentA3");	// hands one
 			m.mapParser(currentLevel, "segmentA6");			// ghosts
@@ -189,9 +193,10 @@ public class Game extends Canvas implements Runnable{
 
 			//create different segment pools for the different parts of the game
 			//we want them separated in order to keep a specific order in our game
-			ArrayList<String> segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","intersegmentA2up","intersegmentA2down"));
-			ArrayList<String> segments2 = new ArrayList<String>(Arrays.asList("segmentA3", "segmentA4", "segmentA4"));
-			ArrayList<String> segments3 = new ArrayList<String>(Arrays.asList("intersegmentA3","segmentA6","segmentA7","segmentA8","segmentA9","intersegmentA3","intersegmentA3","segmentA6","segmentA7","intersegmentA3"));
+			segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","intersegmentA2up","intersegmentA2down"));
+			segments2 = new ArrayList<String>(Arrays.asList("segmentA3", "segmentA4", "segmentA4"));
+			//segments3 = new ArrayList<String>(Arrays.asList("segmentA11"));
+			segments3 = new ArrayList<String>(Arrays.asList("segmentA6","segmentA7","segmentA8","segmentA9","segmentA6","segmentA7","segmentA10","segmentA11"));
 
 			//load up the images that are going to be used for dynamic background generation onto individual levels
 			//**it is important that all levels have the same amount of images
@@ -213,10 +218,14 @@ public class Game extends Canvas implements Runnable{
 			int part1nrblocks = randomGenerate(m,segments1);
 			int part2nrblocks = randomGenerate(m,new ArrayList<String>(Arrays.asList("intro2")));
 			part2nrblocks = part2nrblocks + randomGenerate(m,segments2) + randomGenerate(m,new ArrayList<String>(Arrays.asList("segmentA5")));
+			int part3nrblocks = randomGenerate(m,segments3);
+
+
 			MapPart mp1 = new MapPart("./img/minipart1d.png",part1nrblocks);
 			MapPart mp2 = new MapPart("./img/minipart2.png",part2nrblocks);
+			MapPart mp3 = new MapPart("./img/minipart3.png",part3nrblocks);
 
-			currentLevel.addEntity(new BarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,player,currentLevel,mp1,mp2));
+			currentLevel.addEntity(new BarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,player,currentLevel,mp1,mp2,mp3));
 
 		}
 
@@ -241,8 +250,6 @@ public class Game extends Canvas implements Runnable{
 		int rnd1;
 		while (!segmentPool.isEmpty()) {
 
-			//advance by 1 block
-			m.parseCommand(currentLevel, "Chunk 1 E asdgasdg.png");
 			//choose segment at random from segment pool
 			rnd1 = new Random().nextInt(segmentPool.size());
 
@@ -259,6 +266,13 @@ public class Game extends Canvas implements Runnable{
 					rnd1 = new Random().nextInt(segmentPool.size());
 				}
 
+			//custom behaviour for Castle Dungeon -- put an intersegmentA3 before each segment
+			if (belongsTo(segmentPool.get(rnd1),segments3))
+				randomGenerate(m, new ArrayList<String>(Arrays.asList("intersegmentA3")));
+
+			//advance by 1 block
+			m.parseCommand(currentLevel, "Chunk 1 E asdgasdg.png");
+
 			try
 			{
 				//initialize object to read first line of the picked segment
@@ -274,13 +288,17 @@ public class Game extends Canvas implements Runnable{
 					//default 1 block size segment -- no level change
 					case "1":
 
-						if (index == 0) {
-							m.parseCommand(currentLevel, "Platform Custom -86 384 customFloor3.png");
-							m.parseCommand(currentLevel, "Platform Custom 340 384 customFloor3.png");
-						}
-						else {
-							m.parseCommand(currentLevel, "Platform Custom 54 384 edge1.png");
-							m.parseCommand(currentLevel, "Platform Custom 338 384 edge1inv.png");
+						//custom behaviour for segments 1
+						if (belongsTo(segmentPool.get(rnd1),segments1))
+						{
+							if (index == 0) {
+								m.parseCommand(currentLevel, "Platform Custom -86 384 customFloor3.png");
+								m.parseCommand(currentLevel, "Platform Custom 340 384 customFloor3.png");
+							}
+							else {
+								m.parseCommand(currentLevel, "Platform Custom 54 384 edge1.png");
+								m.parseCommand(currentLevel, "Platform Custom 338 384 edge1inv.png");
+							}
 						}
 
 						m.parseCommand(currentLevel, "Area 0 -384 ".concat(ctrlr.getCurrent(index+1)));
@@ -403,7 +421,8 @@ public class Game extends Canvas implements Runnable{
 			
 			//revert the 1 block advancement at the start of the while loop
 			m.parseCommand(currentLevel, "Revert");
-			//draw the contents of the segment
+
+					//draw the contents of the segment
 			m.mapParser(currentLevel, segmentPool.get(rnd1));
 			//rremove the segment from the segment pool
 			segmentPool.remove(rnd1);
@@ -413,6 +432,16 @@ public class Game extends Canvas implements Runnable{
 
 		return nrBlocks;
 
+	}
+
+	public boolean belongsTo(String s, ArrayList<String> al)
+	{
+		for (String z : al) {
+			if (z.equals(s)){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public synchronized void stop() {

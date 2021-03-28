@@ -1,13 +1,10 @@
 package game.entities.areas;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.LinkedList;
 
-public class ScriptedDamageZone extends AnimArea{
+public class EventScriptedDamageZone extends AnimArea{
 	private int timer=0;
 	private boolean active = true;
 	private int i = 0;
@@ -18,10 +15,11 @@ public class ScriptedDamageZone extends AnimArea{
 	private float speed,speed2;
 	private boolean lockX=false, lockY=false;
 	private LinkedList<Point> points;
-
+	private boolean activated = true;
+	private LinkedList<Area> areas = new LinkedList<>();
 	int k=0;
 
-	public ScriptedDamageZone(float x, float y, int width, int height, float speed, LinkedList<Point> points, int startOffset, String...urls) {
+	public EventScriptedDamageZone(float x, float y, int width, int height, float speed, LinkedList<Point> points, int startOffset, String...urls) {
 		super(x, y, width, height, urls);
 		this.startOffset = startOffset;
 		this.originalX=x;
@@ -34,7 +32,8 @@ public class ScriptedDamageZone extends AnimArea{
 
 	public void tick() {
 
-
+		if (activated)
+		{
 			if (i<startOffset)
 				i++;
 			else
@@ -79,6 +78,7 @@ public class ScriptedDamageZone extends AnimArea{
 					if (k==points.size()) {
 						this.x=originalX;
 						this.y=originalY;
+						activated=false;
 						speed=1;
 						speed2=1;
 						k = 1;
@@ -121,7 +121,7 @@ public class ScriptedDamageZone extends AnimArea{
 
 			}
 
-
+		}
 
 	}
 
@@ -133,11 +133,15 @@ public class ScriptedDamageZone extends AnimArea{
 	public boolean getActive(){
 		return this.active;
 	}
+	public boolean getActivated(){
+		return this.activated;
+	}
+	public void setActivated(boolean activated){ this.activated=activated;}
 	public void setActive(boolean active){
 		this.active = active;
 	}
-
-
+	public LinkedList<Area> getEventArea(){return this.areas;}
+	public void addArea(Area area){ areas.add(area);}
 	public void addPoint(Point p)
 	{
 		points.add(p);
