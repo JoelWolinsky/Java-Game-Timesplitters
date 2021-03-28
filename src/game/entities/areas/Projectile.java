@@ -1,5 +1,7 @@
 package game.entities.areas;
 
+import game.attributes.CollidingObject;
+
 public class Projectile extends DamageZone {
 	private float baseposX,baseposY;
 	private float velX,velY;

@@ -27,6 +27,7 @@ public abstract class GameObject {
 		this.width = width;
 		this.height = height;
 	}
+
 	
 	/**
 	 * Required function for all subclasses<br>

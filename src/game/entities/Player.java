@@ -42,6 +42,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private boolean immunity=false;
 	private int i=0;
 	private boolean cc=false;
+	private boolean moving;
 
 	private static int animationTimer = 0;
 	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
@@ -87,6 +88,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	//TODO: Fix moving through the up-and-down moving platform when you jump underneath it
 	public void tick() {
 		//Gather all collisions
+		moving = false;
 		CollidingObject.getCollisions(this);
 		if (i<100) {
 			i++;
@@ -104,7 +106,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		
 		if (this.input != null) {
 			if(KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
-	
+
+
+				moving=true;
+
 			/* Beware: Java floating point representation makes it difficult to have perfect numbers
 			( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
 	
@@ -117,7 +122,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 					currentAnimationState = AnimationStates.RIGHT;
 	
 			} else if(KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
-	
+
+
+				moving=true;
+
 					// Simulates acceleration when you run left
 					if (this.velX <= -RUN_SPEED){
 						this.velX = -RUN_SPEED;
@@ -229,6 +237,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 
 
+	}
+
+	public boolean moving(){
+		return moving;
 	}
 
 	public void respawn(){

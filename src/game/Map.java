@@ -310,6 +310,48 @@ public class Map {
                         currentLevel.addEntity(edz);
 
                         break;
+
+                    case "EventScriptedDamageZone":
+
+                        //prepares a string array with the urls
+                        List<String> list9 = new ArrayList<String>();
+                        for (int l = 6+(3*Integer.parseInt(splited[5])) + 1;l < 6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]);l++)
+                            list9.add("./img/".concat(splited[l]));
+
+                        String[] arr9 = list9.toArray(new String[0]);
+
+
+                        LinkedList<Point> pntz = new LinkedList<>();
+
+                        Point aszd;
+                        pntz.add(new Point(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),1));
+
+                        for (int l = 6;l < 6+(3*Integer.parseInt(splited[5]));l+=3)
+                        {
+                            aszd= new Point(horizontalIndex - setX + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]));
+                            pntz.add(aszd);
+                        }
+
+
+
+                        EventScriptedDamageZone esdz;
+                        esdz = new EventScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),pntz,Integer.parseInt(splited[4]),arr9);
+
+
+
+
+                        Area kol;
+                        for (int l = 6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]) + 1 ;l < 6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]) + 1 +(4*Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))])]));l+=4)
+                        {
+                            kol= new Area(horizontalIndex - setX + Integer.parseInt(splited[1]) + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[2]) + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]),Integer.parseInt(splited[l+3]),"");
+                            esdz.addArea(kol);
+                            currentLevel.addEntity(kol);
+                        }
+
+                        currentLevel.addEntity(esdz);
+
+                        break;
+
                     case "Projectile":
 
                         List<String> list2 = new ArrayList<String>();

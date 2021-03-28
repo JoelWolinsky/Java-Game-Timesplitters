@@ -1,6 +1,5 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA11p1.png 2
-Chunk 1 E segmentA11p1.png
-Respawn 10 363 0 0 flag1.png
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA11p1.png
+Chunk 1 E segmentA12p1.png
 
 Platform Custom 0 60 corner1.png
 Platform Custom 96 28 corner1.png
@@ -30,7 +29,7 @@ Floor
 
 Chunk 1 N skyA.png
 Chunk 1 E skyA.png
-Chunk 1 S segmentA11p2.png
+Chunk 1 S segmentA12p2.png
 
 Platform Custom 0 28 top3.png
 Platform Custom 138 28 corner1inv.png
