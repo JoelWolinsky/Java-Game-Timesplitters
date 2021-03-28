@@ -36,6 +36,7 @@ public class Game extends Canvas implements Runnable{
 	public static GameServer socketServer;
 
 	public static Boolean isMultiplayer = false;
+	public static Boolean againstComputer = false;
 	public static Game game;
 	boolean half = false;
 	public static Player player;
@@ -133,18 +134,8 @@ public class Game extends Canvas implements Runnable{
 
 		System.out.println("start()");
 
-		if(isMultiplayer == false) {
-			System.out.println("not mp");
-
-//			player = new Player(0, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
-			aiPlayer = new AIPlayer(50, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
-
-			player = new Player(0, 340, keyInput, 0 ,0);
-
-			currentLevel.addEntity(player);
-			currentLevel.addEntity(aiPlayer);
-
-		}else {
+		if(isMultiplayer == true) {
+			
 			System.out.println("mp");
 			player = new PlayerMP(this.currentLevel, 300, 300, keyInput, null, -1);
 			currentLevel.addEntity(player);
@@ -161,7 +152,7 @@ public class Game extends Canvas implements Runnable{
 		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 		String mapMode = "RNG";
 		Map m = new Map();
-		//keep default for now untwil we sort randomly generated
+		//keep default for now until we sort randomly generated
 		if (mapMode.equals("default")) {
 
 /*

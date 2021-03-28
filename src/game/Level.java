@@ -168,71 +168,169 @@ public class Level extends Canvas {
 
 			if (k instanceof AIPlayer) {
 
-				for (GameObject l:entities)
-				{
-
-					if (l instanceof Waypoint) {
-						//if (o.getReached()==false) //comment this out if you want to allow players to activate previously reached respawn points
-						if (((Waypoint) l).getInteraction((AIPlayer) k))
-						{
-
-							((AIPlayer) k).setDirection(((Waypoint) l).getDirection());
-							((AIPlayer) k).setJump(((Waypoint) l).getJump());
-
-							// Means a waypoint only has an effect once until player touches another one
-							if (!waypoints.contains((Waypoint) l)) {
-
-								waypoints.clear();
-								waypoints.add((Waypoint) l);
-								((AIPlayer) k).setWait(((Waypoint) l).getWait());
-
-							}
-						}
-					}
-
-					if (l instanceof Platform)
-						if (l instanceof CrushingPlatform)
-							if (((CrushingPlatform) l).getInteraction(((AIPlayer) k)))
-								((AIPlayer) k).respawn();
-
-					if (l instanceof Area)
+					for (GameObject l:getGameObjects())
 					{
-						if (l instanceof RespawnPoint)
+						
+						if (l instanceof Waypoint) {
 							//if (o.getReached()==false) //comment this out if you want to allow players to activate previously reached respawn points
-							if (((RespawnPoint) l).getInteraction(((AIPlayer) k)))
+							if (((Waypoint) l).getInteraction((AIPlayer) k))
 							{
-								((AIPlayer) k).setRespawnX((int) l.getX());
-								((AIPlayer) k).setRespawnY((int) l.getY()-10);
-								((RespawnPoint)l).setReached(true);
-								((RespawnPoint)l).setCurrentActive(true);
-								//for (RespawnPoint oo: respawnPoints)
-								//	if (oo != o)
-								//		oo.setCurrentActive(false);
+	
+								((AIPlayer) k).setDirection(((Waypoint) l).getDirection());
+								((AIPlayer) k).setJump(((Waypoint) l).getJump());
+	
+								// Means a waypoint only has an effect once until player touches another one
+								if (!waypoints.contains((Waypoint) l)) {
+	
+									waypoints.clear();
+									waypoints.add((Waypoint) l);
+									((AIPlayer) k).setWait(((Waypoint) l).getWait());
+	
+								}
 							}
-
-						//player interaction with damage zones
-						if (l instanceof DamageZone)
-							if (((DamageZone) l).getActive())
-								if (((DamageZone) l).getInteraction(((AIPlayer) k)))
-									((AIPlayer) k).respawn();
-
-						if (l instanceof ScriptedDamageZone)
-							if (((ScriptedDamageZone) l).getInteraction(((AIPlayer) k)))
-								((AIPlayer) k).respawn();
-
-						//player interaction with event damage zones
-						if (l instanceof EventDamageZone) {
-
-							for (Area xd: ((EventDamageZone) l).getEventArea() )
-							if (xd.getInteraction(((AIPlayer) k))) {
-								((EventDamageZone) l).setTriggered(true);
-							}
-							if (((EventDamageZone) l).getActive())
-								if (((EventDamageZone) l).getInteraction(((AIPlayer) k)))
-									((AIPlayer) k).respawn();
 						}
+						
 
-					}
+
+
+						if (l instanceof Platform)
+							if (l instanceof CrushingPlatform)
+								if (((CrushingPlatform) l).getInteraction(((AIPlayer) k)))
+									((AIPlayer) k).respawn();
+	
+						if (l instanceof Area)
+						{
+	
+							if (l instanceof Portal) {
+								if (((Portal) l).getInteraction(((AIPlayer) k))) {
+									((AIPlayer) k).setRespawnX(((Portal) l).getCurrentX() + ((Portal) l).getDestinationX());
+									((AIPlayer) k).setRespawnY((int) ((Portal) l).getCurrentY() + ((Portal) l).getDestinationLevel() + ((Portal) l).getDestinationY());
+									((AIPlayer) k).setRespawnThreshold((int)((Portal) l).getCurrentY() + ((Portal) l).getDestinationLevel() + ((Portal) l).getDestinationY());
+									k.setY(((Portal) l).getCurrentY() + ((Portal) l).getDestinationLevel() + ((Portal) l).getDestinationY());
+									k.setX(k.getX());
+									//for (RespawnPoint oo: respawnPoints)
+									//	if (oo != o)
+									//		oo.setCurrentActive(false);
+								}
+	
+								if (((Portal) l).getInteractionEffect(((AIPlayer) k)))
+								{
+									switch (j){
+										case 0:
+											k.setX(k.getX()+15);
+											j++;
+											break;
+										case 1:
+											k.setX(k.getX()-15);
+											j++;
+											break;
+										case 2:
+											k.setX(k.getX()+15);
+											j++;
+											break;
+										case 3:
+											k.setX(k.getX()-15);
+											j++;
+											break;
+										case 4:
+											k.setX(k.getX()+15);
+											j++;
+											break;
+										case 5:
+											k.setX(k.getX()-15);
+											j++;
+											break;
+										case 6:
+											k.setX(k.getX()+15);
+											j++;
+											break;
+										case 7:
+											k.setX(k.getX()-15);
+											j++;
+											break;
+									}
+	
+								}
+	
+							}
+	
+							if (l instanceof OnReachAnimArea)
+								if (((OnReachAnimArea) l).getInteraction(((AIPlayer) k)))
+									((OnReachAnimArea) l).setActive(true);
+								else
+									((OnReachAnimArea) l).setActive(false);
+	
+							if (l instanceof RespawnPoint)
+								//if (o.getReached()==false) //comment this out if you want to allow players to activate previously reached respawn points
+								//if (((RespawnPoint) l).getReached()==false)
+								if (((RespawnPoint) l).getInteraction(((AIPlayer) k)))
+								{
+									((AIPlayer) k).setRespawnX((int) l.getX() + (int)((RespawnPoint) l).getExtraPointX());
+									((AIPlayer) k).setRespawnY((int) l.getY()-40 + (int) ((RespawnPoint) l).getExtraPointY());
+									((AIPlayer) k).setRespawnThreshold((int)l.getY());
+									((RespawnPoint)l).setReached(true);
+									((RespawnPoint)l).setCurrentActive(true);
+									//for (RespawnPoint oo: respawnPoints)
+									//	if (oo != o)
+									//		oo.setCurrentActive(false);
+								}
+	
+							if (l instanceof ExtendedRespawnPoint)
+								//if (((ExtendedRespawnPoint) l).getReached()==false)
+								if (((ExtendedRespawnPoint) l).getInteraction(((AIPlayer) k)))
+								{
+									((AIPlayer) k).setRespawnThreshold((int)l.getY());
+									((ExtendedRespawnPoint)l).setReached(true);
+									((ExtendedRespawnPoint)l).setCurrentActive(true);
+									//for (RespawnPoint oo: respawnPoints)
+									//	if (oo != o)
+									//		oo.setCurrentActive(false);
+								}
+	
+							//player interaction with damage zones
+							if (l instanceof DamageZone)
+								if (((DamageZone) l).getActive())
+									if (((DamageZone) l).getInteraction(((AIPlayer) k)))
+										((AIPlayer) k).respawn();
+	
+							if (l instanceof ScriptedDamageZone)
+									if (((ScriptedDamageZone) l).getInteraction(((AIPlayer) k)))
+										((AIPlayer) k).respawn();
+							//player interaction with event damage zones
+							if (l instanceof EventDamageZone) {
+	
+								for (Area xd: ((EventDamageZone) l).getEventArea() )
+								if (xd.getInteraction(((AIPlayer) k))) {
+									((EventDamageZone) l).setTriggered(true);
+								}
+								if (((EventDamageZone) l).getActive())
+									if (((EventDamageZone) l).getInteraction(((AIPlayer) k)))
+										((AIPlayer) k).respawn();
+							}
+	
+							if (l instanceof DetectionDamageZone) {
+									if (((DetectionDamageZone) l).getArea().getInteraction(((AIPlayer) k))) {
+										//((DetectionDamageZone) l).setTriggered(true);
+										((DetectionDamageZone) l).getArea().setVisibile(true);
+										((AIPlayer) k).respawn();
+										i=0;
+									}
+									else {
+										if (i<50)
+											i++;
+										else
+										((DetectionDamageZone) l).getArea().setVisibile(false);
+									}
+								if (((DetectionDamageZone) l).getActive())
+									if (((DetectionDamageZone) l).getInteraction(((AIPlayer) k)))
+										((AIPlayer) k).respawn();
+	
+							}
+	
+						}
+	
+					
+				
 				}
 			}
 		}
@@ -259,8 +357,8 @@ public class Level extends Canvas {
 			}
 			else if (o instanceof Waypoint)
 			{
-				// if (((Waypoint) o).getCurrentActive())
-				//	o.render(g, f, h);
+					// COMMENT OUT TO HIDE WAYPOINTS
+					// o.render(g, f, h);
 			}
 			else if (o instanceof DamageZone)
 			{

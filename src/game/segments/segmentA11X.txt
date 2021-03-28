@@ -1,0 +1,84 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA3.png
+Chunk 1 E intersegmentA3.png
+Respawn 10 363 0 0 flag1.png
+Waypoint 10 363 flag3.png R N 0
+Waypoint 60 363 flag3.png R N 0
+AnimArea 194 250 4 torch1.png torch2.png torch3.png torch4.png
+Platform Custom 0 124 corner1inv.png
+Platform Custom 96 156 top2.png
+Platform Custom 330 124 corner1.png
+Waypoint 390 363 flag3.png R Y 15
+Floor
+Chunk 1 N skyA.png
+Revert
+
+
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA9p1.png
+Chunk 1 E segmentA10p1.png
+
+Platform Custom 0 240 top4.png
+
+TimerPlatform 60 370 thinplatform2.png 2 20
+Waypoint 60 320 flag3.png R Y 25
+Platform Custom 200 410 thinPlatform2.png
+Waypoint 200 390 flag3.png R Y 40
+TimerPlatform 340 370 thinplatform2.png 2 50
+Waypoint 350 350 flag3.png R Y 20
+
+DamageZone 0 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 22 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 44 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 66 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 88 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 110 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 132 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 154 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 176 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 198 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 220 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 242 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 264 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 286 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 308 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 330 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 352 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 374 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 396 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 418 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+
+Chunk 1 N skyA.png
+Chunk 1 E skyA.png
+Chunk 1 S segmentA10p2.png
+
+
+Platform Custom 0 240 top4.png
+
+Platform Custom 60 410 thinPlatform2.png
+Waypoint 70 390 flag3.png R Y 20
+TimerPlatform 180 340 thinplatform2.png 2 90
+Waypoint 120 320 flag3.png R N 10
+Platform Custom 180 420 thinplatform2.png
+Waypoint 190 400 flag3.png R Y 15
+TimerPlatform 300 370 thinplatform2.png 2 120
+Waypoint 300 350 flag3.png R Y 20
+
+DamageZone 0 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 22 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 44 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 66 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 88 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 110 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 132 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 154 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 176 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 198 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 220 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 242 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 264 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 286 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 308 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 330 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 352 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 374 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 396 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 418 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
