@@ -145,6 +145,26 @@ public class Game extends Canvas implements Runnable{
 	        }
 	        loginPacket.writeData(socketClient);
 
+		} else if (againstComputer == true) {
+
+			System.out.println("not mp");
+			System.out.println("against computer");
+
+			aiPlayer = new AIPlayer(50, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+			player = new Player(0, 340, keyInput, 0 ,0);
+			
+			currentLevel.addEntity(player);
+			currentLevel.addEntity(aiPlayer);
+			
+		} else {
+			
+			System.out.println("not mp");
+			System.out.println("single player");
+
+			player = new Player(0, 340, keyInput, 0 ,0);
+
+			currentLevel.addEntity(player);
+
 		}
 
 		game = this;
