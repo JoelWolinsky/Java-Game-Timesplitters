@@ -158,22 +158,16 @@ public class Game extends Canvas implements Runnable{
 
 		game = this;
 
-		//make this as a player choice in the menu either MAP 1 or Randomly Generated
 		String mapMode = "RNG";
 		Map m = new Map();
+
+		camera = new Camera();
+		camera.addTarget(player);
+
 		//keep default for now untwil we sort randomly generated
-		if (mapMode.equals("default")) {
+		if (mapMode.equals("debug")) {
 
 /*
-
-			m.mapParser(currentLevel, "segmentA1");			// basic segment
-			m.mapParser(currentLevel, "intersegmentA1"); 	// falling objects - hard for AI
-			m.mapParser(currentLevel, "segmentA2");			// electric one
-			m.mapParser(currentLevel, "intersegmentA2");	// falling rocks
-			m.mapParser(currentLevel, "segmentA3");			// aesthetic hall 1
-			m.mapParser(currentLevel, "segmentA4");			// aesthetic hall 2
-			m.mapParser(currentLevel, "segmentA5");			// aesthetic hall 3
-
 			m.mapParser(currentLevel, "intersegmentA3");	// hands one
 			m.mapParser(currentLevel, "segmentA6");			// ghosts
 			m.mapParser(currentLevel, "segmentA7");			// platforms
@@ -189,8 +183,6 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "introDimension");
 			m.mapParser(currentLevel, "segmentA14");
 
-
-
  */
 		}
 		else if (mapMode.equals("RNG")) {
@@ -199,8 +191,7 @@ public class Game extends Canvas implements Runnable{
 			//we want them separated in order to keep a specific order in our game
 			ArrayList<String> segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","intersegmentA2up","intersegmentA2down"));
 			ArrayList<String> segments2 = new ArrayList<String>(Arrays.asList("segmentA3", "segmentA4", "segmentA4"));
-			ArrayList<String> intro2 = new ArrayList<String>(Arrays.asList("intro2"));
-			ArrayList<String> throneRoom = new ArrayList<String>(Arrays.asList("segmentA5"));
+			ArrayList<String> segments3 = new ArrayList<String>(Arrays.asList("intersegmentA3","segmentA6","segmentA7","segmentA8","segmentA9","intersegmentA3","intersegmentA3","segmentA6","segmentA7","intersegmentA3"));
 
 			//load up the images that are going to be used for dynamic background generation onto individual levels
 			//**it is important that all levels have the same amount of images
@@ -219,20 +210,21 @@ public class Game extends Canvas implements Runnable{
 
 			//generate the segment pools
 			m.mapParser(currentLevel, "intro1");
-			randomGenerate(m,segments1);
-			randomGenerate(m,intro2);
-			randomGenerate(m,segments2);
-			randomGenerate(m,throneRoom);
+			int part1nrblocks = randomGenerate(m,segments1);
+			int part2nrblocks = randomGenerate(m,new ArrayList<String>(Arrays.asList("intro2")));
+			part2nrblocks = part2nrblocks + randomGenerate(m,segments2) + randomGenerate(m,new ArrayList<String>(Arrays.asList("segmentA5")));
+			MapPart mp1 = new MapPart("./img/minipart1d.png",part1nrblocks);
+			MapPart mp2 = new MapPart("./img/minipart2.png",part2nrblocks);
+
+			currentLevel.addEntity(new BarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,player,currentLevel,mp1,mp2));
 
 		}
 
+
 		Collections.sort(currentLevel.getGameObjects(), Comparator.comparingInt(GameObject::getZ));
 
-		camera = new Camera();
-		camera.addTarget(player);
 
 		//windowHandler = new WindowHandler(this);
-
 		this.addKeyListener(keyInput);
 		this.addMouseListener(mouseInput);
 		this.addMouseMotionListener(mouseInput);
@@ -243,11 +235,10 @@ public class Game extends Canvas implements Runnable{
 		this.requestFocus();
 	}
 
-	public void randomGenerate(Map m,ArrayList<String> segmentPool) {
+	public int randomGenerate(Map m,ArrayList<String> segmentPool) {
 
-
+		int nrBlocks=0;
 		int rnd1;
-
 		while (!segmentPool.isEmpty()) {
 
 			//advance by 1 block
@@ -268,8 +259,8 @@ public class Game extends Canvas implements Runnable{
 					rnd1 = new Random().nextInt(segmentPool.size());
 				}
 
-			try {
-
+			try
+			{
 				//initialize object to read first line of the picked segment
 				File myObj = new File("./src/game/segments/".concat(segmentPool.get(rnd1)).concat(".txt"));
 				Scanner myReader;
@@ -303,6 +294,7 @@ public class Game extends Canvas implements Runnable{
 						}
 
 						ctrlr.incrementStateIndex();
+						nrBlocks++;
 						break;
 
 					//default 2 block size segment -- no level change
@@ -337,6 +329,7 @@ public class Game extends Canvas implements Runnable{
 
 						ctrlr.incrementStateIndex();
 						ctrlr.incrementStateIndex();
+						nrBlocks+=2;
 						break;
 
 					case "Custom":
@@ -370,6 +363,7 @@ public class Game extends Canvas implements Runnable{
 								index++;
 
 								ctrlr.incrementStateIndex();
+								nrBlocks++;
 								break;
 
 							//this segment decreses elevation of the level
@@ -395,6 +389,7 @@ public class Game extends Canvas implements Runnable{
 								index--;
 
 								ctrlr.incrementStateIndex();
+								nrBlocks++;
 								break;
 						}
 						break;
@@ -405,8 +400,7 @@ public class Game extends Canvas implements Runnable{
 			catch (FileNotFoundException e)
 			{
 			}
-
-
+			
 			//revert the 1 block advancement at the start of the while loop
 			m.parseCommand(currentLevel, "Revert");
 			//draw the contents of the segment
@@ -415,6 +409,10 @@ public class Game extends Canvas implements Runnable{
 			segmentPool.remove(rnd1);
 
 		}
+
+
+		return nrBlocks;
+
 	}
 
 	public synchronized void stop() {
