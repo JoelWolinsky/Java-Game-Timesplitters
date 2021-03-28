@@ -1,30 +1,31 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA11p1.png
 Chunk 1 E segmentA11p1.png
+Respawn 10 363 0 0 flag1.png
 
-Platform Custom 0 92 corner1.png
-Platform Custom 96 60 corner1.png
-Platform Custom 192 28 corner1.png
+Platform Custom 0 60 corner1.png
+Platform Custom 96 28 corner1.png
+Platform Custom 192 28 top3.png
 Platform Custom 288 28 top3.png
-Platform Custom 70 352 bookshelf2.png
-Platform Custom 120 335 bookshelf3.png
-Platform Custom 160 320 bookshelf1.png
-Platform Custom 180 285 bookshelf2.png
-Platform Custom 210 320 bookshelf1.png
-Platform Custom 230 285 bookshelf2.png
-Platform Custom 280 335 bookshelf3.png
-Platform Custom 315 320 bookshelf1.png
-Platform Custom 280 260 bookshelf1.png
-Platform Custom 330 270 bookshelf3.png
-Platform Custom 330 235 bookshelf2.png
-Platform Custom 330 170 bookshelf1.png
-Platform Custom 380 210 bookshelf2.png
-Platform Custom 380 150 bookshelf1.png
-Platform Custom 360 335 bookshelf3.png
-Platform Custom 395 335 bookshelf3.png
-Platform Custom 370 310 bookshelf2.png
-Platform Custom 380 240 bookshelf1.png
+Platform Custom 110 352 bookshelf2.png
+Platform Custom 160 335 bookshelf3.png
+Platform Custom 200 320 bookshelf1.png
+Platform Custom 220 285 bookshelf2.png
+Platform Custom 250 320 bookshelf1.png
+Platform Custom 270 285 bookshelf2.png
+Platform Custom 320 335 bookshelf3.png
+Platform Custom 355 320 bookshelf1.png
+Platform Custom 320 260 bookshelf1.png
+Platform Custom 370 270 bookshelf3.png
+Platform Custom 370 235 bookshelf2.png
+Platform Custom 370 170 bookshelf1.png
+Platform Custom 420 210 bookshelf2.png
+Platform Custom 420 150 bookshelf1.png
+Platform Custom 400 335 bookshelf3.png
+Platform Custom 435 335 bookshelf3.png
+Platform Custom 410 310 bookshelf2.png
+Platform Custom 420 240 bookshelf1.png
 
-MovingPlatform 180 180 5 false 0.15 bookshelf2.png
+MovingPlatform 240 180 20 false 0.35 bookshelf2.png
 Floor
 
 Chunk 1 N skyA.png

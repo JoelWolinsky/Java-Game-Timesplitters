@@ -1,0 +1,91 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA2.png
+Chunk 1 E intersegmentA2up.png
+Respawn 54 363 0 0 flag1.png
+Waypoint 50 363 flag3.png R N 0
+Waypoint 74 363 flag3.png R Y 0
+
+
+Platform Custom -20 384 customFloor1.png
+
+//BOTTOM WALLS
+Platform Custom 70 384 wall5.png
+Platform Custom 338 384 wall5inv.png
+
+
+//BOTTOM SHORTCUT PLATFORMS
+Platform Custom 193 430 thinPlatformA.png
+Waypoint 205 410 flag3.png R Y 20
+
+//TORCH AND FALLING ROCKS
+AnimArea 197 60 4 torch1.png torch2.png torch3.png torch4.png
+-AnimArea 197 210 4 torch1.png torch2.png torch3.png torch4.png
+-AnimArea 197 340 4 torch1.png torch2.png torch3.png torch4.png
+-Projectile 120 0 0 3 500 0 0 0 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
+
+//CLIMBING PLATFORMS LEFT
+Platform Custom 90 224 smallplatform1.png
+Waypoint 90 204 flag3.png R Y 60
+Waypoint 160 204 flag3.png L Y 60
+
+//CLIMBING PLATFORMS RIGHT
+Platform Custom 320 384 smallplatform1inv.png
+Waypoint 320 363 flag3.png L Y 30
+Platform Custom 320 64 smallplatform1inv.png
+Waypoint 320 44 flag3.png R Y 20
+Waypoint 194 44 flag3.png R Y 110
+
+
+//1ST FLOOR
+Platform Custom 194 304 edge1inv.png
+Waypoint 194 284 flag3.png L Y 180
+Platform Inverted 182 284
+Platform Default 150 284
+Platform Default 118 284
+Platform Default 86 284
+
+
+//2ND FLOOR
+Platform Inverted 210 130
+Platform Default 226 130
+Platform Default 258 130
+Platform Default 290 130
+Platform Default 322 130
+Platform Custom 178 146 edge1.png
+Waypoint 178 126 flag3.png R Y 20
+
+
+Projectile 130 12 0 4 253 0 0 60 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
+Projectile 270 143 0 4 500 0 0 20 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
+
+Platform Custom 338 0 edge1inv.png
+Waypoint 338 0 flag3.png R Y 30
+
+//OUTER WALLS
+Platform Custom 70 19 wall1.png
+Platform Custom 338 0 wall4.png
+
+
+EventDamageZone 200 218 40 200 notice.png 0 0 1 100 80 1 100 4 skele1.png skele2.png skele4.png skele2.png
+Chunk 1 N intersegmentA2upsky.png
+
+//3RD FLOOR
+
+Platform Custom 200 400 edge1inv.png
+Platform Inverted 184 384
+Platform Default 168 384
+Platform Default 136 384
+Platform Default 104 384
+Platform Default 72 384
+
+//WALLS UPPER
+Platform Custom 70 250 wall1.png
+
+//ROOF
+Platform Custom 53 221 corner2.png
+Platform Custom 307 221 corner2inv.png
+Platform Custom 117 190 corner1.png
+Platform Custom 213 190 corner1inv.png
+
+AnimArea 197 310 4 torch1.png torch2.png torch3.png torch4.png
+Projectile 250 242 0 4 250 0 0 60 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
+Projectile 280 252 0 4 240 0 0 20 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
