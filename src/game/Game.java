@@ -174,45 +174,107 @@ public class Game extends Canvas implements Runnable{
 		Map m = new Map();
 		//keep default for now until we sort randomly generated
 		if (mapMode.equals("default")) {
+					
+			if (againstComputer == true) { // AI map
 
-/*
+				m.mapParser(currentLevel, "intersegmentA1X");				// No go zone 		
 
-			m.mapParser(currentLevel, "segmentA1");			// basic segment
-			m.mapParser(currentLevel, "intersegmentA1"); 	// falling objects - hard for AI
-			m.mapParser(currentLevel, "segmentA2");			// electric one
-			m.mapParser(currentLevel, "intersegmentA2");	// falling rocks
-			m.mapParser(currentLevel, "segmentA3");			// aesthetic hall 1
-			m.mapParser(currentLevel, "segmentA4");			// aesthetic hall 2
-			m.mapParser(currentLevel, "segmentA5");			// aesthetic hall 3
+				/*
+				m.mapParser(currentLevel, "intro1");				// No go zone 		
+				m.mapParser(currentLevel, "intersegmentA2upX");		// falling chandeliers
+				m.mapParser(currentLevel, "intersegmentA1X"); 		// skeletons throwing objects down
+				m.mapParser(currentLevel, "introDimensionX");		// Pink portal
+				m.mapParser(currentLevel, "segmentA6X");			// ghosts
+				m.mapParser(currentLevel, "segmentA1X");			// basic segment
+				m.mapParser(currentLevel, "intersegmentA2X");		// falling rocks
+				m.mapParser(currentLevel, "segmentA11X");			// disappearing platforms over acid
+				m.mapParser(currentLevel, "segmentA12X");			// bookshelf pyramid
+				m.mapParser(currentLevel, "intersegmentA2upX");		// falling chandeliers
+				m.mapParser(currentLevel, "segmentEND");			// Ending
+				*/
 
-			m.mapParser(currentLevel, "intersegmentA3");	// hands one
-			m.mapParser(currentLevel, "segmentA6");			// ghosts
-			m.mapParser(currentLevel, "segmentA7");			// platforms
+			} else { // Single player map
 
-			m.mapParser(currentLevel, "intersegmentA3");	// hands one
-			m.mapParser(currentLevel, "segmentA8");			// disappearing long and small platforms
-			m.mapParser(currentLevel, "intersegmentA3");	// hands one
-			m.mapParser(currentLevel, "segmentA10");		// long corridor
-			m.mapParser(currentLevel, "segmentA11");		// disappearing platforms over acid
-			m.mapParser(currentLevel, "segmentA12");		// bookshelf pyramid
-			m.mapParser(currentLevel, "segmentA13");		// crushing bookshelves
-			m.mapParser(currentLevel, "intersegmentA3");
-			m.mapParser(currentLevel, "introDimension");
-			m.mapParser(currentLevel, "segmentA14");
+				m.mapParser(currentLevel, "segmentA1");				// basic
+				m.mapParser(currentLevel, "intersegmentA2");		// falling rocks
+				m.mapParser(currentLevel, "intersegmentA3");		// hands one
+				m.mapParser(currentLevel, "segmentA6");				// ghosts
+				m.mapParser(currentLevel, "segmentA3");				// hall
+				m.mapParser(currentLevel, "segmentA8");				// disappearing long and small platforms
+				m.mapParser(currentLevel, "segmentA4");				// hall
+				m.mapParser(currentLevel, "segmentA11");			// disappearing platforms over acid
+				m.mapParser(currentLevel, "introDimension");		// Pink portal
+				m.mapParser(currentLevel, "segmentA12");			// bookshelf pyramid
+				m.mapParser(currentLevel, "intersegmentA1"); 		// skeletons throwing objects down
+				m.mapParser(currentLevel, "intersegmentA3");		// hands one
+				m.mapParser(currentLevel, "segmentA9");				// spinning fireball one 	
+				m.mapParser(currentLevel, "segmentA1");				// basic				-
+				m.mapParser(currentLevel, "intersegmentA2up");		// falling chandeliers
+				m.mapParser(currentLevel, "segmentA13");			// wizard and crushing bookshelves 			-- NOT DOING AI VERSION
+				m.mapParser(currentLevel, "segmentEND");			// Ending
+				
+			}
+			
+			/*
 
+			*** LEGEND ***
 
+			m.mapParser(currentLevel, "goN");					// Skeletons throwing objects down
+			
+			m.mapParser(currentLevel, "intro1");				// No go zone 								-- NO X VERSION
+			m.mapParser(currentLevel, "intro2");				// Basic chandelier room
+			m.mapParser(currentLevel, "introDimension");		// Pink portal
 
- */
-		}
-		else if (mapMode.equals("RNG")) {
+			m.mapParser(currentLevel, "segmentA1");				// basic segment
+			m.mapParser(currentLevel, "segmentA2");				// electric one
+			m.mapParser(currentLevel, "segmentA3");				// aesthetic hall 1
+			m.mapParser(currentLevel, "segmentA4");				// aesthetic hall 2
+			m.mapParser(currentLevel, "segmentA5");				// aesthetic hall 3
+			m.mapParser(currentLevel, "segmentA6");				// ghosts
+			m.mapParser(currentLevel, "segmentA7");				// platforms								-- CAUSES PROGRAM TO CRASH
+			m.mapParser(currentLevel, "segmentA8");				// disappearing long and small platforms 	-- NEEDS WORK
+			m.mapParser(currentLevel, "segmentA9");				// spinning fireball one 					-- NOT DOING AI VERSION
+			m.mapParser(currentLevel, "segmentA10");			// long corridor
+			m.mapParser(currentLevel, "segmentA11");			// disappearing platforms over acid
+			m.mapParser(currentLevel, "segmentA12");			// bookshelf pyramid
+			m.mapParser(currentLevel, "segmentA13");			// wizard and crushing bookshelves 			-- NOT DOING AI VERSION
+			m.mapParser(currentLevel, "segmentA14");			// interstellar bookshelf columns 			-- WAIT UNTIL DEBUGGED
+			
+			m.mapParser(currentLevel, "intersegmentA1"); 		// skeletons throwing objects down
+			m.mapParser(currentLevel, "intersegmentA2");		// falling rocks
+			m.mapParser(currentLevel, "intersegmentA2up");		// falling chandeliers
+			m.mapParser(currentLevel, "intersegmentA2down");	// falling chandeliers						-- BUGGY
+			m.mapParser(currentLevel, "intersegmentA3");		// hands one
+	
+		*/
+	
+	}	else if (mapMode.equals("RNG")) {
 
 			//create different segment pools for the different parts of the game
 			//we want them separated in order to keep a specific order in our game
-			ArrayList<String> segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","intersegmentA2up","intersegmentA2down"));
-			ArrayList<String> segments2 = new ArrayList<String>(Arrays.asList("segmentA3", "segmentA4", "segmentA4"));
-			ArrayList<String> intro2 = new ArrayList<String>(Arrays.asList("intro2"));
-			ArrayList<String> throneRoom = new ArrayList<String>(Arrays.asList("segmentA5"));
+		
+			ArrayList<String> segments1;
+			ArrayList<String> segments2;
+			ArrayList<String> intro2;
+			ArrayList<String> throneRoom;
+		
 
+			if (againstComputer == true) {
+
+				segments1 = new ArrayList<String>(Arrays.asList("segmentA1X","segmentA2X","intersegmentA1X","intersegmentA2upX","intersegmentA2upX"));
+				segments2 = new ArrayList<String>(Arrays.asList("segmentA3X", "segmentA4X","segmentA4X"));
+				intro2 = new ArrayList<String>(Arrays.asList("intro2X"));
+				throneRoom = new ArrayList<String>(Arrays.asList("segmentA5X"));
+
+			} else {
+
+				segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","intersegmentA2up","intersegmentA2down"));
+				segments2 = new ArrayList<String>(Arrays.asList("segmentA3", "segmentA4", "segmentA4"));
+				intro2 = new ArrayList<String>(Arrays.asList("intro2"));
+				throneRoom = new ArrayList<String>(Arrays.asList("segmentA5"));
+
+			}
+			
 			//load up the images that are going to be used for dynamic background generation onto individual levels
 			//**it is important that all levels have the same amount of images
 			BackgroundStates level0 = new BackgroundStates("ground1.png","ground2.png");

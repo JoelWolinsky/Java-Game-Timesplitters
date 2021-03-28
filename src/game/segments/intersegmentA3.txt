@@ -1,4 +1,4 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA3.png
+Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA3.png 1
 Chunk 1 E intersegmentA3.png
 Respawn 10 363 0 0 flag1.png
 AnimArea 194 250 4 torch1.png torch2.png torch3.png torch4.png

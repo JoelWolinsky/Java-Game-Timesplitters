@@ -1,17 +1,3 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA3.png
-Chunk 1 E intersegmentA3.png
-Respawn 10 363 0 0 flag1.png
-Waypoint 10 363 flag3.png R N 0
-Waypoint 60 363 flag3.png R N 0
-AnimArea 194 250 4 torch1.png torch2.png torch3.png torch4.png
-Platform Custom 0 124 corner1inv.png
-Platform Custom 96 156 top2.png
-Platform Custom 330 124 corner1.png
-Waypoint 400 363 flag3.png R Y 25
-Floor
-Chunk 1 N skyA.png
-Revert
-
 Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA2.png
 Chunk 1 E intersegmentA4alt.png
 Respawn -40 363 0 0 flag1.png

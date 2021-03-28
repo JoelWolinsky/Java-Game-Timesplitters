@@ -1,4 +1,4 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA12p1.png
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA12p1.png 2
 Chunk 1 E segmentA12p1.png
 Respawn 10 363 0 0 flag1.png
 Waypoint 50 363 flag3.png R N 15

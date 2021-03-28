@@ -1,4 +1,4 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA1.png
+Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA1.png 1
 Chunk 1 E intersegmentA2.png
 Respawn 40 363 0 0 flag1.png
 Waypoint 40 363 flag3.png R N 0
@@ -14,8 +14,6 @@ Projectile 200 100 0 3 500 300 0 20 nopicture.png 4 arrow1.png arrow1.png arrow1
 Projectile 200 100 0 3 500 300 0 100 nopicture.png 4 arrow1.png arrow1.png arrow1.png arrow1.png
 Projectile 200 100 0 3 500 300 0 60 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
 Projectile 200 100 0 3 500 300 0 140 nopicture.png 4 arrow1.png arrow1.png arrow1.png arrow1.png
-
-Platform Custom 0 384 customFloor1.png
 
 //OUTER WALLS
 Platform Custom 70 19 wall1.png
