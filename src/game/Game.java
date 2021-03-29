@@ -42,7 +42,7 @@ public class Game extends Canvas implements Runnable{
 	public static Player player;
 	public static AIPlayer aiPlayer;
 	public static Camera camera;
-	ArrayList<String> segments3,segments1,segments2;
+	ArrayList<String> segments3,segments1,segments2,intro2,throneRoom;
 	int index = 0;
 	int stateIndex=0;
 	int bottom;
@@ -217,25 +217,22 @@ public class Game extends Canvas implements Runnable{
 			//create different segment pools for the different parts of the game
 			//we want them separated in order to keep a specific order in our game
 
-			ArrayList<String> segments1;
-			ArrayList<String> segments2;
-			ArrayList<String> intro2;
-			ArrayList<String> throneRoom;
 
 
 			if (againstComputer == true) {
 
 				segments1 = new ArrayList<String>(Arrays.asList("segmentA1X","segmentA2X","intersegmentA1X","intersegmentA2upX","intersegmentA2upX"));
 				segments2 = new ArrayList<String>(Arrays.asList("segmentA3X", "segmentA4X","segmentA4X"));
+				segments3 = new ArrayList<String>(Arrays.asList("segmentA6","segmentA7","segmentA8","segmentA9","segmentA6","segmentA7","segmentA10","segmentA11"));
 				intro2 = new ArrayList<String>(Arrays.asList("intro2X"));
 				throneRoom = new ArrayList<String>(Arrays.asList("segmentA5X"));
-
 			} else {
 
-				segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","intersegmentA2up","intersegmentA2down"));
+				segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2up"));
 				segments2 = new ArrayList<String>(Arrays.asList("segmentA3", "segmentA4", "segmentA4"));
-				//segments3 = new ArrayList<String>(Arrays.asList("segmentA11"));
+				intro2 = new ArrayList<String>(Arrays.asList("intro2"));
 				segments3 = new ArrayList<String>(Arrays.asList("segmentA6","segmentA7","segmentA8","segmentA9","segmentA6","segmentA7","segmentA10","segmentA11"));
+				throneRoom = new ArrayList<String>(Arrays.asList("segmentA5"));
 
 			}
 
@@ -257,8 +254,8 @@ public class Game extends Canvas implements Runnable{
 			//generate the segment pools
 			m.mapParser(currentLevel, "intro1");
 			int part1nrblocks = randomGenerate(m,segments1);
-			int part2nrblocks = randomGenerate(m,new ArrayList<String>(Arrays.asList("intro2")));
-			part2nrblocks = part2nrblocks + randomGenerate(m,segments2) + randomGenerate(m,new ArrayList<String>(Arrays.asList("segmentA5")));
+			int part2nrblocks = randomGenerate(m,intro2);
+			part2nrblocks = part2nrblocks + randomGenerate(m,segments2) + randomGenerate(m,throneRoom);
 			int part3nrblocks = randomGenerate(m,segments3);
 
 
