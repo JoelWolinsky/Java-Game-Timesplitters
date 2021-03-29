@@ -15,6 +15,8 @@ public class Level extends Canvas {
 	private LinkedList<Waypoint> waypoints = new LinkedList<>();
 	private int i =0;
 	private int j=0;
+	private int gameTimer=0;
+	private boolean gameStarted=false;
 
 	public synchronized LinkedList<GameObject> getGameObjects(){
 		return this.entities;
@@ -22,9 +24,17 @@ public class Level extends Canvas {
 
 	public void tick() {
 
+
+
+
 		for (GameObject k: getGameObjects())
 		{
 			if (k instanceof Player) {
+
+				if (gameStarted)
+					((Player) k).setCanMove(true);
+
+
 				for (GameObject l:getGameObjects())
 				{
 					if (l instanceof Platform)
@@ -460,4 +470,7 @@ public class Level extends Canvas {
 		}
 	}
 
+	public void setGameStarted(boolean gameStarted) {
+		this.gameStarted = gameStarted;
+	}
 }

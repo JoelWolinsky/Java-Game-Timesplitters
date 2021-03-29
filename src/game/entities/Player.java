@@ -31,10 +31,11 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private float terminalVelY = 15;
 
 	private static final float DECELERATION = 0.4f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
-	private static final float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
-	private static final float RUN_SPEED = 3.6f; 		// Default run speed
+	private static float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
+	private static float RUN_SPEED = 3.6f; 		// Default run speed
 	private static final float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
 
+	private boolean godMode=false;
 	private int respawnX=0;
 	private int respawnThreshold=340;
 	private int respawnY=340;
@@ -43,6 +44,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private int i=0;
 	private boolean cc=false;
 	private boolean moving;
+	private boolean canMove=false;
 
 	private static int animationTimer = 0;
 	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
@@ -88,22 +90,29 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	//TODO: Fix moving through the up-and-down moving platform when you jump underneath it
 	public void tick() {
 		//Gather all collisions
-		moving = false;
 		CollidingObject.getCollisions(this);
+
+
+		moving = false;
+
+		//disable immunity after 100
 		if (i<100) {
 			i++;
 		}else {
 			immunity=false;
 		}
 
+		//always have the player collision box set to respective size of its animationstate
 		this.width = getAnimation(currentAnimationState).getFrame(currentFrame).getWidth();
 		this.height = getAnimation(currentAnimationState).getFrame(currentFrame).getHeight();
 
 
 		this.prevPos = new Point((int)this.x, (int)this.y);
 
+
 		//Check for keyboard input along the x-axis
-		
+
+		if (canMove)
 		if (this.input != null) {
 			if(KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
 
@@ -159,6 +168,8 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				}
 			}
 		}
+
+
 		//If you're not on ground, you should fall
 		if(!isOnGround()) {
 			fall(this);
@@ -219,8 +230,6 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		The main idea is that most respawn points will be at ground level on each specific floor so the +300 will
 		work everytime. (Falling 300 blocks below the floor/respawnY will kill the player)
 		 */
-
-
 		if (this.y >respawnThreshold+300) {
 			this.x = respawnX;
 			this.y = respawnY;
@@ -232,7 +241,21 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		{
 			respawn();
 		}
-		
+
+		// press g to enable godmode -- remember to disable this after finishing game
+		if(KeyInput.g.isPressed())
+		{
+			if (godMode) {
+				godMode = false;
+				RUN_SPEED = 3.6f;
+				JUMP_GRAVITY = -7.5f;
+			}
+			else {
+				godMode = true;
+				RUN_SPEED = 13.6f;
+				JUMP_GRAVITY = - 12.0f;
+			}
+		}
 		
 
 
@@ -244,7 +267,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	}
 
 	public void respawn(){
-		if (immunity==false)
+		if (immunity==false && godMode==false)
 		{
 			this.x = respawnX;
 			this.y = respawnY;
@@ -367,5 +390,9 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 	public void setRespawnThreshold(int respawnThreshold) {
 		this.respawnThreshold = respawnThreshold;
+	}
+
+	public void setCanMove(boolean canMove) {
+		this.canMove = canMove;
 	}
 }

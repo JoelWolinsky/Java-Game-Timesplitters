@@ -88,6 +88,9 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 	}
 
 	public void tick() {
+
+		if (this instanceof GameObject)
+
 		//Gather all collisions
 		CollidingObject.getCollisions(this);
 		if (i<100) {

@@ -8,14 +8,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-import javax.swing.JOptionPane;
-
 import game.display.Window;
 import game.entities.GameObject;
 import game.entities.Player;
 import game.entities.AIPlayer;
-import game.entities.platforms.Platform;
-import game.graphics.Assets;
 import game.input.KeyInput;
 import game.network.packets.Packet00Login;
 import network.GameClient;
@@ -251,19 +247,27 @@ public class Game extends Canvas implements Runnable{
 			//add levels to the background controller which manages the current position within the horizontal panorama
 			ctrlr = new BackgroundController(level0,level1,level2,level3);
 
+			//LinkedList<String> countdown = new LinkedList<String>(Arrays.asList("five.png", "four.png","three.png","two.png","one.png","asdgasdg.png"));
+			LinkedList<String> countdown = new LinkedList<String>(Arrays.asList("5.png", "4.png","3.png","2.png","1.png","finish2.png","asdgasdg.png"));
+
+			UIController uiController = new UIController(camera.getXOffset(), camera.getYOffset()+10,0,0,currentLevel,countdown,"5.png");
+			currentLevel.addEntity(uiController);
+
+
+
 			//generate the segment pools
 			m.mapParser(currentLevel, "intro1");
-			int part1nrblocks = randomGenerate(m,segments1);
-			int part2nrblocks = randomGenerate(m,intro2);
-			part2nrblocks = part2nrblocks + randomGenerate(m,segments2) + randomGenerate(m,throneRoom);
+			//int part1nrblocks = randomGenerate(m,segments1);
+			//int part2nrblocks = randomGenerate(m,intro2);
+			//part2nrblocks = part2nrblocks + randomGenerate(m,segments2) + randomGenerate(m,throneRoom);
 			int part3nrblocks = randomGenerate(m,segments3);
 
 
-			MapPart mp1 = new MapPart("./img/minipart1d.png",part1nrblocks);
-			MapPart mp2 = new MapPart("./img/minipart2.png",part2nrblocks);
+			//MapPart mp1 = new MapPart("./img/minipart1d.png",part1nrblocks);
+			//MapPart mp2 = new MapPart("./img/minipart2.png",part2nrblocks);
 			MapPart mp3 = new MapPart("./img/minipart3.png",part3nrblocks);
 
-			currentLevel.addEntity(new BarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,player,currentLevel,mp1,mp2,mp3));
+			currentLevel.addEntity(new BarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,player,currentLevel,mp3));
 
 		}
 
