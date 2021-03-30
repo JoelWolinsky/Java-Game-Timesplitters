@@ -382,6 +382,31 @@ public class Map {
 
                         currentLevel.addEntity(cao);
                         break;
+
+                    case "Chest":
+                        Chest ch;
+                        List<String> list11 = new ArrayList<String>();
+                        for (int l = 4;l < 4+Integer.parseInt(splited[3]);l++)
+                            list11.add("./img/".concat(splited[l]));
+
+                        String[] arr11 = list11.toArray(new String[0]);
+
+                        ch = new Chest(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,arr11);
+
+                        currentLevel.addEntity(ch);
+                        break;
+                    case "SlowArea":
+                        SlowArea sa;
+                        List<String> list10 = new ArrayList<String>();
+                        for (int l = 4;l < 4+Integer.parseInt(splited[3]);l++)
+                            list10.add("./img/".concat(splited[l]));
+
+                        String[] arr10 = list10.toArray(new String[0]);
+
+                        sa = new SlowArea(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,arr10);
+
+                        currentLevel.addEntity(sa);
+                        break;
                     case "Portal":
                         Portal por;
                         List<String> list8 = new ArrayList<String>();

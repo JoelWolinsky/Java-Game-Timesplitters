@@ -29,5 +29,27 @@ Platform Inverted 342 265
 Platform Custom 358 265 edge1inv.png
 Platform Custom 260 336 smallpillar1.png
 Platform Custom 342 292 smallpillar1.png
+SlowArea 280 280 4 web.png web.png web.png web.png
+SlowArea 280 300 4 web.png web.png web.png web.png
+SlowArea 280 320 4 web.png web.png web.png web.png
+SlowArea 310 300 4 web.png web.png web.png web.png
+SlowArea 310 320 4 web.png web.png web.png web.png
+SlowArea 310 280 4 web.png web.png web.png web.png
+SlowArea 310 340 4 web.png web.png web.png web.png
+SlowArea 280 340 4 web.png web.png web.png web.png
+SlowArea 310 360 4 web.png web.png web.png web.png
+SlowArea 280 360 4 web.png web.png web.png web.png
+
+SlowArea 330 340 4 web.png web.png web.png web.png
+SlowArea 330 360 4 web.png web.png web.png web.png
+SlowArea 330 320 4 web.png web.png web.png web.png
+SlowArea 330 300 4 web.png web.png web.png web.png
+SlowArea 330 280 4 web.png web.png web.png web.png
+
+SlowArea 260 280 4 web.png web.png web.png web.png
+SlowArea 260 300 4 web.png web.png web.png web.png
+SlowArea 260 320 4 web.png web.png web.png web.png
+SlowArea 260 340 4 web.png web.png web.png web.png
+SlowArea 260 360 4 web.png web.png web.png web.png
 Floor
 

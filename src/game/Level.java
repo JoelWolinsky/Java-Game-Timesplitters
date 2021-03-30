@@ -1,13 +1,19 @@
 package game;
 
 import java.awt.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Random;
 
 import game.entities.*;
 import game.entities.areas.*;
 import game.entities.platforms.CrushingPlatform;
 import game.entities.platforms.Platform;
 import game.entities.platforms.TimerPlatform;
+
+import javax.imageio.ImageIO;
 
 public class Level extends Canvas {
 
@@ -16,7 +22,7 @@ public class Level extends Canvas {
 	private int i =0;
 	private int j=0;
 	private int gameTimer=0;
-	private boolean gameStarted=false;
+	private boolean gameStarted=true;
 
 	public synchronized LinkedList<GameObject> getGameObjects(){
 		return this.entities;
@@ -45,6 +51,19 @@ public class Level extends Canvas {
 					if (l instanceof Area)
 					{
 
+						if (l instanceof Chest)
+							if(((Chest) l).isVisibile())
+								if (((Chest) l).getInteraction((Player)k))
+								{
+									if (((Player) k).getInventoryIndex()<2)
+									{
+										((Player) k).incrementInventoryIndex();
+										((Player) k).getInventory().get(((Player) k).getInventoryIndex()).setUrl(randomItem());
+										((Chest) l).setVisibile(false);
+										((Player) k).setInventoryChanged(true);
+									}
+
+								}
 						if (l instanceof Portal) {
 							if (((Portal) l).getInteraction(((Player) k))) {
 								((Player) k).setRespawnX(((Portal) l).getCurrentX() + ((Portal) l).getDestinationX());
@@ -103,6 +122,14 @@ public class Level extends Canvas {
 								((OnReachAnimArea) l).setActive(true);
 							else
 								((OnReachAnimArea) l).setActive(false);
+
+						if (l instanceof SlowArea)
+							if (((SlowArea) l).getInteraction(((Player) k))) {
+								((Player) k).slow();
+								((Player) k).setLocker(l);
+							}
+							else
+								((Player) k).normal(l);
 
 						if (l instanceof RespawnPoint)
 							//if (o.getReached()==false) //comment this out if you want to allow players to activate previously reached respawn points
@@ -472,5 +499,13 @@ public class Level extends Canvas {
 
 	public void setGameStarted(boolean gameStarted) {
 		this.gameStarted = gameStarted;
+	}
+
+	public String randomItem(){
+		ArrayList<String> itemPool =new ArrayList<String>(Arrays.asList("./img/shoes.png"));
+		int rnd1;
+		rnd1 = new Random().nextInt(itemPool.size());
+
+		return itemPool.get(rnd1);
 	}
 }

@@ -4,11 +4,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.UUID;
 
 import game.Game;
+import game.Item;
 import game.attributes.AnimatedObject;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
@@ -33,7 +35,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private static final float DECELERATION = 0.4f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
 	private static float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
 	private static float RUN_SPEED = 3.6f; 		// Default run speed
-	private static final float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
+	private static float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
 
 	private boolean godMode=false;
 	private int respawnX=0;
@@ -45,6 +47,13 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private boolean cc=false;
 	private boolean moving;
 	private boolean canMove=false;
+	private boolean locked=false;
+	private GameObject locker;
+	private LinkedList<Item> inventory = new LinkedList<Item>(Arrays.asList(new Item(0,0,0,0,this,"./img/shoes.png"),new Item(0,0,0,0,this,"./img/shoes.png"),new Item(0,0,0,0,this,"./img/shoes.png")));
+	private int inventorySize=3;
+	private int inventoryIndex=2;
+	private boolean inventoryChanged=false;
+	private int itemUseCooldown = 0;
 
 	private static int animationTimer = 0;
 	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
@@ -256,7 +265,23 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				JUMP_GRAVITY = - 12.0f;
 			}
 		}
-		
+
+		if(KeyInput.space.isPressed())
+		{
+			if (inventoryIndex>=0)
+			if(itemUseCooldown>=50) {
+				inventory.get(inventoryIndex).getEffect();
+				inventory.get(inventoryIndex).setUrl("./img/empty.png");
+				this.setInventoryChanged(true);
+				//after 5 sec
+				//normal();
+				inventoryIndex--;
+				itemUseCooldown=0;
+			}
+		}
+
+		if (itemUseCooldown<50)
+			itemUseCooldown++;
 
 
 
@@ -264,6 +289,24 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 	public boolean moving(){
 		return moving;
+	}
+
+	public void slow(){
+		RUN_SPEED = 2.0f;
+		JUMP_GRAVITY = -5.5f;
+	}
+
+	public void speed(){
+		RUN_SPEED = 13.6f;
+		JUMP_GRAVITY = - 12.0f;
+	}
+
+	public void normal(GameObject z){
+		if(this.locker == z)
+		{
+			RUN_SPEED = 3.6f;
+			JUMP_GRAVITY = -7.5f;
+		}
 	}
 
 	public void respawn(){
@@ -394,5 +437,41 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 	public void setCanMove(boolean canMove) {
 		this.canMove = canMove;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+	}
+
+	public void setLocker(GameObject locker) {
+		this.locker = locker;
+	}
+
+	public void addToInventory(Item item) {
+		inventory.add(item);
+	}
+
+	public void removeFromInventory(GameObject item) {
+		inventory.remove(item);
+	}
+
+	public LinkedList<Item> getInventory() {
+		return inventory;
+	}
+
+	public boolean inventoryChanged() {
+		return inventoryChanged;
+	}
+
+	public void setInventoryChanged(boolean inventoryChanged) {
+		this.inventoryChanged = inventoryChanged;
+	}
+
+	public int getInventoryIndex() {
+		return inventoryIndex;
+	}
+
+	public void incrementInventoryIndex() {
+		inventoryIndex++;
 	}
 }

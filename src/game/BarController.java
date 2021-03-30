@@ -20,7 +20,6 @@ public class BarController extends GameObject {
 
 		}
 		for (MapPart st : urls) {
-			System.out.println(((float)((float)((st.getNrBlocks()*426)*100)/(totalNrBlocks*426))/100)*600);
 			currentLevel.addEntity(new UIElement(this.x + offset, this.y + 10, (int)(((float)((float)((st.getNrBlocks()*426)*100)/(totalNrBlocks*426))/100)*600), 57, st.getUrl()));
 			offset = offset + (int)(((float)((float)((st.getNrBlocks()*426)*100)/(totalNrBlocks*426))/100)*600);
 		}

@@ -74,4 +74,7 @@ public class Camera {
 		return this.yOffset;
 	}
 
+	public GameObject getTarget() {
+		return target;
+	}
 }

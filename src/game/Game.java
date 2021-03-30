@@ -174,7 +174,8 @@ public class Game extends Canvas implements Runnable{
 		camera.addTarget(player);
 
 		if (mapMode.equals("default")) {
-
+			m.mapParser(currentLevel, "intro1");
+			m.mapParser(currentLevel, "segmentA1");
 			/*
 
 			*** LEGEND ***
@@ -268,6 +269,8 @@ public class Game extends Canvas implements Runnable{
 			MapPart mp3 = new MapPart("./img/minipart3.png",part3nrblocks);
 
 			currentLevel.addEntity(new BarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,player,currentLevel,mp3));
+
+			currentLevel.addEntity(new InventoryController(camera.getXOffset(), camera.getYOffset()+400, 0,0,player,currentLevel,mp3));
 
 		}
 
