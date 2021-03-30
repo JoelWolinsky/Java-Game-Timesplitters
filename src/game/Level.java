@@ -55,10 +55,23 @@ public class Level extends Canvas {
 							if(((Chest) l).isVisibile())
 								if (((Chest) l).getInteraction((Player)k))
 								{
+									/*
+									//OPTION 1
 									if (((Player) k).getInventoryIndex()<2)
 									{
 										((Player) k).incrementInventoryIndex();
 										((Player) k).getInventory().get(((Player) k).getInventoryIndex()).setUrl(randomItem());
+										((Chest) l).setVisibile(false);
+										((Player) k).setInventoryChanged(true);
+									}
+
+									 */
+
+									//OPTION 2
+
+									if (((Player) k).firstFreeSpace()!=-1)
+									{
+										((Player) k).getInventory().get(((Player) k).firstFreeSpace()).setUrl(randomItem());
 										((Chest) l).setVisibile(false);
 										((Player) k).setInventoryChanged(true);
 									}
@@ -502,7 +515,7 @@ public class Level extends Canvas {
 	}
 
 	public String randomItem(){
-		ArrayList<String> itemPool =new ArrayList<String>(Arrays.asList("./img/shoes.png"));
+		ArrayList<String> itemPool =new ArrayList<String>(Arrays.asList("./img/shoes.png","./img/jump.png"));
 		int rnd1;
 		rnd1 = new Random().nextInt(itemPool.size());
 

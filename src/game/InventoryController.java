@@ -13,6 +13,7 @@ import java.util.LinkedList;
 public class InventoryController extends GameObject {
 
 	private Player player;
+	LinkedList<UIElement> frames = new LinkedList<UIElement>();
 	LinkedList<UIElement> slots = new LinkedList<UIElement>();
 	private int inventorySize=3;
 	int i =0;
@@ -23,8 +24,10 @@ public class InventoryController extends GameObject {
 
 		for (int i =0;i < inventorySize;i++)
 		{
-			currentLevel.addEntity(new UIElement(this.x + 20 + (i*60) , this.y + 10, 50 , 50, "./img/frame.png"));
+			frames.add(new UIElement(this.x + 20 + (i*60) , this.y + 10, 50 , 50, "./img/frameNotSelected.png"));
 			slots.add(new UIElement(this.x + 20 + (i*60) + 12 , this.y + 10 + 12, 25 , 25, player.getInventory().get(i).getUrl()));
+
+			currentLevel.addEntity(frames.get(i));
 			currentLevel.addEntity(slots.get(i));
 		}
 
@@ -32,6 +35,22 @@ public class InventoryController extends GameObject {
 	}
 
 	public void tick() {
+
+
+		//OPTION 2
+		for (int j = 0 ;j<inventorySize;j++)
+		try
+		{
+			if (j==player.getInventoryIndex())
+				frames.get(j).setImg(ImageIO.read(new File("./img/frame.png")));
+			else
+				frames.get(j).setImg(ImageIO.read(new File("./img/frameNotSelected.png")));
+		}
+		catch ( IOException exc )
+		{
+			//TODO: Handle exception.
+		}
+
 
 		if (player.inventoryChanged())
 		{

@@ -12,7 +12,6 @@ public class Chest extends AnimArea{
 
 	public Chest(float x, float y, int width, int height, String...urls) {
 		super(x, y, width, height,urls);
-		System.out.println("bruh");
 	}
 
 

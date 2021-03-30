@@ -1,6 +1,8 @@
 package game.input;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 public class KeyInput extends KeyAdapter{
 	
@@ -11,6 +13,8 @@ public class KeyInput extends KeyAdapter{
     public static Key r = new Key();
     public static Key g = new Key();
     public static Key space = new Key();
+    public static Key comma = new Key();
+    public static Key period = new Key();
 	/**
 	 * Sets the pressed value of a given key based on a keyCode
 	 * @param keyCode The keyCode representing the key pressed
@@ -38,6 +42,13 @@ public class KeyInput extends KeyAdapter{
         if (keyCode == KeyEvent.VK_SPACE) {
             space.setPressed(isPressed);
         }
+        if (keyCode == KeyEvent.VK_COMMA) {
+            comma.setPressed(isPressed);
+        }
+        if (keyCode == KeyEvent.VK_PERIOD) {
+            period.setPressed(isPressed);
+        }
+
     }
     
 	public void keyPressed(KeyEvent e) {

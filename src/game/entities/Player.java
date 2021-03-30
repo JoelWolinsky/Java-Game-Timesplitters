@@ -4,11 +4,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.UUID;
+import java.util.*;
 
+import game.Effect;
 import game.Game;
 import game.Item;
 import game.attributes.AnimatedObject;
@@ -33,7 +31,8 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private float terminalVelY = 15;
 
 	private static final float DECELERATION = 0.4f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
-	private static float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
+	private static float JUMP_GRAVITY = -7.5f;
+	private static float JUMP_GRAVITY_DOUBLE = -10.5f;// VelY changes to this number upon jump
 	private static float RUN_SPEED = 3.6f; 		// Default run speed
 	private static float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
 
@@ -49,11 +48,16 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private boolean canMove=false;
 	private boolean locked=false;
 	private GameObject locker;
-	private LinkedList<Item> inventory = new LinkedList<Item>(Arrays.asList(new Item(0,0,0,0,this,"./img/shoes.png"),new Item(0,0,0,0,this,"./img/shoes.png"),new Item(0,0,0,0,this,"./img/shoes.png")));
+	private LinkedList<Item> inventory = new LinkedList<Item>(Arrays.asList(new Item(0,0,0,0,this,"./img/empty.png"),new Item(0,0,0,0,this,"./img/shoes.png"),new Item(0,0,0,0,this,"./img/empty.png")));
 	private int inventorySize=3;
 	private int inventoryIndex=2;
 	private boolean inventoryChanged=false;
 	private int itemUseCooldown = 0;
+	private int slotSelectionCooldown=0;
+	private int effectDuration=500;
+	private ArrayList<Effect> currentEffects = new ArrayList<Effect>();
+	private boolean canDoubleJump=false;
+	private int jumpCooldown=0;
 
 	private static int animationTimer = 0;
 	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
@@ -167,16 +171,28 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 					this.velX = 0;
 				}
 			}
+
 	
 			//Check for keyboard input along the y-axis
 			if(KeyInput.down.isPressed()) {
 				this.velY = DOWN_SPEED;
 			}else if(KeyInput.up.isPressed()) {
-				if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
+
+				if (jumpCooldown>=10 && canDoubleJump && !isOnGround() && !hasCeilingAbove() && !isOnWall())
+				{
+					this.velY = JUMP_GRAVITY_DOUBLE;
+					jumpCooldown=0;
+					canDoubleJump=false;
+				}
+				else if(jumpCooldown>=10 && isOnGround() && !hasCeilingAbove() && !isOnWall()) {
 					this.velY = JUMP_GRAVITY;
+					jumpCooldown=0;
 				}
 			}
 		}
+
+		if (jumpCooldown<10)
+			jumpCooldown++;
 
 
 		//If you're not on ground, you should fall
@@ -268,9 +284,13 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 		if(KeyInput.space.isPressed())
 		{
+			/*
+			//OPTION 1
 			if (inventoryIndex>=0)
 			if(itemUseCooldown>=50) {
-				inventory.get(inventoryIndex).getEffect();
+				inventory.get(0).getEffect();
+				for (int i=0 ; i <inventorySize-1;i++)
+					inventory.get(i).setUrl(inventory.get(i+1).getUrl());
 				inventory.get(inventoryIndex).setUrl("./img/empty.png");
 				this.setInventoryChanged(true);
 				//after 5 sec
@@ -278,10 +298,68 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				inventoryIndex--;
 				itemUseCooldown=0;
 			}
+
+
+			 */
+
+			//OPTION 2
+			if (!(inventory.get(inventoryIndex).getUrl().equals("./img/empty.png"))) {
+				inventory.get(inventoryIndex).getEffect();
+				if (!(inventory.get(inventoryIndex).getUrl().equals("./img/jump.png")))
+				currentEffects.add(new Effect(inventory.get(inventoryIndex).getUrl(),500));
+				inventory.get(inventoryIndex).setUrl("./img/empty.png");
+				this.setInventoryChanged(true);
+			}
 		}
+
+
+		if (!currentEffects.isEmpty())
+		{
+			for (Effect e : currentEffects)
+			{
+				e.decrement();
+
+				if (e.getTimer()<=0) {
+					removeEffect(e.getName());
+					currentEffects.remove(e);
+					break;
+				}
+			}
+
+		}
+
+
 
 		if (itemUseCooldown<50)
 			itemUseCooldown++;
+
+
+		//OPTION 2
+
+		if (slotSelectionCooldown<5)
+			slotSelectionCooldown++;
+
+		if(KeyInput.comma.isPressed())
+		{
+			if (slotSelectionCooldown>=5)
+			if (inventoryIndex>0)
+			{
+				inventoryIndex--;
+				slotSelectionCooldown=0;
+			}
+		}
+
+		if(KeyInput.period.isPressed())
+		{
+			if (slotSelectionCooldown>=5)
+			if (inventoryIndex<2)
+			{
+				inventoryIndex++;
+				slotSelectionCooldown=0;
+			}
+		}
+
+
 
 
 
@@ -296,9 +374,13 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		JUMP_GRAVITY = -5.5f;
 	}
 
-	public void speed(){
-		RUN_SPEED = 13.6f;
-		JUMP_GRAVITY = - 12.0f;
+
+	public void setRunSpeed(float runSpeed) {
+		RUN_SPEED = runSpeed;
+	}
+
+	public void setJumpGravity(float jumpGravity) {
+		JUMP_GRAVITY = jumpGravity;
 	}
 
 	public void normal(GameObject z){
@@ -306,6 +388,16 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		{
 			RUN_SPEED = 3.6f;
 			JUMP_GRAVITY = -7.5f;
+		}
+	}
+
+	public void removeEffect(String code){
+
+		switch (code){
+			case "./img/shoes.png":
+				RUN_SPEED = 3.6f;
+				JUMP_GRAVITY = -7.5f;
+				break;
 		}
 	}
 
@@ -474,4 +566,20 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public void incrementInventoryIndex() {
 		inventoryIndex++;
 	}
+
+	public int firstFreeSpace(){
+
+		for (int i =0 ; i<inventorySize;i++)
+		{
+			if (inventory.get(i).getUrl().equals("./img/empty.png"))
+				return i;
+		}
+
+		return -1;
+	}
+
+	public void setCanDoubleJump(boolean canDoubleJump) {
+		this.canDoubleJump = canDoubleJump;
+	}
+
 }

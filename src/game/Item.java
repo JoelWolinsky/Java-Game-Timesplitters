@@ -46,7 +46,17 @@ public class Item extends GameObject {
 	}
 
 	public void getEffect(){
-		player.speed();
+
+		switch (url){
+			case "./img/shoes.png":
+				player.setRunSpeed(13.6f);
+				player.setJumpGravity(-12.0f);
+				break;
+			case "./img/jump.png":
+				player.setCanDoubleJump(true);
+				break;
+		}
+
 	}
 
 	public String getUrl() {
