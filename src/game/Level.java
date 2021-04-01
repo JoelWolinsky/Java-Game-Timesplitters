@@ -22,6 +22,7 @@ public class Level extends Canvas {
 	private int i =0;
 	private int j=0;
 	private int gameTimer=0;
+	private boolean added=false;
 	private boolean gameStarted=true;
 
 	public synchronized LinkedList<GameObject> getGameObjects(){
@@ -30,9 +31,6 @@ public class Level extends Canvas {
 
 	public void tick() {
 
-
-
-
 		for (GameObject k: getGameObjects())
 		{
 			if (k instanceof Player) {
@@ -40,6 +38,20 @@ public class Level extends Canvas {
 				if (gameStarted)
 					((Player) k).setCanMove(true);
 
+				for (Item i : ((Player) k).getInventory()) {
+					if (i.getAddItem()) {
+						this.addEntity(new AddedItem(k.getX(), k.getY(), 0, 0, (Player) k, i.getItemToAdd() , i.getItemToAdd(),i.getItemToAdd(),i.getItemToAdd()));
+						i.setAddItem(false);
+						added=true;
+						break;
+					}
+				}
+
+				if (added)
+				{
+					added=false;
+					break;
+				}
 
 				for (GameObject l:getGameObjects())
 				{
@@ -50,6 +62,17 @@ public class Level extends Canvas {
 
 					if (l instanceof Area)
 					{
+
+						if (l instanceof AddedItem)
+						{
+							if (((AddedItem) l).isVisibile())
+								if (((AddedItem) l).getInteraction((Player)k))
+									if (k!=((AddedItem) l).getCreator()) {
+										((AddedItem) l).getEffect((Player) k);
+										((AddedItem) l).setVisibile(false);
+										((Player) k).addEffect(new Effect(((AddedItem) l).getEffect(),500));
+									}
+						}
 
 						if (l instanceof Chest)
 							if(((Chest) l).isVisibile())
@@ -515,7 +538,7 @@ public class Level extends Canvas {
 	}
 
 	public String randomItem(){
-		ArrayList<String> itemPool =new ArrayList<String>(Arrays.asList("./img/shoes.png","./img/jump.png"));
+		ArrayList<String> itemPool =new ArrayList<String>(Arrays.asList("./img/shoes.png","./img/jump.png","./img/banana.png"));
 		int rnd1;
 		rnd1 = new Random().nextInt(itemPool.size());
 

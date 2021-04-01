@@ -305,7 +305,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			//OPTION 2
 			if (!(inventory.get(inventoryIndex).getUrl().equals("./img/empty.png"))) {
 				inventory.get(inventoryIndex).getEffect();
-				if (!(inventory.get(inventoryIndex).getUrl().equals("./img/jump.png")))
+				if (!(inventory.get(inventoryIndex).getUrl().equals("./img/jump.png")) && !(inventory.get(inventoryIndex).getUrl().equals("./img/banana.png")))
 				currentEffects.add(new Effect(inventory.get(inventoryIndex).getUrl(),500));
 				inventory.get(inventoryIndex).setUrl("./img/empty.png");
 				this.setInventoryChanged(true);
@@ -398,6 +398,12 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				RUN_SPEED = 3.6f;
 				JUMP_GRAVITY = -7.5f;
 				break;
+
+			case "./img/banana.png":
+				RUN_SPEED = 3.6f;
+				JUMP_GRAVITY = -7.5f;
+				break;
+
 		}
 	}
 
@@ -580,6 +586,11 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 	public void setCanDoubleJump(boolean canDoubleJump) {
 		this.canDoubleJump = canDoubleJump;
+	}
+
+	public void addEffect(Effect e)
+	{
+		currentEffects.add(e);
 	}
 
 }

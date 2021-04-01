@@ -16,6 +16,8 @@ public class Item extends GameObject {
 	private int totalNrBlocks;
 	private BufferedImage img;
 	private String url;
+	private boolean addItem = false;
+	private String itemToAdd = "";
 
 	public Item(float x, float y, int width, int height, Player player, String url) {
 		super(x, y, 3, width, height);
@@ -55,6 +57,10 @@ public class Item extends GameObject {
 			case "./img/jump.png":
 				player.setCanDoubleJump(true);
 				break;
+			case "./img/banana.png":
+				this.addItem=true;
+				itemToAdd=url;
+				break;
 		}
 
 	}
@@ -65,5 +71,17 @@ public class Item extends GameObject {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public void setAddItem(boolean addItem) {
+		this.addItem = addItem;
+	}
+
+	public boolean getAddItem() {
+		return addItem;
+	}
+
+	public String getItemToAdd() {
+		return itemToAdd;
 	}
 }
