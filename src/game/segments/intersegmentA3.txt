@@ -6,9 +6,12 @@ Respawn 405 363 0 0 flag1.png
 AnimArea 80 220 4 torch1.png torch2.png torch3.png torch4.png
 Chest -200 360 4 chest.png chest.png chest.png chest.png
 Chest -360 360 4 chest.png chest.png chest.png chest.png
-ScriptedDamageZone 60 360 1 0 3 10 360 6 100 360 6 60 360 1 4 hand1.png hand4.png hand5.png hand4.png
-ScriptedDamageZone 190 360 1 20 3 250 360 4 130 360 4 190 360 1 4 hand1.png hand4.png hand5.png hand4.png
-ScriptedDamageZone 320 360 1 20 3 250 360 4 380 360 4 320 360 1 4 hand1.png hand4.png hand5.png hand4.png
+TrackedScriptedDamageZone 120 120 1 20 1 150 120 4 4 bateye1.png bateye2.png bateye3.png bateye4.png 1 -100 70 200 200
+TrackingAI 330 120 1 20 1 150 120 2 4 bateye1.png bateye2.png bateye3.png bateye4.png 1 -100 70 200 200
+-EventScriptedDamageZone 150 120 1 20 2 150 384 6 150 120 2 4 bateye1.png bateye2.png bateye3.png bateye4.png 2 -100 70 16 200 100 70 16 200
+-DetectionDamageZone -260 360 1 0 1 -260 360 1 4 hand1.png hand4.png hand5.png hand4.png
+-ScriptedDamageZone 190 360 1 20 3 250 360 4 130 360 4 190 360 1 4 hand1.png hand4.png hand5.png hand4.png
+-ScriptedDamageZone 320 360 1 20 3 250 360 4 380 360 4 320 360 1 4 hand1.png hand4.png hand5.png hand4.png
 AnimArea 340 220 4 torch1.png torch2.png torch3.png torch4.png
 Platform Custom 0 124 corner1inv.png
 Platform Custom 96 156 top2.png

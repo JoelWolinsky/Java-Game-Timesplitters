@@ -14,6 +14,7 @@ import game.entities.platforms.Platform;
 import game.entities.platforms.TimerPlatform;
 
 import javax.imageio.ImageIO;
+import javax.sound.midi.Track;
 
 public class Level extends Canvas {
 
@@ -212,6 +213,22 @@ public class Level extends Canvas {
 								}
 							if (((EventScriptedDamageZone) l).getActivated())
 								if (((EventScriptedDamageZone) l).getInteraction(((Player) k)))
+									((Player) k).respawn();
+						}
+
+						if (l instanceof TrackingAI) {
+
+							for (Area xd: ((TrackingAI) l).getEventArea() )
+								if (xd.getInteraction(((Player) k))) {
+									((TrackingAI) l).setActivated(true);
+									((TrackingAI) l).setVisibile(true);
+								}
+								else {
+									((TrackingAI) l).setActivated(false);
+									((TrackingAI) l).setVisibile(false);
+								}
+							if (((TrackingAI) l).getActivated())
+								if (((TrackingAI) l).getInteraction(((Player) k)))
 									((Player) k).respawn();
 						}
 
@@ -544,4 +561,19 @@ public class Level extends Canvas {
 
 		return itemPool.get(rnd1);
 	}
+
+	public LinkedList<Player> getPlayers()
+	{
+		LinkedList<Player> players = new LinkedList<Player>();
+		for (GameObject o : getGameObjects())
+		{
+			if (o instanceof Player)
+				players.add((Player)o);
+		}
+
+		System.out.println("This many players: " + players.size());
+
+		return players;
+	}
+
 }

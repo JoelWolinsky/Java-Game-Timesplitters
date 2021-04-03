@@ -147,4 +147,7 @@ public class EventScriptedDamageZone extends AnimArea{
 		points.add(p);
 	}
 
+	public LinkedList<Point> getPoints() {
+		return points;
+	}
 }

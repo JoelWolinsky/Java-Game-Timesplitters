@@ -143,4 +143,7 @@ public class ScriptedDamageZone extends AnimArea{
 		points.add(p);
 	}
 
+	public Point getPoint(int index) {
+		return points.get(index);
+	}
 }

@@ -159,9 +159,7 @@ public class Game extends Canvas implements Runnable{
 			System.out.println("single player");
 
 			player = new Player(0, 340, keyInput, 0 ,0);
-
 			currentLevel.addEntity(player);
-
 		}
 
 		game = this;
