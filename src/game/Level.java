@@ -25,6 +25,7 @@ public class Level extends Canvas {
 	private int gameTimer=0;
 	private boolean added=false;
 	private boolean gameStarted=true;
+	private boolean addChicken = false;
 
 	public synchronized LinkedList<GameObject> getGameObjects(){
 		return this.entities;
@@ -32,8 +33,37 @@ public class Level extends Canvas {
 
 	public void tick() {
 
+
+		for (MindlessAISpawner mss: getChickenSpawners()) {
+			if (mss.getAddChicken()) {
+				addEntity(new MindlessAI(mss.getDummyX(), mss.getDummyY(), mss.getDummyWidth(), mss.getDummyHeight(), mss.getDummyMinRange(), mss.getDummyMaxRange(), mss.getUrls()));
+				mss.setAddChicken(false);
+				break;
+			}
+			else if (mss.getRemoveChicken())
+			{
+				removeEntity(getChickens().getFirst());
+				mss.setRemoveChicken(false);
+				break;
+			}
+
+		}
 		for (GameObject k: getGameObjects())
 		{
+
+			if (k instanceof MindlessAI)
+			{
+				for (GameObject ll:getGameObjects()) {
+					if (ll !=k)
+					if (ll instanceof MindlessAI) {
+						if (((MindlessAI) ll).getInteraction((MindlessAI) k)) {
+							if (!((MindlessAI) k).isBounceImmune())
+							((MindlessAI) k).bouncing(((MindlessAI) ll).getSpeed(), ((MindlessAI) ll).getYuh());
+						}
+					}
+				}
+			}
+
 			if (k instanceof Player) {
 
 				if (gameStarted)
@@ -63,6 +93,15 @@ public class Level extends Canvas {
 
 					if (l instanceof Area)
 					{
+
+						if (l instanceof MindlessAI)
+						{
+							if (((MindlessAI) l).getInteraction((Player)k))
+								{
+									if (!((Player) k).isBounceImmune())
+										((Player) k).bouncing(((MindlessAI) l).getSpeed(),((MindlessAI) l).getYuh());
+								}
+						}
 
 						if (l instanceof AddedItem)
 						{
@@ -441,6 +480,7 @@ public class Level extends Canvas {
 			o.tick();
 		}
 
+
 	}
 
 	public void render(Graphics g, float f, float h) {
@@ -576,4 +616,37 @@ public class Level extends Canvas {
 		return players;
 	}
 
+	public LinkedList<MindlessAI> getChickens()
+	{
+		LinkedList<MindlessAI> chickens = new LinkedList<MindlessAI>();
+		for (GameObject o : getGameObjects())
+		{
+			if (o instanceof MindlessAI)
+				chickens.add((MindlessAI) o);
+		}
+
+
+		return chickens;
+	}
+
+	public LinkedList<MindlessAISpawner> getChickenSpawners()
+	{
+		LinkedList<MindlessAISpawner> chickenSpawners = new LinkedList<MindlessAISpawner>();
+		for (GameObject o : getGameObjects())
+		{
+			if (o instanceof MindlessAISpawner)
+				chickenSpawners.add((MindlessAISpawner) o);
+		}
+
+
+		return chickenSpawners;
+	}
+
+	public boolean getAddChicken() {
+		return addChicken;
+	}
+
+	public void setAddChicken(boolean addChicken) {
+		this.addChicken = addChicken;
+	}
 }

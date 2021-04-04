@@ -42,7 +42,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private int respawnY=340;
 	private int deathFromFallThreshold;
 	private boolean immunity=false;
-	private int i=0;
+	private int i=0,bi=0;
 	private boolean cc=false;
 	private boolean moving;
 	private boolean canMove=false;
@@ -58,6 +58,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private ArrayList<Effect> currentEffects = new ArrayList<Effect>();
 	private boolean canDoubleJump=false;
 	private int jumpCooldown=0;
+	private boolean bouncing=false;
+	private int bouncingSpeed = 0;
+	private int bouncingTimer=0;
+	private boolean bounceImmunity=false;
 
 	private static int animationTimer = 0;
 	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
@@ -114,6 +118,13 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}else {
 			immunity=false;
 		}
+
+		if (bi<15) {
+			bi++;
+		}else {
+			bounceImmunity=false;
+		}
+
 
 		//always have the player collision box set to respective size of its animationstate
 		this.width = getAnimation(currentAnimationState).getFrame(currentFrame).getWidth();
@@ -361,6 +372,22 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 
 
+		if (bouncing)
+		{
+			this.x = this.x + (bouncingSpeed*2);
+			if (bouncingSpeed>0)
+				this.y = this.y - bouncingSpeed;
+			else
+				this.y = this.y - bouncingSpeed*(-1);
+			bouncingTimer++;
+			if(bouncingTimer>=10) {
+				bouncing = false;
+				bouncingTimer=0;
+			}
+
+			//sum = sum + speed;
+		}
+
 
 
 	}
@@ -416,6 +443,15 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			i=0;
 		}
 	}
+
+	public void bouncing(int speed, int yuh){
+		this.bouncing = true;
+		bouncingSpeed= speed;
+		bounceImmunity=true;
+		bi=0;
+	}
+
+
 
 
 	private boolean isOnGround() {
@@ -593,4 +629,15 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		currentEffects.add(e);
 	}
 
+	public int getRandomNumber(int min, int max) {
+		return (int) ((Math.random() * (max - min)) + min);
+	}
+	public static int getRandom(int[] array) {
+		int rnd = new Random().nextInt(array.length);
+		return array[rnd];
+	}
+
+	public boolean isBounceImmune() {
+		return bounceImmunity;
+	}
 }

@@ -471,6 +471,30 @@ public class Map {
 
                         currentLevel.addEntity(cao);
                         break;
+                    case "MindlessAI":
+                        MindlessAI mai;
+                        List<String> list14 = new ArrayList<String>();
+                        for (int l = 6;l < 6+Integer.parseInt(splited[5]);l++)
+                            list14.add("./img/".concat(splited[l]));
+
+                        String[] arr14 = list14.toArray(new String[0]);
+
+                        mai = new MindlessAI(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),arr14);
+
+                        currentLevel.addEntity(mai);
+                        break;
+                    case "MindlessAISpawner":
+                        MindlessAISpawner mais;
+                        List<String> list15 = new ArrayList<String>();
+                        for (int l = 6;l < 6+Integer.parseInt(splited[5]);l++)
+                            list15.add("./img/".concat(splited[l]));
+
+                        String[] arr15 = list15.toArray(new String[0]);
+
+                        mais = new MindlessAISpawner(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),currentLevel,arr15);
+
+                        currentLevel.addEntity(mais);
+                        break;
 
                     case "Chest":
                         Chest ch;

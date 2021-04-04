@@ -41,7 +41,7 @@ public class Area extends GameObject {
 			g.drawImage(img,(int)(this.x + f),(int)(this.y + h),null);
 	}
 
-	public boolean getInteraction(Player player){
+	public boolean getInteraction(GameObject player){
 		return ((int)this.x < (int)player.getX()+player.getWidth() && 
 				(int)player.getX() < this.x+this.width && 
 				(int)this.y < (int)player.getY()+player.getHeight() && 
