@@ -4,11 +4,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.UUID;
+import java.util.*;
 
+import game.Effect;
 import game.Game;
+import game.Item;
 import game.attributes.AnimatedObject;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
@@ -31,17 +31,37 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private float terminalVelY = 15;
 
 	private static final float DECELERATION = 0.4f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
-	private static final float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
-	private static final float RUN_SPEED = 3.6f; 		// Default run speed
-	private static final float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
+	private static float JUMP_GRAVITY = -7.5f;
+	private static float JUMP_GRAVITY_DOUBLE = -10.5f;// VelY changes to this number upon jump
+	private static float RUN_SPEED = 3.6f; 		// Default run speed
+	private static float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
 
+	private boolean godMode=false;
 	private int respawnX=0;
 	private int respawnThreshold=340;
 	private int respawnY=340;
 	private int deathFromFallThreshold;
 	private boolean immunity=false;
-	private int i=0;
+	private int i=0,bi=0;
 	private boolean cc=false;
+	private boolean moving;
+	private boolean canMove=false;
+	private boolean locked=false;
+	private GameObject locker;
+	private LinkedList<Item> inventory = new LinkedList<Item>(Arrays.asList(new Item(0,0,0,0,this,"./img/empty.png"),new Item(0,0,0,0,this,"./img/shoes.png"),new Item(0,0,0,0,this,"./img/empty.png")));
+	private int inventorySize=3;
+	private int inventoryIndex=2;
+	private boolean inventoryChanged=false;
+	private int itemUseCooldown = 0;
+	private int slotSelectionCooldown=0;
+	private int effectDuration=500;
+	private ArrayList<Effect> currentEffects = new ArrayList<Effect>();
+	private boolean canDoubleJump=false;
+	private int jumpCooldown=0;
+	private boolean bouncing=false;
+	private int bouncingSpeed = 0;
+	private int bouncingTimer=0;
+	private boolean bounceImmunity=false;
 
 	private static int animationTimer = 0;
 	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
@@ -88,23 +108,41 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public void tick() {
 		//Gather all collisions
 		CollidingObject.getCollisions(this);
+
+
+		moving = false;
+
+		//disable immunity after 100
 		if (i<100) {
 			i++;
 		}else {
 			immunity=false;
 		}
 
+		if (bi<15) {
+			bi++;
+		}else {
+			bounceImmunity=false;
+		}
+
+
+		//always have the player collision box set to respective size of its animationstate
 		this.width = getAnimation(currentAnimationState).getFrame(currentFrame).getWidth();
 		this.height = getAnimation(currentAnimationState).getFrame(currentFrame).getHeight();
 
 
 		this.prevPos = new Point((int)this.x, (int)this.y);
 
+
 		//Check for keyboard input along the x-axis
-		
+
+		if (canMove)
 		if (this.input != null) {
 			if(KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
-	
+
+
+				moving=true;
+
 			/* Beware: Java floating point representation makes it difficult to have perfect numbers
 			( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
 	
@@ -117,7 +155,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 					currentAnimationState = AnimationStates.RIGHT;
 	
 			} else if(KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
-	
+
+
+				moving=true;
+
 					// Simulates acceleration when you run left
 					if (this.velX <= -RUN_SPEED){
 						this.velX = -RUN_SPEED;
@@ -141,16 +182,30 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 					this.velX = 0;
 				}
 			}
+
 	
 			//Check for keyboard input along the y-axis
 			if(KeyInput.down.isPressed()) {
 				this.velY = DOWN_SPEED;
 			}else if(KeyInput.up.isPressed()) {
-				if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
+
+				if (jumpCooldown>=10 && canDoubleJump && !isOnGround() && !hasCeilingAbove() && !isOnWall())
+				{
+					this.velY = JUMP_GRAVITY_DOUBLE;
+					jumpCooldown=0;
+					canDoubleJump=false;
+				}
+				else if(jumpCooldown>=10 && isOnGround() && !hasCeilingAbove() && !isOnWall()) {
 					this.velY = JUMP_GRAVITY;
+					jumpCooldown=0;
 				}
 			}
 		}
+
+		if (jumpCooldown<10)
+			jumpCooldown++;
+
+
 		//If you're not on ground, you should fall
 		if(!isOnGround()) {
 			fall(this);
@@ -211,8 +266,6 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		The main idea is that most respawn points will be at ground level on each specific floor so the +300 will
 		work everytime. (Falling 300 blocks below the floor/respawnY will kill the player)
 		 */
-
-
 		if (this.y >respawnThreshold+300) {
 			this.x = respawnX;
 			this.y = respawnY;
@@ -224,15 +277,165 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		{
 			respawn();
 		}
-		
-		
+
+		// press g to enable godmode -- remember to disable this after finishing game
+		if(KeyInput.g.isPressed())
+		{
+			if (godMode) {
+				godMode = false;
+				RUN_SPEED = 3.6f;
+				JUMP_GRAVITY = -7.5f;
+			}
+			else {
+				godMode = true;
+				RUN_SPEED = 13.6f;
+				JUMP_GRAVITY = - 12.0f;
+			}
+		}
+
+		if(KeyInput.space.isPressed())
+		{
+			/*
+			//OPTION 1
+			if (inventoryIndex>=0)
+			if(itemUseCooldown>=50) {
+				inventory.get(0).getEffect();
+				for (int i=0 ; i <inventorySize-1;i++)
+					inventory.get(i).setUrl(inventory.get(i+1).getUrl());
+				inventory.get(inventoryIndex).setUrl("./img/empty.png");
+				this.setInventoryChanged(true);
+				//after 5 sec
+				//normal();
+				inventoryIndex--;
+				itemUseCooldown=0;
+			}
+
+
+			 */
+
+			//OPTION 2
+			if (!(inventory.get(inventoryIndex).getUrl().equals("./img/empty.png"))) {
+				inventory.get(inventoryIndex).getEffect();
+				if (!(inventory.get(inventoryIndex).getUrl().equals("./img/jump.png")) && !(inventory.get(inventoryIndex).getUrl().equals("./img/banana.png")))
+				currentEffects.add(new Effect(inventory.get(inventoryIndex).getUrl(),500));
+				inventory.get(inventoryIndex).setUrl("./img/empty.png");
+				this.setInventoryChanged(true);
+			}
+		}
+
+
+		if (!currentEffects.isEmpty())
+		{
+			for (Effect e : currentEffects)
+			{
+				e.decrement();
+
+				if (e.getTimer()<=0) {
+					removeEffect(e.getName());
+					currentEffects.remove(e);
+					break;
+				}
+			}
+
+		}
+
+
+
+		if (itemUseCooldown<50)
+			itemUseCooldown++;
+
+
+		//OPTION 2
+
+		if (slotSelectionCooldown<5)
+			slotSelectionCooldown++;
+
+		if(KeyInput.comma.isPressed())
+		{
+			if (slotSelectionCooldown>=5)
+			if (inventoryIndex>0)
+			{
+				inventoryIndex--;
+				slotSelectionCooldown=0;
+			}
+		}
+
+		if(KeyInput.period.isPressed())
+		{
+			if (slotSelectionCooldown>=5)
+			if (inventoryIndex<2)
+			{
+				inventoryIndex++;
+				slotSelectionCooldown=0;
+			}
+		}
+
+
+
+		if (bouncing)
+		{
+			this.x = this.x + (bouncingSpeed*2);
+			if (bouncingSpeed>0)
+				this.y = this.y - bouncingSpeed;
+			else
+				this.y = this.y - bouncingSpeed*(-1);
+			bouncingTimer++;
+			if(bouncingTimer>=10) {
+				bouncing = false;
+				bouncingTimer=0;
+			}
+
+			//sum = sum + speed;
+		}
 
 
 
 	}
 
+	public boolean moving(){
+		return moving;
+	}
+
+	public void slow(){
+		RUN_SPEED = 2.0f;
+		JUMP_GRAVITY = -5.5f;
+	}
+
+
+	public void setRunSpeed(float runSpeed) {
+		RUN_SPEED = runSpeed;
+	}
+
+	public void setJumpGravity(float jumpGravity) {
+		JUMP_GRAVITY = jumpGravity;
+	}
+
+	public void normal(GameObject z){
+		if(this.locker == z)
+		{
+			RUN_SPEED = 3.6f;
+			JUMP_GRAVITY = -7.5f;
+		}
+	}
+
+	public void removeEffect(String code){
+
+		switch (code){
+			case "./img/shoes.png":
+				RUN_SPEED = 3.6f;
+				JUMP_GRAVITY = -7.5f;
+				break;
+
+			case "./img/banana.png":
+				RUN_SPEED = 3.6f;
+				JUMP_GRAVITY = -7.5f;
+				break;
+
+		}
+	}
+
 	public void respawn(){
-		if (immunity==false)
+		if (immunity==false && godMode==false)
 		{
 			this.x = respawnX;
 			this.y = respawnY;
@@ -240,6 +443,15 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			i=0;
 		}
 	}
+
+	public void bouncing(int speed, int yuh){
+		this.bouncing = true;
+		bouncingSpeed= speed;
+		bounceImmunity=true;
+		bi=0;
+	}
+
+
 
 
 	private boolean isOnGround() {
@@ -355,5 +567,77 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 	public void setRespawnThreshold(int respawnThreshold) {
 		this.respawnThreshold = respawnThreshold;
+	}
+
+	public void setCanMove(boolean canMove) {
+		this.canMove = canMove;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+	}
+
+	public void setLocker(GameObject locker) {
+		this.locker = locker;
+	}
+
+	public void addToInventory(Item item) {
+		inventory.add(item);
+	}
+
+	public void removeFromInventory(GameObject item) {
+		inventory.remove(item);
+	}
+
+	public LinkedList<Item> getInventory() {
+		return inventory;
+	}
+
+	public boolean inventoryChanged() {
+		return inventoryChanged;
+	}
+
+	public void setInventoryChanged(boolean inventoryChanged) {
+		this.inventoryChanged = inventoryChanged;
+	}
+
+	public int getInventoryIndex() {
+		return inventoryIndex;
+	}
+
+	public void incrementInventoryIndex() {
+		inventoryIndex++;
+	}
+
+	public int firstFreeSpace(){
+
+		for (int i =0 ; i<inventorySize;i++)
+		{
+			if (inventory.get(i).getUrl().equals("./img/empty.png"))
+				return i;
+		}
+
+		return -1;
+	}
+
+	public void setCanDoubleJump(boolean canDoubleJump) {
+		this.canDoubleJump = canDoubleJump;
+	}
+
+	public void addEffect(Effect e)
+	{
+		currentEffects.add(e);
+	}
+
+	public int getRandomNumber(int min, int max) {
+		return (int) ((Math.random() * (max - min)) + min);
+	}
+	public static int getRandom(int[] array) {
+		int rnd = new Random().nextInt(array.length);
+		return array[rnd];
+	}
+
+	public boolean isBounceImmune() {
+		return bounceImmunity;
 	}
 }

@@ -34,18 +34,19 @@ public class ScriptedDamageZone extends AnimArea{
 
 	public void tick() {
 
-		if (i<startOffset)
-			i++;
-		else
-		{
 
-			if (speed>0)
+			if (i<startOffset)
+				i++;
+			else
 			{
-				if (this.x >= points.get(k).getX())
 
-					lockX=true;
-			}
-			else if (speed<0)
+				if (speed>0)
+				{
+					if (this.x >= points.get(k).getX())
+
+						lockX=true;
+				}
+				else if (speed<0)
 				{
 					if (this.x <= points.get(k).getX())
 
@@ -53,73 +54,75 @@ public class ScriptedDamageZone extends AnimArea{
 				}
 
 
-			if (speed2>0)
-			{
-				if (this.y >= points.get(k).getY())
-					lockY= true;
-			}
-			else if (speed2<0)
-			{
-				if (this.y <= points.get(k).getY())
+				if (speed2>0)
+				{
+					if (this.y >= points.get(k).getY())
+						lockY= true;
+				}
+				else if (speed2<0)
+				{
+					if (this.y <= points.get(k).getY())
 
-					lockY=true;
-			}
-
-
-			if (!lockX)
-				this.x = this.x + (speed * points.get(k).getSpeed());
-			if (!lockY)
-				this.y = this.y + (speed2* points.get(k).getSpeed());
-
-			if (lockY && lockX)
-			{
-				k++;
-
-				if (k==points.size()) {
-					this.x=originalX;
-					this.y=originalY;
-					speed=1;
-					speed2=1;
-					k = 1;
+						lockY=true;
 				}
 
-				if (points.get(k).getX() - points.get(k - 1).getX() == 0)
+
+				if (!lockX)
+					this.x = this.x + (speed * points.get(k).getSpeed());
+				if (!lockY)
+					this.y = this.y + (speed2* points.get(k).getSpeed());
+
+				if (lockY && lockX)
 				{
-					lockX = true;
-				}
-				else
-				{
-					lockX = false;
-					if (points.get(k).getX() - points.get(k - 1).getX() < 0) {
-						if (speed > 0)
-							speed = speed * (-1);
-					} else if (points.get(k).getX() - points.get(k - 1).getX() > 0) {
-						if (speed < 0)
-							speed = speed * (-1);
+					k++;
+
+					if (k==points.size()) {
+						this.x=originalX;
+						this.y=originalY;
+						speed=1;
+						speed2=1;
+						k = 1;
 					}
-				}
 
-				if (points.get(k).getY()-points.get(k-1).getY()==0)
-				{
-					lockY=true;
-				}
-				else
-				{
-					lockY=false;
-					if (points.get(k).getY()-points.get(k-1).getY() < 0) {
-						if (speed2 > 0)
-							speed2 = speed2 * (-1);
+					if (points.get(k).getX() - points.get(k - 1).getX() == 0)
+					{
+						lockX = true;
 					}
-					else if (points.get(k).getY()-points.get(k-1).getY() > 0) {
-						if (speed2 < 0)
-							speed2 = speed2 * (-1);
+					else
+					{
+						lockX = false;
+						if (points.get(k).getX() - points.get(k - 1).getX() < 0) {
+							if (speed > 0)
+								speed = speed * (-1);
+						} else if (points.get(k).getX() - points.get(k - 1).getX() > 0) {
+							if (speed < 0)
+								speed = speed * (-1);
+						}
 					}
+
+					if (points.get(k).getY()-points.get(k-1).getY()==0)
+					{
+						lockY=true;
+					}
+					else
+					{
+						lockY=false;
+						if (points.get(k).getY()-points.get(k-1).getY() < 0) {
+							if (speed2 > 0)
+								speed2 = speed2 * (-1);
+						}
+						else if (points.get(k).getY()-points.get(k-1).getY() > 0) {
+							if (speed2 < 0)
+								speed2 = speed2 * (-1);
+						}
+					}
+
 				}
 
 			}
 
 
-		}
+
 	}
 
 	@Override
@@ -134,9 +137,13 @@ public class ScriptedDamageZone extends AnimArea{
 		this.active = active;
 	}
 
+
 	public void addPoint(Point p)
 	{
 		points.add(p);
 	}
 
+	public Point getPoint(int index) {
+		return points.get(index);
+	}
 }

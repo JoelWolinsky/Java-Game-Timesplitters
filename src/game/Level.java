@@ -1,7 +1,11 @@
 package game;
 
 import java.awt.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Random;
 
 import game.entities.*;
 import game.entities.areas.*;
@@ -9,12 +13,19 @@ import game.entities.platforms.CrushingPlatform;
 import game.entities.platforms.Platform;
 import game.entities.platforms.TimerPlatform;
 
+import javax.imageio.ImageIO;
+import javax.sound.midi.Track;
+
 public class Level extends Canvas {
 
 	private LinkedList<GameObject> entities = new LinkedList<>();
 	private LinkedList<Waypoint> waypoints = new LinkedList<>();
 	private int i =0;
 	private int j=0;
+	private int gameTimer=0;
+	private boolean added=false;
+	private boolean gameStarted=true;
+	private boolean addChicken = false;
 
 	public synchronized LinkedList<GameObject> getGameObjects(){
 		return this.entities;
@@ -22,9 +33,57 @@ public class Level extends Canvas {
 
 	public void tick() {
 
+
+		for (MindlessAISpawner mss: getChickenSpawners()) {
+			if (mss.getAddChicken()) {
+				addEntity(new MindlessAI(mss.getDummyX(), mss.getDummyY(), mss.getDummyWidth(), mss.getDummyHeight(), mss.getDummyMinRange(), mss.getDummyMaxRange(), mss.getUrls()));
+				mss.setAddChicken(false);
+				break;
+			}
+			else if (mss.getRemoveChicken())
+			{
+				removeEntity(getChickens().getFirst());
+				mss.setRemoveChicken(false);
+				break;
+			}
+
+		}
 		for (GameObject k: getGameObjects())
 		{
+
+			if (k instanceof MindlessAI)
+			{
+				for (GameObject ll:getGameObjects()) {
+					if (ll !=k)
+					if (ll instanceof MindlessAI) {
+						if (((MindlessAI) ll).getInteraction((MindlessAI) k)) {
+							if (!((MindlessAI) k).isBounceImmune())
+							((MindlessAI) k).bouncing(((MindlessAI) ll).getSpeed(), ((MindlessAI) ll).getYuh());
+						}
+					}
+				}
+			}
+
 			if (k instanceof Player) {
+
+				if (gameStarted)
+					((Player) k).setCanMove(true);
+
+				for (Item i : ((Player) k).getInventory()) {
+					if (i.getAddItem()) {
+						this.addEntity(new AddedItem(k.getX(), k.getY(), 0, 0, (Player) k, i.getItemToAdd() , i.getItemToAdd(),i.getItemToAdd(),i.getItemToAdd()));
+						i.setAddItem(false);
+						added=true;
+						break;
+					}
+				}
+
+				if (added)
+				{
+					added=false;
+					break;
+				}
+
 				for (GameObject l:getGameObjects())
 				{
 					if (l instanceof Platform)
@@ -35,6 +94,52 @@ public class Level extends Canvas {
 					if (l instanceof Area)
 					{
 
+						if (l instanceof MindlessAI)
+						{
+							if (((MindlessAI) l).getInteraction((Player)k))
+								{
+									if (!((Player) k).isBounceImmune())
+										((Player) k).bouncing(((MindlessAI) l).getSpeed(),((MindlessAI) l).getYuh());
+								}
+						}
+
+						if (l instanceof AddedItem)
+						{
+							if (((AddedItem) l).isVisibile())
+								if (((AddedItem) l).getInteraction((Player)k))
+									if (k!=((AddedItem) l).getCreator()) {
+										((AddedItem) l).getEffect((Player) k);
+										((AddedItem) l).setVisibile(false);
+										((Player) k).addEffect(new Effect(((AddedItem) l).getEffect(),500));
+									}
+						}
+
+						if (l instanceof Chest)
+							if(((Chest) l).isVisibile())
+								if (((Chest) l).getInteraction((Player)k))
+								{
+									/*
+									//OPTION 1
+									if (((Player) k).getInventoryIndex()<2)
+									{
+										((Player) k).incrementInventoryIndex();
+										((Player) k).getInventory().get(((Player) k).getInventoryIndex()).setUrl(randomItem());
+										((Chest) l).setVisibile(false);
+										((Player) k).setInventoryChanged(true);
+									}
+
+									 */
+
+									//OPTION 2
+
+									if (((Player) k).firstFreeSpace()!=-1)
+									{
+										((Player) k).getInventory().get(((Player) k).firstFreeSpace()).setUrl(randomItem());
+										((Chest) l).setVisibile(false);
+										((Player) k).setInventoryChanged(true);
+									}
+
+								}
 						if (l instanceof Portal) {
 							if (((Portal) l).getInteraction(((Player) k))) {
 								((Player) k).setRespawnX(((Portal) l).getCurrentX() + ((Portal) l).getDestinationX());
@@ -94,6 +199,14 @@ public class Level extends Canvas {
 							else
 								((OnReachAnimArea) l).setActive(false);
 
+						if (l instanceof SlowArea)
+							if (((SlowArea) l).getInteraction(((Player) k))) {
+								((Player) k).slow();
+								((Player) k).setLocker(l);
+							}
+							else
+								((Player) k).normal(l);
+
 						if (l instanceof RespawnPoint)
 							//if (o.getReached()==false) //comment this out if you want to allow players to activate previously reached respawn points
 							//if (((RespawnPoint) l).getReached()==false)
@@ -131,6 +244,34 @@ public class Level extends Canvas {
 								if (((ScriptedDamageZone) l).getInteraction(((Player) k)))
 									((Player) k).respawn();
 						//player interaction with event damage zones
+						if (l instanceof EventScriptedDamageZone) {
+
+							for (Area xd: ((EventScriptedDamageZone) l).getEventArea() )
+								if (xd.getInteraction(((Player) k))) {
+									((EventScriptedDamageZone) l).setActivated(true);
+								}
+							if (((EventScriptedDamageZone) l).getActivated())
+								if (((EventScriptedDamageZone) l).getInteraction(((Player) k)))
+									((Player) k).respawn();
+						}
+
+						if (l instanceof TrackingAI) {
+
+							for (Area xd: ((TrackingAI) l).getEventArea() )
+								if (xd.getInteraction(((Player) k))) {
+									((TrackingAI) l).setActivated(true);
+									((TrackingAI) l).setVisibile(true);
+								}
+								else {
+									((TrackingAI) l).setActivated(false);
+									((TrackingAI) l).setVisibile(false);
+								}
+							if (((TrackingAI) l).getActivated())
+								if (((TrackingAI) l).getInteraction(((Player) k)))
+									((Player) k).respawn();
+						}
+
+
 						if (l instanceof EventDamageZone) {
 
 							for (Area xd: ((EventDamageZone) l).getEventArea() )
@@ -339,6 +480,7 @@ public class Level extends Canvas {
 			o.tick();
 		}
 
+
 	}
 
 	public void render(Graphics g, float f, float h) {
@@ -448,4 +590,63 @@ public class Level extends Canvas {
 		}
 	}
 
+	public void setGameStarted(boolean gameStarted) {
+		this.gameStarted = gameStarted;
+	}
+
+	public String randomItem(){
+		ArrayList<String> itemPool =new ArrayList<String>(Arrays.asList("./img/shoes.png","./img/jump.png","./img/banana.png"));
+		int rnd1;
+		rnd1 = new Random().nextInt(itemPool.size());
+
+		return itemPool.get(rnd1);
+	}
+
+	public LinkedList<Player> getPlayers()
+	{
+		LinkedList<Player> players = new LinkedList<Player>();
+		for (GameObject o : getGameObjects())
+		{
+			if (o instanceof Player)
+				players.add((Player)o);
+		}
+
+		System.out.println("This many players: " + players.size());
+
+		return players;
+	}
+
+	public LinkedList<MindlessAI> getChickens()
+	{
+		LinkedList<MindlessAI> chickens = new LinkedList<MindlessAI>();
+		for (GameObject o : getGameObjects())
+		{
+			if (o instanceof MindlessAI)
+				chickens.add((MindlessAI) o);
+		}
+
+
+		return chickens;
+	}
+
+	public LinkedList<MindlessAISpawner> getChickenSpawners()
+	{
+		LinkedList<MindlessAISpawner> chickenSpawners = new LinkedList<MindlessAISpawner>();
+		for (GameObject o : getGameObjects())
+		{
+			if (o instanceof MindlessAISpawner)
+				chickenSpawners.add((MindlessAISpawner) o);
+		}
+
+
+		return chickenSpawners;
+	}
+
+	public boolean getAddChicken() {
+		return addChicken;
+	}
+
+	public void setAddChicken(boolean addChicken) {
+		this.addChicken = addChicken;
+	}
 }
