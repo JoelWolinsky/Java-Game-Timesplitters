@@ -20,10 +20,10 @@ Floor
 
 Chunk 1 E segmentA1.png
 Waypoint 200 363 flag3.png L Y 10
+Waypoint 130 325 flag3.png R Y 30
 Platform Custom 0 140 top1.png
 Platform Custom 330 140 corner1inv.png
 Platform Custom 130 325 edge2inv.png
-Waypoint 130 325 flag3.png R Y 30
 Platform Custom 82 270 edge2.png
 Platform Custom 230 265 edge1.png
 Platform Inverted 262 265

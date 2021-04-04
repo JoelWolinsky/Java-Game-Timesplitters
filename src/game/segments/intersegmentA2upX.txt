@@ -29,8 +29,8 @@ Waypoint 160 204 flag3.png L Y 60
 
 //CLIMBING PLATFORMS RIGHT
 Platform Custom 320 384 smallplatform1inv.png
-Waypoint 320 363 flag3.png L Y 30
 Platform Custom 320 64 smallplatform1inv.png
+Waypoint 320 363 flag3.png L Y 30
 Waypoint 320 44 flag3.png R Y 20
 Waypoint 194 44 flag3.png R Y 110
 

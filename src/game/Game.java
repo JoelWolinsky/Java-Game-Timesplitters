@@ -214,25 +214,12 @@ public class Game extends Canvas implements Runnable{
 
 
 
-			if (againstComputer == true) {
+			ArrayList<String> segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","intersegmentA2up","intersegmentA2down"));
+			ArrayList<String> segments2 = new ArrayList<String>(Arrays.asList("segmentA3","segmentA4","segmentA4"));
+			ArrayList<String> segments3 = new ArrayList<String>(Arrays.asList("segmentA6","segmentA7","segmentA8","segmentA9","segmentA10","segmentA11"));
+			ArrayList<String> intro2 = new ArrayList<String>(Arrays.asList("intro2"));
+			ArrayList<String> throneRoom = new ArrayList<String>(Arrays.asList("segmentA5"));
 
-				segments1 = new ArrayList<String>(Arrays.asList("segmentA1X","segmentA2X","intersegmentA1X","intersegmentA2upX","intersegmentA2upX"));
-				segments2 = new ArrayList<String>(Arrays.asList("segmentA3X", "segmentA4X","segmentA4X"));
-				segments3 = new ArrayList<String>(Arrays.asList("segmentA6","segmentA7","segmentA8","segmentA9","segmentA6","segmentA7","segmentA10","segmentA11"));
-				intro2 = new ArrayList<String>(Arrays.asList("intro2X"));
-				throneRoom = new ArrayList<String>(Arrays.asList("segmentA5X"));
-			} else {
-
-				segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2up"));
-				segments2 = new ArrayList<String>(Arrays.asList("segmentA3", "segmentA4", "segmentA4"));
-				intro2 = new ArrayList<String>(Arrays.asList("intro2"));
-				segments3 = new ArrayList<String>(Arrays.asList("segmentA6","segmentA7","segmentA8","segmentA9","segmentA6","segmentA7","segmentA10","segmentA11"));
-				throneRoom = new ArrayList<String>(Arrays.asList("segmentA5"));
-
-			}
-
-			//load up the images that are going to be used for dynamic background generation onto individual levels
-			//**it is important that all levels have the same amount of images
 			BackgroundStates level0 = new BackgroundStates("ground1.png","ground2.png");
 			BackgroundStates level1 = new BackgroundStates("sky1.png","sky2.png");
 			BackgroundStates level2 = new BackgroundStates("sky3.png","sky4.png");
@@ -309,8 +296,9 @@ public class Game extends Canvas implements Runnable{
 					rnd1 = new Random().nextInt(segmentPool.size());
 				}
 
+				// ------------------------------------------------------------------------------ CAUSES CODE TO CRASH
 			//custom behaviour for Castle Dungeon -- put an intersegmentA3 before each segment
-			if (belongsTo(segmentPool.get(rnd1),segments3))
+			if (belongsTo(segmentPool.get(rnd1),segments3)) // seems the .get doesn't work, meaning segmentPool is empty
 				randomGenerate(m, new ArrayList<String>(Arrays.asList("intersegmentA3")));
 
 			//advance by 1 block
@@ -471,7 +459,6 @@ public class Game extends Canvas implements Runnable{
 			segmentPool.remove(rnd1);
 
 		}
-
 
 		return nrBlocks;
 

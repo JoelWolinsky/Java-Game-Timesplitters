@@ -1,5 +1,6 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA5p1.png 2
 Chunk 1 E segmentA6p1.png
+Waypoint -40 363 flag3.png R Y 20
 Platform Custom 0 92 corner1.png
 Platform Custom 96 92 top1.png
 Platform Custom 330 92 corner1inv.png

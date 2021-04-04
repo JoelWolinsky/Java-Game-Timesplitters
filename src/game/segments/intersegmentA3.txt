@@ -1,6 +1,7 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA3.png 1
 Chunk 1 E intersegmentA3.png
 Respawn 405 363 0 0 flag1.png
+Waypoint 50 363 flag3.png R Y 0
 
 -Platform Custom 30 272 thinplatform2.png
 AnimArea 80 220 4 torch1.png torch2.png torch3.png torch4.png

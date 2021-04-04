@@ -5,6 +5,8 @@ Platform Custom 82 325 edge2.png
 Platform Custom 29 140 top1.png
 Platform Custom 0 140 corner1.png
 Platform Custom 214 265 edge1.png
+Waypoint 54 363 flag3.png R N 0
+Waypoint 104 363 flag3.png R N 0
 EventDamageZone 327 228 50 200 notice.png 0 0 1 -180 -70 1 100 4 skele1.png skele2.png skele4.png skele2.png
 -DetectionDamageZone 140 360 0 0 1 170 360 1 4 hand1.png hand1.png hand1.png hand1.png
 Platform Default 246 265
@@ -17,6 +19,8 @@ Floor
 
 
 Chunk 1 E segmentA1.png
+Waypoint 200 363 flag3.png L Y 10
+Waypoint 130 325 flag3.png R Y 30
 Platform Custom 0 140 top1.png
 Platform Custom 330 140 corner1inv.png
 Platform Custom 130 325 edge2inv.png
