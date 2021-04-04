@@ -6,6 +6,8 @@ Platform Custom 0 92 corner1.png
 Platform Custom 96 92 top1.png
 Platform Custom 330 92 corner1inv.png
 
+Platform Custom -90 384 customFloor1.png
+
 Platform Custom 46 300 edge3.png
 Waypoint 48 280 flag3.png R Y 20
 Platform Custom 46 460 edge3.png
@@ -18,8 +20,8 @@ Platform Custom 370 480 edge3inv.png
 Platform Custom 370 320 edge3inv.png
 Waypoint 372 300 flag3.png R N 10
 
-Chunk 1 N skyA.png
-Chunk 1 E skyA.png
+-Chunk 1 N skyA.png
+-Chunk 1 E skyA.png
 Chunk 1 S segmentA6p2.png
 
 Platform Custom 0 92 corner1.png
