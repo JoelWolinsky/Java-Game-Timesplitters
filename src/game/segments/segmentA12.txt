@@ -24,12 +24,19 @@ Platform Custom 435 335 bookshelf3.png
 Platform Custom 410 310 bookshelf2.png
 Platform Custom 420 240 bookshelf1.png
 
-MovingPlatform 240 180 20 false 0.35 bookshelf2.png
+MovingPlatform 250 180 20 false 0.5 bookshelf2.png
+
+ScriptedDamageZone 60 140 1 0 3 60 145 0.2 60 135 0.2 60 140 0.2 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
+TrackedScriptedDamageZone 60 140 1 20 1 150 120 2 4 magic1.png magic2.png magic3.png magic4.png 1 -100 40 300 200
+
+
+ScriptedDamageZone 200 80 1 0 3 200 75 0.2 200 85 0.2 200 80 0.2 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
+TrackedScriptedDamageZone 200 80 1 20 1 150 120 1.5 4 magic1.png magic2.png magic3.png magic4.png 1 -100 0 400 200
+
+
 Floor
 
-Chunk 1 N skyA.png
-Chunk 1 E skyA.png
-Chunk 1 S segmentA12p2.png
+Chunk 1 E segmentA12p2.png
 
 Platform Custom 0 28 top3.png
 Platform Custom 138 28 corner1inv.png
@@ -40,8 +47,14 @@ Platform Custom 10 230 bookshelf1.png
 Platform Custom 10 290 bookshelf2.png
 Platform Custom 10 320 bookshelf1.png
 
-MovingPlatform 180 210 20 true 1 bookshelf3.png
+MovingPlatform 180 270 60 true 1.5 bookshelf3.png
 Platform Custom 360 350 bookshelf2.png
 Platform Custom 320 320 bookshelf1.png
+
+ScriptedDamageZone 200 100 1 0 3 200 75 0.2 200 85 0.2 200 80 0.2 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
+TrackedScriptedDamageZone 170 100 1 20 1 150 120 1.5 4 magic1.png magic2.png magic3.png magic4.png 1 -150 0 400 300
+
+-ScriptedDamageZone 200 100 1 0 3 200 75 0.2 200 85 0.2 200 80 0.2 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
+-TrackedScriptedDamageZone 300 140 1 20 1 150 120 1.5 4 magic1.png magic2.png magic3.png magic4.png 1 -100 70 200 200
 
 Floor

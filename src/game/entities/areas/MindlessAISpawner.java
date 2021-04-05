@@ -20,9 +20,10 @@ public class MindlessAISpawner extends GameObject {
 	private boolean addChicken = false;
 	private boolean removeChicken = false;
 	private int chickensSpawned=0;
+	private int maxChickens;
 	private String[] urls;
 
-	public MindlessAISpawner(float x, float y, int width, int height,int minRange, int maxRange,Level currentLevel, String...urls) {
+	public MindlessAISpawner(float x, float y, int width, int height,int minRange, int maxRange,int maxChickens,Level currentLevel, String...urls) {
 		super(0,0,0,0,0);
 		this.urls=urls;
 		this.dummyX=x;
@@ -32,13 +33,12 @@ public class MindlessAISpawner extends GameObject {
 		this.dummyMinRange=minRange;
 		this.dummyMaxRange=maxRange;
 		this.currentLevel=currentLevel;
+		this.maxChickens=maxChickens;
 	}
 
 	public void tick() {
 
-
-		System.out.println(chickensSpawned);
-		if (chickensSpawned<=5)
+		if (chickensSpawned<=maxChickens)
 		{
 			if (addChicken==false) {
 				if (i < 100)

@@ -4,9 +4,9 @@ public class Point<S, T> {
 
         private int x;
         private int y;
-        private int speed;
+        private float speed;
 
-        public Point(int x, int y, int speed) {
+        public Point(int x, int y, float speed) {
             this.x = x;
             this.y = y;
             this.speed=speed;
@@ -21,7 +21,7 @@ public class Point<S, T> {
         return y;
     }
 
-    public int getSpeed() {
+    public float getSpeed() {
         return speed;
     }
 

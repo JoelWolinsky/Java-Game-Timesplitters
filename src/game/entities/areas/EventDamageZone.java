@@ -22,10 +22,14 @@ public class EventDamageZone extends AnimArea{
 	private int noticeDelay,onDuration;
 	private LinkedList<Area> areas = new LinkedList<>();
 	private int noticeX,noticeY;
+	private int cooldown = 0;
+	private boolean go = false;
+	private boolean random = false;
 
-	public EventDamageZone(float x, float y, int width, int height, int noticeDelay, int onDuration ,String notice, int noticeX, int noticeY, String...urls) {
+	public EventDamageZone(float x, float y, int width, int height, int noticeDelay, int onDuration ,String notice, int noticeX, int noticeY,boolean random, String...urls) {
 		super(x, y, width, height,urls);
 
+		this.random=random;
 		this.noticeDelay=noticeDelay;
 		this.onDuration=onDuration;
 		this.noticeX=noticeX;
@@ -47,9 +51,21 @@ public class EventDamageZone extends AnimArea{
 
 		if (triggered)
 		{
+
+			if (timer==1 && random)
+				if (getRandomNumber(0,3)>0)
+					go=false;
+				else
+					go=true;
+
 			if (timer>noticeDelay)
 			{
-				this.active=true;
+				if (random) {
+					if (go)
+						this.active = true;
+				}
+				else
+					this.active=true;
 			}
 
 			if (timer >onDuration) {
@@ -67,11 +83,23 @@ public class EventDamageZone extends AnimArea{
 		//a.render(g,f,h);
 		//g.setColor(Color.magenta);
 		//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
-		if (triggered)
-			if (1 < timer && timer < noticeDelay)
-				g.drawImage(img, (int) (this.x+ noticeX + f), (int) (this.y+ noticeY + h), null);
-		if (active)
-				super.render(g,f,h);
+		if (random) {
+			if (go) {
+				if (triggered)
+					if (1 < timer && timer < noticeDelay)
+						g.drawImage(img, (int) (this.x + noticeX + f), (int) (this.y + noticeY + h), null);
+				if (active)
+					super.render(g, f, h);
+			}
+		}
+		else
+			{
+				if (triggered)
+					if (1 < timer && timer < noticeDelay)
+						g.drawImage(img, (int) (this.x+ noticeX + f), (int) (this.y+ noticeY + h), null);
+				if (active)
+					super.render(g,f,h);
+			}
 	}
 
 	public boolean getActive(){
@@ -84,5 +112,12 @@ public class EventDamageZone extends AnimArea{
 	public void setTriggered(boolean triggered){this.triggered=triggered;}
 	public void addArea(Area area){ areas.add(area);}
 
+	public boolean isTriggered() {
+		return triggered;
+	}
+
+	public int getRandomNumber(int min, int max) {
+		return (int) ((Math.random() * (max - min)) + min);
+	}
 
 }

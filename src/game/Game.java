@@ -164,7 +164,7 @@ public class Game extends Canvas implements Runnable{
 
 		game = this;
 
-		String mapMode = "RNG";
+		String mapMode = "default";
 		Map m = new Map();
 		//keep default for now until we sort randomly generated
 
@@ -173,7 +173,8 @@ public class Game extends Canvas implements Runnable{
 
 		if (mapMode.equals("default")) {
 			m.mapParser(currentLevel, "intro1");
-			m.mapParser(currentLevel, "segmentA1");
+			m.mapParser(currentLevel, "segmentA12");
+			m.mapParser(currentLevel, "segmentA13");
 			/*
 
 			*** LEGEND ***
@@ -224,7 +225,7 @@ public class Game extends Canvas implements Runnable{
 			} else {
 
 				segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2up"));
-				segments2 = new ArrayList<String>(Arrays.asList("segmentA3", "segmentA4", "segmentA4"));
+				segments2 = new ArrayList<String>(Arrays.asList("segmentA3","segmentA4"));
 				intro2 = new ArrayList<String>(Arrays.asList("intro2"));
 				segments3 = new ArrayList<String>(Arrays.asList("segmentA6","segmentA7","segmentA8","segmentA9","segmentA6","segmentA7","segmentA10","segmentA11"));
 				throneRoom = new ArrayList<String>(Arrays.asList("segmentA5"));
