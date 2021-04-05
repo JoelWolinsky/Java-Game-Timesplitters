@@ -172,8 +172,9 @@ public class Game extends Canvas implements Runnable{
 		camera.addTarget(player);
 
 		if (mapMode.equals("default")) {
-			m.mapParser(currentLevel, "intro1");
+			m.mapParser(currentLevel, "segmentA2");
 			m.mapParser(currentLevel, "segmentA1");
+			//m.mapParser(currentLevel, "intersegmentA2down");
 			/*
 
 			*** LEGEND ***
@@ -184,7 +185,7 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "intro2");				// Basic chandelier room
 			m.mapParser(currentLevel, "introDimension");		// Pink portal
 
-			m.mapParser(currentLevel, "segmentA1");				// basic segment
+			m.mapParser(currentLevel, "segmentA1");				// web segment
 			m.mapParser(currentLevel, "segmentA2");				// electric one
 			m.mapParser(currentLevel, "segmentA3");				// aesthetic hall 1
 			m.mapParser(currentLevel, "segmentA4");				// aesthetic hall 2
@@ -202,7 +203,7 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "intersegmentA1"); 		// skeletons throwing objects down
 			m.mapParser(currentLevel, "intersegmentA2");		// falling rocks
 			m.mapParser(currentLevel, "intersegmentA2up");		// falling chandeliers
-			m.mapParser(currentLevel, "intersegmentA2down");	// falling chandeliers						-- BUGGY
+			m.mapParser(currentLevel, "intersegmentA2down");	// falling chandeliers						-- BUGGY (FOR AI)
 			m.mapParser(currentLevel, "intersegmentA3");		// hands one
 
 		*/
@@ -212,13 +213,11 @@ public class Game extends Canvas implements Runnable{
 			//create different segment pools for the different parts of the game
 			//we want them separated in order to keep a specific order in our game
 
-
-
-			ArrayList<String> segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","intersegmentA2up","intersegmentA2down"));
-			ArrayList<String> segments2 = new ArrayList<String>(Arrays.asList("segmentA3","segmentA4","segmentA4"));
-			ArrayList<String> segments3 = new ArrayList<String>(Arrays.asList("segmentA6","segmentA7","segmentA8","segmentA9","segmentA10","segmentA11"));
-			ArrayList<String> intro2 = new ArrayList<String>(Arrays.asList("intro2"));
-			ArrayList<String> throneRoom = new ArrayList<String>(Arrays.asList("segmentA5"));
+			segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","intersegmentA2up","intersegmentA2down"));
+			segments2 = new ArrayList<String>(Arrays.asList("segmentA3","segmentA4","segmentA4"));
+			segments3 = new ArrayList<String>(Arrays.asList("segmentA6","segmentA7","segmentA8","segmentA9","segmentA10","segmentA11"));
+			intro2 = new ArrayList<String>(Arrays.asList("intro2"));
+			throneRoom = new ArrayList<String>(Arrays.asList("segmentA5"));
 
 			BackgroundStates level0 = new BackgroundStates("ground1.png","ground2.png");
 			BackgroundStates level1 = new BackgroundStates("sky1.png","sky2.png");
@@ -239,22 +238,24 @@ public class Game extends Canvas implements Runnable{
 			UIController uiController = new UIController(camera.getXOffset(), camera.getYOffset()+10,0,0,currentLevel,countdown,"5.png");
 			currentLevel.addEntity(uiController);
 
-
-
 			//generate the segment pools
 			m.mapParser(currentLevel, "intro1");
-			//int part1nrblocks = randomGenerate(m,segments1);
-			//int part2nrblocks = randomGenerate(m,intro2);
-			//part2nrblocks = part2nrblocks + randomGenerate(m,segments2) + randomGenerate(m,throneRoom);
+			int part1nrblocks = randomGenerate(m,segments1);
+			int part2nrblocks = randomGenerate(m,intro2);
+			part2nrblocks = part2nrblocks + randomGenerate(m,segments2); // + randomGenerate(m,throneRoom);
 			int part3nrblocks = randomGenerate(m,segments3);
 
 
-			//MapPart mp1 = new MapPart("./img/minipart1d.png",part1nrblocks);
-			//MapPart mp2 = new MapPart("./img/minipart2.png",part2nrblocks);
+			MapPart mp1 = new MapPart("./img/minipart1d.png",part1nrblocks);
+			MapPart mp2 = new MapPart("./img/minipart2.png",part2nrblocks);
 			MapPart mp3 = new MapPart("./img/minipart3.png",part3nrblocks);
 
+			currentLevel.addEntity(new BarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,player,currentLevel,mp1));
+			currentLevel.addEntity(new BarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,player,currentLevel,mp2));
 			currentLevel.addEntity(new BarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,player,currentLevel,mp3));
 
+			currentLevel.addEntity(new InventoryController(camera.getXOffset(), camera.getYOffset()+400, 0,0,player,currentLevel,mp1));
+			currentLevel.addEntity(new InventoryController(camera.getXOffset(), camera.getYOffset()+400, 0,0,player,currentLevel,mp2));
 			currentLevel.addEntity(new InventoryController(camera.getXOffset(), camera.getYOffset()+400, 0,0,player,currentLevel,mp3));
 
 		}
@@ -278,7 +279,8 @@ public class Game extends Canvas implements Runnable{
 
 		int nrBlocks=0;
 		int rnd1;
-		while (!segmentPool.isEmpty()) {
+		
+		while (!segmentPool.isEmpty()){
 
 			//choose segment at random from segment pool
 			rnd1 = new Random().nextInt(segmentPool.size());
@@ -296,9 +298,8 @@ public class Game extends Canvas implements Runnable{
 					rnd1 = new Random().nextInt(segmentPool.size());
 				}
 
-				// ------------------------------------------------------------------------------ CAUSES CODE TO CRASH
 			//custom behaviour for Castle Dungeon -- put an intersegmentA3 before each segment
-			if (belongsTo(segmentPool.get(rnd1),segments3)) // seems the .get doesn't work, meaning segmentPool is empty
+			if (belongsTo(segmentPool.get(rnd1),segments3))
 				randomGenerate(m, new ArrayList<String>(Arrays.asList("intersegmentA3")));
 
 			//advance by 1 block

@@ -37,7 +37,7 @@ public class MindlessAISpawner extends GameObject {
 	public void tick() {
 
 
-		System.out.println(chickensSpawned);
+		// System.out.println(chickensSpawned);
 		if (chickensSpawned<=5)
 		{
 			if (addChicken==false) {

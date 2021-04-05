@@ -1,6 +1,6 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA2.png 1
 Chunk 1 E intersegmentA2.png
-Respawn 54 363 0 0 flag1.png
+Respawn 65 363 0 0 flag1.png
 
 //OUTER WALLS
 Platform Custom 70 19 wall1.png
@@ -14,7 +14,7 @@ Waypoint 165 330 flag3.png L Y 20
 Waypoint 165 200 flag3.png L Y 20
 Waypoint 320 264 flag3.png L N 65
 Waypoint 320 134 flag3.png L N 65
-Waypoint 246 330 flag3.png R N 10
+Waypoint 285 290 flag3.png R N 0
 Waypoint 246 200 flag3.png R N 10
 
 //BOTTOM WALLS
