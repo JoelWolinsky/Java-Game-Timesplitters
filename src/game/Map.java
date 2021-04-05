@@ -247,8 +247,6 @@ public class Map {
                             points.add(adak);
                         }
 
-                        System.out.println(splited[3]);
-
                         ScriptedDamageZone adz;
                         adz = new ScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),points,Integer.parseInt(splited[4]),arr5);
                         currentLevel.addEntity(adz);

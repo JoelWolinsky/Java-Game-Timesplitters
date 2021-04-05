@@ -173,14 +173,14 @@ public class Game extends Canvas implements Runnable{
 
 		if (mapMode.equals("default")) {
 			m.mapParser(currentLevel, "intro1");
-			m.mapParser(currentLevel, "segmentA12");
+			//\m.mapParser(currentLevel, "segmentA11");
+			m.mapParser(currentLevel, "segmentA15");
 			m.mapParser(currentLevel, "segmentA13");
+			m.mapParser(currentLevel, "introDimension");
+			m.mapParser(currentLevel, "segmentA14");
 			/*
 
 			*** LEGEND ***
-
-			m.mapParser(currentLevel, "goN");					// Skeletons throwing objects down
-
 			m.mapParser(currentLevel, "intro1");				// No go zone 								-- NO X VERSION
 			m.mapParser(currentLevel, "intro2");				// Basic chandelier room
 			m.mapParser(currentLevel, "introDimension");		// Pink portal
@@ -219,44 +219,29 @@ public class Game extends Canvas implements Runnable{
 			intro2 = new ArrayList<String>(Arrays.asList("intro2"));
 			throneRoom = new ArrayList<String>(Arrays.asList("segmentA5"));
 
-			BackgroundStates level0 = new BackgroundStates("ground1.png","ground2.png");
-			BackgroundStates level1 = new BackgroundStates("sky1.png","sky2.png");
-			BackgroundStates level2 = new BackgroundStates("sky3.png","sky4.png");
-			BackgroundStates level3 = new BackgroundStates("sky5.png","sky6.png");
-
 			//choose the limits of your map this should also be related to how many levels you have defined
 			//eg. you don't want to have 20 levels but a top limit of only 2 since 17 of the leves will never be used
 			bottom=0;
 			top=2;
 
 			//add levels to the background controller which manages the current position within the horizontal panorama
-			ctrlr = new BackgroundController(level0,level1,level2,level3);
+			ctrlr = new BackgroundController(new BackgroundStates("ground1.png","ground2.png"),new BackgroundStates("sky1.png","sky2.png"),new BackgroundStates("sky3.png","sky4.png"),new BackgroundStates("sky5.png","sky6.png"));
 
-			//LinkedList<String> countdown = new LinkedList<String>(Arrays.asList("five.png", "four.png","three.png","two.png","one.png","asdgasdg.png"));
+			//Countdown
 			LinkedList<String> countdown = new LinkedList<String>(Arrays.asList("5.png", "4.png","3.png","2.png","1.png","finish2.png","asdgasdg.png"));
-
 			UIController uiController = new UIController(camera.getXOffset(), camera.getYOffset()+10,0,0,currentLevel,countdown,"5.png");
 			currentLevel.addEntity(uiController);
 
 			//generate the segment pools
 			m.mapParser(currentLevel, "intro1");
-			int part1nrblocks = randomGenerate(m,segments1);
-			int part2nrblocks = randomGenerate(m,intro2);
-			part2nrblocks = part2nrblocks + randomGenerate(m,segments2); // + randomGenerate(m,throneRoom);
-			int part3nrblocks = randomGenerate(m,segments3);
+			MapPart mp1 = new MapPart("./img/minipart1.png",randomGenerate(m,segments1));
+			MapPart mp2 = new MapPart("./img/minipart2.png",randomGenerate(m,intro2) + randomGenerate(m,segments2) + randomGenerate(m,throneRoom));
+			MapPart mp3 = new MapPart("./img/minipart3.png",randomGenerate(m,segments3));
 
-
-			MapPart mp1 = new MapPart("./img/minipart1d.png",part1nrblocks);
-			MapPart mp2 = new MapPart("./img/minipart2.png",part2nrblocks);
-			MapPart mp3 = new MapPart("./img/minipart3.png",part3nrblocks);
-
-			currentLevel.addEntity(new BarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,player,currentLevel,mp1));
-			currentLevel.addEntity(new BarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,player,currentLevel,mp2));
-			currentLevel.addEntity(new BarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,player,currentLevel,mp3));
-
-			currentLevel.addEntity(new InventoryController(camera.getXOffset(), camera.getYOffset()+400, 0,0,player,currentLevel,mp1));
-			currentLevel.addEntity(new InventoryController(camera.getXOffset(), camera.getYOffset()+400, 0,0,player,currentLevel,mp2));
-			currentLevel.addEntity(new InventoryController(camera.getXOffset(), camera.getYOffset()+400, 0,0,player,currentLevel,mp3));
+			//GameProgress UI
+			currentLevel.addEntity(new BarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,player,currentLevel,mp1,mp2,mp3));
+			//Inventorry UI
+			currentLevel.addEntity(new InventoryController(camera.getXOffset(), camera.getYOffset()+400, 0,0,player,currentLevel));
 
 		}
 

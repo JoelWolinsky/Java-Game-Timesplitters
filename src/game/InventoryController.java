@@ -16,9 +16,8 @@ public class InventoryController extends GameObject {
 	LinkedList<UIElement> frames = new LinkedList<UIElement>();
 	LinkedList<UIElement> slots = new LinkedList<UIElement>();
 	private int inventorySize=3;
-	int i =0;
 
-	public InventoryController(float x, float y, int width, int height, Player player, Level currentLevel, MapPart...urls) {
+	public InventoryController(float x, float y, int width, int height, Player player, Level currentLevel) {
 		super(x, y, 3, width, height);
 		this.player=player;
 
@@ -37,7 +36,6 @@ public class InventoryController extends GameObject {
 	public void tick() {
 
 
-		//OPTION 2
 		for (int j = 0 ;j<inventorySize;j++)
 		try
 		{

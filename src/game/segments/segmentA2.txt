@@ -10,7 +10,7 @@ Platform Custom 214 265 edge1.png
 DamageZone 180 230 3 200 150 0 cinders1.png 4 fire1.png fire2.png fire3.png fire1.png
 DamageZone 260 230 3 300 350 20 nopicture.png 4 fire1.png fire2.png fire3.png fire1.png
 DamageZone 340 230 3 200 150 40 cinders1.png 4 fire1.png fire2.png fire3.png fire1.png
-EventDamageZone 210 380 40 60 notice3.png 90 -55 4 15 -210 16 97 175 -210 16 97 243 -210 16 97 401 -210 16 97 4 electric1.png electric2.png electric1.png electric2.png
+EventDamageZone 210 380 40 60 notice3.png 90 -55 false 4 15 -210 16 97 175 -210 16 97 243 -210 16 97 401 -210 16 97 4 electric1.png electric2.png electric1.png electric2.png
 OnReachAnimArea 225 175 4 activated1.png activated1.png activated1.png activated1.png
 OnReachAnimArea 385 175 4 activated1.png activated1.png activated1.png activated1.png
 Platform Default 246 265
@@ -32,7 +32,7 @@ DamageZone 60 230 3 200 150 0 nopicture.png 4 fire1.png fire2.png fire3.png fire
 DamageZone 140 230 3 300 150 20 cinders1.png 4 fire1.png fire2.png fire3.png fire1.png
 DamageZone 220 230 3 200 150 40 nopicture.png 4 fire1.png fire2.png fire3.png fire1.png
 
-EventDamageZone 0 380 40 60 notice3.png 105 -55 4 -201 -210 16 97 -41 -210 16 97 27 -210 16 97 185 -210 16 97 4 electric2.png electric1.png electric2.png electric1.png
+EventDamageZone 0 380 40 60 notice3.png 105 -55 false 4 -201 -210 16 97 -41 -210 16 97 27 -210 16 97 185 -210 16 97 4 electric2.png electric1.png electric2.png electric1.png
 OnReachAnimArea 27 175 4 activated1.png activated1.png activated1.png activated1.png
 OnReachAnimArea 185 175 4 activated1.png activated1.png activated1.png activated1.png
 Platform Default 0 265

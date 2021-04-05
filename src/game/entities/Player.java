@@ -13,6 +13,7 @@ import game.attributes.AnimatedObject;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
+import game.entities.platforms.CrushingPlatform;
 import game.entities.platforms.MovingPlatform;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
@@ -216,6 +217,21 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 					this.x += ((MovingPlatform) o).getVelocity();
 				}else {
 					this.y += ((MovingPlatform) o).getVelocity();
+				}
+			}
+
+			if (o instanceof CrushingPlatform)
+			{
+				if (((CrushingPlatform) o).getCrushingSide().equals("BOTTOM"))
+				{
+					if (((CrushingPlatform) o).getVelocity()<0)
+						this.y += ((CrushingPlatform) o).getVelocity();
+					else fall(this);
+				}
+				else if (((CrushingPlatform) o).getCrushingSide().equals("LEFT") || ((CrushingPlatform) o).getCrushingSide().equals("RIGHT"))
+				{
+					this.x += ((CrushingPlatform) o).getVelocity();
+
 				}
 			}
 		}

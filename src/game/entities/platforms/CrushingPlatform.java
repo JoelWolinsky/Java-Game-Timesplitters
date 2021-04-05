@@ -104,6 +104,14 @@ public class CrushingPlatform extends Platform implements SolidCollider{
 				return false;
 		}
 	}
+
+	public float getVelocity() {
+		return velocity;
+	}
+
+	public String getCrushingSide() {
+		return crushingSide;
+	}
 }
 
 

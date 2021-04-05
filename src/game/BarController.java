@@ -20,8 +20,8 @@ public class BarController extends GameObject {
 
 		}
 		for (MapPart st : urls) {
-			currentLevel.addEntity(new UIElement(this.x + offset, this.y + 10, (int)(((float)((float)((st.getNrBlocks()*426)*100)/(totalNrBlocks*426))/100)*600), 57, st.getUrl()));
-			offset = offset + (int)(((float)((float)((st.getNrBlocks()*426)*100)/(totalNrBlocks*426))/100)*600);
+			currentLevel.addEntity(new UIElement(this.x + offset, this.y + 10, (int)((((float)((st.getNrBlocks()*426)*100)/(totalNrBlocks*426))/100)*600), 57, st.getUrl()));
+			offset = offset + (int)((((float)((st.getNrBlocks()*426)*100)/(totalNrBlocks*426))/100)*600);
 		}
 
 		currentLevel.addEntity(new Blip(this.x, this.y+20, 20,20,player,totalNrBlocks,"./img/head1.png"));
@@ -31,15 +31,10 @@ public class BarController extends GameObject {
 
 	public void tick() {
 
-
-
 	}
 
 	public void render(Graphics g, float f, float h) {
 
-			//g.setColor(Color.magenta);
-			//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
-			//g.drawImage(img,(int)(this.x),(int)(this.y),null);
 	}
 
 

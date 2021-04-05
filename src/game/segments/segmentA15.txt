@@ -1,0 +1,179 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA11p1.png
+Chunk 1 E segmentA12p1.png
+Respawn 10 363 0 0 flag1.png
+
+Platform Custom 0 92 corner1.png
+Platform Custom 96 60 corner1.png
+Platform Custom 192 28 corner1.png
+Platform Custom 288 28 top3.png
+Platform Custom 70 352 bookshelf2.png
+Platform Custom 120 335 bookshelf3.png
+Platform Custom 160 320 bookshelf1.png
+Platform Custom 180 285 bookshelf2.png
+Platform Custom 210 320 bookshelf1.png
+Platform Custom 230 270 bookshelf3.png
+Platform Custom 260 335 bookshelf3.png
+Platform Custom 315 320 bookshelf1.png
+Platform Custom 260 300 bookshelf2.png
+Platform Custom 265 235 bookshelf1.png
+Platform Custom 330 270 bookshelf3.png
+Platform Custom 315 235 bookshelf2.png
+Platform Custom 330 170 bookshelf1.png
+Platform Custom 380 210 bookshelf2.png
+Platform Custom 380 150 bookshelf1.png
+Platform Custom 360 335 bookshelf3.png
+Platform Custom 395 335 bookshelf3.png
+Platform Custom 370 310 bookshelf2.png
+Platform Custom 370 245 bookshelf1.png
+
+
+ScriptedDamageZone 130 130 1 0 3 130 128 0.2 130 132 0.2 130 130 0.2 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
+TrackedScriptedDamageZone 130 130 1 20 1 150 120 1 4 magic1.png magic2.png magic3.png magic4.png 1 -100 0 400 200
+
+DamageZone 415 142 3 100 350 336 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 404 142 3 100 350 339 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 393 142 3 100 350 342 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 382 142 3 100 350 345 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 371 153 3 100 350 348 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 360 164 3 100 350 351 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 349 164 3 100 350 354 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 338 164 3 100 350 357 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 327 164 3 100 350 360 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 316 175 3 100 350 363 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 316 186 3 100 350 366 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 316 197 3 100 350 369 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 316 208 3 100 350 372 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 316 219 3 100 350 375 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 305 223 3 100 350 378 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 294 223 3 100 350 381 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 283 223 3 100 350 384 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 272 223 3 100 350 387 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 257 234 3 100 350 390 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 257 245 3 100 350 393 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 257 256 3 100 350 396 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 246 260 3 100 350 399 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 235 260 3 100 350 402 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 220 271 3 100 350 405 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 209 278 3 100 350 408 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 198 278 3 100 350 411 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 187 278 3 100 350 414 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 170 289 3 100 350 417 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 170 300 3 100 350 420 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 159 311 3 100 350 423 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 148 322 3 100 350 426 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 137 327 3 100 350 429 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 126 327 3 100 350 432 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 110 338 3 100 350 435 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 99 347 3 100 350 438 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 88 347 3 100 350 441 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 77 347 3 100 350 444 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 60 358 3 100 350 447 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 60 369 3 100 350 450 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+
+
+
+Floor
+
+Chunk 1 E segmentA12p2.png
+Platform Custom 0 28 top3.png
+Platform Custom 138 28 corner1inv.png
+Platform Custom 234 60 corner1inv.png
+Platform Custom 330 92 corner1inv.png
+Platform Custom 10 230 bookshelf1.png
+Platform Custom 0 290 bookshelf2.png
+Platform Custom 10 320 bookshelf1.png
+Platform Custom 60 352 bookshelf2.png
+Platform Custom 60 300 bookshelf3.png
+Platform Custom 110 320 bookshelf1.png
+Platform Custom 100 290 bookshelf2.png
+Platform Custom 120 240 bookshelf3.png
+Platform Custom 10 198 bookshelf2.png
+
+Platform Custom 160 340 bookshelf3.png
+Platform Custom 193 350 bookshelf2.png
+Platform Custom 195 285 bookshelf1.png
+Platform Custom 290 340 bookshelf3.png
+Platform Custom 245 350 bookshelf2.png
+Platform Custom 355 352 bookshelf2.png
+Platform Custom 320 320 bookshelf1.png
+
+
+ScriptedDamageZone 180 100 1 0 3 180 98 0.2 180 102 0.2 180 100 0.2 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
+TrackedScriptedDamageZone 180 100 1 20 1 150 120 1 4 magic1.png magic2.png magic3.png magic4.png 1 -150 0 400 300
+
+DamageZone 415 372 3 100 350 114 fog1.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 404 372 3 100 350 117 fog1.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 404 361 3 100 350 120 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 404 350 3 100 350 123 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 393 339 3 100 350 126 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 382 339 3 100 350 129 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 371 339 3 100 350 132 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 360 339 3 100 350 135 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 360 328 3 100 350 138 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 360 317 3 100 350 141 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+-DamageZone 360 306 3 100 350 144 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 349 306 3 100 350 147 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 338 306 3 100 350 150 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 327 306 3 100 350 153 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 310 317 3 100 350 156 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 310 328 3 100 350 159 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 299 328 3 100 350 162 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 288 328 3 100 350 165 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 277 335 3 100 350 168 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 266 339 3 100 350 171 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 255 339 3 100 350 174 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 244 339 3 100 350 177 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 240 328 3 100 350 180 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 240 317 3 100 350 183 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 240 306 3 100 350 186 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 240 295 3 100 350 189 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 240 284 3 100 350 192 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 229 273 3 100 350 195 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 218 273 3 100 350 198 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 207 273 3 100 350 201 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 196 273 3 100 350 204 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 185 284 3 100 350 207 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 185 295 3 100 350 210 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 185 306 3 100 350 213 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 185 317 3 100 350 216 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 185 328 3 100 350 219 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 174 328 3 100 350 222 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 163 328 3 100 350 225 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 152 328 3 100 350 228 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 145 317 3 100 350 231 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 145 306 3 100 350 234 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 145 295 3 100 350 237 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 145 284 3 100 350 240 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 145 273 3 100 350 243 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 145 262 3 100 350 247 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 145 251 3 100 350 250 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 145 240 3 100 350 253 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 134 229 3 100 350 256 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 123 229 3 100 350 259 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 112 240 3 100 350 262 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 112 251 3 100 350 265 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 112 262 3 100 350 268 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 112 273 3 100 350 271 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 101 278 3 100 350 274 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 95 289 3 100 350 277 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 84 289 3 100 350 280 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 73 289 3 100 350 283 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 62 289 3 100 350 286 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 51 278 3 100 350 289 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 51 267 3 100 350 292 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 51 256 3 100 350 295 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 51 245 3 100 350 298 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 51 234 3 100 350 301 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 51 223 3 100 350 304 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 51 212 3 100 350 307 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 51 201 3 100 350 310 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 40 190 3 100 350 313 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 29 190 3 100 350 316 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 18 190 3 100 350 319 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 7 190 3 100 350 321 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone -3 190 3 100 350 324 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone -3 179 3 100 350 327 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone -3 168 3 100 350 330 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone -3 157 3 100 350 333 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+
+Floor
