@@ -164,7 +164,7 @@ public class Game extends Canvas implements Runnable{
 
 		game = this;
 
-		String mapMode = "RNG";
+		String mapMode = "default";
 		Map m = new Map();
 		//keep default for now until we sort randomly generated
 
@@ -172,9 +172,9 @@ public class Game extends Canvas implements Runnable{
 		camera.addTarget(player);
 
 		if (mapMode.equals("default")) {
-			m.mapParser(currentLevel, "segmentA2");
-			m.mapParser(currentLevel, "segmentA1");
-			//m.mapParser(currentLevel, "intersegmentA2down");
+			m.mapParser(currentLevel, "intro1");
+			m.mapParser(currentLevel, "segmentA12");
+			m.mapParser(currentLevel, "segmentA13");
 			/*
 
 			*** LEGEND ***
@@ -279,7 +279,7 @@ public class Game extends Canvas implements Runnable{
 
 		int nrBlocks=0;
 		int rnd1;
-		
+
 		while (!segmentPool.isEmpty()){
 
 			//choose segment at random from segment pool

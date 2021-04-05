@@ -54,9 +54,7 @@ DamageZone 66 372 3 1000 350 114 nopicture.png 4 ice1.png ice1.png ice1.png ice1
 
 Floor
 
-Chunk 1 N skyA.png
-Chunk 1 E skyA.png
-Chunk 1 S segmentA13p2.png
+Chunk 1 E segmentA13p2.png
 
 Platform Custom -24 354 bookshelf2.png
 Platform Custom -16 305 bookshelf3.png

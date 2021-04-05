@@ -61,6 +61,20 @@ public class Level extends Canvas {
 							((MindlessAI) k).bouncing(((MindlessAI) ll).getSpeed(), ((MindlessAI) ll).getYuh());
 						}
 					}
+
+					if (ll instanceof EventDamageZone)
+					{
+
+						for (Area xd: ((EventDamageZone) ll).getEventArea() )
+							if (xd.getInteraction( k)) {
+								((EventDamageZone) ll).setTriggered(true);
+							}
+						if (((EventDamageZone) ll).getActive())
+							if (((EventDamageZone) ll).getInteraction( k))
+								((MindlessAI) k).bouncing(((MindlessAI) k).getSpeed(), ((MindlessAI) k).getYuh());
+
+					}
+
 				}
 			}
 
@@ -93,6 +107,8 @@ public class Level extends Canvas {
 
 					if (l instanceof Area)
 					{
+
+
 
 						if (l instanceof MindlessAI)
 						{

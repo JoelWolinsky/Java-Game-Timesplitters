@@ -243,10 +243,11 @@ public class Map {
 
                         for (int l = 6;l < 6+(3*Integer.parseInt(splited[5]));l+=3)
                         {
-                            adak= new Point(horizontalIndex - setX + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]));
+                            adak= new Point(horizontalIndex - setX + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[l+1]),Float.parseFloat(splited[l+2]));
                             points.add(adak);
                         }
 
+                        System.out.println(splited[3]);
 
                         ScriptedDamageZone adz;
                         adz = new ScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),points,Integer.parseInt(splited[4]),arr5);
@@ -291,18 +292,18 @@ public class Map {
 
                         //prepares a string array with the urls
                         List<String> list4 = new ArrayList<String>();
-                        for (int l = 9+(4*Integer.parseInt(splited[8])) + 1;l < 9+(4*Integer.parseInt(splited[8])) + 1 + Integer.parseInt(splited[9+(4*Integer.parseInt(splited[8]))]);l++)
+                        for (int l = 10+(4*Integer.parseInt(splited[9])) + 1;l < 10+(4*Integer.parseInt(splited[9])) + 1 + Integer.parseInt(splited[10+(4*Integer.parseInt(splited[9]))]);l++)
                             list4.add("./img/".concat(splited[l]));
 
                         String[] arr4 = list4.toArray(new String[0]);
 
 
                         EventDamageZone edz;
-                        edz = new EventDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),splited[5],Integer.parseInt(splited[6]),Integer.parseInt(splited[7]),arr4);
+                        edz = new EventDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),splited[5],Integer.parseInt(splited[6]),Integer.parseInt(splited[7]),Boolean.parseBoolean(splited[8]),arr4);
 
 
                         Area alol;
-                        for (int l = 9;l < 9+(4*Integer.parseInt(splited[8]));l+=4)
+                        for (int l = 10;l < 10+(4*Integer.parseInt(splited[9]));l+=4)
                         {
                             alol= new Area(horizontalIndex - setX + Integer.parseInt(splited[1]) + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[2]) + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]),Integer.parseInt(splited[l+3]),"");
                             edz.addArea(alol);
@@ -370,7 +371,7 @@ public class Map {
 
                         for (int l = 6;l < 6+(3*Integer.parseInt(splited[5]));l+=3)
                         {
-                            ptp= new Point(horizontalIndex - setX + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]));
+                            ptp= new Point(horizontalIndex - setX + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[l+1]),Float.parseFloat(splited[l+2]));
                             pntzz.add(ptp);
                         }
 
@@ -486,12 +487,12 @@ public class Map {
                     case "MindlessAISpawner":
                         MindlessAISpawner mais;
                         List<String> list15 = new ArrayList<String>();
-                        for (int l = 6;l < 6+Integer.parseInt(splited[5]);l++)
+                        for (int l = 7;l < 7+Integer.parseInt(splited[6]);l++)
                             list15.add("./img/".concat(splited[l]));
 
                         String[] arr15 = list15.toArray(new String[0]);
 
-                        mais = new MindlessAISpawner(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),currentLevel,arr15);
+                        mais = new MindlessAISpawner(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),Integer.parseInt(splited[5]),currentLevel,arr15);
 
                         currentLevel.addEntity(mais);
                         break;

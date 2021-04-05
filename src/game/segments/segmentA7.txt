@@ -12,15 +12,15 @@ Platform Custom 250 260 thinfloor1.png
 Waypoint 380 240 flag3.png R Y 0
 
 
-EventDamageZone 150 260 40 200 notice4.png 0 10 1 -170 -30 1 100 4 skele1.png skele2.png skele3.png skele4.png
-EventDamageZone 350 200 40 200 notice4.png 0 10 1 -170 -30 1 100 4 skele1.png skele2.png skele3.png skele4.png
+EventDamageZone 150 260 40 200 notice4.png 0 10 false 1 -170 -30 1 100 4 skele1.png skele2.png skele3.png skele4.png
+EventDamageZone 350 200 40 200 notice4.png 0 10 false 1 -170 -30 1 100 4 skele1.png skele2.png skele3.png skele4.png
 Platform Custom 0 384 wall5.png
 
 Chunk 1 E segmentA7p2.png
 Platform Custom 410 384 wall5inv.png
 
-EventDamageZone 110 350 40 200 notice4.png 0 10 1 -170 -30 1 100 4 skele1.png skele2.png skele3.png skele4.png
-EventDamageZone 330 200 40 200 notice4.png 0 10 1 -170 -30 1 100 4 skele1.png skele2.png skele3.png skele4.png
+EventDamageZone 110 350 40 200 notice4.png 0 10 false 1 -170 -30 1 100 4 skele1.png skele2.png skele3.png skele4.png
+EventDamageZone 330 200 40 200 notice4.png 0 10 false 1 -170 -30 1 100 4 skele1.png skele2.png skele3.png skele4.png
 
 
 Platform Custom 0 92 corner1.png
