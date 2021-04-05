@@ -516,7 +516,7 @@ public class Level extends Canvas {
 			else if (o instanceof Waypoint)
 			{
 					// COMMENT OUT TO HIDE WAYPOINTS
-					o.render(g, f, h);
+					//o.render(g, f, h);
 			}
 			else if (o instanceof DamageZone)
 			{
