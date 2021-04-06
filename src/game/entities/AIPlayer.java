@@ -13,6 +13,7 @@ import game.attributes.AnimatedObject;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
+import game.entities.areas.RespawnPoint;
 import game.entities.platforms.MovingPlatform;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
@@ -33,12 +34,15 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 	private static final float DECELERATION = 0.4f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
 	private static final float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
 	private static final float RUN_SPEED = 3.6f; 		// Default run speed
-	private static final float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
 
     public String direction = "N"; // or private?
     public String jump = "N";
-    public float wait = 0;
+    public float wait = 600;
+	public Player humanPlayer;
+	public float dist_from_player;
+	public RespawnPoint penultimateRespawnPoint;
 
+	public LinkedList<RespawnPoint> visitedRespawnPoints = new LinkedList<>();
 
 	private int respawnX=0;
 	private int respawnY=340;
@@ -46,6 +50,7 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 	private boolean immunity=false;
 	private int i=0;
 	private boolean cc=false;
+	private int max_distance_between_players = 550;
 
 	private static int animationTimer = 0;
 	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
@@ -60,10 +65,11 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 
 	private int respawnThreshold;
 
-	public AIPlayer(float x, float y, int width,int height, String...urls) {
+	public AIPlayer(float x, float y, int width,int height, Player humanPlayer, String...urls) {
 		super(x, y, 2, width, height);
 		
 		this.username = UUID.randomUUID().toString();;
+		this.humanPlayer = humanPlayer;
 
 		BufferedImage img;
 		try
@@ -102,55 +108,40 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 		this.width = getAnimation(currentAnimationState).getFrame(currentFrame).getWidth();
 		this.height = getAnimation(currentAnimationState).getFrame(currentFrame).getHeight();
 
-
 		this.prevPos = new Point((int)this.x, (int)this.y);
 
-		if (this.wait > 0) {
-			
-			this.wait--;
+		dist_from_player = this.x - this.humanPlayer.x;
+		
+		// teleports AI Player to the penultimate RespawnPoint that the player has reached 
+		if (dist_from_player < -max_distance_between_players) {
 
-			if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
-				if (this.velX >= -0.1f && this.velX <= 0.1f) {
-					this.velX = 0;
-					currentAnimationState = AnimationStates.IDLE;
-				} else if (this.velX > 0.1f) {
-					this.velX -= DECELERATION;
-				} else {
-					this.velX += DECELERATION;
+			if (humanPlayer.getRespawnPoints().size() > 2){
+
+				// first get the penultimate one
+				penultimateRespawnPoint = humanPlayer.getRespawnPoints().get(humanPlayer.getRespawnPoints().size()-2);
+
+				// so that it only teleports once, and doesn't keep getting sent back
+				if (!this.visitedRespawnPoints.contains(penultimateRespawnPoint)) {
+
+					// then set AIPlayer x to the value of that RP
+					this.x = penultimateRespawnPoint.x;
+					this.y = penultimateRespawnPoint.y-40;
+
 				}
-			} else {
-				this.velX = 0;
-				currentAnimationState = AnimationStates.IDLE;
+
 			}
 
 		}
-		else {
 
-			if(this.direction.equals("R")) {
 
-			/* Beware: Java floating point representation makes it difficult to have perfect numbers
-			( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
 
-					// Simulates acceleration when running right
-					if (this.velX >= RUN_SPEED){
-						this.velX = RUN_SPEED;
-					} else {
-						this.velX += RUN_SPEED/6;
-					}
-					currentAnimationState = AnimationStates.RIGHT;
 
-			} else if(this.direction.equals("L")) { 
+		if (dist_from_player < max_distance_between_players) {
+			
+			if (this.wait > 0) {
+				
+				this.wait--;
 
-					// Simulates acceleration when running left
-					if (this.velX <= -RUN_SPEED){
-						this.velX = -RUN_SPEED;
-					} else {
-						this.velX -= RUN_SPEED/6;
-					}
-					currentAnimationState = AnimationStates.LEFT;
-
-			} else { 
-				// For deceleration effect
 				if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
 					if (this.velX >= -0.1f && this.velX <= 0.1f) {
 						this.velX = 0;
@@ -164,18 +155,90 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 					this.velX = 0;
 					currentAnimationState = AnimationStates.IDLE;
 				}
+
 			}
+			else {
 
-			// For moving downwards quickly
-			  /* 	if(KeyInput.down.isPressed()) {
-						this.velY = DOWN_SPEED; 	} */
+				if(this.direction.equals("R")) {
 
-			if(jump.equals("Y")) {
-				if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
-					this.velY = JUMP_GRAVITY;
+				/* Beware: Java floating point representation makes it difficult to have perfect numbers
+				( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
+
+						// Simulates acceleration when running right
+						if (this.velX >= RUN_SPEED){
+							this.velX = RUN_SPEED;
+						} else {
+							this.velX += RUN_SPEED/6;
+						}
+						currentAnimationState = AnimationStates.RIGHT;
+
+				} else if(this.direction.equals("L")) { 
+
+						// Simulates acceleration when running left
+						if (this.velX <= -RUN_SPEED){
+							this.velX = -RUN_SPEED;
+						} else {
+							this.velX -= RUN_SPEED/6;
+						}
+						currentAnimationState = AnimationStates.LEFT;
+
+				} else { 
+					// For deceleration effect
+					if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
+						if (this.velX >= -0.1f && this.velX <= 0.1f) {
+							this.velX = 0;
+							currentAnimationState = AnimationStates.IDLE;
+						} else if (this.velX > 0.1f) {
+							this.velX -= DECELERATION;
+						} else {
+							this.velX += DECELERATION;
+						}
+					} else {
+						this.velX = 0;
+						currentAnimationState = AnimationStates.IDLE;
+					}
 				}
-				this.jump = "N";
+
+				// For moving downwards quickly
+				/* 	if(KeyInput.down.isPressed()) {
+							this.velY = DOWN_SPEED; 	} */
+
+				if(jump.equals("Y")) {
+					if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
+						this.velY = JUMP_GRAVITY;
+					}
+					this.jump = "N";
+				}
 			}
+
+			//Move player if it will not cause a collision
+			if(!SolidCollider.willCauseSolidCollision(this, this.velX+1, true)) {
+				this.x += velX;
+			}
+			if(!SolidCollider.willCauseSolidCollision(this, this.velY+1, false)) {
+				this.y += this.velY;
+			} else {
+				// Stop player falling through the floor
+				CollidingObject o = SolidCollider.nextCollision(this,  this.velY, false);
+				if(o != null) {
+					Rectangle s = o.getBounds();
+		
+					if(this.velY > 0 && !isOnWall()) {
+						this.y = s.y - this.height;
+						this.velY = 0;
+					} else if(this.velY < 0 && !isOnWall()) {
+						this.velY = 0;
+					} else {	// When velY == 0 and velX == 0 the sticking to the wall bug occurs.
+								// Rebounds the player off the wall to avoid sticking.
+						if (SolidCollider.willCauseSolidCollision(this, 5, true)) {
+							this.velX = -2.0f;
+						} else if (SolidCollider.willCauseSolidCollision(this, -5, true)) {
+							this.velX = 2.0f;
+						}
+					}
+				}
+			}
+
 		}
 
 		//If you're not on ground, you should fall
@@ -188,34 +251,6 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 					this.x += ((MovingPlatform) o).getVelocity();
 				}else {
 					this.y += ((MovingPlatform) o).getVelocity();
-				}
-			}
-		}
-
-		//Move player if it will not cause a collision
-		if(!SolidCollider.willCauseSolidCollision(this, this.velX+1, true)) {
-			this.x += velX;
-		}
-		if(!SolidCollider.willCauseSolidCollision(this, this.velY+1, false)) {
-			this.y += this.velY;
-		} else {
-			// Stop player falling through the floor
-			CollidingObject o = SolidCollider.nextCollision(this,  this.velY, false);
-			if(o != null) {
-				Rectangle s = o.getBounds();
-	
-				if(this.velY > 0 && !isOnWall()) {
-					this.y = s.y - this.height;
-					this.velY = 0;
-				} else if(this.velY < 0 && !isOnWall()) {
-					this.velY = 0;
-				} else {	// When velY == 0 and velX == 0 the sticking to the wall bug occurs.
-							// Rebounds the player off the wall to avoid sticking.
-					if (SolidCollider.willCauseSolidCollision(this, 5, true)) {
-						this.velX = -2.0f;
-					} else if (SolidCollider.willCauseSolidCollision(this, -5, true)) {
-						this.velX = 2.0f;
-					}
 				}
 			}
 		}
@@ -393,6 +428,14 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 
 	public void setRespawnThreshold(int respawnThreshold) {
 		this.respawnThreshold = respawnThreshold;
+	}
+
+	public LinkedList<RespawnPoint> getRespawnPoints() {
+		return visitedRespawnPoints;
+	}
+
+	public void addRespawnPoint(RespawnPoint r) {
+		this.visitedRespawnPoints.add(r);
 	}
 
 

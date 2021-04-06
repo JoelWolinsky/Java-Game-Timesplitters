@@ -147,8 +147,8 @@ public class Game extends Canvas implements Runnable{
 			System.out.println("not mp");
 			System.out.println("against computer");
 
-			aiPlayer = new AIPlayer(50, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
 			player = new Player(0, 340, keyInput, 0 ,0);
+			aiPlayer = new AIPlayer(50, 340, 0 ,0, player, "./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
 
 			currentLevel.addEntity(player);
 			currentLevel.addEntity(aiPlayer);
@@ -213,7 +213,8 @@ public class Game extends Canvas implements Runnable{
 			//create different segment pools for the different parts of the game
 			//we want them separated in order to keep a specific order in our game
 
-			segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down","intersegmentA2up","intersegmentA2down"));
+			// REMOVED "intersegmentA2down" FROM 'SEGMENTS1' BECAUSE BUGGY SO AI CAN'T PASS IT
+			segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up"));
 			segments2 = new ArrayList<String>(Arrays.asList("segmentA3","segmentA4","segmentA4"));
 			segments3 = new ArrayList<String>(Arrays.asList("segmentA6","segmentA7","segmentA8","segmentA9","segmentA10","segmentA11"));
 			intro2 = new ArrayList<String>(Arrays.asList("intro2"));
@@ -467,6 +468,10 @@ public class Game extends Canvas implements Runnable{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public Player getPlayer() {
+		return player;
 	}
 
 }

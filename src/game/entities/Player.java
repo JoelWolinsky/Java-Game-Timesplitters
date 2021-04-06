@@ -15,6 +15,7 @@ import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
 import game.entities.platforms.CrushingPlatform;
 import game.entities.platforms.MovingPlatform;
+import game.entities.areas.RespawnPoint;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
 import game.graphics.Assets;
@@ -36,6 +37,8 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private static float JUMP_GRAVITY_DOUBLE = -10.5f;// VelY changes to this number upon jump
 	private static float RUN_SPEED = 3.6f; 		// Default run speed
 	private static float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
+
+	public LinkedList<RespawnPoint> visitedRespawnPoints = new LinkedList<>();
 
 	private boolean godMode=false;
 	private int respawnX=0;
@@ -656,4 +659,13 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public boolean isBounceImmune() {
 		return bounceImmunity;
 	}
+
+	public LinkedList<RespawnPoint> getRespawnPoints() {
+		return visitedRespawnPoints;
+	}
+
+	public void addRespawnPoint(RespawnPoint r) {
+		this.visitedRespawnPoints.add(r);
+	}
+
 }
