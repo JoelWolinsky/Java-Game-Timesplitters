@@ -147,8 +147,8 @@ public class Game extends Canvas implements Runnable{
 			System.out.println("not mp");
 			System.out.println("against computer");
 
-			aiPlayer = new AIPlayer(50, 340, 0 ,0,"./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
 			player = new Player(0, 340, keyInput, 0 ,0);
+			aiPlayer = new AIPlayer(50, 340, 0 ,0, player, "./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
 
 			currentLevel.addEntity(player);
 			currentLevel.addEntity(aiPlayer);
@@ -483,6 +483,10 @@ public class Game extends Canvas implements Runnable{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public Player getPlayer() {
+		return player;
 	}
 
 }
