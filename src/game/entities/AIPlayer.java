@@ -13,6 +13,7 @@ import game.attributes.AnimatedObject;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
+import game.entities.areas.RespawnPoint;
 import game.entities.platforms.MovingPlatform;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
@@ -36,9 +37,12 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 
     public String direction = "N"; // or private?
     public String jump = "N";
-    public float wait = 0;
+    public float wait = 600;
 	public Player humanPlayer;
 	public float dist_from_player;
+	public RespawnPoint penultimateRespawnPoint;
+
+	public LinkedList<RespawnPoint> visitedRespawnPoints = new LinkedList<>();
 
 	private int respawnX=0;
 	private int respawnY=340;
@@ -46,6 +50,7 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 	private boolean immunity=false;
 	private int i=0;
 	private boolean cc=false;
+	private int max_distance_between_players = 550;
 
 	private static int animationTimer = 0;
 	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
@@ -107,7 +112,31 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 
 		dist_from_player = this.x - this.humanPlayer.x;
 		
-		if (dist_from_player < 550) {
+		// teleports AI Player to the penultimate RespawnPoint that the player has reached 
+		if (dist_from_player < -max_distance_between_players) {
+
+			if (humanPlayer.getRespawnPoints().size() > 2){
+
+				// first get the penultimate one
+				penultimateRespawnPoint = humanPlayer.getRespawnPoints().get(humanPlayer.getRespawnPoints().size()-2);
+
+				// so that it only teleports once, and doesn't keep getting sent back
+				if (!this.visitedRespawnPoints.contains(penultimateRespawnPoint)) {
+
+					// then set AIPlayer x to the value of that RP
+					this.x = penultimateRespawnPoint.x;
+					this.y = penultimateRespawnPoint.y-40;
+
+				}
+
+			}
+
+		}
+
+
+
+
+		if (dist_from_player < max_distance_between_players) {
 			
 			if (this.wait > 0) {
 				
@@ -399,6 +428,14 @@ public class AIPlayer extends GameObject implements AnimatedObject, SolidCollide
 
 	public void setRespawnThreshold(int respawnThreshold) {
 		this.respawnThreshold = respawnThreshold;
+	}
+
+	public LinkedList<RespawnPoint> getRespawnPoints() {
+		return visitedRespawnPoints;
+	}
+
+	public void addRespawnPoint(RespawnPoint r) {
+		this.visitedRespawnPoints.add(r);
 	}
 
 

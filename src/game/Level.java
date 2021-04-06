@@ -220,6 +220,14 @@ public class Level extends Canvas {
 								//for (RespawnPoint oo: respawnPoints)
 								//	if (oo != o)
 								//		oo.setCurrentActive(false);
+
+
+								if (!((Player) k).getRespawnPoints().contains((RespawnPoint) l)) {
+	
+									((Player) k).addRespawnPoint((RespawnPoint) l);
+											
+								}
+
 							}
 
 						if (l instanceof ExtendedRespawnPoint)
@@ -414,6 +422,15 @@ public class Level extends Canvas {
 									//for (RespawnPoint oo: respawnPoints)
 									//	if (oo != o)
 									//		oo.setCurrentActive(false);
+
+
+									// Means a waypoint only has an effect once until player touches another one
+									if (!((AIPlayer) k).getRespawnPoints().contains((RespawnPoint) l)) {
+		
+										((AIPlayer) k).addRespawnPoint((RespawnPoint) l);
+												
+									}
+
 								}
 	
 							if (l instanceof ExtendedRespawnPoint)
