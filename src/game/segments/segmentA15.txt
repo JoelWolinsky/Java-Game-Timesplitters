@@ -1,13 +1,13 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA11p1.png
-Chunk 1 E segmentA12p1.png
+Chunk 1 E segmentA15p1.png
 Respawn 10 363 0 0 flag1.png
 
 Platform Custom 0 92 corner1.png
 Platform Custom 96 60 corner1.png
 Platform Custom 192 28 corner1.png
 Platform Custom 288 28 top3.png
-Platform Custom 70 352 bookshelf2.png
-Platform Custom 120 335 bookshelf3.png
+Platform Custom 90 352 bookshelf2.png
+Platform Custom 140 335 bookshelf3.png
 Platform Custom 160 320 bookshelf1.png
 Platform Custom 180 285 bookshelf2.png
 Platform Custom 210 320 bookshelf1.png
@@ -66,15 +66,26 @@ DamageZone 126 327 3 100 350 432 nopicture.png 4 ice1.png ice1.png ice1.png ice1
 DamageZone 110 338 3 100 350 435 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
 DamageZone 99 347 3 100 350 438 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
 DamageZone 88 347 3 100 350 441 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
-DamageZone 77 347 3 100 350 444 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
-DamageZone 60 358 3 100 350 447 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
-DamageZone 60 369 3 100 350 450 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 77 358 3 100 350 447 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 77 369 3 100 350 450 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 380 3 100 350 453 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 391 3 100 350 456 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 402 3 100 350 459 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 413 3 100 350 462 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 424 3 100 350 465 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 435 3 100 350 468 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 446 3 100 350 471 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 457 3 100 350 474 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 468 3 100 350 477 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 479 3 100 350 480 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+
+Platform Custom 0 384 customFloor4.png
+Platform Custom 20 384 wall5.png
+Platform Custom 84 384 customFloor7.png
+Platform Custom 84 384 wall5inv.png
 
 
-
-Floor
-
-Chunk 1 E segmentA12p2.png
+Chunk 1 E segmentA15p2.png
 Platform Custom 0 28 top3.png
 Platform Custom 138 28 corner1inv.png
 Platform Custom 234 60 corner1inv.png
@@ -89,26 +100,39 @@ Platform Custom 100 290 bookshelf2.png
 Platform Custom 120 240 bookshelf3.png
 Platform Custom 10 198 bookshelf2.png
 
-Platform Custom 160 340 bookshelf3.png
+Platform Custom 160 335 bookshelf3.png
 Platform Custom 193 350 bookshelf2.png
 Platform Custom 195 285 bookshelf1.png
-Platform Custom 290 340 bookshelf3.png
+Platform Custom 290 335 bookshelf3.png
 Platform Custom 245 350 bookshelf2.png
-Platform Custom 355 352 bookshelf2.png
 Platform Custom 320 320 bookshelf1.png
 
 
 ScriptedDamageZone 180 100 1 0 3 180 98 0.2 180 102 0.2 180 100 0.2 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
 TrackedScriptedDamageZone 180 100 1 20 1 150 120 1 4 magic1.png magic2.png magic3.png magic4.png 1 -150 0 400 300
 
-DamageZone 415 372 3 100 350 114 fog1.png 4 ice1.png ice1.png ice1.png ice1.png
-DamageZone 404 372 3 100 350 117 fog1.png 4 ice1.png ice1.png ice1.png ice1.png
-DamageZone 404 361 3 100 350 120 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
-DamageZone 404 350 3 100 350 123 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
-DamageZone 393 339 3 100 350 126 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
-DamageZone 382 339 3 100 350 129 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
-DamageZone 371 339 3 100 350 132 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
-DamageZone 360 339 3 100 350 135 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 371 567 3 100 350 72 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 556 3 100 350 75 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 545 3 100 350 78 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 534 3 100 350 81 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 523 3 100 350 84 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 512 3 100 350 87 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 501 3 100 350 90 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 490 3 100 350 93 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 479 3 100 350 96 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 468 3 100 350 99 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 457 3 100 350 102 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 446 3 100 350 105 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 435 3 100 350 108 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 424 3 100 350 111 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 413 3 100 350 114 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 402 3 100 350 117 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 371 391 3 100 350 120 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 360 380 3 100 350 123 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 360 372 3 100 350 126 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 360 361 3 100 350 129 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 360 350 3 100 350 132 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+DamageZone 360 339 3 100 350 135 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
 DamageZone 360 328 3 100 350 138 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
 DamageZone 360 317 3 100 350 141 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
 -DamageZone 360 306 3 100 350 144 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
@@ -176,4 +200,5 @@ DamageZone -3 179 3 100 350 327 nopicture.png 4 iceleft1.png iceleft1.png icelef
 DamageZone -3 168 3 100 350 330 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
 DamageZone -3 157 3 100 350 333 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
 
-Floor
+Platform Custom 362 384 wall5.png
+Platform Custom 426 384 wall5inv.png

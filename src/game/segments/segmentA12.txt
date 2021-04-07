@@ -39,9 +39,12 @@ TrackedScriptedDamageZone 60 140 1 20 1 150 120 2 4 magic1.png magic2.png magic3
 
 ScriptedDamageZone 200 80 1 0 3 200 75 0.2 200 85 0.2 200 80 0.2 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
 TrackedScriptedDamageZone 200 80 1 20 1 150 120 1.5 4 magic1.png magic2.png magic3.png magic4.png 1 -100 0 400 200
+Platform Custom 0 384 customFloor4.png
+Platform Custom 20 384 wall5.png
+Platform Custom 84 384 customFloor5.png
+Platform Custom 84 384 wall5inv.png
 
 
-Floor
 
 Chunk 1 E segmentA12p2.png
 
@@ -54,9 +57,9 @@ Platform Custom 10 230 bookshelf1.png
 Platform Custom 10 290 bookshelf2.png
 Platform Custom 10 320 bookshelf1.png
 
-MovingPlatform 180 270 60 true 1.5 bookshelf3.png
-Platform Custom 360 350 bookshelf2.png
-Platform Custom 320 320 bookshelf1.png
+MovingPlatform 180 300 60 true 1.5 bookshelf3.png
+Platform Custom 330 350 bookshelf2.png
+Platform Custom 300 320 bookshelf1.png
 Waypoint 260 363 flag3.png R Y 10
 
 ScriptedDamageZone 200 100 1 0 3 200 75 0.2 200 85 0.2 200 80 0.2 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
@@ -65,4 +68,9 @@ TrackedScriptedDamageZone 170 100 1 20 1 150 120 1.5 4 magic1.png magic2.png mag
 -ScriptedDamageZone 200 100 1 0 3 200 75 0.2 200 85 0.2 200 80 0.2 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
 -TrackedScriptedDamageZone 300 140 1 20 1 150 120 1.5 4 magic1.png magic2.png magic3.png magic4.png 1 -100 70 200 200
 
-Floor
+
+Platform Custom 298 384 customFloor6.png
+Platform Custom 362 384 wall5.png
+Platform Custom 426 384 wall5inv.png
+Platform Custom 298 384 wall5inv.png
+Platform Custom 58 384 wall5.png
