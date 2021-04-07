@@ -164,7 +164,7 @@ public class Game extends Canvas implements Runnable{
 
 		game = this;
 
-		String mapMode = "default";
+		String mapMode = "RNG";
 		Map m = new Map();
 		//keep default for now until we sort randomly generated
 

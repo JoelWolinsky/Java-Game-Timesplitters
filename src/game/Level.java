@@ -434,7 +434,8 @@ public class Level extends Canvas {
 									((AIPlayer) k).setRespawnY((int) l.getY()-40 + (int) ((RespawnPoint) l).getExtraPointY());
 									((AIPlayer) k).setRespawnThreshold((int)l.getY());
 									((RespawnPoint)l).setReached(true);
-									((RespawnPoint)l).setCurrentActive(true);
+									// ((RespawnPoint)l).setCurrentActive(true);
+									
 									//for (RespawnPoint oo: respawnPoints)
 									//	if (oo != o)
 									//		oo.setCurrentActive(false);
@@ -455,7 +456,8 @@ public class Level extends Canvas {
 								{
 									((AIPlayer) k).setRespawnThreshold((int)l.getY());
 									((ExtendedRespawnPoint)l).setReached(true);
-									((ExtendedRespawnPoint)l).setCurrentActive(true);
+									// ((ExtendedRespawnPoint)l).setCurrentActive(true);
+									
 									//for (RespawnPoint oo: respawnPoints)
 									//	if (oo != o)
 									//		oo.setCurrentActive(false);
