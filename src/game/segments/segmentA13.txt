@@ -48,11 +48,26 @@ DamageZone 121 372 3 1000 350 99 nopicture.png 4 ice1.png ice2.png ice3.png ice4
 DamageZone 110 372 3 1000 350 102 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
 DamageZone 99 372 3 1000 350 105 nopicture.png 4 ice1.png ice2.png ice3.png ice4.png
 DamageZone 88 372 3 1000 350 108 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
-DamageZone 77 372 3 1000 350 111 nopicture.png 4 ice1.png ice2.png ice3.png ice4.png
-DamageZone 66 372 3 1000 350 114 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
+DamageZone 75 383 3 1000 350 111 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 394 3 1000 350 114 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 405 3 1000 350 117 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 416 3 1000 350 120 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 427 3 1000 350 123 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 438 3 1000 350 126 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 449 3 1000 350 129 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 460 3 1000 350 132 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 471 3 1000 350 135 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 482 3 1000 350 138 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 493 3 1000 350 141 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 504 3 1000 350 144 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 515 3 1000 350 147 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 526 3 1000 350 150 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
+DamageZone 75 537 3 1000 350 153 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
 
 
-Floor
+Platform Custom 20 384 wall5.png
+Platform Custom 84 384 customFloor8.png
+Platform Custom 84 384 wall5inv.png
 
 Chunk 1 E segmentA13p2.png
 
@@ -109,6 +124,3 @@ DamageZone 297 372 3 1000 350 99 nopicture.png 4 ice1.png ice1.png ice1.png ice1
 DamageZone 308 372 3 1000 350 102 nopicture.png 4 ice1.png ice2.png ice3.png ice4.png
 DamageZone 319 372 3 1000 350 105 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
 DamageZone 330 372 3 1000 350 108 nopicture.png 4 ice1.png ice2.png ice3.png ice4.png
-
-
-Floor
