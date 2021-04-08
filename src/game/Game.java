@@ -133,7 +133,7 @@ public class Game extends Canvas implements Runnable{
 		if(isMultiplayer == true) {
 
 			System.out.println("mp");
-			player = new PlayerMP(this.currentLevel, 300, 300, keyInput, null, -1);
+			player = new PlayerMP(300, 300, keyInput, null, -1);
 			currentLevel.addEntity(player);
 			Packet00Login loginPacket = new Packet00Login(player.getUsername(), 300, 300);
 	        if (socketServer != null) {
@@ -439,8 +439,6 @@ public class Game extends Canvas implements Runnable{
 
 			//revert the 1 block advancement at the start of the while loop
 			m.parseCommand(currentLevel, "Revert");
-
-			System.out.println(segmentPool.get(rnd1));
 					//draw the contents of the segment
 			m.mapParser(currentLevel, segmentPool.get(rnd1));
 			//rremove the segment from the segment pool

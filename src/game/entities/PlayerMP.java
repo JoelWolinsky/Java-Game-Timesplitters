@@ -12,7 +12,7 @@ public class PlayerMP extends Player {
 	public int port;
 	
 	
-	public PlayerMP(Level level, float x, float y, KeyInput input, InetAddress ipAddress, int port) {
+	public PlayerMP(float x, float y, KeyInput input, InetAddress ipAddress, int port) {
 		super(x, y, input, 32, 64);
 		this.ipAddress = ipAddress;
 		this.port = port;
@@ -26,7 +26,7 @@ public class PlayerMP extends Player {
 		//loginPacket.writeData(Game.socketClient);
 	}
 	
-	public PlayerMP(Level level, float x, float y, InetAddress ipAddress, int port) {
+	public PlayerMP(float x, float y, InetAddress ipAddress, int port) {
 		super(x, y, null, 32,64);
 		this.ipAddress = ipAddress;
 		this.port = port;
