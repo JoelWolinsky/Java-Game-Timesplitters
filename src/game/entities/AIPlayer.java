@@ -7,15 +7,13 @@ import java.util.UUID;
 
 import game.attributes.SolidCollider;
 import game.entities.areas.RespawnPoint;
+import game.entities.areas.Waypoint;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
 import game.graphics.Assets;
 
 public class AIPlayer extends Player{
 
-	static BufferedImage sprite;
-
-	private float terminalVelY = 15;
 
 	private static final float DECELERATION = 0.4f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
 	private static final float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
@@ -27,17 +25,10 @@ public class AIPlayer extends Player{
 	public Player humanPlayer;
 	public float dist_from_player;
 	public RespawnPoint penultimateRespawnPoint;
-
 	public LinkedList<RespawnPoint> visitedRespawnPoints = new LinkedList<>();
-
-
 	private int max_distance_between_players = 550;
-
-	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
-	private static AnimationStates currentAnimationState = defaultAnimationState;
-	private static HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
-	private Assets s = new Assets();
 	private String username;
+	private Waypoint currentWaypoint;
 
 
 	public AIPlayer(float x, float y, int width,int height, Player humanPlayer) {
@@ -83,12 +74,13 @@ public class AIPlayer extends Player{
 			
 			if (this.wait > 0) {
 
+				System.out.println(this.wait);
 				this.wait--;
 
 				if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
 					if (this.velX >= -0.1f && this.velX <= 0.1f) {
 						this.velX = 0;
-						currentAnimationState = AnimationStates.IDLE;
+						currentAnimState = AnimationStates.IDLE;
 					} else if (this.velX > 0.1f) {
 						this.velX -= DECELERATION;
 					} else {
@@ -96,7 +88,7 @@ public class AIPlayer extends Player{
 					}
 				} else {
 					this.velX = 0;
-					currentAnimationState = AnimationStates.IDLE;
+					currentAnimState = AnimationStates.IDLE;
 				}
 
 			}
@@ -112,7 +104,7 @@ public class AIPlayer extends Player{
 						} else {
 							this.velX += RUN_SPEED/6;
 						}
-						currentAnimationState = AnimationStates.RIGHT;
+					currentAnimState = AnimationStates.RIGHT;
 
 				} else if(this.direction.equals("L")) { 
 
@@ -122,14 +114,14 @@ public class AIPlayer extends Player{
 						} else {
 							this.velX -= RUN_SPEED/6;
 						}
-						currentAnimationState = AnimationStates.LEFT;
+					currentAnimState = AnimationStates.LEFT;
 
 				} else { 
 					// For deceleration effect
 					if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
 						if (this.velX >= -0.1f && this.velX <= 0.1f) {
 							this.velX = 0;
-							currentAnimationState = AnimationStates.IDLE;
+							currentAnimState = AnimationStates.IDLE;
 						} else if (this.velX > 0.1f) {
 							this.velX -= DECELERATION;
 						} else {
@@ -137,7 +129,7 @@ public class AIPlayer extends Player{
 						}
 					} else {
 						this.velX = 0;
-						currentAnimationState = AnimationStates.IDLE;
+						currentAnimState = AnimationStates.IDLE;
 					}
 				}
 
@@ -183,6 +175,11 @@ public class AIPlayer extends Player{
 		this.wait = w;
 	}
 
+	public void setCurrentWaypoint(Waypoint currentWaypoint) {
+		this.currentWaypoint = currentWaypoint;
+	}
 
-
+	public Waypoint getCurrentWaypoint() {
+		return currentWaypoint;
+	}
 }

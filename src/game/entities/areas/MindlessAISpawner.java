@@ -8,6 +8,7 @@ import game.entities.GameObject;
 import game.entities.platforms.MovingPlatform;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -24,6 +25,7 @@ public class MindlessAISpawner extends GameObject {
 	private int chickensSpawned=0;
 	private int maxChickens;
 	private String[] urls;
+	private LinkedList<MindlessAI> myChickens = new LinkedList<>();
 
 	public MindlessAISpawner(float x, float y, int width, int height,int minRange, int maxRange,int maxChickens,Level currentLevel, String...urls) {
 		super(0,0,0,0,0);
@@ -46,7 +48,9 @@ public class MindlessAISpawner extends GameObject {
 				if (i < 100)
 					i++;
 				else {
-					getToBeAdded().add(new MindlessAI(this.getDummyX(), this.getDummyY(), this.getDummyWidth(), this.getDummyHeight(), this.getDummyMinRange(), this.getDummyMaxRange(), this.getUrls()));
+					MindlessAI mindlessAI = new MindlessAI(this.getDummyX(), this.getDummyY(), this.getDummyWidth(), this.getDummyHeight(), this.getDummyMinRange(), this.getDummyMaxRange(), this.getUrls());
+					getToBeAdded().add(mindlessAI);
+					myChickens.add(mindlessAI);
 					chickensSpawned++;
 					i = 0;
 				}
@@ -54,7 +58,8 @@ public class MindlessAISpawner extends GameObject {
 		}
 		else
 		{
-			getToBeRemoved().add(getChickens().getFirst());
+			getToBeRemoved().add(myChickens.getFirst());
+			myChickens.removeFirst();
 			chickensSpawned--;
 		}
 

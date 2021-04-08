@@ -8,15 +8,13 @@ import game.entities.areas.*;
 
 public class Level extends Canvas {
 
+	private boolean gameStarted=false;
+	private boolean gameEnded=false;
+
 	private static LinkedList<GameObject> entities = new LinkedList<>();
 	private static ArrayList<GameObject> toBeAdded = new ArrayList<>();
 	private static ArrayList<GameObject> toBeRemoved = new ArrayList<>();
-	private static LinkedList<Waypoint> waypoints = new LinkedList<>();
-	private boolean gameStarted=true;
 
-	public static synchronized LinkedList<Waypoint> getWaypoints(){
-		return waypoints;
-	}
 	public static synchronized LinkedList<GameObject> getGameObjects(){
 		return entities;
 	}
@@ -25,7 +23,23 @@ public class Level extends Canvas {
 
 	public void tick() {
 
+		//Unique Event - GAME STARTING
+		if (gameStarted)
+		{
+			for (Player p : getPlayers())
+				p.setCanMove(true);
+			gameStarted=false;
+		}
 
+		//Unique Event - GAME ENDING
+		if (gameEnded)
+		{
+			for (Player p : getPlayers())
+				p.setCanMove(false);
+			gameEnded=false;
+		}
+
+		//Add the elements sitting in the queue to be added
 		if (!toBeAdded.isEmpty()) {
 			for (GameObject o : toBeAdded) {
 				entities.add(o);
@@ -33,6 +47,7 @@ public class Level extends Canvas {
 			toBeAdded.removeAll(toBeAdded);
 		}
 
+		//Remove the elements sitting in the queue to be removed
 		if (!toBeRemoved.isEmpty()) {
 			for (GameObject o : toBeRemoved) {
 				entities.remove(o);
@@ -40,22 +55,7 @@ public class Level extends Canvas {
 			toBeRemoved.removeAll(toBeRemoved);
 		}
 
-
-		for (GameObject object1: entities)
-		{
-
-			if (object1 instanceof Player)
-				{
-					if (gameStarted)
-						((Player) object1).setCanMove(true);
-				}
-
-		}
-
-		for(GameObject o : entities) {
-			o.tick();
-		}
-
+		for(GameObject o : entities) { o.tick(); }
 
 	}
 
@@ -123,10 +123,6 @@ public class Level extends Canvas {
 		}
 	}
 
-	public void setGameStarted(boolean gameStarted) {
-		this.gameStarted = gameStarted;
-	}
-
 
 	public static LinkedList<Player> getPlayers()
 	{
@@ -152,29 +148,12 @@ public class Level extends Canvas {
 		return AIplayers;
 	}
 
-	public static LinkedList<MindlessAI> getChickens()
-	{
-		LinkedList<MindlessAI> chickens = new LinkedList<MindlessAI>();
-		for (GameObject o : getGameObjects())
-		{
-			if (o instanceof MindlessAI)
-				chickens.add((MindlessAI) o);
-		}
 
-
-		return chickens;
+	public void setGameStarted(boolean gameStarted) {
+		this.gameStarted = gameStarted;
 	}
 
-	public LinkedList<MindlessAISpawner> getChickenSpawners()
-	{
-		LinkedList<MindlessAISpawner> chickenSpawners = new LinkedList<MindlessAISpawner>();
-		for (GameObject o : getGameObjects())
-		{
-			if (o instanceof MindlessAISpawner)
-				chickenSpawners.add((MindlessAISpawner) o);
-		}
-
-
-		return chickenSpawners;
+	public void setGameEnded(boolean gameEnded) {
+		this.gameEnded = gameEnded;
 	}
 }

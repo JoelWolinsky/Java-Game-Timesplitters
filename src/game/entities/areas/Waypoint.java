@@ -35,16 +35,11 @@ public class Waypoint extends Area {
 			if (this.getInteraction(ap))
 			{
 
-				ap.setDirection(this.getDirection());
-				ap.setJump(this.getJump());
-
-				// Means a waypoint only has an effect once until player touches another one
-				if (!getWaypoints().contains(this)) {
-
-					getWaypoints().clear();
-					getWaypoints().add(this);
+				if (ap.getCurrentWaypoint()!=this) {
+					ap.setDirection(this.getDirection());
+					ap.setJump(this.getJump());
 					ap.setWait(this.getWait());
-
+					ap.setCurrentWaypoint(this);
 				}
 			}
 		}
