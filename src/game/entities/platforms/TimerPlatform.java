@@ -2,6 +2,8 @@ package game.entities.platforms;
 
 import game.attributes.SolidCollider;
 
+import java.awt.*;
+
 public class TimerPlatform extends Platform {
 
 	private float timer=0;
@@ -41,6 +43,12 @@ public class TimerPlatform extends Platform {
 			timer+=speed;
 		}
 
+	}
+
+	@Override
+	public void render(Graphics g, float xOffset, float yOffset) {
+		if (this.active)
+			super.render(g,xOffset,yOffset);
 	}
 
 	public boolean getActive(){

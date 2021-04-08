@@ -19,7 +19,9 @@ Respawn 0 1500 213 0 invisibleRespawn.png
 
 Platform Custom -32 -128 wall2.png
 Platform Custom -32 0 wall2.png
-Platform Custom -32 395 wall2.png
+Platform Custom -32 395 wall6.png
+Platform Custom 426 395 wall6inv.png
+Platform Custom 426 -1000 wall6inv.png
 Chunk 1 N intersegmentA4.png
 
 
@@ -27,8 +29,8 @@ Chunk 1 N intersegmentA4.png
 Revert
 
 Chunk 1 S intersegmentA4.png
-Chunk 1 S intersegmentA4alt.png
-Chunk 1 S intersegmentA4alt.png
+Chunk 1 S intersegmentA4.png
+Chunk 1 S intersegmentA4.png
 Projectile 100 -1500 0 10 1800 60 0 0 nopicture.png 4 books1.png books1.png books1.png books1.png
 Projectile 180 -1500 0 10 1800 60 0 20 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
 Projectile 80 -1500 0 10 1800 60 0 110 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png

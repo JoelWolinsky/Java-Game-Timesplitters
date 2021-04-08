@@ -1,4 +1,6 @@
 package game.entities.areas;
+import game.entities.Player;
+
 import javax.imageio.ImageIO;
 
 import java.awt.*;
@@ -6,6 +8,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
+
+import static game.Level.getPlayers;
 
 /*
 This class extends AnimArea instead of DamageZone to avoid some rendering issues due to the fact that we use this class to
@@ -47,6 +51,20 @@ public class EventDamageZone extends AnimArea{
 	}
 
 	public void tick() {
+
+
+		for (Player p: getPlayers())
+		{
+			for (Area a: this.getEventArea())
+				if (a.getInteraction(p))
+					this.setTriggered(true);
+
+
+			if (this.getActive())
+				if (this.getInteraction(p))
+					p.respawn();
+		}
+
 
 
 		if (triggered)

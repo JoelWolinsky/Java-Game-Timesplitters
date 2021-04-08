@@ -1,4 +1,5 @@
 package game.entities.areas;
+import game.Effect;
 import game.attributes.AnimatedObject;
 import game.entities.Player;
 import game.graphics.Animation;
@@ -6,6 +7,8 @@ import game.graphics.AnimationStates;
 
 import java.awt.*;
 import java.util.HashMap;
+
+import static game.Level.getPlayers;
 
 public class AddedItem extends AnimArea implements AnimatedObject {
 
@@ -25,6 +28,18 @@ public class AddedItem extends AnimArea implements AnimatedObject {
 	}
 
 	public void tick() {
+
+		for (Player p: getPlayers())
+		{
+			if (this.isVisibile())
+				if (this.getInteraction(p))
+					if (p!=this.getCreator()) {
+						this.getEffect(p);
+						this.setVisibile(false);
+						p.addEffect(new Effect(this.getEffect(),500));
+					}
+		}
+
 	}
 
 	public void getEffect(Player k){

@@ -1,10 +1,14 @@
 package game.entities.areas;
 
+import game.entities.Player;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
+import static game.Level.getPlayers;
 
 public class DamageZone extends AnimArea{
 	private int timer=0;
@@ -37,6 +41,17 @@ public class DamageZone extends AnimArea{
 	}
 
 	public void tick() {
+
+
+		for (Player p : getPlayers())
+		{
+			if (getInteraction(p))
+				if (getActive()) {
+					p.respawn();
+					System.out.println("true");
+				}
+
+		}
 
 		if (i<startOffset)
 			i++;

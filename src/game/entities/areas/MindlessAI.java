@@ -19,6 +19,9 @@ import java.awt.*;
 import java.awt.Point;
 import java.util.*;
 
+import static game.Level.getGameObjects;
+import static game.Level.getPlayers;
+
 public class MindlessAI extends AnimArea implements GravityObject, CollidingObject, SolidCollider {
 
 	private float velX = 0;
@@ -50,6 +53,47 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 	public void tick() {
 		//Gather all collisions
 		CollidingObject.getCollisions(this);
+
+		for (Player p : getPlayers())
+		{
+			if (this.getInteraction(p))
+				if (!(p.isBounceImmune()))
+					p.bouncing(this.getSpeed(),this.getYuh());
+		}
+
+		for (GameObject o : getGameObjects())
+		{
+			if (o !=  this)
+				if (o instanceof MindlessAI)
+				{
+					if (((MindlessAI) o).getInteraction(this))
+					{
+						if (!this.isBounceImmune())
+							this.bouncing(((MindlessAI) o).getSpeed(), ((MindlessAI) o).getYuh());
+					}
+				}
+
+			if (o instanceof EventDamageZone)
+			{
+				for (Area xd: ((EventDamageZone) o).getEventArea() )
+					if (xd.getInteraction(this)) {
+						((EventDamageZone) o).setTriggered(true);
+					}
+				if (((EventDamageZone) o).getActive())
+					if (((EventDamageZone) o).getInteraction(this))
+						this.bouncing(this.getSpeed(), this.getYuh());
+
+			}
+
+			if (o instanceof Player)
+			{
+				if (this.getInteraction(o))
+					if (!(((Player)o).isBounceImmune()))
+						((Player)o).bouncing(this.getSpeed(),this.getYuh());
+			}
+
+		}
+
 
 		if (bi<15) {
 			bi++;

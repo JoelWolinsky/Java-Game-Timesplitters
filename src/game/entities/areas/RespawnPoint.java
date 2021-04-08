@@ -2,6 +2,8 @@ package game.entities.areas;
 import game.entities.AIPlayer;
 import game.entities.Player;
 
+import static game.Level.getPlayers;
+
 public class RespawnPoint extends Area {
 
 	private boolean reached = false;
@@ -15,6 +17,27 @@ public class RespawnPoint extends Area {
 	}
 
 	public void tick() {
+
+		for (Player p : getPlayers())
+		{
+			if (this.getInteraction(p))
+			{
+				p.setRespawnX((int) this.getX() + (int)this.getExtraPointX());
+				p.setRespawnY((int) this.getY()-40 + (int)this.getExtraPointY());
+				p.setRespawnThreshold((int)this.getY());
+				this.setReached(true);
+				this.setCurrentActive(true);
+
+
+				if (!p.getRespawnPoints().contains(this)) {
+					p.addRespawnPoint(this);
+				}
+
+			}
+		}
+
+
+
 	}
 
 	public void setCurrentActive(boolean currentActive)

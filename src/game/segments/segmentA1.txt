@@ -15,6 +15,9 @@ Platform Default 294 265
 Platform Inverted 326 265
 Platform Default 342 265
 Platform Custom 374 265 edge1inv.png
+Chest 100 360 4 chest.png chest.png chest.png chest.png
+Chest 300 360 4 chest.png chest.png chest.png chest.png
+
 Floor
 
 

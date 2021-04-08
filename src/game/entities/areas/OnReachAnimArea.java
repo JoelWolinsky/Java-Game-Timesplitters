@@ -1,24 +1,26 @@
 package game.entities.areas;
-import game.attributes.AnimatedObject;
-import game.graphics.Animation;
-import game.graphics.AnimationStates;
+import game.entities.Player;
+import static  game.Level.*;
 
-import java.awt.*;
-import java.util.HashMap;
-
-public class OnReachAnimArea extends AnimArea implements AnimatedObject {
-
-	private boolean active = false;
+public class OnReachAnimArea extends AnimArea{
 
 	public OnReachAnimArea(float x, float y, int width, int height, String...urls) {
 		super(x, y, width, height,urls);
 	}
 
-	public void setActive(boolean active) {
-		this.active=active;
+	public void tick() {
+
+		for (Player p: getPlayers())
+		{
+			if (this.getInteraction(p))
+			{
+				this.setVisibile(true);
+			}
+			else
+			{
+				this.setVisibile(false);
+			}
+		}
 	}
 
-	public boolean isActive() {
-		return active;
-	}
 }

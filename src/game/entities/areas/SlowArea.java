@@ -1,12 +1,8 @@
 package game.entities.areas;
-import game.attributes.AnimatedObject;
-import game.graphics.Animation;
-import game.graphics.AnimationStates;
+import game.entities.Player;
+import static game.Level.getPlayers;
 
-import java.awt.*;
-import java.util.HashMap;
-
-public class SlowArea extends AnimArea implements AnimatedObject {
+public class SlowArea extends AnimArea{
 
 
 	public SlowArea(float x, float y, int width, int height, String...urls) {
@@ -14,13 +10,21 @@ public class SlowArea extends AnimArea implements AnimatedObject {
 	}
 
 	public void tick() {
+
+		for (Player p: getPlayers())
+		{
+			if (this.getInteraction(p))
+			{
+				p.slow();
+				p.setLocker(this);
+			}
+			else
+			{
+				p.normal(this);
+			}
+		}
+
 	}
 
-	public void render(Graphics g, float f, float h) {
-
-		super.render(g,f,h);
-		//g.setColor(Color.magenta);
-		//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
-	}
 
 }

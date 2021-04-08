@@ -1,6 +1,8 @@
 package game.entities.areas;
 import game.entities.AIPlayer;
 
+import java.awt.*;
+
 public class Waypoint extends Area {
 
 	private boolean reached = false;
@@ -23,7 +25,12 @@ public class Waypoint extends Area {
     public void tick() {
 	}
 
-    public String getDirection()
+	@Override
+	public void render(Graphics g, float f, float h) {
+		//super.render(g, f, h);
+	}
+
+	public String getDirection()
 	{
 		return this.direction;
 	}
