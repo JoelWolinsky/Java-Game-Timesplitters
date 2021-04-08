@@ -5,7 +5,8 @@ Respawn 10 363 0 0 flag1.png
 Platform Custom 0 92 corner1.png
 Platform Custom 96 60 corner1.png
 Platform Custom 192 28 corner1.png
-Platform Custom 288 28 top3.png
+Platform Custom 288 -4 corner1.png
+Platform Custom 384 -4 top6.png
 Platform Custom 90 352 bookshelf2.png
 Platform Custom 140 335 bookshelf3.png
 Platform Custom 160 320 bookshelf1.png
@@ -28,7 +29,7 @@ Platform Custom 370 245 bookshelf1.png
 
 
 ScriptedDamageZone 130 130 1 0 3 130 128 0.2 130 132 0.2 130 130 0.2 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
-TrackedScriptedDamageZone 130 130 1 20 1 150 120 1 4 magic1.png magic2.png magic3.png magic4.png 1 -100 0 400 200
+TrackedScriptedDamageZone 130 130 1 20 1 130 130 1 4 magic1.png magic2.png magic3.png magic4.png 1 -100 0 400 210
 
 DamageZone 415 142 3 100 350 336 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
 DamageZone 404 142 3 100 350 339 nopicture.png 4 ice1.png ice1.png ice1.png ice1.png
@@ -79,14 +80,16 @@ DamageZone 75 457 3 100 350 474 nopicture.png 4 iceright1.png iceright1.png icer
 DamageZone 75 468 3 100 350 477 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
 DamageZone 75 479 3 100 350 480 nopicture.png 4 iceright1.png iceright1.png iceright1.png iceright1.png
 
-Platform Custom 0 384 customFloor4.png
+-Platform Custom 0 384 customFloor4.png
+Platform Custom 0 384 wall5inv.png
 Platform Custom 20 384 wall5.png
 Platform Custom 84 384 customFloor7.png
 Platform Custom 84 384 wall5inv.png
 
 
 Chunk 1 E segmentA15p2.png
-Platform Custom 0 28 top3.png
+-Platform Custom 0 28 top3.png
+Platform Custom 42 -4 corner1inv.png
 Platform Custom 138 28 corner1inv.png
 Platform Custom 234 60 corner1inv.png
 Platform Custom 330 92 corner1inv.png
@@ -108,8 +111,8 @@ Platform Custom 245 350 bookshelf2.png
 Platform Custom 320 320 bookshelf1.png
 
 
-ScriptedDamageZone 180 100 1 0 3 180 98 0.2 180 102 0.2 180 100 0.2 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
-TrackedScriptedDamageZone 180 100 1 20 1 150 120 1 4 magic1.png magic2.png magic3.png magic4.png 1 -150 0 400 300
+ScriptedDamageZone 296 130 1 0 3 296 128 0.2 296 132 0.2 296 130 0.2 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
+TrackedScriptedDamageZone 296 130 1 20 1 296 130 1 4 magic1.png magic2.png magic3.png magic4.png 1 -300 0 400 200
 
 DamageZone 371 567 3 100 350 72 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
 DamageZone 371 556 3 100 350 75 nopicture.png 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png

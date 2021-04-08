@@ -1,4 +1,5 @@
 package game.entities.areas;
+import game.Effect;
 import game.attributes.AnimatedObject;
 import game.entities.Player;
 import game.entities.AIPlayer;
@@ -8,12 +9,16 @@ import game.graphics.AnimationStates;
 import java.awt.*;
 import java.util.HashMap;
 
+import static game.Level.getPlayers;
+
 public class Portal extends AnimArea{
 
 	private int destinationLevel;
 	private int destinationX;
 	private int destinationY;
 	private int currentX,currentY;
+	private int stutterValue = 15;
+	private int j=0;
 
 	public Portal(float x, float y, int width, int height, int destinationLevel,int destinationX,int destinationY,int currentX,int currentY, String...urls) {
 		super(x, y, width, height,urls);
@@ -25,6 +30,30 @@ public class Portal extends AnimArea{
 	}
 
 	public void tick() {
+
+
+		for (Player p: getPlayers())
+		{
+			if (this.getInteraction(p)) {
+				p.setRespawnX(this.getCurrentX() + this.getDestinationX());
+				p.setRespawnY(this.getCurrentY() + this.getDestinationLevel() + this.getDestinationY());
+				p.setRespawnThreshold(this.getCurrentY() + this.getDestinationLevel() + this.getDestinationY());
+				p.setY(this.getCurrentY() + this.getDestinationLevel() + this.getDestinationY());
+				p.setX(p.getX());
+
+			}
+
+
+			if (this.getInteractionEffect(p))
+			{
+				p.setX(p.getX()+stutterValue);
+				stutterValue=stutterValue*(-1);
+			}
+
+		}
+
+
+
 	}
 
 

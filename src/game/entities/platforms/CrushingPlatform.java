@@ -5,6 +5,8 @@ import game.attributes.SolidCollider;
 import game.entities.AIPlayer;
 import game.entities.Player;
 
+import static game.Level.getPlayers;
+
 public class CrushingPlatform extends Platform implements SolidCollider{
 
 	private float basePos, movingRange, velocity;
@@ -32,6 +34,13 @@ public class CrushingPlatform extends Platform implements SolidCollider{
 	}
 	
 	public void tick() {
+
+		for (Player p: getPlayers()){
+
+			if (this.getInteraction(p))
+				p.respawn();
+		}
+
 		if (i<startOffset)
 			i++;
 		else{

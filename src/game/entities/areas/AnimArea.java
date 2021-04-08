@@ -5,6 +5,7 @@ import game.graphics.AnimationStates;
 
 import java.awt.*;
 import java.util.HashMap;
+import static  game.Level.*;
 
 public class AnimArea extends Area implements AnimatedObject {
 

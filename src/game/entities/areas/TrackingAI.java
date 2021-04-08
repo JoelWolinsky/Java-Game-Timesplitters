@@ -4,6 +4,8 @@ import game.entities.Player;
 
 import java.util.LinkedList;
 
+import static game.Level.getPlayers;
+
 public class TrackingAI extends EventScriptedDamageZone{
 
 	private Player mytarget;
@@ -17,6 +19,23 @@ public class TrackingAI extends EventScriptedDamageZone{
 	}
 
 	public void tick() {
+
+		for (Player p : getPlayers())
+		{
+			for (Area a: this.getEventArea() )
+				if (a.getInteraction(p)) {
+					this.setActivated(true);
+					this.setVisibile(true);
+				}
+				else {
+					this.setActivated(false);
+					this.setVisibile(false);
+				}
+			if (this.getActivated())
+				if (this.getInteraction(p))
+					p.respawn();
+		}
+
 
 		if (this.getActivated())
 		{
