@@ -40,7 +40,6 @@ public class Game extends Canvas implements Runnable{
 	public static Camera camera;
 	ArrayList<String> segments3,segments1,segments2,intro2,throneRoom;
 	int index = 0;
-	int stateIndex=0;
 	int bottom;
 	int top;
 	BackgroundController ctrlr;
@@ -148,7 +147,7 @@ public class Game extends Canvas implements Runnable{
 			System.out.println("against computer");
 
 			player = new Player(0, 340, keyInput, 0 ,0);
-			aiPlayer = new AIPlayer(50, 340, 0 ,0, player, "./img/adventurer-idle0.png","./img/adventurer-idle1.png","./img/adventurer-idle2.png");
+			aiPlayer = new AIPlayer(50, 340, 0 ,0, player);
 
 			currentLevel.addEntity(player);
 			currentLevel.addEntity(aiPlayer);
@@ -164,7 +163,7 @@ public class Game extends Canvas implements Runnable{
 
 		game = this;
 
-		String mapMode = "RNG";
+		String mapMode = "default";
 		Map m = new Map();
 		//keep default for now until we sort randomly generated
 
@@ -174,6 +173,7 @@ public class Game extends Canvas implements Runnable{
 		if (mapMode.equals("default")) {
 			m.mapParser(currentLevel, "intro1");
 			m.mapParser(currentLevel, "segmentA4");
+			m.mapParser(currentLevel, "segmentA10");
 			//m.mapParser(currentLevel, "segmentA11");
 			//m.mapParser(currentLevel, "segmentA15");
 			//m.mapParser(currentLevel, "segmentA12");
@@ -214,9 +214,7 @@ public class Game extends Canvas implements Runnable{
 
 			//create different segment pools for the different parts of the game
 			//we want them separated in order to keep a specific order in our game
-
-			// REMOVED "intersegmentA2down" FROM 'SEGMENTS1' BECAUSE BUGGY SO AI CAN'T PASS IT
-			segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up"));
+			segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down"));
 			segments2 = new ArrayList<String>(Arrays.asList("segmentA3","segmentA4","segmentA4"));
 			segments3 = new ArrayList<String>(Arrays.asList("segmentA6","segmentA7","segmentA8","segmentA9","segmentA10","segmentA11"));
 			intro2 = new ArrayList<String>(Arrays.asList("intro2"));
@@ -442,10 +440,12 @@ public class Game extends Canvas implements Runnable{
 			//revert the 1 block advancement at the start of the while loop
 			m.parseCommand(currentLevel, "Revert");
 
+			System.out.println(segmentPool.get(rnd1));
 					//draw the contents of the segment
 			m.mapParser(currentLevel, segmentPool.get(rnd1));
 			//rremove the segment from the segment pool
 			segmentPool.remove(rnd1);
+
 
 		}
 

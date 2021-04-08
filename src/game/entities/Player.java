@@ -2,8 +2,6 @@ package game.entities;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.*;
 
 import game.Effect;
@@ -23,7 +21,6 @@ import game.graphics.Assets;
 import game.input.KeyInput;
 import game.network.packets.Packet02Move;
 
-import javax.imageio.ImageIO;
 
 import static game.Level.getToBeAdded;
 
@@ -31,8 +28,8 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 	static BufferedImage sprite;
 
-	private float velX = 0;
-	private float velY = 0;
+	protected float velX = 0;
+	protected float velY = 0;
 	private float terminalVelY = 15;
 
 	private static final float DECELERATION = 0.4f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
@@ -76,30 +73,18 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private static HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
 	private int currentFrame;
 	private Assets s = new Assets();
-	
+
 	private Point prevPos;
-	
+
 	private String username;
 	private KeyInput input;
 
 	public Player(float x, float y, KeyInput input, int width,int height) {
 		super(x, y, 2, width, height);
-		
+
 		this.input = input;
 		this.username = UUID.randomUUID().toString();;
-		
-		
-		BufferedImage img;
-		try
-		{
-			//sets the width and height of the platform based on the provided image width and height
-			img = ImageIO.read( new File("./img/adventurer-idle0.png"));
 
-		}
-		catch ( IOException exc )
-		{
-			//TODO: Handle exception.
-		}
 
 		s.init();
 
@@ -111,6 +96,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		SolidCollider.addSolidCollider(this);
 	}
 
+
 	//TODO: Fix moving through the up-and-down moving platform when you jump underneath it
 	public void tick() {
 		//Gather all collisions
@@ -120,6 +106,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		moving = false;
 
 		//disable immunity after 100
+		if (!(this instanceof AIPlayer))
 		if (i<100) {
 			i++;
 		}else {
@@ -153,6 +140,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		//Check for keyboard input along the x-axis
 
 		if (canMove)
+		if (!(this instanceof AIPlayer))
 		if (this.input != null) {
 			if(KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
 
@@ -161,7 +149,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 			/* Beware: Java floating point representation makes it difficult to have perfect numbers
 			( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
-	
+
 					// Simulates acceleration when you run right
 					if (this.velX >= RUN_SPEED){
 						this.velX = RUN_SPEED;
@@ -169,7 +157,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 						this.velX += RUN_SPEED/6;
 					}
 					currentAnimationState = AnimationStates.RIGHT;
-	
+
 			} else if(KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
 
 
@@ -182,7 +170,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 						this.velX -= RUN_SPEED/6;
 					}
 					currentAnimationState = AnimationStates.LEFT;
-	
+
 			} else {
 				currentAnimationState = AnimationStates.IDLE;
 				// For deceleration effect
@@ -199,7 +187,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				}
 			}
 
-	
+
 			//Check for keyboard input along the y-axis
 			if(KeyInput.down.isPressed()) {
 				this.velY = DOWN_SPEED;
@@ -251,10 +239,11 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			}
 		}
 
-		//Move player if it will not cause a collision
+
 		if(!SolidCollider.willCauseSolidCollision(this, this.velX+1, true)) {
-			this.x += velX;
+			this.x += this.velX;
 		}
+
 		if(!SolidCollider.willCauseSolidCollision(this, this.velY+1, false)) {
 			this.y += this.velY;
 		} else {
@@ -262,7 +251,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			CollidingObject o = SolidCollider.nextCollision(this,  this.velY, false);
 			if(o != null) {
 				Rectangle s = o.getBounds();
-	
+
 				if(this.velY > 0 && !isOnWall()) {
 					this.y = s.y - this.height;
 					this.velY = 0;
@@ -278,7 +267,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 				}
 			}
 		}
-		
+
 		if(Game.isMultiplayer) {
 			if(this == Game.player) {
 				if((int)this.x != this.prevPos.x || (int)this.y != this.prevPos.y) {
@@ -326,24 +315,6 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 		if(KeyInput.space.isPressed())
 		{
-			/*
-			//OPTION 1
-			if (inventoryIndex>=0)
-			if(itemUseCooldown>=50) {
-				inventory.get(0).getEffect();
-				for (int i=0 ; i <inventorySize-1;i++)
-					inventory.get(i).setUrl(inventory.get(i+1).getUrl());
-				inventory.get(inventoryIndex).setUrl("./img/empty.png");
-				this.setInventoryChanged(true);
-				//after 5 sec
-				//normal();
-				inventoryIndex--;
-				itemUseCooldown=0;
-			}
-
-
-			 */
-
 			//OPTION 2
 			if (!(inventory.get(inventoryIndex).getUrl().equals("./img/empty.png"))) {
 				inventory.get(inventoryIndex).getEffect();
@@ -371,12 +342,9 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}
 
 
-
 		if (itemUseCooldown<50)
 			itemUseCooldown++;
 
-
-		//OPTION 2
 
 		if (slotSelectionCooldown<5)
 			slotSelectionCooldown++;
@@ -475,7 +443,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}
 	}
 
-	public void bouncing(int speed, int yuh){
+	public void bouncing(int speed){
 		this.bouncing = true;
 		bouncingSpeed= speed;
 		bounceImmunity=true;
@@ -485,11 +453,11 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 
 
-	private boolean isOnGround() {
+	public boolean isOnGround() {
 		return SolidCollider.willCauseSolidCollision(this, 5, false);
 	}
 
-	private boolean isOnWall() {
+	public boolean isOnWall() {
 		if ((SolidCollider.willCauseSolidCollision(this, this.velX, true) || SolidCollider.willCauseSolidCollision(this, -this.velX, true))
 				&& !isOnGround()){
 			return true;
@@ -498,7 +466,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}
 	}
 
-	private boolean hasCeilingAbove() {
+	public boolean hasCeilingAbove() {
 		return SolidCollider.willCauseSolidCollision(this, -5, false);
 	}
 
@@ -511,6 +479,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 
 	public float getVelY() {
 		return this.velY;
+	}
+
+	public float getVelX() {
+		return velX;
 	}
 
 	public float getTerminalVel() {
@@ -561,7 +533,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	}
 
 	public AnimationStates getCurrentAnimationState() {
-		return Player.currentAnimationState;
+		return currentAnimationState;
 	}
 
 	public AnimationStates getDefaultAnimationState() {
@@ -679,5 +651,4 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public void addRespawnPoint(RespawnPoint r) {
 		this.visitedRespawnPoints.add(r);
 	}
-
 }

@@ -52,7 +52,7 @@ public class MindlessAISpawner extends GameObject {
 			this.setRemoveChicken(false);
 
 		}
-
+		
 
 		if (chickensSpawned<=maxChickens)
 		{

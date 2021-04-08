@@ -26,7 +26,7 @@ public class RespawnPoint extends Area {
 				p.setRespawnY((int) this.getY()-40 + (int)this.getExtraPointY());
 				p.setRespawnThreshold((int)this.getY());
 				this.setReached(true);
-				this.setCurrentActive(true);
+				//this.setCurrentActive(true);
 
 
 				if (!p.getRespawnPoints().contains(this)) {
@@ -34,19 +34,7 @@ public class RespawnPoint extends Area {
 				}
 
 			}
-			/*
-			if (p instanceof AIPlayer)
-			{
-				// Means a waypoint only has an effect once until player touches another one
-				if (!p.getRespawnPoints().contains(this) {
 
-					p.addRespawnPoint(this);
-
-				}
-
-			}
-
-			 */
 		}
 
 
@@ -75,10 +63,6 @@ public class RespawnPoint extends Area {
 
 	public boolean getInteraction(Player player){
 		return ((int)this.x<(int)player.getX()+player.getWidth() && (int)player.getX()<this.x+this.width && (int)this.y-200<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)this.y+this.height);
-	}
-
-	public boolean getInteraction(AIPlayer aiPlayer){
-		return ((int)this.x<(int)aiPlayer.getX()+aiPlayer.getWidth() && (int)aiPlayer.getX()<this.x+this.width && (int)this.y-200<(int)aiPlayer.getY()+aiPlayer.getHeight() && (int)aiPlayer.getY() <(int)this.y+this.height);
 	}
 
 	public float getExtraPointX() {

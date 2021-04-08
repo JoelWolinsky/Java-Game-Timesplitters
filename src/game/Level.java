@@ -140,6 +140,18 @@ public class Level extends Canvas {
 		return players;
 	}
 
+	public static LinkedList<AIPlayer> getAIPlayers()
+	{
+		LinkedList<AIPlayer> AIplayers = new LinkedList<AIPlayer>();
+		for (GameObject o : entities)
+		{
+			if (o instanceof AIPlayer)
+				AIplayers.add((AIPlayer) o);
+		}
+
+		return AIplayers;
+	}
+
 	public static LinkedList<MindlessAI> getChickens()
 	{
 		LinkedList<MindlessAI> chickens = new LinkedList<MindlessAI>();

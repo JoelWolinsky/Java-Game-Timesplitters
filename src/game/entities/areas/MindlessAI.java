@@ -1,22 +1,12 @@
 package game.entities.areas;
-import game.Effect;
-import game.Game;
-import game.Item;
-import game.attributes.AnimatedObject;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
 import game.entities.GameObject;
 import game.entities.Player;
 import game.entities.platforms.MovingPlatform;
-import game.graphics.Animation;
-import game.graphics.AnimationStates;
-import game.graphics.Assets;
-import game.input.KeyInput;
-import game.network.packets.Packet02Move;
 
 import java.awt.*;
-import java.awt.Point;
 import java.util.*;
 
 import static game.Level.getGameObjects;
@@ -58,7 +48,7 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 		{
 			if (this.getInteraction(p))
 				if (!(p.isBounceImmune()))
-					p.bouncing(this.getSpeed(),this.getYuh());
+					p.bouncing(this.getSpeed());
 		}
 
 
@@ -90,7 +80,7 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 			{
 				if (this.getInteraction(o))
 					if (!(((Player)o).isBounceImmune()))
-						((Player)o).bouncing(this.getSpeed(),this.getYuh());
+						((Player)o).bouncing(this.getSpeed());
 			}
 
 		}

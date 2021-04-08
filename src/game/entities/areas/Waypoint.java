@@ -4,8 +4,7 @@ import game.entities.Player;
 
 import java.awt.*;
 
-import static game.Level.getPlayers;
-import static game.Level.getWaypoints;
+import static game.Level.*;
 
 public class Waypoint extends Area {
 
@@ -28,35 +27,35 @@ public class Waypoint extends Area {
 
     public void tick() {
 
-		/*
 
-		for (Player p : getPlayers())
+
+		for (AIPlayer ap : getAIPlayers())
 		{
-			if (p instanceof AIPlayer)
-			if (this.getInteraction((AIPlayer) object1))
+			if (ap instanceof AIPlayer)
+			if (this.getInteraction(ap))
 			{
 
-				p.setDirection(this.getDirection());
-				((AIPlayer) object1).setJump(((Waypoint) l).getJump());
+				ap.setDirection(this.getDirection());
+				ap.setJump(this.getJump());
 
 				// Means a waypoint only has an effect once until player touches another one
 				if (!getWaypoints().contains(this)) {
 
 					getWaypoints().clear();
 					getWaypoints().add(this);
-					((AIPlayer) object1).setWait(((Waypoint) l).getWait());
+					ap.setWait(this.getWait());
 
 				}
 			}
 		}
 
-		 */
+
 
 	}
 
 	@Override
 	public void render(Graphics g, float f, float h) {
-		//super.render(g, f, h);
+		super.render(g, f, h);
 	}
 
 	public String getDirection()
