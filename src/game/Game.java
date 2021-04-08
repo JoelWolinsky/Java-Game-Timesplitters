@@ -164,7 +164,7 @@ public class Game extends Canvas implements Runnable{
 
 		game = this;
 
-		String mapMode = "default";
+		String mapMode = "RNG";
 		Map m = new Map();
 		//keep default for now until we sort randomly generated
 
@@ -173,7 +173,7 @@ public class Game extends Canvas implements Runnable{
 
 		if (mapMode.equals("default")) {
 			m.mapParser(currentLevel, "intro1");
-			m.mapParser(currentLevel, "introDimension");
+			m.mapParser(currentLevel, "segmentA4");
 			//m.mapParser(currentLevel, "segmentA11");
 			//m.mapParser(currentLevel, "segmentA15");
 			//m.mapParser(currentLevel, "segmentA12");

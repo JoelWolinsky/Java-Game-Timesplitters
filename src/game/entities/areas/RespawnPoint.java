@@ -34,6 +34,19 @@ public class RespawnPoint extends Area {
 				}
 
 			}
+			/*
+			if (p instanceof AIPlayer)
+			{
+				// Means a waypoint only has an effect once until player touches another one
+				if (!p.getRespawnPoints().contains(this) {
+
+					p.addRespawnPoint(this);
+
+				}
+
+			}
+
+			 */
 		}
 
 

@@ -61,6 +61,7 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 					p.bouncing(this.getSpeed(),this.getYuh());
 		}
 
+
 		for (GameObject o : getGameObjects())
 		{
 			if (o !=  this)

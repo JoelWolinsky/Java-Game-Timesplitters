@@ -11,6 +11,8 @@ import java.awt.*;
 import java.util.LinkedList;
 import java.util.Random;
 
+import static game.Level.*;
+
 public class MindlessAISpawner extends GameObject {
 
 	private Level currentLevel;
@@ -37,6 +39,20 @@ public class MindlessAISpawner extends GameObject {
 	}
 
 	public void tick() {
+
+
+		if (this.getAddChicken())
+		{
+			getToBeAdded().add(new MindlessAI(this.getDummyX(), this.getDummyY(), this.getDummyWidth(), this.getDummyHeight(), this.getDummyMinRange(), this.getDummyMaxRange(), this.getUrls()));
+			this.setAddChicken(false);
+		}
+		else if (this.getRemoveChicken())
+		{
+			getToBeRemoved().add(getChickens().getFirst());
+			this.setRemoveChicken(false);
+
+		}
+
 
 		if (chickensSpawned<=maxChickens)
 		{

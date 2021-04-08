@@ -13,6 +13,7 @@ import game.attributes.AnimatedObject;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
+import game.entities.areas.AddedItem;
 import game.entities.platforms.CrushingPlatform;
 import game.entities.platforms.MovingPlatform;
 import game.entities.areas.RespawnPoint;
@@ -23,6 +24,8 @@ import game.input.KeyInput;
 import game.network.packets.Packet02Move;
 
 import javax.imageio.ImageIO;
+
+import static game.Level.getToBeAdded;
 
 public class Player extends GameObject implements AnimatedObject, SolidCollider, GravityObject{
 
@@ -129,6 +132,15 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			bounceImmunity=false;
 		}
 
+
+		for (Item i : this.getInventory())
+		{
+			if (i.getAddItem())
+			{
+				getToBeAdded().add(new AddedItem(this.getX(), this.getY(), 0, 0, this, i.getItemToAdd() , i.getItemToAdd(),i.getItemToAdd(),i.getItemToAdd()));
+				i.setAddItem(false);
+			}
+		}
 
 		//always have the player collision box set to respective size of its animationstate
 		this.width = getAnimation(currentAnimationState).getFrame(currentFrame).getWidth();

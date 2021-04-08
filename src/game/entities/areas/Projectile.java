@@ -1,6 +1,9 @@
 package game.entities.areas;
 
 import game.attributes.CollidingObject;
+import game.entities.Player;
+
+import static game.Level.getPlayers;
 
 public class Projectile extends DamageZone {
 	private float baseposX,baseposY;
@@ -24,6 +27,12 @@ public class Projectile extends DamageZone {
 	}
 
 	public void tick() {
+
+		for (Player p : getPlayers())
+		{
+			if (this.getInteraction(p))
+				p.respawn();
+		}
 
 		if (i<startOffset)
 			i++;

@@ -48,11 +48,5 @@ public class Area extends GameObject {
 				(int)player.getY() < (int)this.y+this.height);
 	}
 
-	public boolean getInteraction(AIPlayer aiPlayer){
-		return ((int)this.x < (int)aiPlayer.getX()+aiPlayer.getWidth() && 
-				(int)aiPlayer.getX() < this.x+this.width && 
-				(int)this.y < (int)aiPlayer.getY()+aiPlayer.getHeight() && 
-				(int)aiPlayer.getY() < (int)this.y+this.height);
-	}
 
 }
