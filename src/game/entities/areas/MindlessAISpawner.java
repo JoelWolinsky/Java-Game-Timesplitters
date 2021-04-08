@@ -40,38 +40,22 @@ public class MindlessAISpawner extends GameObject {
 
 	public void tick() {
 
-
-		if (this.getAddChicken())
-		{
-			getToBeAdded().add(new MindlessAI(this.getDummyX(), this.getDummyY(), this.getDummyWidth(), this.getDummyHeight(), this.getDummyMinRange(), this.getDummyMaxRange(), this.getUrls()));
-			this.setAddChicken(false);
-		}
-		else if (this.getRemoveChicken())
-		{
-			getToBeRemoved().add(getChickens().getFirst());
-			this.setRemoveChicken(false);
-
-		}
-		
-
 		if (chickensSpawned<=maxChickens)
 		{
 			if (addChicken==false) {
 				if (i < 100)
 					i++;
 				else {
-					this.addChicken = true;
+					getToBeAdded().add(new MindlessAI(this.getDummyX(), this.getDummyY(), this.getDummyWidth(), this.getDummyHeight(), this.getDummyMinRange(), this.getDummyMaxRange(), this.getUrls()));
 					chickensSpawned++;
-					//currentLevel.addEntity(new MindlessAI(dummyX,dummyY,dummyWidth,dummyWidth,dummyMinRange,dummyMaxRange,urls));
 					i = 0;
 				}
 			}
 		}
 		else
 		{
-			removeChicken=true;
+			getToBeRemoved().add(getChickens().getFirst());
 			chickensSpawned--;
-			//currentLevel.getChickens().remove(currentLevel.getChickens().getFirst());
 		}
 
 	}

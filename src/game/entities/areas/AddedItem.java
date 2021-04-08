@@ -1,16 +1,10 @@
 package game.entities.areas;
 import game.Effect;
-import game.attributes.AnimatedObject;
 import game.entities.Player;
-import game.graphics.Animation;
-import game.graphics.AnimationStates;
-
-import java.awt.*;
-import java.util.HashMap;
 
 import static game.Level.getPlayers;
 
-public class AddedItem extends AnimArea implements AnimatedObject {
+public class AddedItem extends AnimArea {
 
 	private boolean visibile=true;
 	private Player creator;

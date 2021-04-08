@@ -7,7 +7,6 @@ import java.util.*;
 import game.Effect;
 import game.Game;
 import game.Item;
-import game.attributes.AnimatedObject;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
@@ -24,9 +23,7 @@ import game.network.packets.Packet02Move;
 
 import static game.Level.getToBeAdded;
 
-public class Player extends GameObject implements AnimatedObject, SolidCollider, GravityObject{
-
-	static BufferedImage sprite;
+public class Player extends GameObject implements SolidCollider, GravityObject{
 
 	protected float velX = 0;
 	protected float velY = 0;
@@ -44,7 +41,6 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private int respawnX=0;
 	private int respawnThreshold=340;
 	private int respawnY=340;
-	private int deathFromFallThreshold;
 	private boolean immunity=false;
 	private int i=0,bi=0;
 	private boolean cc=false;
@@ -67,30 +63,25 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	private int bouncingTimer=0;
 	private boolean bounceImmunity=false;
 
-	private static int animationTimer = 0;
-	private static AnimationStates defaultAnimationState = AnimationStates.IDLE;
-	private static AnimationStates currentAnimationState = defaultAnimationState;
-	private static HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
-	private int currentFrame;
 	private Assets s = new Assets();
-
 	private Point prevPos;
-
 	private String username;
 	private KeyInput input;
 
 	public Player(float x, float y, KeyInput input, int width,int height) {
 		super(x, y, 2, width, height);
 
+
 		this.input = input;
 		this.username = UUID.randomUUID().toString();;
 
+		this.currentAnimState = AnimationStates.IDLE;
 
 		s.init();
+		animations.put(AnimationStates.IDLE, new Animation(15, s.player_idle));
+		animations.put(AnimationStates.RIGHT, new Animation(15, s.player_right));
+		animations.put(AnimationStates.LEFT, new Animation(15, s.player_left));
 
-		animations.put(AnimationStates.IDLE, new Animation(15, Assets.player_idle));
-		animations.put(AnimationStates.RIGHT, new Animation(15, Assets.player_right));
-		animations.put(AnimationStates.LEFT, new Animation(15, Assets.player_left));
 
 		CollidingObject.addCollider(this);
 		SolidCollider.addSolidCollider(this);
@@ -130,8 +121,8 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		}
 
 		//always have the player collision box set to respective size of its animationstate
-		this.width = getAnimation(currentAnimationState).getFrame(currentFrame).getWidth();
-		this.height = getAnimation(currentAnimationState).getFrame(currentFrame).getHeight();
+		this.width = animations.get(currentAnimState).getFrame(frame).getWidth();
+		this.height = animations.get(currentAnimState).getFrame(frame).getHeight();
 
 
 		this.prevPos = new Point((int)this.x, (int)this.y);
@@ -156,7 +147,7 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 					} else {
 						this.velX += RUN_SPEED/6;
 					}
-					currentAnimationState = AnimationStates.RIGHT;
+					currentAnimState = AnimationStates.RIGHT;
 
 			} else if(KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
 
@@ -169,10 +160,10 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 					} else {
 						this.velX -= RUN_SPEED/6;
 					}
-					currentAnimationState = AnimationStates.LEFT;
+				currentAnimState = AnimationStates.LEFT;
 
 			} else {
-				currentAnimationState = AnimationStates.IDLE;
+				currentAnimState = AnimationStates.IDLE;
 				// For deceleration effect
 				if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
 					if (this.velX >= -0.1f && this.velX <= 0.1f) {
@@ -506,14 +497,14 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 			{
 
 
-				this.currentFrame= this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
+				this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
 
 			}
 		}
 		else
 		{
 
-			this.currentFrame= this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
+			this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
 		}
 
 	}
@@ -522,27 +513,6 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 		return new Rectangle((int)x, (int)y, width, height);
 	}
 
-
-	public int getAnimationTimer() {
-		return Player.animationTimer;
-	}
-
-	public void setAnimationTimer(int animationTimer) {
-		Player.animationTimer = animationTimer;
-
-	}
-
-	public AnimationStates getCurrentAnimationState() {
-		return currentAnimationState;
-	}
-
-	public AnimationStates getDefaultAnimationState() {
-		return Player.defaultAnimationState;
-	}
-
-	public Animation getAnimation(AnimationStates state) {
-		return animations.get(state);
-	}
 
 	public void setRespawnX(int x) {
 		this.respawnX = x;
@@ -651,4 +621,6 @@ public class Player extends GameObject implements AnimatedObject, SolidCollider,
 	public void addRespawnPoint(RespawnPoint r) {
 		this.visitedRespawnPoints.add(r);
 	}
+
+
 }

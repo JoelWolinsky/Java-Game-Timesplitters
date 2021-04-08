@@ -55,7 +55,7 @@ public class Waypoint extends Area {
 
 	@Override
 	public void render(Graphics g, float f, float h) {
-		super.render(g, f, h);
+		//super.render(g, f, h);
 	}
 
 	public String getDirection()

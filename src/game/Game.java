@@ -172,12 +172,12 @@ public class Game extends Canvas implements Runnable{
 
 		if (mapMode.equals("default")) {
 			m.mapParser(currentLevel, "intro1");
-			m.mapParser(currentLevel, "segmentA4");
+			m.mapParser(currentLevel, "segmentA11");
 			m.mapParser(currentLevel, "segmentA10");
 			//m.mapParser(currentLevel, "segmentA11");
 			//m.mapParser(currentLevel, "segmentA15");
 			//m.mapParser(currentLevel, "segmentA12");
-			//m.mapParser(currentLevel, "segmentA13");
+			m.mapParser(currentLevel, "segmentA13");
 			//m.mapParser(currentLevel, "introDimension");
 			//m.mapParser(currentLevel, "segmentA14");
 			/*

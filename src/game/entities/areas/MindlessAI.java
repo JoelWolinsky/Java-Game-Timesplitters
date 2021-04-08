@@ -60,7 +60,7 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 					if (((MindlessAI) o).getInteraction(this))
 					{
 						if (!this.isBounceImmune())
-							this.bouncing(((MindlessAI) o).getSpeed(), ((MindlessAI) o).getYuh());
+							this.bouncing(((MindlessAI) o).getSpeed());
 					}
 				}
 
@@ -72,7 +72,7 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 					}
 				if (((EventDamageZone) o).getActive())
 					if (((EventDamageZone) o).getInteraction(this))
-						this.bouncing(this.getSpeed(), this.getYuh());
+						this.bouncing(this.getSpeed());
 
 			}
 
@@ -194,7 +194,7 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 
 	}
 
-	public void bouncing(int speed, int yuh){
+	public void bouncing(int speed){
 		this.bouncing = true;
 		bouncingSpeed= speed *(-1);
 		bounceImmunity=true;

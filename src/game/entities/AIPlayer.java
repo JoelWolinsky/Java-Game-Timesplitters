@@ -1,27 +1,15 @@
 package game.entities;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.UUID;
 
-import game.Game;
-import game.attributes.AnimatedObject;
-import game.attributes.CollidingObject;
-import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
 import game.entities.areas.RespawnPoint;
-import game.entities.platforms.MovingPlatform;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
 import game.graphics.Assets;
-import game.input.KeyInput;
-import game.network.packets.Packet02Move;
-
-import javax.imageio.ImageIO;
 
 public class AIPlayer extends Player{
 
