@@ -1,5 +1,5 @@
 package game.entities.areas;
-import game.entities.Player;
+import game.entities.players.Player;
 import static  game.Level.*;
 
 public class OnReachAnimArea extends AnimArea{

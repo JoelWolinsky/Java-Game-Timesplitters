@@ -1,5 +1,5 @@
 package game.entities.areas;
-import game.entities.Player;
+import game.entities.players.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;

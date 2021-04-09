@@ -1,7 +1,5 @@
 package game.entities.areas;
 import game.entities.GameObject;
-import game.entities.Player;
-import game.entities.AIPlayer;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

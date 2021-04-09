@@ -9,7 +9,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 
 import game.Game;
-import game.entities.PlayerMP;
+import game.entities.players.PlayerMP;
 import game.network.packets.Packet;
 import game.network.packets.Packet.PacketTypes;
 import game.network.packets.Packet00Login;

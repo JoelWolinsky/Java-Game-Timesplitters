@@ -1,6 +1,6 @@
 package game.entities.areas;
 
-import game.entities.Player;
+import game.entities.players.Player;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

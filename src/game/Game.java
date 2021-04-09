@@ -10,13 +10,13 @@ import java.util.*;
 
 import game.display.Window;
 import game.entities.GameObject;
-import game.entities.Player;
-import game.entities.AIPlayer;
+import game.entities.players.Player;
+import game.entities.players.AIPlayer;
 import game.input.KeyInput;
 import game.network.packets.Packet00Login;
 import network.GameClient;
 import network.GameServer;
-import game.entities.PlayerMP;
+import game.entities.players.PlayerMP;
 
 public class Game extends Canvas implements Runnable{
 
@@ -172,7 +172,8 @@ public class Game extends Canvas implements Runnable{
 
 		if (mapMode.equals("default")) {
 			m.mapParser(currentLevel, "intro1");
-			m.mapParser(currentLevel, "segmentA4");
+			m.mapParser(currentLevel, "intersegmentA2up");
+			m.mapParser(currentLevel, "intersegmentA2down");
 			m.mapParser(currentLevel, "segmentA4");
 			//m.mapParser(currentLevel, "segmentA11");
 			//m.mapParser(currentLevel, "segmentA15");

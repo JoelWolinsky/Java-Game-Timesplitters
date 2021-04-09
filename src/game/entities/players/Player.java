@@ -1,15 +1,14 @@
-package game.entities;
+package game.entities.players;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.*;
-
 import game.Effect;
 import game.Game;
 import game.Item;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
+import game.entities.GameObject;
 import game.entities.areas.AddedItem;
 import game.entities.platforms.CrushingPlatform;
 import game.entities.platforms.MovingPlatform;
@@ -35,7 +34,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 	private static float RUN_SPEED = 3.6f; 		// Default run speed
 	private static float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
 
-	public LinkedList<RespawnPoint> visitedRespawnPoints = new LinkedList<>();
+	public LinkedList<RespawnPoint> previousRespawnPoints = new LinkedList<>();
 
 	private boolean godMode=false;
 	private int respawnX=0;
@@ -615,11 +614,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 	}
 
 	public LinkedList<RespawnPoint> getRespawnPoints() {
-		return visitedRespawnPoints;
-	}
-
-	public void addRespawnPoint(RespawnPoint r) {
-		this.visitedRespawnPoints.add(r);
+		return previousRespawnPoints;
 	}
 
 

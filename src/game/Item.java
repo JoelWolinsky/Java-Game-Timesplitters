@@ -1,7 +1,7 @@
 package game;
 
 import game.entities.GameObject;
-import game.entities.Player;
+import game.entities.players.Player;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

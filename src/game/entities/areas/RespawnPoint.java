@@ -1,14 +1,14 @@
 package game.entities.areas;
-import game.entities.AIPlayer;
-import game.entities.Player;
+import game.entities.players.Player;
+
+import java.awt.*;
 
 import static game.Level.getPlayers;
 
 public class RespawnPoint extends Area {
 
-	private boolean reached = false;
-	private boolean currentActive = false;
 	private float pointX,pointY;
+	private boolean reached = false;
 
 	public RespawnPoint(float x, float y, int width, int height, int pointX, int pointY, String url) {
 		super(x, y, width, height, url);
@@ -22,43 +22,23 @@ public class RespawnPoint extends Area {
 		{
 			if (this.getInteraction(p))
 			{
-				p.setRespawnX((int) this.getX() + (int)this.getExtraPointX());
-				p.setRespawnY((int) this.getY()-40 + (int)this.getExtraPointY());
-				p.setRespawnThreshold((int)this.getY());
-				this.setReached(true);
-				//this.setCurrentActive(true);
-
-
 				if (!p.getRespawnPoints().contains(this)) {
-					p.addRespawnPoint(this);
+					p.setRespawnX((int) this.getX() + (int)this.getExtraPointX());
+					p.setRespawnY((int) this.getY()-40 + (int)this.getExtraPointY());
+					p.setRespawnThreshold((int)this.getY());
+					p.getRespawnPoints().add(this);
+					this.reached=true;
 				}
-
 			}
 
 		}
 
-
-
 	}
 
-	public void setCurrentActive(boolean currentActive)
-	{
-		this.currentActive = currentActive;
-	}
-
-	public boolean getCurrentActive()
-	{
-		return this.currentActive;
-	}
-
-	public void setReached(boolean reached)
-	{
-		this.reached = reached;
-	}
-
-	public boolean getReached()
-	{
-		return this.reached;
+	@Override
+	public void render(Graphics g, float f, float h) {
+		if (this.reached)
+			super.render(g, f, h);
 	}
 
 	public boolean getInteraction(Player player){

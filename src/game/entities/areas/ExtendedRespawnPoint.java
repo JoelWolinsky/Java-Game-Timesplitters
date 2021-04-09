@@ -1,6 +1,5 @@
 package game.entities.areas;
-import game.entities.AIPlayer;
-import game.entities.Player;
+import game.entities.players.Player;
 
 import static game.Level.getPlayers;
 

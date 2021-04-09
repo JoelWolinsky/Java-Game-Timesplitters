@@ -1,9 +1,9 @@
 package game.entities.areas;
 
-import game.attributes.CollidingObject;
-import game.entities.Player;
+import game.entities.players.Player;
 
 import static game.Level.getPlayers;
+import static game.Utility.getRandomIntInRangeSeeded;
 
 public class Projectile extends DamageZone {
 	private float baseposX,baseposY;
@@ -50,12 +50,12 @@ public class Projectile extends DamageZone {
 					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
+						this.x = getRandomIntInRangeSeeded((int)baseposX,(int)randomRangeX);
 
 					if (randomRangeY==0)
 						this.y=this.baseposY;
 					else
-						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
+						this.y = getRandomIntInRangeSeeded((int)baseposY,(int)randomRangeY);
 
 					if (!super.getNotice().equals("nopicture.png"))
 					{
@@ -75,12 +75,12 @@ public class Projectile extends DamageZone {
 					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
+						this.x = getRandomIntInRangeSeeded((int)baseposX,(int)randomRangeX);
 
 					if (randomRangeY==0)
 						this.y=this.baseposY;
 					else
-						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
+						this.y = getRandomIntInRangeSeeded((int)baseposY,(int)randomRangeY);
 
 					if (!super.getNotice().equals("nopicture.png"))
 					{
@@ -103,12 +103,12 @@ public class Projectile extends DamageZone {
 					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
+						this.x = getRandomIntInRangeSeeded((int)baseposX,(int)randomRangeX);
 
 					if (randomRangeY==0)
 						this.y=this.baseposY;
 					else
-						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
+						this.y = getRandomIntInRangeSeeded((int)baseposY,(int)randomRangeY);
 
 					if (!super.getNotice().equals("nopicture.png"))
 					{
@@ -128,12 +128,12 @@ public class Projectile extends DamageZone {
 					if (randomRangeX==0)
 						this.x=this.baseposX;
 					else
-						this.x = (int)(Math.random() * (this.baseposX - randomRangeX + 1)) + randomRangeX;
+						this.x = getRandomIntInRangeSeeded((int)baseposX,(int)randomRangeX);
 
 					if (randomRangeY==0)
 						this.y=this.baseposY;
 					else
-						this.y = (int)(Math.random() * (this.baseposY - randomRangeY + 1)) + randomRangeY;
+						this.y = getRandomIntInRangeSeeded((int)baseposY,(int)randomRangeY);
 
 					if (!super.getNotice().equals("nopicture.png"))
 					{

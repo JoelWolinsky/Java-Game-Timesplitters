@@ -1,5 +1,5 @@
 package game.entities.areas;
-import game.entities.Player;
+import game.entities.players.Player;
 
 import javax.imageio.ImageIO;
 
@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import static game.Level.getPlayers;
+import static game.Utility.getRandomIntInRangeSeeded;
 
 /*
 This class extends AnimArea instead of DamageZone to avoid some rendering issues due to the fact that we use this class to
@@ -71,7 +72,7 @@ public class EventDamageZone extends AnimArea{
 		{
 
 			if (timer==1 && random)
-				if (getRandomNumber(0,3)>0)
+				if (getRandomIntInRangeSeeded(0,3)>0)
 					go=false;
 				else
 					go=true;
@@ -96,11 +97,7 @@ public class EventDamageZone extends AnimArea{
 	}
 
 	public void render(Graphics g, float f, float h) {
-
-		//DEBUG FOR TRIGGER AREA AND THIS AREA
-		//a.render(g,f,h);
-		//g.setColor(Color.magenta);
-		//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
+		
 		if (random) {
 			if (go) {
 				if (triggered)
@@ -132,10 +129,6 @@ public class EventDamageZone extends AnimArea{
 
 	public boolean isTriggered() {
 		return triggered;
-	}
-
-	public int getRandomNumber(int min, int max) {
-		return (int) ((Math.random() * (max - min)) + min);
 	}
 
 }

@@ -2,8 +2,8 @@ package game.entities.platforms;
 
 import game.attributes.CollidingObject;
 import game.attributes.SolidCollider;
-import game.entities.AIPlayer;
-import game.entities.Player;
+import game.entities.players.AIPlayer;
+import game.entities.players.Player;
 
 import static game.Level.getPlayers;
 

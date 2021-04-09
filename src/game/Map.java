@@ -1,18 +1,15 @@
 package game;
 
 import game.entities.GameObject;
-import game.entities.Player;
+import game.entities.players.Player;
 import game.entities.areas.*;
 import game.entities.platforms.CrushingPlatform;
 import game.entities.platforms.MovingPlatform;
 import game.entities.platforms.Platform;
 import game.entities.platforms.TimerPlatform;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -434,7 +431,7 @@ public class Map {
                     case "MindlessAISpawner":
 
                         MindlessAISpawner mindlessAISpawner;
-                        mindlessAISpawner = new MindlessAISpawner(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),Integer.parseInt(splited[5]),currentLevel,createURLS(6));
+                        mindlessAISpawner = new MindlessAISpawner(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),Integer.parseInt(splited[5]),createURLS(6));
                         currentLevel.addEntity(mindlessAISpawner);
                         break;
 

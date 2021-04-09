@@ -1,6 +1,6 @@
 package game.entities.areas;
 
-import game.entities.Player;
+import game.entities.players.Player;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -48,7 +48,6 @@ public class DamageZone extends AnimArea{
 			if (getInteraction(p))
 				if (getActive()) {
 					p.respawn();
-					System.out.println("true");
 				}
 
 		}
@@ -81,15 +80,10 @@ public class DamageZone extends AnimArea{
 
 	public void render(Graphics g, float f, float h) {
 
-		//DEBUG FOR TRIGGER AREA AND THIS AREA
-		//a.render(g,f,h);
-		//g.setColor(Color.magenta);
-		//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
 		if (this.active==false && timer >= (offDuration/1.5))
 			g.drawImage(img, (int) (this.x + f), (int) (this.y + h), null);
 		else if (active)
 			super.render(g,f,h);
-		else{}
 
 	}
 

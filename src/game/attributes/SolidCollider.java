@@ -2,8 +2,8 @@ package game.attributes;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 
-import game.entities.AIPlayer;
-import game.entities.Player;
+import game.entities.players.AIPlayer;
+import game.entities.players.Player;
 
 /**
  * Interface to be implemented by any object that must not allow an object to pass through it<br>

@@ -3,7 +3,7 @@ import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
 import game.entities.GameObject;
-import game.entities.Player;
+import game.entities.players.Player;
 import game.entities.platforms.MovingPlatform;
 
 import java.awt.*;
@@ -11,6 +11,11 @@ import java.util.*;
 
 import static game.Level.getGameObjects;
 import static game.Level.getPlayers;
+
+import static game.Utility.getRandomElementInRangeSeeded;
+import static game.Utility.getRandomIntInRangeSeeded;
+import static game.Utility.getRandomFloatInRangeSeeded;
+import static game.Utility.getRandomElementInRangeSeeded;
 
 public class MindlessAI extends AnimArea implements GravityObject, CollidingObject, SolidCollider {
 
@@ -93,9 +98,9 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 		}
 
 		idleSum++;
-		this.x = this.x + getRandomNumberFloat(0.1f,1.0f) * idleIndex;
+		this.x = this.x + getRandomFloatInRangeSeeded(0.1f,1.0f) * idleIndex;
 
-		if (idleSum>=getRandomNumber(10,40))
+		if (idleSum>=getRandomIntInRangeSeeded(10,40))
 		{
 			idleIndex=idleIndex *(-1);
 			idleSum=0;
@@ -116,13 +121,13 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 
 
 
-			if (sum*yuh>=getRandomNumber(20,200))
+			if (sum*yuh>=getRandomIntInRangeSeeded(20,200))
 			{
 				sum=0;
 				i=0;
-				iMax=getRandomNumber(30,100);
-				speed= getRandomNumber(3,7);
-				yuh = getRandom(bruh);
+				iMax=getRandomIntInRangeSeeded(30,100);
+				speed= getRandomIntInRangeSeeded(3,7);
+				yuh = getRandomElementInRangeSeeded(bruh);
 				speed = speed * yuh;
 			}
 		}
@@ -134,15 +139,6 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 		//If you're not on ground, you should fall
 		if(!isOnGround()) {
 			fall(this);
-		} else {
-			CollidingObject o = SolidCollider.nextCollision(this, 5, false);
-			if(o instanceof MovingPlatform) {
-				if(((MovingPlatform) o).getXAxis()) {
-					this.x += ((MovingPlatform) o).getVelocity();
-				}else {
-					this.y += ((MovingPlatform) o).getVelocity();
-				}
-			}
 		}
 
 		//Move player if it will not cause a collision
@@ -215,10 +211,6 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 		}
 	}
 
-	private boolean hasCeilingAbove() {
-		return SolidCollider.willCauseSolidCollision(this, -5, false);
-	}
-
 	public void handleCollisions(LinkedList<CollidingObject> collisions) {
 	}
 
@@ -239,17 +231,6 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 		return new Rectangle((int)x, (int)y, width, height);
 	}
 
-	public float getRandomNumberFloat(float min, float max) {
-		return (float) ((Math.random() * (max - min)) + min);
-	}
-
-	public int getRandomNumber(int min, int max) {
-		return (int) ((Math.random() * (max - min)) + min);
-	}
-	public static int getRandom(int[] array) {
-		int rnd = new Random().nextInt(array.length);
-		return array[rnd];
-	}
 
 	public int getSpeed() {
 		return speed;

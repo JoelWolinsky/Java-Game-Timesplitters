@@ -4,12 +4,11 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
 import game.Game;
-import game.entities.PlayerMP;
+import game.entities.players.PlayerMP;
 import game.network.packets.Packet;
 import game.network.packets.Packet.PacketTypes;
 import game.network.packets.Packet00Login;

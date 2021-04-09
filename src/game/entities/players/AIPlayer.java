@@ -1,18 +1,14 @@
-package game.entities;
+package game.entities.players;
 
-import java.awt.image.BufferedImage;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.UUID;
 
 import game.attributes.SolidCollider;
 import game.entities.areas.RespawnPoint;
 import game.entities.areas.Waypoint;
-import game.graphics.Animation;
 import game.graphics.AnimationStates;
-import game.graphics.Assets;
 
-public class AIPlayer extends Player{
+public class AIPlayer extends Player {
 
 
 	private static final float DECELERATION = 0.4f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
@@ -44,7 +40,7 @@ public class AIPlayer extends Player{
 
 		super.tick();
 
-		dist_from_player = this.x - this.humanPlayer.x;
+		dist_from_player = this.x - this.humanPlayer.getX();
 		// teleports AI Player to the penultimate RespawnPoint that the player has reached 
 		if (dist_from_player < -max_distance_between_players) {
 
@@ -57,8 +53,8 @@ public class AIPlayer extends Player{
 				if (!this.visitedRespawnPoints.contains(penultimateRespawnPoint)) {
 
 					// then set AIPlayer x to the value of that RP
-					this.x = penultimateRespawnPoint.x;
-					this.y = penultimateRespawnPoint.y-40;
+					this.x = penultimateRespawnPoint.getX();
+					this.y = penultimateRespawnPoint.getY()-40;
 
 				}
 

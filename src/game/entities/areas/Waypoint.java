@@ -1,15 +1,9 @@
 package game.entities.areas;
-import game.entities.AIPlayer;
-import game.entities.Player;
-
+import game.entities.players.AIPlayer;
 import java.awt.*;
-
 import static game.Level.*;
 
 public class Waypoint extends Area {
-
-	private boolean reached = false;
-	private boolean currentActive = false;
 
 	private String direction;
 	private String jump;
@@ -26,7 +20,6 @@ public class Waypoint extends Area {
 	}
 
     public void tick() {
-
 
 
 		for (AIPlayer ap : getAIPlayers())

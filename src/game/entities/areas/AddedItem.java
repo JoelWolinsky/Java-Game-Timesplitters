@@ -1,6 +1,6 @@
 package game.entities.areas;
 import game.Effect;
-import game.entities.Player;
+import game.entities.players.Player;
 
 import static game.Level.getPlayers;
 

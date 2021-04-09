@@ -1,11 +1,10 @@
-package game.entities;
+package game.entities.players;
 
 import java.net.InetAddress;
 
-import game.Game;
-import game.Level;
+import game.entities.players.Player;
 import game.input.KeyInput;
-import game.network.packets.Packet00Login;
+
 public class PlayerMP extends Player {
 	
 	public InetAddress ipAddress;

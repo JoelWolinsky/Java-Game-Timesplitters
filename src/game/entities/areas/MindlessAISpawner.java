@@ -1,42 +1,23 @@
 package game.entities.areas;
-
-import game.Level;
-import game.attributes.CollidingObject;
-import game.attributes.GravityObject;
-import game.attributes.SolidCollider;
 import game.entities.GameObject;
-import game.entities.platforms.MovingPlatform;
-
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.Random;
-
 import static game.Level.*;
 
 public class MindlessAISpawner extends GameObject {
 
-	private Level currentLevel;
 	private int i = 0;
-	private float dummyX,dummyY;
-	private int dummyWidth,dummyHeight,dummyMinRange,dummyMaxRange;
-	private boolean addChicken = false;
-	private boolean removeChicken = false;
+	private int dummyMinRange,dummyMaxRange;
 	private int chickensSpawned=0;
 	private int maxChickens;
 	private String[] urls;
 	private LinkedList<MindlessAI> myChickens = new LinkedList<>();
 
-	public MindlessAISpawner(float x, float y, int width, int height,int minRange, int maxRange,int maxChickens,Level currentLevel, String...urls) {
-		super(0,0,0,0,0);
+	public MindlessAISpawner(float x, float y, int width, int height,int minRange, int maxRange,int maxChickens, String...urls) {
+		super(x,y,0,width,height);
 		this.urls=urls;
-		this.dummyX=x;
-		this.dummyY=y;
-		this.dummyWidth=width;
-		this.dummyHeight=height;
 		this.dummyMinRange=minRange;
 		this.dummyMaxRange=maxRange;
-		this.currentLevel=currentLevel;
 		this.maxChickens=maxChickens;
 	}
 
@@ -44,17 +25,16 @@ public class MindlessAISpawner extends GameObject {
 
 		if (chickensSpawned<=maxChickens)
 		{
-			if (addChicken==false) {
-				if (i < 100)
-					i++;
-				else {
-					MindlessAI mindlessAI = new MindlessAI(this.getDummyX(), this.getDummyY(), this.getDummyWidth(), this.getDummyHeight(), this.getDummyMinRange(), this.getDummyMaxRange(), this.getUrls());
-					getToBeAdded().add(mindlessAI);
-					myChickens.add(mindlessAI);
-					chickensSpawned++;
-					i = 0;
-				}
+			if (i < 100)
+				i++;
+			else {
+				MindlessAI mindlessAI = new MindlessAI(this.x, this.y, this.width, this.height, this.getDummyMinRange(), this.getDummyMaxRange(), this.getUrls());
+				getToBeAdded().add(mindlessAI);
+				myChickens.add(mindlessAI);
+				chickensSpawned++;
+				i = 0;
 			}
+
 		}
 		else
 		{
@@ -70,22 +50,6 @@ public class MindlessAISpawner extends GameObject {
 
 	}
 
-	public float getDummyX() {
-		return dummyX;
-	}
-
-	public float getDummyY() {
-		return dummyY;
-	}
-
-	public int getDummyHeight() {
-		return dummyHeight;
-	}
-
-	public int getDummyWidth() {
-		return dummyWidth;
-	}
-
 	public int getDummyMinRange() {
 		return dummyMinRange;
 	}
@@ -94,23 +58,7 @@ public class MindlessAISpawner extends GameObject {
 		return dummyMaxRange;
 	}
 
-	public boolean getAddChicken() {
-		return addChicken;
-	}
-
 	public String[] getUrls() {
 		return urls;
-	}
-
-	public void setAddChicken(boolean addChicken) {
-		this.addChicken = addChicken;
-	}
-
-	public void setRemoveChicken(boolean removeChicken) {
-		this.removeChicken = removeChicken;
-	}
-
-	public boolean getRemoveChicken() {
-		return removeChicken;
 	}
 }

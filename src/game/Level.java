@@ -4,11 +4,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import game.entities.*;
-import game.entities.areas.*;
+import game.entities.players.AIPlayer;
+import game.entities.players.Player;
+import game.entities.players.PlayerMP;
 
 public class Level extends Canvas {
 
-	private boolean gameStarted=false;
+	private boolean gameStarted=true;
 	private boolean gameEnded=false;
 
 	private static LinkedList<GameObject> entities = new LinkedList<>();
@@ -70,6 +72,42 @@ public class Level extends Canvas {
 
 	public static void removeEntity(GameObject o) { entities.remove(o); }
 
+	public static LinkedList<Player> getPlayers()
+	{
+		LinkedList<Player> players = new LinkedList<Player>();
+		for (GameObject o : entities)
+		{
+			if (o instanceof Player)
+				players.add((Player)o);
+		}
+
+		return players;
+	}
+
+	public static LinkedList<AIPlayer> getAIPlayers()
+	{
+		LinkedList<AIPlayer> AIplayers = new LinkedList<AIPlayer>();
+		for (GameObject o : entities)
+		{
+			if (o instanceof AIPlayer)
+				AIplayers.add((AIPlayer) o);
+		}
+
+		return AIplayers;
+	}
+
+
+	public void setGameStarted(boolean gameStarted) {
+		this.gameStarted = gameStarted;
+	}
+
+	public void setGameEnded(boolean gameEnded) {
+		this.gameEnded = gameEnded;
+	}
+
+
+	//MULTIPLAYER STUFF
+
 	public void removePlayerMP(String username) {
 		try {
 			for(Player e : getPlayers())
@@ -114,36 +152,4 @@ public class Level extends Canvas {
 	}
 
 
-	public static LinkedList<Player> getPlayers()
-	{
-		LinkedList<Player> players = new LinkedList<Player>();
-		for (GameObject o : entities)
-		{
-			if (o instanceof Player)
-				players.add((Player)o);
-		}
-
-		return players;
-	}
-
-	public static LinkedList<AIPlayer> getAIPlayers()
-	{
-		LinkedList<AIPlayer> AIplayers = new LinkedList<AIPlayer>();
-		for (GameObject o : entities)
-		{
-			if (o instanceof AIPlayer)
-				AIplayers.add((AIPlayer) o);
-		}
-
-		return AIplayers;
-	}
-
-
-	public void setGameStarted(boolean gameStarted) {
-		this.gameStarted = gameStarted;
-	}
-
-	public void setGameEnded(boolean gameEnded) {
-		this.gameEnded = gameEnded;
-	}
 }
