@@ -70,7 +70,6 @@ public class AIPlayer extends Player {
 			
 			if (this.wait > 0) {
 
-				System.out.println(this.wait);
 				this.wait--;
 
 				if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){

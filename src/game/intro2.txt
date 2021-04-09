@@ -1,9 +1,0 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png intro2.png
-Chunk 1 E intro2.png
-Respawn 10 363 flag1.png
-Platform Custom 0 156 corner1.png
-Platform Custom 96 156 top2.png
-Platform Custom 330 124 corner1.png
-Floor
-Chunk 1 N skyA.png
-Revert

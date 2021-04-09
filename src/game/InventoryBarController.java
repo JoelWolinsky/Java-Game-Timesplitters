@@ -9,14 +9,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
-public class InventoryController extends GameObject {
+public class InventoryBarController extends GameObject {
 
 	private Player player;
 	LinkedList<UIElement> frames = new LinkedList<UIElement>();
 	LinkedList<UIElement> slots = new LinkedList<UIElement>();
 	private int inventorySize=3;
 
-	public InventoryController(float x, float y, int width, int height, Player player, Level currentLevel) {
+	public InventoryBarController(float x, float y, int width, int height, Player player, Level currentLevel) {
 		super(x, y, 3, width, height);
 		this.player=player;
 
@@ -70,9 +70,6 @@ public class InventoryController extends GameObject {
 
 	public void render(Graphics g, float f, float h) {
 
-			//g.setColor(Color.magenta);
-			//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
-			//g.drawImage(img,(int)(this.x),(int)(this.y),null);
 	}
 
 

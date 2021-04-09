@@ -54,7 +54,6 @@ Projectile -10 360 -3 1 400 0 0 100 nopicture.png 4 bloodcell1.png bloodcell2.pn
 Projectile -10 360 -3 2 400 0 0 120 nopicture.png 4 bloodcell1.png bloodcell2.png bloodcell3.png bloodcell4.png
 Projectile -10 360 -3 3 400 0 0 140 nopicture.png 4 bloodcell1.png bloodcell2.png bloodcell3.png bloodcell4.png
 
-Platform Custom 410 384 wall5inv.png
 
 
 Platform Custom 63 300 floorcage3.png

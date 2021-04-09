@@ -10,9 +10,9 @@ import java.io.File;
 import java.io.IOException;
 
 public class UIElement extends GameObject {
+
 	private BufferedImage img;
 	private boolean visible = true;
-	private Player player;
 
 	public UIElement(float x, float y, int width, int height, String url) {
 		super(x, y, 3, width, height);
@@ -38,8 +38,6 @@ public class UIElement extends GameObject {
 
 	public void render(Graphics g, float f, float h) {
 
-			//g.setColor(Color.magenta);
-			//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
 			if (visible)
 			g.drawImage(img,(int)(this.x),(int)(this.y),null);
 	}
@@ -61,5 +59,9 @@ public class UIElement extends GameObject {
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+
+	public boolean isVisible() {
+		return visible;
 	}
 }

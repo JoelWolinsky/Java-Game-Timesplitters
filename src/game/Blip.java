@@ -10,8 +10,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class Blip extends GameObject {
+
 	private BufferedImage img;
-	private boolean visible = true;
 	private Player player;
 	private int totalNrBlocks=0;
 
@@ -34,7 +34,6 @@ public class Blip extends GameObject {
 
 	public void tick() {
 
-		//System.out.println(player.getX());
 		if (player.moving())
 			this.x=player.getX()/(0.71f*totalNrBlocks);
 
@@ -42,8 +41,6 @@ public class Blip extends GameObject {
 
 	public void render(Graphics g, float f, float h) {
 
-			//g.setColor(Color.magenta);
-			//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
 			g.drawImage(img,(int)(this.x+20),(int)(this.y),null);
 	}
 

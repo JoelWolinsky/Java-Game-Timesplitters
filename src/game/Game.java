@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.*;
 
 import game.display.Window;
@@ -38,7 +39,7 @@ public class Game extends Canvas implements Runnable{
 	public static Player player;
 	public static AIPlayer aiPlayer;
 	public static Camera camera;
-	ArrayList<String> segments3,segments1,segments2,intro2,throneRoom;
+	ArrayList<String> segments3,segments1,segments2,segments4,wizard,introDimension,castleEntrance,throneRoom;
 	int index = 0;
 	int bottom;
 	int top;
@@ -172,13 +173,12 @@ public class Game extends Canvas implements Runnable{
 
 		if (mapMode.equals("default")) {
 			m.mapParser(currentLevel, "intro1");
-			m.mapParser(currentLevel, "intersegmentA2up");
-			m.mapParser(currentLevel, "intersegmentA2down");
-			m.mapParser(currentLevel, "segmentA4");
 			//m.mapParser(currentLevel, "segmentA11");
 			//m.mapParser(currentLevel, "segmentA15");
 			//m.mapParser(currentLevel, "segmentA12");
-			m.mapParser(currentLevel, "segmentA13");
+			//m.mapParser(currentLevel, "segmentA11");
+			m.mapParser(currentLevel, "segmentA10");
+			m.mapParser(currentLevel, "segmentA15");
 			//m.mapParser(currentLevel, "introDimension");
 			//m.mapParser(currentLevel, "segmentA14");
 			/*
@@ -194,7 +194,7 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "segmentA4");				// aesthetic hall 2
 			m.mapParser(currentLevel, "segmentA5");				// aesthetic hall 3
 			m.mapParser(currentLevel, "segmentA6");				// ghosts
-			m.mapParser(currentLevel, "segmentA7");				// platforms								-- CAUSES PROGRAM TO CRASH
+			m.mapParser(currentLevel, "segmentA7");				// platforms
 			m.mapParser(currentLevel, "segmentA8");				// disappearing long and small platforms 	-- NEEDS WORK
 			m.mapParser(currentLevel, "segmentA9");				// spinning fireball one 					-- NOT DOING AI VERSION
 			m.mapParser(currentLevel, "segmentA10");			// long corridor
@@ -217,9 +217,12 @@ public class Game extends Canvas implements Runnable{
 			//we want them separated in order to keep a specific order in our game
 			segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down"));
 			segments2 = new ArrayList<String>(Arrays.asList("segmentA3","segmentA4","segmentA4"));
-			segments3 = new ArrayList<String>(Arrays.asList("segmentA6","segmentA7","segmentA8","segmentA9","segmentA10","segmentA11"));
-			intro2 = new ArrayList<String>(Arrays.asList("intro2"));
+			castleEntrance = new ArrayList<String>(Arrays.asList("intro2"));
 			throneRoom = new ArrayList<String>(Arrays.asList("segmentA5"));
+			segments3 = new ArrayList<String>(Arrays.asList("segmentA6","segmentA7","segmentA8","segmentA9","segmentA10","segmentA11"));
+			segments4 = new ArrayList<String>(Arrays.asList("segmentA15","segmentA12","segmentA15"));
+			wizard = new ArrayList<String>(Arrays.asList("segmentA13"));
+			introDimension = new ArrayList<String>(Arrays.asList("introDimension"));
 
 			//choose the limits of your map this should also be related to how many levels you have defined
 			//eg. you don't want to have 20 levels but a top limit of only 2 since 17 of the leves will never be used
@@ -229,25 +232,31 @@ public class Game extends Canvas implements Runnable{
 			//add levels to the background controller which manages the current position within the horizontal panorama
 			ctrlr = new BackgroundController(new BackgroundStates("ground1.png","ground2.png"),new BackgroundStates("sky1.png","sky2.png"),new BackgroundStates("sky3.png","sky4.png"),new BackgroundStates("sky5.png","sky6.png"));
 
-			//Countdown
-			LinkedList<String> countdown = new LinkedList<String>(Arrays.asList("5.png", "4.png","3.png","2.png","1.png","finish2.png","asdgasdg.png"));
-			UIController uiController = new UIController(camera.getXOffset(), camera.getYOffset()+10,0,0,currentLevel,countdown,"5.png");
-			currentLevel.addEntity(uiController);
-
-			//generate the segment pools
+			//generate the segment pools - order is important
 			m.mapParser(currentLevel, "intro1");
-			MapPart mp1 = new MapPart("./img/minipart1.png",randomGenerate(m,segments1));
-			MapPart mp2 = new MapPart("./img/minipart2.png",randomGenerate(m,intro2) + randomGenerate(m,segments2) + randomGenerate(m,throneRoom));
-			MapPart mp3 = new MapPart("./img/minipart3.png",randomGenerate(m,segments3));
+			ArrayList<Integer> allParts = new ArrayList<>(Arrays.asList(
+					randomGenerate(m,segments1),
+					randomGenerate(m,castleEntrance) + randomGenerate(m,segments2) + randomGenerate(m,throneRoom),
+					randomGenerate(m,segments3),
+					randomGenerate(m,segments4) + randomGenerate(m,wizard) + randomGenerate(m,introDimension)));
+
+			//create specific progressbar parts for the generated segment pools
+			ArrayList<MapPart> mps = new ArrayList<>();
+			for (Integer i =0 ; i<allParts.size();i++)
+			{
+				mps.add(new MapPart("./img/minipart".concat(i.toString()).concat(".png"),allParts.get(i)));
+			}
 
 			//GameProgress UI
-			currentLevel.addEntity(new BarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,player,currentLevel,mp1,mp2,mp3));
+			currentLevel.addEntity(new ProgressBarController(camera.getXOffset(), camera.getYOffset()+10, 0,0,currentLevel,mps));
 			//Inventorry UI
-			currentLevel.addEntity(new InventoryController(camera.getXOffset(), camera.getYOffset()+400, 0,0,player,currentLevel));
+			currentLevel.addEntity(new InventoryBarController(camera.getXOffset(), camera.getYOffset()+400, 0,0,player,currentLevel));
+			//Main UI Announcer eg. Countdown, End Game Celebration etc.
+			currentLevel.addEntity(new UIController(camera.getXOffset(), camera.getYOffset()+10,0,0));
 
 		}
 
-
+		//Sorts all of the entities based on their z index
 		Collections.sort(currentLevel.getGameObjects(), Comparator.comparingInt(GameObject::getZ));
 
 

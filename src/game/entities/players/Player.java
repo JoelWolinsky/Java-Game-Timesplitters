@@ -135,8 +135,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 			if(KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
 
 
-				moving=true;
-
 			/* Beware: Java floating point representation makes it difficult to have perfect numbers
 			( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
 
@@ -150,8 +148,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 
 			} else if(KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
 
-
-				moving=true;
 
 					// Simulates acceleration when you run left
 					if (this.velX <= -RUN_SPEED){
@@ -231,10 +227,12 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 
 
 		if(!SolidCollider.willCauseSolidCollision(this, this.velX+1, true)) {
+			moving=true;
 			this.x += this.velX;
 		}
 
 		if(!SolidCollider.willCauseSolidCollision(this, this.velY+1, false)) {
+			moving=true;
 			this.y += this.velY;
 		} else {
 			// Stop player falling through the floor

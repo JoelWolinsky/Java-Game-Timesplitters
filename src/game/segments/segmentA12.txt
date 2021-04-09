@@ -39,6 +39,7 @@ TrackedScriptedDamageZone 130 130 1 20 1 130 130 2 4 magic1.png magic2.png magic
 
 
 -Platform Custom 0 384 customFloor4.png
+Platform Custom 0 384 wall5inv.png
 Platform Custom 20 384 wall5.png
 Platform Custom 84 384 customFloor5.png
 Platform Custom 84 384 wall5inv.png

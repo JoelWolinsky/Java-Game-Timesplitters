@@ -4,65 +4,71 @@ import game.entities.GameObject;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Arrays;
+import static game.Level.getGameObjects;
+import static game.Level.setGameStarted;
 
 public class UIController extends GameObject {
-	private BufferedImage img;
-	private boolean visible = true;
-	private LinkedList<String> s;
+
+	private ArrayList<String> countdownUrls = new ArrayList<String>(Arrays.asList("5.png", "4.png","3.png","2.png","1.png","finish2.png","asdgasdg.png"));
 	private int index=0;
-	private Level level;
 	private int timer=0;
 	private boolean startCountdown=true;
-	UIElement uie;
+	private boolean endGameCelebration=false;
+	UIElement announcer;
 
-	public UIController(float x, float y, int width, int height, Level level, LinkedList<String> b,String url) {
+	public UIController(float x, float y, int width, int height) {
 		super(x, y, 3, width, height);
-		this.s = (LinkedList)b.clone();
-		this.level=level;
 
-
-		System.out.println(width);
-
-		uie = new UIElement(x, y, 0, 0, "./img/5.png");
-		level.addEntity(uie);
-		uie.centerHorizontally();
-		uie.centerVertically();
+		//Initialize center announcer UI Element
+		announcer = new UIElement(x, y, 0, 0, "./img/5.png");
+		announcer.setVisible(false);
+		announcer.centerHorizontally();
+		announcer.centerVertically();
+		getGameObjects().add(announcer);
 
 	}
 
 	public void tick() {
 
+		//START OF THE GAME COUNTDOWN SLIDESHOW
 		if (startCountdown) {
+
+			if (!announcer.isVisible())
+				announcer.setVisible(true);
 
 			if (timer < 50)
 				timer++;
+
 			else {
 
-				if (startCountdown)
-				{
-					try {
-						uie.setImg(ImageIO.read(new File("./img/".concat(s.get(index)))));
-					} catch (IOException exc) {
-						//TODO: Handle exception.
-					}
+				try {
+					announcer.setImg(ImageIO.read(new File("./img/".concat(countdownUrls.get(index)))));
+				}
+				catch (IOException exc) {
+					//TODO: Handle exception.
 				}
 
 				index++;
-				if (index == s.size()-1) {
-					level.setGameStarted(true);
+				if (index == countdownUrls.size()-1) {
+					setGameStarted(true);
 				}
 
-				if (index == s.size()) {
+				if (index == countdownUrls.size()) {
 					startCountdown = false;
-					uie.setVisible(false);
+					announcer.setVisible(false);
 				}
 
 				timer = 0;
 			}
+		}
+
+		if (endGameCelebration)
+		{
+
 		}
 
 
@@ -71,8 +77,6 @@ public class UIController extends GameObject {
 
 	public void render(Graphics g, float f, float h) {
 
-			//g.setColor(Color.magenta);
-			//g.fillRect((int)(this.x),(int)(this.y),this.width,this.height);
 	}
 
 

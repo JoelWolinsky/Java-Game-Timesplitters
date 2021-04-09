@@ -1,6 +1,6 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA9p1.png 2
 Chunk 1 E segmentA10p1.png
-
+Respawn 10 363 0 0 flag1.png
 Platform Custom 0 124 corner1inv.png
 Platform Custom 96 156 corner1inv.png
 Platform Custom 192 188 corner1inv.png
@@ -16,5 +16,13 @@ Platform Custom 0 220 top5.png
 Platform Custom 138 188 corner1.png
 Platform Custom 234 156 corner1.png
 Platform Custom 330 124 corner1.png
+
+
+TrackingAI -320 365 1f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -200 -200 800 400
+TrackingAI -130 260 1.4f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -200 -200 700 400
+TrackingAI 70 320 1f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -200 -200 500 800
+TrackingAI 300 360 1.4f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -200 -200 330 400
+TrackingAI 300 200 0.75f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -200 -200 330 400
+
 
 Floor

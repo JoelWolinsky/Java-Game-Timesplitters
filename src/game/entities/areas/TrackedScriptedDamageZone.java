@@ -16,8 +16,14 @@ public class TrackedScriptedDamageZone extends EventScriptedDamageZone{
 
 	public void tick() {
 
+
+		for (Area a: this.getEventArea())
+			if (a.getInteraction(mytarget))
+				this.setActivated(true);
+
 		if (this.getActivated())
 		{
+
 			this.getPoints().get(1).setX((int)mytarget.getX());
 			this.getPoints().get(1).setY((int)mytarget.getY());
 			super.tick();

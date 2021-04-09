@@ -20,10 +20,8 @@ public class TrackingAI extends EventScriptedDamageZone{
 
 	public void tick() {
 
-		for (Player p : getPlayers())
-		{
 			for (Area a: this.getEventArea() )
-				if (a.getInteraction(p)) {
+				if (a.getInteraction(mytarget)) {
 					this.setActivated(true);
 					this.setVisibile(true);
 				}
@@ -31,10 +29,12 @@ public class TrackingAI extends EventScriptedDamageZone{
 					this.setActivated(false);
 					this.setVisibile(false);
 				}
+
+
+		for (Player p : getPlayers())
 			if (this.getActivated())
 				if (this.getInteraction(p))
 					p.respawn();
-		}
 
 
 		if (this.getActivated())

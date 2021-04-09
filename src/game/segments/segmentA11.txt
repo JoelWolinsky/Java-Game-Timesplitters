@@ -13,7 +13,7 @@ Waypoint 200 390 flag3.png R Y 40
 TimerPlatform 340 370 thinplatform2.png 2 50
 Waypoint 350 350 flag3.png R Y 20
 
-
+-TrackingAI 300 475 0.75f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -100 -300 400 400
 
 DamageZone 0 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
 DamageZone 22 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
@@ -39,8 +39,13 @@ DamageZone 418 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png wast
 Platform Custom 0 384 wall5.png
 
 Chunk 1 E segmentA11p2.png
-Platform Custom 412 384 wall5inv.png
 
+
+TrackingAI -100 450 0.75f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -150 -300 650 400
+TrackingAI 350 450 0.75f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -200 -300 250 400
+
+
+Platform Custom 412 384 wall5inv.png
 Platform Custom 0 220 top5.png
 Platform Custom 138 188 corner1.png
 Platform Custom 234 156 corner1.png

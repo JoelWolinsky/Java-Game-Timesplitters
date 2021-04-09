@@ -10,8 +10,8 @@ import game.entities.players.PlayerMP;
 
 public class Level extends Canvas {
 
-	private boolean gameStarted=true;
-	private boolean gameEnded=false;
+	private static boolean gameStarted=true;
+	private static boolean gameEnded=false;
 
 	private static LinkedList<GameObject> entities = new LinkedList<>();
 	private static ArrayList<GameObject> toBeAdded = new ArrayList<>();
@@ -97,12 +97,12 @@ public class Level extends Canvas {
 	}
 
 
-	public void setGameStarted(boolean gameStarted) {
-		this.gameStarted = gameStarted;
+	public static void setGameStarted(boolean gmeStarted) {
+		gameStarted = gmeStarted;
 	}
 
-	public void setGameEnded(boolean gameEnded) {
-		this.gameEnded = gameEnded;
+	public static void setGameEnded(boolean gmeEnded) {
+		gameEnded = gmeEnded;
 	}
 
 

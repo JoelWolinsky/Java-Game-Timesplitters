@@ -4,27 +4,32 @@ import game.entities.GameObject;
 import game.entities.players.Player;
 
 import java.awt.*;
+import java.util.ArrayList;
 
-public class BarController extends GameObject {
-	private boolean visible = true;
-	private Player player;
+import static game.Level.getPlayers;
+
+public class ProgressBarController extends GameObject {
+
 	private int offset= 20;
 	private int totalNrBlocks;
 
-	public BarController(float x, float y, int width, int height, Player player,Level currentLevel, MapPart...urls) {
+	public ProgressBarController(float x, float y, int width, int height, Level currentLevel, ArrayList<MapPart> mps) {
 		super(x, y, 3, width, height);
-		this.player=player;
 
-		for (MapPart st : urls) {
+		for (MapPart st : mps) {
 			totalNrBlocks = totalNrBlocks + st.getNrBlocks();
 
 		}
-		for (MapPart st : urls) {
+		for (MapPart st : mps) {
 			currentLevel.addEntity(new UIElement(this.x + offset, this.y + 10, (int)((((float)((st.getNrBlocks()*426)*100)/(totalNrBlocks*426))/100)*600), 57, st.getUrl()));
 			offset = offset + (int)((((float)((st.getNrBlocks()*426)*100)/(totalNrBlocks*426))/100)*600);
 		}
 
-		currentLevel.addEntity(new Blip(this.x, this.y+20, 20,20,player,totalNrBlocks,"./img/head1.png"));
+		for (Player p: getPlayers())
+		{
+			currentLevel.addEntity(new Blip(this.x, this.y+20, 20,20,p,totalNrBlocks,"./img/head1.png"));
+		}
+
 		this.width = width;
 
 	}
