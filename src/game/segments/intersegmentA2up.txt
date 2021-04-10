@@ -12,7 +12,7 @@ Platform Custom 338 384 wall5inv.png
 
 //BOTTOM SHORTCUT PLATFORMS
 Platform Custom 193 430 thinPlatformA.png
-Waypoint 205 410 flag3.png R Y 20
+Waypoint 205 410 flag3.png R Y 10
 
 //TORCH AND FALLING ROCKS
 AnimArea 197 60 torch
