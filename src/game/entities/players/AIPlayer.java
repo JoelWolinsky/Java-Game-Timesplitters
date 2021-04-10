@@ -52,12 +52,8 @@ public class AIPlayer extends Player {
 						// first get the penultimate one
 						penultimateRespawnPoint = humanPlayer.getRespawnPoints().get(humanPlayer.getRespawnPoints().size()-2);
 
-						System.out.println("visitedRespawnPoints size: "+ this.getRespawnPoints().size());
-
 						// so that it only teleports once, and doesn't keep getting sent back
 						if (!this.getRespawnPoints().contains(penultimateRespawnPoint)) {
-
-							System.out.println("in here!");
 
 							if (this.humanPlayer.getX() - penultimateRespawnPoint.getX() > 350) {
 
