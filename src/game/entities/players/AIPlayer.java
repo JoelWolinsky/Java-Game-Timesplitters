@@ -10,11 +10,6 @@ import game.graphics.AnimationStates;
 
 public class AIPlayer extends Player {
 
-
-	private static final float DECELERATION = 0.4f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
-	private static final float JUMP_GRAVITY = -7.5f; 	// VelY changes to this number upon jump
-	private static final float RUN_SPEED = 3.6f; 		// Default run speed
-
     public String direction = "N"; // or private?
     public String jump = "N";
     public float wait = 0;

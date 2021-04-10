@@ -63,3 +63,5 @@ interSegmentA4portaldest
 IDLE 4 interSegmentA4portaldest1.png interSegmentA4portaldest2.png interSegmentA4portaldest3.png interSegmentA4portaldest4.png
 bigportal
 IDLE 4 bigportal.png bigportal.png bigportal.png bigportal.png
+banana
+IDLE 4 banana.png banana.png banana.png banana.png

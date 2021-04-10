@@ -34,7 +34,7 @@ public class Blip extends GameObject {
 
 	public void tick() {
 
-		if (player.moving())
+		if (player.isMoving())
 			this.x=player.getX()/(0.71f*totalNrBlocks);
 
 	}

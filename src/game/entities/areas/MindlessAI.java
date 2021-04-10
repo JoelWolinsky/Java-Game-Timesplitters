@@ -4,7 +4,6 @@ import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
 import game.entities.GameObject;
 import game.entities.players.Player;
-import game.entities.platforms.MovingPlatform;
 
 import java.awt.*;
 import java.util.*;
@@ -15,7 +14,6 @@ import static game.Level.getPlayers;
 import static game.Utility.getRandomElementInRangeSeeded;
 import static game.Utility.getRandomIntInRangeSeeded;
 import static game.Utility.getRandomFloatInRangeSeeded;
-import static game.Utility.getRandomElementInRangeSeeded;
 
 public class MindlessAI extends AnimArea implements GravityObject, CollidingObject, SolidCollider {
 
@@ -53,7 +51,7 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 		{
 			if (this.getInteraction(p))
 				if (!(p.isBounceImmune()))
-					p.bouncing(this.getSpeed());
+					p.bounce(this.getSpeed());
 		}
 
 
@@ -85,7 +83,7 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 			{
 				if (this.getInteraction(o))
 					if (!(((Player)o).isBounceImmune()))
-						((Player)o).bouncing(this.getSpeed());
+						((Player)o).bounce(this.getSpeed());
 			}
 
 		}
