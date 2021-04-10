@@ -175,12 +175,7 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "intersegmentA2up");
 			m.mapParser(currentLevel, "intersegmentA2down");
 			m.mapParser(currentLevel, "segmentA4");
-			//m.mapParser(currentLevel, "segmentA11");
-			//m.mapParser(currentLevel, "segmentA15");
-			//m.mapParser(currentLevel, "segmentA12");
 			m.mapParser(currentLevel, "segmentA13");
-			//m.mapParser(currentLevel, "introDimension");
-			//m.mapParser(currentLevel, "segmentA14");
 			/*
 
 			*** LEGEND ***
@@ -194,7 +189,7 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "segmentA4");				// aesthetic hall 2
 			m.mapParser(currentLevel, "segmentA5");				// aesthetic hall 3
 			m.mapParser(currentLevel, "segmentA6");				// ghosts
-			m.mapParser(currentLevel, "segmentA7");				// platforms								-- CAUSES PROGRAM TO CRASH
+			m.mapParser(currentLevel, "segmentA7");				// platforms								
 			m.mapParser(currentLevel, "segmentA8");				// disappearing long and small platforms 	-- NEEDS WORK
 			m.mapParser(currentLevel, "segmentA9");				// spinning fireball one 					-- NOT DOING AI VERSION
 			m.mapParser(currentLevel, "segmentA10");			// long corridor
@@ -206,7 +201,7 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "intersegmentA1"); 		// skeletons throwing objects down
 			m.mapParser(currentLevel, "intersegmentA2");		// falling rocks
 			m.mapParser(currentLevel, "intersegmentA2up");		// falling chandeliers
-			m.mapParser(currentLevel, "intersegmentA2down");	// falling chandeliers						-- BUGGY (FOR AI)
+			m.mapParser(currentLevel, "intersegmentA2down");	// falling chandeliers						
 			m.mapParser(currentLevel, "intersegmentA3");		// hands one
 
 		*/

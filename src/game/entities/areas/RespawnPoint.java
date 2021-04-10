@@ -1,4 +1,5 @@
 package game.entities.areas;
+import game.entities.players.AIPlayer;
 import game.entities.players.Player;
 
 import java.awt.*;
@@ -27,7 +28,9 @@ public class RespawnPoint extends Area {
 					p.setRespawnY((int) this.getY()-40 + (int)this.getExtraPointY());
 					p.setRespawnThreshold((int)this.getY());
 					p.getRespawnPoints().add(this);
-					this.reached=true;
+					
+					if (! (p instanceof AIPlayer))
+						this.reached=true;
 				}
 			}
 

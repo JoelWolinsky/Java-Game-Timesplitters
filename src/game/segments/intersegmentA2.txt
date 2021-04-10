@@ -7,7 +7,7 @@ Platform Custom 70 19 wall1.png
 Platform Custom 338 19 wall1inv.png
 
 Waypoint 40 363 flag3.png R N 0
-Waypoint 85 363 flag3.png R Y 25
+Waypoint 90 363 flag3.png R Y 0
 Waypoint 86 264 flag3.png R Y 65
 Waypoint 90 134 flag3.png R Y 65
 Waypoint 165 330 flag3.png L Y 20
