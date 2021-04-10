@@ -27,10 +27,10 @@ public class AddedItem extends AnimArea {
 		{
 			if (this.isVisibile())
 				if (this.getInteraction(p))
-					if (p!=this.getCreator()) {
+					{
 						this.getEffect(p);
 						this.setVisibile(false);
-						p.addEffect(new Effect(this.getEffect(),500));
+						p.addEffect(new Effect(this.getEffectName(),500));
 					}
 		}
 
@@ -61,7 +61,7 @@ public class AddedItem extends AnimArea {
 		return creator;
 	}
 
-	public String getEffect() {
+	public String getEffectName() {
 		return effect;
 	}
 }

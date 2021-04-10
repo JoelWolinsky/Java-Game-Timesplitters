@@ -15,12 +15,16 @@ public class SlowArea extends AnimArea{
 		{
 			if (this.getInteraction(p))
 			{
-				p.slow();
+				p.setRunSpeed(2.0f);
+				p.setJumpGravity(-5.5f);
 				p.setLocker(this);
 			}
 			else
 			{
-				p.normal(this);
+				if (this == p.getLocker()) {
+					p.normal(this);
+					p.removeLocker();
+				}
 			}
 		}
 

@@ -2,8 +2,12 @@ Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA1.png
 
 Chunk 1 W ground1.png
 
-Chest 526 360 chest
-Chest 726 360 chest
+Chest 1000 360 chest
+Chest 1000 360 chest
+Chest 1000 360 chest
+Chest 1000 360 chest
+Chest 1000 360 chest
+Chest 1000 360 chest
 
 Area 0 -384 sky1.png
 Area 0 384 introStairs.png

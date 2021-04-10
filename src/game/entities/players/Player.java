@@ -13,13 +13,10 @@ import game.entities.areas.AddedItem;
 import game.entities.platforms.CrushingPlatform;
 import game.entities.platforms.MovingPlatform;
 import game.entities.areas.RespawnPoint;
-import game.graphics.Animation;
 import game.graphics.AnimationStates;
-import game.graphics.Assets;
 import game.input.KeyInput;
 import game.network.packets.Packet02Move;
-
-
+import static game.graphics.Assets.getAnimations;
 import static game.Level.getToBeAdded;
 
 public class Player extends GameObject implements SolidCollider, GravityObject{
@@ -28,11 +25,11 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 	protected float velY = 0;
 	private float terminalVelY = 15;
 
-	private static final float DECELERATION = 0.4f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
-	private static float JUMP_GRAVITY = -7.5f;
-	private static float JUMP_GRAVITY_DOUBLE = -10.5f;// VelY changes to this number upon jump
-	private static float RUN_SPEED = 3.6f; 		// Default run speed
-	private static float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
+	protected float DECELERATION = 0.4f; 	 	// Rate at which velX decreases when A/D key released (for sliding)
+	protected float JUMP_GRAVITY = -7.5f;
+	protected float JUMP_GRAVITY_DOUBLE = -10.5f;// VelY changes to this number upon jump
+	protected float RUN_SPEED = 3.6f; 		// Default run speed
+	protected float DOWN_SPEED = 10; 		// Speed at which character falls when S pressed in mid-air
 
 	public LinkedList<RespawnPoint> previousRespawnPoints = new LinkedList<>();
 
@@ -48,7 +45,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 	protected boolean canMove=false;
 	private boolean locked=false;
 	private GameObject locker;
-	private LinkedList<Item> inventory = new LinkedList<Item>(Arrays.asList(new Item(0,0,0,0,this,"./img/empty.png"),new Item(0,0,0,0,this,"./img/shoes.png"),new Item(0,0,0,0,this,"./img/empty.png")));
+	private ArrayList<Item> inventory = new ArrayList<Item>(Arrays.asList(new Item(0,0,0,0,this,"./img/empty.png"),new Item(0,0,0,0,this,"./img/empty.png"),new Item(0,0,0,0,this,"./img/empty.png")));
 	private int inventorySize=3;
 	private int inventoryIndex=2;
 	private boolean inventoryChanged=false;
@@ -63,24 +60,20 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 	private int bouncingTimer=0;
 	private boolean bounceImmunity=false;
 
-	private Assets s = new Assets();
 	private Point prevPos;
 	private String username;
 	private KeyInput input;
 
+
 	public Player(float x, float y, KeyInput input, int width,int height) {
 		super(x, y, 2, width, height);
-
 
 		this.input = input;
 		this.username = UUID.randomUUID().toString();;
 
+		//animations
+		this.animations = getAnimations("player");
 		this.currentAnimState = AnimationStates.IDLE;
-
-		s.init();
-		animations.put(AnimationStates.IDLE, new Animation(15, s.player_idle));
-		animations.put(AnimationStates.RIGHT, new Animation(15, s.player_right));
-		animations.put(AnimationStates.LEFT, new Animation(15, s.player_left));
 
 
 		CollidingObject.addCollider(this);
@@ -132,12 +125,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 		//Check for keyboard input along the x-axis
 
 		if (canMove)
-		if (!(this instanceof AIPlayer))
 		if (this.input != null) {
 			if(KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
-
-
-				moving=true;
 
 				// Simulates acceleration when you run right
 				if (this.velX >= RUN_SPEED){
@@ -149,7 +138,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 
 			} else if(KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
 
-
 					// Simulates acceleration when you run left
 					if (this.velX <= -RUN_SPEED){
 						this.velX = -RUN_SPEED;
@@ -159,27 +147,34 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 				currentAnimState = AnimationStates.LEFT;
 
 			} else {
-				currentAnimState = AnimationStates.IDLE;
+
 				// For deceleration effect
-				if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
+				if (!SolidCollider.willCauseSolidCollision(this, this.velX, true))
+				{
 					if (this.velX >= -0.1f && this.velX <= 0.1f) {
 						this.velX = 0;
 					} else if (this.velX > 0.1f) {
 						this.velX -= DECELERATION;
+						currentAnimState = AnimationStates.IDLE;
 					} else {
 						this.velX += DECELERATION;
+						currentAnimState = AnimationStates.OTHER;
 					}
-				} else {
+				}
+				else {
 					this.velX = 0;
 				}
+
 			}
 
 
 			//Check for keyboard input along the y-axis
-			if(KeyInput.down.isPressed()) {
+			if(KeyInput.down.isPressed())
+			{
 				this.velY = DOWN_SPEED;
-			}else if(KeyInput.up.isPressed()) {
-
+			}
+			else if(KeyInput.up.isPressed())
+			{
 				if (jumpCooldown>=10 && canDoubleJump && !isOnGround() && !hasCeilingAbove() && !isOnWall())
 				{
 					this.velY = JUMP_GRAVITY_DOUBLE;
@@ -308,6 +303,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 			}
 		}
 
+		if (!(this instanceof AIPlayer))
 		if(KeyInput.space.isPressed())
 		{
 			//OPTION 2
@@ -379,23 +375,16 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 				bouncingTimer=0;
 			}
 
-			//sum = sum + speed;
 		}
 
 
 
 	}
 
-	public boolean moving(){
+	public boolean isMoving(){
 		return moving;
 	}
-
-	public void slow(){
-		RUN_SPEED = 2.0f;
-		JUMP_GRAVITY = -5.5f;
-	}
-
-
+	
 	public void setRunSpeed(float runSpeed) {
 		RUN_SPEED = runSpeed;
 	}
@@ -420,7 +409,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 				JUMP_GRAVITY = -7.5f;
 				break;
 
-			case "./img/banana.png":
+			case "banana":
 				RUN_SPEED = 3.6f;
 				JUMP_GRAVITY = -7.5f;
 				break;
@@ -439,12 +428,10 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 			canMove=false;
 			i=0;
 			currentAnimState = AnimationStates.IDLE;
-			
-			
 		}
 	}
 
-	public void bouncing(int speed){
+	public void bounce(int speed){
 		this.bouncing = true;
 		bouncingSpeed= speed;
 		bounceImmunity=true;
@@ -498,22 +485,13 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 		//g.fillRect((int)(this.x + xOffset),(int)(this.y + yOffset),this.width,this.height);
 		if (immunity==true)
 		{
-			if (0<i && i <10 || 30<i && i <40 || 60<i && i<70)
+			if (!(0<i && i <10 || 30<i && i <40 || 60<i && i<70))
 			{
-
-
-			}
-			else
-			{
-
-
 				this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
-
 			}
 		}
 		else
 		{
-
 			this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
 		}
 
@@ -522,7 +500,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 	public Rectangle getBounds() {
 		return new Rectangle((int)x, (int)y, width, height);
 	}
-
 
 	public void setRespawnX(int x) {
 		this.respawnX = x;
@@ -572,7 +549,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 		inventory.remove(item);
 	}
 
-	public LinkedList<Item> getInventory() {
+	public ArrayList<Item> getInventory() {
 		return inventory;
 	}
 
@@ -612,14 +589,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 		currentEffects.add(e);
 	}
 
-	public int getRandomNumber(int min, int max) {
-		return (int) ((Math.random() * (max - min)) + min);
-	}
-	public static int getRandom(int[] array) {
-		int rnd = new Random().nextInt(array.length);
-		return array[rnd];
-	}
-
 	public boolean isBounceImmune() {
 		return bounceImmunity;
 	}
@@ -628,5 +597,12 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 		return previousRespawnPoints;
 	}
 
+	public GameObject getLocker() {
+		return locker;
+	}
 
+	public void removeLocker()
+	{
+		locker=null;
+	}
 }

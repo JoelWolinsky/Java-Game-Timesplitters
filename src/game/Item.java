@@ -59,7 +59,7 @@ public class Item extends GameObject {
 				break;
 			case "./img/banana.png":
 				this.addItem=true;
-				itemToAdd=url;
+				itemToAdd=url.substring(6,12);
 				break;
 		}
 
@@ -84,4 +84,5 @@ public class Item extends GameObject {
 	public String getItemToAdd() {
 		return itemToAdd;
 	}
+
 }

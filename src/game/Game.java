@@ -13,6 +13,7 @@ import game.display.Window;
 import game.entities.GameObject;
 import game.entities.players.Player;
 import game.entities.players.AIPlayer;
+import game.graphics.Assets;
 import game.input.KeyInput;
 import game.network.packets.Packet00Login;
 import network.GameClient;
@@ -43,6 +44,7 @@ public class Game extends Canvas implements Runnable{
 	int index = 0;
 	int bottom;
 	int top;
+	private Assets s = new Assets();
 	BackgroundController ctrlr;
 	/**
 	 * Initialises game entities and objects that must appear at the start of the game
@@ -129,6 +131,8 @@ public class Game extends Canvas implements Runnable{
 
 	public synchronized void start() {
 
+		s.init();
+
 		System.out.println("start()");
 
 		if(isMultiplayer == true) {
@@ -171,13 +175,14 @@ public class Game extends Canvas implements Runnable{
 		camera = new Camera();
 		camera.addTarget(player);
 
+
 		if (mapMode.equals("default")) {
 			m.mapParser(currentLevel, "intro1");
 			//m.mapParser(currentLevel, "segmentA11");
 			//m.mapParser(currentLevel, "segmentA15");
 			//m.mapParser(currentLevel, "segmentA12");
 			//m.mapParser(currentLevel, "segmentA11");
-			m.mapParser(currentLevel, "introDimension");
+			m.mapParser(currentLevel, "segmentA11");
 			//m.mapParser(currentLevel, "introDimension");
 			//m.mapParser(currentLevel, "segmentA14");
 			/*
