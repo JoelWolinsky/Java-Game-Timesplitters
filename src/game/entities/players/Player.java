@@ -98,7 +98,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 		// if (!(this instanceof AIPlayer))
 		if (i<100) {
 			i++;
-			if (i>30) {
+			if (i>20) {
 				canMove = true; // makes Players pause for half second upon respawn
 			}
 		}else {

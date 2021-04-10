@@ -21,7 +21,6 @@ public class AIPlayer extends Player {
 	public Player humanPlayer;
 	public float dist_from_player;
 	public RespawnPoint penultimateRespawnPoint;
-	public LinkedList<RespawnPoint> visitedRespawnPoints = new LinkedList<>();
 	private int max_distance_ahead = 650;
 	private int max_distance_behind = -550;
 	private String username;
@@ -42,104 +41,112 @@ public class AIPlayer extends Player {
 		super.tick();
 
 		dist_from_player = this.x - this.humanPlayer.getX();
-		// teleports AI Player to the penultimate RespawnPoint that the player has reached 
-		if (dist_from_player < max_distance_behind) {
-
-			if (humanPlayer.getRespawnPoints().size() > 2){
-
-				// first get the penultimate one
-				penultimateRespawnPoint = humanPlayer.getRespawnPoints().get(humanPlayer.getRespawnPoints().size()-2);
-
-				// so that it only teleports once, and doesn't keep getting sent back
-				if (!this.visitedRespawnPoints.contains(penultimateRespawnPoint)) {
-
-					// then set AIPlayer x to the value of that RP
-					this.x = penultimateRespawnPoint.getX();
-					this.y = penultimateRespawnPoint.getY()-40;
-
-				}
-			}
-		}
-
 
 		if (dist_from_player < max_distance_ahead) {
 
+				// teleports AI Player to the penultimate RespawnPoint that the player has reached 
+				if (dist_from_player < max_distance_behind) {
+
+					if (humanPlayer.getRespawnPoints().size() > 2){
+
+						// first get the penultimate one
+						penultimateRespawnPoint = humanPlayer.getRespawnPoints().get(humanPlayer.getRespawnPoints().size()-2);
+
+						System.out.println("visitedRespawnPoints size: "+ this.getRespawnPoints().size());
+
+						// so that it only teleports once, and doesn't keep getting sent back
+						if (!this.getRespawnPoints().contains(penultimateRespawnPoint)) {
+
+							System.out.println("in here!");
+
+							if (this.humanPlayer.getX() - penultimateRespawnPoint.getX() > 350) {
+
+								// then set AIPlayer x to the value of that RP
+								this.x = penultimateRespawnPoint.getX();
+								this.y = penultimateRespawnPoint.getY()-40;
+
+							}							
+						}
+					}
+				}
+		
 			if (this.canMove == true ) {
 
-				if (this.wait > 0) {
+					if (this.wait > 0) {
 
-					// System.out.println(this.wait);
-					this.wait--;
+						// System.out.println(this.wait);
+						this.wait--;
 
-					if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
-						if (this.velX >= -0.1f && this.velX <= 0.1f) {
-							this.velX = 0;
-							currentAnimState = AnimationStates.IDLE;
-						} else if (this.velX > 0.1f) {
-							this.velX -= DECELERATION;
-						} else {
-							this.velX += DECELERATION;
-						}
-					} else {
-						this.velX = 0;
-						currentAnimState = AnimationStates.IDLE;
-					}
-
-				}
-				else {
-					
-						if(this.direction.equals("R")) {
-
-						/* Beware: Java floating point representation makes it difficult to have perfect numbers
-						( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
-
-								// Simulates acceleration when running right
-								if (this.velX >= RUN_SPEED){
-									this.velX = RUN_SPEED;
-								} else {
-									this.velX += RUN_SPEED/6;
-								}
-							currentAnimState = AnimationStates.RIGHT;
-
-						} else if(this.direction.equals("L")) { 
-
-								// Simulates acceleration when running left
-								if (this.velX <= -RUN_SPEED){
-									this.velX = -RUN_SPEED;
-								} else {
-									this.velX -= RUN_SPEED/6;
-								}
-							currentAnimState = AnimationStates.LEFT;
-
-						} else { 
-							// For deceleration effect
-							if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
-								if (this.velX >= -0.1f && this.velX <= 0.1f) {
-									this.velX = 0;
-									currentAnimState = AnimationStates.IDLE;
-								} else if (this.velX > 0.1f) {
-									this.velX -= DECELERATION;
-								} else {
-									this.velX += DECELERATION;
-								}
-							} else {
+						if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
+							if (this.velX >= -0.1f && this.velX <= 0.1f) {
 								this.velX = 0;
 								currentAnimState = AnimationStates.IDLE;
+							} else if (this.velX > 0.1f) {
+								this.velX -= DECELERATION;
+							} else {
+								this.velX += DECELERATION;
 							}
+						} else {
+							this.velX = 0;
+							currentAnimState = AnimationStates.IDLE;
 						}
 
-					
-						if(jump.equals("Y")) {
-							if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
-								
-								this.velY = JUMP_GRAVITY;
+					}
+					else {
+						
+							if(this.direction.equals("R")) {
+
+							/* Beware: Java floating point representation makes it difficult to have perfect numbers
+							( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
+
+									// Simulates acceleration when running right
+									if (this.velX >= RUN_SPEED){
+										this.velX = RUN_SPEED;
+									} else {
+										this.velX += RUN_SPEED/6;
+									}
+								currentAnimState = AnimationStates.RIGHT;
+
+							} else if(this.direction.equals("L")) { 
+
+									// Simulates acceleration when running left
+									if (this.velX <= -RUN_SPEED){
+										this.velX = -RUN_SPEED;
+									} else {
+										this.velX -= RUN_SPEED/6;
+									}
+								currentAnimState = AnimationStates.LEFT;
+
+							} else { 
+								// For deceleration effect
+								if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
+									if (this.velX >= -0.1f && this.velX <= 0.1f) {
+										this.velX = 0;
+										currentAnimState = AnimationStates.IDLE;
+									} else if (this.velX > 0.1f) {
+										this.velX -= DECELERATION;
+									} else {
+										this.velX += DECELERATION;
+									}
+								} else {
+									this.velX = 0;
+									currentAnimState = AnimationStates.IDLE;
+								}
 							}
-							this.jump = "N";
+
+						
+							if(jump.equals("Y")) {
+								if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
+									
+									this.velY = JUMP_GRAVITY;
+								}
+								this.jump = "N";
+							}
 						}
 					}
 				}
 			}
-		}
+		
 
 		
 

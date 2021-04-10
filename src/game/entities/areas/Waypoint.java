@@ -27,7 +27,7 @@ public class Waypoint extends Area {
 			if (this.getInteraction(ap))
 			{
 
-				if (ap.immunity == true) {
+				if (ap.immunity == true && ap.i < 20) {
 
 					//ap.immunity = false;
 
