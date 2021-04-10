@@ -429,7 +429,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 	}
 
 	public void respawn(){
-		if (godMode==false ) // && immunity==false )
+		if (godMode==false && immunity==false )
 		{
 			this.x = respawnX;
 			this.y = respawnY;

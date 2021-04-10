@@ -29,7 +29,7 @@ public class Waypoint extends Area {
 
 				if (ap.immunity == true) {
 
-					ap.immunity = false;
+					//ap.immunity = false;
 
 					ap.setWait(this.getWait());
 					ap.setCurrentWaypoint(this);
