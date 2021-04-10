@@ -206,7 +206,7 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "intersegmentA1"); 		// skeletons throwing objects down
 			m.mapParser(currentLevel, "intersegmentA2");		// falling rocks
 			m.mapParser(currentLevel, "intersegmentA2up");		// falling chandeliers
-			m.mapParser(currentLevel, "intersegmentA2down");	// falling chandeliers						-- BUGGY (FOR AI)
+			m.mapParser(currentLevel, "intersegmentA2down");	// falling chandeliers						
 			m.mapParser(currentLevel, "intersegmentA3");		// hands one
 
 		*/

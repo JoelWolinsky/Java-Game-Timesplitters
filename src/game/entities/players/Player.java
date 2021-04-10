@@ -40,11 +40,12 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 	private int respawnX=0;
 	private int respawnThreshold=340;
 	private int respawnY=340;
-	private boolean immunity=false;
-	private int i=0,bi=0;
+	public boolean immunity=false;
+	public int i=0;
+	private int bi=0;
 	private boolean cc=false;
 	private boolean moving;
-	private boolean canMove=false;
+	protected boolean canMove=false;
 	private boolean locked=false;
 	private GameObject locker;
 	private LinkedList<Item> inventory = new LinkedList<Item>(Arrays.asList(new Item(0,0,0,0,this,"./img/empty.png"),new Item(0,0,0,0,this,"./img/shoes.png"),new Item(0,0,0,0,this,"./img/empty.png")));
@@ -86,8 +87,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 		SolidCollider.addSolidCollider(this);
 	}
 
-
-	//TODO: Fix moving through the up-and-down moving platform when you jump underneath it
 	public void tick() {
 		//Gather all collisions
 		CollidingObject.getCollisions(this);
@@ -96,9 +95,12 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 		moving = false;
 
 		//disable immunity after 100
-		if (!(this instanceof AIPlayer))
+		// if (!(this instanceof AIPlayer))
 		if (i<100) {
 			i++;
+			if (i>30) {
+				canMove = true; // makes Players pause for half second upon respawn
+			}
 		}else {
 			immunity=false;
 		}
@@ -135,16 +137,15 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 			if(KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
 
 
-			/* Beware: Java floating point representation makes it difficult to have perfect numbers
-			( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
+				moving=true;
 
-					// Simulates acceleration when you run right
-					if (this.velX >= RUN_SPEED){
-						this.velX = RUN_SPEED;
-					} else {
-						this.velX += RUN_SPEED/6;
-					}
-					currentAnimState = AnimationStates.RIGHT;
+				// Simulates acceleration when you run right
+				if (this.velX >= RUN_SPEED){
+					this.velX = RUN_SPEED;
+				} else {
+					this.velX += RUN_SPEED/6;
+				}
+				currentAnimState = AnimationStates.RIGHT;
 
 			} else if(KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
 
@@ -275,9 +276,15 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 		work everytime. (Falling 300 blocks below the floor/respawnY will kill the player)
 		 */
 		if (this.y >respawnThreshold+300) {
+			
 			this.x = respawnX;
 			this.y = respawnY;
+			this.velX = 0;
+			this.velY = 5;
+			immunity=true;
+			canMove=false;
 			i=0;
+			currentAnimState = AnimationStates.IDLE;
 		}
 
 		// press r to respawn -- used for debugging
@@ -422,12 +429,18 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 	}
 
 	public void respawn(){
-		if (immunity==false && godMode==false)
+		if (godMode==false && immunity==false )
 		{
 			this.x = respawnX;
 			this.y = respawnY;
+			this.velX = 0;
+			this.velY = 5;
 			immunity=true;
+			canMove=false;
 			i=0;
+			currentAnimState = AnimationStates.IDLE;
+			
+			
 		}
 	}
 

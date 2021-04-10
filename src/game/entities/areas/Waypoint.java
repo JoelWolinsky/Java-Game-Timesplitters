@@ -21,19 +21,35 @@ public class Waypoint extends Area {
 
     public void tick() {
 
-
 		for (AIPlayer ap : getAIPlayers())
 		{
 			if (ap instanceof AIPlayer)
 			if (this.getInteraction(ap))
 			{
 
-				if (ap.getCurrentWaypoint()!=this) {
-					ap.setDirection(this.getDirection());
-					ap.setJump(this.getJump());
+				if (ap.immunity == true) {
+
+					//ap.immunity = false;
+
 					ap.setWait(this.getWait());
 					ap.setCurrentWaypoint(this);
+					ap.setDirection(this.getDirection());
+					ap.setJump(this.getJump());
+					
+
+				} else {
+
+					if (ap.getCurrentWaypoint()!=this) {
+						ap.setWait(this.getWait());
+						ap.setCurrentWaypoint(this);
+						ap.setDirection(this.getDirection());
+						ap.setJump(this.getJump());
+					}
+
 				}
+
+				
+
 			}
 		}
 
