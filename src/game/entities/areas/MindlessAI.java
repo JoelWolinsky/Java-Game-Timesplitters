@@ -38,8 +38,8 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 	private float originalX;
 	private int minRange,maxRange;
 
-	public MindlessAI(float x, float y, int width, int height,int minRange, int maxRange, String...urls) {
-		super(x, y, width, height,urls);
+	public MindlessAI(float x, float y, int width, int height,int minRange, int maxRange, String url) {
+		super(x, y, width, height,url);
 		this.minRange=minRange;
 		this.maxRange=maxRange;
 		originalX=x;

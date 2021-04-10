@@ -1,7 +1,11 @@
 package game.entities.areas;
 
 import game.entities.players.Player;
+import game.graphics.Animation;
+import game.graphics.AnimationStates;
 
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.util.LinkedList;
 
 import static game.Level.getPlayers;
@@ -11,8 +15,8 @@ public class TrackingAI extends EventScriptedDamageZone{
 	private Player mytarget;
 	private float speed;
 
-	public TrackingAI(float x, float y, int width, int height, float speed, LinkedList<Point> points, int startOffset, Player player, String...urls) {
-		super(x, y, width, height, speed,points,startOffset, urls);
+	public TrackingAI(float x, float y, int width, int height, float speed, LinkedList<Point> points, int startOffset, Player player, String url) {
+		super(x, y, width, height, speed,points,startOffset, url);
 		this.mytarget=player;
 		this.speed=speed;
 		this.setActivated(false);
@@ -42,10 +46,14 @@ public class TrackingAI extends EventScriptedDamageZone{
 			this.getPoints().get(1).setX((int)mytarget.getX());
 			this.getPoints().get(1).setY((int)mytarget.getY());
 
-			if (this.x < this.getPoints().get(1).getX())
-				this.x= this.x + speed;
-			else if (this.x > this.getPoints().get(1).getX())
+			if (this.x < this.getPoints().get(1).getX()) {
+				currentAnimState=AnimationStates.OTHER;
+				this.x = this.x + speed;
+			}
+			else if (this.x > this.getPoints().get(1).getX()) {
+				currentAnimState=AnimationStates.IDLE;
 				this.x = this.x - speed;
+			}
 
 			if (this.y < this.getPoints().get(1).getY())
 				this.y= this.y + speed;
@@ -60,6 +68,7 @@ public class TrackingAI extends EventScriptedDamageZone{
 		}
 
 	}
+
 
 
 }

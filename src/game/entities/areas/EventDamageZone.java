@@ -31,8 +31,8 @@ public class EventDamageZone extends AnimArea{
 	private boolean go = false;
 	private boolean random = false;
 
-	public EventDamageZone(float x, float y, int width, int height, int noticeDelay, int onDuration ,String notice, int noticeX, int noticeY,boolean random, String...urls) {
-		super(x, y, width, height,urls);
+	public EventDamageZone(float x, float y, int width, int height, int noticeDelay, int onDuration ,String notice, int noticeX, int noticeY,boolean random, String url) {
+		super(x, y, width, height,url);
 
 		this.random=random;
 		this.noticeDelay=noticeDelay;

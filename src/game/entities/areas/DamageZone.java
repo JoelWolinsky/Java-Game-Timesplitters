@@ -21,8 +21,8 @@ public class DamageZone extends AnimArea{
 	private BufferedImage img;
 	private String notice;
 
-	public DamageZone(float x, float y, int width, int height, int increment,int onDuration, int offDuration, int startOffset, String notice, String...urls) {
-		super(x, y, width, height,urls);
+	public DamageZone(float x, float y, int width, int height, int increment,int onDuration, int offDuration, int startOffset, String notice, String url) {
+		super(x, y, width, height,url);
 		this.increment=increment;
 		this.startOffset = startOffset;
 		this.onDuration=onDuration;

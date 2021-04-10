@@ -8,5 +8,6 @@ public enum AnimationStates {
 	RIGHT,
 	LEFT,
 	JUMP,
+	OTHER,
 	FALL
 }

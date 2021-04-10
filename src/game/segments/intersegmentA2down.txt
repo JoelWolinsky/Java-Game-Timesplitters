@@ -20,7 +20,7 @@ Platform Custom 307 221 corner2inv.png
 Platform Custom 117 190 corner1.png
 Platform Custom 213 190 corner1inv.png
 
-AnimArea 197 310 4 torch1.png torch2.png torch3.png torch4.png
+AnimArea 197 310 torch
 
 
 Chunk 1 S intersegmentA2up.png
@@ -36,10 +36,10 @@ Platform Custom 213 430 edge1inv.png
 Platform Custom 181 430 edge1.png
 
 //TORCH AND FALLING ROCKS
-AnimArea 197 60 4 torch1.png torch2.png torch3.png torch4.png
--AnimArea 197 210 4 torch1.png torch2.png torch3.png torch4.png
--AnimArea 197 340 4 torch1.png torch2.png torch3.png torch4.png
--Projectile 120 0 0 3 500 0 0 0 nopicture.png 4 rocks1.png rocks1.png rocks1.png rocks1.png
+AnimArea 197 60 torch
+-AnimArea 197 210 torch
+-AnimArea 197 340 torch
+-Projectile 120 0 0 3 500 0 0 0 nopicture.png rocks
 
 //CLIMBING PLATFORMS LEFT
 Platform Custom 90 224 smallplatform1.png
@@ -75,14 +75,14 @@ Platform Custom 70 0 wall4inv.png
 
 
 
-EventDamageZone 190 384 10 200 notice.png 0 0 false 1 -100 -100 200 1 4 skele1.png skele2.png skele4.png skele2.png
+EventDamageZone 190 384 10 200 notice.png 0 0 false 1 -100 -100 200 1 skele
 
-Projectile 120 -135 0 4 650 150 0 50 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
-Projectile 260 -135 0 4 700 285 0 20 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
-Projectile 120 -135 0 4 620 150 0 80 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
-Projectile 260 -135 0 4 600 285 0 110 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
-Projectile 120 -135 0 4 710 150 0 130 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
-Projectile 260 -135 0 4 640 285 0 150 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
-Projectile 120 -135 0 4 700 150 0 170 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
-Projectile 260 -135 0 4 620 285 0 190 crack1.png 4 stones1.png stones1.png stones1.png stones1.png
+Projectile 120 -135 0 4 650 150 0 50 crack1.png stones
+Projectile 260 -135 0 4 700 285 0 20 crack1.png stones
+Projectile 120 -135 0 4 620 150 0 80 crack1.png stones
+Projectile 260 -135 0 4 600 285 0 110 crack1.png stones
+Projectile 120 -135 0 4 710 150 0 130 crack1.png stones
+Projectile 260 -135 0 4 640 285 0 150 crack1.png stones
+Projectile 120 -135 0 4 700 150 0 170 crack1.png stones
+Projectile 260 -135 0 4 620 285 0 190 crack1.png stones
 

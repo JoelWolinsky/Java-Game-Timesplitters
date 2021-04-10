@@ -7,16 +7,15 @@ Platform Custom 0 140 corner1.png
 Platform Custom 214 265 edge1.png
 Waypoint 54 363 flag3.png R N 0
 Waypoint 104 363 flag3.png R N 0
-EventDamageZone 327 228 50 200 notice.png 0 0 false 1 -180 -70 1 100 4 skele1.png skele2.png skele4.png skele2.png
--DetectionDamageZone 140 360 0 0 1 170 360 1 4 hand1.png hand1.png hand1.png hand1.png
+EventDamageZone 327 228 50 200 notice.png 0 0 false 1 -180 -70 1 100 skele
 Platform Default 246 265
 Platform Inverted 278 265
 Platform Default 294 265
 Platform Inverted 326 265
 Platform Default 342 265
 Platform Custom 374 265 edge1inv.png
-Chest 100 360 4 chest.png chest.png chest.png chest.png
-Chest 300 360 4 chest.png chest.png chest.png chest.png
+Chest 100 360 chest
+Chest 300 360 chest
 
 Floor
 
@@ -37,27 +36,27 @@ Platform Custom 358 265 edge1inv.png
 Platform Custom 260 336 smallpillar1.png
 Platform Custom 342 292 smallpillar1.png
 Waypoint 420 363 flag3.png R Y 0
-SlowArea 280 280 4 web.png web.png web.png web.png
-SlowArea 280 300 4 web.png web.png web.png web.png
-SlowArea 280 320 4 web.png web.png web.png web.png
-SlowArea 310 300 4 web.png web.png web.png web.png
-SlowArea 310 320 4 web.png web.png web.png web.png
-SlowArea 310 280 4 web.png web.png web.png web.png
-SlowArea 310 340 4 web.png web.png web.png web.png
-SlowArea 280 340 4 web.png web.png web.png web.png
-SlowArea 310 360 4 web.png web.png web.png web.png
-SlowArea 280 360 4 web.png web.png web.png web.png
+SlowArea 280 280 web
+SlowArea 280 300 web
+SlowArea 280 320 web
+SlowArea 310 300 web
+SlowArea 310 320 web
+SlowArea 310 280 web
+SlowArea 310 340 web
+SlowArea 280 340 web
+SlowArea 310 360 web
+SlowArea 280 360 web
 
-SlowArea 330 340 4 web.png web.png web.png web.png
-SlowArea 330 360 4 web.png web.png web.png web.png
-SlowArea 330 320 4 web.png web.png web.png web.png
-SlowArea 330 300 4 web.png web.png web.png web.png
-SlowArea 330 280 4 web.png web.png web.png web.png
+SlowArea 330 340 web
+SlowArea 330 360 web
+SlowArea 330 320 web
+SlowArea 330 300 web
+SlowArea 330 280 web
 
-SlowArea 260 280 4 web.png web.png web.png web.png
-SlowArea 260 300 4 web.png web.png web.png web.png
-SlowArea 260 320 4 web.png web.png web.png web.png
-SlowArea 260 340 4 web.png web.png web.png web.png
-SlowArea 260 360 4 web.png web.png web.png web.png
+SlowArea 260 280 web
+SlowArea 260 300 web
+SlowArea 260 320 web
+SlowArea 260 340 web
+SlowArea 260 360 web
 Floor
 

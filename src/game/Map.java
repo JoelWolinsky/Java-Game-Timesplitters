@@ -223,35 +223,17 @@ public class Map {
                     case "DamageZone":
 
                         DamageZone damageZone;
-                        damageZone = new DamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),Integer.parseInt(splited[5]),Integer.parseInt(splited[6]),splited[7],createURLS(8));
+                        damageZone = new DamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),Integer.parseInt(splited[5]),Integer.parseInt(splited[6]),splited[7],splited[8]);
                         currentLevel.addEntity(damageZone);
                         break;
 
                     case "ScriptedDamageZone":
 
-                        //prepares a string array with the urls
-                        List<String> list5 = new ArrayList<String>();
-                        for (int l = 6+(3*Integer.parseInt(splited[5])) + 1 ;l < 6+(3*Integer.parseInt(splited[5])) + 1 +Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]);l++)
-                            list5.add("./img/".concat(splited[l]));
-
-                        String[] arr5 = list5.toArray(new String[0]);
-
-
                         LinkedList<Point> points = new LinkedList<>();
-
-                        Point adak;
-                        points.add(new Point(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),1));
-
-                        for (int l = 6;l < 6+(3*Integer.parseInt(splited[5]));l+=3)
-                        {
-                            adak= new Point(horizontalIndex - setX + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[l+1]),Float.parseFloat(splited[l+2]));
-                            points.add(adak);
-                        }
-
+                        int newIndex = createPoints(points,5);
                         ScriptedDamageZone adz;
-                        adz = new ScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),points,Integer.parseInt(splited[4]),arr5);
+                        adz = new ScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),points,Integer.parseInt(splited[4]),splited[newIndex]);
                         currentLevel.addEntity(adz);
-
 
                         break;
 
@@ -259,7 +241,7 @@ public class Map {
 
 
                         EventDamageZone edz;
-                        edz = new EventDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),splited[5],Integer.parseInt(splited[6]),Integer.parseInt(splited[7]),Boolean.parseBoolean(splited[8]),createURLS(10+(4*Integer.parseInt(splited[9]))));
+                        edz = new EventDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),splited[5],Integer.parseInt(splited[6]),Integer.parseInt(splited[7]),Boolean.parseBoolean(splited[8]),splited[10+(4*Integer.parseInt(splited[9]))]);
 
                         Area alol;
                         for (int l = 10;l < 10+(4*Integer.parseInt(splited[9]));l+=4)
@@ -276,34 +258,19 @@ public class Map {
                     case "EventScriptedDamageZone":
 
                         //prepares a string array with the urls
-                        List<String> list9 = new ArrayList<String>();
-                        for (int l = 6+(3*Integer.parseInt(splited[5])) + 1;l < 6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]);l++)
-                            list9.add("./img/".concat(splited[l]));
 
-                        String[] arr9 = list9.toArray(new String[0]);
 
 
                         LinkedList<Point> pntz = new LinkedList<>();
-
-                        Point aszd;
-                        pntz.add(new Point(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),1));
-
-                        for (int l = 6;l < 6+(3*Integer.parseInt(splited[5]));l+=3)
-                        {
-                            aszd= new Point(horizontalIndex - setX + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]));
-                            pntz.add(aszd);
-                        }
-
-
+                        int newInd = createPoints(pntz,5);
 
                         EventScriptedDamageZone esdz;
-                        esdz = new EventScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),pntz,Integer.parseInt(splited[4]),arr9);
-
+                        esdz = new EventScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),pntz,Integer.parseInt(splited[4]),splited[newInd]);
 
 
 
                         Area kol;
-                        for (int l = 6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]) + 1 ;l < 6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]) + 1 +(4*Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))])]));l+=4)
+                        for (int l = newInd+1 +1 ;l < newInd+1 + 1 +(4*Integer.parseInt(splited[newInd+1]));l+=4)
                         {
                             kol= new Area(horizontalIndex - setX + Integer.parseInt(splited[1]) + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[2]) + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]),Integer.parseInt(splited[l+3]),"");
                             esdz.addArea(kol);
@@ -316,33 +283,20 @@ public class Map {
                     case "TrackedScriptedDamageZone":
 
                         //prepares a string array with the urls
-                        List<String> list12 = new ArrayList<String>();
-                        for (int l = 6+(3*Integer.parseInt(splited[5])) + 1;l < 6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]);l++)
-                            list12.add("./img/".concat(splited[l]));
-
-                        String[] arr12 = list12.toArray(new String[0]);
 
 
                         LinkedList<Point> pntzz = new LinkedList<>();
 
-                        Point ptp;
-                        pntzz.add(new Point(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),1));
-
-                        for (int l = 6;l < 6+(3*Integer.parseInt(splited[5]));l+=3)
-                        {
-                            ptp= new Point(horizontalIndex - setX + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[l+1]),Float.parseFloat(splited[l+2]));
-                            pntzz.add(ptp);
-                        }
-
+                        int newInddd = createPoints(pntzz,5);
 
 
                         for (Player player : currentLevel.getPlayers())
                         {
                             TrackedScriptedDamageZone tsdz;
-                            tsdz = new TrackedScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),pntzz,Integer.parseInt(splited[4]),player,arr12);
+                            tsdz = new TrackedScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),pntzz,Integer.parseInt(splited[4]),player,splited[newInddd]);
 
                             Area area;
-                            for (int l = 6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]) + 1 ;l < 6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]) + 1 +(4*Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))])]));l+=4)
+                            for (int l = newInddd+1 + 1 ;l < newInddd+1 + 1 +(4*Integer.parseInt(splited[newInddd+1]));l+=4)
                             {
                                 area= new Area(horizontalIndex - setX + Integer.parseInt(splited[1]) + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[2]) + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]),Integer.parseInt(splited[l+3]),"");
                                 tsdz.addArea(area);
@@ -357,34 +311,20 @@ public class Map {
                         break;
                     case "TrackingAI":
 
-                        //prepares a string array with the urls
-                        List<String> list13 = new ArrayList<String>();
-                        for (int l = 6+(3*Integer.parseInt(splited[5])) + 1;l < 6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]);l++)
-                            list13.add("./img/".concat(splited[l]));
-
-                        String[] arr13 = list13.toArray(new String[0]);
-
 
                         LinkedList<Point> pntzzz = new LinkedList<>();
 
-                        Point pttp;
-                        pntzzz.add(new Point(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),1));
-
-                        for (int l = 6;l < 6+(3*Integer.parseInt(splited[5]));l+=3)
-                        {
-                            pttp= new Point(horizontalIndex - setX + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]));
-                            pntzzz.add(pttp);
-                        }
+                        int newIndx = createPoints(pntzzz,5);
 
 
 
                         for (Player player : currentLevel.getPlayers())
                         {
                             TrackingAI tssdz;
-                            tssdz = new TrackingAI(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),pntzzz,Integer.parseInt(splited[4]),player,arr13);
+                            tssdz = new TrackingAI(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),pntzzz,Integer.parseInt(splited[4]),player,splited[newIndx]);
 
                             Area arrea;
-                            for (int l = 6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]) + 1 ;l < 6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))]) + 1 +(4*Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5])) + 1 + Integer.parseInt(splited[6+(3*Integer.parseInt(splited[5]))])]));l+=4)
+                            for (int l = newIndx+1 + 1 ;l < newIndx+1 + 1 +(4*Integer.parseInt(splited[newIndx+1]));l+=4)
                             {
                                 arrea= new Area(horizontalIndex - setX + Integer.parseInt(splited[1]) + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[2]) + Integer.parseInt(splited[l+1]),Integer.parseInt(splited[l+2]),Integer.parseInt(splited[l+3]),"");
                                 tssdz.addArea(arrea);
@@ -410,56 +350,56 @@ public class Map {
                             randomRangeY = verticalIndex + Float.parseFloat(splited[7]);
 
                         Projectile projectile;
-                        projectile = new Projectile(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Float.parseFloat(splited[4]),Float.parseFloat(splited[5]),randomRangeX,randomRangeY, Integer.parseInt(splited[8]),splited[9],createURLS(10));
+                        projectile = new Projectile(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Float.parseFloat(splited[3]),Float.parseFloat(splited[4]),Float.parseFloat(splited[5]),randomRangeX,randomRangeY, Integer.parseInt(splited[8]),splited[9],splited[10]);
                         currentLevel.addEntity(projectile);
                         break;
 
                     case "AnimArea":
 
                         AnimArea animArea;
-                        animArea = new AnimArea(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,createURLS(3));
+                        animArea = new AnimArea(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,splited[3]);
                         currentLevel.addEntity(animArea);
                         break;
 
                     case "MindlessAI":
 
                         MindlessAI mindlessAI;
-                        mindlessAI = new MindlessAI(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),createURLS(5));
+                        mindlessAI = new MindlessAI(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),splited[5]);
                         currentLevel.addEntity(mindlessAI);
                         break;
 
                     case "MindlessAISpawner":
 
                         MindlessAISpawner mindlessAISpawner;
-                        mindlessAISpawner = new MindlessAISpawner(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),Integer.parseInt(splited[5]),createURLS(6));
+                        mindlessAISpawner = new MindlessAISpawner(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3]),Integer.parseInt(splited[4]),Integer.parseInt(splited[5]),splited[6]);
                         currentLevel.addEntity(mindlessAISpawner);
                         break;
 
                     case "Chest":
 
                         Chest chest;
-                        chest = new Chest(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,createURLS(3));
+                        chest = new Chest(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,splited[3]);
                         currentLevel.addEntity(chest);
                         break;
 
                     case "SlowArea":
 
                         SlowArea slowArea;
-                        slowArea = new SlowArea(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,createURLS(3));
+                        slowArea = new SlowArea(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,splited[3]);
                         currentLevel.addEntity(slowArea);
                         break;
 
                     case "Portal":
 
                         Portal portal;
-                        portal = new Portal(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3])*setY,Integer.parseInt(splited[4]),Integer.parseInt(splited[5]),horizontalIndex - setX,verticalIndex,createURLS(6));
+                        portal = new Portal(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,Integer.parseInt(splited[3])*setY,Integer.parseInt(splited[4]),Integer.parseInt(splited[5]),horizontalIndex - setX,verticalIndex,splited[6]);
                         currentLevel.addEntity(portal);
                         break;
 
                     case "OnReachAnimArea":
 
                         OnReachAnimArea onReachAnimArea;
-                        onReachAnimArea = new OnReachAnimArea(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,createURLS(3));
+                        onReachAnimArea = new OnReachAnimArea(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),0,0,splited[3]);
                         currentLevel.addEntity(onReachAnimArea);
                         break;
 
@@ -502,6 +442,20 @@ public class Map {
         return arr;
     }
 
+    public int createPoints(LinkedList<Point> points,int index)
+    {
+
+        Point adak;
+        points.add(new Point(horizontalIndex - setX + Integer.parseInt(splited[1]),verticalIndex + Integer.parseInt(splited[2]),1));
+
+        for (int l = index+1 ;l < index+1 +(3*Integer.parseInt(splited[index]));l+=3)
+        {
+            adak= new Point(horizontalIndex - setX + Integer.parseInt(splited[l]),verticalIndex + Integer.parseInt(splited[l+1]),Float.parseFloat(splited[l+2]));
+            points.add(adak);
+        }
+
+        return index+1 +(3*Integer.parseInt(splited[index]));
+    }
     public void addAreas(GameObject o)
     {
 

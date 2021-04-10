@@ -8,8 +8,8 @@ public class TrackedScriptedDamageZone extends EventScriptedDamageZone{
 
 	Player mytarget;
 
-	public TrackedScriptedDamageZone(float x, float y, int width, int height, float speed, LinkedList<Point> points, int startOffset, Player player, String...urls) {
-		super(x, y, width, height, speed,points,startOffset, urls);
+	public TrackedScriptedDamageZone(float x, float y, int width, int height, float speed, LinkedList<Point> points, int startOffset, Player player, String url) {
+		super(x, y, width, height, speed,points,startOffset, url);
 		this.mytarget=player;
 		this.setActivated(false);
 	}

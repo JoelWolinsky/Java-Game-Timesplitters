@@ -1,5 +1,4 @@
 package game.entities.areas;
-import game.graphics.Animation;
 import game.graphics.AnimationStates;
 import java.awt.*;
 
@@ -7,11 +6,10 @@ public class AnimArea extends Area{
 
 	private boolean visibile=true;
 
-	public AnimArea(float x, float y, int width, int height, String...urls) {
-		super(x, y, width, height,urls[0]);
+	public AnimArea(float x, float y, int width, int height, String url) {
+		super(x, y, width, height,url);
 
 		this.currentAnimState = AnimationStates.IDLE;
-		animations.put(AnimationStates.IDLE, new Animation(15, urls));
 	}
 
 	public void tick() {

@@ -15,37 +15,37 @@ Waypoint 350 350 flag3.png R Y 20
 
 -TrackingAI 300 475 0.75f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -100 -300 400 400
 
-DamageZone 0 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 22 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 44 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 66 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 88 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 110 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 132 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 154 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 176 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 198 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 220 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 242 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 264 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 286 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 308 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 330 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 352 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 374 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 396 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 418 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 0 480 0 0 0 0 nopicture.png acid
+DamageZone 22 480 0 0 0 0 nopicture.png acid
+DamageZone 44 480 0 0 0 0 nopicture.png acid
+DamageZone 66 480 0 0 0 0 nopicture.png acid
+DamageZone 88 480 0 0 0 0 nopicture.png acid
+DamageZone 110 480 0 0 0 0 nopicture.png acid
+DamageZone 132 480 0 0 0 0 nopicture.png acid
+DamageZone 154 480 0 0 0 0 nopicture.png acid
+DamageZone 176 480 0 0 0 0 nopicture.png acid
+DamageZone 198 480 0 0 0 0 nopicture.png acid
+DamageZone 220 480 0 0 0 0 nopicture.png acid
+DamageZone 242 480 0 0 0 0 nopicture.png acid
+DamageZone 264 480 0 0 0 0 nopicture.png acid
+DamageZone 286 480 0 0 0 0 nopicture.png acid
+DamageZone 308 480 0 0 0 0 nopicture.png acid
+DamageZone 330 480 0 0 0 0 nopicture.png acid
+DamageZone 352 480 0 0 0 0 nopicture.png acid
+DamageZone 374 480 0 0 0 0 nopicture.png acid
+DamageZone 396 480 0 0 0 0 nopicture.png acid
+DamageZone 418 480 0 0 0 0 nopicture.png acid
 
 Platform Custom 0 384 wall5.png
 
 Chunk 1 E segmentA11p2.png
 
 
-TrackingAI -100 450 0.75f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -150 -300 650 400
-TrackingAI 350 450 0.75f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -200 -300 250 400
+TrackingAI -100 450 0.75f 20 1 150 120 1 ghost 1 -150 -300 650 400
+TrackingAI 350 450 0.75f 20 1 150 120 1 ghost 1 -200 -300 250 400
 
 
-Platform Custom 412 384 wall5inv.png
+Platform Custom 426 384 wall5inv.png
 Platform Custom 0 220 top5.png
 Platform Custom 138 188 corner1.png
 Platform Custom 234 156 corner1.png
@@ -60,22 +60,23 @@ Waypoint 190 400 flag3.png R Y 15
 TimerPlatform 300 370 thinplatform2.png 2 120
 Waypoint 300 350 flag3.png R Y 20
 
-DamageZone 0 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 22 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 44 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 66 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 88 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 110 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 132 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 154 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 176 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 198 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 220 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 242 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 264 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 286 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 308 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 330 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 352 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 374 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
-DamageZone 396 480 0 0 0 0 nopicture.png 4 waste1.png waste2.png waste3.png waste4.png
+DamageZone 0 480 0 0 0 0 nopicture.png acid
+DamageZone 22 480 0 0 0 0 nopicture.png acid
+DamageZone 44 480 0 0 0 0 nopicture.png acid
+DamageZone 66 480 0 0 0 0 nopicture.png acid
+DamageZone 88 480 0 0 0 0 nopicture.png acid
+DamageZone 110 480 0 0 0 0 nopicture.png acid
+DamageZone 132 480 0 0 0 0 nopicture.png acid
+DamageZone 154 480 0 0 0 0 nopicture.png acid
+DamageZone 176 480 0 0 0 0 nopicture.png acid
+DamageZone 198 480 0 0 0 0 nopicture.png acid
+DamageZone 220 480 0 0 0 0 nopicture.png acid
+DamageZone 242 480 0 0 0 0 nopicture.png acid
+DamageZone 264 480 0 0 0 0 nopicture.png acid
+DamageZone 286 480 0 0 0 0 nopicture.png acid
+DamageZone 308 480 0 0 0 0 nopicture.png acid
+DamageZone 330 480 0 0 0 0 nopicture.png acid
+DamageZone 352 480 0 0 0 0 nopicture.png acid
+DamageZone 374 480 0 0 0 0 nopicture.png acid
+DamageZone 396 480 0 0 0 0 nopicture.png acid
+DamageZone 418 480 0 0 0 0 nopicture.png acid
