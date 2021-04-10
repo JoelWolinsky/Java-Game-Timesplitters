@@ -1,4 +1,4 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA2.png 2
+Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA2.png 1
 Chunk 1 E intersegmentA4alt.png
 Respawn -40 363 0 0 flag1.png
 Waypoint 200 563 flag3.png N N 0
@@ -30,16 +30,16 @@ Revert
 Chunk 1 S intersegmentA4.png
 Chunk 1 S intersegmentA4.png
 Chunk 1 S intersegmentA4.png
-Projectile 100 -1500 0 10 1800 0 0 0 nopicture.png 4 books1.png books1.png books1.png books1.png
-Projectile 180 -1500 0 10 1800 0 0 20 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
-Projectile 80 -1500 0 10 1800 0 0 110 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
-Projectile 250 -1500 0 10 1800 0 0 50 nopicture.png 4 books1.png books1.png books1.png books1.png
-Projectile 340 -1500 0 10 1800 0 0 90 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
-Projectile 290 -1500 0 10 1800 0 0 140 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
-Portal 10 350 3 200 200 4 bigportal.png bigportal.png bigportal.png bigportal.png
+Projectile 100 -1500 0 10 1800 0 0 0 nopicture.png books
+Projectile 180 -1500 0 10 1800 0 0 20 nopicture.png bookshelf
+Projectile 80 -1500 0 10 1800 0 0 110 nopicture.png bookshelf
+Projectile 250 -1500 0 10 1800 0 0 50 nopicture.png books
+Projectile 340 -1500 0 10 1800 0 0 90 nopicture.png bookshelf
+Projectile 290 -1500 0 10 1800 0 0 140 nopicture.png bookshelf
+Portal 10 350 3 200 200 bigportal
 -AnimArea 0 0 4 intersegmentA4portalalt1.png intersegmentA4portalalt2.png intersegmentA4portalalt3.png intersegmentA4portalalt4.png
 Chunk 1 S flareia4.png
-AnimArea 0 -384 4 intersegmentA4portal1.png intersegmentA4portal2.png intersegmentA4portal3.png intersegmentA4portal4.png
+AnimArea 0 -384 intersegmentA4portal
 -AnimArea 0 0 4 intersegmentA4portalaltalt1.png intersegmentA4portalaltalt1.png intersegmentA4portalaltalt1.png intersegmentA4portalaltalt1.png
 
 
@@ -80,13 +80,13 @@ Waypoint 285 363 flag3.png R N 0
 Waypoint 280 363 flag3.png R Y 0
 Platform Custom 200 383 thinfloor1.png
 
-Projectile 0 -650 0 10 1500 100 0 0 nopicture.png 4 books1.png books1.png books1.png books1.png
-Projectile 0 -650 0 10 1700 100 0 30 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
-Projectile -100 -650 0 10 1800 0 0 50 nopicture.png 4 books1.png books1.png books1.png books1.png
-Projectile -100 -650 0 10 2100 0 0 80 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
-Projectile -200 -650 0 10 1900 -100 0 100 nopicture.png 4 books1.png books1.png books1.png books1.png
-Projectile -200 -650 0 10 2300 -100 0 10 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
-Projectile -300 -650 0 10 1900 -200 0 120 nopicture.png 4 books1.png books1.png books1.png books1.png
-Projectile -300 -850 10 10 1000 -200 0 40 nopicture.png 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
+Projectile 0 -650 0 10 1500 100 0 0 nopicture.png books
+Projectile 0 -650 0 10 1700 100 0 30 nopicture.png bookshelf
+Projectile -100 -650 0 10 1800 0 0 50 nopicture.png books
+Projectile -100 -650 0 10 2100 0 0 80 nopicture.png bookshelf
+Projectile -200 -650 0 10 1900 -100 0 100 nopicture.png books
+Projectile -200 -650 0 10 2300 -100 0 10 nopicture.png bookshelf
+Projectile -300 -650 0 10 1900 -200 0 120 nopicture.png books
+Projectile -300 -850 10 10 1000 -200 0 40 nopicture.png bookshelf
 
-AnimArea -110 -1100 4 interSegmentA4portaldest1.png interSegmentA4portaldest2.png interSegmentA4portaldest3.png interSegmentA4portaldest4.png
+AnimArea -110 -1100 interSegmentA4portaldest

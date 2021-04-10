@@ -5,8 +5,8 @@ import static game.Level.getPlayers;
 public class SlowArea extends AnimArea{
 
 
-	public SlowArea(float x, float y, int width, int height, String...urls) {
-		super(x, y, width, height,urls);
+	public SlowArea(float x, float y, int width, int height, String url) {
+		super(x, y, width, height,url);
 	}
 
 	public void tick() {

@@ -10,12 +10,12 @@ public class MindlessAISpawner extends GameObject {
 	private int dummyMinRange,dummyMaxRange;
 	private int chickensSpawned=0;
 	private int maxChickens;
-	private String[] urls;
+	private String url;
 	private LinkedList<MindlessAI> myChickens = new LinkedList<>();
 
-	public MindlessAISpawner(float x, float y, int width, int height,int minRange, int maxRange,int maxChickens, String...urls) {
+	public MindlessAISpawner(float x, float y, int width, int height,int minRange, int maxRange,int maxChickens, String url) {
 		super(x,y,0,width,height);
-		this.urls=urls;
+		this.url=url;
 		this.dummyMinRange=minRange;
 		this.dummyMaxRange=maxRange;
 		this.maxChickens=maxChickens;
@@ -28,7 +28,7 @@ public class MindlessAISpawner extends GameObject {
 			if (i < 100)
 				i++;
 			else {
-				MindlessAI mindlessAI = new MindlessAI(this.x, this.y, this.width, this.height, this.getDummyMinRange(), this.getDummyMaxRange(), this.getUrls());
+				MindlessAI mindlessAI = new MindlessAI(this.x, this.y, this.width, this.height, this.getDummyMinRange(), this.getDummyMaxRange(), this.getUrl());
 				getToBeAdded().add(mindlessAI);
 				myChickens.add(mindlessAI);
 				chickensSpawned++;
@@ -58,7 +58,7 @@ public class MindlessAISpawner extends GameObject {
 		return dummyMaxRange;
 	}
 
-	public String[] getUrls() {
-		return urls;
+	public String getUrl() {
+		return url;
 	}
 }

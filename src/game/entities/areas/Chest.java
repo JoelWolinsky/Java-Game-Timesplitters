@@ -9,8 +9,8 @@ import static game.Level.getPlayers;
 
 public class Chest extends AnimArea{
 
-	public Chest(float x, float y, int width, int height, String...urls) {
-		super(x, y, width, height,urls);
+	public Chest(float x, float y, int width, int height, String url) {
+		super(x, y, width, height,url);
 	}
 
 	public void tick() {

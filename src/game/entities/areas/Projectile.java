@@ -14,8 +14,8 @@ public class Projectile extends DamageZone {
 	private int startOffset;
 	private int i=0;
 
-	public Projectile(float x, float y, int width, int height, float velocityX, float velocityY, float distance, float randomRangeX,float randomRangeY, int startOffset, String notice, String...urls) {
-		super(x, y, width, height,0,0,0,startOffset, notice, urls);
+	public Projectile(float x, float y, int width, int height, float velocityX, float velocityY, float distance, float randomRangeX,float randomRangeY, int startOffset, String notice, String url) {
+		super(x, y, width, height,0,0,0,startOffset, notice, url);
 		this.randomRangeX=randomRangeX;
 		this.randomRangeY=randomRangeY;
 		this.startOffset=startOffset;

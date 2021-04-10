@@ -10,12 +10,12 @@ public class AddedItem extends AnimArea {
 	private Player creator;
 	private String effect;
 
-	public AddedItem(float x, float y, int width, int height, Player creator, String...urls) {
-		super(x, y, width, height,urls);
+	public AddedItem(float x, float y, int width, int height, Player creator, String url) {
+		super(x, y, width, height,url);
 		this.creator=creator;
 
-		effect = urls[0];
-		switch (urls[0]){
+		effect = url;
+		switch (url){
 
 		}
 
@@ -40,7 +40,7 @@ public class AddedItem extends AnimArea {
 
 		switch (effect)
 		{
-			case "./img/banana.png":
+			case "banana":
 				k.setRunSpeed(1.6f);
 				k.setJumpGravity(-1.0f);
 				break;

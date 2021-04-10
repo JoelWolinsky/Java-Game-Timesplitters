@@ -1,6 +1,8 @@
 package game.entities;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
+import game.graphics.Assets;
+
 import java.awt.Graphics;
 import java.util.HashMap;
 

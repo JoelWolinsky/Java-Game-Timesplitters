@@ -22,8 +22,8 @@ public class ScriptedDamageZone extends AnimArea{
 
 	int k=0;
 
-	public ScriptedDamageZone(float x, float y, int width, int height, float speed, LinkedList<Point> points, int startOffset, String...urls) {
-		super(x, y, width, height, urls);
+	public ScriptedDamageZone(float x, float y, int width, int height, float speed, LinkedList<Point> points, int startOffset, String url) {
+		super(x, y, width, height, url);
 		this.startOffset = startOffset;
 		this.originalX=x;
 		this.originalY=y;

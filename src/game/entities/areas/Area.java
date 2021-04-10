@@ -1,11 +1,14 @@
 package game.entities.areas;
 import game.entities.GameObject;
+import game.graphics.AnimationStates;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
+import static game.graphics.Assets.getAnimations;
 
 public class Area extends GameObject {
 	private BufferedImage img;
@@ -25,6 +28,19 @@ public class Area extends GameObject {
 		{
 			//TODO: Handle exception.
 		}
+
+		if (this.width==0 && this.height==0)
+		{
+			this.animations = getAnimations(url);
+			img = animations.get(AnimationStates.IDLE).getFrame(0);
+			this.width = img.getWidth();
+			this.height = img.getHeight();
+		}
+
+
+		//sets the width and height of the platform based on the provided image width and height
+
+
 
 	}
 

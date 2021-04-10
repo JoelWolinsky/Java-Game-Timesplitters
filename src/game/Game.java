@@ -177,12 +177,11 @@ public class Game extends Canvas implements Runnable{
 			//m.mapParser(currentLevel, "segmentA15");
 			//m.mapParser(currentLevel, "segmentA12");
 			//m.mapParser(currentLevel, "segmentA11");
-			m.mapParser(currentLevel, "segmentA10");
-			m.mapParser(currentLevel, "segmentA15");
+			m.mapParser(currentLevel, "introDimension");
 			//m.mapParser(currentLevel, "introDimension");
 			//m.mapParser(currentLevel, "segmentA14");
 			/*
-
+wd
 			*** LEGEND ***
 			m.mapParser(currentLevel, "intro1");				// No go zone 								-- NO X VERSION
 			m.mapParser(currentLevel, "intro2");				// Basic chandelier room
@@ -296,7 +295,7 @@ public class Game extends Canvas implements Runnable{
 
 			//custom behaviour for Castle Dungeon -- put an intersegmentA3 before each segment
 			if (belongsTo(segmentPool.get(rnd1),segments3))
-				randomGenerate(m, new ArrayList<String>(Arrays.asList("intersegmentA3")));
+				nrBlocks = nrBlocks + randomGenerate(m, new ArrayList<String>(Arrays.asList("intersegmentA3")));
 
 			//advance by 1 block
 			m.parseCommand(currentLevel, "Chunk 1 E asdgasdg.png");

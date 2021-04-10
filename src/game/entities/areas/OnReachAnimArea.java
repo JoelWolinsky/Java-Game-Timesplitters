@@ -4,8 +4,8 @@ import static  game.Level.*;
 
 public class OnReachAnimArea extends AnimArea{
 
-	public OnReachAnimArea(float x, float y, int width, int height, String...urls) {
-		super(x, y, width, height,urls);
+	public OnReachAnimArea(float x, float y, int width, int height, String url) {
+		super(x, y, width, height,url);
 	}
 
 	public void tick() {

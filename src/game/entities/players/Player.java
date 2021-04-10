@@ -114,7 +114,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 		{
 			if (i.getAddItem())
 			{
-				getToBeAdded().add(new AddedItem(this.getX(), this.getY(), 0, 0, this, i.getItemToAdd() , i.getItemToAdd(),i.getItemToAdd(),i.getItemToAdd()));
+				getToBeAdded().add(new AddedItem(this.getX(), this.getY(), 0, 0, this, i.getItemToAdd()));
 				i.setAddItem(false);
 			}
 		}

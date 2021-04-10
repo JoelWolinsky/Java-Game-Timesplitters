@@ -4,19 +4,12 @@ Respawn 405 363 0 0 flag1.png
 Waypoint 50 363 flag3.png R Y 0
 
 -Platform Custom 30 272 thinplatform2.png
-AnimArea 80 220 4 torch1.png torch2.png torch3.png torch4.png
-Chest -200 360 4 chest.png chest.png chest.png chest.png
-Chest -360 360 4 chest.png chest.png chest.png chest.png
+AnimArea 80 220 torch
 
--MindlessAI 80 350 100 100 4 chicken.png chicken.png chicken.png chicken.png
-
--TrackedScriptedDamageZone 120 120 1 20 1 150 120 4 4 bateye1.png bateye2.png bateye3.png bateye4.png 1 -100 70 200 200
--TrackingAI 330 120 1 20 1 150 120 2 4 bateye1.png bateye2.png bateye3.png bateye4.png 1 -100 70 200 200
-
-ScriptedDamageZone 60 360 1 0 3 10 360 6 100 360 6 60 360 1 4 hand1.png hand4.png hand5.png hand4.png
-ScriptedDamageZone 190 360 1 20 3 250 360 4 130 360 4 190 360 1 4 hand1.png hand4.png hand5.png hand4.png
-ScriptedDamageZone 320 360 1 20 3 250 360 4 380 360 4 320 360 1 4 hand1.png hand4.png hand5.png hand4.png
-AnimArea 340 220 4 torch1.png torch2.png torch3.png torch4.png
+ScriptedDamageZone 60 360 1 0 3 10 360 6 100 360 6 60 360 1 hand
+ScriptedDamageZone 190 360 1 20 3 250 360 4 130 360 4 190 360 1 hand
+ScriptedDamageZone 320 360 1 20 3 250 360 4 380 360 4 320 360 1 hand
+AnimArea 340 220 torch
 Platform Custom 0 124 corner1inv.png
 Platform Custom 96 156 top2.png
 Platform Custom 330 124 corner1.png

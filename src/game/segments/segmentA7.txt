@@ -12,15 +12,15 @@ Platform Custom 250 260 thinfloor1.png
 Waypoint 380 240 flag3.png R Y 0
 
 
-EventDamageZone 150 260 40 200 notice4.png 0 10 false 1 -170 -30 1 100 4 skele1.png skele2.png skele3.png skele4.png
-EventDamageZone 350 200 40 200 notice4.png 0 10 false 1 -170 -30 1 100 4 skele1.png skele2.png skele3.png skele4.png
+EventDamageZone 150 260 40 200 notice4.png 0 10 false 1 -170 -30 1 100 skele
+EventDamageZone 350 200 40 200 notice4.png 0 10 false 1 -170 -30 1 100 skele
 Platform Custom 0 384 wall5.png
 
 Chunk 1 E segmentA7p2.png
 Platform Custom 410 384 wall5inv.png
 
-EventDamageZone 110 350 40 200 notice4.png 0 10 false 1 -170 -30 1 100 4 skele1.png skele2.png skele3.png skele4.png
-EventDamageZone 330 200 40 200 notice4.png 0 10 false 1 -170 -30 1 100 4 skele1.png skele2.png skele3.png skele4.png
+EventDamageZone 110 350 40 200 notice4.png 0 10 false 1 -170 -30 1 100 skele
+EventDamageZone 330 200 40 200 notice4.png 0 10 false 1 -170 -30 1 100 skele
 
 
 Platform Custom 0 92 corner1.png
@@ -35,18 +35,18 @@ Platform Custom 280 250 thinfloor1.png
 Platform Custom 240 460 thinfloor1.png
 
 
-Projectile 350 170 -2 0 700 0 350 0 fog1.png 4 ghost5.png ghost6.png ghost7.png ghost5.png
-Projectile 350 170 -2 0 700 0 350 80 fog1.png 4 ghost5.png ghost6.png ghost7.png ghost5.png
-Projectile 350 170 -1 0 700 0 350 40 fog1.png 4 ghost5.png ghost6.png ghost7.png ghost5.png
-Projectile 350 170 -2 0 700 0 350 120 fog1.png 4 ghost5.png ghost6.png ghost7.png ghost5.png
+Projectile 350 170 -2 0 700 0 350 0 fog1.png ghost
+Projectile 350 170 -2 0 700 0 350 80 fog1.png ghost
+Projectile 350 170 -1 0 700 0 350 40 fog1.png ghost
+Projectile 350 170 -2 0 700 0 350 120 fog1.png ghost
 
-Projectile 350 170 -1 0 700 0 350 160 fog1.png 4 ghost5.png ghost6.png ghost7.png ghost5.png
-Projectile 350 170 -3 0 700 0 350 200 fog1.png 4 ghost5.png ghost6.png ghost7.png ghost5.png
+Projectile 350 170 -1 0 700 0 350 160 fog1.png ghost
+Projectile 350 170 -3 0 700 0 350 200 fog1.png ghost
 
-Projectile 350 350 -2 0 700 0 520 20 fog1.png 4 ghost5.png ghost6.png ghost7.png ghost5.png
-Projectile 350 350 -2 0 700 0 520 100 fog1.png 4 ghost5.png ghost6.png ghost7.png ghost5.png
-Projectile 350 350 -1 0 700 0 520 60 fog1.png 4 ghost5.png ghost6.png ghost7.png ghost5.png
-Projectile 350 350 -2 0 700 0 520 140 fog1.png 4 ghost5.png ghost6.png ghost7.png ghost5.png
+Projectile 350 350 -2 0 700 0 520 20 fog1.png ghost
+Projectile 350 350 -2 0 700 0 520 100 fog1.png ghost
+Projectile 350 350 -1 0 700 0 520 60 fog1.png ghost
+Projectile 350 350 -2 0 700 0 520 140 fog1.png ghost
 
-Projectile 350 350 -3 0 700 0 520 180 fog1.png 4 ghost5.png ghost6.png ghost7.png ghost5.png
-Projectile 350 350 -1 0 700 0 520 220 fog1.png 4 ghost5.png ghost6.png ghost7.png ghost5.png
+Projectile 350 350 -3 0 700 0 520 180 fog1.png ghost
+Projectile 350 350 -1 0 700 0 520 220 fog1.png ghost

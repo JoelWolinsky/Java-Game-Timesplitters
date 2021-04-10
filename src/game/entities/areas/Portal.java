@@ -2,6 +2,8 @@ package game.entities.areas;
 import game.entities.players.Player;
 import game.entities.players.AIPlayer;
 
+import java.awt.*;
+
 import static game.Level.getPlayers;
 
 public class Portal extends AnimArea{
@@ -13,8 +15,8 @@ public class Portal extends AnimArea{
 	private int stutterValue = 15;
 	private int j=0;
 
-	public Portal(float x, float y, int width, int height, int destinationLevel,int destinationX,int destinationY,int currentX,int currentY, String...urls) {
-		super(x, y, width, height,urls);
+	public Portal(float x, float y, int width, int height, int destinationLevel,int destinationX,int destinationY,int currentX,int currentY, String url) {
+		super(x, y, width, height,url);
 		this.destinationLevel=destinationLevel;
 		this.destinationX=destinationX;
 		this.destinationY=destinationY;
@@ -49,6 +51,12 @@ public class Portal extends AnimArea{
 
 	}
 
+	@Override
+	public void render(Graphics g, float f, float h) {
+		g.setColor(Color.magenta);
+		g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
+		super.render(g, f, h);
+	}
 
 	public boolean getInteractionEffect(Player player){
 		return ((int)this.x<(int)player.getX()+player.getWidth() && (int)player.getX()<this.x+this.width && (int)this.y-200<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)this.y+this.height);

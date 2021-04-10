@@ -18,11 +18,11 @@ Platform Custom 234 156 corner1.png
 Platform Custom 330 124 corner1.png
 
 
-TrackingAI -320 365 1f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -200 -200 800 400
-TrackingAI -130 260 1.4f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -200 -200 700 400
-TrackingAI 70 320 1f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -200 -200 500 800
-TrackingAI 300 360 1.4f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -200 -200 330 400
-TrackingAI 300 200 0.75f 20 1 150 120 1 4 ghost5.png ghost6.png ghost7.png ghost5.png 1 -200 -200 330 400
+TrackingAI -320 365 1f 20 1 150 120 1 ghost 1 -200 -200 800 400
+TrackingAI -130 260 1.4f 20 1 150 120 1 ghost 1 -200 -200 700 400
+TrackingAI 70 320 1f 20 1 150 120 1 ghost 1 -200 -200 500 800
+TrackingAI 300 360 1.4f 20 1 150 120 1 ghost 1 -200 -200 330 400
+TrackingAI 300 200 0.75f 20 1 150 120 1 ghost 1 -200 -200 330 400
 
 
 Floor

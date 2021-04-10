@@ -23,8 +23,8 @@ public class EventScriptedDamageZone extends AnimArea{
 	private LinkedList<Area> areas = new LinkedList<>();
 	int k=0;
 
-	public EventScriptedDamageZone(float x, float y, int width, int height, float speed, LinkedList<Point> points, int startOffset, String...urls) {
-		super(x, y, width, height, urls);
+	public EventScriptedDamageZone(float x, float y, int width, int height, float speed, LinkedList<Point> points, int startOffset, String url) {
+		super(x, y, width, height, url);
 		this.startOffset = startOffset;
 		this.originalX=x;
 		this.originalY=y;

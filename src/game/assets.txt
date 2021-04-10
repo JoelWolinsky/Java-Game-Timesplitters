@@ -1,0 +1,65 @@
+ghost
+IDLE 4 ghost5.png ghost6.png ghost7.png ghost5.png
+OTHER 4 ghost5inv.png ghost6inv.png ghost7inv.png ghost5inv.png
+acid
+IDLE 4 acid1.png acid2.png acid3.png acid4.png
+skele
+IDLE 4 skele1.png skele2.png skele4.png skele2.png
+hand
+IDLE 4 hand1.png hand1.png hand1.png hand1.png
+chest
+IDLE 4 chest.png chest.png chest.png chest.png
+web
+IDLE 4 web.png web.png web.png web.png
+fire
+IDLE 4 fire1.png fire2.png fire3.png fire1.png
+electric
+IDLE 4 electric1.png electric2.png electric1.png electric2.png
+activated
+IDLE 4 activated1.png activated1.png activated1.png activated1.png
+statue
+IDLE 4 statue1.png statue2.png statue3.png statue4.png
+chicken
+IDLE 4 chicken.png chicken.png chicken.png chicken.png
+bateye
+IDLE 4 bateye1.png bateye2.png bateye3.png bateye4.png
+bloodghost
+IDLE 4 bloodghost1.png bloodghost2.png bloodghost3.png bloodghost4.png
+bloodcell
+IDLE 4 bloodcell1.png bloodcell2.png bloodcell3.png bloodcell4.png
+crystalball
+IDLE 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
+magic
+IDLE 4 magic1.png magic2.png magic3.png magic4.png
+ice
+IDLE 4 ice1.png ice2.png ice3.png ice4.png
+iceright
+IDLE 4 iceright1.png iceright1.png iceright1.png iceright1.png
+iceleft
+IDLE 4 iceleft1.png iceleft1.png iceleft1.png iceleft1.png
+wizard
+IDLE 4 wizard1inv.png wizard2inv.png wizard3inv.png wizard4inv.png
+bookshelf
+IDLE 4 bookshelf1.png bookshelf1.png bookshelf1.png bookshelf1.png
+books
+IDLE 4 books1.png books1.png books1.png books1.png
+portal
+IDLE 4 portal1.png portal2.png portal3.png portal1.png
+torch
+IDLE 4 torch1.png torch2.png torch3.png torch4.png
+rocks
+IDLE 4 rocks1.png rocks1.png rocks1.png rocks1.png
+stones
+IDLE 4 stones1.png stones1.png stones1.png stones1.png
+arrow
+IDLE 4 arrow1.png arrow1.png arrow1.png arrow1.png
+skeletonreact
+IDLE 4 skeletonreact1.png skeletonreact1.png skelethrow3.png skelethrow4.png
+skeletonreactinv
+IDLE 4 skeletonreact1inv.png skeletonreact2inv.png skeletonreact3inv.png skeletonreact4inv.png
+intersegmentA4portal
+IDLE 4 intersegmentA4portal1.png intersegmentA4portal2.png intersegmentA4portal3.png intersegmentA4portal4.png
+interSegmentA4portaldest
+IDLE 4 interSegmentA4portaldest1.png interSegmentA4portaldest2.png interSegmentA4portaldest3.png interSegmentA4portaldest4.png
+bigportal
+IDLE 4 bigportal.png bigportal.png bigportal.png bigportal.png
