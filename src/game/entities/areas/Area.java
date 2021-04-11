@@ -1,47 +1,25 @@
 package game.entities.areas;
 import game.entities.GameObject;
-import game.graphics.AnimationStates;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import static game.graphics.Assets.getAnimations;
 
 public class Area extends GameObject {
 	private BufferedImage img;
 	private boolean visible = true;
 
-	public Area(float x, float y, int width, int height, String url) {
+	public Area(float x, float y, int width, int height, BufferedImage bi) {
 		super(x, y, 0, width, height);
 
-		try
+		img = bi;
+		if (img!=null)
 		{
-			//sets the width and height of the platform based on the provided image width and height
-			img = ImageIO.read( new File(url));
 			this.width = img.getWidth();
 			this.height = img.getHeight();
 		}
-		catch ( IOException exc )
-		{
-			//TODO: Handle exception.
-		}
+	}
 
-		if (this.width==0 && this.height==0)
-		{
-			this.animations = getAnimations(url);
-			img = animations.get(AnimationStates.IDLE).getFrame(0);
-			this.width = img.getWidth();
-			this.height = img.getHeight();
-		}
-
-
-		//sets the width and height of the platform based on the provided image width and height
-
-
-
+	public Area(float x, float y, int width, int height) {
+		super(x, y, 0, width, height);
 	}
 
 	public void tick() {

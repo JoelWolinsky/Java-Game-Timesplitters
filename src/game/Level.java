@@ -68,7 +68,7 @@ public class Level extends Canvas {
 		}
 	}
 
-	public static void addEntity(GameObject o) { entities.add(o); }
+	public void addEntity(GameObject o) { entities.add(o); }
 
 	public static void removeEntity(GameObject o) { entities.remove(o); }
 

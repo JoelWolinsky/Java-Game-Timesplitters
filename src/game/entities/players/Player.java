@@ -13,6 +13,7 @@ import game.entities.areas.AddedItem;
 import game.entities.platforms.CrushingPlatform;
 import game.entities.platforms.MovingPlatform;
 import game.entities.areas.RespawnPoint;
+import game.graphics.Animation;
 import game.graphics.AnimationStates;
 import game.input.KeyInput;
 import game.network.packets.Packet02Move;
@@ -59,6 +60,12 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 	private int bouncingSpeed = 0;
 	private int bouncingTimer=0;
 	private boolean bounceImmunity=false;
+
+	protected int animationTimer = 0;
+	protected int frame;
+	protected AnimationStates currentAnimState;
+	protected Animation currentAnimation;
+	protected HashMap<AnimationStates, Animation> animations;
 
 	private Point prevPos;
 	private String username;
@@ -604,5 +611,23 @@ public class Player extends GameObject implements SolidCollider, GravityObject{
 	public void removeLocker()
 	{
 		locker=null;
+	}
+
+	public void renderAnim(Graphics g, int x, int y) {
+
+		if (currentAnimState!=null)
+		{
+			currentAnimation = animations.get(currentAnimState);
+
+			frame = (animationTimer / currentAnimation.getTicksPerFrame());
+
+			g.drawImage(currentAnimation.getFrame(frame), x, y, null);
+
+			animationTimer ++;
+
+			if (animationTimer >= currentAnimation.getTicksPerFrame() * currentAnimation.getNumberOfFrames()) {
+				animationTimer = 0;
+			}
+		}
 	}
 }

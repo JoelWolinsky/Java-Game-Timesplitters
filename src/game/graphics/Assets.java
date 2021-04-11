@@ -26,14 +26,9 @@ public class Assets {
 	private static int PLAYER_HEIGHT=30;
 
 	public Assets(){
-		parseAssets();
-	}
-
-
-	public void init() {
 		SpriteSheet sheet = new SpriteSheet(Image.loadImage("./img/adventurer-Sheet.png"));
 		player_idle = new ArrayList<BufferedImage>();
-		
+
 		player_idle.add(sheet.crop(xOffset, yOffset, PLAYER_WIDTH, PLAYER_HEIGHT));
 		player_idle.add(sheet.crop(xOffset+xDistance, yOffset, PLAYER_WIDTH, PLAYER_HEIGHT));
 		player_idle.add(sheet.crop(xOffset+xDistance*2, yOffset, PLAYER_WIDTH, PLAYER_HEIGHT));
@@ -41,29 +36,19 @@ public class Assets {
 		player_idle.add(sheet.crop(xOffset, yOffset, PLAYER_WIDTH, PLAYER_HEIGHT));
 		player_idle.add(sheet.crop(xOffset+xDistance, yOffset, PLAYER_WIDTH, PLAYER_HEIGHT));
 
-		player_other = new ArrayList<BufferedImage>();
-		for (BufferedImage b : player_idle)
-		{
-			BufferedImage bb = b;
-			AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-			tx.translate(-bb.getWidth(null), 0);
-			AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-			bb = op.filter(bb, null);
-			player_other.add(bb);
-		}
+		player_other = flipHorizontally(player_idle);
 
-		
 		player_right = new ArrayList<BufferedImage>();
-		
+
 		player_right.add(sheet.crop(xOffset+xDistance, yOffset+yDistance, PLAYER_WIDTH, PLAYER_HEIGHT));
 		player_right.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance, PLAYER_WIDTH, PLAYER_HEIGHT));
 		player_right.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance, PLAYER_WIDTH, PLAYER_HEIGHT));
 		player_right.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance, PLAYER_WIDTH	, PLAYER_HEIGHT));
 		player_right.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance, PLAYER_WIDTH, PLAYER_HEIGHT));
 		player_right.add(sheet.crop(xOffset+xDistance*6, yOffset+yDistance, PLAYER_WIDTH, PLAYER_HEIGHT));
-		
+
 		player_left = new ArrayList<BufferedImage>();
-		
+
 		player_left.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
 		player_left.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
 		player_left.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
@@ -72,12 +57,21 @@ public class Assets {
 		player_left.add(sheet.crop(xOffset+xDistance*0, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
 
 		Asset as = new Asset("player",new HashMap<AnimationStates, Animation>());
-
 		as.getAnimations().put(AnimationStates.IDLE, new Animation(15,player_idle));
 		as.getAnimations().put(AnimationStates.RIGHT, new Animation(15,player_right));
 		as.getAnimations().put(AnimationStates.LEFT, new Animation(15,player_left));
 		as.getAnimations().put(AnimationStates.OTHER, new Animation(15,player_other));
 		assets.add(as);
+
+		parseAssets();
+	}
+
+	public static BufferedImage getImageForReference(String code)
+	{
+		for (Asset a : assets)
+			if (a.getName().equals(code))
+				return a.getAnimations().get(AnimationStates.IDLE).getFrame(0);
+		return null;
 	}
 
 
@@ -156,6 +150,23 @@ public class Assets {
 		String[] arr = list.toArray(new String[0]);
 
 		return arr;
+	}
+
+	public ArrayList<BufferedImage> flipHorizontally(ArrayList<BufferedImage> imagesToFlip)
+	{
+
+		ArrayList<BufferedImage> flippedImages = new ArrayList<BufferedImage>();
+		for (BufferedImage b : imagesToFlip)
+		{
+			BufferedImage bb = b;
+			AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+			tx.translate(-bb.getWidth(null), 0);
+			AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+			bb = op.filter(bb, null);
+			flippedImages.add(bb);
+		}
+
+		return flippedImages;
 	}
 
 

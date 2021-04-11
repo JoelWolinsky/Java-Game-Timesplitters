@@ -16,11 +16,6 @@ public abstract class GameObject {
 	protected int z,width,height;
 
 	//animations related
-	protected HashMap<AnimationStates, Animation> animations = new HashMap<AnimationStates, Animation>();
-	protected int animationTimer = 0;
-	protected int frame;
-	protected AnimationStates currentAnimState;
-	protected Animation currentAnimation;
 	
 	/**
 	 * GameObject constructor.<br>
@@ -87,24 +82,6 @@ public abstract class GameObject {
 	}	
 	public void setZ(int z) {
 		this.z = z;
-	}
-
-	public void renderAnim(Graphics g, int x, int y) {
-
-		if (currentAnimState!=null)
-		{
-			currentAnimation = animations.get(currentAnimState);
-
-			frame = (animationTimer / currentAnimation.getTicksPerFrame());
-
-			g.drawImage(currentAnimation.getFrame(frame), x, y, null);
-
-			animationTimer ++;
-
-			if (animationTimer >= currentAnimation.getTicksPerFrame() * currentAnimation.getNumberOfFrames()) {
-				animationTimer = 0;
-			}
-		}
 	}
 
 

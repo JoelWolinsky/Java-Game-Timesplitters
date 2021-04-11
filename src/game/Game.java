@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.*;
 
 import game.display.Window;
@@ -131,8 +130,6 @@ public class Game extends Canvas implements Runnable{
 
 	public synchronized void start() {
 
-		s.init();
-
 		System.out.println("start()");
 
 		if(isMultiplayer == true) {
@@ -177,12 +174,12 @@ public class Game extends Canvas implements Runnable{
 
 
 		if (mapMode.equals("default")) {
-			m.mapParser(currentLevel, "intro1");
+			m.parseFile(currentLevel, "intro1");
 			//m.mapParser(currentLevel, "segmentA11");
 			//m.mapParser(currentLevel, "segmentA15");
 			//m.mapParser(currentLevel, "segmentA12");
 			//m.mapParser(currentLevel, "segmentA11");
-			m.mapParser(currentLevel, "segmentA11");
+			m.parseFile(currentLevel, "segmentA2");
 			//m.mapParser(currentLevel, "introDimension");
 			//m.mapParser(currentLevel, "segmentA14");
 			/*
@@ -237,7 +234,7 @@ wd
 			ctrlr = new BackgroundController(new BackgroundStates("ground1.png","ground2.png"),new BackgroundStates("sky1.png","sky2.png"),new BackgroundStates("sky3.png","sky4.png"),new BackgroundStates("sky5.png","sky6.png"));
 
 			//generate the segment pools - order is important
-			m.mapParser(currentLevel, "intro1");
+			m.parseFile(currentLevel, "intro1");
 			ArrayList<Integer> allParts = new ArrayList<>(Arrays.asList(
 					randomGenerate(m,segments1),
 					randomGenerate(m,castleEntrance) + randomGenerate(m,segments2) + randomGenerate(m,throneRoom),
@@ -454,7 +451,7 @@ wd
 			//revert the 1 block advancement at the start of the while loop
 			m.parseCommand(currentLevel, "Revert");
 					//draw the contents of the segment
-			m.mapParser(currentLevel, segmentPool.get(rnd1));
+			m.parseFile(currentLevel, segmentPool.get(rnd1));
 			//rremove the segment from the segment pool
 			segmentPool.remove(rnd1);
 

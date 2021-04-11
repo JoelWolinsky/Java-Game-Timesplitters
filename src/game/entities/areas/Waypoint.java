@@ -1,5 +1,7 @@
 package game.entities.areas;
 import game.entities.players.AIPlayer;
+import game.graphics.Image;
+
 import java.awt.*;
 import static game.Level.*;
 
@@ -12,7 +14,7 @@ public class Waypoint extends Area {
 	public Waypoint(float x, float y, int width, int height, 
 		String url, String direction, String jump, int wait) { 		// 'Wait' is the number of ticks the AIPlayer is to wait at each Waypoint
 			
-			super(x, y, width, height, url);
+			super(x, y, width, height, Image.loadImage(url));
 			this.direction = direction;
 			this.jump = jump;
 			this.wait = wait;

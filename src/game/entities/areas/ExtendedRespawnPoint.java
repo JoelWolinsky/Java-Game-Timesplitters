@@ -1,5 +1,6 @@
 package game.entities.areas;
 import game.entities.players.Player;
+import game.graphics.Image;
 
 import static game.Level.getPlayers;
 
@@ -9,7 +10,7 @@ public class ExtendedRespawnPoint extends Area {
 	private boolean currentActive = true;
 
 	public ExtendedRespawnPoint(float x, float y, int width, int height, String url) {
-		super(x, y, width, height, url);
+		super(x, y, width, height, Image.loadImage(url));
 
 		this.width=width;
 		this.height=height;
