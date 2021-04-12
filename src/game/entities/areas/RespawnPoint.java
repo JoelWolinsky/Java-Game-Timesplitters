@@ -1,6 +1,7 @@
 package game.entities.areas;
 import game.entities.players.AIPlayer;
 import game.entities.players.Player;
+import game.graphics.Image;
 
 import java.awt.*;
 
@@ -12,7 +13,7 @@ public class RespawnPoint extends Area {
 	private boolean reached = false;
 
 	public RespawnPoint(float x, float y, int width, int height, int pointX, int pointY, String url) {
-		super(x, y, width, height, url);
+		super(x, y, width, height, Image.loadImage(url));
 		this.pointX=pointX;
 		this.pointY=pointY;
 	}

@@ -15,10 +15,6 @@ public class AddedItem extends AnimArea {
 		this.creator=creator;
 
 		effect = url;
-		switch (url){
-
-		}
-
 	}
 
 	public void tick() {
