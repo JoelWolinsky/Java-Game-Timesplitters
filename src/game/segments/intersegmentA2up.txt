@@ -63,7 +63,7 @@ Platform Custom 70 19 wall1.png
 Platform Custom 338 0 wall4.png
 
 
-EventDamageZone 200 218 40 200 notice.png 0 0 false 1 100 80 1 100 skele
+EventDamageZone 200 218 40 200 notice.png 0 0 false skele 1 100 80 1 100
 Chunk 1 N intersegmentA2upsky.png
 
 //3RD FLOOR

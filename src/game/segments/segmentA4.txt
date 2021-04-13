@@ -8,25 +8,25 @@ Platform Custom 96 92 top2.png
 Platform Custom 330 92 corner1inv.png
 Floor
 
-EventDamageZone 50 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
+EventDamageZone 50 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
-EventDamageZone 180 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
+EventDamageZone 180 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
-EventDamageZone 260 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
+EventDamageZone 260 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
-EventDamageZone 380 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
+EventDamageZone 380 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
 Chunk 1 E segmentA4p2.png
 
-EventDamageZone 20 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
+EventDamageZone 20 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
-EventDamageZone 150 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
+EventDamageZone 150 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
-EventDamageZone 210 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
+EventDamageZone 210 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
 MindlessAISpawner 280 260 1000 1000 5 chicken
 
-EventDamageZone 350 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
+EventDamageZone 350 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
 Platform Custom 0 92 corner1.png
 Platform Custom 96 92 top2.png

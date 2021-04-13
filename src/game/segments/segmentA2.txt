@@ -10,7 +10,7 @@ Platform Custom 214 265 edge1.png
 DamageZone 180 230 3 200 150 0 cinders1.png fire
 DamageZone 260 230 3 300 350 20 nopicture.png fire
 DamageZone 340 230 3 200 150 40 cinders1.png fire
-EventDamageZone 210 380 40 60 notice3.png 90 -55 false 4 15 -210 16 97 175 -210 16 97 243 -210 16 97 401 -210 16 97 electric
+EventDamageZone 210 380 40 60 notice3.png 90 -55 false electric 4 15 -210 16 97 175 -210 16 97 243 -210 16 97 401 -210 16 97
 OnReachAnimArea 225 175 activated
 OnReachAnimArea 385 175 activated
 Platform Default 246 265
@@ -32,7 +32,7 @@ DamageZone 60 230 3 200 150 0 nopicture.png fire
 DamageZone 140 230 3 300 150 20 cinders1.png fire
 DamageZone 220 230 3 200 150 40 nopicture.png fire
 
-EventDamageZone 0 380 40 60 notice3.png 105 -55 false 4 -201 -210 16 97 -41 -210 16 97 27 -210 16 97 185 -210 16 97 electric
+EventDamageZone 0 380 40 60 notice3.png 105 -55 false electric 4 -201 -210 16 97 -41 -210 16 97 27 -210 16 97 185 -210 16 97
 OnReachAnimArea 27 175 activated
 OnReachAnimArea 185 175 activated
 Platform Default 0 265

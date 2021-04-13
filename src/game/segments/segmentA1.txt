@@ -7,7 +7,7 @@ Platform Custom 0 140 corner1.png
 Platform Custom 214 265 edge1.png
 Waypoint 54 363 flag3.png R N 0
 Waypoint 104 363 flag3.png R N 0
-EventDamageZone 327 228 50 200 notice.png 0 0 false 1 -180 -70 1 100 skele
+EventDamageZone 327 228 50 200 notice.png 0 0 false skele 1 -180 -70 1 100
 Platform Default 246 265
 Platform Inverted 278 265
 Platform Default 294 265

@@ -179,7 +179,7 @@ public class Game extends Canvas implements Runnable{
 			//m.mapParser(currentLevel, "segmentA15");
 			//m.mapParser(currentLevel, "segmentA12");
 			//m.mapParser(currentLevel, "segmentA11");
-			m.parseFile(currentLevel, "segmentA2");
+			m.parseFile(currentLevel, "segmentA15");
 			//m.mapParser(currentLevel, "introDimension");
 			//m.mapParser(currentLevel, "segmentA14");
 			/*

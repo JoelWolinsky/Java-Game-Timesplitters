@@ -30,7 +30,7 @@ public class EventScriptedDamageZone extends AnimArea{
 		this.originalY=y;
 		this.speed=speed;
 		this.speed2=speed;
-		this.points = (LinkedList) points.clone();
+		this.points = points;
 
 	}
 

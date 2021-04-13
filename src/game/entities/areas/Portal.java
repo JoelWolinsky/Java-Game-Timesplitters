@@ -53,8 +53,6 @@ public class Portal extends AnimArea{
 
 	@Override
 	public void render(Graphics g, float f, float h) {
-		g.setColor(Color.magenta);
-		g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
 		super.render(g, f, h);
 	}
 
