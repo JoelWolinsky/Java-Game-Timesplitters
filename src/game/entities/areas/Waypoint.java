@@ -29,7 +29,7 @@ public class Waypoint extends Area {
 			if (this.getInteraction(ap))
 			{
 
-				if (ap.immunity == true && ap.i < 20) {
+				if (ap.immunity == true && ap.i < 2) {
 
 					//ap.immunity = false;
 
@@ -61,7 +61,7 @@ public class Waypoint extends Area {
 
 	@Override
 	public void render(Graphics g, float f, float h) {
-		//super.render(g, f, h);
+		super.render(g, f, h);
 	}
 
 	public String getDirection()
