@@ -57,10 +57,10 @@ public class Assets {
 		player_left.add(sheet.crop(xOffset+xDistance*0, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
 
 		Asset as = new Asset("player",new HashMap<AnimationStates, Animation>());
-		as.getAnimations().put(AnimationStates.IDLE, new Animation(15,player_idle));
-		as.getAnimations().put(AnimationStates.RIGHT, new Animation(15,player_right));
-		as.getAnimations().put(AnimationStates.LEFT, new Animation(15,player_left));
-		as.getAnimations().put(AnimationStates.OTHER, new Animation(15,player_other));
+		as.getAnimations().put(AnimationStates.IDLE, new Animation(10,player_idle));
+		as.getAnimations().put(AnimationStates.RIGHT, new Animation(10,player_right));
+		as.getAnimations().put(AnimationStates.LEFT, new Animation(10,player_left));
+		as.getAnimations().put(AnimationStates.OTHER, new Animation(10,player_other));
 		assets.add(as);
 
 		parseAssets();
@@ -98,19 +98,19 @@ public class Assets {
 				{
 					switch (splitted[0]){
 						case "IDLE":
-							asset.getAnimations().put(AnimationStates.IDLE, new Animation(15,createURLS(1)));
+							asset.getAnimations().put(AnimationStates.IDLE, new Animation(Integer.parseInt(splitted[1]),createURLS(2)));
 							break;
 						case "LEFT":
-							asset.getAnimations().put(AnimationStates.LEFT, new Animation(15,createURLS(1)));
+							asset.getAnimations().put(AnimationStates.LEFT, new Animation(Integer.parseInt(splitted[1]),createURLS(2)));
 							break;
 						case "RIGHT":
-							asset.getAnimations().put(AnimationStates.RIGHT, new Animation(15,createURLS(1)));
+							asset.getAnimations().put(AnimationStates.RIGHT, new Animation(Integer.parseInt(splitted[1]),createURLS(2)));
 							break;
 						case "JUMP":
-							asset.getAnimations().put(AnimationStates.JUMP, new Animation(15,createURLS(1)));
+							asset.getAnimations().put(AnimationStates.JUMP, new Animation(Integer.parseInt(splitted[1]),createURLS(2)));
 							break;
 						case "OTHER":
-							asset.getAnimations().put(AnimationStates.OTHER, new Animation(15,createURLS(1)));
+							asset.getAnimations().put(AnimationStates.OTHER, new Animation(Integer.parseInt(splitted[1]),createURLS(2)));
 							break;
 					}
 

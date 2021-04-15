@@ -39,7 +39,7 @@ public class Game extends Canvas implements Runnable{
 	public static Player player;
 	public static AIPlayer aiPlayer;
 	public static Camera camera;
-	ArrayList<String> segments3,segments1,segments2,segments4,wizard,introDimension,castleEntrance,throneRoom;
+	ArrayList<String> segments3,segments1,segments2,segments4,wizard,introDimension,castleEntrance,throneRoom, segments5;
 	int index = 0;
 	int bottom;
 	int top;
@@ -177,9 +177,10 @@ public class Game extends Canvas implements Runnable{
 			m.parseFile(currentLevel, "intro1");
 			//m.mapParser(currentLevel, "segmentA11");
 			//m.mapParser(currentLevel, "segmentA15");
-			//m.mapParser(currentLevel, "segmentA12");
-			//m.mapParser(currentLevel, "segmentA11");
-			m.parseFile(currentLevel, "segmentA15");
+			m.parseFile(currentLevel, "introDimension");
+			m.parseFile(currentLevel, "segmentA16");
+			m.parseFile(currentLevel, "segmentA14");
+			m.parseFile(currentLevel, "segmentA14");
 			//m.mapParser(currentLevel, "introDimension");
 			//m.mapParser(currentLevel, "segmentA14");
 			/*
@@ -224,6 +225,7 @@ wd
 			segments4 = new ArrayList<String>(Arrays.asList("segmentA15","segmentA12","segmentA15"));
 			wizard = new ArrayList<String>(Arrays.asList("segmentA13"));
 			introDimension = new ArrayList<String>(Arrays.asList("introDimension"));
+			segments5 = new ArrayList<String>(Arrays.asList("segmentA14","segmentA16"));
 
 			//choose the limits of your map this should also be related to how many levels you have defined
 			//eg. you don't want to have 20 levels but a top limit of only 2 since 17 of the leves will never be used
@@ -239,7 +241,8 @@ wd
 					randomGenerate(m,segments1),
 					randomGenerate(m,castleEntrance) + randomGenerate(m,segments2) + randomGenerate(m,throneRoom),
 					randomGenerate(m,segments3),
-					randomGenerate(m,segments4) + randomGenerate(m,wizard) + randomGenerate(m,introDimension)));
+					randomGenerate(m,segments4) + randomGenerate(m,wizard) + randomGenerate(m,introDimension),
+					randomGenerate(m,segments5)));
 
 			//create specific progressbar parts for the generated segment pools
 			ArrayList<MapPart> mps = new ArrayList<>();

@@ -64,8 +64,15 @@ Chunk 1 W segmentA14p1.png
 
 Chunk 1 S segmentA14p2.png
 Chunk 1 S segmentA14p1.png
+Chunk 1 S segmentA14p1.png
+Revert
 Chunk 1 E segmentA14p2.png
+Chunk 1 S segmentA14p2.png
+Revert
 Chunk 1 N segmentA14p1.png
+
+
+AnimArea -110 -1100 interSegmentA4portaldest
 
 Respawn 0 0 213 0 invisibleRespawn.png
 Respawn 0 200 213 0 invisibleRespawn.png
@@ -79,6 +86,7 @@ Waypoint 270 363 flag3.png R N 0
 Waypoint 285 363 flag3.png R N 0
 Waypoint 280 363 flag3.png R Y 0
 Platform Custom 200 383 thinfloor1.png
+Platform Custom 270 383 thinfloor1.png
 
 Projectile 0 -650 0 10 1500 100 0 0 nopicture.png books
 Projectile 0 -650 0 10 1700 100 0 30 nopicture.png bookshelf
@@ -89,4 +97,7 @@ Projectile -200 -650 0 10 2300 -100 0 10 nopicture.png bookshelf
 Projectile -300 -650 0 10 1900 -200 0 120 nopicture.png books
 Projectile -300 -850 10 10 1000 -200 0 40 nopicture.png bookshelf
 
-AnimArea -110 -1100 interSegmentA4portaldest
+Projectile 520 -400 -10 10 900 0 0 100 nopicture.png books
+Projectile 520 -350 -5 10 1100 0 0 0 nopicture.png books
+Projectile -700 -400 9 10 1800 0 0 100 nopicture.png books
+
