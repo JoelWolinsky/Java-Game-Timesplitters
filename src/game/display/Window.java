@@ -71,10 +71,10 @@ public class Window extends Canvas{
 		
 		// The panel that holds the options buttons
 		JPanel optionButtonPanel = new JPanel(new FlowLayout());
-		optionButtonPanel.setBounds(WIDTH / 4, HEIGHT / 15, panelWidth, panelHeight);
+		optionButtonPanel.setBounds(WIDTH / 4, HEIGHT / 15, panelWidth, panelHeight * 2);
 		optionButtonPanel.setOpaque(false);
 		optionButtonPanel.setVisible(false);
-		((FlowLayout)optionButtonPanel.getLayout()).setVgap(panelHeight / 12);
+		((FlowLayout)optionButtonPanel.getLayout()).setVgap(panelHeight / 8);
 		
 		// The panel that holds the back button
 		JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -432,6 +432,58 @@ public class Window extends Canvas{
 			}
 		});
 		
+		// The difficulty button on the options screen
+		JLabel difficultyButton = new JLabel(button3Icon);
+		difficultyButton.setForeground(Color.black);
+		difficultyButton.setFont(sizedFont);
+		difficultyButton.setHorizontalTextPosition(JLabel.CENTER);
+		
+		if (Launcher.cHandler.difficulty.equals("Easy")) {
+			difficultyButton.setText("<html><center>DIFFICULTY:<br><p style='margin-top:8'>EASY</center></html>");
+		} else if (Launcher.cHandler.difficulty.equals("Medium")){
+			difficultyButton.setText("<html><center>DIFFICULTY:<br><p style='margin-top:8'>MEDIUM</center></html>");
+		} else if (Launcher.cHandler.difficulty.equals("Hard")){
+			difficultyButton.setText("<html><center>DIFFICULTY:<br><p style='margin-top:8'>HARD</center></html>");
+		}
+		
+		difficultyButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				difficultyButton.setIcon(button3ClickedInner);
+				SoundHandler.playSound("button1", 1f);
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+		    	if (Launcher.cHandler.difficulty.equals("Easy")) {
+		    		difficultyButton.setText("<html><center>DIFFICULTY:<br><p style='margin-top:8'>MEDIUM</center></html>");
+		    		Launcher.cHandler.updateConfigValue(ConfigOption.DIFFICULTY, "Medium");
+		    		Launcher.cHandler.difficulty = "Medium";
+		    	} else if (Launcher.cHandler.difficulty.equals("Medium")) {
+		    		difficultyButton.setText("<html><center>DIFFICULTY:<br><p style='margin-top:8'>HARD</center></html>");
+		    		Launcher.cHandler.updateConfigValue(ConfigOption.DIFFICULTY, "Hard");
+		    		Launcher.cHandler.difficulty = "Hard";
+		    	}else if (Launcher.cHandler.difficulty.equals("Hard")) {
+		    		difficultyButton.setText("<html><center>DIFFICULTY:<br><p style='margin-top:8'>EASY</center></html>");
+		    		Launcher.cHandler.updateConfigValue(ConfigOption.DIFFICULTY, "Easy");
+		    		Launcher.cHandler.difficulty = "Easy";
+		    	}
+	
+		    	difficultyButton.setIcon(button3HoverInner);
+			}
+				  
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				difficultyButton.setIcon(button3HoverInner);
+			}
+				  
+			@Override
+			public void mouseExited(MouseEvent e) {
+				difficultyButton.setIcon(button3Inner);
+			}
+		});
+		
 		// The play vs computer button on the multiplayer screen
 		JLabel playVSComputerButton = new JLabel(button3Icon);
 		playVSComputerButton.setForeground(Color.black);
@@ -571,6 +623,7 @@ public class Window extends Canvas{
 		backButtonPanel.add(backButton);
 		optionButtonPanel.add(toggleSoundEffectsButton);
 		optionButtonPanel.add(toggleMusicButton);
+		optionButtonPanel.add(difficultyButton);
 		multiplayerButtonPanel.add(playVSComputerButton);
 		multiplayerButtonPanel.add(createGameButton);
 		multiplayerButtonPanel.add(joinGameButton);
