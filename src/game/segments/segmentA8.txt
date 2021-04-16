@@ -8,7 +8,7 @@ TimerPlatform 50 420 thinplatform2.png 0.7 140
 TimerPlatform 140 460 thinplatform2.png 0.7 140
 TimerPlatform 240 500 thinplatform2.png 0.7 140
 TimerPlatform 330 540 thinplatform2.png 0.7 140
-Waypoint 140 420 flag3.png R Y 120
+Waypoint 140 420 flag3.png R Y 100
 Waypoint 240 440 flag3.png R Y 20
 Waypoint 330 440 flag3.png R Y 20
 
