@@ -2,6 +2,7 @@ Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA9p1.png 2
 Chunk 1 E segmentA11p1.png
 
 Platform Custom 0 124 corner1inv.png
+Waypoint -50 363 flag3.png R Y 50
 Platform Custom 96 156 corner1inv.png
 Platform Custom 192 188 corner1inv.png
 Platform Custom 288 220 top5.png
@@ -9,7 +10,7 @@ Platform Custom 288 220 top5.png
 TimerPlatform 60 370 thinplatform2.png 2 20
 Waypoint 60 320 flag3.png R Y 25
 Platform Custom 200 410 thinPlatform2.png
-Waypoint 200 390 flag3.png R Y 40
+Waypoint 200 350 flag3.png R Y 40
 TimerPlatform 340 370 thinplatform2.png 2 50
 Waypoint 350 350 flag3.png R Y 20
 
@@ -52,9 +53,9 @@ Platform Custom 234 156 corner1.png
 Platform Custom 330 124 corner1.png
 
 Platform Custom 60 410 thinPlatform2.png
-Waypoint 70 390 flag3.png R Y 20
+Waypoint 70 350 flag3.png R Y 30
 TimerPlatform 180 340 thinplatform2.png 2 90
-Waypoint 120 320 flag3.png R N 10
+Waypoint 120 320 flag3.png R N 20
 Platform Custom 180 420 thinplatform2.png
 Waypoint 190 400 flag3.png R Y 15
 TimerPlatform 300 370 thinplatform2.png 2 120
