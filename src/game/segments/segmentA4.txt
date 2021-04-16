@@ -9,24 +9,27 @@ Platform Custom 330 92 corner1inv.png
 Floor
 
 EventDamageZone 50 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
-
 EventDamageZone 180 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
-
 EventDamageZone 260 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
-
 EventDamageZone 380 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
+Waypoint 120 363 flag3.png R Y 0
+Waypoint 220 300 flag3.png R Y 30
+Waypoint 290 300 flag3.png R N 20
+Waypoint 320 363 flag3.png R Y 10
 
 Chunk 1 E segmentA4p2.png
 
 EventDamageZone 20 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
-
 EventDamageZone 150 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
-
 EventDamageZone 210 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
-
 MindlessAISpawner 280 260 1000 1000 5 chicken
-
 EventDamageZone 350 330 10 40 notice.png 0 0 true 2 -40 -40 2 97 60 -40 2 97 statue
+Waypoint -10 300 flag3.png R Y 30
+Waypoint 60 300 flag3.png R N 20
+Waypoint 100 363 flag3.png R Y 0
+Waypoint 180 300 flag3.png R Y 30
+Waypoint 250 300 flag3.png R N 20
+Waypoint 290 363 flag3.png R Y 0
 
 Platform Custom 0 92 corner1.png
 Platform Custom 96 92 top2.png

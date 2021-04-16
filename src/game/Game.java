@@ -165,7 +165,7 @@ public class Game extends Canvas implements Runnable{
 
 		game = this;
 
-		String mapMode = "RNG";
+		String mapMode = "default";
 		Map m = new Map();
 		//keep default for now until we sort randomly generated
 
@@ -175,15 +175,11 @@ public class Game extends Canvas implements Runnable{
 
 		if (mapMode.equals("default")) {
 			m.parseFile(currentLevel, "intro1");
-			//m.mapParser(currentLevel, "segmentA11");
-			//m.mapParser(currentLevel, "segmentA15");
-			//m.mapParser(currentLevel, "segmentA12");
-			//m.mapParser(currentLevel, "segmentA11");
-			m.parseFile(currentLevel, "segmentA2");
-			//m.mapParser(currentLevel, "introDimension");
-			//m.mapParser(currentLevel, "segmentA14");
+			m.parseFile(currentLevel, "segmentA3");
+			m.parseFile(currentLevel, "segmentA5");
+			
 			/*
-wd
+
 			*** LEGEND ***
 			m.mapParser(currentLevel, "intro1");				// No go zone 								
 			m.mapParser(currentLevel, "intro2");				// Basic chandelier room
@@ -191,9 +187,9 @@ wd
 
 			m.mapParser(currentLevel, "segmentA1");				// web segment
 			m.mapParser(currentLevel, "segmentA2");				// electric one
-			m.mapParser(currentLevel, "segmentA3");				// aesthetic hall 1
-			m.mapParser(currentLevel, "segmentA4");				// aesthetic hall 2
-			m.mapParser(currentLevel, "segmentA5");				// aesthetic hall 3
+			m.mapParser(currentLevel, "segmentA3");				// windy hall 1
+			m.mapParser(currentLevel, "segmentA4");				// windy hall 2
+			m.mapParser(currentLevel, "segmentA5");				// windy hall 3
 			m.mapParser(currentLevel, "segmentA6");				// ghosts
 			m.mapParser(currentLevel, "segmentA7");				// platforms
 			m.mapParser(currentLevel, "segmentA8");				// disappearing long and small platforms 
