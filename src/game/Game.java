@@ -165,7 +165,7 @@ public class Game extends Canvas implements Runnable{
 
 		game = this;
 
-		String mapMode = "default";
+		String mapMode = "RNG";
 		Map m = new Map();
 		//keep default for now until we sort randomly generated
 
@@ -175,8 +175,10 @@ public class Game extends Canvas implements Runnable{
 
 		if (mapMode.equals("default")) {
 			m.parseFile(currentLevel, "intro1");
-			m.parseFile(currentLevel, "segmentA3");
-			m.parseFile(currentLevel, "segmentA5");
+			m.parseFile(currentLevel, "intersegmentA3");
+			m.parseFile(currentLevel, "segmentA11");
+			m.parseFile(currentLevel, "intersegmentA3");
+			
 			
 			/*
 
@@ -189,12 +191,12 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "segmentA2");				// electric one
 			m.mapParser(currentLevel, "segmentA3");				// windy hall 1
 			m.mapParser(currentLevel, "segmentA4");				// windy hall 2
-			m.mapParser(currentLevel, "segmentA5");				// windy hall 3
+			m.mapParser(currentLevel, "segmentA5");				// aesthetic hall
 			m.mapParser(currentLevel, "segmentA6");				// ghosts
 			m.mapParser(currentLevel, "segmentA7");				// platforms
-			m.mapParser(currentLevel, "segmentA8");				// disappearing long and small platforms 
-			m.mapParser(currentLevel, "segmentA9");				// spinning fireball one 					-- NOT DOING AI VERSION?
-			m.mapParser(currentLevel, "segmentA10");			// long corridor
+			m.mapParser(currentLevel, "segmentA8");				// disappearing long and small platforms 	-- Very difficult for AI
+			m.mapParser(currentLevel, "segmentA9");				// spinning fireball one 
+			m.mapParser(currentLevel, "segmentA10");			// ghost corridor
 			m.mapParser(currentLevel, "segmentA11");			// disappearing platforms over acid
 			m.mapParser(currentLevel, "segmentA12");			// bookshelf pyramid
 			m.mapParser(currentLevel, "segmentA13");			// wizard and crushing bookshelves			
@@ -203,7 +205,8 @@ public class Game extends Canvas implements Runnable{
 			m.mapParser(currentLevel, "intersegmentA1"); 		// skeletons throwing objects down
 			m.mapParser(currentLevel, "intersegmentA2");		// falling rocks
 			m.mapParser(currentLevel, "intersegmentA2up");		// falling chandeliers
-			m.mapParser(currentLevel, "intersegmentA2down");	// falling chandeliers						
+			TODO: FIX TELEPORTING INTO WALL BUG for intersegmentA2down
+			m.mapParser(currentLevel, "intersegmentA2down");	// falling chandeliers	 										
 			m.mapParser(currentLevel, "intersegmentA3");		// hands one
 
 		*/
