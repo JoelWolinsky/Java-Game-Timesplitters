@@ -8,12 +8,16 @@ Platform Custom 330 92 corner1inv.png
 Platform Custom 46 300 edge3.png
 Waypoint 48 280 flag3.png R Y 20
 Platform Custom 46 460 edge3.png
+Waypoint 25 360 flag3.png R N 10
+Waypoint 55 440 flag3.png R Y 10
 Platform Custom 170 380 edge3inv.png
+Waypoint 172 360 flag3.png R Y 20
 Platform Custom 170 250 edge3inv.png
 Waypoint 178 230 flag3.png R Y 20
 Platform Custom 170 510 edge3inv.png
 
 Platform Custom 370 480 edge3inv.png
+Waypoint 372 460 flag3.png R Y 20
 Platform Custom 370 320 edge3inv.png
 Waypoint 372 300 flag3.png R N 10
 Platform Custom 0 384 wall5.png
@@ -25,7 +29,8 @@ Platform Custom 330 92 corner1inv.png
 
 
 Platform Custom 20 400 edge3.png
-Waypoint 22 340 flag3.png R Y 40
+Waypoint 2 300 flag3.png R N 10
+Waypoint 22 380 flag3.png R Y 20
 Platform Custom 145 340 edge3inv.png
 Platform Custom 145 480 edge3inv.png
 

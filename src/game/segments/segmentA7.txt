@@ -5,9 +5,11 @@ Platform Custom 96 92 top1.png
 Platform Custom 330 92 corner1inv.png
 
 Platform Custom 20 330 thinfloor1.png
-Waypoint 150 310 flag3.png R Y 0
+Waypoint -50 363 flag3.png R Y 0
+Waypoint 0 363 flag3.png R Y 0
 -Platform Custom 90 400 thinfloor1.png
 Platform Custom 220 450 thinfloor1.png
+Waypoint 350 430 flag3.png R Y 0
 Platform Custom 250 260 thinfloor1.png
 Waypoint 380 240 flag3.png R Y 0
 
@@ -29,6 +31,7 @@ Platform Custom 330 92 corner1inv.png
 
 
 Platform Custom 20 400 thinfloor1.png
+Waypoint 40 380 flag3.png R Y 10
 Platform Custom 100 320 thinfloor1.png
 Waypoint 230 290 flag3.png R Y 0
 Platform Custom 280 250 thinfloor1.png
