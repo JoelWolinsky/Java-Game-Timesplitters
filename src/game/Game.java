@@ -33,10 +33,9 @@ public class Game extends Canvas implements Runnable{
 
 	public static Game game;
 	public static Player player;
-	public static AIPlayer aiPlayer;
 	public static Camera camera = new Camera();
 	private Assets s = new Assets();
-	public Map m = new Map(MapMode.RNG);
+	public Map m;
 	public GameMode gameMode = GameMode.SINGLEPLAYER;
 
 	/**
@@ -121,11 +120,13 @@ public class Game extends Canvas implements Runnable{
 
 	public synchronized void start() {
 
+		m = new Map(MapMode.RNG);
+
 		switch (gameMode)
 		{
 			case MULTIPLAYER:
 				player = new PlayerMP(300, 300, keyInput, null, -1);
-				m.getCurrentLevel().addEntity(player);
+
 				Packet00Login loginPacket = new Packet00Login(player.getUsername(), 300, 300);
 				if (socketServer != null) {
 					socketServer.addConnection((PlayerMP) player, loginPacket);
@@ -134,17 +135,14 @@ public class Game extends Canvas implements Runnable{
 				break;
 			case vsAI:
 				player = new Player(0, 340, keyInput, 0 ,0);
-				aiPlayer = new AIPlayer(50, 340, 0 ,0, player);
-
-				m.getCurrentLevel().addEntity(player);
-				m.getCurrentLevel().addEntity(aiPlayer);
+				m.getCurrentLevel().addEntity(new AIPlayer(50, 340, 0 ,0, player));
 				break;
 			case SINGLEPLAYER:
 				player = new Player(0, 340, keyInput, 0 ,0);
-				m.getCurrentLevel().addEntity(player);
 				break;
 		}
 
+		m.getCurrentLevel().addEntity(player);
 		System.out.println(gameMode);
 
 		game = this;
