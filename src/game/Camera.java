@@ -18,6 +18,7 @@ public class Camera {
 		this.xOffset = 0;
 		this.yOffset = 0;
 	}
+
 	
 	/**
 	 * Called every frame, and is responsible for keeping the target centered.
