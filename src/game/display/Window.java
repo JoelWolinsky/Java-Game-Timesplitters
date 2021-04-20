@@ -23,6 +23,7 @@ import game.Game;
 import game.GameState;
 import game.Launcher;
 import game.SoundHandler;
+import game.graphics.GameMode;
 import network.GameClient;
 import network.GameServer;
 
@@ -509,7 +510,7 @@ public class Window extends Canvas{
 				backMultiplayer.setVisible(false);
 
 				Game.state = GameState.Playing;
-		    	Game.againstComputer = true;
+				game.setGameMode(GameMode.vsAI);
 				game.start();
 
 			}
@@ -555,8 +556,7 @@ public class Window extends Canvas{
 				backMultiplayer.setVisible(false);
 		    	
 		    	Game.state = GameState.Playing;
-		    	Game.isMultiplayer = true;
-		    	
+		    	game.setGameMode(GameMode.MULTIPLAYER);
 		    	game.start();
 			}
 				  
@@ -599,7 +599,7 @@ public class Window extends Canvas{
 				backMultiplayer.setVisible(false);
 		    	
 		    	Game.state = GameState.Playing;
-		    	Game.isMultiplayer = true;
+				game.setGameMode(GameMode.MULTIPLAYER);
 		    	
 		    	game.start();
 			}

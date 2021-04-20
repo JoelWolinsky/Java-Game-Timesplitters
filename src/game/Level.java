@@ -123,13 +123,13 @@ public class Level extends Canvas {
 	}
 
 
-	public PlayerMP getSpecificPlayerMP(String username){
+	public Player getSpecificPlayerMP(String username){
 
 		for (Player p : getPlayers())
 		{
 			if (p.getUsername().equals(username))
 			{
-				return (PlayerMP) p;
+				return p;
 			}
 		}
 

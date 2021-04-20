@@ -8,6 +8,7 @@ import game.entities.platforms.MovingPlatform;
 import game.entities.platforms.Platform;
 import game.entities.platforms.TimerPlatform;
 import game.graphics.Image;
+import game.graphics.MapMode;
 
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
@@ -15,13 +16,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Map {
-
 
     private int horizontalIndex = 0;
     private int verticalIndex = 0;
@@ -33,7 +30,94 @@ public class Map {
     String texturePlatformInverted = "";
     String textureFloor = "";
     String goUrl = "";
+    int index = 0;
+    int bottom;
+    int top;
+    public ArrayList<MapPart> mps = new ArrayList<>();
+    BackgroundController ctrlr;
+    public Level currentLevel = new Level();
 
+    ArrayList<String> segments3,segments1,segments2,segments4,wizard,introDimension,castleEntrance,throneRoom, segments5;
+
+    public Map (MapMode mapMode){
+
+        switch (mapMode)
+        {
+            case debug:
+                parseFile(currentLevel, "intro1");
+                parseFile(currentLevel, "introDimension");
+                parseFile(currentLevel, "segmentA16");
+                parseFile(currentLevel, "segmentA14");
+                parseFile(currentLevel, "segmentA14");
+
+			/*
+			*** LEGEND ***
+			m.mapParser(currentLevel, "intro1");				// No go zone 								-- NO X VERSION
+			m.mapParser(currentLevel, "intro2");				// Basic chandelier room
+			m.mapParser(currentLevel, "introDimension");		// Pink portal
+
+			m.mapParser(currentLevel, "segmentA1");				// web segment
+			m.mapParser(currentLevel, "segmentA2");				// electric one
+			m.mapParser(currentLevel, "segmentA3");				// aesthetic hall 1
+			m.mapParser(currentLevel, "segmentA4");				// aesthetic hall 2
+			m.mapParser(currentLevel, "segmentA5");				// aesthetic hall 3
+			m.mapParser(currentLevel, "segmentA6");				// ghosts
+			m.mapParser(currentLevel, "segmentA7");				// platforms
+			m.mapParser(currentLevel, "segmentA8");				// disappearing long and small platforms 	-- NEEDS WORK
+			m.mapParser(currentLevel, "segmentA9");				// spinning fireball one 					-- NOT DOING AI VERSION
+			m.mapParser(currentLevel, "segmentA10");			// long corridor
+			m.mapParser(currentLevel, "segmentA11");			// disappearing platforms over acid
+			m.mapParser(currentLevel, "segmentA12");			// bookshelf pyramid
+			m.mapParser(currentLevel, "segmentA13");			// wizard and crushing bookshelves 			-- NOT DOING AI VERSION
+			m.mapParser(currentLevel, "segmentA14");			// interstellar bookshelf columns 			-- WAIT UNTIL DEBUGGED
+
+			m.mapParser(currentLevel, "intersegmentA1"); 		// skeletons throwing objects down
+			m.mapParser(currentLevel, "intersegmentA2");		// falling rocks
+			m.mapParser(currentLevel, "intersegmentA2up");		// falling chandeliers
+			m.mapParser(currentLevel, "intersegmentA2down");	// falling chandeliers
+			m.mapParser(currentLevel, "intersegmentA3");		// hands one
+		    */
+
+            case RNG:
+                //create different segment pools for the different parts of the game
+                //we want them separated in order to keep a specific order in our game
+                segments1 = new ArrayList<String>(Arrays.asList("segmentA1","segmentA2","intersegmentA2","intersegmentA1","intersegmentA2up","intersegmentA2down"));
+                segments2 = new ArrayList<String>(Arrays.asList("segmentA3","segmentA4","segmentA4"));
+                castleEntrance = new ArrayList<String>(Arrays.asList("intro2"));
+                throneRoom = new ArrayList<String>(Arrays.asList("segmentA5"));
+                segments3 = new ArrayList<String>(Arrays.asList("segmentA6","segmentA7","segmentA8","segmentA9","segmentA10","segmentA11"));
+                segments4 = new ArrayList<String>(Arrays.asList("segmentA15","segmentA12","segmentA15"));
+                wizard = new ArrayList<String>(Arrays.asList("segmentA13"));
+                introDimension = new ArrayList<String>(Arrays.asList("introDimension"));
+                segments5 = new ArrayList<String>(Arrays.asList("segmentA14","segmentA16"));
+
+                //choose the limits of your map this should also be related to how many levels you have defined
+                //eg. you don't want to have 20 levels but a top limit of only 2 since 17 of the leves will never be used
+                bottom=0;
+                top=2;
+
+                //add levels to the background controller which manages the current position within the horizontal panorama
+                ctrlr = new BackgroundController(new BackgroundStates("ground1.png","ground2.png"),new BackgroundStates("sky1.png","sky2.png"),new BackgroundStates("sky3.png","sky4.png"),new BackgroundStates("sky5.png","sky6.png"));
+
+                //generate the segment pools - order is important
+                parseFile(currentLevel, "intro1");
+                ArrayList<Integer> allParts = new ArrayList<>(Arrays.asList(
+                        randomGenerate(segments1),
+                        randomGenerate(castleEntrance) + randomGenerate(segments2) + randomGenerate(throneRoom),
+                        randomGenerate(segments3),
+                        randomGenerate(segments4) + randomGenerate(wizard) + randomGenerate(introDimension),
+                        randomGenerate(segments5)));
+
+                //create specific progressbar parts for the generated segment pools
+                for (Integer i =0 ; i<allParts.size();i++)
+                {
+                    mps.add(new MapPart("./img/minipart".concat(i.toString()).concat(".png"),allParts.get(i)));
+                }
+
+        }
+
+
+    }
 
     /**
      * Parses a single command
@@ -336,7 +420,7 @@ public class Map {
     }
 
     /**
-     * Add index amount of points to the linkedlist provided, from index from the string array provided
+     * Add index amount of areas to the gameobject provided, from index from the string array provided
      *
      * @param currentLevel the level to which the areas will be added
      * @param o            the object towards which the areas are associated
@@ -361,4 +445,207 @@ public class Map {
 
     }
 
+    public int randomGenerate(ArrayList<String> segmentPool) {
+
+        int nrBlocks=0;
+        int rnd1;
+
+        while (!segmentPool.isEmpty()){
+
+            //choose segment at random from segment pool
+            rnd1 = new Random().nextInt(segmentPool.size());
+
+            //if picked segment is not allowed when on top level or bottom level reroll till it's something valid
+            //when the map is on level 0 we don't want to go further down
+            if (index == bottom)
+                while (segmentPool.get(rnd1).equals("intersegmentA2down")) {
+                    rnd1 = new Random().nextInt(segmentPool.size());
+                }
+
+            //when the map is on the top most level chosen we don't want to go further up
+            if (index == top)
+                while (segmentPool.get(rnd1).equals("intersegmentA2up")) {
+                    rnd1 = new Random().nextInt(segmentPool.size());
+                }
+
+            //custom behaviour for Castle Dungeon -- put an intersegmentA3 before each segment
+            if (belongsTo(segmentPool.get(rnd1),segments3))
+                nrBlocks = nrBlocks + randomGenerate(new ArrayList<String>(Arrays.asList("intersegmentA3")));
+
+            //advance by 1 block
+            parseCommand(currentLevel, "Chunk 1 E asdgasdg.png");
+
+            try
+            {
+                //initialize object to read first line of the picked segment
+                File myObj = new File("./src/game/segments/".concat(segmentPool.get(rnd1)).concat(".txt"));
+                Scanner myReader;
+                myReader = new Scanner(myObj);
+                String data = myReader.nextLine();
+                String[] splix = data.split("\\s+");
+
+                //check if segment is of size 1 or 2 or custom and generate background accordingly
+                switch (splix[8]){
+
+                    //default 1 block size segment -- no level change
+                    case "1":
+
+                        //custom behaviour for segments 1
+                        if (belongsTo(segmentPool.get(rnd1),segments1))
+                        {
+                            if (index == 0) {
+                                parseCommand(currentLevel, "Platform Custom -86 384 customFloor3.png");
+                                parseCommand(currentLevel, "Platform Custom 340 384 customFloor3.png");
+                            }
+                            else {
+                                parseCommand(currentLevel, "Platform Custom 54 384 edge1.png");
+                                parseCommand(currentLevel, "Platform Custom 338 384 edge1inv.png");
+                            }
+                        }
+
+                        parseCommand(currentLevel, "Area 0 -384 ".concat(ctrlr.getCurrent(index+1)));
+                        parseCommand(currentLevel, "Area 0 0 ".concat(ctrlr.getCurrent(index)));
+
+                        if (index>0)
+                        {
+                            parseCommand(currentLevel, "Area 0 384 ".concat(ctrlr.getCurrent(index-1)));
+                            if (index>1)
+                                parseCommand(currentLevel, "Area 0 768 ".concat(ctrlr.getCurrent(index-2)));
+                        }
+
+                        ctrlr.incrementStateIndex();
+                        nrBlocks++;
+                        break;
+
+                    //default 2 block size segment -- no level change
+                    case "2":
+
+                        parseCommand(currentLevel, "Area 0 -384 ".concat(ctrlr.getCurrent(index+1)));
+                        parseCommand(currentLevel, "Area 426 -384 ".concat(ctrlr.getNext(index+1)));
+
+                        parseCommand(currentLevel, "Area 0 0 ".concat(ctrlr.getCurrent(index)));
+                        parseCommand(currentLevel, "Area 426 0 ".concat(ctrlr.getNext(index)));
+
+                        if (index>0)
+                        {
+                            parseCommand(currentLevel, "Area 0 384 ".concat(ctrlr.getCurrent(index-1)));
+                            parseCommand(currentLevel, "Area 426 384 ".concat(ctrlr.getNext(index-1)));
+
+                            parseCommand(currentLevel, "Area 0 384 pillars.png");
+                            parseCommand(currentLevel, "Area 426 384 pillars.png");
+                            parseCommand(currentLevel, "Platform Custom 0 768 floorA.png");
+                            parseCommand(currentLevel, "Platform Custom 426 768 floorA.png");
+
+                            if (index>1)
+                            {
+                                parseCommand(currentLevel, "Area 0 768 ".concat(ctrlr.getCurrent(index-2)));
+                                parseCommand(currentLevel, "Area 426 768 ".concat(ctrlr.getNext(index-2)));
+
+                                parseCommand(currentLevel, "Area 0 768 pillars.png");
+                                parseCommand(currentLevel, "Area 426 768 pillars.png");
+
+                            }
+                        }
+
+                        ctrlr.incrementStateIndex();
+                        ctrlr.incrementStateIndex();
+                        nrBlocks+=2;
+                        break;
+
+                    case "Custom":
+
+                        //here you can define special behaviour for certain segments
+                        switch (splix[9]){
+
+                            //this segment elevates the level
+                            case "intersegmentA2up":
+                                if (index == 0) {
+                                    parseCommand(currentLevel, "Platform Custom -86 384 customFloor3.png");
+                                    parseCommand(currentLevel, "Platform Custom 340 384 customFloor3.png");
+                                } else {
+                                    parseCommand(currentLevel, "Platform Custom 54 384 edge1.png");
+                                    parseCommand(currentLevel, "Platform Custom 340 384 customFloor3.png");
+                                }
+
+                                if (index>0)
+                                {
+                                    parseCommand(currentLevel, "Area 0 384 ".concat(ctrlr.getCurrent(index-1)));
+                                    if (index>1)
+                                        parseCommand(currentLevel, "Area 0 768 ".concat(ctrlr.getCurrent(index-2)));
+                                }
+
+                                parseCommand(currentLevel, "Area 0 0 ".concat(ctrlr.getCurrent(index)));
+                                parseCommand(currentLevel, "Area 0 -384 ".concat(ctrlr.getCurrent(index+1)));
+                                parseCommand(currentLevel, "Area 0 -768 ".concat(ctrlr.getCurrent(index+2)));
+                                parseCommand(currentLevel, "Area -426 -768 ".concat(ctrlr.getPrevious(index+2)));
+
+
+                                index++;
+
+                                ctrlr.incrementStateIndex();
+                                nrBlocks++;
+                                break;
+
+                            //this segment decreses elevation of the level
+                            case "intersegmentA2down":
+                                if (index == 1) {
+                                    parseCommand(currentLevel, "Platform Custom -86 768 customFloor3.png");
+                                    parseCommand(currentLevel, "Platform Custom 340 768 customFloor3.png");
+                                } else {
+                                    parseCommand(currentLevel, "Platform Custom 338 768 edge1inv.png");
+                                    parseCommand(currentLevel, "Platform Custom -86 768 customFloor3.png");
+                                }
+
+                                parseCommand(currentLevel, "Area 0 -384 ".concat(ctrlr.getCurrent(index+1)));
+                                parseCommand(currentLevel, "Area 426 -384 ".concat(ctrlr.getNext(index+1)));
+                                parseCommand(currentLevel, "Area 0 0 ".concat(ctrlr.getCurrent(index)));
+                                if (index>0)
+                                {
+                                    parseCommand(currentLevel, "Area 0 384 ".concat(ctrlr.getCurrent(index-1)));
+                                    if(index>1)
+                                        parseCommand(currentLevel, "Area 0 768 ".concat(ctrlr.getCurrent(index-2)));
+                                }
+
+                                index--;
+
+                                ctrlr.incrementStateIndex();
+                                nrBlocks++;
+                                break;
+                        }
+                        break;
+                }
+
+
+            }
+            catch (FileNotFoundException e)
+            {
+            }
+
+            //revert the 1 block advancement at the start of the while loop
+            parseCommand(currentLevel, "Revert");
+            //draw the contents of the segment
+            parseFile(currentLevel, segmentPool.get(rnd1));
+            //rremove the segment from the segment pool
+            segmentPool.remove(rnd1);
+
+
+        }
+
+        return nrBlocks;
+
+    }
+
+    public boolean belongsTo(String s, ArrayList<String> al)
+    {
+        for (String z : al) {
+            if (z.equals(s)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Level getCurrentLevel() {
+        return currentLevel;
+    }
 }

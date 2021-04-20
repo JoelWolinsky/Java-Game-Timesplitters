@@ -16,6 +16,7 @@ import game.entities.platforms.MovingPlatform;
 import game.entities.areas.RespawnPoint;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
+import game.graphics.GameMode;
 import game.input.KeyInput;
 import game.network.packets.Packet02Move;
 
@@ -248,7 +249,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             }
         }
 
-        if (Game.isMultiplayer) {
+        if (Game.game.getGameMode()== GameMode.MULTIPLAYER) {
             if (this == Game.player) {
                 if ((int) this.x != this.prevPos.x || (int) this.y != this.prevPos.y) {
                     Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y);
