@@ -8,7 +8,7 @@ public class Camera {
 	/**
 	 * xOffset and yOffset are used to offset the actual x and y positions to give the illusion of a moveable camera.
 	 */
-	private float xOffset, yOffset;
+	private static float xOffset, yOffset;
 	/**
 	 * The game object on which the camera will be centered.
 	 */
@@ -64,15 +64,15 @@ public class Camera {
 	/**
 	 * @return The current camera xOffset.
 	 */
-	public float getXOffset() {
-		return this.xOffset;
+	public static float getXOffset() {
+		return xOffset;
 	}
 	
 	/**
 	 * @return The current camera yOffset.
 	 */
-	public float getYOffset() {
-		return this.yOffset;
+	public static float getYOffset() {
+		return yOffset;
 	}
 
 	public GameObject getTarget() {

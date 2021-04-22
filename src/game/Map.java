@@ -35,20 +35,20 @@ public class Map {
     int top;
     public ArrayList<MapPart> mps = new ArrayList<>();
     BackgroundController ctrlr;
-    public Level currentLevel = new Level();
+    public Level currentLevel;
 
     ArrayList<String> segments3,segments1,segments2,segments4,wizard,introDimension,castleEntrance,throneRoom, segments5;
 
     public Map (MapMode mapMode){
 
+        currentLevel = new Level();
+
         switch (mapMode)
         {
             case debug:
+
                 parseFile(currentLevel, "intro1");
-                parseFile(currentLevel, "introDimension");
-                parseFile(currentLevel, "segmentA16");
-                parseFile(currentLevel, "segmentA14");
-                parseFile(currentLevel, "segmentA14");
+                parseFile(currentLevel,"segmentA1");
 
 			/*
 			*** LEGEND ***
@@ -77,6 +77,7 @@ public class Map {
 			m.mapParser(currentLevel, "intersegmentA2down");	// falling chandeliers
 			m.mapParser(currentLevel, "intersegmentA3");		// hands one
 		    */
+                break;
 
             case RNG:
                 //create different segment pools for the different parts of the game
@@ -99,6 +100,7 @@ public class Map {
                 //add levels to the background controller which manages the current position within the horizontal panorama
                 ctrlr = new BackgroundController(new BackgroundStates("ground1.png","ground2.png"),new BackgroundStates("sky1.png","sky2.png"),new BackgroundStates("sky3.png","sky4.png"),new BackgroundStates("sky5.png","sky6.png"));
 
+
                 //generate the segment pools - order is important
                 parseFile(currentLevel, "intro1");
                 ArrayList<Integer> allParts = new ArrayList<>(Arrays.asList(
@@ -113,8 +115,10 @@ public class Map {
                 {
                     mps.add(new MapPart("./img/minipart".concat(i.toString()).concat(".png"),allParts.get(i)));
                 }
+                break;
 
         }
+
 
 
     }
@@ -372,6 +376,10 @@ public class Map {
             case "OnReachAnimArea":
 
                 currentLevel.addEntity(new OnReachAnimArea(horizontalIndex - setX + Integer.parseInt(splitted[1]), verticalIndex + Integer.parseInt(splitted[2]), 0, 0, splitted[3]));
+                break;
+            case "GameEndingObject":
+
+                currentLevel.addEntity(new GameEndingObject(horizontalIndex - setX + Integer.parseInt(splitted[1]), verticalIndex + Integer.parseInt(splitted[2]), 0, 0, splitted[3]));
                 break;
 
             case "Revert":

@@ -1,8 +1,6 @@
 package game;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.util.*;
 
@@ -12,6 +10,7 @@ import game.entities.players.Player;
 import game.entities.players.AIPlayer;
 import game.graphics.Assets;
 import game.graphics.GameMode;
+import game.graphics.LevelState;
 import game.graphics.MapMode;
 import game.input.KeyInput;
 import game.network.packets.Packet00Login;
@@ -19,29 +18,35 @@ import network.GameClient;
 import network.GameServer;
 import game.entities.players.PlayerMP;
 
+import static game.Level.getFinish;
+import static game.Level.getLevelState;
+
 public class Game extends Canvas implements Runnable{
 
 	private static final long serialVersionUID = -772676358550096683L;
 	private Thread thread;
-	private boolean running = false;
+	private static boolean running = false;
 	public static KeyInput keyInput = new KeyInput();
 	public static MouseInput mouseInput = new MouseInput();
-	public static GameState state = GameState.MainMenu;
+	public static GameState gameState = GameState.MainMenu;
 
 	public static GameClient socketClient;
 	public static GameServer socketServer;
 
+	float a=0,b=0,c=0,d=0;
 	public static Game game;
 	public static Player player;
 	public static Camera camera = new Camera();
 	private Assets s = new Assets();
 	public Map m;
-	public GameMode gameMode = GameMode.SINGLEPLAYER;
+	public static GameMode gameMode = GameMode.SINGLEPLAYER;
+	public static boolean bruh=false;
 
 	/**
 	 * Initialises game entities and objects that must appear at the start of the game
 	 */
 	public Game() {
+		new Window(this);
 		new Window(this);
 	}
 
@@ -49,7 +54,8 @@ public class Game extends Canvas implements Runnable{
 	 * Called every frame, this tells certain lists, objects, or entities to call their own tick function.
 	 */
 	private void tick() {
-		if(this.state == GameState.Playing) {
+
+		if(this.gameState == GameState.Playing) {
 			m.getCurrentLevel().tick();
 			camera.tick();
 		}
@@ -69,10 +75,39 @@ public class Game extends Canvas implements Runnable{
 
 		//Rendering code happens here
 
-		if(this.state == GameState.Playing) {
+
+		if(this.gameState == GameState.Playing) {
 			g.setColor(Color.black);
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
-			m.getCurrentLevel().render(g, camera.getXOffset(), camera.getYOffset()+100);
+
+			//END GAME VICTORY
+			if (getLevelState()== LevelState.Finished) {
+				Graphics2D zoomed = (Graphics2D) g;
+
+				if (a<5 || b<5)
+				{
+					a=a+0.3f;
+					b=b+0.3f;
+				}
+
+				if (c<520)
+				{
+					c = c+20;
+				}
+
+				if (d < 665)
+				{
+					d = d + 20;
+				}
+
+				zoomed.scale(a, b);
+				m.getCurrentLevel().render(zoomed, getFinish().getX()- c, getFinish().getY() - d);
+			}
+			else
+			{
+				m.getCurrentLevel().render(g, camera.getXOffset(), camera.getYOffset() + 100);
+			}
+
 		}else {
 			g.setColor(new Color(255,255,255));
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
@@ -120,14 +155,14 @@ public class Game extends Canvas implements Runnable{
 
 	public synchronized void start() {
 
-		m = new Map(MapMode.RNG);
+		m = new Map(MapMode.debug);
 
 		switch (gameMode)
 		{
 			case MULTIPLAYER:
-				player = new PlayerMP(300, 300, keyInput, null, -1);
+				player = new PlayerMP(0, 340, keyInput, null, -1);
 
-				Packet00Login loginPacket = new Packet00Login(player.getUsername(), 300, 300);
+				Packet00Login loginPacket = new Packet00Login(player.getUsername(), 1000, 340);
 				if (socketServer != null) {
 					socketServer.addConnection((PlayerMP) player, loginPacket);
 				}
@@ -135,14 +170,14 @@ public class Game extends Canvas implements Runnable{
 				break;
 			case vsAI:
 				player = new Player(0, 340, keyInput, 0 ,0);
-				m.getCurrentLevel().addEntity(new AIPlayer(50, 340, 0 ,0, player));
+				m.getCurrentLevel().addToAddQueue(new AIPlayer(50, 340, 0 ,0, player));
 				break;
 			case SINGLEPLAYER:
 				player = new Player(0, 340, keyInput, 0 ,0);
 				break;
 		}
 
-		m.getCurrentLevel().addEntity(player);
+		m.getCurrentLevel().addToAddQueue(player);
 		System.out.println(gameMode);
 
 		game = this;
@@ -190,7 +225,23 @@ public class Game extends Canvas implements Runnable{
 		this.gameMode = gameMode;
 	}
 
-	public GameMode getGameMode() {
+	public static GameMode getGameMode() {
 		return gameMode;
+	}
+
+	public static void setGameState(GameState gameStatee) {
+		gameState = gameStatee;
+	}
+
+	public GameState getGameState() {
+		return gameState;
+	}
+
+	public static void setRunning(boolean runningg) {
+		running = runningg;
+	}
+
+	public static void setBruh(boolean bruh) {
+		Game.bruh = bruh;
 	}
 }

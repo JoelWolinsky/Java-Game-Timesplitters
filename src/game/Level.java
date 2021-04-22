@@ -4,14 +4,19 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import game.entities.*;
+import game.entities.areas.GameEndingObject;
 import game.entities.players.AIPlayer;
 import game.entities.players.Player;
 import game.entities.players.PlayerMP;
+import game.graphics.LevelState;
+
+import static game.Game.getGameMode;
 
 public class Level extends Canvas {
 
 	private static boolean gameStarted=true;
 	private static boolean gameEnded=false;
+	private static LevelState levelState = LevelState.Waiting;
 
 	private static LinkedList<GameObject> entities = new LinkedList<>();
 	private static ArrayList<GameObject> toBeAdded = new ArrayList<>();
@@ -21,25 +26,19 @@ public class Level extends Canvas {
 		return entities;
 	}
 	public static synchronized ArrayList<GameObject> getToBeAdded() {return  toBeAdded;}
+	public synchronized void addToAddQueue(GameObject o) {toBeAdded.add(o);}
+	public synchronized void addToRemoveQueue(GameObject o) {toBeRemoved.add(o);}
 	public static synchronized ArrayList<GameObject> getToBeRemoved() {return  toBeRemoved;}
+	public static LevelState getLevelState () {return levelState;}
+	public static void setLevelState (LevelState levelStatee) {levelState = levelStatee;}
 
 	public void tick() {
 
-		//Unique Event - GAME STARTING
-		if (gameStarted)
-		{
-			for (Player p : getPlayers())
-				p.setCanMove(true);
-			gameStarted=false;
-		}
 
-		//Unique Event - GAME ENDING
-		if (gameEnded)
-		{
-			for (Player p : getPlayers())
-				p.setCanMove(false);
-			gameEnded=false;
-		}
+		//System.out.println(levelState);
+
+		if (levelState==LevelState.Waiting)
+			checkAllPlayersConnected();
 
 		//Add the elements sitting in the queue to be added
 		if (!toBeAdded.isEmpty()) {
@@ -63,6 +62,7 @@ public class Level extends Canvas {
 
 	public void render(Graphics g, float f, float h) {
 
+		if (!entities.isEmpty())
 		for(GameObject o : entities) {
 			o.render(g, f, h);
 		}
@@ -149,6 +149,35 @@ public class Level extends Canvas {
 			System.out.println("Exception in movePlayer when moving player " + username);
 			e.printStackTrace();
 		}
+	}
+
+	public void checkAllPlayersConnected(){
+
+		switch (getGameMode()){
+			case SINGLEPLAYER:
+				if (getPlayers().size()==1)
+					levelState=LevelState.Starting;
+				break;
+			case vsAI:
+				if (getPlayers().size()==2)
+					levelState=LevelState.Starting;
+				break;
+			case MULTIPLAYER:
+				if (getPlayers().size()==2)
+					levelState=LevelState.Starting;
+				break;
+		}
+	}
+
+	public static GameObject getFinish()
+	{
+		for (GameObject o : getGameObjects())
+		{
+			if (o instanceof GameEndingObject)
+				return o;
+		}
+
+		return null;
 	}
 
 

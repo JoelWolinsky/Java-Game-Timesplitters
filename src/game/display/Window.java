@@ -37,6 +37,8 @@ public class Window extends Canvas{
 	private static final long serialVersionUID = 1877720651231192133L;
 	
 	public JFrame frame;
+	public static JPanel mainMenu;
+	public static JLabel back,backOptions,backMultiplayer;
 	public static Dimension d = new Dimension(WIDTH,HEIGHT);
 	
 	public Window(Game game) {
@@ -65,7 +67,7 @@ public class Window extends Canvas{
 		int panelHeight = ((HEIGHT / 2) - (WIDTH / 10));
 		
 		// The panel that holds the 4 buttons on this page
-		JPanel mainMenu = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		mainMenu = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		mainMenu.setBounds(WIDTH / 23, (HEIGHT / 2) + 50, panelWidth, panelHeight);
 		mainMenu.setOpaque(false);
 		((FlowLayout)mainMenu.getLayout()).setVgap(panelHeight / 19);
@@ -94,7 +96,7 @@ public class Window extends Canvas{
 		ImageIcon backgroundMain = new ImageIcon("./img/backgroundMain.gif");
 	    Image temp = backgroundMain.getImage().getScaledInstance(WIDTH,HEIGHT,Image.SCALE_DEFAULT);
 	    backgroundMain = new ImageIcon(temp);
-	    JLabel back = new JLabel(backgroundMain);
+	    back = new JLabel(backgroundMain);
 	    back.setLayout(null);
 	    back.setBounds(0,0,WIDTH,HEIGHT);
 	    back.setVisible(true);
@@ -102,7 +104,7 @@ public class Window extends Canvas{
 	    ImageIcon backgroundOptions = new ImageIcon("./img/backgroundOptions.gif");
 	    Image temp2 = backgroundOptions.getImage().getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
 	    backgroundOptions = new ImageIcon(temp2);
-	    JLabel backOptions = new JLabel(backgroundOptions);
+	    backOptions = new JLabel(backgroundOptions);
 	    backOptions.setLayout(null);
 	    backOptions.setBounds(0,0,WIDTH,HEIGHT);
 	    backOptions.setVisible(false);
@@ -110,7 +112,7 @@ public class Window extends Canvas{
 	    ImageIcon backgroundMultiplayer = new ImageIcon("./img/backgroundMultiplayer.gif");
 	    Image temp3 = backgroundMultiplayer.getImage().getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
 	    backgroundMultiplayer = new ImageIcon(temp3);
-	    JLabel backMultiplayer = new JLabel(backgroundMultiplayer);
+	    backMultiplayer = new JLabel(backgroundMultiplayer);
 	    backMultiplayer.setLayout(null);
 	    backMultiplayer.setBounds(0, 0, WIDTH, HEIGHT);
 	    backMultiplayer.setVisible(false);
@@ -186,7 +188,7 @@ public class Window extends Canvas{
 				backOptions.setVisible(false);
 				backMultiplayer.setVisible(false);
 				
-				Game.state = GameState.Playing;
+				game.setGameState(GameState.Playing);
 				game.start();
 			}
 			
@@ -509,7 +511,7 @@ public class Window extends Canvas{
 		    	backOptions.setVisible(false);
 				backMultiplayer.setVisible(false);
 
-				Game.state = GameState.Playing;
+				game.setGameState(GameState.Playing);
 				game.setGameMode(GameMode.vsAI);
 				game.start();
 
@@ -555,7 +557,7 @@ public class Window extends Canvas{
 		    	backOptions.setVisible(false);
 				backMultiplayer.setVisible(false);
 		    	
-		    	Game.state = GameState.Playing;
+		    	game.setGameState(GameState.Playing);
 		    	game.setGameMode(GameMode.MULTIPLAYER);
 		    	game.start();
 			}
@@ -598,7 +600,7 @@ public class Window extends Canvas{
 		    	backOptions.setVisible(false);
 				backMultiplayer.setVisible(false);
 		    	
-		    	Game.state = GameState.Playing;
+		    	game.setGameState(GameState.Playing);
 				game.setGameMode(GameMode.MULTIPLAYER);
 		    	
 		    	game.start();
@@ -640,5 +642,24 @@ public class Window extends Canvas{
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
-	
+
+	public static JPanel getMainMenu() {
+		return mainMenu;
+	}
+
+	public static void setMainMenuVisible(boolean visible) {
+		Window.mainMenu.setVisible(visible);
+	}
+
+	public static void setBack(boolean visible) {
+		Window.back.setVisible(visible);
+	}
+
+	public static void setBackOptions(boolean visible) {
+		Window.backOptions.setVisible(visible);
+	}
+
+	public static void setBackMultiplayer(boolean visible) {
+		Window.backMultiplayer.setVisible(visible);
+	}
 }

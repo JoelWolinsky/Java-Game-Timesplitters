@@ -1,6 +1,8 @@
 ghost
 IDLE 15 4 ghost5.png ghost6.png ghost7.png ghost5.png
 OTHER 15 4 ghost5inv.png ghost6inv.png ghost7inv.png ghost5inv.png
+sphere
+IDLE 15 4 sphere.png sphere.png sphere.png sphere.png
 acid
 IDLE 15 4 acid1.png acid2.png acid3.png acid4.png
 skele

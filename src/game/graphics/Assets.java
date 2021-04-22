@@ -15,6 +15,7 @@ public class Assets {
 	public static ArrayList <BufferedImage> player_right;
 	public static ArrayList <BufferedImage> player_left;
 	public static ArrayList <BufferedImage> player_other;
+	public static ArrayList <BufferedImage> player_swag;
 
 	public static ArrayList<Asset> assets = new ArrayList<>();
 	String[] splitted;
@@ -56,11 +57,82 @@ public class Assets {
 		player_left.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
 		player_left.add(sheet.crop(xOffset+xDistance*0, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
 
+		player_swag = new ArrayList<BufferedImage>();
+
+
+
+		player_swag.add(sheet.crop(xOffset+xDistance*0, yOffset+yDistance*3, PLAYER_WIDTH+5, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*3, PLAYER_WIDTH+5, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*3, PLAYER_WIDTH+5, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*3, PLAYER_WIDTH+5, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*3, PLAYER_WIDTH+5, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance*3, PLAYER_WIDTH+5, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*6, yOffset+yDistance*3, PLAYER_WIDTH+5, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*0, yOffset+yDistance*4, PLAYER_WIDTH+5, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*4, PLAYER_WIDTH+5, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*4, PLAYER_WIDTH+5, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*3, PLAYER_WIDTH+5, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*0, yOffset+yDistance*3, PLAYER_WIDTH+5, PLAYER_HEIGHT));
+
+		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*13, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance*13, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*6, yOffset+yDistance*13, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+
+		player_swag.add(sheet.crop(xOffset+xDistance*0, yOffset+yDistance*14, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*14, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+
+		player_swag.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*14, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*14, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*14, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance*14, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*6, yOffset+yDistance*14, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+
+		player_swag.add(sheet.crop(xOffset+xDistance*0, yOffset+yDistance*15, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*15, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*15, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*15, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*15, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance*15, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*6, yOffset+yDistance*15, PLAYER_WIDTH+10, PLAYER_HEIGHT));
+
+		/*
+		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*6,yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
+
+		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*11, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*11, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*11, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*11, PLAYER_WIDTH, PLAYER_HEIGHT));
+
+		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*6,yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
+
+		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
+		player_swag.add(sheet.crop(xOffset+xDistance*6,yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
+
+		 */
+
 		Asset as = new Asset("player",new HashMap<AnimationStates, Animation>());
 		as.getAnimations().put(AnimationStates.IDLE, new Animation(10,player_idle));
 		as.getAnimations().put(AnimationStates.RIGHT, new Animation(10,player_right));
 		as.getAnimations().put(AnimationStates.LEFT, new Animation(10,player_left));
 		as.getAnimations().put(AnimationStates.OTHER, new Animation(10,player_other));
+		as.getAnimations().put(AnimationStates.SWAG, new Animation(5,player_swag));
 		assets.add(as);
 
 		parseAssets();

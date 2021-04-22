@@ -17,9 +17,11 @@ import game.entities.areas.RespawnPoint;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
 import game.graphics.GameMode;
+import game.graphics.LevelState;
 import game.input.KeyInput;
 import game.network.packets.Packet02Move;
 
+import static game.Level.getLevelState;
 import static game.graphics.Assets.getAnimations;
 import static game.Level.getToBeAdded;
 
@@ -85,6 +87,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         this.animations = getAnimations("player");
         this.currentAnimState = AnimationStates.IDLE;
 
+        this.width = animations.get(currentAnimState).getFrame(frame).getWidth();
+        this.height = animations.get(currentAnimState).getFrame(frame).getHeight();
 
         CollidingObject.addCollider(this);
         SolidCollider.addSolidCollider(this);
@@ -95,10 +99,16 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         CollidingObject.getCollisions(this);
 
 
+        if (getLevelState()== LevelState.InProgress)
+            this.setCanMove(true);
+        else
+            this.setCanMove(false);
+
         moving = false;
 
         //disable immunity after 100
         // if (!(this instanceof AIPlayer))
+        if (getLevelState()== LevelState.InProgress)
         if (i < 100) {
             i++;
             if (i > 20) {
@@ -123,8 +133,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         }
 
         //always have the player collision box set to respective size of its animationstate
-        this.width = animations.get(currentAnimState).getFrame(frame).getWidth();
-        this.height = animations.get(currentAnimState).getFrame(frame).getHeight();
+        //this.width = animations.get(currentAnimState).getFrame(frame).getWidth();
+        //this.height = animations.get(currentAnimState).getFrame(frame).getHeight();
 
 
         this.prevPos = new Point((int) this.x, (int) this.y);
@@ -437,6 +447,10 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     public void handleCollisions(LinkedList<CollidingObject> collisions) {
     }
 
+    public void setVelX(float velX) {
+        this.velX = velX;
+    }
+
     public void setVelY(float velY) {
         this.velY = velY;
     }
@@ -590,5 +604,9 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                 animationTimer = 0;
             }
         }
+    }
+
+    public void setCurrentAnimState(AnimationStates currentAnimState) {
+        this.currentAnimState = currentAnimState;
     }
 }

@@ -1,6 +1,7 @@
 package game;
 
 import game.entities.GameObject;
+import game.graphics.LevelState;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -8,15 +9,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import static game.Level.getGameObjects;
-import static game.Level.setGameStarted;
+
+import static game.Level.*;
 
 public class UIController extends GameObject {
 
 	private ArrayList<String> countdownUrls = new ArrayList<String>(Arrays.asList("5.png", "4.png","3.png","2.png","1.png","finish2.png","asdgasdg.png"));
 	private int index=0;
 	private int timer=0;
-	private boolean startCountdown=true;
+	private boolean startCountdown=false;
 	private boolean endGameCelebration=false;
 	UIElement announcer;
 
@@ -35,6 +36,12 @@ public class UIController extends GameObject {
 	public void tick() {
 
 		//START OF THE GAME COUNTDOWN SLIDESHOW
+		if (getLevelState()==LevelState.Starting)
+			startCountdown=true;
+
+		if (getLevelState()==LevelState.Finished)
+			endGameCelebration=true;
+
 		if (startCountdown) {
 
 			if (!announcer.isVisible())
@@ -54,12 +61,12 @@ public class UIController extends GameObject {
 
 				index++;
 				if (index == countdownUrls.size()-1) {
-					setGameStarted(true);
+					setLevelState(LevelState.InProgress);
 				}
 
 				if (index == countdownUrls.size()) {
 					startCountdown = false;
-					announcer.setVisible(false);
+					//announcer.setVisible(false);
 				}
 
 				timer = 0;
@@ -68,7 +75,14 @@ public class UIController extends GameObject {
 
 		if (endGameCelebration)
 		{
-
+			try {
+				announcer.setImg(ImageIO.read(new File("./img/winner.png")));
+			}
+			catch (IOException exc) {
+				//TODO: Handle exception.
+			}
+			announcer.setY(y);
+			announcer.setX(x+49);
 		}
 
 
