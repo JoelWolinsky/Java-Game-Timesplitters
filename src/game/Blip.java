@@ -13,6 +13,7 @@ public class Blip extends GameObject {
 
 	private BufferedImage img;
 	private Player player;
+	private boolean visible = true;
 	private int totalNrBlocks=0;
 
 	public Blip(float x, float y, int width, int height, Player player, int totalNrBlocks, String url) {
@@ -41,8 +42,16 @@ public class Blip extends GameObject {
 
 	public void render(Graphics g, float f, float h) {
 
+		if(visible)
 			g.drawImage(img,(int)(this.x+20),(int)(this.y),null);
 	}
 
 
+	public boolean isVisible() {
+		return visible;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
 }

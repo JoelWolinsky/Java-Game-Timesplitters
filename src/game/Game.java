@@ -163,7 +163,7 @@ public class Game extends Canvas implements Runnable{
 
 	public synchronized void start() {
 
-		m = new Map(MapMode.debug, gameMode);
+		m = new Map(MapMode.RNG, gameMode);
 
 		switch (gameMode)
 		{
