@@ -47,7 +47,6 @@ public class Game extends Canvas implements Runnable{
 	 */
 	public Game() {
 		new Window(this);
-		new Window(this);
 	}
 
 	/**

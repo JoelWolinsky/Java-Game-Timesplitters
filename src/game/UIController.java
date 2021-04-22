@@ -66,7 +66,7 @@ public class UIController extends GameObject {
 
 				if (index == countdownUrls.size()) {
 					startCountdown = false;
-					//announcer.setVisible(false);
+					announcer.setVisible(false);
 				}
 
 				timer = 0;
@@ -75,6 +75,9 @@ public class UIController extends GameObject {
 
 		if (endGameCelebration)
 		{
+			if (!announcer.isVisible())
+				announcer.setVisible(true);
+
 			try {
 				announcer.setImg(ImageIO.read(new File("./img/winner.png")));
 			}
