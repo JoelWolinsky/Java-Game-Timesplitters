@@ -7,6 +7,7 @@ import game.entities.platforms.CrushingPlatform;
 import game.entities.platforms.MovingPlatform;
 import game.entities.platforms.Platform;
 import game.entities.platforms.TimerPlatform;
+import game.graphics.GameMode;
 import game.graphics.Image;
 import game.graphics.MapMode;
 
@@ -35,11 +36,13 @@ public class Map {
     int top;
     public ArrayList<MapPart> mps = new ArrayList<>();
     BackgroundController ctrlr;
-    public Level currentLevel;
+
+    public Level currentLevel = new Level();
+    int defaultSeed = 0;
 
     ArrayList<String> segments3,segments1,segments2,segments4,wizard,introDimension,castleEntrance,throneRoom, segments5;
 
-    public Map (MapMode mapMode){
+    public Map (MapMode mapMode, GameMode gameMode){
 
         currentLevel = new Level();
 
@@ -100,15 +103,24 @@ public class Map {
                 //add levels to the background controller which manages the current position within the horizontal panorama
                 ctrlr = new BackgroundController(new BackgroundStates("ground1.png","ground2.png"),new BackgroundStates("sky1.png","sky2.png"),new BackgroundStates("sky3.png","sky4.png"),new BackgroundStates("sky5.png","sky6.png"));
 
-
                 //generate the segment pools - order is important
                 parseFile(currentLevel, "intro1");
-                ArrayList<Integer> allParts = new ArrayList<>(Arrays.asList(
-                        randomGenerate(segments1),
-                        randomGenerate(castleEntrance) + randomGenerate(segments2) + randomGenerate(throneRoom),
-                        randomGenerate(segments3),
-                        randomGenerate(segments4) + randomGenerate(wizard) + randomGenerate(introDimension),
-                        randomGenerate(segments5)));
+                ArrayList<Integer> allParts;
+                if (gameMode == GameMode.SINGLEPLAYER) {
+	                allParts = new ArrayList<>(Arrays.asList(
+	                        randomGenerate(segments1),
+	                        randomGenerate(castleEntrance) + randomGenerate(segments2) + randomGenerate(throneRoom),
+	                        randomGenerate(segments3),
+	                        randomGenerate(segments4) + randomGenerate(wizard) + randomGenerate(introDimension),
+	                        randomGenerate(segments5)));
+                } else {
+                	allParts = new ArrayList<>(Arrays.asList(
+	                        randomGenerate(segments1, defaultSeed),
+	                        randomGenerate(castleEntrance, defaultSeed) + randomGenerate(segments2, defaultSeed) + randomGenerate(throneRoom, defaultSeed),
+	                        randomGenerate(segments3, defaultSeed),
+	                        randomGenerate(segments4, defaultSeed) + randomGenerate(wizard, defaultSeed) + randomGenerate(introDimension, defaultSeed),
+	                        randomGenerate(segments5, defaultSeed)));
+                }
 
                 //create specific progressbar parts for the generated segment pools
                 for (Integer i =0 ; i<allParts.size();i++)
@@ -452,8 +464,12 @@ public class Map {
         return index + 1 + (4 * Integer.parseInt(splited[index]));
 
     }
-
+    
     public int randomGenerate(ArrayList<String> segmentPool) {
+    	return randomGenerate(segmentPool, new Random().nextInt());
+    }
+
+    public int randomGenerate(ArrayList<String> segmentPool, int seed) {
 
         int nrBlocks=0;
         int rnd1;
@@ -461,7 +477,7 @@ public class Map {
         while (!segmentPool.isEmpty()){
 
             //choose segment at random from segment pool
-            rnd1 = new Random().nextInt(segmentPool.size());
+            rnd1 = new Random(seed).nextInt(segmentPool.size());
 
             //if picked segment is not allowed when on top level or bottom level reroll till it's something valid
             //when the map is on level 0 we don't want to go further down
