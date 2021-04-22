@@ -26,8 +26,8 @@ public class Level extends Canvas {
 		return entities;
 	}
 	public static synchronized ArrayList<GameObject> getToBeAdded() {return  toBeAdded;}
-	public synchronized void addToAddQueue(GameObject o) {toBeAdded.add(o);}
-	public synchronized void addToRemoveQueue(GameObject o) {toBeRemoved.add(o);}
+	public static synchronized void addToAddQueue(GameObject o) {toBeAdded.add(o);}
+	public static synchronized void addToRemoveQueue(GameObject o) {toBeRemoved.add(o);}
 	public static synchronized ArrayList<GameObject> getToBeRemoved() {return  toBeRemoved;}
 	public static LevelState getLevelState () {return levelState;}
 	public static void setLevelState (LevelState levelStatee) {levelState = levelStatee;}
@@ -177,6 +177,15 @@ public class Level extends Canvas {
 				return o;
 		}
 
+		return null;
+	}
+
+	public static Blip getBlips(){
+		for (GameObject o : getGameObjects())
+		{
+			if (o instanceof Blip)
+				return (Blip)o;
+		}
 		return null;
 	}
 

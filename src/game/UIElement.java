@@ -34,6 +34,9 @@ public class UIElement extends GameObject {
 
 	public void tick() {
 
+		this.height = img.getHeight();
+		this.width = img.getWidth();
+
 	}
 
 	public void render(Graphics g, float f, float h) {
@@ -63,5 +66,9 @@ public class UIElement extends GameObject {
 
 	public boolean isVisible() {
 		return visible;
+	}
+
+	public BufferedImage getImg() {
+		return img;
 	}
 }

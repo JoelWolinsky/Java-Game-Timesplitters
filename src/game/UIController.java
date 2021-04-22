@@ -1,5 +1,6 @@
 package game;
 
+import game.display.Window;
 import game.entities.GameObject;
 import game.graphics.LevelState;
 
@@ -35,6 +36,13 @@ public class UIController extends GameObject {
 
 	public void tick() {
 
+
+		if (announcer.isVisible())
+		{
+			announcer.centerHorizontally();
+			announcer.centerVertically();
+		}
+
 		//START OF THE GAME COUNTDOWN SLIDESHOW
 		if (getLevelState()==LevelState.Starting)
 			startCountdown=true;
@@ -42,10 +50,28 @@ public class UIController extends GameObject {
 		if (getLevelState()==LevelState.Finished)
 			endGameCelebration=true;
 
+		if (getLevelState()==LevelState.Waiting)
+		{
+
+			if (!announcer.isVisible()) {
+				announcer.setVisible(true);
+			}
+
+			try {
+				announcer.setImg(ImageIO.read(new File("./img/loading.png")));
+			}
+			catch (IOException exc) {
+				//TODO: Handle exception.
+			}
+
+		}
+
+
 		if (startCountdown) {
 
-			if (!announcer.isVisible())
+			if (!announcer.isVisible()) {
 				announcer.setVisible(true);
+			}
 
 			if (timer < 50)
 				timer++;
@@ -79,13 +105,13 @@ public class UIController extends GameObject {
 				announcer.setVisible(true);
 
 			try {
-				announcer.setImg(ImageIO.read(new File("./img/winner.png")));
+				announcer.setImg(ImageIO.read(new File("./img/trophy.png")));
 			}
 			catch (IOException exc) {
 				//TODO: Handle exception.
 			}
 			announcer.setY(y);
-			announcer.setX(x+49);
+			announcer.setX(x+((Window.WIDTH/6)/2) - (announcer.getImg().getWidth()/2));
 		}
 
 

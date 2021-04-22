@@ -51,8 +51,8 @@ public class Map {
             case debug:
 
                 parseFile(currentLevel, "intro1");
+                //parseFile(currentLevel,"segmentA2");
                 parseFile(currentLevel,"segmentA1");
-
 			/*
 			*** LEGEND ***
 			m.mapParser(currentLevel, "intro1");				// No go zone 								-- NO X VERSION

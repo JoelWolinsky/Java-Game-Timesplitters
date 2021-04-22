@@ -83,24 +83,33 @@ public class Game extends Canvas implements Runnable{
 			if (getLevelState()== LevelState.Finished) {
 				Graphics2D zoomed = (Graphics2D) g;
 
-				if (a<5 || b<5)
+
+				//Zooming Effect on scaling the camera
+				if (a<6)
 				{
-					a=a+0.3f;
-					b=b+0.3f;
+					a=a+0.25f;
 				}
 
-				if (c<520)
+				if (b<6)
 				{
-					c = c+20;
+					b=b+0.25f;
 				}
 
-				if (d < 665)
+				//Zooming Effect on positioning the camera
+				if (c<213)
 				{
-					d = d + 20;
+					c=c+71;
 				}
 
+				if (d<192)
+				{
+					d=d+24;
+				}
+
+
+				camera.addTarget(getFinish());
 				zoomed.scale(a, b);
-				m.getCurrentLevel().render(zoomed, getFinish().getX()- c, getFinish().getY() - d);
+				m.getCurrentLevel().render(zoomed, camera.getXOffset() - c - ((Window.WIDTH/6)/2), camera.getYOffset()-d);
 			}
 			else
 			{
@@ -154,7 +163,7 @@ public class Game extends Canvas implements Runnable{
 
 	public synchronized void start() {
 
-		m = new Map(MapMode.RNG, gameMode);
+		m = new Map(MapMode.debug, gameMode);
 
 		switch (gameMode)
 		{
