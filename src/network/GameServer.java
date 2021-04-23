@@ -36,7 +36,7 @@ public class GameServer extends Thread {
 			DatagramPacket packet = new DatagramPacket(data, data.length);
 			try {
 				socket.receive(packet);
-				System.out.println("Server recieve");
+			//	System.out.println("Server recieve");
 			} catch (IOException e) {
 				System.out.println("Exception receiving packet in server run");
 				e.printStackTrace();
@@ -65,7 +65,7 @@ public class GameServer extends Thread {
 			case INVALID:
 				break;
 			case LOGIN:
-				System.out.println("Server handle login");
+				//System.out.println("Server handle login");
 				packet = new Packet00Login(data);
 				System.out.println("[" + address.getHostAddress() + ":" + port + "] " + ((Packet00Login) packet).getUsername() + " has connected...");
 				PlayerMP player = new PlayerMP (100, 100, address, port);
@@ -78,7 +78,7 @@ public class GameServer extends Thread {
 				break;
 			case MOVE:
 				packet = new Packet02Move(data);
-				System.out.println(((Packet02Move)packet).getUsername() + " has moved to " + ((Packet02Move)packet).getX() + ", " + ((Packet02Move)packet).getY());
+				//System.out.println(((Packet02Move)packet).getUsername() + " has moved to " + ((Packet02Move)packet).getX() + ", " + ((Packet02Move)packet).getY());
 				this.handleMove((Packet02Move)packet);
 			}
 		}catch (Exception e) {
@@ -92,11 +92,11 @@ public class GameServer extends Thread {
 	
 
 	public void addConnection(PlayerMP player, Packet00Login packet) {
-		System.out.println("Ser add con");
+		//System.out.println("Ser add con");
 		try {
 			boolean alreadyConnected = false;
 			for (String p : this.playerIDs) {
-				System.out.println(this.connectedPlayers.size());
+				//System.out.println(this.connectedPlayers.size());
 				if(packet.getUsername().equalsIgnoreCase(p)) {
 					if(this.connectedPlayers.get(getPlayerMPIndex(p)).ipAddress == null) {
 						this.connectedPlayers.get(getPlayerMPIndex(p)).ipAddress = player.ipAddress;
@@ -106,19 +106,19 @@ public class GameServer extends Thread {
 					}
 					alreadyConnected = true;
 				} else {
-					System.out.print("Adding and send \n");
+				//	System.out.print("Adding and send \n");
 					sendData(packet.getData(),this.connectedPlayers.get(getPlayerMPIndex(p)).ipAddress, this.connectedPlayers.get(getPlayerMPIndex(p)).port);
 					
 					packet = new Packet00Login(this.connectedPlayers.get(getPlayerMPIndex(p)).getUsername(), this.connectedPlayers.get(getPlayerMPIndex(p)).getX(), this.connectedPlayers.get(getPlayerMPIndex(p)).getY());
 	                sendData(packet.getData(), player.ipAddress, player.port);
 				}
 			}
-			System.out.println("already connected = " + alreadyConnected);
+			//System.out.println("already connected = " + alreadyConnected);
 			if (!alreadyConnected) {
 	
 	            this.connectedPlayers.add(player);
 	            this.playerIDs.add(packet.getUsername());
-	            System.out.println("adding to ids" + packet.getUsername());
+	            //System.out.println("adding to ids" + packet.getUsername());
 	        }
 		} catch (Exception e) {
 			System.out.println("Exception in GameServer.addConnection");
@@ -185,11 +185,11 @@ public class GameServer extends Thread {
 	}
 
 	public void sendDataToAllClients(byte[] data) {
-		System.out.println("Server Send to all");
+		//System.out.println("Server Send to all");
 		try {
 			for (PlayerMP p : connectedPlayers) {
 				if (p.port != -1) {
-					System.out.println("Sent to " + p.getUsername());
+					//System.out.println("Sent to " + p.getUsername());
 					sendData(data, p.ipAddress, p.port);
 				}
 			}
@@ -201,10 +201,10 @@ public class GameServer extends Thread {
 	
 	private void handleMove(Packet02Move packet) {
 		try {
-			System.out.println("server handle move");
-			System.out.println(packet.getUsername());
+			//System.out.println("server handle move");
+			//System.out.println(packet.getUsername());
 			//if(getPlayerMP(packet.getUsername()) != null) {
-				System.out.println("packet name not null");
+				//System.out.println("packet name not null");
 				int index = getPlayerMPIndex(packet.getUsername());
 				if(index >= this.connectedPlayers.size()) {
 					index--;

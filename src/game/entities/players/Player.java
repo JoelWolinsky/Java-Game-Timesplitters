@@ -263,7 +263,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             if (this == Game.player) {
                 if ((int) this.x != this.prevPos.x || (int) this.y != this.prevPos.y) {
                     Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y);
-                    System.out.println("Player move usr " + this.getUsername());
+                    //System.out.println("Player move usr " + this.getUsername());
                     packet.writeData(Game.socketClient);
                 }
             }

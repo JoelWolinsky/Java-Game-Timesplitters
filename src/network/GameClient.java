@@ -71,7 +71,7 @@ public class GameClient extends Thread {
 				game.m.currentLevel.removePlayerMP(((Packet01Disconnect) packet).getUsername());
 				break;
 			case MOVE:
-				System.out.println("client handle move");
+				//System.out.println("client handle move");
 				packet = new Packet02Move(data);
 				handleMove((Packet02Move)packet);
 			}	
@@ -92,7 +92,7 @@ public class GameClient extends Thread {
 	}
 	
 	private void handleMove(Packet02Move packet) {
-		System.out.println(this.game.player.getUsername() +" Client handle move " + packet.getUsername());
+		//System.out.println(this.game.player.getUsername() +" Client handle move " + packet.getUsername());
 		//if (this.game.player.getUsername() != packet.getUsername()) {
 			try {
 				this.game.m.currentLevel.movePlayer(packet.getUsername(), packet.getX(), packet.getY());
