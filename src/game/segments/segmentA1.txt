@@ -15,7 +15,7 @@ Platform Default 294 265
 Platform Inverted 326 265
 Platform Default 342 265
 Platform Custom 374 265 edge1inv.png
-Chest 100 360 chest
+Chest 299 242 chest
 
 Floor
 
@@ -46,7 +46,7 @@ SlowArea 310 340 web
 SlowArea 280 340 web
 SlowArea 310 360 web
 SlowArea 280 360 web
-
+Chest 299 242 chest
 SlowArea 330 340 web
 SlowArea 330 360 web
 SlowArea 330 320 web

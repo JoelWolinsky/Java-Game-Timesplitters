@@ -68,6 +68,7 @@ Chunk 1 N intersegmentA2upsky.png
 
 //3RD FLOOR
 
+
 Platform Custom 200 400 edge1inv.png
 Platform Inverted 184 384
 Platform Default 168 384
@@ -85,5 +86,9 @@ Platform Custom 117 190 corner1.png
 Platform Custom 213 190 corner1inv.png
 
 AnimArea 197 310 torch
+
+Chest 100 360 chest
+
+
 Projectile 250 242 0 4 250 0 0 60 crack1.png stones
 Projectile 280 252 0 4 240 0 0 20 crack1.png stones

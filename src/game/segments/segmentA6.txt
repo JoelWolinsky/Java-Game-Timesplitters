@@ -16,6 +16,7 @@ Platform Custom 170 250 edge3inv.png
 Waypoint 178 230 flag3.png R Y 20
 Platform Custom 170 510 edge3inv.png
 
+Chest 372 455 chest
 Platform Custom 370 480 edge3inv.png
 Waypoint 372 460 flag3.png R Y 20
 Platform Custom 370 320 edge3inv.png

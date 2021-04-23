@@ -20,7 +20,7 @@ public class UIController extends GameObject {
 	private int timer=0;
 	private boolean startCountdown=false;
 	private boolean endGameCelebration=false;
-	UIElement announcer;
+	UIElement announcer,announcerMessage;
 
 	public UIController(float x, float y, int width, int height) {
 		super(x, y, 3, width, height);
@@ -30,7 +30,15 @@ public class UIController extends GameObject {
 		announcer.setVisible(false);
 		announcer.centerHorizontally();
 		announcer.centerVertically();
+
+		announcerMessage = new UIElement(x, y-200, 0, 0, "./img/waiting.png");
+		announcerMessage.centerHorizontally();
+		announcerMessage.centerVertically();
+		announcerMessage.setVisible(false);
+		announcerMessage.setY(announcerMessage.getY()-165);
+
 		getGameObjects().add(announcer);
+		getGameObjects().add(announcerMessage);
 
 	}
 
@@ -44,8 +52,9 @@ public class UIController extends GameObject {
 		}
 
 		//START OF THE GAME COUNTDOWN SLIDESHOW
-		if (getLevelState()==LevelState.Starting)
-			startCountdown=true;
+		if (getLevelState()==LevelState.Starting) {
+			startCountdown = true;
+		}
 
 		if (getLevelState()==LevelState.Finished)
 			endGameCelebration=true;
@@ -55,6 +64,7 @@ public class UIController extends GameObject {
 
 			if (!announcer.isVisible()) {
 				announcer.setVisible(true);
+				announcerMessage.setVisible(true);
 			}
 
 			try {
@@ -71,6 +81,14 @@ public class UIController extends GameObject {
 
 			if (!announcer.isVisible()) {
 				announcer.setVisible(true);
+				announcerMessage.setVisible(true);
+			}
+
+			try {
+				announcerMessage.setImg(ImageIO.read(new File("./img/starting.png")));
+			}
+			catch (IOException exc) {
+				//TODO: Handle exception.
 			}
 
 			if (timer < 50)
@@ -88,6 +106,7 @@ public class UIController extends GameObject {
 				index++;
 				if (index == countdownUrls.size()-1) {
 					setLevelState(LevelState.InProgress);
+					announcerMessage.setVisible(false);
 				}
 
 				if (index == countdownUrls.size()) {

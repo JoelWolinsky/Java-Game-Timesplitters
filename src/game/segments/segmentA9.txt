@@ -23,6 +23,8 @@ Platform Custom 355 290 floorcage1.png
 Platform Custom 355 300 floorcage4.png
 Platform Custom 0 384 wall5.png
 Platform Custom 198 660 floorcage5.png
+Chest 201 635 chest
+
 
 Chunk 1 E segmentA9p2.png
 

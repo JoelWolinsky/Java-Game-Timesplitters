@@ -21,12 +21,17 @@ Platform Default 342 265
 Platform Inverted 374 265
 Platform Default 390 265
 
+
 Platform Custom 0 384 customFloor2.png
 Platform Custom 214 384 electricfloor1.png
 
 Chunk 1 E segmentA2p2.png
 Platform Custom 0 140 top1.png
 Platform Custom 330 140 corner1inv.png
+
+Chest -12 242 chest
+
+Chest -12 360 chest
 
 DamageZone 60 230 3 200 150 0 nopicture.png fire
 DamageZone 140 230 3 300 150 20 cinders1.png fire

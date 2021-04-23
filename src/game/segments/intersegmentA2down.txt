@@ -73,7 +73,7 @@ Platform Custom 50 0 edge1.png
 Platform Custom 338 19 wall1inv.png
 Platform Custom 70 0 wall4inv.png
 
-
+Chest 200 405 chest
 
 EventDamageZone 190 384 10 200 notice.png 0 0 false skele 1 -100 -100 200 1
 

@@ -33,7 +33,7 @@ public class Game extends Canvas implements Runnable{
 	public static GameClient socketClient;
 	public static GameServer socketServer;
 
-	float a=0,b=0,c=0,d=0;
+	public float a=0,b=0,c=0,d=0;
 	public static Game game;
 	public static Player player;
 	public static Camera camera = new Camera();
