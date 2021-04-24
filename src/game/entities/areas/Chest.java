@@ -35,7 +35,7 @@ public class Chest extends AnimArea{
 
 
 	public String randomItem(){
-		ArrayList<String> itemPool =new ArrayList<String>(Arrays.asList("./img/shoes.png","./img/jump.png","./img/banana.png"));
+		ArrayList<String> itemPool =new ArrayList<String>(Arrays.asList("./img/shoes.png","./img/jump.png","./img/banana.png","./img/fart1.png"));
 		int rnd1;
 		rnd1 = new Random().nextInt(itemPool.size());
 

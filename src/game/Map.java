@@ -34,10 +34,11 @@ public class Map {
     int index = 0;
     int bottom;
     int top;
+    private int newIndex=0;
     public ArrayList<MapPart> mps = new ArrayList<>();
     BackgroundController ctrlr;
 
-    public Level currentLevel = new Level();
+    public Level currentLevel;
     int defaultSeed = 0;
 
     ArrayList<String> segments3,segments1,segments2,segments4,wizard,introDimension,castleEntrance,throneRoom, segments5;
@@ -296,7 +297,7 @@ public class Map {
             case "ScriptedDamageZone":
 
                 LinkedList<Point> points = new LinkedList<>();
-                int newIndex = createPoints(points, 5, splitted);
+                newIndex = createPoints(points, 5, splitted);
                 currentLevel.addEntity(new ScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splitted[1]), verticalIndex + Integer.parseInt(splitted[2]), 0, 0, Float.parseFloat(splitted[3]), points, Integer.parseInt(splitted[4]), splitted[newIndex]));
                 break;
 
@@ -310,36 +311,29 @@ public class Map {
             case "EventScriptedDamageZone":
 
                 LinkedList<Point> pntz = new LinkedList<>();
-                int newInd = createPoints(pntz, 5, splitted);
-                EventScriptedDamageZone eventScriptedDamageZone = new EventScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splitted[1]), verticalIndex + Integer.parseInt(splitted[2]), 0, 0, Float.parseFloat(splitted[3]), pntz, Integer.parseInt(splitted[4]), splitted[newInd]);
-                addAreas(currentLevel, eventScriptedDamageZone, newInd + 1, splitted);
+                newIndex = createPoints(pntz, 5, splitted);
+                EventScriptedDamageZone eventScriptedDamageZone = new EventScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splitted[1]), verticalIndex + Integer.parseInt(splitted[2]), 0, 0, Float.parseFloat(splitted[3]), pntz, Integer.parseInt(splitted[4]), splitted[newIndex]);
+                addAreas(currentLevel, eventScriptedDamageZone, newIndex + 1, splitted);
                 currentLevel.addEntity(eventScriptedDamageZone);
 
                 break;
-            case "TrackedScriptedDamageZone":
+            case "TrackedScriptedDamageZoneSpawner":
 
                 LinkedList<Point> pntzz = new LinkedList<>();
-                int newInddd = createPoints(pntzz, 5, splitted);
+                newIndex = createPoints(pntzz, 5, splitted);
 
                 //Create one for each player
-                for (Player player : Level.getPlayers()) {
-                    TrackedScriptedDamageZone trackedScriptedDamageZone = new TrackedScriptedDamageZone(horizontalIndex - setX + Integer.parseInt(splitted[1]), verticalIndex + Integer.parseInt(splitted[2]), 0, 0, Float.parseFloat(splitted[3]), pntzz, Integer.parseInt(splitted[4]), player, splitted[newInddd]);
-                    addAreas(currentLevel, trackedScriptedDamageZone, newInddd + 1, splitted);
-                    currentLevel.addEntity(trackedScriptedDamageZone);
-                }
+                TrackedScriptedDamageZoneSpawner trackedScriptedDamageZoneSpawner = new TrackedScriptedDamageZoneSpawner(horizontalIndex - setX + Integer.parseInt(splitted[1]), verticalIndex + Integer.parseInt(splitted[2]), 0, 0, Float.parseFloat(splitted[3]), pntzz, addAreasList(currentLevel,newIndex + 1, splitted), Integer.parseInt(splitted[4]), splitted[newIndex]);
+                currentLevel.addEntity(trackedScriptedDamageZoneSpawner);
                 break;
 
-            case "TrackingAI":
+            case "TrackingAISpawner":
 
                 LinkedList<Point> pntzzz = new LinkedList<>();
-                int newIndx = createPoints(pntzzz, 5, splitted);
+                newIndex = createPoints(pntzzz, 5, splitted);
 
-                //Create one for each player
-                for (Player player : Level.getPlayers()) {
-                    TrackingAI trackingAI = new TrackingAI(horizontalIndex - setX + Integer.parseInt(splitted[1]), verticalIndex + Integer.parseInt(splitted[2]), 0, 0, Float.parseFloat(splitted[3]), pntzzz, Integer.parseInt(splitted[4]), player, splitted[newIndx]);
-                    addAreas(currentLevel, trackingAI, newIndx + 1, splitted);
-                    currentLevel.addEntity(trackingAI);
-                }
+                TrackingAISpawner trackingAISpawner = new TrackingAISpawner(horizontalIndex - setX + Integer.parseInt(splitted[1]), verticalIndex + Integer.parseInt(splitted[2]), 0, 0, Float.parseFloat(splitted[3]), pntzzz, addAreasList(currentLevel,newIndex + 1, splitted), Integer.parseInt(splitted[4]), splitted[newIndex]);
+                currentLevel.addEntity(trackingAISpawner);
                 break;
 
             case "Projectile":
@@ -462,6 +456,20 @@ public class Map {
         }
 
         return index + 1 + (4 * Integer.parseInt(splited[index]));
+
+    }
+
+    public ArrayList<Area> addAreasList(Level currentLevel, int index, String[] splited) {
+
+        ArrayList<Area> areasOfEffect = new ArrayList<>();
+        Area area;
+        for (int l = index + 1; l < index + 1 + (4 * Integer.parseInt(splited[index])); l += 4) {
+            area = new Area(horizontalIndex - setX + Integer.parseInt(splited[1]) + Integer.parseInt(splited[l]), verticalIndex + Integer.parseInt(splited[2]) + Integer.parseInt(splited[l + 1]), Integer.parseInt(splited[l + 2]), Integer.parseInt(splited[l + 3]));
+            currentLevel.addEntity(area);
+            areasOfEffect.add(area);
+        }
+
+        return areasOfEffect;
 
     }
     

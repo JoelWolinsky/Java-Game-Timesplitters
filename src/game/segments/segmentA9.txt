@@ -6,6 +6,8 @@ Waypoint 50 92 flag3.png R Y 10
 Platform Custom 96 92 top1.png
 Platform Custom 330 92 corner1inv.png
 
+ExtendRespawn 0 600 852 1 invisibleRespawn.png
+
 Platform Custom 260 370 thinplatform2.png
 Waypoint 0 363 flag3.png R Y 50
 Platform Custom 200 240 thinplatform2.png
@@ -23,10 +25,20 @@ Platform Custom 355 290 floorcage1.png
 Platform Custom 355 300 floorcage4.png
 Platform Custom 0 384 wall5.png
 Platform Custom 198 660 floorcage5.png
-Chest 201 635 chest
+Chest 208 635 chest
 
+ExtendRespawn 0 700 852 1 invisibleRespawn.png
+Platform Custom 65 885 floorcage7.png
+Chest 110 860 chest
 
 Chunk 1 E segmentA9p2.png
+
+Chest -24 790 chest
+Platform Custom -30 815 floorcage6.png
+
+Chest 220 715 chest
+Platform Custom 168 740 floorcage7.png
+
 
 Platform Custom 20 570 thinplatform2.png
 Waypoint 35 530 flag3.png R Y 20

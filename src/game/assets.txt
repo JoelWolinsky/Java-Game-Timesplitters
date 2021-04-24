@@ -11,6 +11,8 @@ hand
 IDLE 15 4 hand1.png hand1.png hand1.png hand1.png
 chest
 IDLE 15 4 chest.png chest.png chest.png chest.png
+fart
+IDLE 5 4 fart1.png fart2.png fart3.png fart4.png
 web
 IDLE 15 4 web.png web.png web.png web.png
 fire
@@ -26,13 +28,13 @@ IDLE 15 4 chicken.png chicken.png chicken.png chicken.png
 bateye
 IDLE 15 4 bateye1.png bateye2.png bateye3.png bateye4.png
 bloodghost
-IDLE 15 4 bloodghost1.png bloodghost2.png bloodghost3.png bloodghost4.png
+IDLE 2 4 bloodghost1.png bloodghost2.png bloodghost3.png bloodghost4.png
 bloodcell
-IDLE 15 4 bloodcell1.png bloodcell2.png bloodcell3.png bloodcell4.png
+IDLE 2 4 bloodcell1.png bloodcell2.png bloodcell3.png bloodcell4.png
 crystalball
 IDLE 15 4 crystalball1.png crystalball1.png crystalball1.png crystalball1.png
 magic
-IDLE 15 4 magic1.png magic2.png magic3.png magic4.png
+IDLE 2 4 magic1.png magic2.png magic3.png magic4.png
 ice
 IDLE 15 4 ice1.png ice2.png ice3.png ice4.png
 iceright

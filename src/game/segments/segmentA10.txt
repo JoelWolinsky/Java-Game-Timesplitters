@@ -22,11 +22,11 @@ Waypoint 0 363 flag3.png R Y 0
 Waypoint 200 363 flag3.png R Y 0
 
 
-TrackingAI -320 365 1f 20 1 150 120 1 ghost 1 -200 -200 800 400
-TrackingAI -130 260 1.4f 20 1 150 120 1 ghost 1 -200 -200 700 400
-TrackingAI 70 320 1f 20 1 150 120 1 ghost 1 -200 -200 500 800
-TrackingAI 300 360 1.4f 20 1 150 120 1 ghost 1 -200 -200 330 400
-TrackingAI 300 200 0.75f 20 1 150 120 1 ghost 1 -200 -200 330 400
+TrackingAISpawner -320 365 1f 20 1 150 120 1 ghost 1 -200 -200 800 400
+TrackingAISpawner -130 260 1.4f 20 1 150 120 1 ghost 1 -200 -200 700 400
+TrackingAISpawner 70 320 1f 20 1 150 120 1 ghost 1 -200 -200 500 800
+TrackingAISpawner 300 360 1.4f 20 1 150 120 1 ghost 1 -200 -200 330 400
+TrackingAISpawner 300 200 0.75f 20 1 150 120 1 ghost 1 -200 -200 330 400
 
 
 Floor

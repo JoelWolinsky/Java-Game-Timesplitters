@@ -27,7 +27,16 @@ public class Assets {
 	private static int PLAYER_HEIGHT=30;
 
 	public Assets(){
-		SpriteSheet sheet = new SpriteSheet(Image.loadImage("./img/adventurer-Sheet.png"));
+
+		addAnimationFromSpritesheet(new SpriteSheet(Image.loadImage("./img/adventurer1.png")),"player1");
+		addAnimationFromSpritesheet(new SpriteSheet(Image.loadImage("./img/adventurer2.png")),"player2");
+		addAnimationFromSpritesheet(new SpriteSheet(Image.loadImage("./img/adventurer3.png")),"player3");
+		addAnimationFromSpritesheet(new SpriteSheet(Image.loadImage("./img/adventurer4.png")),"player4");
+		parseAssets();
+	}
+
+	public void addAnimationFromSpritesheet(SpriteSheet sheet, String name)
+	{
 		player_idle = new ArrayList<BufferedImage>();
 
 		player_idle.add(sheet.crop(xOffset, yOffset, PLAYER_WIDTH, PLAYER_HEIGHT));
@@ -58,8 +67,6 @@ public class Assets {
 		player_left.add(sheet.crop(xOffset+xDistance*0, yOffset+yDistance*2, PLAYER_WIDTH, PLAYER_HEIGHT));
 
 		player_swag = new ArrayList<BufferedImage>();
-
-
 
 		player_swag.add(sheet.crop(xOffset+xDistance*0, yOffset+yDistance*3, PLAYER_WIDTH+5, PLAYER_HEIGHT));
 		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*3, PLAYER_WIDTH+5, PLAYER_HEIGHT));
@@ -98,44 +105,13 @@ public class Assets {
 		player_swag.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance*15, PLAYER_WIDTH+10, PLAYER_HEIGHT));
 		player_swag.add(sheet.crop(xOffset+xDistance*6, yOffset+yDistance*15, PLAYER_WIDTH+10, PLAYER_HEIGHT));
 
-		/*
-		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*6,yOffset+yDistance*13, PLAYER_WIDTH, PLAYER_HEIGHT));
-
-		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*11, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*11, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*11, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*11, PLAYER_WIDTH, PLAYER_HEIGHT));
-
-		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*6,yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
-
-		player_swag.add(sheet.crop(xOffset+xDistance*1, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*2, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*3, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*4, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
-		player_swag.add(sheet.crop(xOffset+xDistance*6,yOffset+yDistance*15, PLAYER_WIDTH, PLAYER_HEIGHT));
-
-		 */
-
-		Asset as = new Asset("player",new HashMap<AnimationStates, Animation>());
+		Asset as = new Asset(name,new HashMap<AnimationStates, Animation>());
 		as.getAnimations().put(AnimationStates.IDLE, new Animation(10,player_idle));
 		as.getAnimations().put(AnimationStates.RIGHT, new Animation(10,player_right));
 		as.getAnimations().put(AnimationStates.LEFT, new Animation(10,player_left));
 		as.getAnimations().put(AnimationStates.OTHER, new Animation(10,player_other));
 		as.getAnimations().put(AnimationStates.SWAG, new Animation(5,player_swag));
 		assets.add(as);
-
-		parseAssets();
 	}
 
 	public static BufferedImage getImageForReference(String code)

@@ -42,8 +42,8 @@ Platform Custom 0 384 wall5.png
 Chunk 1 E segmentA11p2.png
 
 
-TrackingAI -100 450 0.75f 20 1 150 120 1 ghost 1 -150 -300 650 400
-TrackingAI 350 450 0.75f 20 1 150 120 1 ghost 1 -200 -300 250 400
+TrackingAISpawner -100 450 0.75f 20 1 150 120 1 ghost 1 -150 -300 650 400
+TrackingAISpawner 350 450 0.75f 20 1 150 120 1 ghost 1 -200 -300 250 400
 
 
 Platform Custom 426 384 wall5inv.png

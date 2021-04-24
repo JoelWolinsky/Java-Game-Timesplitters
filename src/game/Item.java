@@ -1,5 +1,8 @@
 package game;
 
+import game.attributes.CollidingObject;
+import game.attributes.GravityObject;
+import game.attributes.SolidCollider;
 import game.entities.GameObject;
 import game.entities.players.Player;
 
@@ -8,10 +11,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class Item extends GameObject {
 	private boolean visible = true;
 	private Player player;
+	private float velX = 5;
+	private float velY = 5;
 	private int offset= 20;
 	private int totalNrBlocks;
 	private BufferedImage img;
@@ -34,9 +40,11 @@ public class Item extends GameObject {
 			//TODO: Handle exception.
 		}
 
+
 	}
 
 	public void tick() {
+
 
 	}
 
@@ -51,8 +59,8 @@ public class Item extends GameObject {
 
 		switch (url){
 			case "./img/shoes.png":
-				player.setRunSpeed(13.6f);
-				player.setJumpGravity(-12.0f);
+				player.setRunSpeed(5.0f);
+				player.setJumpGravity(-7.5f);
 				break;
 			case "./img/jump.png":
 				player.setCanDoubleJump(true);
@@ -60,6 +68,10 @@ public class Item extends GameObject {
 			case "./img/banana.png":
 				this.addItem=true;
 				itemToAdd=url.substring(6,12);
+				break;
+			case "./img/fart1.png":
+				this.addItem=true;
+				itemToAdd=url.substring(6,10);
 				break;
 		}
 
@@ -84,5 +96,6 @@ public class Item extends GameObject {
 	public String getItemToAdd() {
 		return itemToAdd;
 	}
+
 
 }

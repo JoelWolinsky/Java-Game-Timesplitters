@@ -168,7 +168,7 @@ public class Game extends Canvas implements Runnable{
 		switch (gameMode)
 		{
 			case MULTIPLAYER:
-				player = new PlayerMP(0, 340, keyInput, null, -1);
+				player = new PlayerMP(0, 340, keyInput, null, -1,"player1");
 
 				Packet00Login loginPacket = new Packet00Login(player.getUsername(), 1000, 340);
 				if (socketServer != null) {
@@ -177,11 +177,11 @@ public class Game extends Canvas implements Runnable{
 				loginPacket.writeData(socketClient);
 				break;
 			case vsAI:
-				player = new Player(0, 340, keyInput, 0 ,0);
-				m.getCurrentLevel().addToAddQueue(new AIPlayer(50, 340, 0 ,0, player));
+				player = new Player(0, 340, keyInput, 0 ,0,"player1");
+				m.getCurrentLevel().addToAddQueue(new AIPlayer(50, 340, 0 ,0, player,"player2"));
 				break;
 			case SINGLEPLAYER:
-				player = new Player(0, 340, keyInput, 0 ,0);
+				player = new Player(0, 340, keyInput, 0 ,0,"player1");
 				break;
 		}
 

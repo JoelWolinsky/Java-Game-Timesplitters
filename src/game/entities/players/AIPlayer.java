@@ -22,8 +22,8 @@ public class AIPlayer extends Player {
 	private Waypoint currentWaypoint;
 
 
-	public AIPlayer(float x, float y, int width,int height, Player humanPlayer) {
-		super(x, y, null, width, height);
+	public AIPlayer(float x, float y, int width,int height, Player humanPlayer,String url) {
+		super(x, y, null, width, height,url);
 
 		
 		this.username = UUID.randomUUID().toString();;

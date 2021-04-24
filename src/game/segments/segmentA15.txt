@@ -34,7 +34,7 @@ Platform Custom 370 245 bookshelf1.png
 
 
 ScriptedDamageZone 130 130 1 0 3 130 128 0.2 130 132 0.2 130 130 0.2 crystalball
-TrackedScriptedDamageZone 130 130 1 20 1 130 130 1 magic 1 -100 0 400 210
+TrackedScriptedDamageZoneSpawner 130 130 1 20 1 130 130 1 magic 1 -100 0 400 210
 
 DamageZone 415 142 3 100 350 336 nopicture.png ice
 DamageZone 404 142 3 100 350 339 nopicture.png ice
@@ -121,7 +121,7 @@ Platform Custom 320 320 bookshelf1.png
 
 
 ScriptedDamageZone 296 130 1 0 3 296 128 0.2 296 132 0.2 296 130 0.2 crystalball
-TrackedScriptedDamageZone 296 130 1 20 1 296 130 1 magic 1 -300 0 400 200
+TrackedScriptedDamageZoneSpawner 296 130 1 20 1 296 130 1 magic 1 -300 0 400 200
 
 DamageZone 371 567 3 100 350 72 nopicture.png iceleft
 DamageZone 371 556 3 100 350 75 nopicture.png iceleft

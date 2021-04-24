@@ -37,6 +37,9 @@ public class AddedItem extends AnimArea {
 		switch (effect)
 		{
 			case "banana":
+				k.bounce(5);
+				break;
+			case "fart":
 				k.setRunSpeed(1.6f);
 				k.setJumpGravity(-1.0f);
 				break;

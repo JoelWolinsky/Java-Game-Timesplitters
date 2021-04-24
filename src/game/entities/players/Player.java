@@ -33,7 +33,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
     protected float DECELERATION = 0.4f;        // Rate at which velX decreases when A/D key released (for sliding)
     protected float JUMP_GRAVITY = -7.5f;
-    protected float JUMP_GRAVITY_DOUBLE = -10.5f;// VelY changes to this number upon jump
+    protected float JUMP_GRAVITY_DOUBLE = -6.5f;// VelY changes to this number upon jump
     protected float RUN_SPEED = 3.6f;        // Default run speed
     protected float DOWN_SPEED = 10;        // Speed at which character falls when S pressed in mid-air
 
@@ -77,14 +77,14 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     private final KeyInput input;
 
 
-    public Player(float x, float y, KeyInput input, int width, int height) {
+    public Player(float x, float y, KeyInput input, int width, int height,String url) {
         super(x, y, 2, width, height);
 
         this.input = input;
         this.username = UUID.randomUUID().toString();
 
 		//animations
-        this.animations = getAnimations("player");
+        this.animations = getAnimations(url);
         this.currentAnimState = AnimationStates.IDLE;
 
         this.width = animations.get(currentAnimState).getFrame(frame).getWidth();
