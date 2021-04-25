@@ -143,14 +143,10 @@ public class Game extends Canvas implements Runnable{
 			lastTime = now;
 			while(delta >= 1) {
 				tick();
-				//Can we change the render to here?? Animations are a lot more relative to speed by doing this --Marek
 				render();
 				delta--;
 			}
 			if(running) {
-				///render(); ***ORIGINAL PLACE --Marek
-
-
 				if(System.currentTimeMillis() - timer >1000) {
 					timer += 1000;
 				}

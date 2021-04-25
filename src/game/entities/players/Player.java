@@ -112,7 +112,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         if (i < 100) {
             i++;
             if (i > 20) {
-                canMove = true; // makes Players pause for half second upon respawn
+                canMove = true; // makes Players pause for 20 ticks upon respawn
             }
         } else {
             immunity = false;
