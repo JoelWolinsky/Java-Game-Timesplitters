@@ -47,6 +47,9 @@ public class Map {
 
         currentLevel = new Level();
 
+        WallOfDeath wod = new WallOfDeath();
+        currentLevel.addEntity(wod);
+
         switch (mapMode)
         {
             case debug:
@@ -56,7 +59,7 @@ public class Map {
                 parseFile(currentLevel,"segmentA1");
 			/*
 			*** LEGEND ***
-			m.mapParser(currentLevel, "intro1");				// No go zone 								-- NO X VERSION
+			m.mapParser(currentLevel, "intro1");				// No go zone 								
 			m.mapParser(currentLevel, "intro2");				// Basic chandelier room
 			m.mapParser(currentLevel, "introDimension");		// Pink portal
 
@@ -67,13 +70,13 @@ public class Map {
 			m.mapParser(currentLevel, "segmentA5");				// aesthetic hall 3
 			m.mapParser(currentLevel, "segmentA6");				// ghosts
 			m.mapParser(currentLevel, "segmentA7");				// platforms
-			m.mapParser(currentLevel, "segmentA8");				// disappearing long and small platforms 	-- NEEDS WORK
-			m.mapParser(currentLevel, "segmentA9");				// spinning fireball one 					-- NOT DOING AI VERSION
+			m.mapParser(currentLevel, "segmentA8");				// disappearing long and small platforms 	-- VERY DIFFICULT FOR AIPlayer
+			m.mapParser(currentLevel, "segmentA9");				// spinning fireball one 					
 			m.mapParser(currentLevel, "segmentA10");			// long corridor
 			m.mapParser(currentLevel, "segmentA11");			// disappearing platforms over acid
 			m.mapParser(currentLevel, "segmentA12");			// bookshelf pyramid
-			m.mapParser(currentLevel, "segmentA13");			// wizard and crushing bookshelves 			-- NOT DOING AI VERSION
-			m.mapParser(currentLevel, "segmentA14");			// interstellar bookshelf columns 			-- WAIT UNTIL DEBUGGED
+			m.mapParser(currentLevel, "segmentA13");			// wizard and crushing bookshelves 			
+			m.mapParser(currentLevel, "segmentA14");			// interstellar bookshelf columns 			
 
 			m.mapParser(currentLevel, "intersegmentA1"); 		// skeletons throwing objects down
 			m.mapParser(currentLevel, "intersegmentA2");		// falling rocks
