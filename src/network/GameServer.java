@@ -21,6 +21,9 @@ public class GameServer extends Thread {
 	private List<PlayerMP> connectedPlayers = new ArrayList<PlayerMP>();
 	private List<String> playerIDs= new ArrayList<String>();
 	
+	/** 
+	 * Initialises the socket connection 
+	 */
 	public GameServer(Game game) {
 		this.game = game;
 		try {
@@ -30,32 +33,28 @@ public class GameServer extends Thread {
 		}
 	}
 	
+	/** 
+	 * Initialises the server. This will run continuously and will forward and packets received onto parsePacket.
+	 */
 	public void run() {
 		while(true) {
 			byte[] data = new byte[1024];
 			DatagramPacket packet = new DatagramPacket(data, data.length);
 			try {
 				socket.receive(packet);
-			//	System.out.println("Server recieve");
 			} catch (IOException e) {
 				System.out.println("Exception receiving packet in server run");
 				e.printStackTrace();
 			}
-			//System.out.println("packet");
 			this.parsePacket(packet.getData(), packet.getAddress(), packet.getPort());
-//			String message = new String(packet.getData());
-//			if(message.trim().equalsIgnoreCase("ping")) {
-//				System.out.println("Client ["+packet.getAddress().getHostAddress()+":"+packet.getPort()+"]-> " + message);
-//				sendData("pong".getBytes(), packet.getAddress(), packet.getPort());
-//				
-//
-//			}
 		}
 	}
 	
+	/**
+	 * Handles the different packets received from the client.
+	 */
 	private void parsePacket(byte[] data, InetAddress address, int port) {
 		try {
-			//System.out.println("server parse");
 			String message = new String(data).trim();
 			PacketTypes type = Packet.lookupPacket(message.substring(0,2));
 	
@@ -90,7 +89,9 @@ public class GameServer extends Thread {
 	
 
 	
-
+	/** 
+	 * Adds new players to the game.
+	 */
 	public void addConnection(PlayerMP player, Packet00Login packet) {
 		//System.out.println("Ser add con");
 		try {
@@ -139,6 +140,7 @@ public class GameServer extends Thread {
 		}
 	}
 	
+	
 	public String getPlayerMP(String username) {
 		try {
 			for(String player : this.playerIDs) {
@@ -170,6 +172,10 @@ public class GameServer extends Thread {
 			return -1;
 		}
 	}
+	
+	/** 
+	 * Sends packets from the server to a client. 
+	 */
 	public void sendData(byte[] data, InetAddress ipAddress, int port) {
 		//System.out.println("server send packet");
 		if(port != -1) {
@@ -183,7 +189,10 @@ public class GameServer extends Thread {
 			}
 		}
 	}
-
+	
+	/** 
+	 * Sends data to every user logged in by calling sendData for each user.
+	 */
 	public void sendDataToAllClients(byte[] data) {
 		//System.out.println("Server Send to all");
 		try {
@@ -199,6 +208,10 @@ public class GameServer extends Thread {
 		}
 	}
 	
+	/** 
+	 * Handles a move packet received from the client.
+	 * @param packet
+	 */
 	private void handleMove(Packet02Move packet) {
 		try {
 			//System.out.println("server handle move");

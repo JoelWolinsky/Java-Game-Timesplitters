@@ -33,6 +33,9 @@ public class GameClient extends Thread {
 		}
 	}
 	
+	/* 
+	 * Open the socket to reveive packets from the server.
+	 */
    public void run() {
         while (true) {
             byte[] data = new byte[1024];
@@ -49,7 +52,9 @@ public class GameClient extends Thread {
         }
     }
 	   
-	
+	/* 
+	 * Handles any packets received from the server.
+	 */
 	private void parsePacket(byte[] data, InetAddress address, int port) {
 		try {
 			//System.out.println("client parse");
@@ -81,6 +86,9 @@ public class GameClient extends Thread {
 		}
 	}
 	
+	/* 
+	 * Sends data to the server.
+	 */
 	public void sendData(byte[] data) {
 		//System.out.println("client send");
 		DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, 1331);
@@ -91,6 +99,9 @@ public class GameClient extends Thread {
 		}
 	}
 	
+	/* 
+	 * Handles the move packet if the user moves.
+	 */
 	private void handleMove(Packet02Move packet) {
 		//System.out.println(this.game.player.getUsername() +" Client handle move " + packet.getUsername());
 		//if (this.game.player.getUsername() != packet.getUsername()) {
@@ -104,7 +115,9 @@ public class GameClient extends Thread {
 		
 	}
 
-	
+	/*
+	 * Handles the user login packet.
+	 */
 	private void handleLogin(Packet00Login packet, InetAddress address, int port) {
 		System.out.println("[" + address.getHostAddress() + ":" + port + "] " + (packet).getUsername() + " has joined the game...");
 		PlayerMP player = new PlayerMP (packet.getX(), packet.getY(), address, port,"player");
