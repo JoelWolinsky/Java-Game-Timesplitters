@@ -186,15 +186,30 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
                 //Check for keyboard input along the y-axis
                 if (KeyInput.down.isPressed()) {
-                    this.velY = DOWN_SPEED;
+                    if (godMode)
+                        this.velY = 7.5F;
+                    else
+                        this.velY = DOWN_SPEED;
                 } else if (KeyInput.up.isPressed()) {
-                    if (jumpCooldown >= 10 && canDoubleJump && !isOnGround() && !hasCeilingAbove() && !isOnWall()) {
-                        this.velY = JUMP_GRAVITY_DOUBLE;
-                        jumpCooldown = 0;
-                        canDoubleJump = false;
-                    } else if (jumpCooldown >= 10 && isOnGround() && !hasCeilingAbove() && !isOnWall()) {
-                        this.velY = JUMP_GRAVITY;
-                        jumpCooldown = 0;
+
+                    if (godMode)
+                    {
+                        if (this.velY <= -RUN_SPEED) {
+                            this.velY = -RUN_SPEED;
+                        } else {
+                            this.velY -= RUN_SPEED / 6;
+                        }
+                    }
+                    else
+                    {
+                        if (jumpCooldown >= 10 && canDoubleJump && !isOnGround() && !hasCeilingAbove() && !isOnWall()) {
+                            this.velY = JUMP_GRAVITY_DOUBLE;
+                            jumpCooldown = 0;
+                            canDoubleJump = false;
+                        } else if (jumpCooldown >= 10 && isOnGround() && !hasCeilingAbove() && !isOnWall()) {
+                            this.velY = JUMP_GRAVITY;
+                            jumpCooldown = 0;
+                        }
                     }
                 }
             }
@@ -204,7 +219,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
 
         //If you're not on ground, you should fall
-        if (!isOnGround()) {
+        if (!isOnGround() && !godMode) {
             fall(this);
         } else {
             CollidingObject o = SolidCollider.nextCollision(this, 5, false);
@@ -302,7 +317,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                 JUMP_GRAVITY = -7.5f;
             } else {
                 godMode = true;
-                RUN_SPEED = 13.6f;
+                RUN_SPEED = 7.6f;
                 JUMP_GRAVITY = -12.0f;
             }
         }
