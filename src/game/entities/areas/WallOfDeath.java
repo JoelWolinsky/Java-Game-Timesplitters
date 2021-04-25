@@ -8,27 +8,24 @@ import static game.Level.getPlayers;
 import static game.Level.getLevelState;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 
 public class WallOfDeath extends GameObject {
 
-    private BufferedImage img;
-	private boolean visible = true;
     private LinkedList<Area> areas = new LinkedList<>();
 
     public WallOfDeath() {
-		
         super(-3000, -500, 100, 2000, 4600);
-
+        
 	}
 
     public void tick() {
 
         for (Player p: getPlayers())
 		{
-			if (this.getInteraction(p))
+			if (this.getInteraction(p)){
 				p.respawn();
+            }
                 // permadeath so don't respawn. turn into ghost and fly
 		}
 

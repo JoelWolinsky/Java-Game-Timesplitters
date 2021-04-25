@@ -47,8 +47,7 @@ public class Map {
 
         currentLevel = new Level();
 
-        WallOfDeath wod = new WallOfDeath();
-        currentLevel.addEntity(wod);
+        currentLevel.addEntity(new WallOfDeath());
 
         switch (mapMode)
         {
