@@ -31,10 +31,10 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     protected float velY = 0;
     private final float terminalVelY = 15;
 
-    protected float DECELERATION = 0.4f;        // Rate at which velX decreases when A/D key released (for sliding)
+    protected float DECELERATION = 0.5f;        // Rate at which velX decreases when A/D key released (for sliding)
     protected float JUMP_GRAVITY = -7.5f;
     protected float JUMP_GRAVITY_DOUBLE = -6.5f;// VelY changes to this number upon jump
-    protected float RUN_SPEED = 3.6f;        // Default run speed
+    protected float RUN_SPEED = 3.5f;        // Default run speed
     protected float DOWN_SPEED = 10;        // Speed at which character falls when S pressed in mid-air
 
     public LinkedList<RespawnPoint> previousRespawnPoints = new LinkedList<>();
@@ -150,8 +150,9 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                     if (this.velX >= RUN_SPEED) {
                         this.velX = RUN_SPEED;
                     } else {
-                        this.velX += RUN_SPEED / 6;
+                        this.velX += 0.5;
                     }
+
                     currentAnimState = AnimationStates.RIGHT;
 
                 } else if (KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
@@ -160,8 +161,9 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                     if (this.velX <= -RUN_SPEED) {
                         this.velX = -RUN_SPEED;
                     } else {
-                        this.velX -= RUN_SPEED / 6;
+                        this.velX -= 0.5;
                     }
+
                     currentAnimState = AnimationStates.LEFT;
 
                 } else {
@@ -245,7 +247,9 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
 
         if (!SolidCollider.willCauseSolidCollision(this, this.velX + 1, true)) {
+
             moving = true;
+
             this.x += this.velX;
         }
 
@@ -313,7 +317,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         if (KeyInput.g.isPressed()) {
             if (godMode) {
                 godMode = false;
-                RUN_SPEED = 3.6f;
+                RUN_SPEED = 3.5f;
                 JUMP_GRAVITY = -7.5f;
             } else {
                 godMode = true;
@@ -404,7 +408,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
     public void normal(GameObject z) {
         if (this.locker == z) {
-            RUN_SPEED = 3.6f;
+            RUN_SPEED = 3.5f;
             JUMP_GRAVITY = -7.5f;
         }
     }
@@ -413,12 +417,12 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
         switch (code) {
             case "./img/shoes.png":
-                RUN_SPEED = 3.6f;
+                RUN_SPEED = 3.5f;
                 JUMP_GRAVITY = -7.5f;
                 break;
 
             case "banana":
-                RUN_SPEED = 3.6f;
+                RUN_SPEED = 3.5f;
                 JUMP_GRAVITY = -7.5f;
                 break;
 
