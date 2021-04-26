@@ -165,6 +165,7 @@ public class Level extends Canvas {
 			case MULTIPLAYER:
 				if (getPlayers().size()==2)
 					levelState=LevelState.Starting;
+					
 				break;
 		}
 	}

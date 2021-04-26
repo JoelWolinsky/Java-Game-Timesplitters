@@ -66,7 +66,7 @@ public class GameClient extends Thread {
 			case INVALID:
 				break;
 			case LOGIN:
-	
+				System.out.println("Client handle login");
 				packet = new Packet00Login(data);
 				handleLogin((Packet00Login) packet, address, port);
 				break;
@@ -120,7 +120,7 @@ public class GameClient extends Thread {
 	 */
 	private void handleLogin(Packet00Login packet, InetAddress address, int port) {
 		System.out.println("[" + address.getHostAddress() + ":" + port + "] " + (packet).getUsername() + " has joined the game...");
-		PlayerMP player = new PlayerMP (packet.getX(), packet.getY(), address, port,"player");
+		PlayerMP player = new PlayerMP (packet.getX(), packet.getY(), address, port,"player2");
 		game.m.currentLevel.addEntity(player);
 	}
 	
