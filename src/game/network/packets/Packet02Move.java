@@ -35,7 +35,7 @@ public class Packet02Move extends Packet {
 
 	@Override
 	public void writeData(GameServer server) {
-		//System.out.println("packet02 write data");
+		System.out.println("packet02 write data send to all");
 		server.sendDataToAllClients(getData());
 	}
 

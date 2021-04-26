@@ -19,7 +19,7 @@ public class Level extends Canvas {
 	private static LevelState levelState = LevelState.Waiting;
 
 	private static LinkedList<GameObject> entities = new LinkedList<>();
-	private static ArrayList<GameObject> toBeAdded = new ArrayList<>();
+	public static ArrayList<GameObject> toBeAdded = new ArrayList<>();
 	private static ArrayList<GameObject> toBeRemoved = new ArrayList<>();
 
 	public static synchronized LinkedList<GameObject> getGameObjects(){
@@ -165,7 +165,6 @@ public class Level extends Canvas {
 			case MULTIPLAYER:
 				if (getPlayers().size()==2)
 					levelState=LevelState.Starting;
-					
 				break;
 		}
 	}

@@ -9,6 +9,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 
 import game.Game;
+import game.Level;
 import game.entities.players.PlayerMP;
 import game.network.packets.Packet;
 import game.network.packets.Packet.PacketTypes;
@@ -121,7 +122,7 @@ public class GameClient extends Thread {
 	private void handleLogin(Packet00Login packet, InetAddress address, int port) {
 		System.out.println("[" + address.getHostAddress() + ":" + port + "] " + (packet).getUsername() + " has joined the game...");
 		PlayerMP player = new PlayerMP (packet.getX(), packet.getY(), address, port,"player2");
-		game.m.currentLevel.addEntity(player);
+		Level.addToAddQueue(player);
 	}
 	
 

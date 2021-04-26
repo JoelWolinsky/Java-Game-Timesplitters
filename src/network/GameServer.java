@@ -83,8 +83,8 @@ public class GameServer extends Thread {
 				break;
 			case MOVE:
 				packet = new Packet02Move(data);
-				//System.out.println(((Packet02Move)packet).getUsername() + " has moved to " + ((Packet02Move)packet).getX() + ", " + ((Packet02Move)packet).getY());
-				//this.handleMove((Packet02Move)packet);
+				System.out.println(((Packet02Move)packet).getUsername() + " has moved to " + ((Packet02Move)packet).getX() + ", " + ((Packet02Move)packet).getY());
+				this.handleMove((Packet02Move)packet);
 			}
 		}catch (Exception e) {
 				System.out.println("Exception at GameServer.parsePacket");
