@@ -65,6 +65,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     private int bouncingSpeed = 0;
     private int bouncingTimer = 0;
     private boolean bounceImmunity = false;
+    private boolean facingRight = true;
 
     protected int animationTimer = 0;
     protected int frame;
@@ -90,7 +91,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         this.currentAnimState = AnimationStates.IDLE;
 
         this.width = animations.get(currentAnimState).getFrame(frame).getWidth();
-        this.height = animations.get(currentAnimState).getFrame(frame).getHeight();
+        this.height = animations.get(currentAnimState).getFrame(frame).getHeight();       
 
         CollidingObject.addCollider(this);
         SolidCollider.addSolidCollider(this);
@@ -141,7 +142,26 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
         this.prevPos = new Point((int) this.x, (int) this.y);
 
-
+        //Animation Handler
+        
+        if(velX > 0) {
+        	facingRight = true;
+        	currentAnimState = AnimationStates.RIGHT;
+        }
+        else if(velX < 0) {
+        	facingRight = false;
+        	currentAnimState = AnimationStates.LEFT;
+        }
+        else if (velX == 0 && !ghostMode) {
+        	if(facingRight) {
+        		currentAnimState = AnimationStates.IDLE;
+        	}
+        	else {
+        		currentAnimState = AnimationStates.OTHER;
+        	}
+        }
+        
+        
         //Check for keyboard input along the x-axis
 
         if (canMove)
@@ -154,8 +174,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                     } else {
                         this.velX += 0.5;
                     }
-
-                    currentAnimState = AnimationStates.RIGHT;
+                  
 
                 } else if (KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
 
@@ -165,8 +184,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                     } else {
                         this.velX -= 0.5;
                     }
-
-                    currentAnimState = AnimationStates.LEFT;
+                  
 
                 } else {
 
@@ -175,13 +193,11 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                         if (this.velX >= -0.1f && this.velX <= 0.1f) {
                             this.velX = 0;
                         } else if (this.velX > 0.1f) {
-                            this.velX -= DECELERATION;
-                            if (!ghostMode)
-                            currentAnimState = AnimationStates.IDLE;
+                            this.velX -= DECELERATION;          
+                            
                         } else {
                             this.velX += DECELERATION;
-                            if (!ghostMode)
-                            currentAnimState = AnimationStates.OTHER;
+                          
                         }
                     } else {
                         this.velX = 0;
@@ -214,6 +230,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                     }
                     else
                     {
+                    	
                         if (jumpCooldown >= 10 && canDoubleJump && !isOnGround() && !hasCeilingAbove() && !isOnWall()) {
                             this.velY = JUMP_GRAVITY_DOUBLE;
                             jumpCooldown = 0;
