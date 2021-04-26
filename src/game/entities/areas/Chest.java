@@ -1,4 +1,5 @@
 package game.entities.areas;
+import game.entities.players.AIPlayer;
 import game.entities.players.Player;
 
 import java.util.ArrayList;
@@ -27,6 +28,9 @@ public class Chest extends AnimArea{
 						this.setVisibile(false);
 						p.setInventoryChanged(true);
 
+						if (p instanceof AIPlayer) {
+							((AIPlayer) p).startInventoryTimer();
+						}
 					}
 				}
 			}

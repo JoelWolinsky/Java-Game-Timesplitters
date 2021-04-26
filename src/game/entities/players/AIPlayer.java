@@ -3,6 +3,7 @@ package game.entities.players;
 import java.util.LinkedList;
 import java.util.UUID;
 
+import game.Effect;
 import game.attributes.SolidCollider;
 import game.entities.areas.RespawnPoint;
 import game.entities.areas.Waypoint;
@@ -20,6 +21,8 @@ public class AIPlayer extends Player {
 	private int max_distance_behind = -550;
 	private String username;
 	private Waypoint currentWaypoint;
+	private int inventoryTimer = 0;
+	private boolean inventoryTimerOn = false;
 
 
 	public AIPlayer(float x, float y, int width,int height, Player humanPlayer,String url) {
@@ -50,7 +53,6 @@ public class AIPlayer extends Player {
 				if (this.humanPlayer.getX() - penultimateRespawnPoint.getX() > 350) {
 					this.invincibleMove = true;
 				}
-
 			}
 
 			if (this.invincibleMove == true) {
@@ -65,20 +67,15 @@ public class AIPlayer extends Player {
 
 				// so that it only teleports once, and doesn't keep getting sent back
 				if (!this.getRespawnPoints().contains(penultimateRespawnPoint)) {
-
 					this.y = penultimateRespawnPoint.getY()-40;
-
 				} 	
 			}			
-		} 	// else { this.invincible = false; }	
+		}
 		
-	
-	
 		if (this.canMove == true ) {
 
 				if (this.wait > 0) {
 
-					// System.out.println(this.wait);
 					this.wait--;
 
 					if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
@@ -148,6 +145,24 @@ public class AIPlayer extends Player {
 						}
 					}
 				}
+
+				if (this.inventoryTimerOn == true) {
+					
+					this.inventoryTimer++;
+
+					if (this.inventoryTimer == 120) {
+						
+						inventory.get(0).getEffect();
+						if (!(inventory.get(0).getUrl().equals("./img/jump.png")) && !(inventory.get(0).getUrl().equals("./img/banana.png")))
+							currentEffects.add(new Effect(inventory.get(0).getUrl(), 500));
+						inventory.get(0).setUrl("./img/empty.png");
+						this.setInventoryChanged(true);
+						
+
+						this.inventoryTimer = 0;
+						this.inventoryTimerOn = false;
+					}
+				}
 			}
 		
 		
@@ -191,5 +206,9 @@ public class AIPlayer extends Player {
 
 	public Waypoint getCurrentWaypoint() {
 		return currentWaypoint;
+	}
+
+	public void startInventoryTimer(){
+		this.inventoryTimerOn = true;
 	}
 }

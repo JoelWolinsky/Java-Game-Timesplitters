@@ -51,23 +51,23 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     protected boolean canMove = false;
     private boolean locked = false;
     private GameObject locker;
-    private final ArrayList<Item> inventory = new ArrayList<Item>(Arrays.asList(new Item(0, 0, 0, 0, this, "./img/empty.png"), new Item(0, 0, 0, 0, this, "./img/empty.png"), new Item(0, 0, 0, 0, this, "./img/empty.png")));
-    private final int inventorySize = 3;
-    private int inventoryIndex = 2;
-    private boolean inventoryChanged = false;
-    private int itemUseCooldown = 0;
-    private int slotSelectionCooldown = 0;
-    private final int effectDuration = 500;
-    private final ArrayList<Effect> currentEffects = new ArrayList<Effect>();
-    private boolean canDoubleJump = false;
-    private int jumpCooldown = 0;
+    protected final ArrayList<Item> inventory = new ArrayList<Item>(Arrays.asList(new Item(0, 0, 0, 0, this, "./img/empty.png"), new Item(0, 0, 0, 0, this, "./img/empty.png"), new Item(0, 0, 0, 0, this, "./img/empty.png")));
+    protected final int inventorySize = 3;
+    protected int inventoryIndex = 2;
+    protected boolean inventoryChanged = false;
+    protected int itemUseCooldown = 0;
+    protected int slotSelectionCooldown = 0;
+    protected final int effectDuration = 500;
+    protected final ArrayList<Effect> currentEffects = new ArrayList<Effect>();
+    protected boolean canDoubleJump = false;
+    protected int jumpCooldown = 0;
     private boolean bouncing = false;
     private int bouncingSpeed = 0;
     private int bouncingTimer = 0;
     private boolean bounceImmunity = false;
     private boolean facingRight = true;
-    public boolean invincible = false;
-    public boolean invincibleMove = false;
+    protected boolean invincible = false;
+    protected boolean invincibleMove = false;
 
     protected int animationTimer = 0;
     protected int frame;
@@ -103,17 +103,9 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         //Gather all collisions
         CollidingObject.getCollisions(this);
 
-
-        /*if (getLevelState()== LevelState.InProgress){
-            this.setCanMove(true);
-		} else {
-            this.setCanMove(false);
-		}*/
-
         moving = false;
 
         //disable immunity after 100
-        // if (!(this instanceof AIPlayer))
         if (getLevelState()== LevelState.InProgress)
         if (i < 100) {
             i++;
@@ -371,7 +363,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             }
         }
 
-        if (!(this instanceof AIPlayer))
+        if (!(this instanceof AIPlayer)){
             if (KeyInput.space.isPressed()) {
                 //OPTION 2
                 if (!(inventory.get(inventoryIndex).getUrl().equals("./img/empty.png"))) {
@@ -382,6 +374,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                     this.setInventoryChanged(true);
                 }
             }
+        }
 
 
         if (!currentEffects.isEmpty()) {
