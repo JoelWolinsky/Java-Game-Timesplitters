@@ -9,6 +9,5 @@ public class Launcher {
 		cHandler = new ConfigHandler("src/config.txt");
 		cHandler.createConfigFile();
 		new Game();		
-	}
-	
+	}	
 }

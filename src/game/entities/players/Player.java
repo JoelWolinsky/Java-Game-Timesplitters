@@ -66,6 +66,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     private int bouncingTimer = 0;
     private boolean bounceImmunity = false;
     private boolean facingRight = true;
+    public boolean invincible = false;
+    public boolean invincibleMove = false;
 
     protected int animationTimer = 0;
     protected int frame;
@@ -473,7 +475,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     }
 
     public void respawn() {
-        if (ghostMode == false && immunity == false) {
+        if (ghostMode == false && immunity == false && invincible == false) {
             this.x = respawnX;
             this.y = respawnY;
             this.velX = 0;
