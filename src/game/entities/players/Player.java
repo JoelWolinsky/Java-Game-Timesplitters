@@ -99,10 +99,11 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         CollidingObject.getCollisions(this);
 
 
-        if (getLevelState()== LevelState.InProgress)
+        /*if (getLevelState()== LevelState.InProgress){
             this.setCanMove(true);
-        else
+		} else {
             this.setCanMove(false);
+		}*/
 
         moving = false;
 
@@ -112,7 +113,11 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         if (i < 100) {
             i++;
             if (i > 20) {
-                canMove = true; // makes Players pause for 20 ticks upon respawn
+				if (getLevelState()== LevelState.InProgress){
+                	this.setCanMove(true); // makes Players pause for 20 ticks upon respawn
+				} else {
+					this.setCanMove(false);
+				}
             }
         } else {
             immunity = false;
@@ -186,8 +191,13 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
                 //Check for keyboard input along the y-axis
                 if (KeyInput.down.isPressed()) {
-                    if (godMode)
-                        this.velY = 7.5F;
+                    if (godMode){
+						if (this.velY >= 7.5f) {
+							this.velY = 7.5f;
+                        } else {
+                            this.velY += RUN_SPEED / 6;
+                        }
+					}
                     else
                         this.velY = DOWN_SPEED;
                 } else if (KeyInput.up.isPressed()) {
