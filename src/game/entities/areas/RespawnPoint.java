@@ -30,7 +30,7 @@ public class RespawnPoint extends Area {
 					p.setRespawnThreshold((int)this.getY());
 					p.getRespawnPoints().add(this);
 					
-					if (! (p instanceof AIPlayer))
+					if (! (p instanceof AIPlayer) && p.isGhostMode() == false)
 						this.reached=true;
 				}
 			}

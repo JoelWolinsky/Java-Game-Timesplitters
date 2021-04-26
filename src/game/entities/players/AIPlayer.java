@@ -39,6 +39,8 @@ public class AIPlayer extends Player {
 
 		if (dist_from_player < max_distance_ahead) {
 
+			if (humanPlayer.isGhostMode() == false) {
+
 				// teleports AI Player to the penultimate RespawnPoint that the player has reached 
 				if (dist_from_player < max_distance_behind) {
 
@@ -60,6 +62,7 @@ public class AIPlayer extends Player {
 						}
 					}
 				}
+			}
 		
 			if (this.canMove == true ) {
 

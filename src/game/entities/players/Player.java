@@ -214,10 +214,10 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                 //Check for keyboard input along the y-axis
                 if (KeyInput.down.isPressed()) {
                     if (ghostMode){
-						if (this.velY >= 7.5f) {
-							this.velY = 7.5f;
+						if (this.velY >= 6f) {
+							this.velY = 6f;
                         } else {
-                            this.velY += RUN_SPEED / 6;
+                            this.velY += 0.5;
                         }
 					}
                     else
@@ -226,8 +226,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
                     if (ghostMode)
                     {
-                        if (this.velY <= -RUN_SPEED) {
-                            this.velY = -RUN_SPEED;
+                        if (this.velY <= -6f) {
+                            this.velY = -6f;
                         } else {
                             this.velY -= 0.5;
                         }
