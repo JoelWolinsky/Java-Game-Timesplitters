@@ -18,8 +18,7 @@ public class WallOfDeath extends GameObject {
     private LinkedList<Area> areas = new LinkedList<>();
 
     public WallOfDeath() {
-        super(-3000, -500, 100, 2000, 4600);
-        
+        super(-3000, -1000, 100, 2000, 5500);
 	}
 
     public void tick() {
