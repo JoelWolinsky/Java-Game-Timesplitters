@@ -159,7 +159,7 @@ public class Level extends Canvas {
 					levelState=LevelState.Starting;
 				break;
 			case vsAI:
-				if (getPlayers().size()==2)
+				if (getPlayers().size()>=2)
 					levelState=LevelState.Starting;
 				break;
 			case MULTIPLAYER:
@@ -180,13 +180,15 @@ public class Level extends Canvas {
 		return null;
 	}
 
-	public static Blip getBlips(){
-		for (GameObject o : getGameObjects())
+	public static ArrayList<Blip> getBlips(){
+		ArrayList<Blip> blips = new ArrayList<Blip>();
+		for (GameObject o : entities)
 		{
 			if (o instanceof Blip)
-				return (Blip)o;
+				blips.add((Blip) o);
 		}
-		return null;
+
+		return blips;
 	}
 
 

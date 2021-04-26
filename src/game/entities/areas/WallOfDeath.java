@@ -1,11 +1,14 @@
 package game.entities.areas;
 
 import game.entities.GameObject;
+import game.entities.players.AIPlayer;
 import game.entities.players.Player;
+import game.graphics.AnimationStates;
 import game.graphics.LevelState;
 
 import static game.Level.getPlayers;
 import static game.Level.getLevelState;
+import static game.graphics.Assets.getAnimations;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -24,7 +27,14 @@ public class WallOfDeath extends GameObject {
         for (Player p: getPlayers())
 		{
 			if (this.getInteraction(p)){
-				p.respawn();
+			    if(!(p instanceof AIPlayer))
+			    if (!p.isGhostMode())
+                {
+                    p.setGhostMode(true);
+                    p.setCurrentAnimState(AnimationStates.LEFT);
+                    p.setAnimations(getAnimations("GHOST_FORM"));
+
+                }
             }
                 // permadeath so don't respawn. turn into ghost and fly
 		}

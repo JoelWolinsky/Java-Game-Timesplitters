@@ -39,7 +39,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
     public LinkedList<RespawnPoint> previousRespawnPoints = new LinkedList<>();
 
-    private boolean godMode = false;
+    private boolean ghostMode = false;
     private int respawnX = 0;
     private int respawnThreshold = 340;
     private int respawnY = 340;
@@ -75,6 +75,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     private Point prevPos;
     private final String username;
     private final KeyInput input;
+    private String objectModel;
 
 
     public Player(float x, float y, KeyInput input, int width, int height,String url) {
@@ -83,6 +84,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         this.input = input;
         this.username = UUID.randomUUID().toString();
 
+        objectModel=url;
 		//animations
         this.animations = getAnimations(url);
         this.currentAnimState = AnimationStates.IDLE;
@@ -174,9 +176,11 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                             this.velX = 0;
                         } else if (this.velX > 0.1f) {
                             this.velX -= DECELERATION;
+                            if (!ghostMode)
                             currentAnimState = AnimationStates.IDLE;
                         } else {
                             this.velX += DECELERATION;
+                            if (!ghostMode)
                             currentAnimState = AnimationStates.OTHER;
                         }
                     } else {
@@ -188,18 +192,24 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
                 //Check for keyboard input along the y-axis
                 if (KeyInput.down.isPressed()) {
-                    if (godMode)
-                        this.velY = 7.5F;
+                    if (ghostMode)
+                    {
+                        if (this.velY >= RUN_SPEED) {
+                            this.velY = RUN_SPEED;
+                        } else {
+                            this.velY += 0.5;
+                        }
+                    }
                     else
                         this.velY = DOWN_SPEED;
                 } else if (KeyInput.up.isPressed()) {
 
-                    if (godMode)
+                    if (ghostMode)
                     {
                         if (this.velY <= -RUN_SPEED) {
                             this.velY = -RUN_SPEED;
                         } else {
-                            this.velY -= RUN_SPEED / 6;
+                            this.velY -= 0.5;
                         }
                     }
                     else
@@ -214,6 +224,16 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                         }
                     }
                 }
+                else if(ghostMode)
+                {
+                    if (this.velY >= -0.1f && this.velY <= 0.1f) {
+                        this.velY = 0;
+                    } else if (this.velY > 0.1f) {
+                        this.velY -= DECELERATION;
+                    } else {
+                        this.velY += DECELERATION;
+                    }
+                }
             }
 
         if (jumpCooldown < 10)
@@ -221,7 +241,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
 
         //If you're not on ground, you should fall
-        if (!isOnGround() && !godMode) {
+        if (!isOnGround() && !ghostMode) {
             fall(this);
         } else {
             CollidingObject o = SolidCollider.nextCollision(this, 5, false);
@@ -248,12 +268,14 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
         if (!SolidCollider.willCauseSolidCollision(this, this.velX + 1, true)) {
 
+            if(!ghostMode)
             moving = true;
 
             this.x += this.velX;
         }
 
         if (!SolidCollider.willCauseSolidCollision(this, this.velY + 1, false)) {
+            if(!ghostMode)
             moving = true;
             this.y += this.velY;
         } else {
@@ -313,14 +335,14 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             respawn();
         }
 
-        // press g to enable godmode -- remember to disable this after finishing game
+
         if (KeyInput.g.isPressed()) {
-            if (godMode) {
-                godMode = false;
+            if (ghostMode) {
+                ghostMode = false;
                 RUN_SPEED = 3.5f;
                 JUMP_GRAVITY = -7.5f;
             } else {
-                godMode = true;
+                ghostMode = true;
                 RUN_SPEED = 7.6f;
                 JUMP_GRAVITY = -12.0f;
             }
@@ -430,7 +452,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     }
 
     public void respawn() {
-        if (godMode == false && immunity == false) {
+        if (ghostMode == false && immunity == false) {
             this.x = respawnX;
             this.y = respawnY;
             this.velX = 0;
@@ -627,5 +649,22 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
     public void setCurrentAnimState(AnimationStates currentAnimState) {
         this.currentAnimState = currentAnimState;
+    }
+
+    public void setGhostMode(boolean ghostMode) {
+        this.ghostMode = ghostMode;
+    }
+
+    public void setAnimations(HashMap<AnimationStates, Animation> animations) {
+        animationTimer=0;
+        this.animations = animations;
+    }
+
+    public boolean isGhostMode() {
+        return ghostMode;
+    }
+
+    public String getObjectModel() {
+        return objectModel;
     }
 }

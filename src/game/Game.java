@@ -174,7 +174,9 @@ public class Game extends Canvas implements Runnable{
 				break;
 			case vsAI:
 				player = new Player(0, 340, keyInput, 0 ,0,"player1");
-				m.getCurrentLevel().addToAddQueue(new AIPlayer(50, 340, 0 ,0, player,"player2"));
+				m.getCurrentLevel().addToAddQueue(new AIPlayer(30, 340, 0 ,0, player,"player2"));
+				m.getCurrentLevel().addToAddQueue(new AIPlayer(60, 340, 0 ,0, player,"player3"));
+				m.getCurrentLevel().addToAddQueue(new AIPlayer(90, 340, 0 ,0, player,"player4"));
 				break;
 			case SINGLEPLAYER:
 				player = new Player(0, 340, keyInput, 0 ,0,"player1");

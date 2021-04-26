@@ -54,4 +54,12 @@ public class Blip extends GameObject {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setImg(BufferedImage img) {
+		this.img = img;
+	}
 }

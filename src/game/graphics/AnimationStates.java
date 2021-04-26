@@ -12,4 +12,5 @@ public enum AnimationStates {
 	OTHER,
 	FALL,
 	SWAG,
+	GHOST,
 }

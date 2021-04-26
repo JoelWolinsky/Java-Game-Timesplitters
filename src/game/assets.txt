@@ -71,3 +71,6 @@ bigportal
 IDLE 15 4 bigportal.png bigportal.png bigportal.png bigportal.png
 banana
 IDLE 15 4 banana.png banana.png banana.png banana.png
+GHOST_FORM
+LEFT 5 4 ghostformleft.png ghostformleft.png ghostformleft.png ghostformleft.png ghostformleft.png ghostformleft.png
+RIGHT 5 4 ghostformright.png ghostformright.png ghostformright.png ghostformright.png ghostformright.png ghostformright.png

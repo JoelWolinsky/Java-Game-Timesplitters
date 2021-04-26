@@ -16,6 +16,7 @@ public class Assets {
 	public static ArrayList <BufferedImage> player_left;
 	public static ArrayList <BufferedImage> player_other;
 	public static ArrayList <BufferedImage> player_swag;
+	public static ArrayList <BufferedImage> player_ghost;
 
 	public static ArrayList<Asset> assets = new ArrayList<>();
 	String[] splitted;
@@ -105,12 +106,14 @@ public class Assets {
 		player_swag.add(sheet.crop(xOffset+xDistance*5, yOffset+yDistance*15, PLAYER_WIDTH+10, PLAYER_HEIGHT));
 		player_swag.add(sheet.crop(xOffset+xDistance*6, yOffset+yDistance*15, PLAYER_WIDTH+10, PLAYER_HEIGHT));
 
+
 		Asset as = new Asset(name,new HashMap<AnimationStates, Animation>());
 		as.getAnimations().put(AnimationStates.IDLE, new Animation(10,player_idle));
 		as.getAnimations().put(AnimationStates.RIGHT, new Animation(10,player_right));
 		as.getAnimations().put(AnimationStates.LEFT, new Animation(10,player_left));
 		as.getAnimations().put(AnimationStates.OTHER, new Animation(10,player_other));
 		as.getAnimations().put(AnimationStates.SWAG, new Animation(5,player_swag));
+		as.getAnimations().put(AnimationStates.SWAG, new Animation(5,player_ghost));
 		assets.add(as);
 	}
 
