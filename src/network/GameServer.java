@@ -68,10 +68,13 @@ public class GameServer extends Thread {
 				packet = new Packet00Login(data);
 				System.out.println("[" + address.getHostAddress() + ":" + port + "] " + ((Packet00Login) packet).getUsername() + " has connected...");
 				System.out.println(connectedPlayers.size());
-				System.out.println("Add con1");
+				//System.out.println("Add con1");
 
 				PlayerMP player = new PlayerMP (100, 100, address, port,"player1");
-				System.out.println("Add con2");
+				System.out.println("username before: " + player.getUsername());
+				player.setUsername(((Packet00Login) packet).getUsername());
+				System.out.println("username after: " + player.getUsername());
+				//System.out.println("Add con2");
 				this.addConnection(player, (Packet00Login) packet);
 				System.out.println("Add con3");
 
@@ -100,10 +103,13 @@ public class GameServer extends Thread {
 	 */
 	public void addConnection(PlayerMP player, Packet00Login packet) {
 		System.out.println("Ser add con");
+		System.out.println(packet.getUsername());
 		try {
 			boolean alreadyConnected = false;
+			// For each player in the game
 			for (String p : this.playerIDs) {
 				System.out.println(this.connectedPlayers.size());
+				// If player already in game
 				if(packet.getUsername().equalsIgnoreCase(p)) {
 					if(this.connectedPlayers.get(getPlayerMPIndex(p)).ipAddress == null) {
 						this.connectedPlayers.get(getPlayerMPIndex(p)).ipAddress = player.ipAddress;
@@ -116,8 +122,10 @@ public class GameServer extends Thread {
 					System.out.print("Adding and send \n");
 					sendData(packet.getData(),this.connectedPlayers.get(getPlayerMPIndex(p)).ipAddress, this.connectedPlayers.get(getPlayerMPIndex(p)).port);
 					
-					packet = new Packet00Login(this.connectedPlayers.get(getPlayerMPIndex(p)).getUsername(), this.connectedPlayers.get(getPlayerMPIndex(p)).getX(), this.connectedPlayers.get(getPlayerMPIndex(p)).getY());
-	                sendData(packet.getData(), player.ipAddress, player.port);
+					Packet00Login packet1 = new Packet00Login(this.connectedPlayers.get(getPlayerMPIndex(p)).getUsername(), this.connectedPlayers.get(getPlayerMPIndex(p)).getX(), this.connectedPlayers.get(getPlayerMPIndex(p)).getY());
+					sendData(packet1.getData(), player.ipAddress, player.port);
+					
+
 				}
 			}
 			System.out.println("already connected = " + alreadyConnected);
@@ -126,6 +134,8 @@ public class GameServer extends Thread {
 	            this.connectedPlayers.add(player);
 	            this.playerIDs.add(packet.getUsername());
 	            System.out.println("adding to ids " + packet.getUsername());
+	            
+	            System.out.println(this.connectedPlayers.size());
 	        }
 		} catch (Exception e) {
 			System.out.println("Exception in GameServer.addConnection");
@@ -204,7 +214,7 @@ public class GameServer extends Thread {
 		try {
 			for (PlayerMP p : connectedPlayers) {
 				if (p.port != -1) {
-					//System.out.println("Sent to " + p.getUsername());
+					System.out.println("Sent to " + p.getUsername());
 					sendData(data, p.ipAddress, p.port);
 				}
 			}

@@ -73,7 +73,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     protected HashMap<AnimationStates, Animation> animations;
 
     private Point prevPos;
-    private final String username;
+    private  String username;
     private final KeyInput input;
     private String objectModel;
 
@@ -83,6 +83,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
         this.input = input;
         this.username = UUID.randomUUID().toString();
+        //System.out.println("making name " + this.username);
 
         objectModel=url;
 		//animations
@@ -94,6 +95,10 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
         CollidingObject.addCollider(this);
         SolidCollider.addSolidCollider(this);
+    }
+    
+    public void setUsername(String username) {
+    	this.username = username;
     }
 
     public void tick() {
@@ -667,4 +672,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     public String getObjectModel() {
         return objectModel;
     }
+    
+    
 }

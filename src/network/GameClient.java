@@ -104,15 +104,18 @@ public class GameClient extends Thread {
 	 * Handles the move packet if the user moves.
 	 */
 	private void handleMove(Packet02Move packet) {
-		//System.out.println(this.game.player.getUsername() +" Client handle move " + packet.getUsername());
-		//if (this.game.player.getUsername() != packet.getUsername()) {
+		if (Game.player.getUsername().equals(packet.getUsername())) {
+			// 
+		} else {
+			System.out.println(Game.player.getUsername() +" Client handle move " + packet.getUsername());
+
 			try {
 				this.game.m.currentLevel.movePlayer(packet.getUsername(), packet.getX(), packet.getY());
 			} catch (Exception e) {
 				System.out.println("Exception in handleMove. Packet " + packet);
 				e.printStackTrace();
 			}
-		//}
+		}
 		
 	}
 
