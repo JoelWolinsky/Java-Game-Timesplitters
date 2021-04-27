@@ -110,7 +110,7 @@ public class GameClient extends Thread {
 			//System.out.println(Game.player.getUsername() +" Client handle move " + packet.getUsername());
 
 			try {
-				this.game.m.currentLevel.movePlayer(packet.getUsername(), packet.getX(), packet.getY());
+				this.game.m.currentLevel.movePlayer(packet.getUsername(), packet.getX(), packet.getY(), packet.getDirection());
 			} catch (Exception e) {
 				System.out.println("Exception in handleMove. Packet " + packet);
 				e.printStackTrace();
@@ -124,7 +124,7 @@ public class GameClient extends Thread {
 	 */
 	private void handleLogin(Packet00Login packet, InetAddress address, int port) {
 		System.out.println("[" + address.getHostAddress() + ":" + port + "] " + (packet).getUsername() + " has joined the game...");
-		PlayerMP player = new PlayerMP (packet.getX(), packet.getY(), address, port,"player2");
+		PlayerMP player = new PlayerMP (0, 340, address, port,"player2");
 		player.setUsername((packet).getUsername());
 
 		Level.addToAddQueue(player);

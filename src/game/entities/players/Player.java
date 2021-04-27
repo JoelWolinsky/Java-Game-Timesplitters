@@ -71,8 +71,10 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     protected int animationTimer = 0;
     protected int frame;
     protected AnimationStates currentAnimState;
+    protected String currentDirection = "right";
     protected Animation currentAnimation;
     protected HashMap<AnimationStates, Animation> animations;
+    protected int directionTickCounter = 0;
 
     private Point prevPos;
     private  String username;
@@ -146,23 +148,40 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         this.prevPos = new Point((int) this.x, (int) this.y);
 
         //Animation Handler
-        
-        if(velX > 0) {
-        	facingRight = true;
-        	currentAnimState = AnimationStates.RIGHT;
+        if (velX == 0 && !ghostMode) { 
+        	directionTickCounter++;
         }
-        else if(velX < 0) {
-        	facingRight = false;
-        	currentAnimState = AnimationStates.LEFT;
-        }
-        else if (velX == 0 && !ghostMode) {
+        if (input != null) {
+        	if(velX > 0) {
+            	facingRight = true;
+            	currentAnimState = AnimationStates.RIGHT;
+            	currentDirection = "right";
+            }
+            else if(velX < 0) {
+            	facingRight = false;
+            	currentAnimState = AnimationStates.LEFT;
+            	currentDirection = "left";
+            }
+            else if (velX == 0 && !ghostMode) {
+            	if(facingRight) {
+            		currentAnimState = AnimationStates.IDLE;
+            		currentDirection = "idle";
+            	}
+            	else {
+            		currentAnimState = AnimationStates.OTHER;
+            	}
+            }
+        } else if (directionTickCounter == 30) {
+        	directionTickCounter = 0;
         	if(facingRight) {
         		currentAnimState = AnimationStates.IDLE;
+        		currentDirection = "idle";
         	}
         	else {
         		currentAnimState = AnimationStates.OTHER;
         	}
         }
+        
         
         
         //Check for keyboard input along the x-axis
@@ -322,7 +341,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         if (Game.game.getGameMode()== GameMode.MULTIPLAYER) {
             if (this == Game.player) {
                 if ((int) this.x != this.prevPos.x || (int) this.y != this.prevPos.y) {
-                    Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y);
+                    Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, currentDirection);
                     //System.out.println("Player move usr " + this.getUsername());
                     packet.writeData(Game.socketClient);
                 }
