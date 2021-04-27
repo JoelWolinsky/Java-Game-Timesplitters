@@ -141,9 +141,7 @@ public class Level extends Canvas {
 		try {
 
 			if (getSpecificPlayerMP(username)!=null) {
-				System.out.println(x+","+y);
-				System.out.println("level moving player "+username);
-				System.out.println(getSpecificPlayerMP(username));
+
 				getSpecificPlayerMP(username).setX(x);
 				getSpecificPlayerMP(username).setY(y);
 				
