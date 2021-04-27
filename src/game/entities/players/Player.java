@@ -351,6 +351,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             canMove = false;
             i = 0;
             currentAnimState = AnimationStates.IDLE;
+            SoundHandler.playSound("falling", 0.5f);
         }
 
         // press r to respawn -- used for debugging
