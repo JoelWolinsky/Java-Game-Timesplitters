@@ -214,7 +214,7 @@ public class GameServer extends Thread {
 		try {
 			for (PlayerMP p : connectedPlayers) {
 				if (p.port != -1) {
-					System.out.println("Sent to " + p.getUsername());
+					//System.out.println("Sent to " + p.getUsername());
 					sendData(data, p.ipAddress, p.port);
 				}
 			}

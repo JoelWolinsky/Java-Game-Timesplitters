@@ -107,7 +107,7 @@ public class GameClient extends Thread {
 		if (Game.player.getUsername().equals(packet.getUsername())) {
 			// 
 		} else {
-			System.out.println(Game.player.getUsername() +" Client handle move " + packet.getUsername());
+			//System.out.println(Game.player.getUsername() +" Client handle move " + packet.getUsername());
 
 			try {
 				this.game.m.currentLevel.movePlayer(packet.getUsername(), packet.getX(), packet.getY());
@@ -125,6 +125,7 @@ public class GameClient extends Thread {
 	private void handleLogin(Packet00Login packet, InetAddress address, int port) {
 		System.out.println("[" + address.getHostAddress() + ":" + port + "] " + (packet).getUsername() + " has joined the game...");
 		PlayerMP player = new PlayerMP (packet.getX(), packet.getY(), address, port,"player2");
+		player.setUsername((packet).getUsername());
 		Level.addToAddQueue(player);
 	}
 	
