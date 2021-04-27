@@ -6,6 +6,7 @@ import java.util.*;
 import game.Effect;
 import game.Game;
 import game.Item;
+import game.SoundHandler;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
@@ -238,6 +239,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                         } else if (jumpCooldown >= 10 && isOnGround() && !hasCeilingAbove() && !isOnWall()) {
                             this.velY = JUMP_GRAVITY;
                             jumpCooldown = 0;
+                            SoundHandler.playRandomJumpLand();
                         }
                     }
                 }
@@ -299,8 +301,12 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             // Stop player falling through the floor
             CollidingObject o = SolidCollider.nextCollision(this, this.velY, false);
             if (o != null) {
+            	
+            	if (!ghostMode) {
+            		SoundHandler.playRandomJump();
+            	}
+            	
                 Rectangle s = o.getBounds();
-
                 if (this.velY > 0 && !isOnWall()) {
                     this.y = s.y - this.height;
                     this.velY = 0;

@@ -52,6 +52,8 @@ public class Window extends Canvas{
 		frame.setResizable(false);
 		c.setBackground(Color.BLACK);
 		
+		SoundHandler.playMusic("mainMenuMusic", 0.1f);
+		
 		// Creating a new Font from the PressStart2P.ttf file that can be used in HTML JLabels
 		Font buttonFont = null;
 		try {
@@ -415,10 +417,12 @@ public class Window extends Canvas{
 		    		toggleMusicButton.setText("<html><center>MUSIC:<br><p style='margin-top:8'>OFF</center></html>");
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.MUSIC, "False");
 		    		Launcher.cHandler.musicToggle = false;
+		    		SoundHandler.stopMusic();
 		    	} else {
 		    		toggleMusicButton.setText("<html><center>MUSIC:<br><p style='margin-top:8'>ON</center></html>");
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.MUSIC, "True");
 		    		Launcher.cHandler.musicToggle = true;
+		    		SoundHandler.resumeMusic();
 		    	}
 	
 		    	toggleMusicButton.setIcon(button3HoverInner);
