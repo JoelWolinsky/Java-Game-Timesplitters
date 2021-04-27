@@ -47,7 +47,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     public int i = 0;
     private int bi = 0;
     private final boolean cc = false;
-    private boolean moving;
     protected boolean canMove = false;
     private boolean locked = false;
     private GameObject locker;
@@ -333,6 +332,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 		The main idea is that most respawn points will be at ground level on each specific floor so the +300 will
 		work everytime. (Falling 300 blocks below the floor/respawnY will kill the player)
 		 */
+
+        if (!isGhostMode())
         if (this.y > respawnThreshold + 300) {
 
             this.x = respawnX;
@@ -430,10 +431,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         }
 
 
-    }
-
-    public boolean isMoving() {
-        return moving;
     }
 
     public void setRunSpeed(float runSpeed) {

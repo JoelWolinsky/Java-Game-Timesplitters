@@ -12,13 +12,13 @@ import java.io.IOException;
 public class Blip extends GameObject {
 
 	private BufferedImage img;
-	private Player player;
+	private GameObject target;
 	private boolean visible = true;
 	private int totalNrBlocks=0;
 
-	public Blip(float x, float y, int width, int height, Player player, int totalNrBlocks, String url) {
+	public Blip(float x, float y, int width, int height, GameObject target, int totalNrBlocks, String url) {
 		super(x, y, 3, width, height);
-		this.player=player;
+		this.target =target;
 		this.totalNrBlocks=totalNrBlocks;
 		try
 		{
@@ -35,8 +35,8 @@ public class Blip extends GameObject {
 
 	public void tick() {
 
-		if (player.isMoving())
-			this.x=player.getX()/(0.71f*totalNrBlocks);
+		if (target.isMoving())
+			this.x= target.getX()/(0.71f*totalNrBlocks);
 
 	}
 
@@ -55,8 +55,8 @@ public class Blip extends GameObject {
 		this.visible = visible;
 	}
 
-	public Player getPlayer() {
-		return player;
+	public GameObject getTarget() {
+		return target;
 	}
 
 	public void setImg(BufferedImage img) {

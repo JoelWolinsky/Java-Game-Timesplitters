@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import game.entities.*;
 import game.entities.areas.GameEndingObject;
+import game.entities.areas.WallOfDeath;
 import game.entities.players.AIPlayer;
 import game.entities.players.Player;
 import game.entities.players.PlayerMP;
@@ -189,6 +190,16 @@ public class Level extends Canvas {
 		}
 
 		return blips;
+	}
+
+	public static WallOfDeath getWallOfDeath()
+	{
+		for (GameObject o : entities)
+		{
+			if (o instanceof WallOfDeath)
+				return (WallOfDeath) o;
+		}
+		return null;
 	}
 
 

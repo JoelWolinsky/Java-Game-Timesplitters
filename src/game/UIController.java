@@ -23,7 +23,7 @@ public class UIController extends GameObject {
 	UIElement announcer,announcerMessage;
 
 	public UIController(float x, float y, int width, int height) {
-		super(x, y, 3, width, height);
+		super(x, y, 4, width, height);
 
 		//Initialize center announcer UI Element
 		announcer = new UIElement(x, y, 0, 0, "./img/5.png");

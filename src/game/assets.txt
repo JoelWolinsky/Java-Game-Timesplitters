@@ -22,7 +22,7 @@ IDLE 15 4 electric1.png electric2.png electric1.png electric2.png
 activated
 IDLE 15 4 activated1.png activated1.png activated1.png activated1.png
 statue
-IDLE 15 4 statue1.png statue2.png statue3.png statue4.png
+IDLE 5 4 statue1.png statue2.png statue3.png statue4.png
 chicken
 IDLE 15 4 chicken.png chicken.png chicken.png chicken.png
 bateye
@@ -74,3 +74,5 @@ IDLE 15 4 banana.png banana.png banana.png banana.png
 GHOST_FORM
 LEFT 5 4 ghostformleft.png ghostformleft.png ghostformleft.png ghostformleft.png ghostformleft.png ghostformleft.png
 RIGHT 5 4 ghostformright.png ghostformright.png ghostformright.png ghostformright.png ghostformright.png ghostformright.png
+DETH
+IDLE 4 5 deth1.png deth2.png deth3.png deth4.png deth5.png

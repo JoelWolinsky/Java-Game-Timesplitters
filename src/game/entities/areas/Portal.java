@@ -57,12 +57,9 @@ public class Portal extends AnimArea{
 	}
 
 	public boolean getInteractionEffect(Player player){
-		return ((int)this.x<(int)player.getX()+player.getWidth() && (int)player.getX()<this.x+this.width && (int)this.y-200<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)this.y+this.height);
+		return ((int)this.x<(int)player.getX()+player.getWidth() && (int)player.getX()<this.x+this.width && (int)this.y-550<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)this.y+this.height);
 	}
 
-	public boolean getInteractionEffect(AIPlayer player){
-		return ((int)this.x<(int)player.getX()+player.getWidth() && (int)player.getX()<this.x+this.width && (int)this.y-200<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)this.y+this.height);
-	}
 
 	public int getDestinationLevel() {
 		return destinationLevel;

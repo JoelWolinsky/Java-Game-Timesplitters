@@ -3,6 +3,7 @@ package game.entities.areas;
 import game.entities.GameObject;
 import game.entities.players.AIPlayer;
 import game.entities.players.Player;
+import game.graphics.Animation;
 import game.graphics.AnimationStates;
 import game.graphics.LevelState;
 
@@ -11,15 +12,25 @@ import static game.Level.getLevelState;
 import static game.graphics.Assets.getAnimations;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class WallOfDeath extends GameObject {
 
     private LinkedList<Area> areas = new LinkedList<>();
+    protected int animationTimer = 0;
+    protected int frame;
+    protected AnimationStates currentAnimState;
+    protected Animation currentAnimation;
+    protected HashMap<AnimationStates, Animation> animations;
 
     public WallOfDeath() {
-        super(-4000, -1000, 2, 2000, 5500);
+        super(-2000, -300, 3,1113, 819);
         // super(-3000, -1000, 100, 2000, 5500);
+
+        this.animations = getAnimations("DETH");
+        this.currentAnimState = AnimationStates.IDLE;
+
 	}
 
     public void tick() {
@@ -40,7 +51,9 @@ public class WallOfDeath extends GameObject {
 		}
 
         if (getLevelState()== LevelState.InProgress){
-            this.width += 1;
+            moving=true;
+            this.x += 1;
+            //this.width++;
         }
 
 	}
@@ -48,23 +61,44 @@ public class WallOfDeath extends GameObject {
     @Override
     public void render(Graphics g, float f, float h) {
 
-        g.setColor(Color.magenta);
-        g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
+       // g.setColor(Color.magenta);
+       /// g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
         // g.drawImage(img,(int)(this.x + f),(int)(this.y + h),null);
-        
-        // super.render(g, f, h);
+       //super.render(g, f, h);
+        this.renderAnim(g, (int) (this.x + f), (int) (this.y + h));
     }
 
 
 	public boolean getInteraction(GameObject player){
-		return ((int)this.x < (int)player.getX()+player.getWidth() && 
-				(int)player.getX() < this.x+this.width && 
+		return ((int)this.x < (int)player.getX()+player.getWidth() &&
+				(int)player.getX() < this.x+this.width - 110 &&
 				(int)this.y < (int)player.getY()+player.getHeight() && 
 				(int)player.getY() < (int)this.y+this.height);
 	}
 
     public LinkedList<Area> getEventArea(){return this.areas;}
 
+
+    public void renderAnim(Graphics g, int x, int y) {
+
+        if (currentAnimState != null) {
+            currentAnimation = animations.get(currentAnimState);
+
+            frame = (animationTimer / currentAnimation.getTicksPerFrame());
+
+            g.drawImage(currentAnimation.getFrame(frame), x, y, null);
+
+            animationTimer++;
+
+            if (animationTimer >= currentAnimation.getTicksPerFrame() * currentAnimation.getNumberOfFrames()) {
+                animationTimer = 0;
+            }
+        }
+    }
+
+    public void setCurrentAnimState(AnimationStates currentAnimState) {
+        this.currentAnimState = currentAnimState;
+    }
 
 }
     

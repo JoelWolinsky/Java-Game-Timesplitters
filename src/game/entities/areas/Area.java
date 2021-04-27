@@ -1,11 +1,13 @@
 package game.entities.areas;
 import game.entities.GameObject;
+import game.entities.players.Player;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Area extends GameObject {
 	private BufferedImage img;
-	private boolean visible = true;
+	private final boolean visible = true;
 
 	public Area(float x, float y, int width, int height, BufferedImage bi) {
 		super(x, y, 0, width, height);
@@ -34,7 +36,11 @@ public class Area extends GameObject {
 	}
 
 	public boolean getInteraction(GameObject player){
-		return ((int)this.x < (int)player.getX()+player.getWidth() && 
+		if (player instanceof Player)
+			if (((Player) player).isGhostMode())
+				return false;
+
+		return ((int)this.x < (int)player.getX()+player.getWidth() &&
 				(int)player.getX() < this.x+this.width && 
 				(int)this.y < (int)player.getY()+player.getHeight() && 
 				(int)player.getY() < (int)this.y+this.height);

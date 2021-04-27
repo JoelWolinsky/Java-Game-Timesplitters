@@ -53,7 +53,7 @@ public class ProgressBarController extends GameObject {
 		{
 			if (p.isGhostMode())
 				for (Blip blip: getBlips())
-					if (blip.getPlayer()==p)
+					if (blip.getTarget()==p)
 					{
 						try {
 							blip.setImg(ImageIO.read(new File("./img/gravestone.png")));
@@ -78,6 +78,9 @@ public class ProgressBarController extends GameObject {
 					listOfAddedBlips.add(p);
 				}
 			}
+
+			Blip bp = new Blip(this.x+getWallOfDeath().getX()/2, this.y + 10, 20, 20, getWallOfDeath(), totalNrBlocks, "./img/dethHead.png");
+			addToAddQueue(bp);
 		}
 
 	}

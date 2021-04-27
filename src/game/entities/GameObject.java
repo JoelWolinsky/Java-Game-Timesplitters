@@ -14,8 +14,7 @@ public abstract class GameObject {
 	
 	protected float x,y;
 	protected int z,width,height;
-
-	//animations related
+	protected boolean moving;
 	
 	/**
 	 * GameObject constructor.<br>
@@ -84,5 +83,8 @@ public abstract class GameObject {
 		this.z = z;
 	}
 
+	public boolean isMoving() {
+		return moving;
+	}
 
 }

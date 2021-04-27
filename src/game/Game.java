@@ -164,9 +164,9 @@ public class Game extends Canvas implements Runnable{
 		switch (gameMode)
 		{
 			case MULTIPLAYER:
-				player = new PlayerMP(0, 340, keyInput, null, -1,"player1");
+				player = new PlayerMP(0, 350, keyInput, null, -1,"player1");
 
-				Packet00Login loginPacket = new Packet00Login(player.getUsername(), 1000, 340);
+				Packet00Login loginPacket = new Packet00Login(player.getUsername(), 1000, 350);
 				if (socketServer != null) {
 					socketServer.addConnection((PlayerMP) player, loginPacket);
 				}
@@ -174,12 +174,12 @@ public class Game extends Canvas implements Runnable{
 				break;
 			case vsAI:
 				player = new Player(0, 340, keyInput, 0 ,0,"player1");
-				m.getCurrentLevel().addToAddQueue(new AIPlayer(30, 340, 0 ,0, player,"player2"));
-				m.getCurrentLevel().addToAddQueue(new AIPlayer(60, 340, 0 ,0, player,"player3"));
-				m.getCurrentLevel().addToAddQueue(new AIPlayer(90, 340, 0 ,0, player,"player4"));
+				m.getCurrentLevel().addToAddQueue(new AIPlayer(30, 350, 0 ,0, player,"player2"));
+				m.getCurrentLevel().addToAddQueue(new AIPlayer(60, 350, 0 ,0, player,"player3"));
+				m.getCurrentLevel().addToAddQueue(new AIPlayer(90, 350, 0 ,0, player,"player4"));
 				break;
 			case SINGLEPLAYER:
-				player = new Player(0, 340, keyInput, 0 ,0,"player1");
+				player = new Player(0, 350, keyInput, 0 ,0,"player1");
 				break;
 		}
 
