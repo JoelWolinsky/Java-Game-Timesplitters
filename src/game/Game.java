@@ -166,9 +166,10 @@ public class Game extends Canvas implements Runnable{
 			case MULTIPLAYER:
 				player = new PlayerMP(0, 350, keyInput, null, -1,"player1");
 
-				Packet00Login loginPacket = new Packet00Login(player.getUsername(), 1000, 350);
+				Packet00Login loginPacket = new Packet00Login(player.getUsername(), 200, 340);
 				if (socketServer != null) {
-					socketServer.addConnection((PlayerMP) player, loginPacket);
+					//socketServer.addConnection((PlayerMP) player, loginPacket);
+					loginPacket.writeData(socketServer);
 				}
 				loginPacket.writeData(socketClient);
 				break;

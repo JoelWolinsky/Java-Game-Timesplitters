@@ -9,6 +9,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 
 import game.Game;
+import game.Level;
 import game.entities.players.PlayerMP;
 import game.network.packets.Packet;
 import game.network.packets.Packet.PacketTypes;
@@ -66,7 +67,7 @@ public class GameClient extends Thread {
 			case INVALID:
 				break;
 			case LOGIN:
-	
+				System.out.println("Client handle login");
 				packet = new Packet00Login(data);
 				handleLogin((Packet00Login) packet, address, port);
 				break;
@@ -103,15 +104,18 @@ public class GameClient extends Thread {
 	 * Handles the move packet if the user moves.
 	 */
 	private void handleMove(Packet02Move packet) {
-		//System.out.println(this.game.player.getUsername() +" Client handle move " + packet.getUsername());
-		//if (this.game.player.getUsername() != packet.getUsername()) {
+		if (Game.player.getUsername().equals(packet.getUsername())) {
+			// 
+		} else {
+			System.out.println(Game.player.getUsername() +" Client handle move " + packet.getUsername());
+
 			try {
 				this.game.m.currentLevel.movePlayer(packet.getUsername(), packet.getX(), packet.getY());
 			} catch (Exception e) {
 				System.out.println("Exception in handleMove. Packet " + packet);
 				e.printStackTrace();
 			}
-		//}
+		}
 		
 	}
 
@@ -120,8 +124,8 @@ public class GameClient extends Thread {
 	 */
 	private void handleLogin(Packet00Login packet, InetAddress address, int port) {
 		System.out.println("[" + address.getHostAddress() + ":" + port + "] " + (packet).getUsername() + " has joined the game...");
-		PlayerMP player = new PlayerMP (packet.getX(), packet.getY(), address, port,"player");
-		game.m.currentLevel.addEntity(player);
+		PlayerMP player = new PlayerMP (packet.getX(), packet.getY(), address, port,"player2");
+		Level.addToAddQueue(player);
 	}
 	
 

@@ -20,7 +20,7 @@ public class Level extends Canvas {
 	private static LevelState levelState = LevelState.Waiting;
 
 	private static LinkedList<GameObject> entities = new LinkedList<>();
-	private static ArrayList<GameObject> toBeAdded = new ArrayList<>();
+	public static ArrayList<GameObject> toBeAdded = new ArrayList<>();
 	private static ArrayList<GameObject> toBeRemoved = new ArrayList<>();
 
 	public static synchronized LinkedList<GameObject> getGameObjects(){
@@ -81,7 +81,6 @@ public class Level extends Canvas {
 			if (o instanceof Player)
 				players.add((Player)o);
 		}
-
 		return players;
 	}
 
@@ -142,8 +141,13 @@ public class Level extends Canvas {
 		try {
 
 			if (getSpecificPlayerMP(username)!=null) {
+				System.out.println(x+","+y);
+				System.out.println("level moving player "+username);
+				System.out.println(getSpecificPlayerMP(username));
 				getSpecificPlayerMP(username).setX(x);
 				getSpecificPlayerMP(username).setY(y);
+				
+				
 			}
 
 		} catch (Exception e) {
