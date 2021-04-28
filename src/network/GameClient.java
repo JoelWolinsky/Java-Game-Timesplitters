@@ -1,5 +1,7 @@
 package network;
 
+import static game.Level.setLevelState;
+
 import java.io.IOException;
 
 import java.net.DatagramPacket;
@@ -11,12 +13,14 @@ import java.net.UnknownHostException;
 import game.Game;
 import game.Level;
 import game.entities.players.PlayerMP;
+import game.graphics.LevelState;
 import game.network.packets.Packet;
 import game.network.packets.Packet.PacketTypes;
 import game.network.packets.Packet00Login;
 import game.network.packets.Packet01Disconnect;
 import game.network.packets.Packet02Move;
 import game.network.packets.Packet03MoveWall;
+import game.network.packets.Packet04StartGame;
 
 public class GameClient extends Thread {
 	private InetAddress ipAddress;
@@ -86,6 +90,10 @@ public class GameClient extends Thread {
 				//System.out.println("receive wall packet");
 				packet = new Packet03MoveWall(data);
 				handleMove((Packet03MoveWall)packet);
+				break;
+			case STARTGAME:
+				packet = new Packet04StartGame(data);
+				handleStartGame((Packet04StartGame)packet);
 			}	
 		} catch (Exception e) {
 			System.out.println("Exception in parsePacket on client. Data " + data + "\nAddress " + address + "\nPort " + port);
@@ -93,6 +101,12 @@ public class GameClient extends Thread {
 		}
 	}
 	
+	private void handleStartGame(Packet04StartGame packet) {
+		System.out.println("handleStartGame");
+		setLevelState(LevelState.InProgress);
+		
+	}
+
 	/* 
 	 * Sends data to the server.
 	 */

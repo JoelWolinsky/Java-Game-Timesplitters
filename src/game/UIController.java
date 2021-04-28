@@ -3,6 +3,7 @@ package game;
 import game.display.Window;
 import game.entities.GameObject;
 import game.graphics.LevelState;
+import game.network.packets.Packet04StartGame;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -50,7 +51,9 @@ public class UIController extends GameObject {
 			announcer.centerHorizontally();
 			announcer.centerVertically();
 		}
-
+		if (getLevelState()==LevelState.InProgress) {
+			announcerMessage.setVisible(false);
+		}
 		//START OF THE GAME COUNTDOWN SLIDESHOW
 		if (getLevelState()==LevelState.Starting) {
 			startCountdown = true;
@@ -95,18 +98,27 @@ public class UIController extends GameObject {
 				timer++;
 
 			else {
-
-				try {
-					announcer.setImg(ImageIO.read(new File("./img/".concat(countdownUrls.get(index)))));
+				if(index< countdownUrls.size()) {
+					try {
+						announcer.setImg(ImageIO.read(new File("./img/".concat(countdownUrls.get(index)))));
+					}
+					catch (IOException exc) {
+						//TODO: Handle exception.
+					}
 				}
-				catch (IOException exc) {
-					//TODO: Handle exception.
-				}
-
 				index++;
 				if (index == countdownUrls.size()-1) {
-					setLevelState(LevelState.InProgress);
-					announcerMessage.setVisible(false);
+					if(Game.socketServer != null) {
+						//setLevelState(LevelState.InProgress);
+						Packet04StartGame packet = new Packet04StartGame(null);
+		                packet.writeData(Game.socketClient);
+
+						announcerMessage.setVisible(false);
+
+					} else {
+						announcerMessage.setVisible(false);
+
+					}
 				}
 
 				if (index == countdownUrls.size()) {

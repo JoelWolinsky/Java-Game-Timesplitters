@@ -15,6 +15,7 @@ import game.network.packets.Packet00Login;
 import game.network.packets.Packet01Disconnect;
 import game.network.packets.Packet02Move;
 import game.network.packets.Packet03MoveWall;
+import game.network.packets.Packet04StartGame;
 
 public class GameServer extends Thread {
 	private DatagramSocket socket;
@@ -95,6 +96,10 @@ public class GameServer extends Thread {
 
 				packet = new Packet03MoveWall(data);
 				this.handleMoveWall((Packet03MoveWall)packet);
+				break;
+			case STARTGAME:
+				packet = new Packet04StartGame(data);
+				this.handleStartGame((Packet04StartGame)packet);
 			}
 		}catch (Exception e) {
 				System.out.println("Exception at GameServer.parsePacket");
@@ -105,6 +110,15 @@ public class GameServer extends Thread {
 	
 
 	
+	private void handleStartGame(Packet04StartGame packet) {
+		try {
+			packet.writeData(this);
+		} catch (Exception e) {
+			System.out.println("Exception in GameServer.handleStartGame");
+			e.printStackTrace();
+		}		
+	}
+
 	/** 
 	 * Adds new players to the game.
 	 */
