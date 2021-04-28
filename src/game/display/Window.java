@@ -23,9 +23,12 @@ import game.Game;
 import game.GameState;
 import game.Launcher;
 import game.SoundHandler;
+import game.entities.GameObject;
 import game.graphics.GameMode;
 import network.GameClient;
 import network.GameServer;
+
+import static game.Level.getGameObjects;
 
 public class Window extends Canvas{
 	
@@ -195,6 +198,8 @@ public class Window extends Canvas{
 				}
 				
 				game.setGameState(GameState.Playing);
+				System.out.println("bruh");
+
 				game.start();
 			}
 			
@@ -657,7 +662,7 @@ public class Window extends Canvas{
 		    	multiplayerButtonPanel.setVisible(false);
 		    	backOptions.setVisible(false);
 				backMultiplayer.setVisible(false);
-		    	
+
 		    	game.setGameState(GameState.Playing);
 				game.setGameMode(GameMode.MULTIPLAYER);
 		    	

@@ -5,6 +5,7 @@ import java.util.*;
 
 import game.Effect;
 import game.Game;
+import game.GameState;
 import game.Item;
 import game.SoundHandler;
 import game.attributes.CollidingObject;
@@ -25,6 +26,10 @@ import game.network.packets.Packet02Move;
 import static game.Level.getLevelState;
 import static game.graphics.Assets.getAnimations;
 import static game.Level.getToBeAdded;
+
+import static game.Level.*;
+import static game.Game.*;
+import static game.display.Window.*;
 
 public class Player extends GameObject implements SolidCollider, GravityObject {
 
@@ -384,6 +389,26 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                 RUN_SPEED = 7.6f;
                 JUMP_GRAVITY = -12.0f;
             }
+        }
+
+        if(getLevelState()==LevelState.Finished)
+        if (KeyInput.esc.isPressed()) {
+
+            mainMenu.setVisible(true);
+            back.setVisible(true);
+            backOptions.setVisible(true);
+            backMultiplayer.setVisible(true);
+
+            setGameState(GameState.MainMenu);
+
+            getGameObjects().removeAll(getGameObjects());
+
+
+            System.out.println("after delete: " +getGameObjects().size() );
+
+            for (GameObject g : getGameObjects())
+                System.out.println("anything here? : " + g);
+
         }
 
         if (!(this instanceof AIPlayer)){

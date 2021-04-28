@@ -37,6 +37,10 @@ public class ProgressBarController extends GameObject {
 
 		this.width = width;
 
+		Blip bp = new Blip(this.x+getWallOfDeath().getX()/2, this.y + 10, 20, 20, getWallOfDeath(), totalNrBlocks, "./img/dethHead.png");
+		myBlips.add(bp);
+		addToAddQueue(bp);
+
 	}
 
 	public void tick() {
@@ -78,10 +82,6 @@ public class ProgressBarController extends GameObject {
 					listOfAddedBlips.add(p);
 				}
 			}
-
-			Blip bp = new Blip(this.x+getWallOfDeath().getX()/2, this.y + 10, 20, 20, getWallOfDeath(), totalNrBlocks, "./img/dethHead.png");
-			myBlips.add(bp);
-			addToAddQueue(bp);
 		}
 
 	}

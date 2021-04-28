@@ -18,8 +18,7 @@ import network.GameClient;
 import network.GameServer;
 import game.entities.players.PlayerMP;
 
-import static game.Level.getFinish;
-import static game.Level.getLevelState;
+import static game.Level.*;
 
 public class Game extends Canvas implements Runnable{
 
@@ -51,6 +50,8 @@ public class Game extends Canvas implements Runnable{
 	 * Called every frame, this tells certain lists, objects, or entities to call their own tick function.
 	 */
 	private void tick() {
+
+		//System.out.println(running);
 
 		if(this.gameState == GameState.Playing) {
 			m.getCurrentLevel().tick();
@@ -167,8 +168,11 @@ public class Game extends Canvas implements Runnable{
 	 */
 	public synchronized void start() {
 
+		System.out.println("1st size: " + getGameObjects().size());
+		System.out.println("yo");
 		m = new Map(MapMode.RNG, gameMode);
 
+		System.out.println("yo2");
 		switch (gameMode)
 		{
 			case MULTIPLAYER:
@@ -191,13 +195,13 @@ public class Game extends Canvas implements Runnable{
 				player = new Player(0, 350, keyInput, 0 ,0,"player1");
 				break;
 		}
+		System.out.println("yo3");
 
 		m.getCurrentLevel().addToAddQueue(player);
 		System.out.println(gameMode);
 
 		game = this;
 		camera.addTarget(player);
-
 
 		//GameProgress UI
 		m.currentLevel.addEntity(new ProgressBarController(Game.camera.getXOffset(), Game.camera.getYOffset()+10, 0,0,m.currentLevel,m.mps));
@@ -206,12 +210,14 @@ public class Game extends Canvas implements Runnable{
 		//Main UI Announcer eg. Countdown, End Game Celebration etc.
 		m.currentLevel.addEntity(new UIController(Game.camera.getXOffset(), Game.camera.getYOffset()+10,0,0));
 
+		System.out.println("2nd size: " + getGameObjects().size());
 		//Sorts all of the entities based on their z index
 		Collections.sort(m.getCurrentLevel().getGameObjects(), Comparator.comparingInt(GameObject::getZ));
 
 		//windowHandler = new WindowHandler(this);
 		this.addKeyListener(keyInput);
 
+		System.out.println("thread");
 		//The server is started in this function
 		thread = new Thread(this);
 		thread.start();

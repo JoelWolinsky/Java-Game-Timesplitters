@@ -36,7 +36,9 @@ public class Level extends Canvas {
 
 	public void tick() {
 
-		//System.out.println(levelState);
+		System.out.println(getGameObjects().size());
+		for (GameObject o : toBeAdded)
+			System.out.println(o);
 
 		if (levelState==LevelState.Waiting)
 			checkAllPlayersConnected();
