@@ -48,6 +48,9 @@ public class KeyInput extends KeyAdapter{
         if (keyCode == KeyEvent.VK_PERIOD) {
             period.setPressed(isPressed);
         }
+        if (keyCode == KeyEvent.VK_ESCAPE) {
+        	System.exit(0);
+        }
 
     }
     
