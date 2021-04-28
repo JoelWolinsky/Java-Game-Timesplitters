@@ -117,7 +117,7 @@ public class SoundHandler {
 		
 		int rnd = new Random().nextInt(deathSoundArray.length);
 		
-		playSound(deathSoundArray[rnd], 1f);
+		playSound(deathSoundArray[rnd], 0.4f);
 	}
 	
 	public static void stopMusic() {

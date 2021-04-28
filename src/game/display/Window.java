@@ -52,7 +52,7 @@ public class Window extends Canvas{
 		frame.setResizable(false);
 		c.setBackground(Color.BLACK);
 		
-		SoundHandler.playMusic("mainMenuMusic", 0.3f);
+		SoundHandler.playMusic("mainMenuMusic", 0.1f);
 		
 		// Creating a new Font from the PressStart2P.ttf file that can be used in HTML JLabels
 		Font buttonFont = null;
@@ -191,7 +191,7 @@ public class Window extends Canvas{
 				backMultiplayer.setVisible(false);
 				
 				if (Launcher.cHandler.ambienceToggle == true) {
-					SoundHandler.playSound("ambience", 0.5f);
+					SoundHandler.playSound("ambience", 0.3f);
 				}
 				
 				game.setGameState(GameState.Playing);
@@ -564,6 +564,10 @@ public class Window extends Canvas{
 		    	multiplayerButtonPanel.setVisible(false);
 		    	backOptions.setVisible(false);
 				backMultiplayer.setVisible(false);
+				
+				if (Launcher.cHandler.ambienceToggle == true) {
+					SoundHandler.playSound("ambience", 0.3f);
+				}
 
 				game.setGameState(GameState.Playing);
 				game.setGameMode(GameMode.vsAI);

@@ -32,7 +32,7 @@ public class RespawnPoint extends Area {
 					p.getRespawnPoints().add(this);
 					
 					if (! (p instanceof AIPlayer))
-						SoundHandler.playSound("waypoint", 0.5f);
+						SoundHandler.playSound("waypoint", 0.2f);
 						this.reached=true;
 				}
 			}

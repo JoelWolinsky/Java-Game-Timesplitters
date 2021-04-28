@@ -354,7 +354,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             canMove = false;
             i = 0;
             currentAnimState = AnimationStates.IDLE;
-            SoundHandler.playSound("falling", 0.5f);
+            SoundHandler.playSound("falling", 0.3f);
         }
 
         // press r to respawn -- used for debugging
@@ -488,7 +488,11 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             canMove = false;
             i = 0;
             currentAnimState = AnimationStates.IDLE;
-            SoundHandler.playRandomDeath();
+            
+            if (!ghostMode && !(this instanceof AIPlayer)) {
+            	SoundHandler.playRandomDeath();
+            }
+            
         }
     }
 
