@@ -5,6 +5,9 @@ import game.entities.players.Player;
 import static game.Level.getPlayers;
 import static game.Utility.getRandomIntInRangeSeeded;
 
+import game.DifficultySettings;
+import game.Launcher;
+
 public class Projectile extends DamageZone {
 	private float baseposX,baseposY;
 	private float velX,velY;
@@ -23,7 +26,26 @@ public class Projectile extends DamageZone {
 		this.baseposY=y;
 		this.distance = distance;
 		this.velX = velocityX;
-		this.velY =velocityY;
+		
+		
+		switch(url) {
+		case "rocks":
+			this.velY = Launcher.difficultySettings.getRocksSpeed();
+			break;
+			
+		case "stones":
+			this.velY = Launcher.difficultySettings.getStonesSpeed();
+			break;
+		
+		case "arrow":
+			this.velY = Launcher.difficultySettings.getArrowSpeed();
+			break;
+			
+		default:
+			this.velY = velocityY;
+		}
+		
+		System.out.println(url +"," + velX + "," + velY);
 	}
 
 	public void tick() {

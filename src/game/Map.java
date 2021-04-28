@@ -37,17 +37,20 @@ public class Map {
     private int newIndex=0;
     public ArrayList<MapPart> mps = new ArrayList<>();
     BackgroundController ctrlr;
-
+    
+    
     public Level currentLevel;
     int defaultSeed = 0;
 
     ArrayList<String> segments3,segments1,segments2,segments4,wizard,introDimension,castleEntrance,throneRoom, segments5;
 
     public Map (MapMode mapMode, GameMode gameMode){
-
+    	
+    	
+    	
         currentLevel = new Level();
 
-        currentLevel.addEntity(new WallOfDeath());
+        currentLevel.addEntity(new WallOfDeath(Launcher.difficultySettings.getDeathWallSpeed()));
 
         switch (mapMode)
         {
@@ -177,9 +180,9 @@ public class Map {
      * @param splitted     The splitted command into specific elements the interpreter can understand
      */
     public void interpret(Level currentLevel, String[] splitted) {
+    	System.out.println(splitted[0]);
 
         switch (splitted[0]) {
-
             case "Theme":
                 if (!splitted[1].equals(currentTheme)) {
                     setX = Integer.parseInt(splitted[2]);

@@ -23,14 +23,15 @@ public class WallOfDeath extends GameObject {
     protected AnimationStates currentAnimState;
     protected Animation currentAnimation;
     protected HashMap<AnimationStates, Animation> animations;
-
-    public WallOfDeath() {
+    private float speed;
+    
+    public WallOfDeath(float speed) {
         super(-2000, -300, 3,1113, 819);
         // super(-3000, -1000, 100, 2000, 5500);
 
         this.animations = getAnimations("DETH");
         this.currentAnimState = AnimationStates.IDLE;
-
+        this.speed = speed;
 	}
 
     public void tick() {
@@ -52,7 +53,7 @@ public class WallOfDeath extends GameObject {
 
         if (getLevelState()== LevelState.InProgress){
             moving=true;
-            this.x += 1;
+            this.x += speed;
             //this.width++;
         }
 
