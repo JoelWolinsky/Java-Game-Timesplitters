@@ -1,5 +1,6 @@
 package game.display;
 import java.awt.Canvas;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -11,7 +12,15 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.BindException;
+import java.net.DatagramSocket;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -26,6 +35,7 @@ import game.SoundHandler;
 import game.graphics.GameMode;
 import network.GameClient;
 import network.GameServer;
+
 
 public class Window extends Canvas{
 	
@@ -546,21 +556,39 @@ public class Window extends Canvas{
 			public void mouseReleased(MouseEvent e) {
 				createGameButton.setIcon(button3HoverInner);
 				
-				Game.socketServer = new GameServer(game);
-				Game.socketServer.start();
-				Game.socketClient = new GameClient(game, "localhost");
-				Game.socketClient.start();
-				
-				back.setVisible(false);
-		    	backButtonPanel.setVisible(false);
-		    	multiplayerButtonPanel.setVisible(false);
-		    	backOptions.setVisible(false);
-				backMultiplayer.setVisible(false);
-		    	
-		    	game.setGameState(GameState.Playing);
-		    	game.setGameMode(GameMode.MULTIPLAYER);
-		    	game.start();
-			}
+				Boolean isAlive = false;
+				try {
+					DatagramSocket socket;
+					socket = new DatagramSocket(1331);
+					socket.close();
+					System.out.println("not already running");
+
+				} catch (SocketException e1) {
+					isAlive = true;
+				}
+					
+					
+				if(isAlive == false) {
+					Game.socketServer = new GameServer(game);
+					
+					Game.socketServer.start();
+					Game.socketClient = new GameClient(game, "localhost");
+					Game.socketClient.start();
+					
+					back.setVisible(false);
+			    	backButtonPanel.setVisible(false);
+			    	multiplayerButtonPanel.setVisible(false);
+			    	backOptions.setVisible(false);
+					backMultiplayer.setVisible(false);
+			    	
+			    	game.setGameState(GameState.Playing);
+			    	game.setGameMode(GameMode.MULTIPLAYER);
+			    	game.start();
+			    		
+				} else {
+					System.out.println("Server already running");
+				}
+		}
 				  
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -661,5 +689,30 @@ public class Window extends Canvas{
 
 	public static void setBackMultiplayer(boolean visible) {
 		Window.backMultiplayer.setVisible(visible);
+	}
+	
+	public static boolean isSocketAliveUitlitybyCrunchify(String hostName, int port) {
+		boolean isAlive = false;
+ 
+		// Creates a socket address from a hostname and a port number
+		SocketAddress socketAddress = new InetSocketAddress(hostName, port);
+		Socket socket = new Socket();
+ 
+		// Timeout required - it's in milliseconds
+		int timeout = 2000;
+ 
+		//og("hostName: " + hostName + ", port: " + port);
+		try {
+			socket.connect(socketAddress, timeout);
+			socket.close();
+			isAlive = true;
+ 
+		} catch (SocketTimeoutException exception) {
+			System.out.println("SocketTimeoutException " + hostName + ":" + port + ". " + exception.getMessage());
+		} catch (IOException exception) {
+			System.out.println(
+					"IOException - Unable to connect to " + hostName + ":" + port + ". " + exception.getMessage());
+		}
+		return isAlive;
 	}
 }
