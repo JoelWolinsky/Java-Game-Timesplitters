@@ -15,7 +15,6 @@ public class Packet02Move extends Packet {
 	public Packet02Move(byte[] data) {
 		super(02);
 		String[] dataArray = readData(data).split(",");
-//		System.out.println(Arrays.toString(dataArray));
 		this.username = dataArray[0];
 		this.x = Float.parseFloat(dataArray[1]);
 		this.y = Float.parseFloat(dataArray[2]);
@@ -31,6 +30,7 @@ public class Packet02Move extends Packet {
 		this.direction = currentDirection;
 		
 	}
+	
 
 	@Override
 	public void writeData(GameClient client) {

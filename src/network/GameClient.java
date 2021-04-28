@@ -16,6 +16,7 @@ import game.network.packets.Packet.PacketTypes;
 import game.network.packets.Packet00Login;
 import game.network.packets.Packet01Disconnect;
 import game.network.packets.Packet02Move;
+import game.network.packets.Packet03MoveWall;
 
 public class GameClient extends Thread {
 	private InetAddress ipAddress;
@@ -80,6 +81,11 @@ public class GameClient extends Thread {
 				//System.out.println("client handle move");
 				packet = new Packet02Move(data);
 				handleMove((Packet02Move)packet);
+				break;
+			case MOVEWALL:
+				//System.out.println("receive wall packet");
+				packet = new Packet03MoveWall(data);
+				handleMove((Packet03MoveWall)packet);
 			}	
 		} catch (Exception e) {
 			System.out.println("Exception in parsePacket on client. Data " + data + "\nAddress " + address + "\nPort " + port);
@@ -115,6 +121,20 @@ public class GameClient extends Thread {
 				System.out.println("Exception in handleMove. Packet " + packet);
 				e.printStackTrace();
 			}
+		}
+		
+	}
+	
+	private void handleMove(Packet03MoveWall packet) {
+		if (Game.socketServer == null) {
+			try {
+				this.game.m.currentLevel.moveWall(packet.getX());
+			} catch (Exception e) {
+				System.out.println("Exception in handleMove. Packet " + packet);
+				e.printStackTrace();
+			}
+		} else {
+			//System.out.println("Server != null");
 		}
 		
 	}

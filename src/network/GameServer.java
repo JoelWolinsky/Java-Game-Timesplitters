@@ -14,6 +14,7 @@ import game.network.packets.Packet.PacketTypes;
 import game.network.packets.Packet00Login;
 import game.network.packets.Packet01Disconnect;
 import game.network.packets.Packet02Move;
+import game.network.packets.Packet03MoveWall;
 
 public class GameServer extends Thread {
 	private DatagramSocket socket;
@@ -88,6 +89,12 @@ public class GameServer extends Thread {
 				packet = new Packet02Move(data);
 				//System.out.println(((Packet02Move)packet).getUsername() + " has moved to " + ((Packet02Move)packet).getX() + ", " + ((Packet02Move)packet).getY());
 				this.handleMove((Packet02Move)packet);
+				break;
+			case MOVEWALL:
+				//System.out.println("send wall packet");
+
+				packet = new Packet03MoveWall(data);
+				this.handleMoveWall((Packet03MoveWall)packet);
 			}
 		}catch (Exception e) {
 				System.out.println("Exception at GameServer.parsePacket");
@@ -240,6 +247,18 @@ public class GameServer extends Thread {
 				}
 				this.connectedPlayers.get(index).setX(packet.getX());
 				this.connectedPlayers.get(index).setY(packet.getY());
+				packet.writeData(this);
+//			} else {
+//				System.out.println("packet name  null");
+//			}
+		} catch (Exception e) {
+			System.out.println("Exception in GameServer.handleMove");
+			e.printStackTrace();
+		}
+	}
+	
+	private void handleMoveWall(Packet03MoveWall packet) {
+		try {
 				packet.writeData(this);
 //			} else {
 //				System.out.println("packet name  null");

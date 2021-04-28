@@ -31,7 +31,7 @@ public class Game extends Canvas implements Runnable{
 	public static GameState gameState = GameState.MainMenu;
 
 	public static GameClient socketClient;
-	public static GameServer socketServer;
+	public static GameServer socketServer = null;
 
 	public float a=0,b=0,c=0,d=0;
 	public static Game game;

@@ -1,11 +1,14 @@
 package game.entities.areas;
 
+import game.Game;
 import game.entities.GameObject;
 import game.entities.players.AIPlayer;
 import game.entities.players.Player;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
 import game.graphics.LevelState;
+import game.network.packets.Packet02Move;
+import game.network.packets.Packet03MoveWall;
 
 import static game.Level.getPlayers;
 import static game.Level.getLevelState;
@@ -51,9 +54,15 @@ public class WallOfDeath extends GameObject {
 		}
 
         if (getLevelState()== LevelState.InProgress){
-            moving=true;
-            this.x += 1;
-            //this.width++;
+        	//System.out.println(Game.socketServer);
+        	if(Game.socketServer != null) {
+	            moving=true;
+	            this.x += 1;
+	            //this.width++;
+	            
+	            Packet03MoveWall packet = new Packet03MoveWall(this.x);
+                packet.writeData(Game.socketClient);
+        	}
         }
 
 	}
@@ -98,6 +107,10 @@ public class WallOfDeath extends GameObject {
 
     public void setCurrentAnimState(AnimationStates currentAnimState) {
         this.currentAnimState = currentAnimState;
+    }
+    
+    public void setMoving() {
+    	this.moving = true;
     }
 
 }
