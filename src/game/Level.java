@@ -53,7 +53,7 @@ public class Level extends Canvas {
 			toBeRemoved.removeAll(toBeRemoved);
 		}
 
-		if (levelState!=LevelState.Loading && toBeAdded.isEmpty())
+		if (levelState!=LevelState.Loading)
 		for(GameObject o : entities) { o.tick(); }
 
 		if (levelState==LevelState.Waiting)
