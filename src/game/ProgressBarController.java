@@ -31,12 +31,11 @@ public class ProgressBarController extends GameObject {
 		for (MapPart st : mps) {
 			UIElement uiElement = new UIElement(this.x + offset, this.y + 10, (int)((((float)((st.getNrBlocks()*426)*100)/(totalNrBlocks*426))/100)*600), 57, st.getUrl());
 			myParts.add(uiElement);
-			currentLevel.addEntity(uiElement);
+			currentLevel.addToAddQueue(uiElement);
 			offset = offset + (int)((((float)((st.getNrBlocks()*426)*100)/(totalNrBlocks*426))/100)*600);
 		}
 
 		this.width = width;
-
 		Blip bp = new Blip(this.x+getWallOfDeath().getX()/2, this.y + 10, 20, 20, getWallOfDeath(), totalNrBlocks, "./img/dethHead.png");
 		myBlips.add(bp);
 		addToAddQueue(bp);

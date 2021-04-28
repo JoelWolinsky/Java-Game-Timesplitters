@@ -9,6 +9,7 @@ import game.entities.platforms.Platform;
 import game.entities.platforms.TimerPlatform;
 import game.graphics.GameMode;
 import game.graphics.Image;
+import game.graphics.LevelState;
 import game.graphics.MapMode;
 
 import javax.imageio.IIOException;
@@ -18,6 +19,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+
+import static game.Level.getLevelState;
 
 public class Map {
 
@@ -133,7 +136,6 @@ public class Map {
                 break;
 
         }
-
 
 
     }
@@ -454,7 +456,7 @@ public class Map {
                 ((EventScriptedDamageZone) o).addArea(area);
             else if (o instanceof EventDamageZone)
                 ((EventDamageZone) o).addArea(area);
-            currentLevel.addEntity(area);
+            currentLevel.addToAddQueue(area);
         }
 
         return index + 1 + (4 * Integer.parseInt(splited[index]));
@@ -467,7 +469,7 @@ public class Map {
         Area area;
         for (int l = index + 1; l < index + 1 + (4 * Integer.parseInt(splited[index])); l += 4) {
             area = new Area(horizontalIndex - setX + Integer.parseInt(splited[1]) + Integer.parseInt(splited[l]), verticalIndex + Integer.parseInt(splited[2]) + Integer.parseInt(splited[l + 1]), Integer.parseInt(splited[l + 2]), Integer.parseInt(splited[l + 3]));
-            currentLevel.addEntity(area);
+            currentLevel.addToAddQueue(area);
             areasOfEffect.add(area);
         }
 

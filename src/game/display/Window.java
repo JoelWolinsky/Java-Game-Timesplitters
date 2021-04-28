@@ -198,7 +198,6 @@ public class Window extends Canvas{
 				}
 				
 				game.setGameState(GameState.Playing);
-				System.out.println("bruh");
 
 				game.start();
 			}

@@ -403,11 +403,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
             getGameObjects().removeAll(getGameObjects());
 
-
-            System.out.println("after delete: " +getGameObjects().size() );
-
-            for (GameObject g : getGameObjects())
-                System.out.println("anything here? : " + g);
+            setLevelState(LevelState.Loading);
+            game.stop();
 
         }
 

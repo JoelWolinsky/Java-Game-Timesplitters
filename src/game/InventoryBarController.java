@@ -25,8 +25,8 @@ public class InventoryBarController extends GameObject {
 			frames.add(new UIElement(this.x + 20 + (i*60) , this.y + 10, 50 , 50, "./img/frameNotSelected.png"));
 			slots.add(new UIElement(this.x + 20 + (i*60) + 12 , this.y + 10 + 12, 25 , 25, player.getInventory().get(i).getUrl()));
 
-			currentLevel.addEntity(frames.get(i));
-			currentLevel.addEntity(slots.get(i));
+			currentLevel.addToAddQueue(frames.get(i));
+			currentLevel.addToAddQueue(slots.get(i));
 		}
 
 

@@ -17,7 +17,7 @@ public class Level extends Canvas {
 
 	private static boolean gameStarted=true;
 	private static boolean gameEnded=false;
-	private static LevelState levelState = LevelState.Waiting;
+	private static LevelState levelState = LevelState.Loading;
 
 	private static LinkedList<GameObject> entities = new LinkedList<>();
 	public static ArrayList<GameObject> toBeAdded = new ArrayList<>();
@@ -36,12 +36,6 @@ public class Level extends Canvas {
 
 	public void tick() {
 
-		System.out.println(getGameObjects().size());
-		for (GameObject o : toBeAdded)
-			System.out.println(o);
-
-		if (levelState==LevelState.Waiting)
-			checkAllPlayersConnected();
 
 		//Add the elements sitting in the queue to be added
 		if (!toBeAdded.isEmpty()) {
@@ -59,19 +53,23 @@ public class Level extends Canvas {
 			toBeRemoved.removeAll(toBeRemoved);
 		}
 
+		if (levelState!=LevelState.Loading && toBeAdded.isEmpty())
 		for(GameObject o : entities) { o.tick(); }
+
+		if (levelState==LevelState.Waiting)
+			checkAllPlayersConnected();
 
 	}
 
 	public void render(Graphics g, float f, float h) {
 
-		if (!entities.isEmpty())
+		if (!entities.isEmpty() && levelState!=LevelState.Loading)
 		for(GameObject o : entities) {
 			o.render(g, f, h);
 		}
 	}
 
-	public void addEntity(GameObject o) { entities.add(o); }
+	public void addEntity(GameObject o) {entities.add(o); }
 
 	public static void removeEntity(GameObject o) { entities.remove(o); }
 
