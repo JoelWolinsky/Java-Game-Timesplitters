@@ -52,7 +52,7 @@ public class Window extends Canvas{
 		frame.setResizable(false);
 		c.setBackground(Color.BLACK);
 		
-		SoundHandler.playMusic("mainMenuMusic", 0.1f);
+		SoundHandler.playMusic("mainMenuMusic", 0.3f);
 		
 		// Creating a new Font from the PressStart2P.ttf file that can be used in HTML JLabels
 		Font buttonFont = null;
@@ -189,6 +189,10 @@ public class Window extends Canvas{
 				back.setVisible(false);
 				backOptions.setVisible(false);
 				backMultiplayer.setVisible(false);
+				
+				if (Launcher.cHandler.ambienceToggle == true) {
+					SoundHandler.playSound("ambience", 0.5f);
+				}
 				
 				game.setGameState(GameState.Playing);
 				game.start();
@@ -439,6 +443,52 @@ public class Window extends Canvas{
 			}
 		});
 		
+		// The toggle ambience button on the options screen
+		JLabel toggleAmbienceButton = new JLabel(button3Icon);
+		toggleAmbienceButton.setForeground(Color.black);
+		toggleAmbienceButton.setFont(sizedFont);
+		toggleAmbienceButton.setHorizontalTextPosition(JLabel.CENTER);
+		
+		if (Launcher.cHandler.ambienceToggle) {
+			toggleAmbienceButton.setText("<html><center>AMBIENCE:<br><p style='margin-top:8'>ON</center></html>");
+		} else {
+			toggleAmbienceButton.setText("<html><center>AMBIENCE:<br><p style='margin-top:8'>OFF</center></html>");
+		}
+		
+		toggleAmbienceButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				toggleAmbienceButton.setIcon(button3ClickedInner);
+				SoundHandler.playSound("button1", 1f);
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+		    	if (Launcher.cHandler.ambienceToggle) {
+		    		toggleAmbienceButton.setText("<html><center>AMBIENCE:<br><p style='margin-top:8'>OFF</center></html>");
+		    		Launcher.cHandler.updateConfigValue(ConfigOption.AMBIENCE, "False");
+		    		Launcher.cHandler.ambienceToggle = false;
+		    	} else {
+		    		toggleAmbienceButton.setText("<html><center>AMBIENCE:<br><p style='margin-top:8'>ON</center></html>");
+		    		Launcher.cHandler.updateConfigValue(ConfigOption.AMBIENCE, "True");
+		    		Launcher.cHandler.ambienceToggle = true;
+		    	}
+	
+		    	toggleAmbienceButton.setIcon(button3HoverInner);
+			}
+				  
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				toggleAmbienceButton.setIcon(button3HoverInner);
+			}
+				  
+			@Override
+			public void mouseExited(MouseEvent e) {
+				toggleAmbienceButton.setIcon(button3Inner);
+			}
+		});
+		
 		// The difficulty button on the options screen
 		JLabel difficultyButton = new JLabel(button3Icon);
 		difficultyButton.setForeground(Color.black);
@@ -629,6 +679,7 @@ public class Window extends Canvas{
 		backButtonPanel.add(backButton);
 		optionButtonPanel.add(toggleSoundEffectsButton);
 		optionButtonPanel.add(toggleMusicButton);
+		optionButtonPanel.add(toggleAmbienceButton);
 		optionButtonPanel.add(difficultyButton);
 		multiplayerButtonPanel.add(playVSComputerButton);
 		multiplayerButtonPanel.add(createGameButton);

@@ -1,3 +1,4 @@
 toggleSoundEffects=True
 toggleMusic=True
-difficulty=Easy
+difficulty=Medium
+toggleAmbience=True

@@ -1,4 +1,5 @@
 package game.entities.areas;
+import game.SoundHandler;
 import game.entities.players.AIPlayer;
 import game.entities.players.Player;
 import game.graphics.Image;
@@ -31,6 +32,7 @@ public class RespawnPoint extends Area {
 					p.getRespawnPoints().add(this);
 					
 					if (! (p instanceof AIPlayer))
+						SoundHandler.playSound("waypoint", 0.5f);
 						this.reached=true;
 				}
 			}

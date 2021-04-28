@@ -11,11 +11,13 @@ public class ConfigHandler {
 	public Boolean soundEffectsToggle;
 	public Boolean musicToggle;
 	public String difficulty;
+	public Boolean ambienceToggle;
 	
 	public enum ConfigOption {
 		SOUNDEFFECTS,
 		MUSIC,
-		DIFFICULTY
+		DIFFICULTY,
+		AMBIENCE
 	}
 	
 	
@@ -24,6 +26,7 @@ public class ConfigHandler {
 		this.soundEffectsToggle = getSoundEffectsToggle();
 		this.musicToggle = getMusicToggle();
 		this.difficulty = getDifficulty();
+		this.ambienceToggle = getAmbienceToggle();
 	}
 	
 	/**
@@ -50,7 +53,6 @@ public class ConfigHandler {
 			}
 		}
 		catch (IOException e) {
-			System.out.println("An error occured");
 			e.printStackTrace();
 		}
 		return null;
@@ -81,7 +83,6 @@ public class ConfigHandler {
 			}
 		}
 		catch (IOException e) {
-			System.out.println("An error occured");
 			e.printStackTrace();
 		}
 		return null;
@@ -116,7 +117,35 @@ public class ConfigHandler {
 			}
 		}
 		catch (IOException e) {
-			System.out.println("An error occured");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Boolean getAmbienceToggle() {
+		createConfigFile();
+		
+		try {
+			File configFile = new File(this.fileName);
+			Scanner reader = new Scanner(configFile);
+			
+			reader.nextLine();
+			reader.nextLine();
+			reader.nextLine();
+			String line = reader.nextLine();
+			String toggle = line.substring(15);
+			reader.close();
+			
+			if (toggle.equals("True")) {
+				this.musicToggle = true;
+				return true;
+			} else {
+				this.musicToggle = false;
+				return false;
+			}
+			
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -142,6 +171,7 @@ public class ConfigHandler {
 				reader.nextLine();
 
 				restAfter = reader.nextLine() + "\n";
+				restAfter += reader.nextLine() + "\n";
 				restAfter += reader.nextLine();
 					
 				updatedFile = newLineValue + restAfter;
@@ -150,14 +180,25 @@ public class ConfigHandler {
 				String newLineValue = "\ntoggleMusic=" + value + "\n";
 				restBefore = reader.nextLine();
 				reader.nextLine();
-				restAfter = reader.nextLine();
+				restAfter = reader.nextLine() + "\n";
+				restAfter += reader.nextLine();
 				
 				updatedFile = restBefore + newLineValue + restAfter;
 				
 			} else if (option == ConfigOption.DIFFICULTY) {
-				String newLineValue = "\ndifficulty=" + value;
+				String newLineValue = "\ndifficulty=" + value + "\n";
 				
 				restBefore = reader.nextLine() + "\n";
+				restBefore += reader.nextLine();
+				reader.nextLine();
+				restAfter = reader.nextLine();
+				
+				updatedFile = restBefore + newLineValue + restAfter;
+			} else if (option == ConfigOption.AMBIENCE) {
+				String newLineValue = "\ntoggleAmbience=" + value;
+				
+				restBefore = reader.nextLine() + "\n";
+				restBefore += reader.nextLine() + "\n";
 				restBefore += reader.nextLine();
 				
 				updatedFile = restBefore + newLineValue;
@@ -184,7 +225,7 @@ public class ConfigHandler {
 			File configFile = new File(this.fileName);
 			if (configFile.createNewFile()) {
 				FileWriter writer = new FileWriter(this.fileName);
-				writer.write("toggleSoundEffects=True\ntoggleMusic=True\ndifficulty=Medium");
+				writer.write("toggleSoundEffects=True\ntoggleMusic=True\ndifficulty=Medium\ntoggleAmbience=True");
 				writer.close();
 				return true;
 			} else {

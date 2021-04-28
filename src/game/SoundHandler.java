@@ -98,7 +98,7 @@ public class SoundHandler {
 		
 		int rnd = new Random().nextInt(jumpSoundArray.length);
 		
-		playSound(jumpSoundArray[rnd], 0.6f);
+		playSound(jumpSoundArray[rnd], 1f);
 		
 	}
 	
@@ -108,7 +108,16 @@ public class SoundHandler {
 		
 		int rnd = new Random().nextInt(jumpLandSoundArray.length);
 		
-		playSound(jumpLandSoundArray[rnd], 0.6f);
+		playSound(jumpLandSoundArray[rnd], 1f);
+	}
+	
+	public static void playRandomDeath() {
+		
+		String[] deathSoundArray = {"death1", "death2", "death3"};
+		
+		int rnd = new Random().nextInt(deathSoundArray.length);
+		
+		playSound(deathSoundArray[rnd], 1f);
 	}
 	
 	public static void stopMusic() {

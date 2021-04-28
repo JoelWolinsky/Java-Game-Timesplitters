@@ -239,7 +239,10 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                         } else if (jumpCooldown >= 10 && isOnGround() && !hasCeilingAbove() && !isOnWall()) {
                             this.velY = JUMP_GRAVITY;
                             jumpCooldown = 0;
-                            SoundHandler.playRandomJumpLand();
+                            
+                            if (!(this instanceof AIPlayer)) {
+                            	SoundHandler.playRandomJumpLand();
+                            }
                         }
                     }
                 }
@@ -302,7 +305,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             CollidingObject o = SolidCollider.nextCollision(this, this.velY, false);
             if (o != null) {
             	
-            	if (!ghostMode) {
+            	if (!ghostMode && !(this instanceof AIPlayer)) {
             		SoundHandler.playRandomJump();
             	}
             	
@@ -485,6 +488,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             canMove = false;
             i = 0;
             currentAnimState = AnimationStates.IDLE;
+            SoundHandler.playRandomDeath();
         }
     }
 
