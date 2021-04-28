@@ -29,7 +29,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
     protected float velX = 0;
     protected float velY = 0;
-    private final float terminalVelY = 15;
+    private final float TERMINAL_VEL_Y = 15;
 
     protected float DECELERATION = 0.5f;        // Rate at which velX decreases when A/D key released (for sliding)
     protected float JUMP_GRAVITY = -7.5f;
@@ -49,14 +49,14 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     protected boolean canMove = false;
     private boolean locked = false;
     private GameObject locker;
-    protected final ArrayList<Item> inventory = new ArrayList<Item>(Arrays.asList(new Item(0, 0, 0, 0, this, "./img/empty.png"), new Item(0, 0, 0, 0, this, "./img/empty.png"), new Item(0, 0, 0, 0, this, "./img/empty.png")));
-    protected final int inventorySize = 3;
+    protected final ArrayList<Item> INVENTORY = new ArrayList<Item>(Arrays.asList(new Item(0, 0, 0, 0, this, "./img/empty.png"), new Item(0, 0, 0, 0, this, "./img/empty.png"), new Item(0, 0, 0, 0, this, "./img/empty.png")));
+    protected final int INVENTORY_SIZE = 3;
     protected int inventoryIndex = 2;
     protected boolean inventoryChanged = false;
     protected int itemUseCooldown = 0;
     protected int slotSelectionCooldown = 0;
-    protected final int effectDuration = 500;
-    protected final ArrayList<Effect> currentEffects = new ArrayList<Effect>();
+    protected final int EFFECT_DURATION = 500;
+    protected final ArrayList<Effect> CURRENT_EFFECTS = new ArrayList<Effect>();
     protected boolean canDoubleJump = false;
     protected int jumpCooldown = 0;
     private boolean bouncing = false;
@@ -75,14 +75,14 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
     private Point prevPos;
     private  String username;
-    private final KeyInput input;
+    private final KeyInput INPUT;
     private String objectModel;
 
 
     public Player(float x, float y, KeyInput input, int width, int height,String url) {
         super(x, y, 2, width, height);
 
-        this.input = input;
+        this.INPUT = input;
         this.username = UUID.randomUUID().toString();
         //System.out.println("making name " + this.username);
 
@@ -175,7 +175,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         //Check for keyboard input along the x-axis
 
         if (canMove)
-            if (this.input != null) {
+            if (this.INPUT != null) {
                 if (KeyInput.right.isPressed() && !collide(this, 2, true)) {
 
                     // Simulates acceleration when you run right
@@ -379,24 +379,24 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         if (!(this instanceof AIPlayer)){
             if (KeyInput.space.isPressed()) {
                 //OPTION 2
-                if (!(inventory.get(inventoryIndex).getUrl().equals("./img/empty.png"))) {
-                    inventory.get(inventoryIndex).getEffect();
-                    if (!(inventory.get(inventoryIndex).getUrl().equals("./img/jump.png")) && !(inventory.get(inventoryIndex).getUrl().equals("./img/banana.png")))
-                        currentEffects.add(new Effect(inventory.get(inventoryIndex).getUrl(), 500));
-                    inventory.get(inventoryIndex).setUrl("./img/empty.png");
+                if (!(INVENTORY.get(inventoryIndex).getUrl().equals("./img/empty.png"))) {
+                    INVENTORY.get(inventoryIndex).getEffect();
+                    if (!(INVENTORY.get(inventoryIndex).getUrl().equals("./img/jump.png")) && !(INVENTORY.get(inventoryIndex).getUrl().equals("./img/banana.png")))
+                        CURRENT_EFFECTS.add(new Effect(INVENTORY.get(inventoryIndex).getUrl(), 500));
+                    INVENTORY.get(inventoryIndex).setUrl("./img/empty.png");
                     this.setInventoryChanged(true);
                 }
             }
         }
 
 
-        if (!currentEffects.isEmpty()) {
-            for (Effect e : currentEffects) {
+        if (!CURRENT_EFFECTS.isEmpty()) {
+            for (Effect e : CURRENT_EFFECTS) {
                 e.decrement();
 
                 if (e.getTimer() <= 0) {
                     removeEffect(e.getName());
-                    currentEffects.remove(e);
+                    CURRENT_EFFECTS.remove(e);
                     break;
                 }
             }
@@ -530,7 +530,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     }
 
     public float getTerminalVel() {
-        return this.terminalVelY;
+        return this.TERMINAL_VEL_Y;
     }
 
     public void render(Graphics g, float xOffset, float yOffset) {
@@ -594,15 +594,15 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     }
 
     public void addToInventory(Item item) {
-        inventory.add(item);
+        INVENTORY.add(item);
     }
 
     public void removeFromInventory(GameObject item) {
-        inventory.remove(item);
+        INVENTORY.remove(item);
     }
 
     public ArrayList<Item> getInventory() {
-        return inventory;
+        return INVENTORY;
     }
 
     public boolean inventoryChanged() {
@@ -623,8 +623,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
     public int firstFreeSpace() {
 
-        for (int i = 0; i < inventorySize; i++) {
-            if (inventory.get(i).getUrl().equals("./img/empty.png"))
+        for (int i = 0; i < INVENTORY_SIZE; i++) {
+            if (INVENTORY.get(i).getUrl().equals("./img/empty.png"))
                 return i;
         }
 
@@ -636,7 +636,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     }
 
     public void addEffect(Effect e) {
-        currentEffects.add(e);
+        CURRENT_EFFECTS.add(e);
     }
 
     public boolean isBounceImmune() {

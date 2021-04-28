@@ -25,7 +25,7 @@ public class Map {
     private int verticalIndex = 0;
     private int setX = 426;
     private int setY = 384;
-    private final LinkedList<String> lastDirection = new LinkedList<>();
+    private final LinkedList<String> LAST_DIRECTION = new LinkedList<>();
     private String currentTheme = "A";
     String texturePlatformDefault = "";
     String texturePlatformInverted = "";
@@ -194,7 +194,7 @@ public class Map {
             case "Chunk":
 
                 Area a;
-                lastDirection.add(splitted[2]);
+                LAST_DIRECTION.add(splitted[2]);
                 switch (splitted[2]) {
                     case "E":
                         horizontalIndex = horizontalIndex + setX;
@@ -392,8 +392,8 @@ public class Map {
 
             case "Revert":
 
-                if (!lastDirection.isEmpty()) {
-                    switch (lastDirection.getLast()) {
+                if (!LAST_DIRECTION.isEmpty()) {
+                    switch (LAST_DIRECTION.getLast()) {
                         case "E":
                             horizontalIndex = horizontalIndex - setX;
                             break;
@@ -407,7 +407,7 @@ public class Map {
                             verticalIndex = verticalIndex - setY;
                             break;
                     }
-                    lastDirection.removeLast();
+                    LAST_DIRECTION.removeLast();
                 }
                 break;
 

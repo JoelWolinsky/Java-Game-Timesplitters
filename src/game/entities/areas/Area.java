@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 
 public class Area extends GameObject {
 	private BufferedImage img;
-	private final boolean visible = true;
 
 	public Area(float x, float y, int width, int height, BufferedImage bi) {
 		super(x, y, 0, width, height);

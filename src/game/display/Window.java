@@ -121,47 +121,47 @@ public class Window extends Canvas{
 		ImageIcon button1Icon = new ImageIcon("./img/button1.png");
 		Image scaledButton1 = button1Icon.getImage().getScaledInstance(panelWidth - 50, (panelHeight / 4) - 10,Image.SCALE_SMOOTH);
 		button1Icon = new ImageIcon(scaledButton1);
-		final ImageIcon button1Inner = button1Icon;
+		final ImageIcon BUTTON_1_INNER = button1Icon;
 		
 		ImageIcon button1ClickedIcon = new ImageIcon("./img/button1Clicked.png");
 		Image scaledbutton1ClickedIcon = button1ClickedIcon.getImage().getScaledInstance(panelWidth - 50, (panelHeight / 4) - 10,Image.SCALE_SMOOTH);
 		button1ClickedIcon = new ImageIcon(scaledbutton1ClickedIcon);
-		final ImageIcon button1ClickedInner = button1ClickedIcon;
+		final ImageIcon BUTTON_1_CLICKED_INNER = button1ClickedIcon;
 		
 		ImageIcon button1HoverIcon = new ImageIcon("./img/button1Hover.png");
 		Image scaledButton1HoverIcon = button1HoverIcon.getImage().getScaledInstance(panelWidth - 50, (panelHeight / 4) - 10,Image.SCALE_SMOOTH);
 		button1HoverIcon = new ImageIcon(scaledButton1HoverIcon);
-		final ImageIcon button1HoverInner = button1HoverIcon;
+		final ImageIcon BUTTON_1_HOVER_INNER = button1HoverIcon;
 		
 		ImageIcon button2Icon = new ImageIcon("./img/button2.png");
 		Image scaledButton2 = button2Icon.getImage().getScaledInstance(panelWidth / 2, (panelHeight / 4) , Image.SCALE_SMOOTH);
 		button2Icon = new ImageIcon(scaledButton2);
-		final ImageIcon button2Inner = button2Icon;
+		final ImageIcon BUTTON_2_INNER = button2Icon;
 		
 		ImageIcon button2HoverIcon = new ImageIcon("./img/button2Hover.png");
 		Image scaledButton2Hover = button2HoverIcon.getImage().getScaledInstance(panelWidth / 2, (panelHeight / 4) , Image.SCALE_SMOOTH);
 		button2HoverIcon = new ImageIcon(scaledButton2Hover);
-		final ImageIcon button2HoverInner = button2HoverIcon;
+		final ImageIcon BUTTON_2_HOVER_INNER = button2HoverIcon;
 		
 		ImageIcon button2ClickedIcon = new ImageIcon("./img/button2Clicked.png");
 		Image scaledButton2Clicked = button2ClickedIcon.getImage().getScaledInstance(panelWidth / 2, (panelHeight / 4) , Image.SCALE_SMOOTH);
 		button2ClickedIcon = new ImageIcon(scaledButton2Clicked);
-		final ImageIcon button2ClickedInner = button2ClickedIcon;
+		final ImageIcon BUTTON_2_CLICKED_INNER = button2ClickedIcon;
 		
 		ImageIcon button3Icon = new ImageIcon("./img/button3.png");
 		Image scaledButton3 = button3Icon.getImage().getScaledInstance(panelWidth - 100, panelHeight / 3, Image.SCALE_SMOOTH);
 		button3Icon = new ImageIcon(scaledButton3);
-		final ImageIcon button3Inner = button3Icon;
+		final ImageIcon BUTTON_3_INNER = button3Icon;
 		
 		ImageIcon button3HoverIcon = new ImageIcon("./img/button3Hover.png");
 		Image scaledButton3Hover = button3HoverIcon.getImage().getScaledInstance(panelWidth - 100,  panelHeight / 3, Image.SCALE_SMOOTH);
 		button3HoverIcon = new ImageIcon(scaledButton3Hover);
-		final ImageIcon button3HoverInner = button3HoverIcon;
+		final ImageIcon BUTTON_3_HOVER_INNER = button3HoverIcon;
 		
 		ImageIcon button3ClickedIcon = new ImageIcon("./img/button3Clicked.png");
 		Image scaledButton3Clicked = button3ClickedIcon.getImage().getScaledInstance(panelWidth - 100, panelHeight / 3, Image.SCALE_SMOOTH);
 		button3ClickedIcon = new ImageIcon(scaledButton3Clicked);
-		final ImageIcon button3ClickedInner = button3ClickedIcon;
+		final ImageIcon BUTTON_3_CLICKED_INNER = button3ClickedIcon;
 		
 		
 		// The singleplayer Button on the main screen
@@ -176,7 +176,7 @@ public class Window extends Canvas{
 			// This handles when the JLabel is pressed by the mouse
 			@Override
 			public void mousePressed(MouseEvent e) {
-				singleplayerButton.setIcon(button1ClickedInner);
+				singleplayerButton.setIcon(BUTTON_1_CLICKED_INNER);
 				SoundHandler.playSound("button1", 1f);
 			}
 			
@@ -195,13 +195,13 @@ public class Window extends Canvas{
 			// This handles when the mouse enters the JLabel
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				singleplayerButton.setIcon(button1HoverInner);
+				singleplayerButton.setIcon(BUTTON_1_HOVER_INNER);
 			}
 				
 			// This handles when the mouse leaves the JLabel
 			@Override
 			public void mouseExited(MouseEvent e) {
-				singleplayerButton.setIcon(button1Inner);
+				singleplayerButton.setIcon(BUTTON_1_INNER);
 			}
 		});
 		
@@ -218,7 +218,7 @@ public class Window extends Canvas{
 		multiplayerButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				multiplayerButton.setIcon(button1ClickedInner);
+				multiplayerButton.setIcon(BUTTON_1_CLICKED_INNER);
 		    	SoundHandler.playSound("button1", 1f);
 		    	backMultiplayer.setVisible(true);
 			}
@@ -233,12 +233,12 @@ public class Window extends Canvas{
 				  
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				multiplayerButton.setIcon(button1HoverInner);
+				multiplayerButton.setIcon(BUTTON_1_HOVER_INNER);
 			}
 				  
 			@Override
 			public void mouseExited(MouseEvent e) {
-				multiplayerButton.setIcon(button1Inner);
+				multiplayerButton.setIcon(BUTTON_1_INNER);
 			}
 		});
 		
@@ -252,7 +252,7 @@ public class Window extends Canvas{
 		optionsButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				optionsButton.setIcon(button1ClickedInner);
+				optionsButton.setIcon(BUTTON_1_CLICKED_INNER);
 		    	SoundHandler.playSound("button1", 1f);
 		    	backOptions.setVisible(true);
 			}
@@ -267,12 +267,12 @@ public class Window extends Canvas{
 				  
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				optionsButton.setIcon(button1HoverInner);
+				optionsButton.setIcon(BUTTON_1_HOVER_INNER);
 			}
 				  
 			@Override
 			public void mouseExited(MouseEvent e) {
-				optionsButton.setIcon(button1Inner);
+				optionsButton.setIcon(BUTTON_1_INNER);
 			}
 		});
 		
@@ -286,7 +286,7 @@ public class Window extends Canvas{
 		quitButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				quitButton.setIcon(button1ClickedInner);
+				quitButton.setIcon(BUTTON_1_CLICKED_INNER);
 		    	SoundHandler.playSound("button1", 1f);
 			}
 			
@@ -297,12 +297,12 @@ public class Window extends Canvas{
 				  
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				quitButton.setIcon(button1HoverInner);
+				quitButton.setIcon(BUTTON_1_HOVER_INNER);
 			}
 				  
 			@Override
 			public void mouseExited(MouseEvent e) {
-				quitButton.setIcon(button1Inner);
+				quitButton.setIcon(BUTTON_1_INNER);
 			}
 		});
 		
@@ -316,14 +316,14 @@ public class Window extends Canvas{
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				backButton.setIcon(button2ClickedInner);
+				backButton.setIcon(BUTTON_2_CLICKED_INNER);
 				SoundHandler.playSound("button1", 1f);
 			}
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				back.setVisible(true);
-				backButton.setIcon(button2Inner);
+				backButton.setIcon(BUTTON_2_INNER);
 				mainMenu.setVisible(true);
 		    	backButtonPanel.setVisible(false);
 		    	optionButtonPanel.setVisible(false);
@@ -334,12 +334,12 @@ public class Window extends Canvas{
 				  
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				backButton.setIcon(button2HoverInner);
+				backButton.setIcon(BUTTON_2_HOVER_INNER);
 			}
 				  
 			@Override
 			public void mouseExited(MouseEvent e) {
-				backButton.setIcon(button2Inner);
+				backButton.setIcon(BUTTON_2_INNER);
 			}
 		});
 		
@@ -358,7 +358,7 @@ public class Window extends Canvas{
 		toggleSoundEffectsButton.addMouseListener(new MouseAdapter() {
 			@Override 
 			public void mousePressed(MouseEvent e) {
-				toggleSoundEffectsButton.setIcon(button3ClickedInner);
+				toggleSoundEffectsButton.setIcon(BUTTON_3_CLICKED_INNER);
 				SoundHandler.playSound("button1", 1f);
 			}
 			
@@ -375,17 +375,17 @@ public class Window extends Canvas{
 		    		Launcher.cHandler.soundEffectsToggle = true;
 		    	}
 	
-		    	toggleSoundEffectsButton.setIcon(button3HoverInner);
+		    	toggleSoundEffectsButton.setIcon(BUTTON_3_HOVER_INNER);
 			}
 				  
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				toggleSoundEffectsButton.setIcon(button3HoverInner);
+				toggleSoundEffectsButton.setIcon(BUTTON_3_HOVER_INNER);
 			}
 				  
 			@Override
 			public void mouseExited(MouseEvent e) {
-				toggleSoundEffectsButton.setIcon(button3Inner);
+				toggleSoundEffectsButton.setIcon(BUTTON_3_INNER);
 			}
 		});
 		
@@ -404,7 +404,7 @@ public class Window extends Canvas{
 		toggleMusicButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				toggleMusicButton.setIcon(button3ClickedInner);
+				toggleMusicButton.setIcon(BUTTON_3_CLICKED_INNER);
 				SoundHandler.playSound("button1", 1f);
 			}
 			
@@ -421,17 +421,17 @@ public class Window extends Canvas{
 		    		Launcher.cHandler.musicToggle = true;
 		    	}
 	
-		    	toggleMusicButton.setIcon(button3HoverInner);
+		    	toggleMusicButton.setIcon(BUTTON_3_HOVER_INNER);
 			}
 				  
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				toggleMusicButton.setIcon(button3HoverInner);
+				toggleMusicButton.setIcon(BUTTON_3_HOVER_INNER);
 			}
 				  
 			@Override
 			public void mouseExited(MouseEvent e) {
-				toggleMusicButton.setIcon(button3Inner);
+				toggleMusicButton.setIcon(BUTTON_3_INNER);
 			}
 		});
 		
@@ -452,7 +452,7 @@ public class Window extends Canvas{
 		difficultyButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				difficultyButton.setIcon(button3ClickedInner);
+				difficultyButton.setIcon(BUTTON_3_CLICKED_INNER);
 				SoundHandler.playSound("button1", 1f);
 			}
 			
@@ -473,17 +473,17 @@ public class Window extends Canvas{
 		    		Launcher.cHandler.difficulty = "Easy";
 		    	}
 	
-		    	difficultyButton.setIcon(button3HoverInner);
+		    	difficultyButton.setIcon(BUTTON_3_HOVER_INNER);
 			}
 				  
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				difficultyButton.setIcon(button3HoverInner);
+				difficultyButton.setIcon(BUTTON_3_HOVER_INNER);
 			}
 				  
 			@Override
 			public void mouseExited(MouseEvent e) {
-				difficultyButton.setIcon(button3Inner);
+				difficultyButton.setIcon(BUTTON_3_INNER);
 			}
 		});
 		
@@ -497,13 +497,13 @@ public class Window extends Canvas{
 		playVSComputerButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				playVSComputerButton.setIcon(button3ClickedInner);
+				playVSComputerButton.setIcon(BUTTON_3_CLICKED_INNER);
 				SoundHandler.playSound("button1", 1f);
 			}
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				playVSComputerButton.setIcon(button3HoverInner);
+				playVSComputerButton.setIcon(BUTTON_3_HOVER_INNER);
 				
 				back.setVisible(false);
 		    	backButtonPanel.setVisible(false);
@@ -519,12 +519,12 @@ public class Window extends Canvas{
 				  
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				playVSComputerButton.setIcon(button3HoverInner);
+				playVSComputerButton.setIcon(BUTTON_3_HOVER_INNER);
 			}
 				  
 			@Override
 			public void mouseExited(MouseEvent e) {
-				playVSComputerButton.setIcon(button3Inner);
+				playVSComputerButton.setIcon(BUTTON_3_INNER);
 			}
 		});
 		
@@ -538,13 +538,13 @@ public class Window extends Canvas{
 		createGameButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				createGameButton.setIcon(button3ClickedInner);
+				createGameButton.setIcon(BUTTON_3_CLICKED_INNER);
 				SoundHandler.playSound("button1", 1f);
 			}
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				createGameButton.setIcon(button3HoverInner);
+				createGameButton.setIcon(BUTTON_3_HOVER_INNER);
 				
 				Game.socketServer = new GameServer(game);
 				Game.socketServer.start();
@@ -564,12 +564,12 @@ public class Window extends Canvas{
 				  
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				createGameButton.setIcon(button3HoverInner);
+				createGameButton.setIcon(BUTTON_3_HOVER_INNER);
 			}
 				  
 			@Override
 			public void mouseExited(MouseEvent e) {
-				createGameButton.setIcon(button3Inner);
+				createGameButton.setIcon(BUTTON_3_INNER);
 			}
 		});
 		
@@ -583,13 +583,13 @@ public class Window extends Canvas{
 		joinGameButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				joinGameButton.setIcon(button3ClickedInner);
+				joinGameButton.setIcon(BUTTON_3_CLICKED_INNER);
 				SoundHandler.playSound("button1", 1f);
 			}
 			
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				joinGameButton.setIcon(button3HoverInner);
+				joinGameButton.setIcon(BUTTON_3_HOVER_INNER);
 				
 				Game.socketClient = new GameClient(game, "localhost");
 				Game.socketClient.start();
@@ -608,12 +608,12 @@ public class Window extends Canvas{
 				  
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				joinGameButton.setIcon(button3HoverInner);
+				joinGameButton.setIcon(BUTTON_3_HOVER_INNER);
 			}
 				  
 			@Override
 			public void mouseExited(MouseEvent e) {
-				joinGameButton.setIcon(button3Inner);
+				joinGameButton.setIcon(BUTTON_3_INNER);
 			}
 		});
 		
