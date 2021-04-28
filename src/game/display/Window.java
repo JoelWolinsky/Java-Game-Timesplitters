@@ -191,7 +191,7 @@ public class Window extends Canvas{
 				backMultiplayer.setVisible(false);
 				
 				if (Launcher.cHandler.ambienceToggle == true) {
-					SoundHandler.playSound("ambience", 0.3f);
+					SoundHandler.playSound("ambience", 0.2f);
 				}
 				
 				game.setGameState(GameState.Playing);
@@ -566,7 +566,7 @@ public class Window extends Canvas{
 				backMultiplayer.setVisible(false);
 				
 				if (Launcher.cHandler.ambienceToggle == true) {
-					SoundHandler.playSound("ambience", 0.3f);
+					SoundHandler.playSound("ambience", 0.2f);
 				}
 
 				game.setGameState(GameState.Playing);

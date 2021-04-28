@@ -111,6 +111,15 @@ public class SoundHandler {
 		playSound(jumpLandSoundArray[rnd], 1f);
 	}
 	
+	public static void playRandomChicken() {
+		
+		String[] chickenSoundArray = {"chicken1", "chicken2", "chicken3"};
+		
+		int rnd = new Random().nextInt(chickenSoundArray.length);
+		
+		playSound(chickenSoundArray[rnd],0.5f);
+	}
+	
 	public static void playRandomDeath() {
 		
 		String[] deathSoundArray = {"death1", "death2", "death3"};
