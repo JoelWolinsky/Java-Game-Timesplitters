@@ -40,7 +40,6 @@ public class Game extends Canvas implements Runnable{
 	private Assets s = new Assets();
 	public Map m;
 	public static GameMode gameMode = GameMode.SINGLEPLAYER;
-	public static boolean bruh=false;
 
 	/**
 	 * Initialises game entities and objects that must appear at the start of the game
@@ -79,10 +78,18 @@ public class Game extends Canvas implements Runnable{
 			g.setColor(Color.black);
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 
+			Graphics2D opac = (Graphics2D) g;
+
+			if(camera.getTarget() instanceof Player)
+			if (((Player)camera.getTarget()).isGhostMode())
+			{
+				float alpha = 0.5F; //draw half transparent
+				AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+				opac.setComposite(ac);
+			}
+
 			//END GAME VICTORY
 			if (getLevelState()== LevelState.Finished) {
-				Graphics2D zoomed = (Graphics2D) g;
-
 
 				//Zooming Effect on scaling the camera
 				if (a<6)
@@ -108,12 +115,12 @@ public class Game extends Canvas implements Runnable{
 
 
 				camera.addTarget(getFinish());
-				zoomed.scale(a, b);
-				m.getCurrentLevel().render(zoomed, camera.getXOffset() - c - ((Window.WIDTH/6)/2), camera.getYOffset()-d);
+				opac.scale(a, b);
+				m.getCurrentLevel().render(opac, camera.getXOffset() - c - ((Window.WIDTH/6)/2), camera.getYOffset()-d);
 			}
 			else
 			{
-				m.getCurrentLevel().render(g, camera.getXOffset(), camera.getYOffset() + 100);
+				m.getCurrentLevel().render(opac, camera.getXOffset(), camera.getYOffset() + 100);
 			}
 
 		}else {
@@ -248,7 +255,4 @@ public class Game extends Canvas implements Runnable{
 		running = runningg;
 	}
 
-	public static void setBruh(boolean bruh) {
-		Game.bruh = bruh;
-	}
 }

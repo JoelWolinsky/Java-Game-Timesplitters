@@ -16,7 +16,6 @@ public class Assets {
 	public static ArrayList <BufferedImage> player_left;
 	public static ArrayList <BufferedImage> player_other;
 	public static ArrayList <BufferedImage> player_swag;
-	public static ArrayList <BufferedImage> player_ghost;
 	public static ArrayList <BufferedImage> player_jump_right;
 	public static ArrayList <BufferedImage> player_jump_left;
 
@@ -126,7 +125,6 @@ public class Assets {
 		as.getAnimations().put(AnimationStates.LEFT, new Animation(10,player_left));
 		as.getAnimations().put(AnimationStates.OTHER, new Animation(10,player_other));
 		as.getAnimations().put(AnimationStates.SWAG, new Animation(5,player_swag));
-		as.getAnimations().put(AnimationStates.SWAG, new Animation(5,player_ghost));
 		//getAnimations().put(AnimationStates.JUMP, new Animation(5,player_jump_right));
 
 		assets.add(as);

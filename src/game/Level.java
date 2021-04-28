@@ -32,9 +32,9 @@ public class Level extends Canvas {
 	public static synchronized ArrayList<GameObject> getToBeRemoved() {return  toBeRemoved;}
 	public static LevelState getLevelState () {return levelState;}
 	public static void setLevelState (LevelState levelStatee) {levelState = levelStatee;}
+	private double time1=0,time2;
 
 	public void tick() {
-
 
 		//System.out.println(levelState);
 
@@ -159,7 +159,13 @@ public class Level extends Canvas {
 		switch (getGameMode()){
 			case SINGLEPLAYER:
 				if (getPlayers().size()==1)
-					levelState=LevelState.Starting;
+				{
+					if(time1==0)
+						time();
+					if(levelState!=LevelState.Starting)
+					if(timetime()>=1000)
+						levelState=LevelState.Starting;
+				}
 				break;
 			case vsAI:
 				if (getPlayers().size()>=2)
@@ -167,7 +173,14 @@ public class Level extends Canvas {
 				break;
 			case MULTIPLAYER:
 				if (getPlayers().size()==2)
-					levelState=LevelState.Starting;
+				{
+					if(time1==0)
+						time();
+					if(levelState!=LevelState.Starting)
+						if(timetime()>=5000)
+							levelState=LevelState.Starting;
+
+				}
 				break;
 		}
 	}
@@ -204,5 +217,16 @@ public class Level extends Canvas {
 		return null;
 	}
 
+	public void time()
+	{
+		time1 = System.currentTimeMillis();
+	}
+
+	public double timetime()
+	{
+		time2 = System.currentTimeMillis();
+
+		return time2-time1;
+	}
 
 }

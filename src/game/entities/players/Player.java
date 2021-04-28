@@ -46,7 +46,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     public boolean immunity = false;
     public int i = 0;
     private int bi = 0;
-    private final boolean cc = false;
     protected boolean canMove = false;
     private boolean locked = false;
     private GameObject locker;
@@ -156,12 +155,20 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         	currentAnimState = AnimationStates.LEFT;
         }
         else if (velX == 0 && !ghostMode) {
-        	if(facingRight) {
-        		currentAnimState = AnimationStates.IDLE;
-        	}
-        	else {
-        		currentAnimState = AnimationStates.OTHER;
-        	}
+
+            if (getLevelState()==LevelState.Finished)
+            {
+                currentAnimState = AnimationStates.SWAG;
+            }
+            else if (facingRight)
+            {
+                currentAnimState = AnimationStates.IDLE;
+            }
+            else
+            {
+                currentAnimState = AnimationStates.OTHER;
+            }
+
         }
         
         
@@ -169,7 +176,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
         if (canMove)
             if (this.input != null) {
-                if (KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
+                if (KeyInput.right.isPressed() && !collide(this, 2, true)) {
 
                     // Simulates acceleration when you run right
                     if (this.velX >= RUN_SPEED) {
@@ -179,7 +186,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                     }
                   
 
-                } else if (KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
+                } else if (KeyInput.left.isPressed() && !collide(this, -2, true)) {
 
                     // Simulates acceleration when you run left
                     if (this.velX <= -RUN_SPEED) {
@@ -192,7 +199,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                 } else {
 
                     // For deceleration effect
-                    if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)) {
+                    if (!collide(this, this.velX, true)) {
                         if (this.velX >= -0.1f && this.velX <= 0.1f) {
                             this.velX = 0;
                         } else if (this.velX > 0.1f) {
@@ -285,7 +292,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         }
 
 
-        if (!SolidCollider.willCauseSolidCollision(this, this.velX + 1, true)) {
+        if (!collide(this, this.velX + 1, true)) {
 
             if(!ghostMode)
             moving = true;
@@ -293,7 +300,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             this.x += this.velX;
         }
 
-        if (!SolidCollider.willCauseSolidCollision(this, this.velY + 1, false)) {
+        if (!collide(this, this.velY + 1, false)) {
             if(!ghostMode)
             moving = true;
             this.y += this.velY;
@@ -310,9 +317,9 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                     this.velY = 0;
                 } else {    // When velY == 0 and velX == 0 the sticking to the wall bug occurs.
                     // Rebounds the player off the wall to avoid sticking.
-                    if (SolidCollider.willCauseSolidCollision(this, 5, true)) {
+                    if (collide(this, 5, true)) {
                         this.velX = -2.0f;
-                    } else if (SolidCollider.willCauseSolidCollision(this, -5, true)) {
+                    } else if (collide(this, -5, true)) {
                         this.velX = 2.0f;
                     }
                 }
@@ -685,6 +692,13 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     public String getObjectModel() {
         return objectModel;
     }
-    
+
+    public boolean collide(CollidingObject o, double vel, boolean xAxis)
+    {
+        if (ghostMode)
+            return false;
+        else
+            return SolidCollider.willCauseSolidCollision(o, vel, xAxis);
+    }
     
 }

@@ -34,29 +34,8 @@ public class GameEndingObject extends AnimArea {
 					pp.setCurrentAnimState(AnimationStates.IDLE);
 				}
 
-				//back.setVisible(true);
-				//backOptions.setVisible(true);
-				//backMultiplayer.setVisible(true);
-
 				setLevelState(LevelState.Finished);
-
 				p.setCurrentAnimState(AnimationStates.SWAG);
-				setBruh(true);
-
-				/*
-				setGameState(GameState.MainMenu);
-				setMainMenuVisible(true);
-				setBack(true);
-				setBackMultiplayer(true);
-				setBackOptions(true);
-				setBruh(true);
-
-				for (GameObject g : getGameObjects())
-					getToBeRemoved().add(g);
-
-				setRunning(false);
-
-				 */
 
 			}
 

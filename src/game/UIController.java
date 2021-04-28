@@ -21,6 +21,7 @@ public class UIController extends GameObject {
 	private boolean startCountdown=false;
 	private boolean endGameCelebration=false;
 	UIElement announcer,announcerMessage;
+	private double time1=0,time2;
 
 	public UIController(float x, float y, int width, int height) {
 		super(x, y, 4, width, height);
@@ -82,6 +83,7 @@ public class UIController extends GameObject {
 			if (!announcer.isVisible()) {
 				announcer.setVisible(true);
 				announcerMessage.setVisible(true);
+				time();
 			}
 
 			try {
@@ -91,7 +93,7 @@ public class UIController extends GameObject {
 				//TODO: Handle exception.
 			}
 
-			if (timer < 50)
+			if (timetime() < 1000)
 				timer++;
 
 			else {
@@ -114,7 +116,7 @@ public class UIController extends GameObject {
 					announcer.setVisible(false);
 				}
 
-				timer = 0;
+				time();
 			}
 		}
 
@@ -150,6 +152,18 @@ public class UIController extends GameObject {
 	public void centerVertically()
 	{
 		this.y=(480/2)-(this.height/2);
+	}
+
+	public void time()
+	{
+		time1 = System.currentTimeMillis();
+	}
+
+	public double timetime()
+	{
+		time2 = System.currentTimeMillis();
+
+		return time2-time1;
 	}
 
 }
