@@ -619,19 +619,39 @@ public class Window extends Canvas{
 			public void mouseReleased(MouseEvent e) {
 				joinGameButton.setIcon(button3HoverInner);
 				
-				Game.socketClient = new GameClient(game, "localhost");
-				Game.socketClient.start();
 				
-				back.setVisible(false);
-		    	backButtonPanel.setVisible(false);
-		    	multiplayerButtonPanel.setVisible(false);
-		    	backOptions.setVisible(false);
-				backMultiplayer.setVisible(false);
 		    	
-		    	game.setGameState(GameState.Playing);
-				game.setGameMode(GameMode.MULTIPLAYER);
 		    	
-		    	game.start();
+		    	Boolean isAlive = false;
+				try {
+					DatagramSocket socket;
+					socket = new DatagramSocket(1331);
+					socket.close();
+					System.out.println("not already running");
+
+				} catch (SocketException e1) {
+					isAlive = true;
+				}
+					
+					
+				if(isAlive == true) {
+					Game.socketClient = new GameClient(game, "localhost");
+					Game.socketClient.start();
+					
+					back.setVisible(false);
+			    	backButtonPanel.setVisible(false);
+			    	multiplayerButtonPanel.setVisible(false);
+			    	backOptions.setVisible(false);
+					backMultiplayer.setVisible(false);
+			    	
+			    	game.setGameState(GameState.Playing);
+					game.setGameMode(GameMode.MULTIPLAYER);
+			    	
+			    	game.start();
+			    		
+				} else {
+					System.out.println("Server isnt running yet");
+				}
 			}
 				  
 			@Override
