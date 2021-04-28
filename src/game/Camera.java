@@ -15,8 +15,8 @@ public class Camera {
 	private GameObject target = null;
 	
 	public Camera() {
-		this.xOffset = 0;
-		this.yOffset = 0;
+		Camera.xOffset = 0;
+		Camera.yOffset = 0;
 	}
 
 	
@@ -25,8 +25,8 @@ public class Camera {
 	 */
 	public void tick() {
 		if(target != null) {
-			this.xOffset = -(this.target.getX() + (this.target.getWidth() /2) - (Window.WIDTH/2));
-			this.yOffset = -(this.target.getY() + (this.target.getHeight() /2) - (Window.HEIGHT/2));
+			Camera.xOffset = -(this.target.getX() + (this.target.getWidth() /2) - (Window.WIDTH/2));
+			Camera.yOffset = -(this.target.getY() + (this.target.getHeight() /2) - (Window.HEIGHT/2));
 		}
 	}
 	
@@ -50,7 +50,7 @@ public class Camera {
 	 * @param offset The amount by which the xOffset should be incremented.
 	 */
 	public void moveCameraX(int offset) {
-		this.xOffset += offset;
+		Camera.xOffset += offset;
 	}
 	
 	/**
@@ -58,19 +58,13 @@ public class Camera {
 	 * @param offset The amount by which the yOffset should be incremented.
 	 */
 	public void moveCameraY(int offset) {
-		this.yOffset += offset;
+		Camera.yOffset += offset;
 	}
 	
-	/**
-	 * @return The current camera xOffset.
-	 */
 	public static float getXOffset() {
 		return xOffset;
 	}
 	
-	/**
-	 * @return The current camera yOffset.
-	 */
 	public static float getYOffset() {
 		return yOffset;
 	}

@@ -27,7 +27,6 @@ public class Game extends Canvas implements Runnable{
 	private Thread thread;
 	private static boolean running = false;
 	public static KeyInput keyInput = new KeyInput();
-	public static MouseInput mouseInput = new MouseInput();
 	public static GameState gameState = GameState.MainMenu;
 
 	public static GameClient socketClient;
@@ -163,7 +162,9 @@ public class Game extends Canvas implements Runnable{
 	}
 
 
-
+	/**
+	 * Initialised the map and players, adds input listeners, begins the thread and starts the game loop.
+	 */
 	public synchronized void start() {
 
 		m = new Map(MapMode.RNG, gameMode);
@@ -210,8 +211,6 @@ public class Game extends Canvas implements Runnable{
 
 		//windowHandler = new WindowHandler(this);
 		this.addKeyListener(keyInput);
-		this.addMouseListener(mouseInput);
-		this.addMouseMotionListener(mouseInput);
 
 		//The server is started in this function
 		thread = new Thread(this);
@@ -221,7 +220,9 @@ public class Game extends Canvas implements Runnable{
 	}
 
 
-
+	/**
+	 * Stops the game thread and the game loop.
+	 */
 	public synchronized void stop() {
 		try {
 			thread.join();
