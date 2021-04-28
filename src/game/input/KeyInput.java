@@ -15,6 +15,7 @@ public class KeyInput extends KeyAdapter{
     public static Key space = new Key();
     public static Key comma = new Key();
     public static Key period = new Key();
+    public static Key esc = new Key();
 	/**
 	 * Sets the pressed value of a given key based on a keyCode
 	 * @param keyCode The keyCode representing the key pressed
@@ -49,7 +50,7 @@ public class KeyInput extends KeyAdapter{
             period.setPressed(isPressed);
         }
         if (keyCode == KeyEvent.VK_ESCAPE) {
-        	System.exit(0);
+            esc.setPressed(isPressed);
         }
 
     }

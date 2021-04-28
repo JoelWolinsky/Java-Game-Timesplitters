@@ -18,8 +18,7 @@ import network.GameClient;
 import network.GameServer;
 import game.entities.players.PlayerMP;
 
-import static game.Level.getFinish;
-import static game.Level.getLevelState;
+import static game.Level.*;
 
 public class Game extends Canvas implements Runnable{
 
@@ -51,6 +50,8 @@ public class Game extends Canvas implements Runnable{
 	 * Called every frame, this tells certain lists, objects, or entities to call their own tick function.
 	 */
 	private void tick() {
+
+		//System.out.println(running);
 
 		if(this.gameState == GameState.Playing) {
 			m.getCurrentLevel().tick();
@@ -198,16 +199,17 @@ public class Game extends Canvas implements Runnable{
 		game = this;
 		camera.addTarget(player);
 
-
 		//GameProgress UI
-		m.currentLevel.addEntity(new ProgressBarController(Game.camera.getXOffset(), Game.camera.getYOffset()+10, 0,0,m.currentLevel,m.mps));
+		m.currentLevel.addToAddQueue(new ProgressBarController(Game.camera.getXOffset(), Game.camera.getYOffset()+10, 0,0,m.currentLevel,m.mps));
 		//Inventorry UI
-		m.currentLevel.addEntity(new InventoryBarController(Game.camera.getXOffset(), Game.camera.getYOffset()+400, 0,0,Game.player,m.currentLevel));
+		m.currentLevel.addToAddQueue(new InventoryBarController(Game.camera.getXOffset(), Game.camera.getYOffset()+400, 0,0,Game.player,m.currentLevel));
 		//Main UI Announcer eg. Countdown, End Game Celebration etc.
-		m.currentLevel.addEntity(new UIController(Game.camera.getXOffset(), Game.camera.getYOffset()+10,0,0));
+		m.currentLevel.addToAddQueue(new UIController(Game.camera.getXOffset(), Game.camera.getYOffset()+10,0,0));
 
 		//Sorts all of the entities based on their z index
 		Collections.sort(m.getCurrentLevel().getGameObjects(), Comparator.comparingInt(GameObject::getZ));
+
+		setLevelState(LevelState.Waiting);
 
 		//windowHandler = new WindowHandler(this);
 		this.addKeyListener(keyInput);

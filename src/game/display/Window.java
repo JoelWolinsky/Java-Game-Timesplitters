@@ -23,9 +23,12 @@ import game.Game;
 import game.GameState;
 import game.Launcher;
 import game.SoundHandler;
+import game.entities.GameObject;
 import game.graphics.GameMode;
 import network.GameClient;
 import network.GameServer;
+
+import static game.Level.getGameObjects;
 
 public class Window extends Canvas{
 	
@@ -51,6 +54,8 @@ public class Window extends Canvas{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		c.setBackground(Color.BLACK);
+		
+		SoundHandler.playMusic("mainMenuMusic", 0.1f);
 		
 		// Creating a new Font from the PressStart2P.ttf file that can be used in HTML JLabels
 		Font buttonFont = null;
@@ -188,7 +193,12 @@ public class Window extends Canvas{
 				backOptions.setVisible(false);
 				backMultiplayer.setVisible(false);
 				
+				if (Launcher.cHandler.ambienceToggle == true) {
+					SoundHandler.playSound("ambience", 0.2f);
+				}
+				
 				game.setGameState(GameState.Playing);
+
 				game.start();
 			}
 			
@@ -415,10 +425,12 @@ public class Window extends Canvas{
 		    		toggleMusicButton.setText("<html><center>MUSIC:<br><p style='margin-top:8'>OFF</center></html>");
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.MUSIC, "False");
 		    		Launcher.cHandler.musicToggle = false;
+		    		SoundHandler.stopMusic();
 		    	} else {
 		    		toggleMusicButton.setText("<html><center>MUSIC:<br><p style='margin-top:8'>ON</center></html>");
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.MUSIC, "True");
 		    		Launcher.cHandler.musicToggle = true;
+		    		SoundHandler.resumeMusic();
 		    	}
 	
 		    	toggleMusicButton.setIcon(BUTTON_3_HOVER_INNER);
@@ -432,6 +444,52 @@ public class Window extends Canvas{
 			@Override
 			public void mouseExited(MouseEvent e) {
 				toggleMusicButton.setIcon(BUTTON_3_INNER);
+			}
+		});
+		
+		// The toggle ambience button on the options screen
+		JLabel toggleAmbienceButton = new JLabel(button3Icon);
+		toggleAmbienceButton.setForeground(Color.black);
+		toggleAmbienceButton.setFont(sizedFont);
+		toggleAmbienceButton.setHorizontalTextPosition(JLabel.CENTER);
+		
+		if (Launcher.cHandler.ambienceToggle) {
+			toggleAmbienceButton.setText("<html><center>AMBIENCE:<br><p style='margin-top:8'>ON</center></html>");
+		} else {
+			toggleAmbienceButton.setText("<html><center>AMBIENCE:<br><p style='margin-top:8'>OFF</center></html>");
+		}
+		
+		toggleAmbienceButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				toggleAmbienceButton.setIcon(BUTTON_3_CLICKED_INNER);
+				SoundHandler.playSound("button1", 1f);
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+		    	if (Launcher.cHandler.ambienceToggle) {
+		    		toggleAmbienceButton.setText("<html><center>AMBIENCE:<br><p style='margin-top:8'>OFF</center></html>");
+		    		Launcher.cHandler.updateConfigValue(ConfigOption.AMBIENCE, "False");
+		    		Launcher.cHandler.ambienceToggle = false;
+		    	} else {
+		    		toggleAmbienceButton.setText("<html><center>AMBIENCE:<br><p style='margin-top:8'>ON</center></html>");
+		    		Launcher.cHandler.updateConfigValue(ConfigOption.AMBIENCE, "True");
+		    		Launcher.cHandler.ambienceToggle = true;
+		    	}
+	
+		    	toggleAmbienceButton.setIcon(BUTTON_3_HOVER_INNER);
+			}
+				  
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				toggleAmbienceButton.setIcon(BUTTON_3_HOVER_INNER);
+			}
+				  
+			@Override
+			public void mouseExited(MouseEvent e) {
+				toggleAmbienceButton.setIcon(BUTTON_3_INNER);
 			}
 		});
 		
@@ -510,6 +568,10 @@ public class Window extends Canvas{
 		    	multiplayerButtonPanel.setVisible(false);
 		    	backOptions.setVisible(false);
 				backMultiplayer.setVisible(false);
+				
+				if (Launcher.cHandler.ambienceToggle == true) {
+					SoundHandler.playSound("ambience", 0.2f);
+				}
 
 				game.setGameState(GameState.Playing);
 				game.setGameMode(GameMode.vsAI);
@@ -599,7 +661,7 @@ public class Window extends Canvas{
 		    	multiplayerButtonPanel.setVisible(false);
 		    	backOptions.setVisible(false);
 				backMultiplayer.setVisible(false);
-		    	
+
 		    	game.setGameState(GameState.Playing);
 				game.setGameMode(GameMode.MULTIPLAYER);
 		    	
@@ -625,6 +687,7 @@ public class Window extends Canvas{
 		backButtonPanel.add(backButton);
 		optionButtonPanel.add(toggleSoundEffectsButton);
 		optionButtonPanel.add(toggleMusicButton);
+		optionButtonPanel.add(toggleAmbienceButton);
 		optionButtonPanel.add(difficultyButton);
 		multiplayerButtonPanel.add(playVSComputerButton);
 		multiplayerButtonPanel.add(createGameButton);

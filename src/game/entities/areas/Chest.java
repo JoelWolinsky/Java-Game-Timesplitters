@@ -1,5 +1,6 @@
 package game.entities.areas;
 import game.entities.players.AIPlayer;
+import game.SoundHandler;
 import game.entities.players.Player;
 
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ public class Chest extends AnimArea{
 						p.getInventory().get(p.firstFreeSpace()).setUrl(randomItem());
 						this.setVisibile(false);
 						p.setInventoryChanged(true);
+						
+						SoundHandler.playSound("chest", 0.4f);
 
 						if (p instanceof AIPlayer) {
 							((AIPlayer) p).startInventoryTimer();

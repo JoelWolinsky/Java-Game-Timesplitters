@@ -1,3 +1,3 @@
 package game.graphics;
 
-public enum LevelState {Waiting,Starting,InProgress,Finished};
+public enum LevelState {Loading,Waiting,Starting,InProgress,Finished};

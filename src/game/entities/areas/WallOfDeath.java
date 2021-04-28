@@ -1,5 +1,6 @@
 package game.entities.areas;
 
+import game.SoundHandler;
 import game.entities.GameObject;
 import game.entities.players.AIPlayer;
 import game.entities.players.Player;
@@ -44,6 +45,7 @@ public class WallOfDeath extends GameObject {
                     p.setGhostMode(true);
                     p.setCurrentAnimState(AnimationStates.LEFT);
                     p.setAnimations(getAnimations("GHOST_FORM"));
+                    SoundHandler.playSound("death", 0.5f);
 
                 }
             }
