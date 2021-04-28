@@ -1,4 +1,5 @@
 package game.entities.areas;
+import game.SoundHandler;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
@@ -50,8 +51,10 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 		for (Player p : getPlayers())
 		{
 			if (this.getInteraction(p))
-				if (!(p.isBounceImmune()))
+				if (!(p.isBounceImmune())) {
 					p.bounce(this.getSpeed());
+					SoundHandler.playRandomChicken();
+				}
 		}
 
 
