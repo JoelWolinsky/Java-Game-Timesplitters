@@ -195,7 +195,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
 	        if (canMove)
 	            if (this.INPUT != null && this == Game.player) {
-	                if (KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
+	                if (KeyInput.right.isPressed() && !collide(this, 2, true)) {
 
 	                    // Simulates acceleration when you run right
 	                    if (this.velX >= RUN_SPEED) {
@@ -205,7 +205,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 	                    }
 
 
-	                } else if (KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
+	                } else if (KeyInput.left.isPressed() && !collide(this, -2, true)) {
 
 	                    // Simulates acceleration when you run left
 	                    if (this.velX <= -RUN_SPEED) {
@@ -218,7 +218,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 	                } else {
 
 	                    // For deceleration effect
-	                    if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)) {
+	                    if (!collide(this, this.velX, true)) {
 	                        if (this.velX >= -0.1f && this.velX <= 0.1f) {
 	                            this.velX = 0;
 	                        } else if (this.velX > 0.1f) {
@@ -311,7 +311,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 	        }
 
 
-	        if (!SolidCollider.willCauseSolidCollision(this, this.velX + 1, true)) {
+	        if (!collide(this, this.velX + 1, true)) {
 
 	            if(!ghostMode)
 	            moving = true;
@@ -319,7 +319,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 	            this.x += this.velX;
 	        }
 
-	        if (!SolidCollider.willCauseSolidCollision(this, this.velY + 1, false)) {
+	        if (!collide(this, this.velY + 1, false)) {
 	            if(!ghostMode)
 	            moving = true;
 	            this.y += this.velY;
@@ -336,9 +336,9 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 	                    this.velY = 0;
 	                } else {    // When velY == 0 and velX == 0 the sticking to the wall bug occurs.
 	                    // Rebounds the player off the wall to avoid sticking.
-	                    if (SolidCollider.willCauseSolidCollision(this, 5, true)) {
+	                    if (collide(this, 5, true)) {
 	                        this.velX = -2.0f;
-	                    } else if (SolidCollider.willCauseSolidCollision(this, -5, true)) {
+	                    } else if (collide(this, -5, true)) {
 	                        this.velX = 2.0f;
 	                    }
 	                }
@@ -509,6 +509,11 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                 break;
 
             case "banana":
+                RUN_SPEED = 3.5f;
+                JUMP_GRAVITY = -7.5f;
+                break;
+
+            case "fart":
                 RUN_SPEED = 3.5f;
                 JUMP_GRAVITY = -7.5f;
                 break;
