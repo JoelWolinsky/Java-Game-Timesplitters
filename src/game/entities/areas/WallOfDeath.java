@@ -6,6 +6,7 @@ import game.entities.players.AIPlayer;
 import game.entities.players.Player;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
+import game.graphics.GameMode;
 import game.graphics.LevelState;
 import game.network.packets.Packet02Move;
 import game.network.packets.Packet03MoveWall;
@@ -62,6 +63,9 @@ public class WallOfDeath extends GameObject {
 	            
 	            Packet03MoveWall packet = new Packet03MoveWall(this.x);
                 packet.writeData(Game.socketClient);
+        	} else if (Game.gameMode == GameMode.SINGLEPLAYER) {
+        		moving=true;
+	            this.x += 1;
         	}
         }
 
