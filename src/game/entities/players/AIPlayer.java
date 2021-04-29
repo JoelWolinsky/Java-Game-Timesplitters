@@ -147,17 +147,16 @@ public class AIPlayer extends Player {
 				}
 
 				if (this.inventoryTimerOn == true) {
-					
+
 					this.inventoryTimer++;
 
-					if (this.inventoryTimer == 120) {
+					if (this.inventoryTimer >= 120) {
 						
 						INVENTORY.get(0).getEffect();
 						if (!(INVENTORY.get(0).getUrl().equals("./img/jump.png")) && !(INVENTORY.get(0).getUrl().equals("./img/banana.png")))
 							CURRENT_EFFECTS.add(new Effect(INVENTORY.get(0).getUrl(), 500));
 						INVENTORY.get(0).setUrl("./img/empty.png");
 						this.setInventoryChanged(true);
-						
 
 						this.inventoryTimer = 0;
 						this.inventoryTimerOn = false;

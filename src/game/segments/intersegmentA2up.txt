@@ -3,6 +3,7 @@ Chunk 1 E intersegmentA2up.png
 Respawn 70 363 0 0 flag1.png
 Waypoint 35 363 flag3.png R N 0
 Waypoint 85 363 flag3.png R Y 20
+Platform Custom 0 384 customFloor1.png
 
 
 //BOTTOM WALLS
@@ -39,7 +40,8 @@ Platform Inverted 182 284
 Platform Default 150 284
 Platform Default 118 284
 Platform Default 86 284
-Waypoint 194 284 flag3.png L Y 180
+Waypoint 90 264 flag3.png R N 30
+Waypoint 205 284 flag3.png L Y 180
 
 
 //2ND FLOOR
