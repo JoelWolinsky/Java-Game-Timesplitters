@@ -17,8 +17,8 @@ public class AIPlayer extends Player {
 	public Player humanPlayer;
 	public float dist_from_player;
 	public RespawnPoint penultimateRespawnPoint;
-	private int max_distance_ahead = 650;
-	private int max_distance_behind = -550;
+	private int max_distance_ahead = 1000;
+	private int max_distance_behind = -400;
 	private String username;
 	private Waypoint currentWaypoint;
 	private int inventoryTimer = 0;
@@ -40,39 +40,9 @@ public class AIPlayer extends Player {
 
 		dist_from_player = this.x - this.humanPlayer.getX();
 
-		if (humanPlayer.isGhostMode() == false) {
+		if (this.isGhostMode() == false) {
 
-			// sends AI Player to the penultimate RespawnPoint that the player has reached 
-			if (dist_from_player < max_distance_behind && humanPlayer.getRespawnPoints().size() > 2) {
-
-				this.invincible = true;
-
-				// Get the penultimate RespawnPoint that humanPlayer visited
-				penultimateRespawnPoint = humanPlayer.getRespawnPoints().get(humanPlayer.getRespawnPoints().size()-2);
-
-				if (this.humanPlayer.getX() - penultimateRespawnPoint.getX() > 350) {
-					this.invincibleMove = true;
-				}
-			}
-
-			if (this.invincibleMove == true) {
-
-				// to make smooth transition on minimap
-				if (this.x < penultimateRespawnPoint.getX()) {
-					this.x += 4;
-				} else { 
-					this.invincible = false; 
-					this.invincibleMove = false; 
-				}
-
-				// so that it only teleports once, and doesn't keep getting sent back
-				if (!this.getRespawnPoints().contains(penultimateRespawnPoint)) {
-					this.y = penultimateRespawnPoint.getY()-40;
-				} 	
-			}			
-		}
-		
-		if (this.canMove == true ) {
+			if (this.canMove == true ) {
 
 				if (this.wait > 0) {
 
@@ -162,7 +132,54 @@ public class AIPlayer extends Player {
 						this.inventoryTimerOn = false;
 					}
 				}
+
+			if (this.humanPlayer.isGhostMode() == false) {
+
+				// sends AI Player to the penultimate RespawnPoint that the player has reached 
+				if (dist_from_player < max_distance_behind && humanPlayer.getRespawnPoints().size() > 2) {
+
+					this.invincible = true;
+
+					// Get the penultimate RespawnPoint that humanPlayer visited
+					penultimateRespawnPoint = humanPlayer.getRespawnPoints().get(humanPlayer.getRespawnPoints().size()-2);
+
+					if (this.humanPlayer.getX() - penultimateRespawnPoint.getX() > 350) {
+						this.invincibleMove = true;
+					}
+				}
+
+				if (this.invincibleMove == true) {
+
+					// to make smooth transition on minimap
+					if (this.x < penultimateRespawnPoint.getX()) {
+						this.x += 4;
+					} else { 
+						this.invincible = false; 
+						this.invincibleMove = false; 
+					}
+
+					// so that it only teleports once, and doesn't keep getting sent back
+					if (!this.getRespawnPoints().contains(penultimateRespawnPoint)) {
+						this.y = penultimateRespawnPoint.getY()-20;
+					} 	
+				}	
 			}
+			
+		} else {	// If AIPlayer isGhostMode
+
+			if (this.y < this.humanPlayer.getY()+600) {
+
+				if (this.velY <= -6f) {
+					this.velY = -6f;
+				} else {
+					this.velY -= 0.5;
+				}
+
+				this.velX = 0;
+
+			}
+		}
+	}
 		
 		
 
