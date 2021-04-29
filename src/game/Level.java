@@ -185,12 +185,12 @@ public class Level extends Canvas {
 		}
 	}
 
-	public static GameObject getFinish()
+	public static GameEndingObject getFinish()
 	{
 		for (GameObject o : getGameObjects())
 		{
 			if (o instanceof GameEndingObject)
-				return o;
+				return (GameEndingObject)o;
 		}
 
 		return null;

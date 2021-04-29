@@ -2,7 +2,7 @@ ghost
 IDLE 15 4 ghost5.png ghost6.png ghost7.png ghost5.png
 OTHER 15 4 ghost5inv.png ghost6inv.png ghost7inv.png ghost5inv.png
 sphere
-IDLE 15 4 sphere.png sphere.png sphere.png sphere.png
+IDLE 2 6 sphere1.png sphere2.png sphere3.png sphere4.png sphere5.png sphere6.png
 acid
 IDLE 15 4 acid1.png acid2.png acid3.png acid4.png
 skele
@@ -76,3 +76,8 @@ LEFT 5 4 ghostformleft.png ghostformleft.png ghostformleft.png ghostformleft.png
 RIGHT 5 4 ghostformright.png ghostformright.png ghostformright.png ghostformright.png ghostformright.png ghostformright.png
 DETH
 IDLE 4 5 deth1.png deth2.png deth3.png deth4.png deth5.png
+END_PORTAL
+IDLE 5 4 endportal1.png endportal1.png endportal1.png endportal1.png
+LEFT 5 4 endportal2.png endportal2.png endportal2.png endportal2.png
+RIGHT 5 4 endportal3.png endportal3.png endportal3.png endportal3.png
+OTHER 5 4 endportal4.png endportal4.png endportal4.png endportal4.png

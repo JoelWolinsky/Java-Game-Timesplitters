@@ -122,17 +122,23 @@ public class UIController extends GameObject {
 
 		if (endGameCelebration)
 		{
-			if (!announcer.isVisible())
+			if (!announcer.isVisible()) {
 				announcer.setVisible(true);
+				announcerMessage.setVisible(true);
+			}
 
 			try {
-				announcer.setImg(ImageIO.read(new File("./img/trophy.png")));
+				announcer.setImg(ImageIO.read(new File("./img/winner.png")));
+				announcerMessage.setImg(ImageIO.read(new File("./img/close.png")));
 			}
 			catch (IOException exc) {
 				//TODO: Handle exception.
 			}
-			announcer.setY(y);
+			announcer.setY(y-8);
 			announcer.setX(x+((Window.WIDTH/6)/2) - (announcer.getImg().getWidth()/2));
+
+			announcerMessage.setY(y+50);
+			announcerMessage.setX(x+((Window.WIDTH/6)/2) - (announcerMessage.getImg().getWidth()/2));
 		}
 
 

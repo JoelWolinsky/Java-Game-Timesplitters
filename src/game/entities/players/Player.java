@@ -394,6 +394,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         if(getLevelState()==LevelState.Finished)
         if (KeyInput.esc.isPressed()) {
 
+            System.exit(0);
+            /*
             mainMenu.setVisible(true);
             back.setVisible(true);
             backOptions.setVisible(true);
@@ -405,6 +407,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
             setLevelState(LevelState.Loading);
             game.stop();
+
+             */
 
         }
 
