@@ -76,8 +76,3 @@ LEFT 5 4 ghostformleft.png ghostformleft.png ghostformleft.png ghostformleft.png
 RIGHT 5 4 ghostformright.png ghostformright.png ghostformright.png ghostformright.png ghostformright.png ghostformright.png
 DETH
 IDLE 4 5 deth1.png deth2.png deth3.png deth4.png deth5.png
-END_PORTAL
-IDLE 5 4 endportal1.png endportal1.png endportal1.png endportal1.png
-LEFT 5 4 endportal2.png endportal2.png endportal2.png endportal2.png
-RIGHT 5 4 endportal3.png endportal3.png endportal3.png endportal3.png
-OTHER 5 4 endportal4.png endportal4.png endportal4.png endportal4.png

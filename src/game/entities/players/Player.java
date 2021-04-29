@@ -150,8 +150,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
 	        //always have the player collision box set to respective size of its animationstate
 	        //this.width = animations.get(currentAnimState).getFrame(frame).getWidth();
-	        //this.height = animations.get(currentAnimState).getFrame(frame).getHeight();
-
+	        //this.height = animations.get(currentAnimState).getFrame(frame).getHeight()
 
 	        this.prevPos = new Point((int) this.x, (int) this.y);
 
@@ -159,7 +158,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 	        if (velX == 0 && !ghostMode) {
 	        	directionTickCounter++;
 	        }
-	        if (input != null) {
+	        if (INPUT != null) {
 	        	if(velX > 0) {
 	            	facingRight = true;
 	            	currentAnimState = AnimationStates.RIGHT;
@@ -195,7 +194,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 	        //Check for keyboard input along the x-axis
 
 	        if (canMove)
-	            if (this.input != null && this == Game.player) {
+	            if (this.INPUT != null && this == Game.player) {
 	                if (KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
 
 	                    // Simulates acceleration when you run right
