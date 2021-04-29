@@ -76,13 +76,17 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     protected int animationTimer = 0;
     protected int frame;
     protected AnimationStates currentAnimState;
+    protected String currentDirection = "right";
     protected Animation currentAnimation;
     protected HashMap<AnimationStates, Animation> animations;
+    protected int directionTickCounter = 0;
 
     private Point prevPos;
     private  String username;
     private final KeyInput INPUT;
     private String objectModel;
+
+    private int packetCounter = 0;
 
 
     public Player(float x, float y, KeyInput input, int width, int height,String url) {
@@ -98,257 +102,258 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         this.currentAnimState = AnimationStates.IDLE;
 
         this.width = animations.get(currentAnimState).getFrame(frame).getWidth();
-        this.height = animations.get(currentAnimState).getFrame(frame).getHeight();       
+        this.height = animations.get(currentAnimState).getFrame(frame).getHeight();
 
         CollidingObject.addCollider(this);
         SolidCollider.addSolidCollider(this);
     }
-    
+
     public void setUsername(String username) {
     	this.username = username;
     }
 
     public void tick() {
         //Gather all collisions
-        CollidingObject.getCollisions(this);
+    	if (this == Game.player) {
+	        CollidingObject.getCollisions(this);
 
-        moving = false;
+	        moving = false;
 
-        //disable immunity after 100
-        if (getLevelState()== LevelState.InProgress)
-        if (i < 100) {
-            i++;
-            if (i > 20) {
-				if (getLevelState()== LevelState.InProgress){
-                	this.setCanMove(true); // makes Players pause for 20 ticks upon respawn
-				} else {
-					this.setCanMove(false);
-				}
-            }
-        } else {
-            immunity = false;
-        }
-
-        if (bi < 15) {
-            bi++;
-        } else {
-            bounceImmunity = false;
-        }
-
-
-        for (Item i : this.getInventory()) {
-            if (i.getAddItem()) {
-                getToBeAdded().add(new AddedItem(this.getX(), this.getY(), 0, 0, this, i.getItemToAdd()));
-                i.setAddItem(false);
-            }
-        }
-
-        //always have the player collision box set to respective size of its animationstate
-        //this.width = animations.get(currentAnimState).getFrame(frame).getWidth();
-        //this.height = animations.get(currentAnimState).getFrame(frame).getHeight();
-
-
-        this.prevPos = new Point((int) this.x, (int) this.y);
-
-        //Animation Handler
-        
-        if(velX > 0) {
-        	facingRight = true;
-        	currentAnimState = AnimationStates.RIGHT;
-        }
-        else if(velX < 0) {
-        	facingRight = false;
-        	currentAnimState = AnimationStates.LEFT;
-        }
-        else if (velX == 0 && !ghostMode) {
-
-            if (getLevelState()==LevelState.Finished)
-            {
-                currentAnimState = AnimationStates.SWAG;
-            }
-            else if (facingRight)
-            {
-                currentAnimState = AnimationStates.IDLE;
-            }
-            else
-            {
-                currentAnimState = AnimationStates.OTHER;
-            }
-
-        }
-        
-        
-        //Check for keyboard input along the x-axis
-
-        if (canMove)
-            if (this.INPUT != null) {
-                if (KeyInput.right.isPressed() && !collide(this, 2, true)) {
-
-                    // Simulates acceleration when you run right
-                    if (this.velX >= RUN_SPEED) {
-                        this.velX = RUN_SPEED;
-                    } else {
-                        this.velX += 0.5;
-                    }
-                  
-
-                } else if (KeyInput.left.isPressed() && !collide(this, -2, true)) {
-
-                    // Simulates acceleration when you run left
-                    if (this.velX <= -RUN_SPEED) {
-                        this.velX = -RUN_SPEED;
-                    } else {
-                        this.velX -= 0.5;
-                    }
-                  
-
-                } else {
-
-                    // For deceleration effect
-                    if (!collide(this, this.velX, true)) {
-                        if (this.velX >= -0.1f && this.velX <= 0.1f) {
-                            this.velX = 0;
-                        } else if (this.velX > 0.1f) {
-                            this.velX -= DECELERATION;          
-                            
-                        } else {
-                            this.velX += DECELERATION;
-                          
-                        }
-                    } else {
-                        this.velX = 0;
-                    }
-
-                }
-
-
-                //Check for keyboard input along the y-axis
-                if (KeyInput.down.isPressed()) {
-                    if (ghostMode){
-						if (this.velY >= 6f) {
-							this.velY = 6f;
-                        } else {
-                            this.velY += 0.5;
-                        }
+	        //disable immunity after 100
+	        if (getLevelState()== LevelState.InProgress)
+	        if (i < 100) {
+	            i++;
+	            if (i > 20) {
+					if (getLevelState()== LevelState.InProgress){
+	                	this.setCanMove(true); // makes Players pause for 20 ticks upon respawn
+					} else {
+						this.setCanMove(false);
 					}
-                    else
-                        this.velY = DOWN_SPEED;
-                } else if (KeyInput.up.isPressed()) {
+	            }
+	        } else {
+	            immunity = false;
+	        }
 
-                    if (ghostMode)
-                    {
-                        if (this.velY <= -6f) {
-                            this.velY = -6f;
-                        } else {
-                            this.velY -= 0.5;
-                        }
-                    }
-                    else
-                    {
-                    	
-                        if (jumpCooldown >= 10 && canDoubleJump && !isOnGround() && !hasCeilingAbove() && !isOnWall()) {
-                            this.velY = JUMP_GRAVITY_DOUBLE;
-                            jumpCooldown = 0;
-                            canDoubleJump = false;
-                        } else if (jumpCooldown >= 10 && isOnGround() && !hasCeilingAbove() && !isOnWall()) {
-                            this.velY = JUMP_GRAVITY;
-                            jumpCooldown = 0;
-                            
-                            if (!(this instanceof AIPlayer)) {
-                            	SoundHandler.playRandomJumpLand();
-                            }
-                        }
-                    }
-                }
-                else if(ghostMode)
-                {
-                    if (this.velY >= -0.1f && this.velY <= 0.1f) {
-                        this.velY = 0;
-                    } else if (this.velY > 0.1f) {
-                        this.velY -= DECELERATION;
-                    } else {
-                        this.velY += DECELERATION;
-                    }
-                }
-            }
-
-        if (jumpCooldown < 10)
-            jumpCooldown++;
+	        if (bi < 15) {
+	            bi++;
+	        } else {
+	            bounceImmunity = false;
+	        }
 
 
-        //If you're not on ground, you should fall
-        if (!isOnGround() && !ghostMode) {
-            fall(this);
-        } else {
-            CollidingObject o = SolidCollider.nextCollision(this, 5, false);
-            if (o instanceof MovingPlatform) {
-                if (((MovingPlatform) o).getXAxis()) {
-                    this.x += ((MovingPlatform) o).getVelocity();
-                } else {
-                    this.y += ((MovingPlatform) o).getVelocity();
-                }
-            }
+	        for (Item i : this.getInventory()) {
+	            if (i.getAddItem()) {
+	                getToBeAdded().add(new AddedItem(this.getX(), this.getY(), 0, 0, this, i.getItemToAdd()));
+	                i.setAddItem(false);
+	            }
+	        }
 
-            if (o instanceof CrushingPlatform) {
-                if (((CrushingPlatform) o).getCrushingSide().equals("BOTTOM")) {
-                    if (((CrushingPlatform) o).getVelocity() < 0)
-                        this.y += ((CrushingPlatform) o).getVelocity();
-                    else fall(this);
-                } else if (((CrushingPlatform) o).getCrushingSide().equals("LEFT") || ((CrushingPlatform) o).getCrushingSide().equals("RIGHT")) {
-                    this.x += ((CrushingPlatform) o).getVelocity();
-
-                }
-            }
-        }
+	        //always have the player collision box set to respective size of its animationstate
+	        //this.width = animations.get(currentAnimState).getFrame(frame).getWidth();
+	        //this.height = animations.get(currentAnimState).getFrame(frame).getHeight();
 
 
-        if (!collide(this, this.velX + 1, true)) {
+	        this.prevPos = new Point((int) this.x, (int) this.y);
 
-            if(!ghostMode)
-            moving = true;
+	        //Animation Handler
+	        if (velX == 0 && !ghostMode) {
+	        	directionTickCounter++;
+	        }
+	        if (input != null) {
+	        	if(velX > 0) {
+	            	facingRight = true;
+	            	currentAnimState = AnimationStates.RIGHT;
+	            	currentDirection = "right";
+	            }
+	            else if(velX < 0) {
+	            	facingRight = false;
+	            	currentAnimState = AnimationStates.LEFT;
+	            	currentDirection = "left";
+	            }
+	            else if (velX == 0 && !ghostMode) {
+	            	if(facingRight) {
+	            		currentAnimState = AnimationStates.IDLE;
+	            		currentDirection = "idle";
+	            	}
+	            	else {
+	            		currentAnimState = AnimationStates.OTHER;
+	            	}
+	            }
+	        } else if (directionTickCounter == 30) {
+	        	directionTickCounter = 0;
+	        	if(facingRight) {
+	        		currentAnimState = AnimationStates.IDLE;
+	        		currentDirection = "idle";
+	        	}
+	        	else {
+	        		currentAnimState = AnimationStates.OTHER;
+	        	}
+	        }
 
-            this.x += this.velX;
-        }
 
-        if (!collide(this, this.velY + 1, false)) {
-            if(!ghostMode)
-            moving = true;
-            this.y += this.velY;
-        } else {
-            // Stop player falling through the floor
-            CollidingObject o = SolidCollider.nextCollision(this, this.velY, false);
-            if (o != null) {
-            	
-            	if (!ghostMode && !(this instanceof AIPlayer)) {
-            		SoundHandler.playRandomJump();
-            	}
-            	
-                Rectangle s = o.getBounds();
-                if (this.velY > 0 && !isOnWall()) {
-                    this.y = s.y - this.height;
-                    this.velY = 0;
-                } else if (this.velY < 0 && !isOnWall()) {
-                    this.velY = 0;
-                } else {    // When velY == 0 and velX == 0 the sticking to the wall bug occurs.
-                    // Rebounds the player off the wall to avoid sticking.
-                    if (collide(this, 5, true)) {
-                        this.velX = -2.0f;
-                    } else if (collide(this, -5, true)) {
-                        this.velX = 2.0f;
-                    }
-                }
-            }
-        }
 
-        if (Game.game.getGameMode()== GameMode.MULTIPLAYER) {
-            if (this == Game.player) {
-                if ((int) this.x != this.prevPos.x || (int) this.y != this.prevPos.y) {
-                    Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y);
-                    //System.out.println("Player move usr " + this.getUsername());
-                    packet.writeData(Game.socketClient);
-                }
-            }
-        }
+	        //Check for keyboard input along the x-axis
+
+	        if (canMove)
+	            if (this.input != null && this == Game.player) {
+	                if (KeyInput.right.isPressed() && !SolidCollider.willCauseSolidCollision(this, 2, true)) {
+
+	                    // Simulates acceleration when you run right
+	                    if (this.velX >= RUN_SPEED) {
+	                        this.velX = RUN_SPEED;
+	                    } else {
+	                        this.velX += 0.5;
+	                    }
+
+
+	                } else if (KeyInput.left.isPressed() && !SolidCollider.willCauseSolidCollision(this, -2, true)) {
+
+	                    // Simulates acceleration when you run left
+	                    if (this.velX <= -RUN_SPEED) {
+	                        this.velX = -RUN_SPEED;
+	                    } else {
+	                        this.velX -= 0.5;
+	                    }
+
+
+	                } else {
+
+	                    // For deceleration effect
+	                    if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)) {
+	                        if (this.velX >= -0.1f && this.velX <= 0.1f) {
+	                            this.velX = 0;
+	                        } else if (this.velX > 0.1f) {
+	                            this.velX -= DECELERATION;
+
+	                        } else {
+	                            this.velX += DECELERATION;
+
+	                        }
+	                    } else {
+	                        this.velX = 0;
+	                    }
+
+	                }
+
+
+	                //Check for keyboard input along the y-axis
+	                if (KeyInput.down.isPressed()) {
+	                    if (ghostMode){
+							if (this.velY >= 6f) {
+								this.velY = 6f;
+	                        } else {
+	                            this.velY += 0.5;
+	                        }
+						}
+	                    else
+	                        this.velY = DOWN_SPEED;
+	                } else if (KeyInput.up.isPressed()) {
+
+	                    if (ghostMode)
+	                    {
+	                        if (this.velY <= -6f) {
+	                            this.velY = -6f;
+	                        } else {
+	                            this.velY -= 0.5;
+	                        }
+	                    }
+	                    else
+	                    {
+
+	                        if (jumpCooldown >= 10 && canDoubleJump && !isOnGround() && !hasCeilingAbove() && !isOnWall()) {
+	                            this.velY = JUMP_GRAVITY_DOUBLE;
+	                            jumpCooldown = 0;
+	                            canDoubleJump = false;
+	                        } else if (jumpCooldown >= 10 && isOnGround() && !hasCeilingAbove() && !isOnWall()) {
+	                            this.velY = JUMP_GRAVITY;
+	                            jumpCooldown = 0;
+	                        }
+	                    }
+	                }
+	                else if(ghostMode)
+	                {
+	                    if (this.velY >= -0.1f && this.velY <= 0.1f) {
+	                        this.velY = 0;
+	                    } else if (this.velY > 0.1f) {
+	                        this.velY -= DECELERATION;
+	                    } else {
+	                        this.velY += DECELERATION;
+	                    }
+	                }
+	            }
+
+	        if (jumpCooldown < 10)
+	            jumpCooldown++;
+
+
+	        //If you're not on ground, you should fall
+	        if (!isOnGround() && !ghostMode) {
+	            fall(this);
+	        } else {
+	            CollidingObject o = SolidCollider.nextCollision(this, 5, false);
+	            if (o instanceof MovingPlatform) {
+	                if (((MovingPlatform) o).getXAxis()) {
+	                    this.x += ((MovingPlatform) o).getVelocity();
+	                } else {
+	                    this.y += ((MovingPlatform) o).getVelocity();
+	                }
+	            }
+
+	            if (o instanceof CrushingPlatform) {
+	                if (((CrushingPlatform) o).getCrushingSide().equals("BOTTOM")) {
+	                    if (((CrushingPlatform) o).getVelocity() < 0)
+	                        this.y += ((CrushingPlatform) o).getVelocity();
+	                    else fall(this);
+	                } else if (((CrushingPlatform) o).getCrushingSide().equals("LEFT") || ((CrushingPlatform) o).getCrushingSide().equals("RIGHT")) {
+	                    this.x += ((CrushingPlatform) o).getVelocity();
+
+	                }
+	            }
+	        }
+
+
+	        if (!SolidCollider.willCauseSolidCollision(this, this.velX + 1, true)) {
+
+	            if(!ghostMode)
+	            moving = true;
+
+	            this.x += this.velX;
+	        }
+
+	        if (!SolidCollider.willCauseSolidCollision(this, this.velY + 1, false)) {
+	            if(!ghostMode)
+	            moving = true;
+	            this.y += this.velY;
+	        } else {
+	            // Stop player falling through the floor
+	            CollidingObject o = SolidCollider.nextCollision(this, this.velY, false);
+	            if (o != null) {
+	                Rectangle s = o.getBounds();
+
+	                if (this.velY > 0 && !isOnWall()) {
+	                    this.y = s.y - this.height;
+	                    this.velY = 0;
+	                } else if (this.velY < 0 && !isOnWall()) {
+	                    this.velY = 0;
+	                } else {    // When velY == 0 and velX == 0 the sticking to the wall bug occurs.
+	                    // Rebounds the player off the wall to avoid sticking.
+	                    if (SolidCollider.willCauseSolidCollision(this, 5, true)) {
+	                        this.velX = -2.0f;
+	                    } else if (SolidCollider.willCauseSolidCollision(this, -5, true)) {
+	                        this.velX = 2.0f;
+	                    }
+	                }
+	            }
+	        }
+
+	        if (Game.game.getGameMode()== GameMode.MULTIPLAYER) {
+	                if ((int) this.x != this.prevPos.x || (int) this.y != this.prevPos.y) {
+	                    Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, currentDirection);
+	                    //System.out.println("Player move usr " + this.getUsername());
+	                    packet.writeData(Game.socketClient);
+	                }
+	            }
+    }
 
 		/*
 		Falling below the current height threshold kills the player
@@ -522,11 +527,11 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             canMove = false;
             i = 0;
             currentAnimState = AnimationStates.IDLE;
-            
+
             if (!ghostMode && !(this instanceof AIPlayer)) {
             	SoundHandler.playRandomDeath();
             }
-            
+
         }
     }
 
@@ -697,20 +702,26 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     }
 
     public void renderAnim(Graphics g, int x, int y) {
+    	if(ghostMode == true) {
+    		if (this.currentAnimation == null) {
+    			this.setAnimations(getAnimations("GHOST_FORM"));
+			}
+    	}
+	        if (currentAnimState != null) {
 
-        if (currentAnimState != null) {
-            currentAnimation = animations.get(currentAnimState);
+	            currentAnimation = animations.get(currentAnimState);
+	            frame = (animationTimer / currentAnimation.getTicksPerFrame());
+	            g.drawImage(currentAnimation.getFrame(frame), x, y, null);
 
-            frame = (animationTimer / currentAnimation.getTicksPerFrame());
 
-            g.drawImage(currentAnimation.getFrame(frame), x, y, null);
 
-            animationTimer++;
+	            animationTimer++;
 
-            if (animationTimer >= currentAnimation.getTicksPerFrame() * currentAnimation.getNumberOfFrames()) {
-                animationTimer = 0;
-            }
-        }
+	            if (animationTimer >= currentAnimation.getTicksPerFrame() * currentAnimation.getNumberOfFrames()) {
+	                animationTimer = 0;
+	            }
+	        }
+
     }
 
     public void setCurrentAnimState(AnimationStates currentAnimState) {
@@ -741,5 +752,5 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         else
             return SolidCollider.willCauseSolidCollision(o, vel, xAxis);
     }
-    
+
 }

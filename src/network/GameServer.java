@@ -14,6 +14,8 @@ import game.network.packets.Packet.PacketTypes;
 import game.network.packets.Packet00Login;
 import game.network.packets.Packet01Disconnect;
 import game.network.packets.Packet02Move;
+import game.network.packets.Packet03MoveWall;
+import game.network.packets.Packet04StartGame;
 
 public class GameServer extends Thread {
 	private DatagramSocket socket;
@@ -70,7 +72,7 @@ public class GameServer extends Thread {
 				System.out.println(connectedPlayers.size());
 				//System.out.println("Add con1");
 
-				PlayerMP player = new PlayerMP (100, 100, address, port,"player1");
+				PlayerMP player = new PlayerMP (10, 0, address, port,"player1");
 				System.out.println("username before: " + player.getUsername());
 				player.setUsername(((Packet00Login) packet).getUsername());
 				System.out.println("username after: " + player.getUsername());
@@ -88,6 +90,16 @@ public class GameServer extends Thread {
 				packet = new Packet02Move(data);
 				//System.out.println(((Packet02Move)packet).getUsername() + " has moved to " + ((Packet02Move)packet).getX() + ", " + ((Packet02Move)packet).getY());
 				this.handleMove((Packet02Move)packet);
+				break;
+			case MOVEWALL:
+				//System.out.println("send wall packet");
+
+				packet = new Packet03MoveWall(data);
+				this.handleMoveWall((Packet03MoveWall)packet);
+				break;
+			case STARTGAME:
+				packet = new Packet04StartGame(data);
+				this.handleStartGame((Packet04StartGame)packet);
 			}
 		}catch (Exception e) {
 				System.out.println("Exception at GameServer.parsePacket");
@@ -98,6 +110,15 @@ public class GameServer extends Thread {
 	
 
 	
+	private void handleStartGame(Packet04StartGame packet) {
+		try {
+			packet.writeData(this);
+		} catch (Exception e) {
+			System.out.println("Exception in GameServer.handleStartGame");
+			e.printStackTrace();
+		}		
+	}
+
 	/** 
 	 * Adds new players to the game.
 	 */
@@ -240,6 +261,18 @@ public class GameServer extends Thread {
 				}
 				this.connectedPlayers.get(index).setX(packet.getX());
 				this.connectedPlayers.get(index).setY(packet.getY());
+				packet.writeData(this);
+//			} else {
+//				System.out.println("packet name  null");
+//			}
+		} catch (Exception e) {
+			System.out.println("Exception in GameServer.handleMove");
+			e.printStackTrace();
+		}
+	}
+	
+	private void handleMoveWall(Packet03MoveWall packet) {
+		try {
 				packet.writeData(this);
 //			} else {
 //				System.out.println("packet name  null");

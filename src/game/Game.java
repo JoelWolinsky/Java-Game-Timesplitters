@@ -29,7 +29,7 @@ public class Game extends Canvas implements Runnable{
 	public static GameState gameState = GameState.MainMenu;
 
 	public static GameClient socketClient;
-	public static GameServer socketServer;
+	public static GameServer socketServer = null;
 
 	public float a=0,b=0,c=0,d=0;
 	public static Game game;
@@ -175,7 +175,7 @@ public class Game extends Canvas implements Runnable{
 			case MULTIPLAYER:
 				player = new PlayerMP(0, 350, keyInput, null, -1,"player1");
 
-				Packet00Login loginPacket = new Packet00Login(player.getUsername(), 200, 340);
+				Packet00Login loginPacket = new Packet00Login(player.getUsername(), 0, 350);
 				if (socketServer != null) {
 					//socketServer.addConnection((PlayerMP) player, loginPacket);
 					loginPacket.writeData(socketServer);

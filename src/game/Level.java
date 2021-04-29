@@ -9,6 +9,7 @@ import game.entities.areas.WallOfDeath;
 import game.entities.players.AIPlayer;
 import game.entities.players.Player;
 import game.entities.players.PlayerMP;
+import game.graphics.AnimationStates;
 import game.graphics.LevelState;
 
 import static game.Game.getGameMode;
@@ -33,6 +34,7 @@ public class Level extends Canvas {
 	public static LevelState getLevelState () {return levelState;}
 	public static void setLevelState (LevelState levelStatee) {levelState = levelStatee;}
 	private double time1=0,time2;
+	private AnimationStates currentAnimState;
 
 	public void tick() {
 
@@ -137,15 +139,28 @@ public class Level extends Canvas {
 
 	}
 
-	public void movePlayer(String username, float x, float y) {
+	public void movePlayer(String username, float x, float y, String direction) {
 		try {
 
 			if (getSpecificPlayerMP(username)!=null) {
 
 				getSpecificPlayerMP(username).setX(x);
 				getSpecificPlayerMP(username).setY(y);
-				
-				
+
+
+
+				if(direction.equals("right")) {
+					currentAnimState = AnimationStates.RIGHT;
+				} else if (direction.equals("left")) {
+					currentAnimState = AnimationStates.LEFT;
+				} else {
+					currentAnimState = AnimationStates.IDLE;
+				}
+				//System.out.println(currentAnimState);
+				getSpecificPlayerMP(username).setCurrentAnimState(currentAnimState);
+
+
+
 			}
 
 		} catch (Exception e) {
@@ -215,6 +230,23 @@ public class Level extends Canvas {
 				return (WallOfDeath) o;
 		}
 		return null;
+	}
+
+	public void moveWall(float x) {
+		try {
+			//System.out.println("movewall");
+			if (getWallOfDeath()!=null) {
+
+				getWallOfDeath().setX(x);
+				getWallOfDeath().setMoving();
+				//System.out.println("movedwall to " + x);
+
+			}
+
+		} catch (Exception e) {
+			System.out.println("Exception in movePlayer when moving player " );
+			e.printStackTrace();
+		}
 	}
 
 	public void time()

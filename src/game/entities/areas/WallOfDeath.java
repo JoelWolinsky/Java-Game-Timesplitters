@@ -1,12 +1,15 @@
 package game.entities.areas;
-
+import game.Game;
 import game.SoundHandler;
 import game.entities.GameObject;
 import game.entities.players.AIPlayer;
 import game.entities.players.Player;
 import game.graphics.Animation;
 import game.graphics.AnimationStates;
+import game.graphics.GameMode;
 import game.graphics.LevelState;
+import game.network.packets.Packet02Move;
+import game.network.packets.Packet03MoveWall;
 
 import static game.Level.getPlayers;
 import static game.Level.getLevelState;
@@ -53,9 +56,18 @@ public class WallOfDeath extends GameObject {
 		}
 
         if (getLevelState()== LevelState.InProgress){
-            moving=true;
-            this.x += 1;
-            //this.width++;
+        	//System.out.println(Game.socketServer);
+        	if(Game.socketServer != null) {
+	            moving=true;
+	            this.x += 1;
+	            //this.width++;
+
+	            Packet03MoveWall packet = new Packet03MoveWall(this.x);
+                packet.writeData(Game.socketClient);
+        	} else if (Game.gameMode == GameMode.SINGLEPLAYER) {
+        		moving=true;
+	            this.x += 1;
+        	}
         }
 
 	}
@@ -74,7 +86,7 @@ public class WallOfDeath extends GameObject {
 	public boolean getInteraction(GameObject player){
 		return ((int)this.x < (int)player.getX()+player.getWidth() &&
 				(int)player.getX() < this.x+this.width - 110 &&
-				(int)this.y < (int)player.getY()+player.getHeight() && 
+				(int)this.y < (int)player.getY()+player.getHeight() &&
 				(int)player.getY() < (int)this.y+this.height);
 	}
 
@@ -102,22 +114,8 @@ public class WallOfDeath extends GameObject {
         this.currentAnimState = currentAnimState;
     }
 
+    public void setMoving() {
+    	this.moving = true;
+    }
+
 }
-    
-
-
-
-
-
-
-
-
-	
-
-	
-
-	
-
-
-
-

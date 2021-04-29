@@ -1,5 +1,7 @@
 package network;
 
+import static game.Level.setLevelState;
+
 import java.io.IOException;
 
 import java.net.DatagramPacket;
@@ -10,12 +12,16 @@ import java.net.UnknownHostException;
 
 import game.Game;
 import game.Level;
+import game.UIController;
 import game.entities.players.PlayerMP;
+import game.graphics.LevelState;
 import game.network.packets.Packet;
 import game.network.packets.Packet.PacketTypes;
 import game.network.packets.Packet00Login;
 import game.network.packets.Packet01Disconnect;
 import game.network.packets.Packet02Move;
+import game.network.packets.Packet03MoveWall;
+import game.network.packets.Packet04StartGame;
 
 public class GameClient extends Thread {
 	private InetAddress ipAddress;
@@ -80,6 +86,15 @@ public class GameClient extends Thread {
 				//System.out.println("client handle move");
 				packet = new Packet02Move(data);
 				handleMove((Packet02Move)packet);
+				break;
+			case MOVEWALL:
+				//System.out.println("receive wall packet");
+				packet = new Packet03MoveWall(data);
+				handleMove((Packet03MoveWall)packet);
+				break;
+			case STARTGAME:
+				packet = new Packet04StartGame(data);
+				handleStartGame((Packet04StartGame)packet);
 			}	
 		} catch (Exception e) {
 			System.out.println("Exception in parsePacket on client. Data " + data + "\nAddress " + address + "\nPort " + port);
@@ -87,6 +102,12 @@ public class GameClient extends Thread {
 		}
 	}
 	
+	private void handleStartGame(Packet04StartGame packet) {
+		System.out.println("handleStartGame");
+		setLevelState(LevelState.InProgress);
+		
+	}
+
 	/* 
 	 * Sends data to the server.
 	 */
@@ -110,11 +131,25 @@ public class GameClient extends Thread {
 			//System.out.println(Game.player.getUsername() +" Client handle move " + packet.getUsername());
 
 			try {
-				this.game.m.currentLevel.movePlayer(packet.getUsername(), packet.getX(), packet.getY());
+				this.game.m.currentLevel.movePlayer(packet.getUsername(), packet.getX(), packet.getY(), packet.getDirection());
 			} catch (Exception e) {
 				System.out.println("Exception in handleMove. Packet " + packet);
 				e.printStackTrace();
 			}
+		}
+		
+	}
+	
+	private void handleMove(Packet03MoveWall packet) {
+		if (Game.socketServer == null) {
+			try {
+				this.game.m.currentLevel.moveWall(packet.getX());
+			} catch (Exception e) {
+				System.out.println("Exception in handleMove. Packet " + packet);
+				e.printStackTrace();
+			}
+		} else {
+			//System.out.println("Server != null");
 		}
 		
 	}
@@ -124,7 +159,7 @@ public class GameClient extends Thread {
 	 */
 	private void handleLogin(Packet00Login packet, InetAddress address, int port) {
 		System.out.println("[" + address.getHostAddress() + ":" + port + "] " + (packet).getUsername() + " has joined the game...");
-		PlayerMP player = new PlayerMP (packet.getX(), packet.getY(), address, port,"player2");
+		PlayerMP player = new PlayerMP (0, 350, address, port,"player2");
 		player.setUsername((packet).getUsername());
 
 		Level.addToAddQueue(player);
