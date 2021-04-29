@@ -72,7 +72,7 @@ public class GameServer extends Thread {
 				System.out.println(connectedPlayers.size());
 				//System.out.println("Add con1");
 
-				PlayerMP player = new PlayerMP (100, 100, address, port,"player1");
+				PlayerMP player = new PlayerMP (10, 0, address, port,"player1");
 				System.out.println("username before: " + player.getUsername());
 				player.setUsername(((Packet00Login) packet).getUsername());
 				System.out.println("username after: " + player.getUsername());

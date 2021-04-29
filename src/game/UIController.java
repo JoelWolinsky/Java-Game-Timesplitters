@@ -44,10 +44,10 @@ public class UIController extends GameObject {
 	}
 
 	public void tick() {
+		//System.out.println(getLevelState());
 		if (getLevelState()==LevelState.InProgress) {
 			announcerMessage.setVisible(false);
-			Game.player.setCurrentAnimState(null);
-		}
+		} else {
 
 		if (announcer.isVisible())
 		{
@@ -77,8 +77,8 @@ public class UIController extends GameObject {
 			catch (IOException exc) {
 				//TODO: Handle exception.
 			}
-
 		}
+	}
 
 
 		if (startCountdown) {
@@ -118,6 +118,7 @@ public class UIController extends GameObject {
 
 					} else {
 						announcerMessage.setVisible(false);
+						Level.setLevelState(LevelState.InProgress);
 
 					}
 				}
