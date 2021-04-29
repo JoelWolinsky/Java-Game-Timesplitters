@@ -183,7 +183,7 @@ public class Game extends Canvas implements Runnable{
 				loginPacket.writeData(socketClient);
 				break;
 			case vsAI:
-				player = new Player(0, 340, keyInput, 0 ,0,"player1");
+				player = new Player(0, 350, keyInput, 0 ,0,"player1");
 				m.getCurrentLevel().addToAddQueue(new AIPlayer(30, 350, 0 ,0, player,"player2"));
 				m.getCurrentLevel().addToAddQueue(new AIPlayer(60, 350, 0 ,0, player,"player3"));
 				m.getCurrentLevel().addToAddQueue(new AIPlayer(90, 350, 0 ,0, player,"player4"));

@@ -10,7 +10,9 @@ TimerPlatform 240 500 thinplatform2.png 0.7 140
 TimerPlatform 330 540 thinplatform2.png 0.7 140
 Waypoint 140 420 flag3.png R Y 100
 Waypoint 240 440 flag3.png R Y 20
-Waypoint 330 440 flag3.png R Y 20
+Waypoint 220 364 flag3.png R Y 30
+Waypoint 330 440 flag3.png R Y 30
+Waypoint 330 314 flag3.png R Y 30
 
 Platform Custom 0 384 wall5.png
 
@@ -33,11 +35,11 @@ Platform Custom 330 92 corner1inv.png
 TimerPlatform 0 384 floordissapear.png 0.7 0
 
 TimerPlatform 50 530 thinplatform2.png 0.7 140
-Waypoint 50 510 flag3.png R Y 20
+Waypoint 50 510 flag3.png R Y 15
 TimerPlatform 140 490 thinplatform2.png 0.7 140
-Waypoint 140 470 flag3.png R Y 20
+Waypoint 140 470 flag3.png R Y 15
 TimerPlatform 240 450 thinplatform2.png 0.7 140
-Waypoint 240 430 flag3.png R Y 20
+Waypoint 240 430 flag3.png R Y 15
 TimerPlatform 330 410 thinplatform2.png 0.7 140
-Waypoint 330 390 flag3.png R Y 20
+Waypoint 330 390 flag3.png R Y 15
 
