@@ -82,7 +82,10 @@ Waypoint 200 363 flag3.png R N 20
 Waypoint 230 363 flag3.png R N 0
 Waypoint 260 363 flag3.png R N 0
 Waypoint 290 363 flag3.png R N 0
-Waypoint 320 363 flag3.png R Y 0
+Waypoint 320 363 flag3.png R N 0
+Waypoint 350 363 flag3.png R N 0
+Waypoint 380 363 flag3.png R N 0
+Waypoint 415 363 flag3.png R Y 0
 Platform Custom 200 383 thinfloor1.png
 Platform Custom 270 383 thinfloor1.png
 

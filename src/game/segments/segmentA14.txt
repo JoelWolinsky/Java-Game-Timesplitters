@@ -27,7 +27,9 @@ Platform Custom 155 196 bookshelf1.png
 Platform Custom 155 250 bookshelf2.png
 GAP
 Platform Custom 150 350 bookshelf2.png
+Waypoint 200 330 flag3.png R Y 70
 Platform Custom 145 382 bookshelf1.png
+Waypoint 145 362 flag3.png R Y 10
 Platform Custom 161 446 bookshelf1.png
 Platform Custom 148 510 bookshelf1.png
 Platform Custom 155 574 bookshelf1.png
@@ -65,6 +67,7 @@ Platform Custom 359 196 bookshelf1.png
 Platform Custom 359 250 bookshelf2.png
 GAP
 Platform Custom 350 370 bookshelf2.png
+Waypoint 400 350 flag3.png R Y 70
 Platform Custom 350 382 bookshelf1.png
 Platform Custom 342 446 bookshelf1.png
 Platform Custom 358 510 bookshelf1.png
@@ -123,11 +126,13 @@ Platform Custom 110 68 bookshelf1.png
 Platform Custom 98 132 bookshelf1.png
 Platform Custom 102 196 bookshelf1.png
 Platform Custom 102 220 bookshelf2.png
-
+-Waypoint 105 290 flag3.png R N 50
+Waypoint 156 290 flag3.png R Y 0
 Platform Custom 100 310 bookshelf2.png
 Platform Custom 100 342 bookshelf2.png
 Platform Custom 102 362 bookshelf2.png
 Platform Custom 98 382 bookshelf1.png
+Waypoint 98 362 flag3.png R Y 20
 Platform Custom 96 446 bookshelf1.png
 Platform Custom 102 510 bookshelf1.png
 Platform Custom 99 574 bookshelf1.png
@@ -163,7 +168,7 @@ Platform Custom 359 196 bookshelf1.png
 Platform Custom 359 250 bookshelf2.png
 
 Respawn 350 350 0 0 flag1.png
-
+Waypoint 400 350 flag3.png R Y 70
 Platform Custom 345 370 bookshelf2.png
 Platform Custom 345 382 bookshelf1.png
 Platform Custom 347 446 bookshelf1.png

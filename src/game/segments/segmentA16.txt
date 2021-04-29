@@ -22,7 +22,7 @@ Platform Custom 145 68 bookshelf1.png
 Platform Custom 161 132 bookshelf1.png
 Platform Custom 155 196 bookshelf1.png
 Platform Custom 155 250 bookshelf2.png
-GAP
+Waypoint 200 330 flag3.png R Y 0
 Platform Custom 150 350 bookshelf2.png
 Platform Custom 145 382 bookshelf1.png
 Platform Custom 161 446 bookshelf1.png
@@ -56,7 +56,7 @@ Platform Custom 105 68 bookshelf1.png
 Platform Custom 98 132 bookshelf1.png
 Platform Custom 102 196 bookshelf1.png
 Platform Custom 102 220 bookshelf2.png
-GAP
+Waypoint 120 322 flag3.png R N 40
 Platform Custom 100 342 bookshelf2.png
 Platform Custom 102 362 bookshelf2.png
 Platform Custom 98 382 bookshelf1.png
@@ -115,9 +115,11 @@ Platform Custom -20 132 bookshelf1.png
 
 GAP
 Platform Custom -20 365 bookshelf2.png
+Waypoint 20 365 flag3.png L Y 30
 Platform Custom 30 385 smallplatform1.png
 Platform Custom -30 475 bookshelf2.png
 Platform Custom -40 315 bookshelf3.png
+Waypoint -15 295 flag3.png R Y 30
 Platform Custom -67 250 bookshelf1.png
 Platform Custom -50 186 bookshelf1.png
 
@@ -134,9 +136,13 @@ Platform Custom -2 1022 bookshelf1.png
 Platform Custom -7 1086 bookshelf1.png
 Platform Custom 8 1150 bookshelf1.png
 Platform Custom 50 250 bookshelf2.png
+Waypoint 50 230 flag3.png R N 30
+Waypoint 105 230 flag3.png R Y 0
 
 Platform Custom 33 495 bookshelf2.png
+Waypoint 33 475 flag3.png R Y 30
 Platform Custom 70 450 bookshelf3.png
+Waypoint 75 430 flag3.png L Y 30
 Platform Custom 95 400 bookshelf3.png
 Platform Custom 90 335 bookshelf1.png
 Platform Custom 85 285 bookshelf3.png
@@ -162,8 +168,8 @@ Platform Custom 300 68 bookshelf1.png
 Platform Custom 302 132 bookshelf1.png
 Platform Custom 309 196 bookshelf1.png
 Platform Custom 309 250 bookshelf2.png
-GAP
 Platform Custom 300 365 bookshelf2.png
+Waypoint 310 345 flag3.png R Y 20
 Platform Custom 302 382 bookshelf1.png
 Platform Custom 292 446 bookshelf1.png
 Platform Custom 308 510 bookshelf1.png
@@ -198,6 +204,8 @@ Platform Custom 359 196 bookshelf1.png
 Platform Custom 359 250 bookshelf2.png
 GAP
 Respawn 355 340 0 0 flag1.png
+Waypoint 355 340 flag3.png R N 20
+Waypoint 400 340 flag3.png R Y 0
 Platform Custom 345 360 bookshelf2.png
 Platform Custom 345 382 bookshelf1.png
 Platform Custom 347 446 bookshelf1.png

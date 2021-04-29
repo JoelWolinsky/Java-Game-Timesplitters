@@ -55,9 +55,9 @@ Platform Custom 330 124 corner1.png
 Platform Custom 60 410 thinPlatform2.png
 Waypoint 70 350 flag3.png R Y 30
 TimerPlatform 180 340 thinplatform2.png 2 90
-Waypoint 120 320 flag3.png R N 20
+Waypoint 120 320 flag3.png R N 10
 Platform Custom 180 420 thinplatform2.png
-Waypoint 190 400 flag3.png R Y 15
+Waypoint 200 400 flag3.png R Y 15
 TimerPlatform 300 370 thinplatform2.png 2 120
 Waypoint 300 350 flag3.png R Y 20
 

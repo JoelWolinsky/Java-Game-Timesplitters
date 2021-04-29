@@ -105,14 +105,14 @@ Platform Custom 60 300 bookshelf3.png
 Platform Custom 110 320 bookshelf1.png
 Platform Custom 100 290 bookshelf2.png
 Waypoint 60 270 flag3.png R Y 10
-Waypoint 100 270 flag3.png L N 0
+Waypoint 100 280 flag3.png L N 0
 Platform Custom 120 240 bookshelf3.png
 Platform Custom 10 198 bookshelf2.png
 
 Platform Custom 160 335 bookshelf3.png
 Platform Custom 193 350 bookshelf2.png
 Platform Custom 195 285 bookshelf1.png
-Waypoint 210 265 flag3.png R Y 10
+Waypoint 190 265 flag3.png R Y 10
 Platform Custom 290 335 bookshelf3.png
 Waypoint 300 315 flag3.png R Y 15
 Platform Custom 245 350 bookshelf2.png
