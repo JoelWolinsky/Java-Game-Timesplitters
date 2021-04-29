@@ -44,16 +44,17 @@ public class UIController extends GameObject {
 	}
 
 	public void tick() {
-
+		if (getLevelState()==LevelState.InProgress) {
+			announcerMessage.setVisible(false);
+			Game.player.setCurrentAnimState(null);
+		}
 
 		if (announcer.isVisible())
 		{
 			announcer.centerHorizontally();
 			announcer.centerVertically();
 		}
-		if (getLevelState()==LevelState.InProgress) {
-			announcerMessage.setVisible(false);
-		}
+		
 		//START OF THE GAME COUNTDOWN SLIDESHOW
 		if (getLevelState()==LevelState.Starting) {
 			startCountdown = true;

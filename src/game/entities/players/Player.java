@@ -673,8 +673,9 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             currentAnimation = animations.get(currentAnimState);
             if(this.currentAnimation != null) {
             	frame = (animationTimer / currentAnimation.getTicksPerFrame());
+                g.drawImage(currentAnimation.getFrame(frame), x, y, null);
+
             }
-            g.drawImage(currentAnimation.getFrame(frame), x, y, null);
 
             animationTimer++;
 
