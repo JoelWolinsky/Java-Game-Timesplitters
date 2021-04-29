@@ -24,7 +24,8 @@ Waypoint 350 240 flag3.png L Y 15
 Platform Custom 370 270 bookshelf3.png
 Platform Custom 370 235 bookshelf2.png
 Platform Custom 370 170 bookshelf1.png
-Waypoint 390 150 flag3.png R Y 15
+Waypoint 370 120 flag3.png R Y 25
+-Waypoint 370 150 flag3.png R Y 15
 Platform Custom 420 210 bookshelf2.png
 Platform Custom 420 150 bookshelf1.png
 Platform Custom 400 335 bookshelf3.png
@@ -60,13 +61,13 @@ Platform Custom 10 290 bookshelf2.png
 Platform Custom 10 320 bookshelf1.png
 
 MovingPlatform 180 300 60 true 1.5 bookshelf3.png
-Waypoint 180 280 flag3.png R Y 20
-Waypoint 210 280 flag3.png R Y 20
-Waypoint 240 280 flag3.png R Y 20
+Waypoint 180 280 flag3.png R Y 15
 Waypoint 270 280 flag3.png R Y 20
+Waypoint 280 363 flag3.png R Y 20
 Platform Custom 330 350 bookshelf2.png
 Platform Custom 300 320 bookshelf1.png
-Waypoint 260 363 flag3.png R Y 10
+Waypoint 350 330 flag3.png R Y 15
+
 
 ScriptedDamageZone 296 130 1 0 3 296 128 0.2 296 132 0.2 296 130 0.2 crystalball
 TrackedScriptedDamageZoneSpawner 296 130 1 20 1 296 130 1.5 magic 1 -300 0 400 200
