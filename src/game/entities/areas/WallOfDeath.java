@@ -39,7 +39,6 @@ public class WallOfDeath extends GameObject {
         for (Player p: getPlayers())
 		{
 			if (this.getInteraction(p)){
-			    if(!(p instanceof AIPlayer))
 			    if (!p.isGhostMode())
                 {
                     p.setGhostMode(true);
