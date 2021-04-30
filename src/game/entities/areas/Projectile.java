@@ -26,6 +26,7 @@ public class Projectile extends DamageZone {
 		this.baseposY=y;
 		this.distance = distance;
 		this.velX = velocityX;
+		this.velY = velocityY;
 		
 		
 		/*
