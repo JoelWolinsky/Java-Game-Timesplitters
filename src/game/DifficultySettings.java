@@ -135,25 +135,32 @@ public class DifficultySettings {
 	public String updateConfigStr(String[] splitted) {
 		
 		
-		switch(splitted[10]) {
+		switch(splitted[0]) {
 		
-			case "rocks":
-				System.out.print("Changed rocks from " + splitted[4]+ "to");
-				splitted[4] = Float.toString(rocksSpeed);
-				System.out.println(splitted[4]);
-				break;
-			
-			case "stones":
-				System.out.print("Changed stones from " + splitted[4]+ "to");
-				splitted[4] = Float.toString(stonesSpeed);
-				System.out.println(splitted[4]);
-				break;
+			case"Projectile":
 				
-			case "arrow":
-				System.out.print("Changed arrow from " + splitted[4]+ "to");
-				splitted[4] = Float.toString(arrowSpeed);
-				System.out.println(splitted[4]);
-				break;
+				switch(splitted[10]) {
+				
+					case "rocks":
+						System.out.print("Changed rocks from " + splitted[4]+ "to");
+						splitted[4] = Float.toString(rocksSpeed);
+						System.out.println(splitted[4]);
+						break;
+				
+					case "stones":
+						System.out.print("Changed stones from " + splitted[4]+ "to");
+						splitted[4] = Float.toString(stonesSpeed);
+						System.out.println(splitted[4]);
+						break;
+					
+					case "arrow":
+						System.out.print("Changed arrow from " + splitted[4]+ "to");
+						splitted[4] = Float.toString(arrowSpeed);
+						System.out.println(splitted[4]);
+						break;
+				}
+			break;
+			
 		}
 		
 		String returnStr = "";
