@@ -50,15 +50,17 @@ public class Map {
 
         currentLevel = new Level();
 
-        currentLevel.addEntity(new WallOfDeath());
+        //currentLevel.addEntity(new WallOfDeath());
 
         switch (mapMode)
         {
             case debug:
 
                 parseFile(currentLevel, "intro1");
-                parseFile(currentLevel,"segmentA2");
-                parseFile(currentLevel,"introDimension");
+                //parseFile(currentLevel, "introDimension");
+               // parseFile(currentLevel,"introOutDimension");
+                //parseFile(currentLevel,"segmentA10");
+                parseFile(currentLevel,"segmentA17");
 			/*
 			*** LEGEND ***
 			m.mapParser(currentLevel, "intro1");				// No go zone 								

@@ -1,0 +1,70 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA12p1.png 2
+
+
+Chunk 1 E segmentA17p1.png
+Respawn 10 363 0 0 flag1.png
+
+Floor
+
+Platform Inverted 100 350
+Platform Inverted 310 330
+
+MovingPlatform 80 130 30 false 1.5 platform3.png
+MovingPlatform 200 180 40 false 2 platform3.png
+MovingPlatform 320 130 30 false 1 platform3.png
+
+
+MovingPlatform 200 270 150 true 4 platform2.png
+MovingPlatform 200 50 150 true 5 platform2.png
+
+MovingPlatform 200 -20 30 false 1.2 platform3.png
+
+MovingPlatform 60 -60 40 true 1 platform3.png
+MovingPlatform 330 -60 40 true 1.75 platform3.png
+
+
+Platform Custom 426 0 walltowerinv.png
+
+Chunk 1 N segmentA17p2.png
+
+Platform Custom 0 280 smallplatform1.png
+Platform Custom 410 280 smallplatform1inv.png
+
+Platform Custom 426 0 walltowerinv.png
+Platform Custom -32 0 walltower.png
+
+MovingPlatform 200 220 150 true 4 platform2.png
+MovingPlatform 200 100 150 true 5 platform2.png
+
+Platform Inverted 0 40
+Platform Inverted 410 40
+
+Platform Custom 100 160 platform3.png
+Platform Custom 300 160 platform3.png
+
+Projectile 0 130 3.5 0 426 0 0 55 fog1.png dart
+Projectile 426 200 -4 0 426 0 0 30 fog1.png dart
+
+Chunk 1 N segmentA17p3.png
+
+Platform Custom 426 0 walltowerinv.png
+Platform Custom -32 0 walltower.png
+
+MovingPlatform 200 150 150 true 4 platform2.png
+MovingPlatform 200 0 150 true 5 platform2.png
+
+Chunk 1 N segmentA17p3.png
+
+Platform Custom 426 0 walltowerinv.png
+Platform Custom -32 0 walltower.png
+
+Projectile 50 100 0 3 1300 213 0 0 nopicture.png rocks
+Projectile 50 100 0 3 1300 213 0 100 nopicture.png arrow
+Projectile 50 100 0 3 1300 213 0 200 nopicture.png rocks
+Projectile 50 100 0 3 1300 213 0 300 nopicture.png arrow
+Projectile 250 100 0 3 1300 400 0 400 nopicture.png arrow
+Projectile 250 100 0 3 1300 400 0 500 nopicture.png arrow
+Projectile 250 100 0 3 1300 400 0 600 nopicture.png rocks
+Projectile 250 100 0 3 1300 400 0 700 nopicture.png arrow
+
+

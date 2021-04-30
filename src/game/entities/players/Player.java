@@ -52,7 +52,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     public boolean immunity = false;
     public int i = 0;
     private int bi = 0;
-    protected boolean canMove = false;
+    protected boolean canMove = true;
     private boolean locked = false;
     private GameObject locker;
     protected final ArrayList<Item> INVENTORY = new ArrayList<Item>(Arrays.asList(new Item(0, 0, 0, 0, this, "./img/empty.png"), new Item(0, 0, 0, 0, this, "./img/empty.png"), new Item(0, 0, 0, 0, this, "./img/empty.png")));
