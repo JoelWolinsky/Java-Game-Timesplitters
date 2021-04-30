@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import game.ConfigHandler.ConfigOption;
+import game.DifficultySettings;
 import game.Game;
 import game.GameState;
 import game.Launcher;
@@ -463,6 +464,7 @@ public class Window extends Canvas{
 		    		difficultyButton.setText("<html><center>DIFFICULTY:<br><p style='margin-top:8'>MEDIUM</center></html>");
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.DIFFICULTY, "Medium");
 		    		Launcher.cHandler.difficulty = "Medium";
+		    		
 		    	} else if (Launcher.cHandler.difficulty.equals("Medium")) {
 		    		difficultyButton.setText("<html><center>DIFFICULTY:<br><p style='margin-top:8'>HARD</center></html>");
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.DIFFICULTY, "Hard");
@@ -472,7 +474,7 @@ public class Window extends Canvas{
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.DIFFICULTY, "Easy");
 		    		Launcher.cHandler.difficulty = "Easy";
 		    	}
-	
+		    	Launcher.difficultySettings = new DifficultySettings(Launcher.cHandler.getDifficulty());
 		    	difficultyButton.setIcon(button3HoverInner);
 			}
 				  

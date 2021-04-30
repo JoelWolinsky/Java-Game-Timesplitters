@@ -1,4 +1,0 @@
-deathWallSpeed=0.5
-rocksSpeed=2
-arrowSpeed=2
-stonesSpeed=2

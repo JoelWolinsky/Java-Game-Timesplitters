@@ -34,8 +34,8 @@ Platform Custom 213 469 thinPlatformA.png
 
 //TORCH AND FALLING ROCKS
 AnimArea 197 50 torch
-Projectile 120 0 0 3 500 0 0 0 nopicture.png rocks
-Projectile 285 0 0 3 500 0 0 0 nopicture.png rocks
+Projectile 120 0 0 3.0 500 0 0 0 nopicture.png rocks
+Projectile 285 0 0 3.0 500 0 0 0 nopicture.png rocks
 
 //WINDOW PLATFORMS
 Platform Default 194 100

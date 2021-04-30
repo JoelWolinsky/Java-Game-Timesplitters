@@ -1,0 +1,4 @@
+deathWallSpeed=1
+rocksSpeed=3
+arrowSpeed=3
+stonesSpeed=4

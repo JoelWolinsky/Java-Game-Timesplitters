@@ -6,14 +6,14 @@ Waypoint 85 363 flag3.png R Y 0
 AnimArea 140 67 skeletonthrow
 AnimArea 200 67 skeletonreactinv
 AnimArea 260 67 skeletonthrowinv
-Projectile 100 100 0 3 500 200 0 0 nopicture.png rocks
-Projectile 100 100 0 3 500 200 0 80 nopicture.png arrow
-Projectile 100 100 0 3 500 200 0 40 nopicture.png rocks
-Projectile 100 100 0 3 500 200 0 120 nopicture.png arrow
-Projectile 200 100 0 3 500 300 0 20 nopicture.png arrow
-Projectile 200 100 0 3 500 300 0 100 nopicture.png arrow
-Projectile 200 100 0 3 500 300 0 60 nopicture.png rocks
-Projectile 200 100 0 3 500 300 0 140 nopicture.png arrow
+Projectile 100 100 0 3.0 500 200 0 0 nopicture.png rocks
+Projectile 100 100 0 3.0 500 200 0 80 nopicture.png arrow
+Projectile 100 100 0 3.0 500 200 0 40 nopicture.png rocks
+Projectile 100 100 0 3.0 500 200 0 120 nopicture.png arrow
+Projectile 200 100 0 3.0 500 300 0 20 nopicture.png arrow
+Projectile 200 100 0 3.0 500 300 0 100 nopicture.png arrow
+Projectile 200 100 0 3.0 500 300 0 60 nopicture.png rocks
+Projectile 200 100 0 3.0 500 300 0 140 nopicture.png arrow
 
 //OUTER WALLS
 Platform Custom 70 19 wall1.png
