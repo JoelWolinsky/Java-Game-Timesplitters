@@ -6,6 +6,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -176,7 +177,30 @@ public class Window extends Canvas{
 		Image scaledButton3Clicked = button3ClickedIcon.getImage().getScaledInstance(panelWidth - 100, panelHeight / 3, Image.SCALE_SMOOTH);
 		button3ClickedIcon = new ImageIcon(scaledButton3Clicked);
 		final ImageIcon BUTTON_3_CLICKED_INNER = button3ClickedIcon;
+		
+		ImageIcon errorPanelIcon = new ImageIcon("./img/errorPanel.png");
+		Image scaledErrorPanel = errorPanelIcon.getImage().getScaledInstance(panelWidth - 80, panelHeight + 100, Image.SCALE_SMOOTH);
+		
+		// The panel that holds the "server running / not running" messages
+	    // We override JPanel's paintComponent method to enable an Image to be used as a background
+		JPanel errorPanel = (new JPanel(new FlowLayout()) {
+			@Override
+			  protected void paintComponent(Graphics g) {
 
+			    super.paintComponent(g);
+			        g.drawImage(scaledErrorPanel, 0, 0, null);
+			}
+		});
+		
+		errorPanel.setBounds((WIDTH / 3) - 13, HEIGHT / 7, panelWidth - 80, panelHeight + 100);
+		errorPanel.setOpaque(false);
+		errorPanel.setVisible(false);
+		((FlowLayout)errorPanel.getLayout()).setVgap((panelHeight / 4) - 15);
+		
+		JLabel errorPanelText = new JLabel();
+		errorPanelText.setFont(sizedFont);
+		errorPanelText.setHorizontalTextPosition(JLabel.CENTER);
+		errorPanelText.setForeground(Color.black);
 
 		// The singleplayer Button on the main screen
 		JLabel singleplayerButton = new JLabel(button1Icon);
@@ -349,6 +373,7 @@ public class Window extends Canvas{
 		    	multiplayerButtonPanel.setVisible(false);
 		    	backOptions.setVisible(false);
 		    	backMultiplayer.setVisible(false);
+		    	errorPanel.setVisible(false);
 			}
 
 			@Override
@@ -359,6 +384,38 @@ public class Window extends Canvas{
 			@Override
 			public void mouseExited(MouseEvent e) {
 				backButton.setIcon(BUTTON_2_INNER);
+			}
+		});
+		
+		// The back button on the error panel
+		JLabel backErrorButton = new JLabel(button2Icon);
+		backErrorButton.setForeground(Color.black);
+		backErrorButton.setFont(sizedFont);
+		backErrorButton.setText("OK");
+		backErrorButton.setHorizontalTextPosition(JLabel.CENTER);
+
+		backErrorButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				backErrorButton.setIcon(BUTTON_2_CLICKED_INNER);
+				SoundHandler.playSound("button1", 1f);
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				backButton.setIcon(BUTTON_2_INNER);
+				errorPanel.setVisible(false);
+				multiplayerButtonPanel.setVisible(true);
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				backErrorButton.setIcon(BUTTON_2_HOVER_INNER);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				backErrorButton.setIcon(BUTTON_2_INNER);
 			}
 		});
 
@@ -413,9 +470,9 @@ public class Window extends Canvas{
 		toggleMusicButton.setForeground(Color.black);
 		toggleMusicButton.setFont(sizedFont);
 		toggleMusicButton.setHorizontalTextPosition(JLabel.CENTER);
-
 		if (Launcher.cHandler.musicToggle) {
 			toggleMusicButton.setText("<html><center>MUSIC:<br><p style='margin-top:8'>ON</center></html>");
+			
 		} else {
 			toggleMusicButton.setText("<html><center>MUSIC:<br><p style='margin-top:8'>OFF</center></html>");
 		}
@@ -622,7 +679,6 @@ public class Window extends Canvas{
 					DatagramSocket socket;
 					socket = new DatagramSocket(1331);
 					socket.close();
-					System.out.println("not already running");
 
 				} catch (SocketException e1) {
 					isAlive = true;
@@ -647,7 +703,9 @@ public class Window extends Canvas{
 			    	game.start();
 
 				} else {
-					System.out.println("Server already running");
+					multiplayerButtonPanel.setVisible(false);
+					errorPanelText.setText("<html><center><p style='margin-top:50'>A server is<br><p style='margin-top:3'>already running</center></html>");
+					errorPanel.setVisible(true);
 				}
 		}
 
@@ -679,23 +737,12 @@ public class Window extends Canvas{
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				joinGameButton.setIcon(BUTTON_3_HOVER_INNER);
-				
-
-				back.setVisible(false);
-		    	backButtonPanel.setVisible(false);
-		    	multiplayerButtonPanel.setVisible(false);
-		    	backOptions.setVisible(false);
-				backMultiplayer.setVisible(false);
-
-		    	game.setGameState(GameState.Playing);
-				game.setGameMode(GameMode.MULTIPLAYER);
 
 		    	Boolean isAlive = false;
 				try {
 					DatagramSocket socket;
 					socket = new DatagramSocket(1331);
 					socket.close();
-					System.out.println("not already running");
 
 				} catch (SocketException e1) {
 					isAlive = true;
@@ -711,6 +758,10 @@ public class Window extends Canvas{
 			    	multiplayerButtonPanel.setVisible(false);
 			    	backOptions.setVisible(false);
 					backMultiplayer.setVisible(false);
+					
+					if (Launcher.cHandler.ambienceToggle == true) {
+						SoundHandler.playSound("ambience", 0.2f);
+					}
 
 			    	game.setGameState(GameState.Playing);
 					game.setGameMode(GameMode.MULTIPLAYER);
@@ -718,7 +769,9 @@ public class Window extends Canvas{
 			    	game.start();
 
 				} else {
-					System.out.println("Server isnt running yet");
+					multiplayerButtonPanel.setVisible(false);
+					errorPanelText.setText("<html><center><p style='margin-top:50'>A server must<br><p style='margin-top:3'>already be running<br><p style='margin-top:3'>for you to join a<br><p style='margin-top:3'>game.</center></html>");
+					errorPanel.setVisible(true);
 				}
 			}
 
@@ -746,10 +799,13 @@ public class Window extends Canvas{
 		multiplayerButtonPanel.add(playVSComputerButton);
 		multiplayerButtonPanel.add(createGameButton);
 		multiplayerButtonPanel.add(joinGameButton);
+		errorPanel.add(errorPanelText);
+		errorPanel.add(backErrorButton);
 		c.add(mainMenu);
 		c.add(optionButtonPanel);
 		c.add(multiplayerButtonPanel);
 		c.add(backButtonPanel);
+		c.add(errorPanel);
 		c.add(back);
 		c.add(backOptions);
 		c.add(backMultiplayer);

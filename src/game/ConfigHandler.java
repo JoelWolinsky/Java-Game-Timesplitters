@@ -27,13 +27,14 @@ public class ConfigHandler {
 		this.musicToggle = getMusicToggle();
 		this.difficulty = getDifficulty();
 		this.ambienceToggle = getAmbienceToggle();
+		
 	}
 	
 	/**
 	 * Returns the value of toggleSoundEffects from the config file
 	 * @return A boolean value of toggleSoundEffects
 	 */
-	public Boolean getSoundEffectsToggle() {
+	private Boolean getSoundEffectsToggle() {
 		createConfigFile();
 		
 		try {
@@ -45,10 +46,8 @@ public class ConfigHandler {
 			reader.close();
 			
 			if (toggle.equals("True")) {
-				this.soundEffectsToggle = true;
 				return true;
 			} else {
-				this.soundEffectsToggle = false;
 				return false;
 			}
 		}
@@ -62,7 +61,7 @@ public class ConfigHandler {
 	 * Returns the value of toggleMusic from the config file
 	 * @return A boolean value of toggleMusic
 	 */
-	public Boolean getMusicToggle() {
+	private Boolean getMusicToggle() {
 		createConfigFile();
 		
 		try {
@@ -75,10 +74,8 @@ public class ConfigHandler {
 			reader.close();
 			
 			if (toggle.equals("True")) {
-				this.musicToggle = true;
 				return true;
 			} else {
-				this.musicToggle = false;
 				return false;
 			}
 		}
@@ -92,7 +89,7 @@ public class ConfigHandler {
 	 * Returns the value of difficulty from the config file
 	 * @return A string value of difficulty
 	 */
-	public String getDifficulty() {
+	private String getDifficulty() {
 		createConfigFile();
 		
 		try {
@@ -106,13 +103,10 @@ public class ConfigHandler {
 			reader.close();
 			
 			if (toggle.equals("Easy")) {
-				this.difficulty = "Easy";
 				return "Easy";
 			} else if (toggle.equals("Medium")){
-				this.difficulty = "Medium";
 				return "Medium";
 			} else {
-				this.difficulty = "Hard";
 				return "Hard";
 			}
 		}
@@ -122,7 +116,7 @@ public class ConfigHandler {
 		return null;
 	}
 	
-	public Boolean getAmbienceToggle() {
+	private Boolean getAmbienceToggle() {
 		createConfigFile();
 		
 		try {
@@ -137,10 +131,8 @@ public class ConfigHandler {
 			reader.close();
 			
 			if (toggle.equals("True")) {
-				this.musicToggle = true;
 				return true;
 			} else {
-				this.musicToggle = false;
 				return false;
 			}
 			
