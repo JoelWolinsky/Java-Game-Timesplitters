@@ -288,7 +288,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 	        //If you're not on ground, you should fall
 	        if (!isOnGround() && !ghostMode) {
 	            fall(this);
-	        } else {
+	        } else if (!ghostMode){
 	            CollidingObject o = SolidCollider.nextCollision(this, 5, false);
 	            if (o instanceof MovingPlatform) {
 	                if (((MovingPlatform) o).getXAxis()) {

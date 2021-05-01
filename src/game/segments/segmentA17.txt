@@ -9,7 +9,7 @@ Floor
 Platform Inverted 100 350
 Platform Inverted 310 330
 
-MovingPlatform 80 130 30 false 1.5 platform3.png
+MovingPlatform 80 150 35 false 1.25 platform3.png
 MovingPlatform 200 180 40 false 2 platform3.png
 MovingPlatform 320 130 30 false 1 platform3.png
 
@@ -23,6 +23,7 @@ MovingPlatform 60 -60 40 true 1 platform3.png
 MovingPlatform 330 -60 40 true 1.75 platform3.png
 
 
+Platform Custom -32 -110 walltower.png
 Platform Custom 426 0 walltowerinv.png
 
 Chunk 1 N segmentA17p2.png
@@ -34,37 +35,97 @@ Platform Custom 426 0 walltowerinv.png
 Platform Custom -32 0 walltower.png
 
 MovingPlatform 200 220 150 true 4 platform2.png
-MovingPlatform 200 100 150 true 5 platform2.png
+-MovingPlatform 200 100 150 true 5 platform2.png
 
-Platform Inverted 0 40
-Platform Inverted 410 40
+Platform Inverted 0 80
+Platform Inverted 410 80
 
 Platform Custom 100 160 platform3.png
 Platform Custom 300 160 platform3.png
 
 Projectile 0 130 3.5 0 426 0 0 55 fog1.png dart
-Projectile 426 200 -4 0 426 0 0 30 fog1.png dart
+Projectile 426 40 -4 0 426 0 0 30 fog1.png dart
 
 Chunk 1 N segmentA17p3.png
 
 Platform Custom 426 0 walltowerinv.png
 Platform Custom -32 0 walltower.png
 
-MovingPlatform 200 150 150 true 4 platform2.png
-MovingPlatform 200 0 150 true 5 platform2.png
+MovingPlatform 200 270 150 true 4 platform2.png
+MovingPlatform 200 40 150 true 3 platform2.png
 
-Chunk 1 N segmentA17p3.png
+Platform Custom 75 384 towerfloor.png
+
+Respawn 75 363 0 0 flag1.png
+Platform Inverted 120 350
+Platform Inverted 210 350
+Platform Inverted 290 350
+Respawn 340 363 0 0 flag1.png
+
+-TrackingAISpawner 0 155 0.5f 20 1 150 120 1 ghost 1 0 -100 400 200
+-TrackingAISpawner 410 155 0.5f 20 1 150 120 1 ghost 1 -400 -100 400 200
+
+MovingPlatform 80 150 55 false 1.25 platform3.png
+MovingPlatform 200 170 40 false 2 platform3.png
+MovingPlatform 320 150 50 false 1.5 platform3.png
+
+Chunk 1 N segmentA17p6.png
+
+
+MovingPlatform 100 330 55 false 1.75 platform3.png
+MovingPlatform 300 330 50 false 2 platform3.png
+
+Platform Custom 200 330 platform3.png
+
+MovingPlatform 200 220 145 true 4.5 platform2.png
+
+
+Projectile 0 370 3.5 0 426 0 0 55 fog1.png dart
+-Projectile 426 330 -4 0 426 0 0 30 fog1.png dart
+Projectile 426 290 -4 0 426 0 0 30 fog1.png dart
+
 
 Platform Custom 426 0 walltowerinv.png
 Platform Custom -32 0 walltower.png
 
-Projectile 50 100 0 3 1300 213 0 0 nopicture.png rocks
-Projectile 50 100 0 3 1300 213 0 100 nopicture.png arrow
-Projectile 50 100 0 3 1300 213 0 200 nopicture.png rocks
-Projectile 50 100 0 3 1300 213 0 300 nopicture.png arrow
-Projectile 250 100 0 3 1300 400 0 400 nopicture.png arrow
-Projectile 250 100 0 3 1300 400 0 500 nopicture.png arrow
-Projectile 250 100 0 3 1300 400 0 600 nopicture.png rocks
-Projectile 250 100 0 3 1300 400 0 700 nopicture.png arrow
+
+
+Chunk 1 N segmentA17top.png
+Platform Custom 426 50 walltowerinv.png
+
+AnimArea 30 160 torch
+
+Platform Custom 0 50 flippedminitowerwallinv.png
+Platform Custom 96 50 flippedminitowerwallinv.png
+Platform Custom 192 50 flippedminitowerwallinv.png
+Platform Custom 288 50 flippedminitowerwallinv.png
+Platform Custom 330 50 flippedminitowerwallinv.png
+Platform Custom -32 50 minitowerwallinv.png
+Platform Custom -32 146 minitowerwallinv.png
+Platform Custom -32 176 minitowerwallinv.png
+
+Platform Custom 0 384 towerfloor.png
+Respawn 260 363 0 0 flag1.png
+
+AnimArea 190 110 torch
+
+Projectile 50 260 0 3 1500 213 0 0 fog1.png rocks
+Projectile 50 260 0 3 1500 213 0 100 fog1.png arrow
+Projectile 50 260 0 3 1500 213 0 200 fog1.png rocks
+-Projectile 50 260 0 3 1500 213 0 300 fog1.png arrow
+Projectile 250 260 0 3 1500 390 0 400 fog1.png arrow
+Projectile 250 260 0 3 1500 390 0 500 fog1.png arrow
+Projectile 250 260 0 3 1500 390 0 600 fog1.png rocks
+-Projectile 250 260 0 3 1500 400 0 700 fog1.png arrow
+
+Platform Custom 375 384 minitowerfloor.png
+Platform Custom 255 384 minitowerfloor.png
+Platform Custom 0 260 426 16
+
+AnimArea 150 225 skeletonthrow
+AnimArea 240 225 skeletonreactinv
+AnimArea 280 225 skeletonthrowinv
+
+Chunk 1 W segmentA17top2.png
 
 

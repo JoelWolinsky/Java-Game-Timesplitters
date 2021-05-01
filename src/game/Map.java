@@ -61,6 +61,7 @@ public class Map {
                // parseFile(currentLevel,"introOutDimension");
                 //parseFile(currentLevel,"segmentA10");
                 parseFile(currentLevel,"segmentA17");
+                parseFile(currentLevel,"segmentB1");
 			/*
 			*** LEGEND ***
 			m.mapParser(currentLevel, "intro1");				// No go zone 								
