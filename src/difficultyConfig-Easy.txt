@@ -1,4 +1,13 @@
 deathWallSpeed=1
+
+//Projectile Speed
 rocksSpeed=3
 arrowSpeed=3
 stonesSpeed=4
+booksSpeed=10
+bookshelfSpeed=10
+
+//Projectile in groups
+ghostSpeed=-2 -2 -1 -2 -1 -3 -2 -2 -1 -2 -3 -1
+bloodcellXSpeed=-1 0 1 2 3 3 3 3 3 3 3 2 1 0 -1 -2 -3 -3 -3 -3 -3 -3 -3
+bloodcellYSpeed=3 3 3 3 3 2 1 0 -1 -2 -3 -3 -3 -3 -3 -3 -3 -2 -1 0 1 2 3

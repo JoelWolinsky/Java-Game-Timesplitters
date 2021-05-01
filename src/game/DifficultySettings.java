@@ -12,13 +12,23 @@ public class DifficultySettings {
 	
 	
 	private float deathWallSpeed;
-	private float projectileSpeed;
 	private float mindlessAISpeed;
+	
+	//Projectile Speeds
 	private float rocksSpeed; //speed of falling rocks\
 	private float stonesSpeed;
 	private float arrowSpeed;
+	private float booksSpeed;
+	private float bookshelfSpeed;
 	
+	//Segment Projectile (Group projectiles)
 	
+	private ArrayList<Float> ghostSpeed;
+	private ArrayList<Float> bloodcellXSpeed;
+	private ArrayList<Float> bloodcellYSpeed;
+	
+	private int ghostSpeedIndex;
+	private int bloodcellSpeedIndex;
 	//load easy,medium,hard config file
 	public DifficultySettings(String difficulty) {
 		
@@ -26,15 +36,50 @@ public class DifficultySettings {
 		
 		
 		deathWallSpeed = getDifficultyValue("deathWallSpeed",difficultyConfig);
-		projectileSpeed = getDifficultyValue("projectileSpeed",difficultyConfig);
 		mindlessAISpeed = getDifficultyValue("mindlessAISpeed",difficultyConfig);
 		rocksSpeed = getDifficultyValue("rocksSpeed",difficultyConfig);
 		stonesSpeed = getDifficultyValue("stonesSpeed",difficultyConfig);
 		arrowSpeed = getDifficultyValue("arrowSpeed",difficultyConfig);
+		booksSpeed = getDifficultyValue("booksSpeed",difficultyConfig);
+		bookshelfSpeed = getDifficultyValue("bookshelfSpeed",difficultyConfig);
+		
+		
+		ghostSpeed = getGroupDifficultyValue("ghostSpeed",difficultyConfig);
+		ghostSpeedIndex = ghostSpeed.size()-1;
+		
+		bloodcellXSpeed = getGroupDifficultyValue("bloodcellXSpeed",difficultyConfig);
+		bloodcellYSpeed = getGroupDifficultyValue("bloodcellYSpeed",difficultyConfig);
+		bloodcellSpeedIndex = bloodcellXSpeed.size()-1;
 		
 		setDifficultyForAllFiles();
 	}
-	
+	public ArrayList<Float> getGroupDifficultyValue(String arg, File difficultyConfig) {
+		try {
+			Scanner sc = new Scanner(difficultyConfig);
+			
+			while(sc.hasNextLine()) {
+				String line = sc.nextLine();
+				String[] parts = line.split("=");
+				
+				if(parts[0].equals(arg)) {
+					String[] tempArr = parts[1].split("\s");
+					sc.close();
+					ArrayList<Float> returnArr = new ArrayList<Float>();
+					for(int i=tempArr.length-1;i>-1;i--) {
+						returnArr.add(Float.parseFloat(tempArr[i]));
+					}
+					return returnArr;
+				}
+			}
+			sc.close();
+			return null;
+		}
+		catch(IOException e){
+			System.out.println("File IO Error");
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	public float getDifficultyValue(String arg, File difficultyConfig) {
 		
@@ -158,6 +203,31 @@ public class DifficultySettings {
 						splitted[4] = Float.toString(arrowSpeed);
 						System.out.println(splitted[4]);
 						break;
+						
+					case "books":
+						splitted[4]= Float.toString(booksSpeed);
+						break;
+						
+					case "bookShelf":
+						splitted[4] = Float.toString(bookshelfSpeed);
+						break;
+						
+					case "ghost":
+						if(ghostSpeedIndex == -1) {
+							ghostSpeedIndex = ghostSpeed.size()-1;
+						}
+						splitted[3] = Float.toString(ghostSpeed.get(ghostSpeedIndex));
+						ghostSpeedIndex--;
+						break;
+						
+					case "bloodcell":
+						if(bloodcellSpeedIndex == -1) {
+							bloodcellSpeedIndex = bloodcellXSpeed.size()-1;
+						}
+						splitted[3] = Float.toString(bloodcellXSpeed.get(bloodcellSpeedIndex));
+						splitted[4] = Float.toString(bloodcellYSpeed.get(bloodcellSpeedIndex));
+						bloodcellSpeedIndex--;
+						break;
 				}
 			break;
 			
@@ -176,7 +246,6 @@ public class DifficultySettings {
 	public void printConfig() {
 		System.out.println("DIFFICULTY SETTINGS");
 		System.out.println(deathWallSpeed);
-		System.out.println(projectileSpeed);
 		System.out.println(mindlessAISpeed);
 		
 	}
@@ -184,9 +253,7 @@ public class DifficultySettings {
 	public float getDeathWallSpeed () {
 		return deathWallSpeed;
 	}
-	public float getProjectileSpeed() {
-		return projectileSpeed;
-	}
+	
 	public float getMindlessAISpeed() {
 		return mindlessAISpeed;
 	}
@@ -201,6 +268,16 @@ public class DifficultySettings {
 
 	public float getArrowSpeed() {
 		return arrowSpeed;
+	}
+
+
+	public float getBooksSpeed() {
+		return booksSpeed;
+	}
+
+
+	public float getBookshelfSpeed() {
+		return bookshelfSpeed;
 	}
 
 }
