@@ -12,8 +12,8 @@ import java.util.LinkedList;
 public class InventoryBarController extends GameObject {
 
 	private Player player;
-	LinkedList<UIElement> frames = new LinkedList<UIElement>();
-	LinkedList<UIElement> slots = new LinkedList<UIElement>();
+	static LinkedList<UIElement> frames = new LinkedList<UIElement>();
+	private LinkedList<UIElement> slots = new LinkedList<UIElement>();
 	private int inventorySize=3;
 
 	public InventoryBarController(float x, float y, int width, int height, Player player, Level currentLevel) {
@@ -35,20 +35,7 @@ public class InventoryBarController extends GameObject {
 	public void tick() {
 
 
-		for (int j = 0 ;j<inventorySize;j++)
-		try
-		{
-			if (j==player.getInventoryIndex())
-				frames.get(j).setImg(ImageIO.read(new File("./img/frame.png")));
-			else
-				frames.get(j).setImg(ImageIO.read(new File("./img/frameNotSelected.png")));
-		}
-		catch ( IOException exc )
-		{
-			//TODO: Handle exception.
-		}
-
-
+		//UPDATE INVENTORY
 		if (player.inventoryChanged())
 		{
 			try
@@ -56,13 +43,13 @@ public class InventoryBarController extends GameObject {
 				for (int i =0;i < inventorySize;i++)
 				{
 					slots.get(i).setImg(ImageIO.read(new File(player.getInventory().get(i).getUrl())));
-					//slots.get(0).setImg(ImageIO.read(new File("./img/empty.png")));
 				}
 			}
 			catch ( IOException exc )
 			{
 				//TODO: Handle exception.
 			}
+
 			player.setInventoryChanged(false);
 		}
 
@@ -70,6 +57,16 @@ public class InventoryBarController extends GameObject {
 
 	public void render(Graphics g, float f, float h) {
 
+	}
+
+	public static void selectFrame(int frame, int previousFrame)
+	{
+		try {
+			frames.get(frame).setImg(ImageIO.read(new File("./img/frame.png")));
+			frames.get(previousFrame).setImg(ImageIO.read(new File("./img/frameNotSelected.png")));
+		} catch (IOException exc) {
+			//TODO: Handle exception.
+		}
 	}
 
 

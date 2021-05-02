@@ -32,9 +32,18 @@ public class Level extends Canvas {
 	public static synchronized void addToRemoveQueue(GameObject o) {toBeRemoved.add(o);}
 	public static synchronized ArrayList<GameObject> getToBeRemoved() {return  toBeRemoved;}
 	public static LevelState getLevelState () {return levelState;}
-	public static void setLevelState (LevelState levelStatee) {levelState = levelStatee;}
+	public static void setLevelState (LevelState levelStatee) {levelState = levelStatee; levelStateChanged=true;}
 	private double time1=0,time2;
 	private AnimationStates currentAnimState;
+	private static boolean levelStateChanged=false;
+
+	public static boolean getLevelStateChanged() {
+		return levelStateChanged;
+	}
+
+	public static void setLevelStateChanged(boolean levelStateChanged) {
+		Level.levelStateChanged = levelStateChanged;
+	}
 
 	public void tick() {
 
@@ -178,14 +187,14 @@ public class Level extends Canvas {
 				{
 					if(time1==0)
 						time();
-					if(levelState!=LevelState.Starting)
-					if(timetime()>=1000)
-						levelState=LevelState.Starting;
+					if(timetime()>=1000) {
+						setLevelState(LevelState.Starting);
+					}
 				}
 				break;
 			case vsAI:
 				if (getPlayers().size()>=2)
-					levelState=LevelState.Starting;
+					setLevelState(LevelState.Starting);
 				break;
 			case MULTIPLAYER:
 				if (getPlayers().size()==2)
@@ -194,12 +203,14 @@ public class Level extends Canvas {
 						time();
 					if(levelState!=LevelState.Starting)
 						if(timetime()>=5000)
-							levelState=LevelState.Starting;
+							setLevelState(LevelState.Starting);
 
 				}
 				break;
 		}
 	}
+
+
 
 	public static GameEndingObject getFinish()
 	{
@@ -261,5 +272,15 @@ public class Level extends Canvas {
 
 		return time2-time1;
 	}
+
+	public static Blip getCertainBlip(Player player)
+	{
+		for (Blip blip: getBlips())
+			if (blip.getTarget()==player)
+				return blip;
+
+		return null;
+	}
+
 
 }

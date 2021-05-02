@@ -1,5 +1,7 @@
 package game.entities.areas;
+import game.Blip;
 import game.GameState;
+import game.UIElement;
 import game.entities.GameObject;
 import game.entities.players.AIPlayer;
 import game.entities.players.Player;
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 
 import static game.Level.*;
 import static game.Game.*;
+import static game.ProgressBarController.getAllBlips;
+import static game.ProgressBarController.getProgressBarElements;
 import static game.display.Window.*;
 
 public class GameEndingObject extends AnimArea {
@@ -31,8 +35,14 @@ public class GameEndingObject extends AnimArea {
 				for (Player pp : getPlayers()) {
 					pp.setVelX(0);
 					pp.setVelY(0);
+					pp.setCanMove(false);
 					pp.setCurrentAnimState(AnimationStates.IDLE);
 				}
+
+				for (Blip b: getAllBlips())
+					b.setVisible(false);
+				for (UIElement uiElement: getProgressBarElements())
+					uiElement.setVisible(false);
 
 				setLevelState(LevelState.Finished);
 				p.setCurrentAnimState(AnimationStates.SWAG);

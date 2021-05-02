@@ -11,11 +11,14 @@ import game.graphics.LevelState;
 import game.network.packets.Packet02Move;
 import game.network.packets.Packet03MoveWall;
 
-import static game.Level.getPlayers;
-import static game.Level.getLevelState;
+import javax.imageio.ImageIO;
+
+import static game.Level.*;
 import static game.graphics.Assets.getAnimations;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -45,10 +48,17 @@ public class WallOfDeath extends GameObject {
 			if (this.getInteraction(p))
 			    if (!p.isGhostMode())
                 {
+                    try {
+                        getCertainBlip(p).setImg(ImageIO.read(new File("./img/gravestone.png")));
+                    } catch (IOException exc) {
+                        //TODO: Handle exception.
+                    }
+
                     p.setGhostMode(true);
                     p.setCurrentAnimState(AnimationStates.LEFT);
                     p.setAnimations(getAnimations("GHOST_FORM"));
                     SoundHandler.playSound("death", 0.5f);
+
                 }
 
         if (getLevelState()== LevelState.InProgress){
