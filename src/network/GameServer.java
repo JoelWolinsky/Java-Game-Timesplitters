@@ -12,7 +12,6 @@ import game.entities.players.PlayerMP;
 import game.network.packets.Packet;
 import game.network.packets.Packet.PacketTypes;
 import game.network.packets.Packet00Login;
-import game.network.packets.Packet01Disconnect;
 import game.network.packets.Packet02Move;
 import game.network.packets.Packet03MoveWall;
 import game.network.packets.Packet04StartGame;
@@ -24,7 +23,8 @@ public class GameServer extends Thread {
 	private List<String> playerIDs= new ArrayList<String>();
 	
 	/** 
-	 * Initialises the socket connection 
+	 * Opens the socket for client-server connections. 
+	 * @param game The game that the server will run for.
 	 */
 	public GameServer(Game game) {
 		this.game = game;
@@ -36,7 +36,8 @@ public class GameServer extends Thread {
 	}
 	
 	/** 
-	 * Initialises the server. This will run continuously and will forward and packets received onto parsePacket.
+	 * Initialises the server. 
+	 * This will run continuously and will forward and packets received onto parsePacket.
 	 */
 	public void run() {
 		while(true) {
@@ -54,6 +55,9 @@ public class GameServer extends Thread {
 	
 	/**
 	 * Handles the different packets received from the client.
+	 * @param data The data which contains the packet information.
+	 * @param address The address the data is from.
+	 * @param port The port the data is from.
 	 */
 	private void parsePacket(byte[] data, InetAddress address, int port) {
 		try {
@@ -66,39 +70,21 @@ public class GameServer extends Thread {
 			case INVALID:
 				break;
 			case LOGIN:
-				System.out.println("Server handle login");
 				packet = new Packet00Login(data);
-				System.out.println("[" + address.getHostAddress() + ":" + port + "] " + ((Packet00Login) packet).getUsername() + " has connected...");
-				System.out.println(connectedPlayers.size());
-				//System.out.println("Add con1");
-
 				PlayerMP player = new PlayerMP (10, 0, address, port,"player1");
-				System.out.println("username before: " + player.getUsername());
 				player.setUsername(((Packet00Login) packet).getUsername());
-				System.out.println("username after: " + player.getUsername());
-				//System.out.println("Add con2");
 				this.addConnection(player, (Packet00Login) packet);
-				System.out.println("Add con3");
-
-				break;
-			case DISCONNECT:
-				packet = new Packet01Disconnect(data);
-				System.out.println("[" + address.getHostAddress() + ":" + port + "] " + ((Packet01Disconnect) packet).getUsername() + " has left...");
-				this.removeConnection((Packet01Disconnect) packet);
 				break;
 			case MOVE:
 				packet = new Packet02Move(data);
-				//System.out.println(((Packet02Move)packet).getUsername() + " has moved to " + ((Packet02Move)packet).getX() + ", " + ((Packet02Move)packet).getY());
 				this.handleMove((Packet02Move)packet);
 				break;
 			case MOVEWALL:
-				//System.out.println("send wall packet");
-
 				packet = new Packet03MoveWall(data);
 				this.handleMoveWall((Packet03MoveWall)packet);
 				break;
 			case STARTGAME:
-				packet = new Packet04StartGame(data);
+				packet = new Packet04StartGame();
 				this.handleStartGame((Packet04StartGame)packet);
 			}
 		}catch (Exception e) {
@@ -109,7 +95,10 @@ public class GameServer extends Thread {
 
 	
 
-	
+	/**
+	 * Handles the StartGame packet.
+	 * @param packet The StartGame packet.
+	 */
 	private void handleStartGame(Packet04StartGame packet) {
 		try {
 			packet.writeData(this);
@@ -119,8 +108,10 @@ public class GameServer extends Thread {
 		}		
 	}
 
-	/** 
-	 * Adds new players to the game.
+	/**
+	 * Handles adding new players joining on the server side.
+	 * @param player The PlayerMP that is joining.
+	 * @param packet The Login packet received.
 	 */
 	public void addConnection(PlayerMP player, Packet00Login packet) {
 		System.out.println("Ser add con");
@@ -165,34 +156,11 @@ public class GameServer extends Thread {
 
 	}
 	
-	public void removeConnection(Packet01Disconnect packet) {
-		try {
-			//PlayerMP player = getPlayerMP(packet.getUsername());
-			//this.connectedPlayers.remove(getPlayerMPIndex(packet.getUsername()));
-			//this.playerIDs.remove(getPlayerMPIndex(packet.getUsername()));
-			//packet.writeData(this);
-		} catch (Exception e) {
-			System.out.println("Exception in GameServer.removeConnection");
-			e.printStackTrace();
-		}
-	}
-	
-	
-	public String getPlayerMP(String username) {
-		try {
-			for(String player : this.playerIDs) {
-				if(player.equals(username)) {
-					return player;
-				}
-			}
-			return null;
-		} catch (Exception e) {
-			System.out.println("Exception in GameServer.getPlayerMP");
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
+	/** 
+	 * Finds the index of a given player in the playerIDs list.
+	 * @param username The username of the player.
+	 * @return The index of the player.
+	 */
 	public int getPlayerMPIndex(String username) {
 		try {
 			int index = 0;
@@ -210,8 +178,11 @@ public class GameServer extends Thread {
 		}
 	}
 	
-	/** 
-	 * Sends packets from the server to a client. 
+	/**
+	 * Sends data from the server to the client.
+	 * @param data The data to be sent.
+	 * @param ipAddress The address to send the data to.
+	 * @param port The port to send the data to.
 	 */
 	public void sendData(byte[] data, InetAddress ipAddress, int port) {
 		//System.out.println("server send packet");
@@ -227,8 +198,9 @@ public class GameServer extends Thread {
 		}
 	}
 	
-	/** 
-	 * Sends data to every user logged in by calling sendData for each user.
+	/**
+	 * Sends the data to all connected players.
+	 * @param data The data to be sent.
 	 */
 	public void sendDataToAllClients(byte[] data) {
 		//System.out.println("Server Send to all");
@@ -247,7 +219,7 @@ public class GameServer extends Thread {
 	
 	/** 
 	 * Handles a move packet received from the client.
-	 * @param packet
+	 * @param packet The packet received.
 	 */
 	private void handleMove(Packet02Move packet) {
 		try {
@@ -270,7 +242,10 @@ public class GameServer extends Thread {
 			e.printStackTrace();
 		}
 	}
-	
+	/** 
+	 * Handles a wall move packet received from the client.
+	 * @param packet The packet received.
+	 */
 	private void handleMoveWall(Packet03MoveWall packet) {
 		try {
 				packet.writeData(this);

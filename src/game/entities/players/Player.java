@@ -158,10 +158,14 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 	        this.prevPos = new Point((int) this.x, (int) this.y);
 
 	        //Animation Handler
-	        if (velX == 0 && !ghostMode) {
+	        if (velX == 0 && velY == 0 &&!ghostMode) {
+	        	//System.out.println("dtc: " + directionTickCounter);
 	        	directionTickCounter++;
+	        } else {
+	        	directionTickCounter =0;
 	        }
-	        if (INPUT != null) {
+	        if (INPUT != null && Game.player == this) {
+	        	//System.out.println("1: "+ this.username);
 	        	if(velX > 0) {
 	            	facingRight = true;
 	            	currentAnimState = AnimationStates.RIGHT;
@@ -181,15 +185,22 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 	            		currentAnimState = AnimationStates.OTHER;
 	            	}
 	            }
-	        } else if (directionTickCounter == 30) {
-	        	directionTickCounter = 0;
-	        	if(facingRight) {
-	        		currentAnimState = AnimationStates.IDLE;
-	        		currentDirection = "idle";
-	        	}
-	        	else {
-	        		currentAnimState = AnimationStates.OTHER;
-	        	}
+	        }
+	        if (Game.game.getGameMode()== GameMode.MULTIPLAYER) {
+	        	if (directionTickCounter == 10) {
+		        	directionTickCounter = 0;
+		        	if(facingRight) {
+		        		Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, "idle");
+	                    //System.out.println("Player move usr " + this.getUsername());
+	                    packet.writeData(Game.socketClient);
+		        	}
+		        	else {
+		        		Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, "other");
+	                    //System.out.println("Player move usr " + this.getUsername());
+	                    packet.writeData(Game.socketClient);
+
+		        	}
+		        }
 	        }
 
 

@@ -113,7 +113,7 @@ public class UIController extends GameObject {
 				if (index == countdownUrls.size()-1) {
 					if(Game.socketServer != null) {
 						//setLevelState(LevelState.InProgress);
-						Packet04StartGame packet = new Packet04StartGame(null);
+						Packet04StartGame packet = new Packet04StartGame();
 		                packet.writeData(Game.socketClient);
 
 						announcerMessage.setVisible(false);

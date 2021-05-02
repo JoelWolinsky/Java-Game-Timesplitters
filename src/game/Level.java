@@ -154,8 +154,11 @@ public class Level extends Canvas {
 					currentAnimState = AnimationStates.RIGHT;
 				} else if (direction.equals("left")) {
 					currentAnimState = AnimationStates.LEFT;
-				} else {
+				} else if (direction.equals("idle")){
 					currentAnimState = AnimationStates.IDLE;
+				} else {
+
+					currentAnimState = AnimationStates.OTHER;
 				}
 				//System.out.println(currentAnimState);
 				getSpecificPlayerMP(username).setCurrentAnimState(currentAnimState);
