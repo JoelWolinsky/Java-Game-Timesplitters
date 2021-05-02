@@ -20,14 +20,12 @@ public class ConfigHandler {
 		AMBIENCE
 	}
 	
-	
 	public ConfigHandler(String fileNameArg) {
 		this.fileName = fileNameArg;
 		this.soundEffectsToggle = getSoundEffectsToggle();
 		this.musicToggle = getMusicToggle();
 		this.difficulty = getDifficulty();
 		this.ambienceToggle = getAmbienceToggle();
-		
 	}
 	
 	/**
@@ -116,6 +114,10 @@ public class ConfigHandler {
 		return null;
 	}
 	
+	/**
+	 * Returns the value of toggleAmbience from the config file
+	 * @return A boolean value of toggleMusic
+	 */
 	private Boolean getAmbienceToggle() {
 		createConfigFile();
 		
@@ -210,7 +212,7 @@ public class ConfigHandler {
 	
 	/**
 	 * Creates a config file and populates it with default values
-	 * @return True if successful, False if not
+	 * @return true if successful, false if not
 	 */
 	public Boolean createConfigFile() {
 		try {
