@@ -1,5 +1,6 @@
 package network;
 
+import static game.Level.getToBeAdded;
 import static game.Level.setLevelState;
 
 import java.io.IOException;
@@ -13,11 +14,13 @@ import java.net.UnknownHostException;
 import game.Game;
 import game.Level;
 import game.UIController;
+import game.entities.areas.AddedItem;
 import game.entities.players.PlayerMP;
 import game.graphics.LevelState;
 import game.network.packets.Packet;
 import game.network.packets.Packet.PacketTypes;
 import game.network.packets.Packet00Login;
+import game.network.packets.Packet01Item;
 import game.network.packets.Packet02Move;
 import game.network.packets.Packet03MoveWall;
 import game.network.packets.Packet04StartGame;
@@ -84,6 +87,10 @@ public class GameClient extends Thread {
 				packet = new Packet00Login(data);
 				handleLogin((Packet00Login) packet, address, port);
 				break;
+			case ITEM:
+				packet = new Packet01Item(data);
+				this.handleItem((Packet01Item)packet);
+				break;
 			case MOVE:
 				//System.out.println("client handle move");
 				packet = new Packet02Move(data);
@@ -104,10 +111,18 @@ public class GameClient extends Thread {
 		}
 	}
 	
+	private void handleItem(Packet01Item packet) {
+		System.out.println("client add item");
+		//System.out.println(packet.getEffect());
+		System.out.println(packet.getX()+","+packet.getY());
+		//Level.getToBeAdded().add(new AddedItem(packet.getX(), packet.getY(), 0, 0, Game.player, packet.getEffect()));
+		Level.getToBeAdded().add(new AddedItem(packet.getX(),packet.getY(), 0, 0, Level.getSpecificPlayerMP(packet.getUsername()), packet.getEffect()));
+	}
+
 	/**
 	 * Handles the StartGame packet.
 	 * @param packet The StartGame packet.
-	 */
+	 */ 
 	private void handleStartGame(Packet04StartGame packet) {
 		System.out.println("handleStartGame");
 		setLevelState(LevelState.InProgress);

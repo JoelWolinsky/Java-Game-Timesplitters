@@ -42,6 +42,7 @@ public class Level extends Canvas {
 		//Add the elements sitting in the queue to be added
 		if (!toBeAdded.isEmpty()) {
 			for (GameObject o : toBeAdded) {
+				System.out.println("adding item"+o.toString());
 				entities.add(o);
 			}
 			toBeAdded.removeAll(toBeAdded);
@@ -126,7 +127,7 @@ public class Level extends Canvas {
 	}
 
 
-	public Player getSpecificPlayerMP(String username){
+	public static Player getSpecificPlayerMP(String username){
 
 		for (Player p : getPlayers())
 		{

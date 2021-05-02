@@ -12,6 +12,7 @@ import game.entities.players.PlayerMP;
 import game.network.packets.Packet;
 import game.network.packets.Packet.PacketTypes;
 import game.network.packets.Packet00Login;
+import game.network.packets.Packet01Item;
 import game.network.packets.Packet02Move;
 import game.network.packets.Packet03MoveWall;
 import game.network.packets.Packet04StartGame;
@@ -75,6 +76,10 @@ public class GameServer extends Thread {
 				player.setUsername(((Packet00Login) packet).getUsername());
 				this.addConnection(player, (Packet00Login) packet);
 				break;
+			case ITEM:
+				packet = new Packet01Item(data);
+				this.handleItem((Packet01Item)packet);
+				break;
 			case MOVE:
 				packet = new Packet02Move(data);
 				this.handleMove((Packet02Move)packet);
@@ -94,6 +99,15 @@ public class GameServer extends Thread {
 		}
 
 	
+
+	private void handleItem(Packet01Item packet) {
+		try {
+			packet.writeData(this);
+		} catch (Exception e) {
+			System.out.println("Exception in GameServer.handleItem");
+			e.printStackTrace();
+		}		
+	}
 
 	/**
 	 * Handles the StartGame packet.

@@ -21,6 +21,7 @@ import game.graphics.AnimationStates;
 import game.graphics.GameMode;
 import game.graphics.LevelState;
 import game.input.KeyInput;
+import game.network.packets.Packet01Item;
 import game.network.packets.Packet02Move;
 
 import static game.Level.getLevelState;
@@ -146,8 +147,15 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
 	        for (Item i : this.getInventory()) {
 	            if (i.getAddItem()) {
+	            	System.out.println(i.getItemToAdd());
 	                getToBeAdded().add(new AddedItem(this.getX(), this.getY(), 0, 0, this, i.getItemToAdd()));
 	                i.setAddItem(false);
+	                
+	                if(Game.game.getGameMode()== GameMode.MULTIPLAYER) {
+		                Packet01Item packet = new Packet01Item(this.getX(), this.getY(),this.getUsername(), i.getItemToAdd());
+	                    packet.writeData(Game.socketClient);
+	                    System.out.println("send add item packet");
+	            	}
 	            }
 	        }
 
