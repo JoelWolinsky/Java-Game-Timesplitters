@@ -30,36 +30,31 @@ public class WallOfDeath extends GameObject {
 
     public WallOfDeath() {
         super(-2000, -300, 3,1113, 819);
-        // super(-3000, -1000, 100, 2000, 5500);
 
         this.animations = getAnimations("DETH");
         this.currentAnimState = AnimationStates.IDLE;
 
 	}
 
+    /**
+	 * Called every frame, and is responsible for moving the Wall of Death and handling its interactions with players.
+	 */
     public void tick() {
 
         for (Player p: getPlayers())
-		{
-			if (this.getInteraction(p)){
+			if (this.getInteraction(p))
 			    if (!p.isGhostMode())
                 {
                     p.setGhostMode(true);
                     p.setCurrentAnimState(AnimationStates.LEFT);
                     p.setAnimations(getAnimations("GHOST_FORM"));
                     SoundHandler.playSound("death", 0.5f);
-
                 }
-            }
-                // permadeath so don't respawn. turn into ghost and fly
-		}
 
         if (getLevelState()== LevelState.InProgress){
-        	//System.out.println(Game.socketServer);
         	if(Game.socketServer != null) {
 	            moving=true;
 	            this.x += 1;
-	            //this.width++;
 
 	            Packet03MoveWall packet = new Packet03MoveWall(this.x);
                 packet.writeData(Game.socketClient);
@@ -68,20 +63,23 @@ public class WallOfDeath extends GameObject {
 	            this.x += 1;
         	}
         }
-
 	}
 
+    /**
+	 * Calls the renderAnim function that renders the animation of the Wall.
+     * @param g The Graphics object onto which the object will be rendered
+	 * @param f The xOffset of the object
+	 * @param h The yOffset of the object
+	 */
     @Override
     public void render(Graphics g, float f, float h) {
-
-       // g.setColor(Color.magenta);
-       /// g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
-        // g.drawImage(img,(int)(this.x + f),(int)(this.y + h),null);
-       //super.render(g, f, h);
         this.renderAnim(g, (int) (this.x + f), (int) (this.y + h));
     }
 
-
+    /**
+	 * Returns whether a given object is in contact (i.e. interacting) with the Wall.
+     * @param player The object that we check is in contact with the Wall.
+	 */
 	public boolean getInteraction(GameObject player){
 		return ((int)this.x < (int)player.getX()+player.getWidth() &&
 				(int)player.getX() < this.x+this.width - 110 &&
@@ -89,9 +87,17 @@ public class WallOfDeath extends GameObject {
 				(int)player.getY() < (int)this.y+this.height);
 	}
 
+    /**
+	 * Returns the 'areas' LinkedList.
+	 */
     public LinkedList<Area> getEventArea(){return this.areas;}
 
-
+    /**
+	 * Renders an animated sprite by flicking through its different frames
+	 * @param g The Graphics object onto which the object will be rendered
+	 * @param x The x coordinate of the object
+	 * @param y The y coordinate of the object
+	 */
     public void renderAnim(Graphics g, int x, int y) {
 
         if (currentAnimState != null) {
@@ -109,10 +115,17 @@ public class WallOfDeath extends GameObject {
         }
     }
 
+    /**
+	 * Updates the state of animation.
+     * @param currentAnimState The current state of animation.
+	 */
     public void setCurrentAnimState(AnimationStates currentAnimState) {
         this.currentAnimState = currentAnimState;
     }
 
+    /**
+	 * Sets the variable 'moving' to true to facilitate networking.
+	 */
     public void setMoving() {
     	this.moving = true;
     }

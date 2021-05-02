@@ -1,6 +1,5 @@
 package game.entities.players;
 
-import java.util.LinkedList;
 import java.util.UUID;
 
 import game.Effect;
@@ -9,38 +8,91 @@ import game.entities.areas.RespawnPoint;
 import game.entities.areas.Waypoint;
 import game.graphics.AnimationStates;
 
-import static game.Level.getPlayers;
+import static game.Level.getAIPlayers;
 
 public class AIPlayer extends Player {
 
-    public String direction = "N"; // or private?
-    public String jump = "N";
-    public float wait = 0;
-	public Player humanPlayer;
-	public float dist_from_player;
-	public RespawnPoint penultimateRespawnPoint;
-	private int max_distance_ahead = 1500;
-	private int max_distance_behind = -400;
-	private String username;
-	private Waypoint currentWaypoint;
-	private int inventoryTimer = 0;
-	private boolean inventoryTimerOn = false;
-	private int id;
-	private int interactionTimer = 0;
-	private int interactionWait = 0;
+	/**
+	 * The direction in which the AIPlayer is running
+	 */
+	private String direction = "N";
+	
+	/**
+	 * Whether the AIPlayer will jump or not (when 'wait' equals zero)
+	 */
+	private String jump = "N";
+	
+	/**
+	 * The amount of ticks for which the AIPlayer will halt before continuing its movement
+	 */
+	private float wait = 0;
 
+	/**
+	 * The human player associated with the AIPlayer (i.e. the user)
+	 */
+	private Player humanPlayer;
+
+	/**
+	 * The distance between the AIPlayer and its human player
+	 */
+	private float dist_from_player;
+
+	/**
+	 * The penultimate RespawnPoint that the human player visited
+	 */
+	private RespawnPoint penultimateRespawnPoint;
+
+	/**
+	 * The maximum distance behind the human player than an AIPlayer can get before measures are taken
+	 * to move closer to the human player
+	 */
+	private int MAX_DISTANCE_BEHIND = -400;
+	
+	/**
+	 * The last Waypoint that the AIPlayer visited
+	 */
+	private Waypoint currentWaypoint;
+	
+	/**
+	 * The ID of the AIPlayer, used for ordering to decide which player halts to not get stuck to another AIPlayer
+	 */
+	private int id;
+
+	/**
+	 * The time elapsed since the AIPlayer picked up an item from a Chest
+	 */
+	private int inventoryTimer = 0;
+
+	/**
+	 * Used to commence the inventoryTimer
+	 */
+	private boolean inventoryTimerOn = false;
+	
+	/**
+	 * The time elapsed since the AIPlayer was in contact with another AIPlayer
+	 */
+	private int interactionTimer = 0;
+
+	/**
+	 * The time the AIPlayer must halt for after being in contact with another AIPlayer for too long
+	 */
+	private int interactionWait = 0;
+	
+	// private String username;
 
 	public AIPlayer(float x, float y, int width,int height, Player humanPlayer,String url) {
 		super(x, y, null, width, height,url);
 
-		
-		this.username = UUID.randomUUID().toString();;
+		// dthis.username = UUID.randomUUID().toString();;
 		this.humanPlayer = humanPlayer;
 		this.id = Character.getNumericValue(url.charAt(6));
 	}
 
+	/**
+	 * Called every frame, and is responsible for the AIPlayer's movement and 
+	 * interaction with chests, items, and the Wall of Death.
+	 */
 	public void tick() {
-
 
 		super.tick();
 
@@ -51,7 +103,7 @@ public class AIPlayer extends Player {
 			if (this.humanPlayer.isGhostMode() == false) {
 
 				// sends AI Player to the penultimate RespawnPoint that the player has reached 
-				if (this.dist_from_player < max_distance_behind && humanPlayer.getRespawnPoints().size() > 2) {
+				if (this.dist_from_player < MAX_DISTANCE_BEHIND && humanPlayer.getRespawnPoints().size() > 2) {
 
 					this.invincible = true;
 
@@ -80,27 +132,25 @@ public class AIPlayer extends Player {
 				}
 			}	
 
-			for (Player p: getPlayers())
-				{
-					if (p instanceof AIPlayer)
-						if (this.getInteraction(p)){
+			for (AIPlayer p: getAIPlayers())	
+				if (this.getInteraction(p)){
 
-							this.interactionTimer++;
+					this.interactionTimer++;
 
-							if (this.interactionTimer >= 30) {
+					if (this.interactionTimer >= 30) {
 
-								if (this.id < p.id) {
-									this.interactionWait = 20;
-								} else {
-									p.interactionWait = 20;
-								}
-
-								this.interactionTimer -= 30;
-								p.interactionTimer -= 30; 
-
-							}
+						if (this.id < p.id) {
+							this.interactionWait = 20;
+						} else {
+							p.interactionWait = 20;
 						}
+
+						this.interactionTimer -= 30;
+						p.interactionTimer -= 30; 
+
 					}
+				}
+				
 
 			if (this.canMove == true && this.invincibleMove == false) {
 
@@ -214,25 +264,27 @@ public class AIPlayer extends Player {
 			}
 		}
 	}
-		
-		
 
-		
-
-
-		/*
-		
-		if(Game.isMultiplayer) {
-			if((int)this.x != this.prevPos.x || (int)this.y != this.prevPos.y) {
-				Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y);
-				packet.writeData(Game.socketClient);
-			}
-		}
+	/**
+	 * Commences the inventory timer; called when the AIPlayer touches a Chest.
 	 */
-	
+	public void startInventoryTimer(){
+		this.inventoryTimerOn = true;
+	}
+
+	/**
+	 * Returns whether a given object is in contact (i.e. interacting) with the AIPlayer.
+     * @param aiPlayer The object that we check is in contact with the AIPlayer.
+	 */
+	public boolean getInteraction(Player player){
+		return ((int)this.x 		 < 	(int)player.getX()+player.getWidth() && 
+				(int)player.getX() < 	this.x+this.width && 
+				(int)this.y-20 	 < 	(int)player.getY()+player.getHeight() && 
+				(int)player.getY() < 	(int)this.y+this.height);
+	}
 
 
-	//AI COMMANDS
+	//GETTERS AND SETTERS
 
     public void setDirection(String r) {
 		this.direction = r;
@@ -250,23 +302,12 @@ public class AIPlayer extends Player {
 		this.wait = w;
 	}
 
-	public void setCurrentWaypoint(Waypoint currentWaypoint) {
-		this.currentWaypoint = currentWaypoint;
-	}
-
 	public Waypoint getCurrentWaypoint() {
 		return currentWaypoint;
 	}
 
-	public void startInventoryTimer(){
-		this.inventoryTimerOn = true;
-	}
-
-	public boolean getInteraction(Player player){
-		return ((int)this.x 		 < 	(int)player.getX()+player.getWidth() && 
-				(int)player.getX() < 	this.x+this.width && 
-				(int)this.y-20 	 < 	(int)player.getY()+player.getHeight() && 
-				(int)player.getY() < 	(int)this.y+this.height);
+	public void setCurrentWaypoint(Waypoint currentWaypoint) {
+		this.currentWaypoint = currentWaypoint;
 	}
 
 }
