@@ -28,7 +28,7 @@ public class Game extends Canvas implements Runnable{
 	public static KeyInput keyInput = new KeyInput();
 	public static GameState gameState = GameState.MainMenu;
 
-	public static GameClient socketClient;
+	public static GameClient socketClient = null;
 	public static GameServer socketServer = null;
 
 	public float a=0,b=0,c=0,d=0;

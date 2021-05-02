@@ -182,19 +182,21 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 	            	}
 	            }
 	        } 
-	         if (directionTickCounter == 10) {
-	        	directionTickCounter = 0;
-	        	if(facingRight) {
-	        		Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, "idle");
-                    //System.out.println("Player move usr " + this.getUsername());
-                    packet.writeData(Game.socketClient);
-	        	}
-	        	else {
-	        		Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, "other");
-                    //System.out.println("Player move usr " + this.getUsername());
-                    packet.writeData(Game.socketClient);
-	        		
-	        	}
+	        if (Game.game.getGameMode()== GameMode.MULTIPLAYER) {
+	        	if (directionTickCounter == 10) {
+		        	directionTickCounter = 0;
+		        	if(facingRight) {
+		        		Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, "idle");
+	                    //System.out.println("Player move usr " + this.getUsername());
+	                    packet.writeData(Game.socketClient);
+		        	}
+		        	else {
+		        		Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, "other");
+	                    //System.out.println("Player move usr " + this.getUsername());
+	                    packet.writeData(Game.socketClient);
+		        		
+		        	}
+		        }
 	        }
 
 
