@@ -9,6 +9,8 @@ import game.entities.areas.RespawnPoint;
 import game.entities.areas.Waypoint;
 import game.graphics.AnimationStates;
 
+import static game.Level.getPlayers;
+
 public class AIPlayer extends Player {
 
     public String direction = "N"; // or private?
@@ -17,12 +19,15 @@ public class AIPlayer extends Player {
 	public Player humanPlayer;
 	public float dist_from_player;
 	public RespawnPoint penultimateRespawnPoint;
-	private int max_distance_ahead = 1000;
+	private int max_distance_ahead = 1500;
 	private int max_distance_behind = -400;
 	private String username;
 	private Waypoint currentWaypoint;
 	private int inventoryTimer = 0;
 	private boolean inventoryTimerOn = false;
+	private int id;
+	private int interactionTimer = 0;
+	private int interactionWait = 0;
 
 
 	public AIPlayer(float x, float y, int width,int height, Player humanPlayer,String url) {
@@ -31,6 +36,7 @@ public class AIPlayer extends Player {
 		
 		this.username = UUID.randomUUID().toString();;
 		this.humanPlayer = humanPlayer;
+		this.id = Character.getNumericValue(url.charAt(6));
 	}
 
 	public void tick() {
@@ -38,105 +44,14 @@ public class AIPlayer extends Player {
 
 		super.tick();
 
-		dist_from_player = this.x - this.humanPlayer.getX();
+		this.dist_from_player = this.x - this.humanPlayer.getX();
 
 		if (this.isGhostMode() == false) {
-
-			if (this.canMove == true ) {
-
-				if (this.wait > 0) {
-
-					this.wait--;
-
-					if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
-						if (this.velX >= -0.1f && this.velX <= 0.1f) {
-							this.velX = 0;
-							currentAnimState = AnimationStates.IDLE;
-						} else if (this.velX > 0.1f) {
-							this.velX -= DECELERATION;
-						} else {
-							this.velX += DECELERATION;
-						}
-					} else {
-						this.velX = 0;
-						currentAnimState = AnimationStates.IDLE;
-					}
-
-				}
-				else {
-					
-						if(this.direction.equals("R")) {
-
-						/* Beware: Java floating point representation makes it difficult to have perfect numbers
-						( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
-
-								// Simulates acceleration when running right
-								if (this.velX >= RUN_SPEED){
-									this.velX = RUN_SPEED;
-								} else {
-									this.velX += RUN_SPEED/6;
-								}
-							currentAnimState = AnimationStates.RIGHT;
-
-						} else if(this.direction.equals("L")) { 
-
-								// Simulates acceleration when running left
-								if (this.velX <= -RUN_SPEED){
-									this.velX = -RUN_SPEED;
-								} else {
-									this.velX -= RUN_SPEED/6;
-								}
-							currentAnimState = AnimationStates.LEFT;
-
-						} else { 
-							// For deceleration effect
-							if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
-								if (this.velX >= -0.1f && this.velX <= 0.1f) {
-									this.velX = 0;
-									currentAnimState = AnimationStates.IDLE;
-								} else if (this.velX > 0.1f) {
-									this.velX -= DECELERATION;
-								} else {
-									this.velX += DECELERATION;
-								}
-							} else {
-								this.velX = 0;
-								currentAnimState = AnimationStates.IDLE;
-							}
-						}
-
-					
-						if(jump.equals("Y")) {
-							if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
-								
-								this.velY = JUMP_GRAVITY;
-							}
-							this.jump = "N";
-						}
-					}
-				}
-
-				if (this.inventoryTimerOn == true) {
-
-					this.inventoryTimer++;
-
-					if (this.inventoryTimer >= 120) {
-						
-						INVENTORY.get(0).getEffect();
-						if (!(INVENTORY.get(0).getUrl().equals("./img/jump.png")) && !(INVENTORY.get(0).getUrl().equals("./img/banana.png")))
-							CURRENT_EFFECTS.add(new Effect(INVENTORY.get(0).getUrl(), 500));
-						INVENTORY.get(0).setUrl("./img/empty.png");
-						this.setInventoryChanged(true);
-
-						this.inventoryTimer = 0;
-						this.inventoryTimerOn = false;
-					}
-				}
 
 			if (this.humanPlayer.isGhostMode() == false) {
 
 				// sends AI Player to the penultimate RespawnPoint that the player has reached 
-				if (dist_from_player < max_distance_behind && humanPlayer.getRespawnPoints().size() > 2) {
+				if (this.dist_from_player < max_distance_behind && humanPlayer.getRespawnPoints().size() > 2) {
 
 					this.invincible = true;
 
@@ -152,7 +67,7 @@ public class AIPlayer extends Player {
 
 					// to make smooth transition on minimap
 					if (this.x < penultimateRespawnPoint.getX()) {
-						this.x += 4;
+						this.x += 3;
 					} else { 
 						this.invincible = false; 
 						this.invincibleMove = false; 
@@ -162,7 +77,126 @@ public class AIPlayer extends Player {
 					if (!this.getRespawnPoints().contains(penultimateRespawnPoint)) {
 						this.y = penultimateRespawnPoint.getY()-20;
 					} 	
-				}	
+				}
+			}	
+
+			for (Player p: getPlayers())
+				{
+					if (p instanceof AIPlayer)
+						if (this.getInteraction(p)){
+
+							this.interactionTimer++;
+
+							if (this.interactionTimer >= 30) {
+
+								if (this.id < p.id) {
+									this.interactionWait = 20;
+								} else {
+									p.interactionWait = 20;
+								}
+
+								this.interactionTimer -= 30;
+								p.interactionTimer -= 30; 
+
+							}
+						}
+					}
+
+			if (this.canMove == true && this.invincibleMove == false) {
+
+				if (this.interactionWait > 0) {
+					this.interactionWait--;
+				} 
+				else {
+
+					if (this.wait > 0) {
+
+						this.wait--;
+
+						if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
+							if (this.velX >= -0.1f && this.velX <= 0.1f) {
+								this.velX = 0;
+								currentAnimState = AnimationStates.IDLE;
+							} else if (this.velX > 0.1f) {
+								this.velX -= DECELERATION;
+							} else {
+								this.velX += DECELERATION;
+							}
+						} else {
+							this.velX = 0;
+							currentAnimState = AnimationStates.IDLE;
+						}
+
+					}
+					else {
+						
+							if(this.direction.equals("R")) {
+
+							/* Beware: Java floating point representation makes it difficult to have perfect numbers
+							( e.g. 3.6f - 0.2f = 3.3999999 instead of 3.4 ) so this code allows some leeway for values. */
+
+									// Simulates acceleration when running right
+									if (this.velX >= RUN_SPEED){
+										this.velX = RUN_SPEED;
+									} else {
+										this.velX += RUN_SPEED/6;
+									}
+								currentAnimState = AnimationStates.RIGHT;
+
+							} else if(this.direction.equals("L")) { 
+
+									// Simulates acceleration when running left
+									if (this.velX <= -RUN_SPEED){
+										this.velX = -RUN_SPEED;
+									} else {
+										this.velX -= RUN_SPEED/6;
+									}
+								currentAnimState = AnimationStates.LEFT;
+
+							} else { 
+								// For deceleration effect
+								if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
+									if (this.velX >= -0.1f && this.velX <= 0.1f) {
+										this.velX = 0;
+										currentAnimState = AnimationStates.IDLE;
+									} else if (this.velX > 0.1f) {
+										this.velX -= DECELERATION;
+									} else {
+										this.velX += DECELERATION;
+									}
+								} else {
+									this.velX = 0;
+									currentAnimState = AnimationStates.IDLE;
+								}
+							}
+
+						
+							if(jump.equals("Y")) {
+								if(isOnGround() && !hasCeilingAbove() && !isOnWall()) {
+									
+									this.velY = JUMP_GRAVITY;
+								}
+								this.jump = "N";
+							}
+						}
+					}
+
+					if (this.inventoryTimerOn == true) {
+
+						this.inventoryTimer++;
+
+						if (this.inventoryTimer >= 80) {
+							
+							INVENTORY.get(0).getEffect();
+							if (!(INVENTORY.get(0).getUrl().equals("./img/jump.png")) && !(INVENTORY.get(0).getUrl().equals("./img/banana.png")))
+								CURRENT_EFFECTS.add(new Effect(INVENTORY.get(0).getUrl(), 500));
+							INVENTORY.get(0).setUrl("./img/empty.png");
+							this.setInventoryChanged(true);
+
+							this.inventoryTimer = 0;
+							this.inventoryTimerOn = false;
+						}
+					}
 			}
 			
 		} else {	// If AIPlayer isGhostMode
@@ -227,4 +261,12 @@ public class AIPlayer extends Player {
 	public void startInventoryTimer(){
 		this.inventoryTimerOn = true;
 	}
+
+	public boolean getInteraction(Player player){
+		return ((int)this.x 		 < 	(int)player.getX()+player.getWidth() && 
+				(int)player.getX() < 	this.x+this.width && 
+				(int)this.y-20 	 < 	(int)player.getY()+player.getHeight() && 
+				(int)player.getY() < 	(int)this.y+this.height);
+	}
+
 }

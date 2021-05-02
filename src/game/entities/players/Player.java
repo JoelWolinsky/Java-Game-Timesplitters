@@ -72,6 +72,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     private boolean facingRight = true;
     protected boolean invincible = false;
     protected boolean invincibleMove = false;
+    protected int id;
 
     protected int animationTimer = 0;
     protected int frame;
@@ -83,6 +84,9 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     private  String username;
     private final KeyInput INPUT;
     private String objectModel;
+    public int wait;
+    public int interactionTimer;
+    public int interactionWait;
 
 
     public Player(float x, float y, KeyInput input, int width, int height,String url) {
