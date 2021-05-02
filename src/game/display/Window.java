@@ -60,7 +60,6 @@ public class Window extends Canvas{
 		c.setPreferredSize(d);
 		c.setMaximumSize(d);
 		c.setMinimumSize(d);
-
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		c.setBackground(Color.BLACK);
@@ -80,59 +79,8 @@ public class Window extends Canvas{
 
 		int panelWidth = WIDTH / 2;
 		int panelHeight = ((HEIGHT / 2) - (WIDTH / 10));
-
-		// The panel that holds the 4 buttons on this page
-		mainMenu = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		mainMenu.setBounds(WIDTH / 23, (HEIGHT / 2) + 50, panelWidth, panelHeight);
-		mainMenu.setOpaque(false);
-		((FlowLayout)mainMenu.getLayout()).setVgap(panelHeight / 19);
-
-		// The panel that holds the options buttons
-		JPanel optionButtonPanel = new JPanel(new FlowLayout());
-		optionButtonPanel.setBounds(WIDTH / 4, HEIGHT / 15, panelWidth, panelHeight * 2);
-		optionButtonPanel.setOpaque(false);
-		optionButtonPanel.setVisible(false);
-		((FlowLayout)optionButtonPanel.getLayout()).setVgap(panelHeight / 8);
-
-		// The panel that holds the back button
-		JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		backButtonPanel.setBounds(WIDTH / 23, HEIGHT - (HEIGHT / 7), panelWidth, panelHeight / 4 + 20);
-		backButtonPanel.setOpaque(false);
-		backButtonPanel.setVisible(false);
-
-		// The panel that holds the multiplayer buttons
-		JPanel multiplayerButtonPanel = new JPanel(new FlowLayout());
-		multiplayerButtonPanel.setBounds(WIDTH / 4, HEIGHT / 10, panelWidth, panelHeight * 2);
-		multiplayerButtonPanel.setOpaque(false);
-		multiplayerButtonPanel.setVisible(false);
-		((FlowLayout)multiplayerButtonPanel.getLayout()).setVgap(panelHeight / 4);
-
-		// Handling the main screen background image
-		ImageIcon backgroundMain = new ImageIcon("./img/backgroundMain.gif");
-	    Image temp = backgroundMain.getImage().getScaledInstance(WIDTH,HEIGHT,Image.SCALE_DEFAULT);
-	    backgroundMain = new ImageIcon(temp);
-	    back = new JLabel(backgroundMain);
-	    back.setLayout(null);
-	    back.setBounds(0,0,WIDTH,HEIGHT);
-	    back.setVisible(true);
-
-	    ImageIcon backgroundOptions = new ImageIcon("./img/backgroundOptions.gif");
-	    Image temp2 = backgroundOptions.getImage().getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
-	    backgroundOptions = new ImageIcon(temp2);
-	    backOptions = new JLabel(backgroundOptions);
-	    backOptions.setLayout(null);
-	    backOptions.setBounds(0,0,WIDTH,HEIGHT);
-	    backOptions.setVisible(false);
-
-	    ImageIcon backgroundMultiplayer = new ImageIcon("./img/backgroundMultiplayer.gif");
-	    Image temp3 = backgroundMultiplayer.getImage().getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
-	    backgroundMultiplayer = new ImageIcon(temp3);
-	    backMultiplayer = new JLabel(backgroundMultiplayer);
-	    backMultiplayer.setLayout(null);
-	    backMultiplayer.setBounds(0, 0, WIDTH, HEIGHT);
-	    backMultiplayer.setVisible(false);
-
-	    // Importing button graphics
+		
+	    // Importing required image graphics
 		ImageIcon button1Icon = new ImageIcon("./img/button1.png");
 		Image scaledButton1 = button1Icon.getImage().getScaledInstance(panelWidth - 50, (panelHeight / 4) - 10,Image.SCALE_SMOOTH);
 		button1Icon = new ImageIcon(scaledButton1);
@@ -180,9 +128,30 @@ public class Window extends Canvas{
 		
 		ImageIcon errorPanelIcon = new ImageIcon("./img/errorPanel.png");
 		Image scaledErrorPanel = errorPanelIcon.getImage().getScaledInstance(panelWidth - 80, panelHeight + 100, Image.SCALE_SMOOTH);
+
+		mainMenu = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		mainMenu.setBounds(WIDTH / 23, (HEIGHT / 2) + 50, panelWidth, panelHeight);
+		mainMenu.setOpaque(false);
+		((FlowLayout)mainMenu.getLayout()).setVgap(panelHeight / 19);
+
+		JPanel optionButtonPanel = new JPanel(new FlowLayout());
+		optionButtonPanel.setBounds(WIDTH / 4, HEIGHT / 15, panelWidth, panelHeight * 2);
+		optionButtonPanel.setOpaque(false);
+		optionButtonPanel.setVisible(false);
+		((FlowLayout)optionButtonPanel.getLayout()).setVgap(panelHeight / 8);
+
+		JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		backButtonPanel.setBounds(WIDTH / 23, HEIGHT - (HEIGHT / 7), panelWidth, panelHeight / 4 + 20);
+		backButtonPanel.setOpaque(false);
+		backButtonPanel.setVisible(false);
+
+		JPanel multiplayerButtonPanel = new JPanel(new FlowLayout());
+		multiplayerButtonPanel.setBounds(WIDTH / 4, HEIGHT / 10, panelWidth, panelHeight * 2);
+		multiplayerButtonPanel.setOpaque(false);
+		multiplayerButtonPanel.setVisible(false);
+		((FlowLayout)multiplayerButtonPanel.getLayout()).setVgap(panelHeight / 4);
 		
-		// The panel that holds the "server running / not running" messages
-	    // We override JPanel's paintComponent method to enable an Image to be used as a background
+	    // Overriding JPanel's paintComponent method to enable an Image to be used as a background
 		JPanel errorPanel = (new JPanel(new FlowLayout()) {
 			@Override
 			  protected void paintComponent(Graphics g) {
@@ -202,7 +171,32 @@ public class Window extends Canvas{
 		errorPanelText.setHorizontalTextPosition(JLabel.CENTER);
 		errorPanelText.setForeground(Color.black);
 
-		// The singleplayer Button on the main screen
+		// Handling the main screen background images
+		ImageIcon backgroundMain = new ImageIcon("./img/backgroundMain.gif");
+	    Image temp = backgroundMain.getImage().getScaledInstance(WIDTH,HEIGHT,Image.SCALE_DEFAULT);
+	    backgroundMain = new ImageIcon(temp);
+	    back = new JLabel(backgroundMain);
+	    back.setLayout(null);
+	    back.setBounds(0,0,WIDTH,HEIGHT);
+	    back.setVisible(true);
+
+	    ImageIcon backgroundOptions = new ImageIcon("./img/backgroundOptions.gif");
+	    Image temp2 = backgroundOptions.getImage().getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
+	    backgroundOptions = new ImageIcon(temp2);
+	    backOptions = new JLabel(backgroundOptions);
+	    backOptions.setLayout(null);
+	    backOptions.setBounds(0,0,WIDTH,HEIGHT);
+	    backOptions.setVisible(false);
+
+	    ImageIcon backgroundMultiplayer = new ImageIcon("./img/backgroundMultiplayer.gif");
+	    Image temp3 = backgroundMultiplayer.getImage().getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
+	    backgroundMultiplayer = new ImageIcon(temp3);
+	    backMultiplayer = new JLabel(backgroundMultiplayer);
+	    backMultiplayer.setLayout(null);
+	    backMultiplayer.setBounds(0, 0, WIDTH, HEIGHT);
+	    backMultiplayer.setVisible(false);
+
+		// Declaring buttons
 		JLabel singleplayerButton = new JLabel(button1Icon);
 		singleplayerButton.setFont(sizedFont);
 		singleplayerButton.setText("SINGLEPLAYER");
@@ -210,7 +204,7 @@ public class Window extends Canvas{
 		singleplayerButton.setForeground(Color.black);
 
 		singleplayerButton.addMouseListener(new MouseAdapter() {
-
+			
 			// This handles when the JLabel is pressed by the mouse
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -251,7 +245,6 @@ public class Window extends Canvas{
 
 		// The rest of the button behaviours are handled in the same way
 
-		// The multiplayer button on the main screen
 		JLabel multiplayerButton = new JLabel(button1Icon);
 		multiplayerButton.setForeground(Color.black);
 		multiplayerButton.setFont(sizedFont);
@@ -285,7 +278,6 @@ public class Window extends Canvas{
 			}
 		});
 
-		// The options button on the main screen
 		JLabel optionsButton = new JLabel(button1Icon);
 		optionsButton.setForeground(Color.black);
 		optionsButton.setFont(sizedFont);
@@ -319,7 +311,6 @@ public class Window extends Canvas{
 			}
 		});
 
-		// The quit button on the main screen
 		JLabel quitButton = new JLabel(button1Icon);
 		quitButton.setForeground(Color.black);
 		quitButton.setFont(sizedFont);
@@ -349,7 +340,6 @@ public class Window extends Canvas{
 			}
 		});
 
-		// The back button on the options and multiplayer screens
 		JLabel backButton = new JLabel(button2Icon);
 		backButton.setForeground(Color.black);
 		backButton.setFont(sizedFont);
@@ -387,7 +377,6 @@ public class Window extends Canvas{
 			}
 		});
 		
-		// The back button on the error panel
 		JLabel backErrorButton = new JLabel(button2Icon);
 		backErrorButton.setForeground(Color.black);
 		backErrorButton.setFont(sizedFont);
@@ -419,7 +408,6 @@ public class Window extends Canvas{
 			}
 		});
 
-		// The toggle sound effects button on the options screen
 		JLabel toggleSoundEffectsButton = new JLabel(button3Icon);
 		toggleSoundEffectsButton.setForeground(Color.black);
 		toggleSoundEffectsButton.setFont(sizedFont);
@@ -465,7 +453,6 @@ public class Window extends Canvas{
 			}
 		});
 
-		// The toggle music button on the options screen
 		JLabel toggleMusicButton = new JLabel(button3Icon);
 		toggleMusicButton.setForeground(Color.black);
 		toggleMusicButton.setFont(sizedFont);
@@ -513,7 +500,6 @@ public class Window extends Canvas{
 			}
 		});
 
-		// The toggle ambience button on the options screen
 		JLabel toggleAmbienceButton = new JLabel(button3Icon);
 		toggleAmbienceButton.setForeground(Color.black);
 		toggleAmbienceButton.setFont(sizedFont);
@@ -559,7 +545,6 @@ public class Window extends Canvas{
 			}
 		});
 
-		// The difficulty button on the options screen
 		JLabel difficultyButton = new JLabel(button3Icon);
 		difficultyButton.setForeground(Color.black);
 		difficultyButton.setFont(sizedFont);
@@ -611,7 +596,6 @@ public class Window extends Canvas{
 			}
 		});
 
-		// The play vs computer button on the multiplayer screen
 		JLabel playVSComputerButton = new JLabel(button3Icon);
 		playVSComputerButton.setForeground(Color.black);
 		playVSComputerButton.setFont(sizedFont);
@@ -642,7 +626,6 @@ public class Window extends Canvas{
 				game.setGameState(GameState.Playing);
 				game.setGameMode(GameMode.vsAI);
 				game.start();
-
 			}
 
 			@Override
@@ -656,7 +639,6 @@ public class Window extends Canvas{
 			}
 		});
 
-		// The create game button on the multiplayer screen
 		JLabel createGameButton = new JLabel(button3Icon);
 		createGameButton.setForeground(Color.black);
 		createGameButton.setFont(sizedFont);
@@ -684,7 +666,6 @@ public class Window extends Canvas{
 					isAlive = true;
 				}
 
-
 				if(isAlive == false) {
 					Game.socketServer = new GameServer(game);
 
@@ -701,7 +682,6 @@ public class Window extends Canvas{
 			    	game.setGameState(GameState.Playing);
 			    	game.setGameMode(GameMode.MULTIPLAYER);
 			    	game.start();
-
 				} else {
 					multiplayerButtonPanel.setVisible(false);
 					errorPanelText.setText("<html><center><p style='margin-top:50'>A server is<br><p style='margin-top:3'>already running</center></html>");
@@ -720,7 +700,6 @@ public class Window extends Canvas{
 			}
 		});
 
-		// The join game button on the multiplayer screen
 		JLabel joinGameButton = new JLabel(button3Icon);
 		joinGameButton.setForeground(Color.black);
 		joinGameButton.setFont(sizedFont);
@@ -743,11 +722,9 @@ public class Window extends Canvas{
 					DatagramSocket socket;
 					socket = new DatagramSocket(1331);
 					socket.close();
-
 				} catch (SocketException e1) {
 					isAlive = true;
 				}
-
 
 				if(isAlive == true) {
 					Game.socketClient = new GameClient(game, "localhost");
@@ -765,9 +742,7 @@ public class Window extends Canvas{
 
 			    	game.setGameState(GameState.Playing);
 					game.setGameMode(GameMode.MULTIPLAYER);
-
 			    	game.start();
-
 				} else {
 					multiplayerButtonPanel.setVisible(false);
 					errorPanelText.setText("<html><center><p style='margin-top:50'>A server must<br><p style='margin-top:3'>already be running<br><p style='margin-top:3'>for you to join a<br><p style='margin-top:3'>game.</center></html>");
@@ -786,7 +761,6 @@ public class Window extends Canvas{
 			}
 		});
 
-		// Add all components then set the frame to visible
 		mainMenu.add(singleplayerButton);
 		mainMenu.add(multiplayerButton);
 		mainMenu.add(optionsButton);
@@ -815,23 +789,43 @@ public class Window extends Canvas{
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
-
+	
+	/**
+	 * Used for accessing the mainMenu JPanel that holds the singleplayer, multiplayer, options, and quit buttons
+	 * @return the mainMenu JPanel
+	 */
 	public static JPanel getMainMenu() {
 		return mainMenu;
 	}
-
+	
+	/**
+	 * Sets the mainMenu JPanel to visible or invisible
+	 * @param visible the boolean for visibility
+	 */
 	public static void setMainMenuVisible(boolean visible) {
 		Window.mainMenu.setVisible(visible);
 	}
-
+	
+	/**
+	 * Sets the main menu background image to visible or invisible
+	 * @param visible the boolean for visibility
+	 */
 	public static void setBack(boolean visible) {
 		Window.back.setVisible(visible);
 	}
-
+	
+	/**
+	 * Sets the options background image to visible or invisible
+	 * @param visible the boolean for visibility
+	 */
 	public static void setBackOptions(boolean visible) {
 		Window.backOptions.setVisible(visible);
 	}
 
+	/**
+	 * Sets the multiplayer background image to visible or invisible
+	 * @param visible the boolean for visibility
+	 */
 	public static void setBackMultiplayer(boolean visible) {
 		Window.backMultiplayer.setVisible(visible);
 	}
