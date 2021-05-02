@@ -28,6 +28,11 @@ public class GameClient extends Thread {
 	private DatagramSocket socket;
 	private Game game;
 	
+	/** 
+	 * Opens the socket for client-server connections. 
+	 * @param game The game that the server will run for.
+	 * @param ipAddress The ipAddress to connect to.
+	 */
 	public GameClient(Game game, String ipAddress) {
 		this.game = game;
 		try {
@@ -40,8 +45,8 @@ public class GameClient extends Thread {
 		}
 	}
 	
-	/* 
-	 * Open the socket to reveive packets from the server.
+	/** 
+	 * Initialises the client side to receive packets from the server.
 	 */
    public void run() {
         while (true) {
@@ -59,8 +64,11 @@ public class GameClient extends Thread {
         }
     }
 	   
-	/* 
+	/*
 	 * Handles any packets received from the server.
+	 * @param data The data which contains the packet information.
+	 * @param address The address the data is from.
+	 * @param port The port the data is from.
 	 */
 	private void parsePacket(byte[] data, InetAddress address, int port) {
 		try {
@@ -102,6 +110,10 @@ public class GameClient extends Thread {
 		}
 	}
 	
+	/**
+	 * Handles the StartGame packet.
+	 * @param packet The StartGame packet.
+	 */
 	private void handleStartGame(Packet04StartGame packet) {
 		System.out.println("handleStartGame");
 		setLevelState(LevelState.InProgress);
@@ -110,6 +122,7 @@ public class GameClient extends Thread {
 
 	/* 
 	 * Sends data to the server.
+	 * @param data The data to be sent.
 	 */
 	public void sendData(byte[] data) {
 		//System.out.println("client send");
@@ -121,8 +134,9 @@ public class GameClient extends Thread {
 		}
 	}
 	
-	/* 
-	 * Handles the move packet if the user moves.
+	/** 
+	 * Handles a move packet received from the server.
+	 * @param packet The packet received.
 	 */
 	private void handleMove(Packet02Move packet) {
 		if (Game.player.getUsername().equals(packet.getUsername())) {
@@ -140,6 +154,10 @@ public class GameClient extends Thread {
 		
 	}
 	
+	/** 
+	 * Handles a wall move packet received from the server.
+	 * @param packet The packet received.
+	 */
 	private void handleMove(Packet03MoveWall packet) {
 		if (Game.socketServer == null) {
 			try {
@@ -154,8 +172,11 @@ public class GameClient extends Thread {
 		
 	}
 
-	/*
-	 * Handles the user login packet.
+	/**
+	 * Handles adding new players to the clients game.
+	 * @param packet The Login packet received.
+	 * @param address The address of the joining player.
+	 * @param port The port of the joining player.
 	 */
 	private void handleLogin(Packet00Login packet, InetAddress address, int port) {
 		System.out.println("[" + address.getHostAddress() + ":" + port + "] " + (packet).getUsername() + " has joined the game...");
