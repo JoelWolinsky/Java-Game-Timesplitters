@@ -12,7 +12,6 @@ import game.entities.players.PlayerMP;
 import game.network.packets.Packet;
 import game.network.packets.Packet.PacketTypes;
 import game.network.packets.Packet00Login;
-import game.network.packets.Packet01Disconnect;
 import game.network.packets.Packet02Move;
 import game.network.packets.Packet03MoveWall;
 import game.network.packets.Packet04StartGame;
@@ -85,7 +84,7 @@ public class GameServer extends Thread {
 				this.handleMoveWall((Packet03MoveWall)packet);
 				break;
 			case STARTGAME:
-				packet = new Packet04StartGame(data);
+				packet = new Packet04StartGame();
 				this.handleStartGame((Packet04StartGame)packet);
 			}
 		}catch (Exception e) {

@@ -18,7 +18,6 @@ import game.graphics.LevelState;
 import game.network.packets.Packet;
 import game.network.packets.Packet.PacketTypes;
 import game.network.packets.Packet00Login;
-import game.network.packets.Packet01Disconnect;
 import game.network.packets.Packet02Move;
 import game.network.packets.Packet03MoveWall;
 import game.network.packets.Packet04StartGame;
@@ -85,11 +84,6 @@ public class GameClient extends Thread {
 				packet = new Packet00Login(data);
 				handleLogin((Packet00Login) packet, address, port);
 				break;
-			case DISCONNECT:
-				packet = new Packet01Disconnect(data);
-				System.out.println("[" + address.getHostAddress() + ":" + port + "] " + ((Packet01Disconnect) packet).getUsername() + " has left the world...");
-				game.m.currentLevel.removePlayerMP(((Packet01Disconnect) packet).getUsername());
-				break;
 			case MOVE:
 				//System.out.println("client handle move");
 				packet = new Packet02Move(data);
@@ -101,7 +95,7 @@ public class GameClient extends Thread {
 				handleMove((Packet03MoveWall)packet);
 				break;
 			case STARTGAME:
-				packet = new Packet04StartGame(data);
+				packet = new Packet04StartGame();
 				handleStartGame((Packet04StartGame)packet);
 			}	
 		} catch (Exception e) {
