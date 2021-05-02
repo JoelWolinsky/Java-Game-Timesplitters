@@ -67,6 +67,7 @@ public class Level extends Canvas {
 
 		if (!entities.isEmpty() && levelState!=LevelState.Loading)
 		for(GameObject o : entities) {
+
 			o.render(g, f, h);
 		}
 	}

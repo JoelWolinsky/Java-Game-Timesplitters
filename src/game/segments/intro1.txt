@@ -1,4 +1,4 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA1.png
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA1.png 2
 
 Chunk 1 W ground1.png
 

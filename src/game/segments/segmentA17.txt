@@ -1,4 +1,4 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA12p1.png 2
+Theme A 426 384 platformA.png invPlatformA.png floorA.png roofBsmol.png 1
 
 
 Chunk 1 E segmentA17p1.png
@@ -23,7 +23,7 @@ MovingPlatform 60 -60 40 true 1 platform3.png
 MovingPlatform 330 -60 40 true 1.75 platform3.png
 
 
-Platform Custom -32 -110 walltower.png
+Platform Custom -32 -190 walltower.png
 Platform Custom 426 0 walltowerinv.png
 
 Chunk 1 N segmentA17p2.png
@@ -62,8 +62,8 @@ Platform Inverted 210 350
 Platform Inverted 290 350
 Respawn 340 363 0 0 flag1.png
 
--TrackingAISpawner 0 155 0.5f 20 1 150 120 1 ghost 1 0 -100 400 200
--TrackingAISpawner 410 155 0.5f 20 1 150 120 1 ghost 1 -400 -100 400 200
+TrackingAISpawner 0 155 0.5f 20 1 150 120 1 ghost 1 0 -100 400 200
+TrackingAISpawner 410 155 0.5f 20 1 150 120 1 ghost 1 -400 -100 400 200
 
 MovingPlatform 80 150 55 false 1.25 platform3.png
 MovingPlatform 200 170 40 false 2 platform3.png
@@ -89,9 +89,19 @@ Platform Custom 426 0 walltowerinv.png
 Platform Custom -32 0 walltower.png
 
 
+Projectile 0 180 3.75 0 426 0 0 75 fog1.png dart
+Projectile 426 130 -4.3 0 426 0 0 20 fog1.png dart
+
+Platform Custom 120 160 platform3.png
+Platform Custom 280 160 platform3.png
+
+Platform Inverted 375 0
+Platform Custom 360 20 edge1.png
+
+MovingPlatform 200 90 145 true 4.5 platform2.png
 
 Chunk 1 N segmentA17top.png
-Platform Custom 426 50 walltowerinv.png
+Platform Custom 426 0 walltowerinv.png
 
 AnimArea 30 160 torch
 
@@ -125,7 +135,8 @@ Platform Custom 0 260 426 16
 AnimArea 150 225 skeletonthrow
 AnimArea 240 225 skeletonreactinv
 AnimArea 280 225 skeletonthrowinv
+Chest 400 360 chest
+Roof
 
-Chunk 1 W segmentA17top2.png
 
 
