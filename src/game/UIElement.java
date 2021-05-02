@@ -13,6 +13,7 @@ public class UIElement extends GameObject {
 
 	private BufferedImage img;
 	private boolean visible = true;
+	private boolean newImg = false;
 
 	public UIElement(float x, float y, int width, int height, String url) {
 		super(x, y, 3, width, height);
@@ -34,8 +35,12 @@ public class UIElement extends GameObject {
 
 	public void tick() {
 
-		this.height = img.getHeight();
-		this.width = img.getWidth();
+		if (newImg)
+		{
+			this.height = img.getHeight();
+			this.width = img.getWidth();
+			newImg=false;
+		}
 
 	}
 
@@ -58,6 +63,7 @@ public class UIElement extends GameObject {
 
 	public void setImg(BufferedImage img) {
 		this.img = img;
+		newImg=true;
 	}
 
 	public void setVisible(boolean visible) {

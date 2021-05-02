@@ -23,6 +23,7 @@ import game.graphics.LevelState;
 import game.input.KeyInput;
 import game.network.packets.Packet02Move;
 
+import static game.InventoryBarController.selectFrame;
 import static game.Level.getLevelState;
 import static game.graphics.Assets.getAnimations;
 import static game.Level.getToBeAdded;
@@ -58,6 +59,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     protected final ArrayList<Item> INVENTORY = new ArrayList<Item>(Arrays.asList(new Item(0, 0, 0, 0, this, "./img/empty.png"), new Item(0, 0, 0, 0, this, "./img/empty.png"), new Item(0, 0, 0, 0, this, "./img/empty.png")));
     protected final int INVENTORY_SIZE = 3;
     protected int inventoryIndex = 2;
+    protected int previousInventoryIndex;
     protected boolean inventoryChanged = false;
     protected int itemUseCooldown = 0;
     protected int slotSelectionCooldown = 0;
@@ -468,7 +470,9 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         if (KeyInput.comma.isPressed()) {
             if (slotSelectionCooldown >= 5)
                 if (inventoryIndex > 0) {
+                    previousInventoryIndex=inventoryIndex;
                     inventoryIndex--;
+                    selectFrame(inventoryIndex,previousInventoryIndex);
                     slotSelectionCooldown = 0;
                 }
         }
@@ -476,7 +480,9 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         if (KeyInput.period.isPressed()) {
             if (slotSelectionCooldown >= 5)
                 if (inventoryIndex < 2) {
+                    previousInventoryIndex=inventoryIndex;
                     inventoryIndex++;
+                    selectFrame(inventoryIndex,previousInventoryIndex);
                     slotSelectionCooldown = 0;
                 }
         }
