@@ -21,11 +21,24 @@ Platform Default 342 265
 Platform Inverted 374 265
 Platform Default 390 265
 
+DamageZone 220 365 0 0 0 0 nopicture.png spike
+DamageZone 240 365 0 0 0 0 nopicture.png spike
+
+
+DamageZone 365 365 0 0 0 0 nopicture.png spike
+DamageZone 385 365 0 0 0 0 nopicture.png spike
 
 Platform Custom 0 384 customFloor2.png
 Platform Custom 214 384 electricfloor1.png
 
 Chunk 1 E segmentA2p2.png
+
+DamageZone 41 365 0 0 0 0 nopicture.png spike
+DamageZone 21 365 0 0 0 0 nopicture.png spike
+
+DamageZone 165 365 0 0 0 0 nopicture.png spike
+DamageZone 185 365 0 0 0 0 nopicture.png spike
+
 Platform Custom 0 140 top1.png
 Platform Custom 330 140 corner1inv.png
 

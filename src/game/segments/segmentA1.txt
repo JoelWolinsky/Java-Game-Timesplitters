@@ -17,6 +17,12 @@ Platform Default 342 265
 Platform Custom 374 265 edge1inv.png
 Chest 299 242 chest
 
+DamageZone 180 365 0 0 0 0 nopicture.png spike
+DamageZone 250 365 0 0 0 0 nopicture.png spike
+Chest 299 360 chest
+DamageZone 350 365 0 0 0 0 nopicture.png spike
+DamageZone 420 365 0 0 0 0 nopicture.png spike
+
 Floor
 
 

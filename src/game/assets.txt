@@ -78,3 +78,5 @@ DETH
 IDLE 4 5 deth1.png deth2.png deth3.png deth4.png deth5.png
 dart
 IDLE 15 4 dart1.png dart1.png dart1.png dart1.png
+spike
+IDLE 5 6 spike1.png spike2.png spike3.png spike4.png spike5.png spike6.png
