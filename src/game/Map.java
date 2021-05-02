@@ -26,13 +26,14 @@ public class Map {
 
     private int horizontalIndex = 0;
     private int verticalIndex = 0;
-    private int setX = 426;
+    private int oldSetx=0,setX = 426;
     private int setY = 384;
     private final LinkedList<String> LAST_DIRECTION = new LinkedList<>();
     private String currentTheme = "A";
     String texturePlatformDefault = "";
     String texturePlatformInverted = "";
     String textureFloor = "";
+    String textureRoof = "";
     String goUrl = "";
     int index = 0;
     int bottom;
@@ -43,8 +44,9 @@ public class Map {
 
     public Level currentLevel;
     int defaultSeed = 0;
+    private boolean justChanged=false;
 
-    ArrayList<String> segments3,segments1,segments2,segments4,wizard,introDimension,castleEntrance,throneRoom, segments5;
+    ArrayList<String> segments3,segments1,segments2,segments4,wizard,introDimension,castleEntrance,throneRoom, segments5, introOutDimension,towerA,segments6;
 
     public Map (MapMode mapMode, GameMode gameMode){
 
@@ -57,8 +59,13 @@ public class Map {
             case debug:
 
                 parseFile(currentLevel, "intro1");
-                parseFile(currentLevel,"segmentA2");
-                parseFile(currentLevel,"introDimension");
+                parseFile(currentLevel, "introDimension");
+                parseFile(currentLevel,"segmentA14");
+                parseFile(currentLevel,"segmentA16");
+                parseFile(currentLevel,"introOutDimension");
+                //parseFile(currentLevel,"segmentA10");
+                parseFile(currentLevel,"segmentA17");
+                parseFile(currentLevel,"segmentB1");
 			/*
 			*** LEGEND ***
 			m.mapParser(currentLevel, "intro1");				// No go zone 								
@@ -100,6 +107,9 @@ public class Map {
                 wizard = new ArrayList<String>(Arrays.asList("segmentA13"));
                 introDimension = new ArrayList<String>(Arrays.asList("introDimension"));
                 segments5 = new ArrayList<String>(Arrays.asList("segmentA14","segmentA16"));
+                introOutDimension = new ArrayList<String>(Arrays.asList("introOutDimension"));
+                towerA = new ArrayList<String>(Arrays.asList("segmentA17"));
+                segments6 = new ArrayList<String>(Arrays.asList("segmentB1"));
 
                 //choose the limits of your map this should also be related to how many levels you have defined
                 //eg. you don't want to have 20 levels but a top limit of only 2 since 17 of the leves will never be used
@@ -127,10 +137,13 @@ public class Map {
 	                        randomGenerate(segments4, defaultSeed) + randomGenerate(wizard, defaultSeed) + randomGenerate(introDimension, defaultSeed),
 	                        randomGenerate(segments5, defaultSeed)));
                 }
-
+                //parseFile(currentLevel,"introOutDimension");
+                //parseFile(currentLevel,"segmentA17");
+                //parseFile(currentLevel,"segmentB1");
                 //create specific progressbar parts for the generated segment pools
                 for (Integer i =0 ; i<allParts.size();i++)
                 {
+                    System.out.println(allParts.get(i));
                     mps.add(new MapPart("./img/minipart".concat(i.toString()).concat(".png"),allParts.get(i)));
                 }
                 break;
@@ -156,20 +169,23 @@ public class Map {
      * @param currentLevel The level towards which we wish to parse
      * @param url          Name of the file we wish to parse
      */
-    public void parseFile(Level currentLevel, String url) {
+    public int parseFile(Level currentLevel, String url) {
 
+        int nrBlocks = 0;
         try {
             File myObj = new File("./src/game/segments/".concat(url).concat(".txt"));
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                interpret(currentLevel, data.split("\\s+"));
+                nrBlocks = nrBlocks + interpret(currentLevel, data.split("\\s+"));
             }
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+
+        return nrBlocks;
     }
 
     /**
@@ -178,19 +194,37 @@ public class Map {
      * @param currentLevel The level towards which we wish to parse
      * @param splitted     The splitted command into specific elements the interpreter can understand
      */
-    public void interpret(Level currentLevel, String[] splitted) {
+    public int interpret(Level currentLevel, String[] splitted) {
+
+        int nrBlocks=0;
 
         switch (splitted[0]) {
 
             case "Theme":
                 if (!splitted[1].equals(currentTheme)) {
+                    oldSetx=setX;
                     setX = Integer.parseInt(splitted[2]);
                     setY = Integer.parseInt(splitted[3]);
                     currentTheme = splitted[1];
+                    justChanged=true;
                 }
                 texturePlatformDefault = splitted[4];
                 texturePlatformInverted = splitted[5];
                 textureFloor = splitted[6];
+                textureRoof = splitted[7];
+
+                switch (splitted[8]){
+                    case "1":
+                        nrBlocks++;
+                        break;
+                    case "2":
+                        nrBlocks++;
+                        nrBlocks++;
+                        break;
+                    case "CUSTOM":
+                        nrBlocks++;
+                        break;
+                }
                 break;
 
             case "Chunk":
@@ -202,6 +236,10 @@ public class Map {
                         horizontalIndex = horizontalIndex + setX;
                         break;
                     case "W":
+                        if(justChanged) {
+                            horizontalIndex = horizontalIndex + (setX-oldSetx);
+                            justChanged=false;
+                        }
                         horizontalIndex = horizontalIndex - setX;
                         break;
                     case "N":
@@ -256,6 +294,10 @@ public class Map {
             case "Floor":
 
                 currentLevel.addEntity(new Platform(horizontalIndex - setX, verticalIndex + setY, setX, 0, textureFloor));
+                break;
+            case "Roof":
+
+                currentLevel.addEntity(new Platform(horizontalIndex - setX, verticalIndex , setX, 0, textureRoof));
                 break;
 
             case "MovingPlatform":
@@ -414,6 +456,8 @@ public class Map {
                 break;
 
         }
+
+        return nrBlocks;
     }
 
     /**

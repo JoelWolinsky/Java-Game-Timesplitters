@@ -1,0 +1,89 @@
+Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA12p1.png 3
+
+Chunk 1 E segmentA14p1.png
+Portal 10 350 -10 200 200 bigportal
+Chunk 1 E segmentA14p1.png
+Revert
+
+Chunk 1 S segmentA14p2.png
+Chunk 1 E segmentA14p1.png
+Revert
+
+Chunk 1 S segmentA14p2.png
+Chunk 1 E segmentA14p1.png
+Revert
+
+Revert
+Revert
+
+Chunk 1 N segmentA14p2.png
+Chunk 1 E segmentA14p1.png
+Revert
+
+Chunk 1 N segmentA14p2.png
+Chunk 1 N segmentA14p1.png
+Chunk 1 N segmentA14p2.png
+Chunk 1 N segmentA14p2.png
+Chunk 1 N segmentA14p1.png
+Chunk 1 N segmentA14p2.png
+ExtendRespawn 0 0 426 1 invisibleRespawn.png
+ExtendRespawn 0 192 426 1 invisibleRespawn.png
+Chunk 1 N segmentA14p2.png
+ExtendRespawn 0 0 426 1 invisibleRespawn.png
+ExtendRespawn 0 192 426 1 invisibleRespawn.png
+
+Platform Custom 400 384 edge1.png
+Platform Custom 390 454 edge1.png
+Platform Inverted 422 454
+Platform Custom 380 524 edge1.png
+Platform Inverted 412 524
+
+Platform Custom -32 385 wall6.png
+Platform Custom 426 395 wall6inv.png
+Platform Custom 426 0 wall2inv.png
+Platform Custom 426 90 wall2inv.png
+
+Chunk 1 N segmentA14p2.png
+Respawn 0 0 213 0 invisibleRespawn.png
+ExtendRespawn 0 192 426 1 invisibleRespawn.png
+
+Platform Custom -32 0 wall2.png
+Platform Custom 426 0 wall2inv.png
+Platform Custom -32 128 wall2.png
+Platform Custom 426 128 wall2inv.png
+Platform Custom -32 256 wall2.png
+Platform Custom 426 256 wall2inv.png
+Platform Custom -32 384 wall2.png
+Platform Custom -32 512 wall2.png
+Platform Custom -32 640 wall2.png
+
+Chunk 1 N segmentA14p2.png
+
+
+Projectile 100 0 0 10 2100 0 0 0 nopicture.png books
+Projectile 180 0 0 10 2100 0 0 20 nopicture.png bookshelf
+Projectile 80 0 0 10 2100 0 0 110 nopicture.png bookshelf
+Projectile 250 0 0 10 2100 0 0 50 nopicture.png books
+Projectile 300 0 0 10 2100 0 0 90 nopicture.png books
+Projectile 290 0 0 10 2100 0 0 140 nopicture.png bookshelf
+
+Revert
+Revert
+
+Chunk 1 E segmentA17p4.png
+Platform Custom 64 220 top5.png
+Platform Custom 170 220 top5.png
+Platform Custom 308 220 top5.png
+Platform Custom 0 188 corner1inv.png
+Floor
+
+Chunk 1 E segmentA17p5.png
+Platform Custom 0 220 top5.png
+Platform Custom 100 220 top5.png
+Platform Custom 200 220 top5.png
+Platform Custom 330 188 corner1.png
+Floor
+
+
+
+

@@ -76,3 +76,5 @@ LEFT 5 4 ghostformleft.png ghostformleft.png ghostformleft.png ghostformleft.png
 RIGHT 5 4 ghostformright.png ghostformright.png ghostformright.png ghostformright.png ghostformright.png ghostformright.png
 DETH
 IDLE 4 5 deth1.png deth2.png deth3.png deth4.png deth5.png
+dart
+IDLE 15 4 dart1.png dart1.png dart1.png dart1.png

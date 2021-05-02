@@ -1,20 +1,19 @@
 Theme A 426 384 platformA.png invPlatformA.png floorA.png intersegmentA2.png 1
 Chunk 1 E intersegmentA4alt.png
 Respawn -40 363 0 0 flag1.png
--Waypoint 200 563 flag3.png N N 0
-Respawn 0 400 213 0 invisibleRespawn.png
-Respawn 0 500 213 0 invisibleRespawn.png
-Respawn 0 600 213 0 invisibleRespawn.png
-Respawn 0 700 213 0 invisibleRespawn.png
-Respawn 0 800 213 0 invisibleRespawn.png
-Respawn 0 900 213 0 invisibleRespawn.png
-Respawn 0 1000 213 0 invisibleRespawn.png
-Respawn 0 1100 213 0 invisibleRespawn.png
-Respawn 0 1200 213 0 invisibleRespawn.png
-Respawn 0 1300 213 0 invisibleRespawn.png
-Respawn 0 1400 213 0 invisibleRespawn.png
-Respawn 0 1500 213 0 invisibleRespawn.png
-
+-Waypoint 200 563 flag3.png N N 0\
+ExtendRespawn 0 400 250 1 invisibleRespawn.png
+ExtendRespawn 0 500 250 1 invisibleRespawn.png
+ExtendRespawn 0 600 250 1 invisibleRespawn.png
+ExtendRespawn 0 700 250 1 invisibleRespawn.png
+ExtendRespawn 0 800 250 1 invisibleRespawn.png
+ExtendRespawn 0 900 250 1 invisibleRespawn.png
+ExtendRespawn 0 1000 250 1 invisibleRespawn.png
+ExtendRespawn 0 1100 250 1 invisibleRespawn.png
+ExtendRespawn 0 1200 250 1 invisibleRespawn.png
+ExtendRespawn 0 1300 250 1 invisibleRespawn.png
+ExtendRespawn 0 1400 250 1 invisibleRespawn.png
+ExtendRespawn 0 1500 250 1 invisibleRespawn.png
 
 Platform Custom -32 -128 wall2.png
 Platform Custom -32 0 wall2.png
@@ -54,11 +53,13 @@ Chunk 1 W segmentA14p1.png
 Revert
 Chunk 1 E segmentA14p2.png
 Revert
-Respawn 0 400 213 0 invisibleRespawn.png
+
+ExtendRespawn 0 400 250 1 invisibleRespawn.png
 
 Chunk 1 S segmentA14p2.png
-Respawn 0 0 213 0 invisibleRespawn.png
-Respawn 0 200 213 0 invisibleRespawn.png
+
+ExtendRespawn 0 0 250 1 invisibleRespawn.png
+ExtendRespawn 0 200 250 1 invisibleRespawn.png
 
 Chunk 1 W segmentA14p1.png
 
@@ -74,8 +75,8 @@ Chunk 1 N segmentA14p1.png
 
 AnimArea -110 -1100 interSegmentA4portaldest
 
-Respawn 0 0 213 0 invisibleRespawn.png
-Respawn 0 200 213 0 invisibleRespawn.png
+ExtendRespawn 0 0 250 1 invisibleRespawn.png
+ExtendRespawn 0 200 250 1 invisibleRespawn.png
 Respawn 0 383 250 0 invisibleRespawn.png
 Respawn 250 363 0 0 flag1.png
 Waypoint 200 363 flag3.png R N 20

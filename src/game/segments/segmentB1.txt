@@ -1,0 +1,11 @@
+Theme B 768 384 platformA.png invPlatformA.png floorBb.png roofB.png 2
+
+
+Chunk 1 W bg2.png
+Respawn 10 363 0 0 flag1.png
+Roof
+Floor
+
+Chunk 1 W bg2.png
+
+Roof

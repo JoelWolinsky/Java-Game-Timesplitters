@@ -36,9 +36,13 @@ public class ProgressBarController extends GameObject {
 		}
 
 		this.width = width;
-		Blip bp = new Blip(this.x+getWallOfDeath().getX()/2, this.y + 10, 20, 20, getWallOfDeath(), totalNrBlocks, "./img/dethHead.png");
-		myBlips.add(bp);
-		addToAddQueue(bp);
+
+		if (getWallOfDeath()!=null)
+		{
+			Blip bp = new Blip(this.x+getWallOfDeath().getX()/2, this.y + 10, 20, 20, getWallOfDeath(), totalNrBlocks, "./img/dethHead.png");
+			myBlips.add(bp);
+			addToAddQueue(bp);
+		}
 
 	}
 
