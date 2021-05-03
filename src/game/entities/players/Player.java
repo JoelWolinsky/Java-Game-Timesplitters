@@ -60,7 +60,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     protected final ArrayList<Item> INVENTORY = new ArrayList<Item>(Arrays.asList(new Item(0, 0, 0, 0, this, "./img/empty.png"), new Item(0, 0, 0, 0, this, "./img/empty.png"), new Item(0, 0, 0, 0, this, "./img/empty.png")));
     protected final int INVENTORY_SIZE = 3;
     protected int inventoryIndex = 2;
-    protected int previousInventoryIndex;
+    protected int previousInventoryIndex=1;
     protected boolean inventoryChanged = false;
     protected int itemUseCooldown = 0;
     protected int slotSelectionCooldown = 0;
@@ -444,7 +444,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                 //OPTION 2
                 if (!(INVENTORY.get(inventoryIndex).getUrl().equals("./img/empty.png"))) {
                     INVENTORY.get(inventoryIndex).getEffect();
-                    if (!(INVENTORY.get(inventoryIndex).getUrl().equals("./img/jump.png")) && !(INVENTORY.get(inventoryIndex).getUrl().equals("./img/banana.png")))
+                    if (!(INVENTORY.get(inventoryIndex).getUrl().equals("./img/jump.png")) && !(INVENTORY.get(inventoryIndex).getUrl().equals("./img/banana.png"))&& !(INVENTORY.get(inventoryIndex).getUrl().equals("./img/fart1.png")))
                         CURRENT_EFFECTS.add(new Effect(INVENTORY.get(inventoryIndex).getUrl(), 500));
                     INVENTORY.get(inventoryIndex).setUrl("./img/empty.png");
                     this.setInventoryChanged(true);

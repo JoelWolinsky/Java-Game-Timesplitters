@@ -29,7 +29,7 @@ public class InventoryBarController extends GameObject {
 			currentLevel.addToAddQueue(slots.get(i));
 		}
 
-
+		selectFrame(2,1);
 	}
 
 	public void tick() {
