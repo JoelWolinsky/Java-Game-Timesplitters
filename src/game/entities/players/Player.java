@@ -120,7 +120,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
     public void tick() {
         //Gather all collisions
-    	if (this == Game.player) {
+    	if (this == Game.player || this instanceof AIPlayer) {
 	        CollidingObject.getCollisions(this);
 
 	        moving = false;
