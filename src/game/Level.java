@@ -16,8 +16,6 @@ import static game.Game.getGameMode;
 
 public class Level extends Canvas {
 
-	private static boolean gameStarted=true;
-	private static boolean gameEnded=false;
 	private static LevelState levelState = LevelState.Loading;
 
 	private static LinkedList<GameObject> entities = new LinkedList<>();
@@ -117,14 +115,6 @@ public class Level extends Canvas {
 		return AIplayers;
 	}
 
-
-	public static void setGameStarted(boolean gmeStarted) {
-		gameStarted = gmeStarted;
-	}
-
-	public static void setGameEnded(boolean gmeEnded) {
-		gameEnded = gmeEnded;
-	}
 
 
 	/**

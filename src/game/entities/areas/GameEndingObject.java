@@ -1,24 +1,17 @@
 package game.entities.areas;
 import game.Blip;
-import game.GameState;
 import game.UIElement;
-import game.entities.GameObject;
-import game.entities.players.AIPlayer;
 import game.entities.players.Player;
 import game.graphics.AnimationStates;
-import game.graphics.Image;
 import game.graphics.LevelState;
 
-import java.awt.*;
-import java.util.ArrayList;
 
 import static game.Level.*;
-import static game.Game.*;
 import static game.ProgressBarController.getAllBlips;
 import static game.ProgressBarController.getProgressBarElements;
-import static game.display.Window.*;
 
 public class GameEndingObject extends AnimArea {
+	
 
 
 	public GameEndingObject(float x, float y, int width, int height,String url) {
@@ -46,6 +39,8 @@ public class GameEndingObject extends AnimArea {
 
 				setLevelState(LevelState.Finished);
 				p.setCurrentAnimState(AnimationStates.SWAG);
+				p.winner = true;
+				
 
 			}
 

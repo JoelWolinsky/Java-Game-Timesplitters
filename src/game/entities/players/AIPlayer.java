@@ -204,7 +204,7 @@ public class AIPlayer extends Player {
 
 							} else { 
 								// For deceleration effect
-								if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)){
+								if (!SolidCollider.willCauseSolidCollision(this, this.velX, true)) {
 									if (this.velX >= -0.1f && this.velX <= 0.1f) {
 										this.velX = 0;
 										currentAnimState = AnimationStates.IDLE;

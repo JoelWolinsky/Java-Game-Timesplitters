@@ -1,8 +1,5 @@
 package network;
 
-import static game.Level.getToBeAdded;
-import static game.Level.setLevelState;
-
 import java.io.IOException;
 
 import java.net.DatagramPacket;
@@ -25,13 +22,15 @@ import game.network.packets.Packet02Move;
 import game.network.packets.Packet03MoveWall;
 import game.network.packets.Packet04StartGame;
 
+import static game.Level.*;
+
 public class GameClient extends Thread {
 	private InetAddress ipAddress;
 	private DatagramSocket socket;
 	private Game game;
-	
-	/** 
-	 * Opens the socket for client-server connections. 
+
+	/**
+	 * Opens the socket for client-server connections.
 	 * @param game The game that the server will run for.
 	 * @param ipAddress The ipAddress to connect to.
 	 */
@@ -46,8 +45,8 @@ public class GameClient extends Thread {
 			e.printStackTrace();
 		}
 	}
-	
-	/** 
+
+	/**
 	 * Initialises the client side to receive packets from the server.
 	 */
    public void run() {
@@ -65,7 +64,7 @@ public class GameClient extends Thread {
             this.parsePacket(packet.getData(), packet.getAddress(), packet.getPort());
         }
     }
-	   
+
 	/*
 	 * Handles any packets received from the server.
 	 * @param data The data which contains the packet information.
@@ -77,37 +76,41 @@ public class GameClient extends Thread {
 			String message = new String(data).trim();
 			PacketTypes type = Packet.lookupPacket(message.substring(0,2));
 			Packet packet = null;
-			switch (type) {
-			default:
-			case INVALID:
-				break;
-			case LOGIN:
-				System.out.println("Client handle login");
-				packet = new Packet00Login(data);
-				handleLogin((Packet00Login) packet, address, port);
-				break;
-			case ITEM:
-				packet = new Packet01Item(data);
-				this.handleItem((Packet01Item)packet);
-				break;
-			case MOVE:
-				packet = new Packet02Move(data);
-				handleMove((Packet02Move)packet);
-				break;
-			case MOVEWALL:
-				packet = new Packet03MoveWall(data);
-				handleMove((Packet03MoveWall)packet);
-				break;
-			case STARTGAME:
-				packet = new Packet04StartGame();
-				handleStartGame((Packet04StartGame)packet);
-			}	
+			if (getLevelState() != LevelState.Finished) {
+				switch (type) {
+				default:
+				case INVALID:
+					break;
+				case LOGIN:
+					System.out.println("Client handle login");
+					packet = new Packet00Login(data);
+					handleLogin((Packet00Login) packet, address, port);
+					break;
+				case ITEM:
+					packet = new Packet01Item(data);
+					this.handleItem((Packet01Item)packet);
+					break;
+				case MOVE:
+					//System.out.println("client handle move");
+					packet = new Packet02Move(data);
+					handleMove((Packet02Move)packet);
+					break;
+				case MOVEWALL:
+					//System.out.println("receive wall packet");
+					packet = new Packet03MoveWall(data);
+					handleMove((Packet03MoveWall)packet);
+					break;
+				case STARTGAME:
+					packet = new Packet04StartGame();
+					handleStartGame((Packet04StartGame)packet);
+				}
+			}
 		} catch (Exception e) {
 			System.out.println("Exception in parsePacket on client. Data " + data + "\nAddress " + address + "\nPort " + port);
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void handleItem(Packet01Item packet) {
 		System.out.println("client add item");
 		System.out.println(packet.getX()+","+packet.getY());
@@ -117,14 +120,14 @@ public class GameClient extends Thread {
 	/**
 	 * Handles the StartGame packet.
 	 * @param packet The StartGame packet.
-	 */ 
+	 */
 	private void handleStartGame(Packet04StartGame packet) {
 		System.out.println("handleStartGame");
 		setLevelState(LevelState.InProgress);
-		
+
 	}
 
-	/* 
+	/*
 	 * Sends data to the server.
 	 * @param data The data to be sent.
 	 */
@@ -136,8 +139,8 @@ public class GameClient extends Thread {
 			e.printStackTrace();
 		}
 	}
-	
-	/** 
+
+	/**
 	 * Handles a move packet received from the server.
 	 * @param packet The packet received.
 	 */
@@ -150,10 +153,10 @@ public class GameClient extends Thread {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
-	/** 
+
+	/**
 	 * Handles a wall move packet received from the server.
 	 * @param packet The packet received.
 	 */
@@ -167,7 +170,7 @@ public class GameClient extends Thread {
 			}
 		} else {
 		}
-		
+
 	}
 
 	/**
@@ -183,6 +186,6 @@ public class GameClient extends Thread {
 
 		Level.addToAddQueue(player);
 	}
-	
+
 
 }

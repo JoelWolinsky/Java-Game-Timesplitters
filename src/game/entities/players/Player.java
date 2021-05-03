@@ -5,8 +5,8 @@ import java.util.*;
 
 import game.Effect;
 import game.Game;
-import game.GameState;
 import game.Item;
+import game.Level;
 import game.SoundHandler;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
@@ -93,6 +93,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     private int packetCounter = 0;
     public int interactionWait;
     public int interactionTimer;
+    
+    public Boolean winner = false;
 
 
     public Player(float x, float y, KeyInput input, int width, int height,String url) {
@@ -725,14 +727,17 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     		if (this.currentAnimation == null) {
     			this.setAnimations(getAnimations("GHOST_FORM"));
 			}
-    	}
+    	}	
+    	
 	        if (currentAnimState != null) {
+	        	if(getLevelState() == LevelState.Finished && this.winner) {
+	        		this.currentAnimState = AnimationStates.SWAG;
+	        	} 
 
 	            currentAnimation = animations.get(currentAnimState);
 	            frame = (animationTimer / currentAnimation.getTicksPerFrame());
 	            g.drawImage(currentAnimation.getFrame(frame), x, y, null);
-
-
+	            
 
 	            animationTimer++;
 
@@ -744,7 +749,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     }
 
     public void setCurrentAnimState(AnimationStates currentAnimState) {
-        this.currentAnimState = currentAnimState;
+
+    		this.currentAnimState = currentAnimState;
     }
 
     public void setGhostMode(boolean ghostMode) {
