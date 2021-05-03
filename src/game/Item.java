@@ -48,7 +48,7 @@ public class Item extends GameObject {
 
 	}
 
-	public void render(Graphics g, float f, float h) {
+	public void render(Graphics g, float xOffset, float yOffset) {
 
 			//g.setColor(Color.magenta);
 			//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);

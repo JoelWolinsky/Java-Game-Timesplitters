@@ -7,8 +7,6 @@ import java.util.HashMap;
 import static game.graphics.Assets.getAnimations;
 import static game.graphics.Assets.getImageForReference;
 
-
-
 public class AnimArea extends Area{
 
 	private boolean visibile=true;
@@ -28,12 +26,12 @@ public class AnimArea extends Area{
 	public void tick() {
 	}
 
-	public void render(Graphics g, float f, float h) {
+	public void render(Graphics g, float xOffset, float yOffset) {
 
 		//g.setColor(Color.magenta);
 		//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
 		if (isVisibile())
-			this.renderAnim(g, (int)(this.x+f), (int)(this.y+h));
+			this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
 	}
 
 

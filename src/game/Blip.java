@@ -40,7 +40,7 @@ public class Blip extends GameObject {
 
 	}
 
-	public void render(Graphics g, float f, float h) {
+	public void render(Graphics g, float xOffset, float yOffset) {
 
 		if(visible)
 			g.drawImage(img,(int)(this.x+20),(int)(this.y),null);

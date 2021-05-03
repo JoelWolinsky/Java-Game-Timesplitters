@@ -4,6 +4,9 @@ import game.entities.players.Player;
 
 import static game.Level.getPlayers;
 
+/**
+ * Class for any objects that have been picked up by the player
+ */
 public class AddedItem extends AnimArea {
 
 	private boolean visibile=true;
@@ -17,6 +20,9 @@ public class AddedItem extends AnimArea {
 		effect = url;
 	}
 
+	/**
+	 * Called every frame, applies item effects to the player
+	 */
 	public void tick() {
 
 		for (Player p: getPlayers())

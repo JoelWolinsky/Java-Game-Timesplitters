@@ -67,7 +67,7 @@ public class InventoryBarController extends GameObject {
 
 	}
 
-	public void render(Graphics g, float f, float h) {
+	public void render(Graphics g, float xOffset, float yOffset) {
 
 	}
 

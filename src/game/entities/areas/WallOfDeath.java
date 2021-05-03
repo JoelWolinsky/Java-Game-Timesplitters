@@ -17,6 +17,7 @@ import static game.Level.*;
 import static game.graphics.Assets.getAnimations;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -30,12 +31,18 @@ public class WallOfDeath extends GameObject {
     protected AnimationStates currentAnimState;
     protected Animation currentAnimation;
     protected HashMap<AnimationStates, Animation> animations;
+    private static BufferedImage gravestone;
 
     public WallOfDeath() {
         super(-2000, -300, 3,1113, 819);
 
         this.animations = getAnimations("DETH");
         this.currentAnimState = AnimationStates.IDLE;
+        try {
+			WallOfDeath.gravestone = ImageIO.read(new File("./img/gravestone.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -48,12 +55,7 @@ public class WallOfDeath extends GameObject {
 			if (this.getInteraction(p))
 			    if (!p.isGhostMode())
                 {
-                    try {
-                        getCertainBlip(p).setImg(ImageIO.read(new File("./img/gravestone.png")));
-                    } catch (IOException exc) {
-                        //TODO: Handle exception.
-                    }
-
+                    getCertainBlip(p).setImg(WallOfDeath.gravestone);
                     p.setGhostMode(true);
                     p.setCurrentAnimState(AnimationStates.LEFT);
                     p.setAnimations(getAnimations("GHOST_FORM"));
@@ -82,8 +84,8 @@ public class WallOfDeath extends GameObject {
 	 * @param h The yOffset of the object
 	 */
     @Override
-    public void render(Graphics g, float f, float h) {
-        this.renderAnim(g, (int) (this.x + f), (int) (this.y + h));
+    public void render(Graphics g, float xOffset, float yOffset) {
+        this.renderAnim(g, (int) (this.x + xOffset), (int) (this.y + yOffset));
     }
 
     /**

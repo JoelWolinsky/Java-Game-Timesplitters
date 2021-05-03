@@ -45,9 +45,9 @@ public class RespawnPoint extends Area {
 	}
 
 	@Override
-	public void render(Graphics g, float f, float h) {
+	public void render(Graphics g, float xOffset, float yOffset) {
 		if (this.reached)
-			super.render(g, f, h);
+			super.render(g, xOffset, yOffset);
 	}
 
 	public boolean getInteraction(Player player){

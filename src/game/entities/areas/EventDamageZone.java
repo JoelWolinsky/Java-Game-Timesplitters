@@ -96,24 +96,24 @@ public class EventDamageZone extends AnimArea{
 		}
 	}
 
-	public void render(Graphics g, float f, float h) {
+	public void render(Graphics g, float xOffset, float yOffset) {
 		
 		if (random) {
 			if (go) {
 				if (triggered)
 					if (1 < timer && timer < noticeDelay)
-						g.drawImage(img, (int) (this.x + noticeX + f), (int) (this.y + noticeY + h), null);
+						g.drawImage(img, (int) (this.x + noticeX + xOffset), (int) (this.y + noticeY + yOffset), null);
 				if (active)
-					super.render(g, f, h);
+					super.render(g, xOffset, yOffset);
 			}
 		}
 		else
 			{
 				if (triggered)
 					if (1 < timer && timer < noticeDelay)
-						g.drawImage(img, (int) (this.x+ noticeX + f), (int) (this.y+ noticeY + h), null);
+						g.drawImage(img, (int) (this.x+ noticeX + xOffset), (int) (this.y+ noticeY + yOffset), null);
 				if (active)
-					super.render(g,f,h);
+					super.render(g,xOffset,yOffset);
 			}
 	}
 

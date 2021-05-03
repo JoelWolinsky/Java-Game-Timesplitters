@@ -78,12 +78,12 @@ public class DamageZone extends AnimArea{
 		}
 	}
 
-	public void render(Graphics g, float f, float h) {
+	public void render(Graphics g, float xOffset, float yOffset) {
 
 		if (this.active==false && timer >= (offDuration/1.5))
-			g.drawImage(img, (int) (this.x + f), (int) (this.y + h), null);
+			g.drawImage(img, (int) (this.x + xOffset), (int) (this.y + yOffset), null);
 		else if (active)
-			super.render(g,f,h);
+			super.render(g,xOffset,yOffset);
 
 	}
 

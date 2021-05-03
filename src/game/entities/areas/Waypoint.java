@@ -67,8 +67,8 @@ public class Waypoint extends Area {
 	 * @param h The yOffset of the object
 	 */
 	@Override
-	public void render(Graphics g, float f, float h) {
-		//super.render(g, f, h);
+	public void render(Graphics g, float xOffset, float yOffset) {
+		//super.render(g, xOffset, yOffset);
 	}
 
 	public String getDirection()

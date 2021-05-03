@@ -133,8 +133,8 @@ public class ScriptedDamageZone extends AnimArea{
 	}
 
 	@Override
-	public void render(Graphics g, float f, float h) {
-		super.render(g, f, h);
+	public void render(Graphics g, float xOffset, float yOffset) {
+		super.render(g, xOffset, yOffset);
 	}
 
 	public boolean getActive(){
