@@ -22,6 +22,7 @@ import static game.ProgressBarController.getProgressBarElements;
 import static game.display.Window.*;
 
 public class GameEndingObject extends AnimArea {
+	
 
 
 	public GameEndingObject(float x, float y, int width, int height,String url) {
@@ -49,6 +50,7 @@ public class GameEndingObject extends AnimArea {
 
 				setLevelState(LevelState.Finished);
 				p.setCurrentAnimState(AnimationStates.SWAG);
+
 				
 				
 
