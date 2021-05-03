@@ -51,7 +51,7 @@ public class AIPlayer extends Player {
 	/**
 	 * The last Waypoint that the AIPlayer visited
 	 */
-	private Waypoint currentWaypoint;
+	public Waypoint currentWaypoint;
 	
 	/**
 	 * The ID of the AIPlayer, used for ordering to decide which player halts to not get stuck to another AIPlayer
@@ -92,6 +92,10 @@ public class AIPlayer extends Player {
 	 * interaction with chests, items, and the Wall of Death.
 	 */
 	public void tick() {
+
+		System.out.println(this.id + "Wait" + this.wait);
+		System.out.println(this.id + "Jump" + this.jump);
+		System.out.println(this.id + "Direction" + this.direction);
 
 		super.tick();
 
