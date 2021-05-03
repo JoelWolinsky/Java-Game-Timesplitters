@@ -83,7 +83,6 @@ public class AIPlayer extends Player {
 	public AIPlayer(float x, float y, int width,int height, Player humanPlayer,String url) {
 		super(x, y, null, width, height,url);
 
-		// dthis.username = UUID.randomUUID().toString();;
 		this.humanPlayer = humanPlayer;
 		this.id = Character.getNumericValue(url.charAt(6));
 	}

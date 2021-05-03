@@ -133,10 +133,6 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 			}
 		}
 
-
-		//!SolidCollider.willCauseSolidCollision(this, 2, true)
-		//!SolidCollider.willCauseSolidCollision(this, -2, true)
-
 		//If you're not on ground, you should fall
 		if(!isOnGround()) {
 			fall(this);
@@ -184,7 +180,6 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 				bouncing = false;
 				bouncingTimer=0;
 			}
-			//sum = sum + speed;
 		}
 
 

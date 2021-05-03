@@ -28,13 +28,11 @@ public class TimerPlatform extends Platform {
 				if (this.active == true)
 				{
 					this.active = false;
-					//CollidingObject.removeCollider(this);
 					SolidCollider.removeSolidCollider(this);
 				}
 				else
 				{
 					this.active = true;
-					//CollidingObject.addCollider(this);
 					SolidCollider.addSolidCollider(this);
 				}
 				timer = 0;

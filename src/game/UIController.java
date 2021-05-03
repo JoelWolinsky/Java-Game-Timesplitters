@@ -7,6 +7,7 @@ import game.network.packets.Packet04StartGame;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,9 +24,26 @@ public class UIController extends GameObject {
 	private boolean endGameCelebration=false;
 	UIElement announcer,announcerMessage;
 	private double time1=0,time2;
+	private static BufferedImage loading, starting, winner, close;
 
 	public UIController(float x, float y, int width, int height) {
 		super(x, y, 4, width, height);
+		
+		try {
+			if (UIController.loading == null) {
+				UIController.loading = ImageIO.read(new File("./img/loading.png"));
+			}
+			if (UIController.starting == null) {
+				UIController.starting = ImageIO.read(new File("./img/starting.png"));
+			}
+			if (UIController.winner == null) {
+				UIController.winner = ImageIO.read(new File("./img/winner.png"));
+			}
+			if (UIController.close == null) {
+				UIController.close = ImageIO.read(new File("./img/close.png"));
+			}
+		} catch (IOException e) {
+		}
 
 		//Initialize center announcer UI Element
 		announcer = new UIElement(x, y, 0, 0, "./img/5.png");
@@ -48,7 +66,6 @@ public class UIController extends GameObject {
 	 * Called every frame, this is responsible for loading and updating the relevant UI elements for the current level state
 	 */
 	public void tick() {
-		//System.out.println(getLevelState());
 		if (getLevelState()==LevelState.InProgress) {
 			announcerMessage.setVisible(false);
 		} else {
@@ -75,12 +92,7 @@ public class UIController extends GameObject {
 				announcerMessage.setVisible(true);
 			}
 
-			try {
-				announcer.setImg(ImageIO.read(new File("./img/loading.png")));
-			}
-			catch (IOException exc) {
-				//TODO: Handle exception.
-			}
+			announcer.setImg(UIController.loading);
 		}
 	}
 
@@ -93,12 +105,7 @@ public class UIController extends GameObject {
 				automaticallySetTime1();
 			}
 
-			try {
-				announcerMessage.setImg(ImageIO.read(new File("./img/starting.png")));
-			}
-			catch (IOException exc) {
-				//TODO: Handle exception.
-			}
+			announcerMessage.setImg(UIController.starting);
 
 			if (getElapsedTime() < 1000)
 				timer++;
@@ -109,13 +116,11 @@ public class UIController extends GameObject {
 						announcer.setImg(ImageIO.read(new File("./img/".concat(countdownUrls.get(index)))));
 					}
 					catch (IOException exc) {
-						//TODO: Handle exception.
 					}
 				}
 				index++;
 				if (index == countdownUrls.size()-1) {
 					if(Game.socketServer != null) {
-						//setLevelState(LevelState.InProgress);
 						Packet04StartGame packet = new Packet04StartGame();
 		                packet.writeData(Game.socketClient);
 
@@ -144,13 +149,9 @@ public class UIController extends GameObject {
 				announcerMessage.setVisible(true);
 			}
 
-			try {
-				announcer.setImg(ImageIO.read(new File("./img/winner.png")));
-				announcerMessage.setImg(ImageIO.read(new File("./img/close.png")));
-			}
-			catch (IOException exc) {
-				//TODO: Handle exception.
-			}
+			announcer.setImg(UIController.winner);
+			announcerMessage.setImg(UIController.close);
+			
 			announcer.setY(y-8);
 			announcer.setX(x+((Window.WIDTH/6)/2) - (announcer.getImg().getWidth()/2));
 

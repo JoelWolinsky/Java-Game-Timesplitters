@@ -131,9 +131,6 @@ public class Map {
 	                        randomGenerate(segments4, defaultSeed) + randomGenerate(wizard, defaultSeed) + randomGenerate(introDimension, defaultSeed),
 	                        randomGenerate(segments5, defaultSeed)));
                 }
-                //parseFile(currentLevel,"introOutDimension");
-                //parseFile(currentLevel,"segmentA17");
-                //parseFile(currentLevel,"segmentB1");
                 //create specific progressbar parts for the generated segment pools
                 for (Integer i =0 ; i<allParts.size();i++)
                 {
@@ -249,7 +246,6 @@ public class Map {
                     newBufferedImage = ImageIO.read(new File("./img/".concat(splitted[3])));
 
                 } catch (IOException exc) {
-                    //TODO: Handle exception.
                 }
 
                 if (newBufferedImage != null)

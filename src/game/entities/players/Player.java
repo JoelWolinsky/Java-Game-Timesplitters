@@ -100,7 +100,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
         this.INPUT = input;
         this.username = UUID.randomUUID().toString();
-        //System.out.println("making name " + this.username);
 
         objectModel=url;
 		//animations
@@ -161,20 +160,16 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 	        }
 
 	        //always have the player collision box set to respective size of its animationstate
-	        //this.width = animations.get(currentAnimState).getFrame(frame).getWidth();
-	        //this.height = animations.get(currentAnimState).getFrame(frame).getHeight()
 
 	        this.prevPos = new Point((int) this.x, (int) this.y);
 
 	        //Animation Handler
 	        if (velX == 0 && velY == 0 &&!ghostMode) {
-	        	//System.out.println("dtc: " + directionTickCounter);
 	        	directionTickCounter++;
 	        } else {
 	        	directionTickCounter =0;
 	        }
 	        if (INPUT != null && Game.player == this) {
-	        	//System.out.println("1: "+ this.username);
 	        	if(velX > 0) {
 	            	facingRight = true;
 	            	currentAnimState = AnimationStates.RIGHT;
@@ -200,7 +195,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 		        	directionTickCounter = 0;
 		        	if(facingRight) {
 		        		Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, "idle");
-	                    //System.out.println("Player move usr " + this.getUsername());
 	                    packet.writeData(Game.socketClient);
 		        	}
 		        	else {
@@ -371,7 +365,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 	        if (Game.game.getGameMode()== GameMode.MULTIPLAYER) {
 	                if ((int) this.x != this.prevPos.x || (int) this.y != this.prevPos.y) {
 	                    Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, currentDirection);
-	                    //System.out.println("Player move usr " + this.getUsername());
 	                    packet.writeData(Game.socketClient);
 	                }
 	            }
@@ -611,11 +604,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     }
 
     public void render(Graphics g, float xOffset, float yOffset) {
-
-
-        //-- To visualise the boundary box, uncomment these and getBounds(float xOffset, float yOffset) as well.
-        //g.setColor(Color.magenta);
-        //g.fillRect((int)(this.x + xOffset),(int)(this.y + yOffset),this.width,this.height);
         if (immunity == true) {
             if (!(0 < i && i < 10 || 30 < i && i < 40 || 60 < i && i < 70)) {
                 this.renderAnim(g, (int) (this.x + xOffset), (int) (this.y + yOffset));

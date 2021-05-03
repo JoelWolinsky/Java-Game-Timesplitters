@@ -22,7 +22,6 @@ public class Packet04StartGame extends Packet {
 	 */
 	@Override
 	public void writeData(GameClient client) {
-		//System.out.println("packet02 write to client");
 		client.sendData(getData());
 	}
 	
@@ -32,7 +31,6 @@ public class Packet04StartGame extends Packet {
 	 */
 	@Override
 	public void writeData(GameServer server) {
-		//System.out.println("packet02 write data send to all");
 		server.sendDataToAllClients(getData());
 	}
 	

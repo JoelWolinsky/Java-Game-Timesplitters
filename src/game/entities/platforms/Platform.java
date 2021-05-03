@@ -28,7 +28,6 @@ public class Platform extends GameObject implements SolidCollider{
 		}
 		catch ( IOException exc )
 		{
-			//TODO: Handle exception.
 		}
 
 		if (url.equals("")) {

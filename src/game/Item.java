@@ -37,7 +37,6 @@ public class Item extends GameObject {
 		}
 		catch ( IOException exc )
 		{
-			//TODO: Handle exception.
 		}
 
 
@@ -49,10 +48,6 @@ public class Item extends GameObject {
 	}
 
 	public void render(Graphics g, float xOffset, float yOffset) {
-
-			//g.setColor(Color.magenta);
-			//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
-			//g.drawImage(img,(int)(this.x),(int)(this.y),null);
 	}
 
 	public void getEffect(){

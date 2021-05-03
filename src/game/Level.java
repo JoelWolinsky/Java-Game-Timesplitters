@@ -191,7 +191,6 @@ public class Level extends Canvas {
 
 					currentAnimState = AnimationStates.OTHER;
 				}
-				//System.out.println(currentAnimState);
 				getSpecificPlayerMP(username).setCurrentAnimState(currentAnimState);
 			}
 
@@ -280,13 +279,10 @@ public class Level extends Canvas {
 	 */
 	public void moveWall(float x) {
 		try {
-			//System.out.println("movewall");
 			if (getWallOfDeath()!=null) {
 
 				getWallOfDeath().setX(x);
 				getWallOfDeath().setMoving();
-				//System.out.println("movedwall to " + x);
-
 			}
 
 		} catch (Exception e) {

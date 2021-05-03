@@ -50,9 +50,6 @@ public class Game extends Canvas implements Runnable{
 	 * Called every frame, this tells certain lists, objects, or entities to call their own tick function.
 	 */
 	private void tick() {
-
-		//System.out.println(running);
-
 		if(this.gameState == GameState.Playing) {
 			m.getCurrentLevel().tick();
 			camera.tick();
@@ -143,7 +140,6 @@ public class Game extends Canvas implements Runnable{
 		double ns = 1000000000 / amountOfTicks;
 		double delta = 0;
 		long timer = System.currentTimeMillis();
-//		int frames = 0;
 		while(running) {
 			long now = System.nanoTime();
 			delta += (now-lastTime)/ns;
@@ -211,7 +207,6 @@ public class Game extends Canvas implements Runnable{
 
 		setLevelState(LevelState.Waiting);
 
-		//windowHandler = new WindowHandler(this);
 		this.addKeyListener(keyInput);
 
 		//The server is started in this function

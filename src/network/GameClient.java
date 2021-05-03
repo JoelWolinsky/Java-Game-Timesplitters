@@ -74,7 +74,6 @@ public class GameClient extends Thread {
 	 */
 	private void parsePacket(byte[] data, InetAddress address, int port) {
 		try {
-			//System.out.println("client parse");
 			String message = new String(data).trim();
 			PacketTypes type = Packet.lookupPacket(message.substring(0,2));
 			Packet packet = null;
@@ -92,12 +91,10 @@ public class GameClient extends Thread {
 				this.handleItem((Packet01Item)packet);
 				break;
 			case MOVE:
-				//System.out.println("client handle move");
 				packet = new Packet02Move(data);
 				handleMove((Packet02Move)packet);
 				break;
 			case MOVEWALL:
-				//System.out.println("receive wall packet");
 				packet = new Packet03MoveWall(data);
 				handleMove((Packet03MoveWall)packet);
 				break;
@@ -113,9 +110,7 @@ public class GameClient extends Thread {
 	
 	private void handleItem(Packet01Item packet) {
 		System.out.println("client add item");
-		//System.out.println(packet.getEffect());
 		System.out.println(packet.getX()+","+packet.getY());
-		//Level.getToBeAdded().add(new AddedItem(packet.getX(), packet.getY(), 0, 0, Game.player, packet.getEffect()));
 		Level.getToBeAdded().add(new AddedItem(packet.getX(),packet.getY(), 0, 0, Level.getSpecificPlayerMP(packet.getUsername()), packet.getEffect()));
 	}
 
@@ -134,7 +129,6 @@ public class GameClient extends Thread {
 	 * @param data The data to be sent.
 	 */
 	public void sendData(byte[] data) {
-		//System.out.println("client send");
 		DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, 1331);
 		try {
 			socket.send(packet);
@@ -148,11 +142,7 @@ public class GameClient extends Thread {
 	 * @param packet The packet received.
 	 */
 	private void handleMove(Packet02Move packet) {
-		if (Game.player.getUsername().equals(packet.getUsername())) {
-			// 
-		} else {
-			//System.out.println(Game.player.getUsername() +" Client handle move " + packet.getUsername());
-
+		if (!Game.player.getUsername().equals(packet.getUsername())) {
 			try {
 				this.game.m.currentLevel.movePlayer(packet.getUsername(), packet.getX(), packet.getY(), packet.getDirection());
 			} catch (Exception e) {
@@ -176,7 +166,6 @@ public class GameClient extends Thread {
 				e.printStackTrace();
 			}
 		} else {
-			//System.out.println("Server != null");
 		}
 		
 	}

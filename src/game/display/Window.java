@@ -42,8 +42,8 @@ import static game.Level.getGameObjects;
 
 public class Window extends Canvas{
 
-	public static final int WIDTH = 640; //640;
-	public static final int HEIGHT = 480; //480;
+	public static final int WIDTH = 640;
+	public static final int HEIGHT = 480;
 	public static final String TITLE = "Engine";
 	public static Rectangle windowRect = new Rectangle(0,0,Game.WIDTH, Game.HEIGHT);
 

@@ -28,7 +28,6 @@ public class Blip extends GameObject {
 		}
 		catch ( IOException exc )
 		{
-			//TODO: Handle exception.
 		}
 
 	}

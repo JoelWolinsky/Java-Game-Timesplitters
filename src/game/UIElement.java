@@ -28,7 +28,6 @@ public class UIElement extends GameObject {
 		}
 		catch ( IOException exc )
 		{
-			//TODO: Handle exception.
 		}
 
 	}

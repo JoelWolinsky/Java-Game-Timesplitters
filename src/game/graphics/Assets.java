@@ -125,7 +125,6 @@ public class Assets {
 		as.getAnimations().put(AnimationStates.LEFT, new Animation(10,player_left));
 		as.getAnimations().put(AnimationStates.OTHER, new Animation(10,player_other));
 		as.getAnimations().put(AnimationStates.SWAG, new Animation(5,player_swag));
-		//getAnimations().put(AnimationStates.JUMP, new Animation(5,player_jump_right));
 
 		assets.add(as);
 	}

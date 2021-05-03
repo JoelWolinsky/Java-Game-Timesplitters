@@ -25,7 +25,6 @@ public class InventoryBarController extends GameObject {
 			frame = ImageIO.read(new File("./img/frame.png"));
 			frameNotSelected = ImageIO.read(new File("./img/frameNotSelected.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -59,7 +58,6 @@ public class InventoryBarController extends GameObject {
 			}
 			catch ( IOException exc )
 			{
-				//TODO: Handle exception.
 			}
 
 			player.setInventoryChanged(false);

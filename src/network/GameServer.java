@@ -199,13 +199,11 @@ public class GameServer extends Thread {
 	 * @param port The port to send the data to.
 	 */
 	public void sendData(byte[] data, InetAddress ipAddress, int port) {
-		//System.out.println("server send packet");
 		if(port != -1) {
 			DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, port);
 
 			try {
 				this.socket.send(packet);
-				//System.out.println("server packet sent to " + ipAddress +":"+port);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -217,11 +215,9 @@ public class GameServer extends Thread {
 	 * @param data The data to be sent.
 	 */
 	public void sendDataToAllClients(byte[] data) {
-		//System.out.println("Server Send to all");
 		try {
 			for (PlayerMP p : connectedPlayers) {
 				if (p.port != -1) {
-					//System.out.println("Sent to " + p.getUsername());
 					sendData(data, p.ipAddress, p.port);
 				}
 			}
@@ -237,10 +233,6 @@ public class GameServer extends Thread {
 	 */
 	private void handleMove(Packet02Move packet) {
 		try {
-			//System.out.println("server handle move");
-			//System.out.println(packet.getUsername());
-			//if(getPlayerMP(packet.getUsername()) != null) {
-				//System.out.println("packet name not null");
 				int index = getPlayerMPIndex(packet.getUsername());
 				if(index >= this.connectedPlayers.size()) {
 					index--;
@@ -248,9 +240,6 @@ public class GameServer extends Thread {
 				this.connectedPlayers.get(index).setX(packet.getX());
 				this.connectedPlayers.get(index).setY(packet.getY());
 				packet.writeData(this);
-//			} else {
-//				System.out.println("packet name  null");
-//			}
 		} catch (Exception e) {
 			System.out.println("Exception in GameServer.handleMove");
 			e.printStackTrace();
@@ -262,10 +251,7 @@ public class GameServer extends Thread {
 	 */
 	private void handleMoveWall(Packet03MoveWall packet) {
 		try {
-				packet.writeData(this);
-//			} else {
-//				System.out.println("packet name  null");
-//			}
+			packet.writeData(this);
 		} catch (Exception e) {
 			System.out.println("Exception in GameServer.handleMove");
 			e.printStackTrace();

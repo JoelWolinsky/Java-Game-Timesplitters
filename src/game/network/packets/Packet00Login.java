@@ -61,7 +61,6 @@ public class Packet00Login extends Packet {
 	 */
 	@Override
 	public byte[] getData() {
-		//System.out.println(("00" + this.username+","+getX()+","+getY()+getURLs()));
 		return ("00" + this.username+","+getX()+","+getY()).getBytes();
 	}
 

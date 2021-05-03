@@ -25,11 +25,8 @@ public class AnimArea extends Area{
 
 	public void tick() {
 	}
-
+	
 	public void render(Graphics g, float xOffset, float yOffset) {
-
-		//g.setColor(Color.magenta);
-		//g.fillRect((int)(this.x + f),(int)(this.y + h),this.width,this.height);
 		if (isVisibile())
 			this.renderAnim(g, (int)(this.x+xOffset), (int)(this.y+yOffset));
 	}
@@ -43,6 +40,12 @@ public class AnimArea extends Area{
 		this.visibile = visibile;
 	}
 
+	/**
+	 * Calculates and draws the correct frame of annimation based on the animation timer
+	 * @param g The graphics object onto which the animation will be drawn
+	 * @param x The x position of the image
+	 * @param y The y position of the image
+	 */
 	public void renderAnim(Graphics g, int x, int y) {
 
 		if (currentAnimState!=null)

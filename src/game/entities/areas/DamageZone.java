@@ -35,7 +35,6 @@ public class DamageZone extends AnimArea{
 		}
 		catch ( IOException exc )
 		{
-			//TODO: Handle exception.
 		}
 
 	}
