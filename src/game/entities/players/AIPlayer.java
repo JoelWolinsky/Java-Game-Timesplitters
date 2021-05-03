@@ -95,10 +95,6 @@ public class AIPlayer extends Player {
 	 */
 	public void tick() {
 
-		System.out.println(this.id + "Wait" + this.wait);
-		System.out.println(this.id + "Jump" + this.jump);
-		System.out.println(this.id + "Direction" + this.direction);
-
 		super.tick();
 
 		this.dist_from_player = this.x - this.humanPlayer.getX();
@@ -164,8 +160,13 @@ public class AIPlayer extends Player {
 
 			if (this.canMove == true && this.invincibleMove == false) {
 
-				if (this.interactionWait > 0) {
+				if (this.interactionWait > 0){ // && !collide(this, 1, true) && !collide(this, 1, false)) {
 					this.interactionWait--;
+
+					if (collide(this, 2, true)) {
+						this.velY = 0;
+					}
+
 				} 
 				else {
 

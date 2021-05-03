@@ -393,7 +393,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             canMove = false;
             i = 0;
             currentAnimState = AnimationStates.IDLE;
-            SoundHandler.playSound("falling", 0.3f);
+            if (!(this instanceof AIPlayer))
+                SoundHandler.playSound("falling", 0.3f);
         }
 
         // press r to respawn -- used for debugging
@@ -773,7 +774,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 
     public boolean collide(CollidingObject o, double vel, boolean xAxis)
     {
-        if (ghostMode)
+        if (ghostMode || invincibleMove)
             return false;
         else
             return SolidCollider.willCauseSolidCollision(o, vel, xAxis);
