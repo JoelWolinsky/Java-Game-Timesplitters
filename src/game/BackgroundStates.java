@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class BackgroundStates {
 
-	private static ArrayList<String> states = new ArrayList<String>();
+	private ArrayList<String> states = new ArrayList<String>();
 
 	/**
 	 * @param urls A list of background images to be loaded
