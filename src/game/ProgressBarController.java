@@ -45,6 +45,9 @@ public class ProgressBarController extends GameObject {
 
     }
 
+    /**
+     * This adds a blip for each player in the progress bar when the game is loading
+     */
     public void tick() {
 
         for (Player p : getPlayers()) {

@@ -5,6 +5,7 @@ import game.entities.players.Player;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -15,10 +16,18 @@ public class InventoryBarController extends GameObject {
 	static LinkedList<UIElement> frames = new LinkedList<UIElement>();
 	private LinkedList<UIElement> slots = new LinkedList<UIElement>();
 	private int inventorySize=3;
+	private static BufferedImage frame, frameNotSelected;
 
 	public InventoryBarController(float x, float y, int width, int height, Player player, Level currentLevel) {
 		super(x, y, 3, width, height);
 		this.player=player;
+		try {
+			frame = ImageIO.read(new File("./img/frame.png"));
+			frameNotSelected = ImageIO.read(new File("./img/frameNotSelected.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		for (int i =0;i < inventorySize;i++)
 		{
@@ -32,6 +41,9 @@ public class InventoryBarController extends GameObject {
 		selectFrame(2,1);
 	}
 
+	/**
+	 * Called every frame, this updates the inventory bar if the player's inventory has changed.
+	 */
 	public void tick() {
 
 
@@ -59,14 +71,15 @@ public class InventoryBarController extends GameObject {
 
 	}
 
+	/**
+	 * Changes the graphics of the inventory bar to show the selected slot
+	 * @param frame The index of the frame to be selected
+	 * @param previousFrame The index of the previously selected frame
+	 */
 	public static void selectFrame(int frame, int previousFrame)
 	{
-		try {
-			frames.get(frame).setImg(ImageIO.read(new File("./img/frame.png")));
-			frames.get(previousFrame).setImg(ImageIO.read(new File("./img/frameNotSelected.png")));
-		} catch (IOException exc) {
-			//TODO: Handle exception.
-		}
+		frames.get(frame).setImg(InventoryBarController.frame);
+		frames.get(previousFrame).setImg(InventoryBarController.frameNotSelected);
 	}
 
 

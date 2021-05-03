@@ -44,6 +44,9 @@ public class UIController extends GameObject {
 
 	}
 
+	/**
+	 * Called every frame, this is responsible for loading and updating the relevant UI elements for the current level state
+	 */
 	public void tick() {
 		//System.out.println(getLevelState());
 		if (getLevelState()==LevelState.InProgress) {
@@ -87,7 +90,7 @@ public class UIController extends GameObject {
 			if (!announcer.isVisible()) {
 				announcer.setVisible(true);
 				announcerMessage.setVisible(true);
-				time();
+				automaticallySetTime1();
 			}
 
 			try {
@@ -97,7 +100,7 @@ public class UIController extends GameObject {
 				//TODO: Handle exception.
 			}
 
-			if (timetime() < 1000)
+			if (getElapsedTime() < 1000)
 				timer++;
 
 			else {
@@ -130,7 +133,7 @@ public class UIController extends GameObject {
 					announcer.setVisible(false);
 				}
 
-				time();
+				automaticallySetTime1();
 			}
 		}
 
@@ -174,12 +177,18 @@ public class UIController extends GameObject {
 		this.y=(480/2)-(this.height/2);
 	}
 
-	public void time()
+	/**
+	 * Sets the value of time1 to the current time
+	 */
+	public void automaticallySetTime1()
 	{
 		time1 = System.currentTimeMillis();
 	}
 
-	public double timetime()
+	/**
+	 * @return The time passed since time1 was set
+	 */
+	public double getElapsedTime()
 	{
 		time2 = System.currentTimeMillis();
 

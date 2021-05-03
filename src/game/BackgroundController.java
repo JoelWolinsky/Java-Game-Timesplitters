@@ -17,7 +17,9 @@ public class BackgroundController {
 
 	}
 
-	//increment the current panoramic view, if we reach the end wrap around
+	/**
+	 * This function increments the current panoramic view, if we reach the end wrap around
+	 */
 	public void incrementStateIndex(){
 
 		stateIndex++;
@@ -27,13 +29,20 @@ public class BackgroundController {
 
 	}
 
-	//get the current panoramic view for the specified (index) level
+	/**
+	 * @param index An integer representing the level for which the panoramic view should be returned.
+	 * @return The current panoramic view for the specified level
+	 */
 	public String getCurrent(int index)
 	{
 		return levels.get(index).getState(stateIndex);
 	}
 
-
+	
+	/**
+	 * @param index An integer representing the current level
+	 * @return The panoramic view for the previous level
+	 */
 	public String getPrevious(int index)
 	{
 		if (stateIndex-1<0)
@@ -41,7 +50,11 @@ public class BackgroundController {
 		else
 			return levels.get(index).getState(stateIndex-1);
 	}
-
+	
+	/**
+	 * @param index An integer representing the current level
+	 * @return The panoramic view for the next level
+	 */
 	public String getNext(int index)
 	{
 		if (stateIndex>=levels.get(index).getStateSize())

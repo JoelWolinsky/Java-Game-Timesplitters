@@ -500,6 +500,12 @@ public class Map {
 
     }
 
+    /**
+     * @param currentLevel The current level
+     * @param index The index of the split parse string
+     * @param splited The parse string that has been split
+     * @return The list of areas
+     */
     public ArrayList<Area> addAreasList(Level currentLevel, int index, String[] splited) {
 
         ArrayList<Area> areasOfEffect = new ArrayList<>();
@@ -514,10 +520,21 @@ public class Map {
 
     }
     
+    /**
+     * Calls randomGenerate(ArrayList<String> segmentPool, int seed) with a random seed
+     * @param segmentPool The pool of possible segments
+     * @return The result of randomGenerate(ArrayList<String> segmentPool, int seed)
+     */
     public int randomGenerate(ArrayList<String> segmentPool) {
     	return randomGenerate(segmentPool, new Random().nextInt());
     }
 
+    /**
+     * 
+     * @param segmentPool The pool of possible segments
+     * @param seed The seed for the random generator
+     * @return The number of blocks in the level
+     */
     public int randomGenerate(ArrayList<String> segmentPool, int seed) {
 
         int nrBlocks=0;

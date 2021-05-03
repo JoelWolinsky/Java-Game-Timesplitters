@@ -7,8 +7,7 @@ import java.awt.Graphics;
 import java.util.HashMap;
 
 /**
- * Superclass for all objects within the game.<br>
- * Contains basic important information, and enforces required functions.
+ * Superclass for all objects within the game. Contains basic important information, and enforces required functions.
  */
 public abstract class GameObject {
 	
@@ -17,9 +16,6 @@ public abstract class GameObject {
 	protected boolean moving;
 	
 	/**
-	 * GameObject constructor.<br>
-	 * This should be called in every subclass's constructor<br>
-	 * <pre>super(x, y, z, width, height);</pre>
 	 * @param x The starting x coordinate of the object
 	 * @param y The starting y coordinate of the object
 	 * @param z The z index of the coordinate. Higher indexes are rendered on top of later indexes.
@@ -36,14 +32,12 @@ public abstract class GameObject {
 
 	
 	/**
-	 * Required function for all subclasses<br>
-	 * Performs any operations that should be performed every frame
+	 * Required function for all subclasses. Performs any operations that should be performed every frame
 	 */
 	public abstract void tick();
 	
 	/**
-	 * Required function for all subclasses<br>
-	 * Performs any rendering
+	 * Required function for all subclasses. Performs any rendering
 	 * @param g The Graphics object onto which the object will be rendered
 	 */
 	public abstract void render(Graphics g, float xOffset, float yOffset);

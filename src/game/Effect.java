@@ -6,7 +6,6 @@ public class Effect  {
 	private String name;
 
 	public Effect(String name, int timer) {
-
 		this.name=name;
 		this.timer=timer;
 	}
@@ -28,6 +27,9 @@ public class Effect  {
 		this.timer = timer;
 	}
 
+	/**
+	 * Decrements the timer value
+	 */
 	public void decrement()
 	{
 		timer--;

@@ -54,6 +54,10 @@ public class Window extends Canvas{
 	public static JLabel back,backOptions,backMultiplayer;
 	public static Dimension d = new Dimension(WIDTH,HEIGHT);
 
+	/**
+	 * Sets up the window and UI elements and starts the game
+	 * @param game
+	 */
 	public Window(Game game) {
 		frame = new JFrame(TITLE);
 		Container c = frame.getContentPane();
@@ -828,30 +832,5 @@ public class Window extends Canvas{
 	 */
 	public static void setBackMultiplayer(boolean visible) {
 		Window.backMultiplayer.setVisible(visible);
-	}
-
-	public static boolean isSocketAliveUitlitybyCrunchify(String hostName, int port) {
-		boolean isAlive = false;
-
-		// Creates a socket address from a hostname and a port number
-		SocketAddress socketAddress = new InetSocketAddress(hostName, port);
-		Socket socket = new Socket();
-
-		// Timeout required - it's in milliseconds
-		int timeout = 2000;
-
-		//og("hostName: " + hostName + ", port: " + port);
-		try {
-			socket.connect(socketAddress, timeout);
-			socket.close();
-			isAlive = true;
-
-		} catch (SocketTimeoutException exception) {
-			System.out.println("SocketTimeoutException " + hostName + ":" + port + ". " + exception.getMessage());
-		} catch (IOException exception) {
-			System.out.println(
-					"IOException - Unable to connect to " + hostName + ":" + port + ". " + exception.getMessage());
-		}
-		return isAlive;
 	}
 }

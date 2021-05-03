@@ -4,8 +4,11 @@ import java.util.ArrayList;
 
 public class BackgroundStates {
 
-	private ArrayList<String> states = new ArrayList<String>();
+	private static ArrayList<String> states = new ArrayList<String>();
 
+	/**
+	 * @param urls A list of background images to be loaded
+	 */
 	public BackgroundStates(String...urls) {
 
 		//load up the images inside of the private arraylist
@@ -14,8 +17,10 @@ public class BackgroundStates {
 
 	}
 
-	//get the required state specified by the controller
-	//is also able to wrap around
+	/**
+	 * @param index The index representing the current level
+	 * @return The required state for the given level index
+	 */
 	public String getState(int index) {
 
 		if (index<0)

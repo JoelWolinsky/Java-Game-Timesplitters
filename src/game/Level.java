@@ -45,6 +45,9 @@ public class Level extends Canvas {
 		Level.levelStateChanged = levelStateChanged;
 	}
 
+	/**
+	 * Called every frame, this adds and removes all awaiting elements, and calls the tick function of all objects within the level
+	 */
 	public void tick() {
 
 
@@ -71,13 +74,19 @@ public class Level extends Canvas {
 			checkAllPlayersConnected();
 
 	}
-
-	public void render(Graphics g, float f, float h) {
+	
+	/**
+	 * Renders all objects within the level
+	 * @param g The graphics object onto which the objects will be rendered
+	 * @param xOffset The camera xOffset
+	 * @param yOffset The camera yOffset
+	 */
+	public void render(Graphics g, float xOffset, float yOffset) {
 
 		if (!entities.isEmpty() && levelState!=LevelState.Loading)
 		for(GameObject o : entities) {
 
-			o.render(g, f, h);
+			o.render(g, xOffset, yOffset);
 		}
 	}
 
@@ -118,8 +127,10 @@ public class Level extends Canvas {
 	}
 
 
-	//MULTIPLAYER STUFF
-
+	/**
+	 * Removes a given multiplayer character
+	 * @param username The username of the multiplayer character to be removed
+	 */
 	public void removePlayerMP(String username) {
 		try {
 			for(Player e : getPlayers())
@@ -134,7 +145,11 @@ public class Level extends Canvas {
 		}
 	}
 
-
+	/**
+	 * Returns a single multiplayer player
+	 * @param username The username of the multiplayer player to be returned
+	 * @return The specified multiplayer player
+	 */
 	public static Player getSpecificPlayerMP(String username){
 
 		for (Player p : getPlayers())
@@ -149,6 +164,13 @@ public class Level extends Canvas {
 
 	}
 
+	/**
+	 * Moves a given player in a given direction - used for multiplayer
+	 * @param username The username of the player
+	 * @param x The number of units in the x axis to move
+	 * @param y The number of units in the y axis to move
+	 * @param direction The direciton to move the player
+	 */
 	public void movePlayer(String username, float x, float y, String direction) {
 		try {
 
@@ -171,9 +193,6 @@ public class Level extends Canvas {
 				}
 				//System.out.println(currentAnimState);
 				getSpecificPlayerMP(username).setCurrentAnimState(currentAnimState);
-
-
-
 			}
 
 		} catch (Exception e) {
@@ -182,6 +201,9 @@ public class Level extends Canvas {
 		}
 	}
 
+	/**
+	 * Checks that the correct numbver of players have connected before starting the game
+	 */
 	public void checkAllPlayersConnected(){
 
 		switch (getGameMode()){
@@ -189,8 +211,8 @@ public class Level extends Canvas {
 				if (getPlayers().size()==1)
 				{
 					if(time1==0)
-						time();
-					if(timetime()>=1000) {
+						automaticallySetTime1();
+					if(getElapsedTime()>=1000) {
 						setLevelState(LevelState.Starting);
 					}
 				}
@@ -203,9 +225,9 @@ public class Level extends Canvas {
 				if (getPlayers().size()==2)
 				{
 					if(time1==0)
-						time();
+						automaticallySetTime1();
 					if(levelState!=LevelState.Starting)
-						if(timetime()>=5000)
+						if(getElapsedTime()>=5000)
 							setLevelState(LevelState.Starting);
 
 				}
@@ -214,7 +236,9 @@ public class Level extends Canvas {
 	}
 
 
-
+	/**
+	 * @return The game ending object
+	 */
 	public static GameEndingObject getFinish()
 	{
 		for (GameObject o : getGameObjects())
@@ -225,7 +249,10 @@ public class Level extends Canvas {
 
 		return null;
 	}
-
+	
+	/**
+	 * @return All blips in the level
+	 */
 	public static ArrayList<Blip> getBlips(){
 		ArrayList<Blip> blips = new ArrayList<Blip>();
 		for (GameObject o : entities)
@@ -247,6 +274,10 @@ public class Level extends Canvas {
 		return null;
 	}
 
+	/**
+	 * Moves the wall of death
+	 * @param x The number of units in the x-axis to increment the wall of death by
+	 */
 	public void moveWall(float x) {
 		try {
 			//System.out.println("movewall");
@@ -264,18 +295,28 @@ public class Level extends Canvas {
 		}
 	}
 
-	public void time()
+	/**
+	 * Sets the time1 object to the current time
+	 */
+	public void automaticallySetTime1()
 	{
 		time1 = System.currentTimeMillis();
 	}
 
-	public double timetime()
+	/**
+	 * @return The time passed since time1 has been set
+	 */
+	public double getElapsedTime()
 	{
 		time2 = System.currentTimeMillis();
 
 		return time2-time1;
 	}
-
+	
+	/**
+	 * @param player A given player
+	 * @return Blips targeted on a given player
+	 */
 	public static Blip getCertainBlip(Player player)
 	{
 		for (Blip blip: getBlips())
