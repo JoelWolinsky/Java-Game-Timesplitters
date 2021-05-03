@@ -14,6 +14,7 @@ Projectile 200 100 0 3 500 300 0 20 nopicture.png arrow
 Projectile 200 100 0 3 500 300 0 100 nopicture.png arrow
 Projectile 200 100 0 3 500 300 0 60 nopicture.png rocks
 Projectile 200 100 0 3 500 300 0 140 nopicture.png arrow
+Platform Custom 0 384 customFloor1.png
 
 //OUTER WALLS
 Platform Custom 70 19 wall1.png

@@ -17,10 +17,16 @@ Platform Default 342 265
 Platform Custom 374 265 edge1inv.png
 Chest 299 242 chest
 
+Waypoint 150 363 flag3.png R Y 10
 DamageZone 180 365 0 0 0 0 nopicture.png spike
+Waypoint 180 300 flag3.png R N 10
+Waypoint 220 363 flag3.png R Y 30
 DamageZone 250 365 0 0 0 0 nopicture.png spike
 Chest 299 360 chest
+Waypoint 290 363 flag3.png R N 25
+Waypoint 320 363 flag3.png R Y 0
 DamageZone 350 365 0 0 0 0 nopicture.png spike
+Waypoint 380 363 flag3.png R Y 20
 DamageZone 420 365 0 0 0 0 nopicture.png spike
 
 Floor
