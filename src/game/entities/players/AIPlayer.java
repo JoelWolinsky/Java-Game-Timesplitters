@@ -10,6 +10,7 @@ import game.graphics.AnimationStates;
 import game.graphics.LevelState;
 
 import static game.Level.getAIPlayers;
+import static game.Level.getLevelState;
 
 public class AIPlayer extends Player {
 
@@ -283,7 +284,7 @@ public class AIPlayer extends Player {
 
 	/**
 	 * Returns whether a given object is in contact (i.e. interacting) with the AIPlayer.
-     * @param aiPlayer The object that we check is in contact with the AIPlayer.
+     * @param player The object that we check is in contact with the AIPlayer.
 	 */
 	public boolean getInteraction(Player player){
 		return ((int)this.x 		 < 	(int)player.getX()+player.getWidth() && 
@@ -317,10 +318,6 @@ public class AIPlayer extends Player {
 
 	public void setCurrentWaypoint(Waypoint currentWaypoint) {
 		this.currentWaypoint = currentWaypoint;
-	}
-
-	private LevelState getLevelState() {
-		return null;
 	}
 
 }
