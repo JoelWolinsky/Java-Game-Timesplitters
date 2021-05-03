@@ -46,7 +46,7 @@ public class AddedItem extends AnimArea {
 				k.bounce(5);
 				break;
 			case "fart":
-				k.setRunSpeed(1.6f);
+				k.setRunSpeed(1.5f);
 				k.setJumpGravity(-1.0f);
 				break;
 		}
