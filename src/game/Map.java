@@ -143,7 +143,6 @@ public class Map {
                 //create specific progressbar parts for the generated segment pools
                 for (Integer i =0 ; i<allParts.size();i++)
                 {
-                    System.out.println(allParts.get(i));
                     mps.add(new MapPart("./img/minipart".concat(i.toString()).concat(".png"),allParts.get(i)));
                 }
                 break;
