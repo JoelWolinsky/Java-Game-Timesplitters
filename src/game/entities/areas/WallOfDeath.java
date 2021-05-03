@@ -58,7 +58,7 @@ public class WallOfDeath extends GameObject {
 
 	            Packet03MoveWall packet = new Packet03MoveWall(this.x);
                 packet.writeData(Game.socketClient);
-        	} else if (Game.gameMode == GameMode.SINGLEPLAYER) {
+        	} else if (Game.gameMode == GameMode.SINGLEPLAYER || Game.gameMode == GameMode.vsAI ) {
         		moving=true;
 	            this.x += 1;
         	}
