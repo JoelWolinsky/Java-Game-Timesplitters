@@ -78,33 +78,35 @@ public class GameClient extends Thread {
 			String message = new String(data).trim();
 			PacketTypes type = Packet.lookupPacket(message.substring(0,2));
 			Packet packet = null;
-			switch (type) {
-			default:
-			case INVALID:
-				break;
-			case LOGIN:
-				System.out.println("Client handle login");
-				packet = new Packet00Login(data);
-				handleLogin((Packet00Login) packet, address, port);
-				break;
-			case ITEM:
-				packet = new Packet01Item(data);
-				this.handleItem((Packet01Item)packet);
-				break;
-			case MOVE:
-				//System.out.println("client handle move");
-				packet = new Packet02Move(data);
-				handleMove((Packet02Move)packet);
-				break;
-			case MOVEWALL:
-				//System.out.println("receive wall packet");
-				packet = new Packet03MoveWall(data);
-				handleMove((Packet03MoveWall)packet);
-				break;
-			case STARTGAME:
-				packet = new Packet04StartGame();
-				handleStartGame((Packet04StartGame)packet);
-			}	
+			if (this.game.m.currentLevel.levelState != LevelState.Finished) {
+				switch (type) {
+				default:
+				case INVALID:
+					break;
+				case LOGIN:
+					System.out.println("Client handle login");
+					packet = new Packet00Login(data);
+					handleLogin((Packet00Login) packet, address, port);
+					break;
+				case ITEM:
+					packet = new Packet01Item(data);
+					this.handleItem((Packet01Item)packet);
+					break;
+				case MOVE:
+					//System.out.println("client handle move");
+					packet = new Packet02Move(data);
+					handleMove((Packet02Move)packet);
+					break;
+				case MOVEWALL:
+					//System.out.println("receive wall packet");
+					packet = new Packet03MoveWall(data);
+					handleMove((Packet03MoveWall)packet);
+					break;
+				case STARTGAME:
+					packet = new Packet04StartGame();
+					handleStartGame((Packet04StartGame)packet);
+				}	
+			}
 		} catch (Exception e) {
 			System.out.println("Exception in parsePacket on client. Data " + data + "\nAddress " + address + "\nPort " + port);
 			e.printStackTrace();

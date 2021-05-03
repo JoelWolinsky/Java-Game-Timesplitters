@@ -36,7 +36,7 @@ public class Game extends Canvas implements Runnable{
 	public static Player player;
 	public static Camera camera = new Camera();
 	private Assets s = new Assets();
-	public Map m;
+	public static Map m;
 	public static GameMode gameMode = GameMode.SINGLEPLAYER;
 
 	/**

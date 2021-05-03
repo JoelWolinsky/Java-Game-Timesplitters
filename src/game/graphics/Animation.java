@@ -4,6 +4,8 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import game.Game;
+
 public class Animation {
 	private ArrayList<BufferedImage> frames;
 	private int ticksPerFrame;
@@ -44,7 +46,9 @@ public class Animation {
 	 * @return The BufferedImage stored at index in the frames list
 	 */
 	public BufferedImage getFrame(int index) {
+
 		return frames.get(index);
+
 	}
 	
 	/**

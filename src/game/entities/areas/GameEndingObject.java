@@ -1,13 +1,16 @@
 package game.entities.areas;
 import game.Blip;
+import game.Game;
 import game.GameState;
 import game.UIElement;
 import game.entities.GameObject;
 import game.entities.players.AIPlayer;
 import game.entities.players.Player;
 import game.graphics.AnimationStates;
+import game.graphics.GameMode;
 import game.graphics.Image;
 import game.graphics.LevelState;
+import game.network.packets.Packet02Move;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -46,6 +49,8 @@ public class GameEndingObject extends AnimArea {
 
 				setLevelState(LevelState.Finished);
 				p.setCurrentAnimState(AnimationStates.SWAG);
+				
+				
 
 			}
 

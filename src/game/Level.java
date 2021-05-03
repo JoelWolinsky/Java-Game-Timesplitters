@@ -18,7 +18,7 @@ public class Level extends Canvas {
 
 	private static boolean gameStarted=true;
 	private static boolean gameEnded=false;
-	private static LevelState levelState = LevelState.Loading;
+	public static LevelState levelState = LevelState.Loading;
 
 	private static LinkedList<GameObject> entities = new LinkedList<>();
 	public static ArrayList<GameObject> toBeAdded = new ArrayList<>();
