@@ -135,7 +135,7 @@ public class Level extends Canvas {
 	}
 
 
-	public Player getSpecificPlayerMP(String username){
+	public static Player getSpecificPlayerMP(String username){
 
 		for (Player p : getPlayers())
 		{
