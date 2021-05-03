@@ -94,6 +94,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     private int packetCounter = 0;
     public int interactionWait;
     public int interactionTimer;
+    
+    public Boolean winner = false;
 
 
     public Player(float x, float y, KeyInput input, int width, int height,String url) {
@@ -741,7 +743,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     	}	
     	
 	        if (currentAnimState != null) {
-	        	if(Level.levelState == LevelState.Finished) {
+	        	if(Level.levelState == LevelState.Finished && this.winner == true) {
 	        		this.currentAnimState = AnimationStates.SWAG;
 	        	} 
 

@@ -50,6 +50,7 @@ public class GameEndingObject extends AnimArea {
 
 				setLevelState(LevelState.Finished);
 				p.setCurrentAnimState(AnimationStates.SWAG);
+				p.winner = true;
 
 				
 				
