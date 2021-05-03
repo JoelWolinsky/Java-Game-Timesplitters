@@ -737,10 +737,21 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     		if (this.currentAnimation == null) {
     			this.setAnimations(getAnimations("GHOST_FORM"));
 			}
+    	} else {
+	    	if (this.currentAnimation == null) {
+	    		if (Game.player == this) {
+	    			this.setAnimations(getAnimations("player1"));
+	    		} else {
+	    			this.setAnimations(getAnimations("player2"));
+	    		}
+			}
     	}
 	        if (currentAnimState != null) {
 
 	            currentAnimation = animations.get(currentAnimState);
+	            if (this.currentAnimation == null) {
+	            	currentAnimation = animations.get(AnimationStates.IDLE);
+	            }
 	            frame = (animationTimer / currentAnimation.getTicksPerFrame());
 	            g.drawImage(currentAnimation.getFrame(frame), x, y, null);
 
