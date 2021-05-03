@@ -122,7 +122,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     public void tick() {
         //Gather all collisions
     	if (this == Game.player || this instanceof AIPlayer) {
-	        CollidingObject.getCollisions(this);
+	        
+            CollidingObject.getCollisions(this);
 
 	        moving = false;
 
@@ -171,7 +172,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
 	        } else {
 	        	directionTickCounter =0;
 	        }
-	        if (INPUT != null && Game.player == this) {
+	        if (INPUT != null && (Game.player == this || this instanceof AIPlayer)) {
 	        	if(velX > 0) {
 	            	facingRight = true;
 	            	currentAnimState = AnimationStates.RIGHT;

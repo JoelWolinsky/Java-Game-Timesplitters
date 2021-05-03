@@ -7,6 +7,7 @@ import game.attributes.SolidCollider;
 import game.entities.areas.RespawnPoint;
 import game.entities.areas.Waypoint;
 import game.graphics.AnimationStates;
+import game.graphics.LevelState;
 
 import static game.Level.getAIPlayers;
 
@@ -51,7 +52,7 @@ public class AIPlayer extends Player {
 	/**
 	 * The last Waypoint that the AIPlayer visited
 	 */
-	private Waypoint currentWaypoint;
+	public Waypoint currentWaypoint;
 	
 	/**
 	 * The ID of the AIPlayer, used for ordering to decide which player halts to not get stuck to another AIPlayer
@@ -93,6 +94,10 @@ public class AIPlayer extends Player {
 	 */
 	public void tick() {
 
+		System.out.println(this.id + "Wait" + this.wait);
+		System.out.println(this.id + "Jump" + this.jump);
+		System.out.println(this.id + "Direction" + this.direction);
+
 		super.tick();
 
 		this.dist_from_player = this.x - this.humanPlayer.getX();
@@ -131,24 +136,29 @@ public class AIPlayer extends Player {
 				}
 			}	
 
-			for (AIPlayer p: getAIPlayers())	
-				if (this.getInteraction(p)){
+			if (getLevelState() == LevelState.InProgress){
+				for (AIPlayer p: getAIPlayers())	
+					if (this.getInteraction(p)){
 
-					this.interactionTimer++;
+						this.interactionTimer += 3;
 
-					if (this.interactionTimer >= 30) {
+						if (this.interactionTimer >= 200) {
 
-						if (this.id < p.id) {
-							this.interactionWait = 20;
-						} else {
-							p.interactionWait = 20;
+							if (this.id < p.id) {
+								this.interactionWait += 20;
+							} else {
+								p.interactionWait += 20;
+							}
+
+							this.interactionTimer -= 200;
+							p.interactionTimer -= 200; 
+
 						}
-
-						this.interactionTimer -= 30;
-						p.interactionTimer -= 30; 
-
 					}
-				}
+					else {
+						this.interactionTimer -= 1;
+					}
+			}
 				
 
 			if (this.canMove == true && this.invincibleMove == false) {
@@ -307,6 +317,10 @@ public class AIPlayer extends Player {
 
 	public void setCurrentWaypoint(Waypoint currentWaypoint) {
 		this.currentWaypoint = currentWaypoint;
+	}
+
+	private LevelState getLevelState() {
+		return null;
 	}
 
 }
