@@ -2,9 +2,6 @@ package game.graphics;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.LinkedList;
-
-import game.Game;
 
 public class Animation {
 	private ArrayList<BufferedImage> frames;

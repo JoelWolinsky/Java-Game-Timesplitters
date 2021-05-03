@@ -5,7 +5,6 @@ import java.util.*;
 
 import game.Effect;
 import game.Game;
-import game.GameState;
 import game.Item;
 import game.Level;
 import game.SoundHandler;
@@ -743,7 +742,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     	}	
     	
 	        if (currentAnimState != null) {
-	        	if(Level.levelState == LevelState.Finished && this.winner == true) {
+	        	if(getLevelState() == LevelState.Finished && this.winner) {
 	        		this.currentAnimState = AnimationStates.SWAG;
 	        	} 
 

@@ -1,8 +1,5 @@
 package network;
 
-import static game.Level.getToBeAdded;
-import static game.Level.setLevelState;
-
 import java.io.IOException;
 
 import java.net.DatagramPacket;
@@ -24,6 +21,8 @@ import game.network.packets.Packet01Item;
 import game.network.packets.Packet02Move;
 import game.network.packets.Packet03MoveWall;
 import game.network.packets.Packet04StartGame;
+
+import static game.Level.*;
 
 public class GameClient extends Thread {
 	private InetAddress ipAddress;
@@ -78,7 +77,7 @@ public class GameClient extends Thread {
 			String message = new String(data).trim();
 			PacketTypes type = Packet.lookupPacket(message.substring(0,2));
 			Packet packet = null;
-			if (this.game.m.currentLevel.levelState != LevelState.Finished) {
+			if (getLevelState() != LevelState.Finished) {
 				switch (type) {
 				default:
 				case INVALID:
