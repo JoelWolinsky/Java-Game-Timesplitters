@@ -4,6 +4,7 @@ import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
 import game.attributes.SolidCollider;
 import game.entities.GameObject;
+import game.entities.players.AIPlayer;
 import game.entities.players.Player;
 
 import java.awt.*;
@@ -53,8 +54,10 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 			if (this.getInteraction(p))
 				if (!(p.isBounceImmune())) {
 					p.bounce(this.getSpeed());
+					
+					if (!(p instanceof AIPlayer))
 					SoundHandler.playRandomChicken();
-				}
+					}
 		}
 
 
