@@ -91,6 +91,8 @@ AnimArea 197 310 torch
 
 Chest 100 360 chest
 
+Respawn 350 363 0 0 flag1.png
+
 
 Projectile 250 242 0 4 250 0 0 60 crack1.png stones
 Projectile 280 252 0 4 240 0 0 20 crack1.png stones

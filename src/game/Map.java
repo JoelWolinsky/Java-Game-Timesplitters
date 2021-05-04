@@ -46,7 +46,7 @@ public class Map {
     int defaultSeed = 0;
     private boolean justChanged=false;
 
-    ArrayList<String> segments3,segments1,segments2,segments4,wizard,introDimension,castleEntrance,throneRoom, segments5, introOutDimension,towerA,segments6;
+    ArrayList<String> segments3,segments1,segments2,segments4,wizard,introDimension,castleEntrance,throneRoom, segments5, introOutDimension,towerA,segments6,end;
 
     public Map (MapMode mapMode, GameMode gameMode){
 
@@ -104,6 +104,7 @@ public class Map {
                 introOutDimension = new ArrayList<String>(Arrays.asList("introOutDimension"));
                 towerA = new ArrayList<String>(Arrays.asList("segmentA17"));
                 segments6 = new ArrayList<String>(Arrays.asList("segmentB1"));
+                end = new ArrayList<String>(Arrays.asList("segmentEND"));
 
                 //choose the limits of your map this should also be related to how many levels you have defined
                 //eg. you don't want to have 20 levels but a top limit of only 2 since 17 of the leves will never be used
@@ -122,14 +123,14 @@ public class Map {
 	                        randomGenerate(castleEntrance) + randomGenerate(segments2) + randomGenerate(throneRoom),
 	                        randomGenerate(segments3),
 	                        randomGenerate(segments4) + randomGenerate(wizard) + randomGenerate(introDimension),
-	                        randomGenerate(segments5)));
+	                        randomGenerate(segments5) + randomGenerate(end)));
                 } else {
                 	allParts = new ArrayList<>(Arrays.asList(
 	                        randomGenerate(segments1, defaultSeed),
 	                        randomGenerate(castleEntrance, defaultSeed) + randomGenerate(segments2, defaultSeed) + randomGenerate(throneRoom, defaultSeed),
 	                        randomGenerate(segments3, defaultSeed),
 	                        randomGenerate(segments4, defaultSeed) + randomGenerate(wizard, defaultSeed) + randomGenerate(introDimension, defaultSeed),
-	                        randomGenerate(segments5, defaultSeed)));
+	                        randomGenerate(segments5, defaultSeed) + randomGenerate(end,defaultSeed)));
                 }
                 //create specific progressbar parts for the generated segment pools
                 for (Integer i =0 ; i<allParts.size();i++)

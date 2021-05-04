@@ -415,7 +415,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             }
         }
 
-        if(getLevelState()==LevelState.Finished)
+        if(getLevelState()==LevelState.Finished || ghostMode)
         if (KeyInput.esc.isPressed()) {
 
             System.exit(0);
@@ -442,7 +442,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
                 if (!(INVENTORY.get(inventoryIndex).getUrl().equals("./img/empty.png"))) {
                     INVENTORY.get(inventoryIndex).getEffect();
                     if (!(INVENTORY.get(inventoryIndex).getUrl().equals("./img/jump.png")) && !(INVENTORY.get(inventoryIndex).getUrl().equals("./img/banana.png"))&& !(INVENTORY.get(inventoryIndex).getUrl().equals("./img/fart1.png")))
-                        CURRENT_EFFECTS.add(new Effect(INVENTORY.get(inventoryIndex).getUrl(), 500));
+                        CURRENT_EFFECTS.add(new Effect(INVENTORY.get(inventoryIndex).getUrl(), 300));
                     INVENTORY.get(inventoryIndex).setUrl("./img/empty.png");
                     this.setInventoryChanged(true);
                 }

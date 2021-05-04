@@ -32,7 +32,7 @@ public class AddedItem extends AnimArea {
 					if (p!=this.getCreator()){
 						this.getEffect(p);
 						this.setVisibile(false);
-						p.addEffect(new Effect(this.getEffectName(),500));
+						p.addEffect(new Effect(this.getEffectName(),250));
 					}
 		}
 
@@ -46,7 +46,7 @@ public class AddedItem extends AnimArea {
 				k.bounce(5);
 				break;
 			case "fart":
-				k.setRunSpeed(1.5f);
+				k.setRunSpeed(2.0f);
 				k.setJumpGravity(-1.0f);
 				break;
 		}

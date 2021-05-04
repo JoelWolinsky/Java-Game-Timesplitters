@@ -1,19 +1,28 @@
-Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA3.png
-Chunk 1 E segmentA3p1.png
-Respawn 10 363 0 0 flag1.png
-Waypoint 50 363 flag3.png N Y 0
-Platform Custom 0 92 corner1.png
-Platform Custom 96 92 top2.png
-Platform Custom 330 92 corner1inv.png
-Floor
++Theme A 426 384 platformA.png invPlatformA.png floorA.png segmentA12p1.png 2
 
-Chunk 1 N skyA.png
-Chunk 1 E skyA.png
-Chunk 1 S segmentA3p2.png
+Chunk 1 E segmentA14p1.png
 
-Platform Custom 0 92 corner1.png
-Platform Custom 96 92 top2.png
-Platform Custom 330 92 corner1inv.png
+GameEndingObject 200 360 sphere
+Platform Custom 100 383 thinfloor1.png
 
-Floor
+Chunk 1 S segmentA14p1.png
+Chunk 1 S segmentA14p1.png
+Revert
+Revert
 
+Chunk 1 N segmentA14p1.png
+
+
+Revert
+
+Chunk 1 E segmentA14p2.png
+
+
+Chunk 1 S segmentA14p1.png
+Chunk 1 S segmentA14p1.png
+Revert
+Revert
+Chunk 1 N segmentA14p1.png
+
+
+Revert
