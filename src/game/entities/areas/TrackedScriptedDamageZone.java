@@ -14,6 +14,9 @@ public class TrackedScriptedDamageZone extends EventScriptedDamageZone{
 		this.setActivated(false);
 	}
 
+	/**
+	 * Checks if it's target is within its activation area, and moves towards the target if so
+	 */
 	public void tick() {
 
 

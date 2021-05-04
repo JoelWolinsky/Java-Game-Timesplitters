@@ -9,6 +9,9 @@ public class SlowArea extends AnimArea{
 		super(x, y, width, height,url);
 	}
 
+	/**
+	 * Checks for players intersecting with th eobject and slows them down.
+	 */
 	public void tick() {
 
 		for (Player p: getPlayers())

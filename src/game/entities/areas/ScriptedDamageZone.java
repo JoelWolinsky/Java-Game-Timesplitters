@@ -33,6 +33,10 @@ public class ScriptedDamageZone extends AnimArea{
 
 	}
 
+	/**
+	 * Checks for players in its' interaction zone and kills them.
+	 * Moves the object.
+	 */
 	public void tick() {
 
 

@@ -8,6 +8,9 @@ public class OnReachAnimArea extends AnimArea{
 		super(x, y, width, height,url);
 	}
 
+	/**
+	 * Checks for player objects within the interactable area, and sets the object to visible if so.
+	 */
 	public void tick() {
 
 		for (Player p: getPlayers())

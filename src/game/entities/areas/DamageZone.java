@@ -39,6 +39,9 @@ public class DamageZone extends AnimArea{
 
 	}
 
+	/**
+	 * Called every frame, this checks for players within its' damage zone, tells any player objects that collide with it to respawn at the last respawn point
+	 */
 	public void tick() {
 
 
@@ -92,5 +95,7 @@ public class DamageZone extends AnimArea{
 	public void setActive(boolean active){
 		this.active = active;
 	}
-	public String getNotice(){return this.notice;}
+	public String getNotice(){
+		return this.notice;
+	}
 }

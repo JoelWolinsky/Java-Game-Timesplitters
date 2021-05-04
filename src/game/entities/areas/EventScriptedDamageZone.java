@@ -34,6 +34,10 @@ public class EventScriptedDamageZone extends AnimArea{
 
 	}
 
+	/**
+	 * Called every frame, this checks for players within the interaction area and kills players that are in the area while the object is active.
+	 * It also triggers the movement of the object once activated.
+	 */
 	public void tick() {
 
 

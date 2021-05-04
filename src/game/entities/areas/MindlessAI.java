@@ -45,6 +45,10 @@ public class MindlessAI extends AnimArea implements GravityObject, CollidingObje
 		originalX=x;
 	}
 
+	/**
+	 * This function is responsible for the movement of the mindless ai.
+	 * It also triggers any necessary effects when the player collides with it.
+	 */
 	public void tick() {
 		//Gather all collisions
 		CollidingObject.getCollisions(this);

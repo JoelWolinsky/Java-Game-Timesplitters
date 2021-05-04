@@ -24,6 +24,9 @@ public class Portal extends AnimArea{
 		this.currentY=currentY;
 	}
 
+	/**
+	 * Checks for players within interactable areas and moves the player to their respawn location.
+	 */
 	public void tick() {
 
 

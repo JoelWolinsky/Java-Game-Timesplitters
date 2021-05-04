@@ -30,6 +30,9 @@ public class TrackedScriptedDamageZoneSpawner extends GameObject {
 		this.areasOfEffect=areasOfEffect;
 	}
 
+	/**
+	 * Spawns a single tracking object for each player when the game starts
+	 */
 	public void tick() {
 
 		if (Level.getLevelState()== LevelState.Starting && once)

@@ -31,6 +31,11 @@ public class Area extends GameObject {
 			g.drawImage(img,(int)(this.x + xOffset),(int)(this.y + yOffset),null);
 	}
 
+	/**
+	 * Checks if a player object is within an interactable area
+	 * @param player The player object
+	 * @return True or False, based on if the player is within the interactable area
+	 */
 	public boolean getInteraction(GameObject player){
 		if (player instanceof Player)
 			if (((Player) player).isGhostMode())

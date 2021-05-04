@@ -31,6 +31,9 @@ public class TrackingAISpawner extends GameObject {
 		this.areasOfEffect=areasOfEffect;
 	}
 
+	/**
+	 * Spawns one trackingAI object for each player once when the game begins
+	 */
 	public void tick() {
 
 		if (Level.getLevelState()== LevelState.Starting && once)

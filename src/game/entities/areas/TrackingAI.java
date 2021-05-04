@@ -22,6 +22,9 @@ public class TrackingAI extends EventScriptedDamageZone{
 		this.setActivated(false);
 	}
 
+	/**
+	 * Checks if the target is within its activation area, and follows the target if it has been activated.
+	 */
 	public void tick() {
 
 			for (Area a: this.getEventArea() )

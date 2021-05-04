@@ -17,6 +17,9 @@ public class ExtendedRespawnPoint extends Area {
 
 	}
 
+	/**
+	 * Called every frame, this checks if a player has reached the respawn point, and updates its own display as well as the players' respawn threshold.
+	 */
 	public void tick() {
 
 		for (Player p : getPlayers())

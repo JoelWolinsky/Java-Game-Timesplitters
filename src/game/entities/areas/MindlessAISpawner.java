@@ -21,6 +21,9 @@ public class MindlessAISpawner extends GameObject {
 		this.maxChickens=maxChickens;
 	}
 
+	/**
+	 * This is responsible for keeping track of the number of mindlessAI objects, and spawning them until the max number is reached, as well as removing any objects that need to be removed.
+	 */
 	public void tick() {
 
 		if (chickensSpawned<=maxChickens)

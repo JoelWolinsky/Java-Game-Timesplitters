@@ -19,6 +19,9 @@ public class RespawnPoint extends Area {
 		this.pointY=pointY;
 	}
 
+	/**
+	 * Called every frame, this checks if a player has reached the respawn point, and updates its own display as well as the players' respawn threshold and notifying the player with a sound.
+	 */
 	public void tick() {
 
 		for (Player p : getPlayers())

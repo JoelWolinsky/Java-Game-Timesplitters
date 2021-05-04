@@ -26,6 +26,9 @@ public class Projectile extends DamageZone {
 		this.velY =velocityY;
 	}
 
+	/**
+	 * Moves the projectile according to its velocity and checks for interactions with players, killing the player if they collide.
+	 */
 	public void tick() {
 
 		for (Player p : getPlayers())

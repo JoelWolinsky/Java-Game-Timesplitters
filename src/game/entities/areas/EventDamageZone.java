@@ -50,6 +50,10 @@ public class EventDamageZone extends AnimArea{
 
 	}
 
+	/**
+	 * Called every frame, this function checks for players within its event area, and kills the player if the object is active.
+	 * It also controls the timing of the activity.
+	 */
 	public void tick() {
 
 

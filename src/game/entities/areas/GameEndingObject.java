@@ -19,6 +19,9 @@ public class GameEndingObject extends AnimArea {
 
 	}
 
+	/**
+	 * This checks if any player characters have reached the object, and ends the game and sets the winner if so
+	 */
 	public void tick() {
 
 		for (Player p : getPlayers())

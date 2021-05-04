@@ -15,6 +15,9 @@ public class Chest extends AnimArea{
 		super(x, y, width, height,url);
 	}
 
+	/**
+	 * Called every frame, this checks for players within it's interactable area and gives any players within its interactable area a random item
+	 */
 	public void tick() {
 
 		for (Player p: getPlayers())
@@ -41,6 +44,9 @@ public class Chest extends AnimArea{
 	}
 
 
+	/**
+	 * @return A random item
+	 */
 	public String randomItem(){
 		ArrayList<String> itemPool =new ArrayList<String>(Arrays.asList("./img/shoes.png","./img/jump.png","./img/banana.png","./img/fart1.png"));
 		int rnd1;
