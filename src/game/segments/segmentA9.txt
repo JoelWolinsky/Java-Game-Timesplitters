@@ -54,29 +54,29 @@ Platform Custom 200 240 thinplatform2.png
 
 
 AnimArea -30 360 bloodghost
-Projectile -10 360 -1.0 3.0 400 0 0 0 nopicture.png bloodcell
-Projectile -10 360 0.0 3.0 400 0 0 20 nopicture.png bloodcell
-Projectile -10 360 1.0 3.0 400 0 0 40 nopicture.png bloodcell
-Projectile -10 360 2.0 3.0 400 0 0 60 nopicture.png bloodcell
-Projectile -10 360 3.0 3.0 400 0 0 80 nopicture.png bloodcell
-Projectile -10 360 3.0 2.0 400 0 0 100 nopicture.png bloodcell
-Projectile -10 360 3.0 1.0 400 0 0 120 nopicture.png bloodcell
-Projectile -10 360 3.0 0.0 400 0 0 0 nopicture.png bloodcell
-Projectile -10 360 3.0 -1.0 400 0 0 20 nopicture.png bloodcell
-Projectile -10 360 3.0 -2.0 400 0 0 40 nopicture.png bloodcell
-Projectile -10 360 3.0 -3.0 400 0 0 60 nopicture.png bloodcell
-Projectile -10 360 2.0 -3.0 400 0 0 80 nopicture.png bloodcell
-Projectile -10 360 1.0 -3.0 400 0 0 100 nopicture.png bloodcell
-Projectile -10 360 0.0 -3.0 400 0 0 120 nopicture.png bloodcell
-Projectile -10 360 -1.0 -3.0 400 0 0 140 nopicture.png bloodcell
-Projectile -10 360 -2.0 -3.0 400 0 0 0 nopicture.png bloodcell
-Projectile -10 360 -3.0 -3.0 400 0 0 20 nopicture.png bloodcell
-Projectile -10 360 -3.0 -2.0 400 0 0 40 nopicture.png bloodcell
-Projectile -10 360 -3.0 -1.0 400 0 0 60 nopicture.png bloodcell
-Projectile -10 360 -3.0 0.0 400 0 0 80 nopicture.png bloodcell
-Projectile -10 360 -3.0 1.0 400 0 0 100 nopicture.png bloodcell
-Projectile -10 360 -3.0 2.0 400 0 0 120 nopicture.png bloodcell
-Projectile -10 360 -3.0 3.0 400 0 0 140 nopicture.png bloodcell
+Projectile -10 360 -0.5 1.5 400 0 0 0 nopicture.png bloodcell
+Projectile -10 360 0.0 1.5 400 0 0 20 nopicture.png bloodcell
+Projectile -10 360 0.5 1.5 400 0 0 40 nopicture.png bloodcell
+Projectile -10 360 1.0 1.5 400 0 0 60 nopicture.png bloodcell
+Projectile -10 360 1.5 1.5 400 0 0 80 nopicture.png bloodcell
+Projectile -10 360 1.5 1.0 400 0 0 100 nopicture.png bloodcell
+Projectile -10 360 1.5 0.5 400 0 0 120 nopicture.png bloodcell
+Projectile -10 360 1.5 0.0 400 0 0 0 nopicture.png bloodcell
+Projectile -10 360 1.5 -0.5 400 0 0 20 nopicture.png bloodcell
+Projectile -10 360 1.5 -1.0 400 0 0 40 nopicture.png bloodcell
+Projectile -10 360 1.5 -1.5 400 0 0 60 nopicture.png bloodcell
+Projectile -10 360 1.0 -1.5 400 0 0 80 nopicture.png bloodcell
+Projectile -10 360 0.5 -1.5 400 0 0 100 nopicture.png bloodcell
+Projectile -10 360 0.0 -1.5 400 0 0 120 nopicture.png bloodcell
+Projectile -10 360 -0.5 -1.5 400 0 0 140 nopicture.png bloodcell
+Projectile -10 360 -1.0 -1.5 400 0 0 0 nopicture.png bloodcell
+Projectile -10 360 -1.5 -1.5 400 0 0 20 nopicture.png bloodcell
+Projectile -10 360 -1.5 -1.0 400 0 0 40 nopicture.png bloodcell
+Projectile -10 360 -1.5 -0.5 400 0 0 60 nopicture.png bloodcell
+Projectile -10 360 -1.5 0.0 400 0 0 80 nopicture.png bloodcell
+Projectile -10 360 -1.5 0.5 400 0 0 100 nopicture.png bloodcell
+Projectile -10 360 -1.5 1.0 400 0 0 120 nopicture.png bloodcell
+Projectile -10 360 -1.5 1.5 400 0 0 140 nopicture.png bloodcell
 
 
 

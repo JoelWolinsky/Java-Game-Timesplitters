@@ -146,10 +146,11 @@ public class DifficultySettings {
                 String data = sc.nextLine();
                 String[] splitted =  data.split("\\s+");
                 //Settings Update
+                data = updateConfigStr(splitted);
                 switch(splitted[0]) {
                 
                 	case "Projectile":
-                		data = updateConfigStr(splitted);
+                		
                 		break;
                 		
                 }
@@ -224,8 +225,18 @@ public class DifficultySettings {
 						if(bloodcellSpeedIndex == -1) {
 							bloodcellSpeedIndex = bloodcellXSpeed.size()-1;
 						}
-						splitted[3] = Float.toString(bloodcellXSpeed.get(bloodcellSpeedIndex));
-						splitted[4] = Float.toString(bloodcellYSpeed.get(bloodcellSpeedIndex));
+						if(Launcher.cHandler.getDifficulty().equals("Hard")) {
+							splitted[3] = Float.toString(bloodcellXSpeed.get(bloodcellSpeedIndex));
+							splitted[4] = Float.toString(bloodcellYSpeed.get(bloodcellSpeedIndex));
+						}
+						else if(Launcher.cHandler.getDifficulty().equals("Medium")) {
+							splitted[3] = Float.toString(bloodcellXSpeed.get(bloodcellSpeedIndex)/1.5f);
+							splitted[4] = Float.toString(bloodcellYSpeed.get(bloodcellSpeedIndex)/1.5f);
+						}
+						else {
+							splitted[3] = Float.toString(bloodcellXSpeed.get(bloodcellSpeedIndex)/2);
+							splitted[4] = Float.toString(bloodcellYSpeed.get(bloodcellSpeedIndex)/2);
+						}
 						bloodcellSpeedIndex--;
 						break;
 				}
