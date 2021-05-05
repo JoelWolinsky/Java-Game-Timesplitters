@@ -588,7 +588,7 @@ public class Window extends Canvas{
 		    		Launcher.cHandler.difficulty = "Easy";
 		    	}
 		    	Launcher.difficultySettings = new DifficultySettings(Launcher.cHandler.getDifficulty());
-		    	difficultyButton.setIcon(button3HoverInner);
+		    	difficultyButton.setIcon(BUTTON_3_HOVER_INNER);
 			}
 
 			@Override

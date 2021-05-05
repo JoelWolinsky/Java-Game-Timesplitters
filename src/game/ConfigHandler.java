@@ -87,7 +87,7 @@ public class ConfigHandler {
 	 * Returns the value of difficulty from the config file
 	 * @return A string value of difficulty
 	 */
-	private String getDifficulty() {
+    public String getDifficulty() {
 		createConfigFile();
 		
 		try {
