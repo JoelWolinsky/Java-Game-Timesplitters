@@ -5,6 +5,9 @@ import game.entities.players.Player;
 import static game.Level.getPlayers;
 import static game.Utility.getRandomIntInRangeSeeded;
 
+import game.DifficultySettings;
+import game.Launcher;
+
 public class Projectile extends DamageZone {
 	private float baseposX,baseposY;
 	private float velX,velY;
@@ -23,7 +26,7 @@ public class Projectile extends DamageZone {
 		this.baseposY=y;
 		this.distance = distance;
 		this.velX = velocityX;
-		this.velY =velocityY;
+		this.velY = velocityY;
 	}
 
 	/**

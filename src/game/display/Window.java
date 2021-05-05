@@ -29,6 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import game.ConfigHandler.ConfigOption;
+import game.DifficultySettings;
 import game.Game;
 import game.GameState;
 import game.Launcher;
@@ -83,7 +84,7 @@ public class Window extends Canvas{
 
 		int panelWidth = WIDTH / 2;
 		int panelHeight = ((HEIGHT / 2) - (WIDTH / 10));
-		
+
 	    // Importing required image graphics
 		ImageIcon button1Icon = new ImageIcon("./img/button1.png");
 		Image scaledButton1 = button1Icon.getImage().getScaledInstance(panelWidth - 50, (panelHeight / 4) - 10,Image.SCALE_SMOOTH);
@@ -129,7 +130,7 @@ public class Window extends Canvas{
 		Image scaledButton3Clicked = button3ClickedIcon.getImage().getScaledInstance(panelWidth - 100, panelHeight / 3, Image.SCALE_SMOOTH);
 		button3ClickedIcon = new ImageIcon(scaledButton3Clicked);
 		final ImageIcon BUTTON_3_CLICKED_INNER = button3ClickedIcon;
-		
+
 		ImageIcon errorPanelIcon = new ImageIcon("./img/errorPanel.png");
 		Image scaledErrorPanel = errorPanelIcon.getImage().getScaledInstance(panelWidth - 80, panelHeight + 100, Image.SCALE_SMOOTH);
 
@@ -154,7 +155,7 @@ public class Window extends Canvas{
 		multiplayerButtonPanel.setOpaque(false);
 		multiplayerButtonPanel.setVisible(false);
 		((FlowLayout)multiplayerButtonPanel.getLayout()).setVgap(panelHeight / 4);
-		
+
 	    // Overriding JPanel's paintComponent method to enable an Image to be used as a background
 		JPanel errorPanel = (new JPanel(new FlowLayout()) {
 			@Override
@@ -164,12 +165,12 @@ public class Window extends Canvas{
 			        g.drawImage(scaledErrorPanel, 0, 0, null);
 			}
 		});
-		
+
 		errorPanel.setBounds((WIDTH / 3) - 13, HEIGHT / 7, panelWidth - 80, panelHeight + 100);
 		errorPanel.setOpaque(false);
 		errorPanel.setVisible(false);
 		((FlowLayout)errorPanel.getLayout()).setVgap((panelHeight / 4) - 15);
-		
+
 		JLabel errorPanelText = new JLabel();
 		errorPanelText.setFont(sizedFont);
 		errorPanelText.setHorizontalTextPosition(JLabel.CENTER);
@@ -208,7 +209,7 @@ public class Window extends Canvas{
 		singleplayerButton.setForeground(Color.black);
 
 		singleplayerButton.addMouseListener(new MouseAdapter() {
-			
+
 			// This handles when the JLabel is pressed by the mouse
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -380,7 +381,7 @@ public class Window extends Canvas{
 				backButton.setIcon(BUTTON_2_INNER);
 			}
 		});
-		
+
 		JLabel backErrorButton = new JLabel(button2Icon);
 		backErrorButton.setForeground(Color.black);
 		backErrorButton.setFont(sizedFont);
@@ -463,7 +464,7 @@ public class Window extends Canvas{
 		toggleMusicButton.setHorizontalTextPosition(JLabel.CENTER);
 		if (Launcher.cHandler.musicToggle) {
 			toggleMusicButton.setText("<html><center>MUSIC:<br><p style='margin-top:8'>ON</center></html>");
-			
+
 		} else {
 			toggleMusicButton.setText("<html><center>MUSIC:<br><p style='margin-top:8'>OFF</center></html>");
 		}
@@ -576,6 +577,7 @@ public class Window extends Canvas{
 		    		difficultyButton.setText("<html><center>DIFFICULTY:<br><p style='margin-top:8'>MEDIUM</center></html>");
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.DIFFICULTY, "Medium");
 		    		Launcher.cHandler.difficulty = "Medium";
+
 		    	} else if (Launcher.cHandler.difficulty.equals("Medium")) {
 		    		difficultyButton.setText("<html><center>DIFFICULTY:<br><p style='margin-top:8'>HARD</center></html>");
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.DIFFICULTY, "Hard");
@@ -585,8 +587,8 @@ public class Window extends Canvas{
 		    		Launcher.cHandler.updateConfigValue(ConfigOption.DIFFICULTY, "Easy");
 		    		Launcher.cHandler.difficulty = "Easy";
 		    	}
-
-		    	difficultyButton.setIcon(BUTTON_3_HOVER_INNER);
+		    	Launcher.difficultySettings = new DifficultySettings(Launcher.cHandler.getDifficulty());
+		    	difficultyButton.setIcon(button3HoverInner);
 			}
 
 			@Override
@@ -739,7 +741,7 @@ public class Window extends Canvas{
 			    	multiplayerButtonPanel.setVisible(false);
 			    	backOptions.setVisible(false);
 					backMultiplayer.setVisible(false);
-					
+
 					if (Launcher.cHandler.ambienceToggle == true) {
 						SoundHandler.playSound("ambience", 0.2f);
 					}
@@ -793,7 +795,7 @@ public class Window extends Canvas{
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
-	
+
 	/**
 	 * Used for accessing the mainMenu JPanel that holds the singleplayer, multiplayer, options, and quit buttons
 	 * @return the mainMenu JPanel
@@ -801,7 +803,7 @@ public class Window extends Canvas{
 	public static JPanel getMainMenu() {
 		return mainMenu;
 	}
-	
+
 	/**
 	 * Sets the mainMenu JPanel to visible or invisible
 	 * @param visible the boolean for visibility
@@ -809,7 +811,7 @@ public class Window extends Canvas{
 	public static void setMainMenuVisible(boolean visible) {
 		Window.mainMenu.setVisible(visible);
 	}
-	
+
 	/**
 	 * Sets the main menu background image to visible or invisible
 	 * @param visible the boolean for visibility
@@ -817,7 +819,7 @@ public class Window extends Canvas{
 	public static void setBack(boolean visible) {
 		Window.back.setVisible(visible);
 	}
-	
+
 	/**
 	 * Sets the options background image to visible or invisible
 	 * @param visible the boolean for visibility

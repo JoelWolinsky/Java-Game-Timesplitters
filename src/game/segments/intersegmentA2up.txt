@@ -54,8 +54,8 @@ Platform Custom 178 146 edge1.png
 Waypoint 178 126 flag3.png R Y 20
 
 
-Projectile 130 12 0 4 253 0 0 60 crack1.png stones
-Projectile 270 143 0 4 500 0 0 20 crack1.png stones
+Projectile 130 12 0 2.0 253 0 0 60 crack1.png stones
+Projectile 270 143 0 2.0 500 0 0 20 crack1.png stones
 
 Platform Custom 338 0 edge1inv.png
 Waypoint 338 0 flag3.png R Y 30
@@ -94,5 +94,5 @@ Chest 100 360 chest
 Respawn 350 363 0 0 flag1.png
 
 
-Projectile 250 242 0 4 250 0 0 60 crack1.png stones
-Projectile 280 252 0 4 240 0 0 20 crack1.png stones
+Projectile 250 242 0 2.0 250 0 0 60 crack1.png stones
+Projectile 280 252 0 2.0 240 0 0 20 crack1.png stones

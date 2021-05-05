@@ -32,8 +32,9 @@ public class WallOfDeath extends GameObject {
     protected Animation currentAnimation;
     protected HashMap<AnimationStates, Animation> animations;
     private static BufferedImage gravestone;
+    private float speed;
 
-    public WallOfDeath() {
+    public WallOfDeath(float speed) {
         super(-2000, -300, 3,1113, 819);
 
         this.animations = getAnimations("DETH");
@@ -43,7 +44,7 @@ public class WallOfDeath extends GameObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+    this.speed = speed;
 	}
 
     /**
@@ -66,13 +67,13 @@ public class WallOfDeath extends GameObject {
         if (getLevelState()== LevelState.InProgress){
         	if(Game.socketServer != null) {
 	            moving=true;
-	            this.x += 1;
+	            this.x += speed;
 
 	            Packet03MoveWall packet = new Packet03MoveWall(this.x);
                 packet.writeData(Game.socketClient);
         	} else if (Game.gameMode == GameMode.SINGLEPLAYER || Game.gameMode == GameMode.vsAI ) {
         		moving=true;
-	            this.x += 1;
+	            this.x += speed;
         	}
         }
 	}
