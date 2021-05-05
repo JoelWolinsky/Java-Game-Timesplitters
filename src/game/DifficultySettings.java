@@ -115,7 +115,7 @@ public class DifficultySettings {
 				String[] parts = line.split("=");
 				
 				if(parts[0].equals(arg)) {
-					String[] tempArr = parts[1].split("\s");
+					String[] tempArr = parts[1].split("\\s+");
 					sc.close();
 					ArrayList<Float> returnArr = new ArrayList<Float>();
 					for(int i=tempArr.length-1;i>-1;i--) {
@@ -364,7 +364,7 @@ public class DifficultySettings {
 			returnStr += (splitted[i]+"\s");
 		}
 		returnStr += (splitted[splitted.length-1]);
-		
+		System.out.println(returnStr);
 		return returnStr;
 	}
 	
