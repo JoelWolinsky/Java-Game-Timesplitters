@@ -68,34 +68,31 @@ public class UIController extends GameObject {
 	public void tick() {
 		if (getLevelState()==LevelState.InProgress) {
 			announcerMessage.setVisible(false);
-			announcer.setVisible(false);
 		} else {
 
-		if (announcer.isVisible())
-		{
-			announcer.centerHorizontally();
-			announcer.centerVertically();
-		}
-		
-		//START OF THE GAME COUNTDOWN SLIDESHOW
-		if (getLevelState()==LevelState.Starting) {
-			startCountdown = true;
-		}
-
-		if (getLevelState()==LevelState.Finished)
-			endGameCelebration=true;
-
-		if (getLevelState()==LevelState.Waiting)
-		{
-
-			if (!announcer.isVisible()) {
-				announcer.setVisible(true);
-				announcerMessage.setVisible(true);
+			if (announcer.isVisible()) {
+				announcer.centerHorizontally();
+				announcer.centerVertically();
 			}
 
-			announcer.setImg(UIController.loading);
+			//START OF THE GAME COUNTDOWN SLIDESHOW
+			if (getLevelState() == LevelState.Starting) {
+				startCountdown = true;
+			}
+
+			if (getLevelState() == LevelState.Finished)
+				endGameCelebration = true;
+
+			if (getLevelState() == LevelState.Waiting) {
+
+				if (!announcer.isVisible()) {
+					announcer.setVisible(true);
+					announcerMessage.setVisible(true);
+				}
+
+				announcer.setImg(UIController.loading);
+			}
 		}
-	
 
 
 		if (startCountdown) {
@@ -162,7 +159,7 @@ public class UIController extends GameObject {
 
 
 		}
-	}
+	
 
 	public void render(Graphics g, float xOffset, float yOffset) {
 
