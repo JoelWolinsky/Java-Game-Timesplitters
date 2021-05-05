@@ -9,6 +9,7 @@ import java.util.List;
 
 import game.Game;
 import game.Level;
+import game.display.Window;
 import game.entities.players.PlayerMP;
 import game.network.packets.Packet;
 import game.network.packets.Packet.PacketTypes;
@@ -172,7 +173,7 @@ public class GameServer extends Thread {
 					Packet00Login packet1 = new Packet00Login(this.connectedPlayers.get(getPlayerMPIndex(p)).getUsername(), this.connectedPlayers.get(getPlayerMPIndex(p)).getX(), this.connectedPlayers.get(getPlayerMPIndex(p)).getY());
 					sendData(packet1.getData(), player.ipAddress, player.port);
 					
-					Packet05Capacity packet2 = new Packet05Capacity(this.game.m.currentLevel.multiplayerCapacity);
+					Packet05Capacity packet2 = new Packet05Capacity(Window.createGamePlayers);
 					sendData(packet2.getData(), player.ipAddress, player.port);
 					
 

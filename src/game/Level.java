@@ -36,7 +36,7 @@ public class Level extends Canvas {
 	private double time1=0,time2;
 	private AnimationStates currentAnimState;
 
-	public int multiplayerCapacity = 4;
+	public int multiplayerCapacity = 100;
 	
 	private static boolean levelStateChanged=false;
 

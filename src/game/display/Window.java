@@ -42,6 +42,7 @@ public class Window extends Canvas{
 	private static final long serialVersionUID = 1877720651231192133L;
 
 	public JFrame frame;
+	private static Game game;
 	public static JPanel mainMenu;
 	public static JLabel back,backOptions,backMultiplayer;
 	public static Dimension d = new Dimension(WIDTH,HEIGHT);
@@ -53,6 +54,7 @@ public class Window extends Canvas{
 	 * @param game
 	 */
 	public Window(Game game) {
+		this.game = game;
 		frame = new JFrame(TITLE);
 		Container c = frame.getContentPane();
 		c.setPreferredSize(d);
@@ -455,6 +457,7 @@ public class Window extends Canvas{
 					errorPanel.setVisible(true);
 				} else {
 					createGamePlayers = processInput(playersField.getText());
+					
 					Game.socketServer = new GameServer(game);
 
 					Game.socketServer.start();
@@ -471,6 +474,7 @@ public class Window extends Canvas{
 			    	game.setGameState(GameState.Playing);
 			    	game.setGameMode(GameMode.MULTIPLAYER);
 			    	game.start();
+			    	game.m.currentLevel.setMultiplayerCapacity(createGamePlayers);
 				}
 			}
 
