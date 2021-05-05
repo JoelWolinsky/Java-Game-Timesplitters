@@ -9,7 +9,7 @@ public abstract class Packet {
 	 * The types of packets that are sent over the server.
 	 */
 	public static enum PacketTypes {
-		INVALID(-1), LOGIN(00), ITEM(01), MOVE(02), MOVEWALL(03), STARTGAME(04);
+		INVALID(-1), LOGIN(00), ITEM(01), MOVE(02), MOVEWALL(03), STARTGAME(04), CAPACITY(05);
 		
 		private int packetId;
 		

@@ -20,6 +20,7 @@ import game.network.packets.Packet01Item;
 import game.network.packets.Packet02Move;
 import game.network.packets.Packet03MoveWall;
 import game.network.packets.Packet04StartGame;
+import game.network.packets.Packet05Capacity;
 
 import static game.Level.*;
 
@@ -102,6 +103,10 @@ public class GameClient extends Thread {
 				case STARTGAME:
 					packet = new Packet04StartGame();
 					handleStartGame((Packet04StartGame)packet);
+					break;
+				case CAPACITY:
+					packet = new Packet05Capacity(data);
+					handleCapacity((Packet05Capacity) packet);
 				}
 			}
 		} catch (Exception e) {
@@ -110,6 +115,15 @@ public class GameClient extends Thread {
 		}
 	}
 
+	private void handleCapacity(Packet05Capacity packet) {
+		this.game.m.currentLevel.setMultiplayerCapacity(packet.getCapacity());
+		
+	}
+	
+	/**
+	 * Handles the handleItem packet.
+	 * @param packet The handleItem packet.
+	 */
 	private void handleItem(Packet01Item packet) {
 		System.out.println("client add item");
 		System.out.println(packet.getX()+","+packet.getY());

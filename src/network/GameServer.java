@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import game.Game;
+import game.Level;
 import game.entities.players.PlayerMP;
 import game.network.packets.Packet;
 import game.network.packets.Packet.PacketTypes;
@@ -16,6 +17,7 @@ import game.network.packets.Packet01Item;
 import game.network.packets.Packet02Move;
 import game.network.packets.Packet03MoveWall;
 import game.network.packets.Packet04StartGame;
+import game.network.packets.Packet05Capacity;
 
 public class GameServer extends Thread {
 	private DatagramSocket socket;
@@ -91,6 +93,10 @@ public class GameServer extends Thread {
 			case STARTGAME:
 				packet = new Packet04StartGame();
 				this.handleStartGame((Packet04StartGame)packet);
+				break;
+			case CAPACITY:
+				packet = new Packet05Capacity(data);
+				handleCapacity((Packet05Capacity) packet);
 			}
 		}catch (Exception e) {
 				System.out.println("Exception at GameServer.parsePacket");
@@ -99,7 +105,22 @@ public class GameServer extends Thread {
 		}
 
 	
-
+	/**
+	 * Handles the handleCapacity packet.
+	 * @param packet The handleCapacity packet.
+	 */
+	private void handleCapacity(Packet05Capacity packet) {
+		try {
+			packet.writeData(this);
+		} catch (Exception e) {
+			System.out.println("Exception in GameServer.handleCapacity");
+			e.printStackTrace();
+		}	
+	}
+	/**
+	 * Handles the handleItem packet.
+	 * @param packet The handleItem packet.
+	 */
 	private void handleItem(Packet01Item packet) {
 		try {
 			packet.writeData(this);
@@ -150,6 +171,9 @@ public class GameServer extends Thread {
 					
 					Packet00Login packet1 = new Packet00Login(this.connectedPlayers.get(getPlayerMPIndex(p)).getUsername(), this.connectedPlayers.get(getPlayerMPIndex(p)).getX(), this.connectedPlayers.get(getPlayerMPIndex(p)).getY());
 					sendData(packet1.getData(), player.ipAddress, player.port);
+					
+					Packet05Capacity packet2 = new Packet05Capacity(this.game.m.currentLevel.multiplayerCapacity);
+					sendData(packet2.getData(), player.ipAddress, player.port);
 					
 
 				}

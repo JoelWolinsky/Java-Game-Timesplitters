@@ -12,7 +12,7 @@ EventDamageZone 50 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 
 
 !EventDamageZone 180 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
-!EventDamageZone 260 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
+EventDamageZone 260 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
 EventDamageZone 380 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
@@ -28,9 +28,9 @@ EventDamageZone 20 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 
 
 !EventDamageZone 150 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
-!EventDamageZone 210 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
+EventDamageZone 210 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
-MindlessAISpawner 280 260 1000 1000 3 chicken
+MindlessAISpawner 280 260 1000 1000 4 chicken
 
 EventDamageZone 350 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
