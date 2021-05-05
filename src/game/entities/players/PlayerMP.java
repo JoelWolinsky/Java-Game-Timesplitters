@@ -2,7 +2,6 @@ package game.entities.players;
 
 import java.net.InetAddress;
 
-import game.entities.players.Player;
 import game.input.KeyInput;
 
 public class PlayerMP extends Player {

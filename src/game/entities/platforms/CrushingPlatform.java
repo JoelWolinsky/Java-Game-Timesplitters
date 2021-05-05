@@ -2,7 +2,6 @@ package game.entities.platforms;
 
 import game.attributes.CollidingObject;
 import game.attributes.SolidCollider;
-import game.entities.players.AIPlayer;
 import game.entities.players.Player;
 
 import static game.Level.getPlayers;
@@ -33,6 +32,10 @@ public class CrushingPlatform extends Platform implements SolidCollider{
 		SolidCollider.addSolidCollider(this);
 	}
 	
+	/**
+	 * Checks for players colliding with the platform, and kills them.
+	 * Moves the platform in the correct direction.
+	 */
 	public void tick() {
 
 		for (Player p: getPlayers()){
@@ -81,6 +84,11 @@ public class CrushingPlatform extends Platform implements SolidCollider{
 
 	}
 
+	/**
+	 * Checks if a player is within the interaction area, which is determined by the crushing side.
+	 * @param player The player object which is being checked
+	 * @return A boolean representing whether the given player is within the interaction radius
+	 */
 	public boolean getInteraction(Player player){
 		switch (crushingSide){
 			case "BOTTOM":
@@ -96,22 +104,6 @@ public class CrushingPlatform extends Platform implements SolidCollider{
 				return false;
 		}
 
-	}
-
-	public boolean getInteraction(AIPlayer player){
-		switch (crushingSide){
-			case "BOTTOM":
-				return ((int)this.x<(int)player.getX()+player.getWidth() && (int)player.getX()<this.x+this.width && (int)this.y+this.height<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)this.y+this.height);
-			case "TOP":
-				return ((int)this.x<(int)player.getX()+player.getWidth() && (int)player.getX()<this.x+this.width && (int)this.y<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)this.y);
-			case "LEFT":
-				return ((int)this.x<(int)player.getX()+player.getWidth() && (int)player.getX()<this.x && (int)this.y<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)this.y+this.height);
-			case "RIGHT":
-				return ((int)this.x + this.width<(int)player.getX()+player.getWidth() && (int)player.getX()<this.x+this.width && (int)this.y<(int)player.getY()+player.getHeight() && (int)player.getY() <(int)this.y+this.height);
-
-			default:
-				return false;
-		}
 	}
 
 	public float getVelocity() {

@@ -1,8 +1,5 @@
 package game;
 
-import game.attributes.CollidingObject;
-import game.attributes.GravityObject;
-import game.attributes.SolidCollider;
 import game.entities.GameObject;
 import game.entities.players.Player;
 
@@ -11,7 +8,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.LinkedList;
 
 public class Item extends GameObject {
 	private boolean visible = true;

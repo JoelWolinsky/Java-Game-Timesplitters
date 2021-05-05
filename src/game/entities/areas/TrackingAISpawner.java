@@ -3,7 +3,6 @@ package game.entities.areas;
 import game.Level;
 import game.entities.GameObject;
 import game.entities.players.Player;
-import game.graphics.AnimationStates;
 import game.graphics.LevelState;
 
 import java.awt.*;

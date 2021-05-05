@@ -1,7 +1,5 @@
 package game.entities.players;
 
-import java.util.UUID;
-
 import game.Effect;
 import game.attributes.SolidCollider;
 import game.entities.areas.RespawnPoint;

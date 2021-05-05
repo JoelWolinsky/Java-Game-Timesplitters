@@ -1,8 +1,5 @@
 package game.network.packets;
 
-import java.util.Arrays;
-
-import game.graphics.AnimationStates;
 import network.GameClient;
 import network.GameServer;
 

@@ -4,10 +4,7 @@ import game.entities.GameObject;
 import game.entities.players.Player;
 import game.graphics.LevelState;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static game.Level.*;

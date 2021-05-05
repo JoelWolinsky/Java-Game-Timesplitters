@@ -1,8 +1,6 @@
 package game.input;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Arrays;
-import java.util.LinkedList;
 
 public class KeyInput extends KeyAdapter{
 	

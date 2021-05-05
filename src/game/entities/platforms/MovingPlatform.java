@@ -31,6 +31,9 @@ public class MovingPlatform extends Platform implements SolidCollider{
 		return this.velocity;
 	}
 	
+	/**
+	 * This calculates the direction the platform should move, and moves it at the correct velocity in that direction.
+	 */
 	public void tick() {
 		if(this.xAxis) {
 				this.x += this.velocity;

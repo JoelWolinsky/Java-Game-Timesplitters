@@ -1,6 +1,5 @@
 package game.entities.areas;
 import game.entities.players.Player;
-import game.entities.players.AIPlayer;
 
 import java.awt.*;
 

@@ -1,1 +1,11 @@
-unnamed package
+game
+game.attributes
+game.display
+game.entities
+game.entities.areas
+game.entities.platforms
+game.entities.players
+game.graphics
+game.input
+game.network.packets
+network

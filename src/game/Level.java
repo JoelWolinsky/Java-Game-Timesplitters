@@ -16,6 +16,8 @@ import static game.Game.getGameMode;
 
 public class Level extends Canvas {
 
+	private static final long serialVersionUID = 9146375162271419424L;
+
 	private static LevelState levelState = LevelState.Loading;
 
 	private static LinkedList<GameObject> entities = new LinkedList<>();

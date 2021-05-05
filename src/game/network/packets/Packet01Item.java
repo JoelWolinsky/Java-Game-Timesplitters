@@ -1,6 +1,5 @@
 package game.network.packets;
 
-import game.entities.players.Player;
 import network.GameClient;
 import network.GameServer;
 

@@ -50,7 +50,7 @@ public class Game extends Canvas implements Runnable{
 	 * Called every frame, this tells certain lists, objects, or entities to call their own tick function.
 	 */
 	private void tick() {
-		if(this.gameState == GameState.Playing) {
+		if(Game.gameState == GameState.Playing) {
 			m.getCurrentLevel().tick();
 			camera.tick();
 		}
@@ -71,7 +71,7 @@ public class Game extends Canvas implements Runnable{
 		//Rendering code happens here
 
 
-		if(this.gameState == GameState.Playing) {
+		if(Game.gameState == GameState.Playing) {
 			g.setColor(Color.black);
 			g.fillRect(0, 0, Window.WIDTH, Window.HEIGHT);
 

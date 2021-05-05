@@ -13,16 +13,9 @@ import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.BindException;
 import java.net.DatagramSocket;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
 import java.net.SocketException;
-import java.net.SocketTimeoutException;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,12 +27,9 @@ import game.Game;
 import game.GameState;
 import game.Launcher;
 import game.SoundHandler;
-import game.entities.GameObject;
 import game.graphics.GameMode;
 import network.GameClient;
 import network.GameServer;
-
-import static game.Level.getGameObjects;
 
 public class Window extends Canvas{
 

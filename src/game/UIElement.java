@@ -1,8 +1,6 @@
 package game;
 
 import game.entities.GameObject;
-import game.entities.players.Player;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;

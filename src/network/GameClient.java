@@ -10,7 +10,6 @@ import java.net.UnknownHostException;
 
 import game.Game;
 import game.Level;
-import game.UIController;
 import game.entities.areas.AddedItem;
 import game.entities.players.PlayerMP;
 import game.graphics.LevelState;

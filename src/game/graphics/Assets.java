@@ -39,6 +39,11 @@ public class Assets {
 		parseAssets();
 	}
 
+	/**
+	 * This extracts all the images for all the animations from a spritesheet
+	 * @param sheet The spritesheet object for the asset
+	 * @param name The name of the asset
+	 */
 	public void addAnimationFromSpritesheet(SpriteSheet sheet, String name)
 	{
 		player_idle = new ArrayList<BufferedImage>();
@@ -129,6 +134,11 @@ public class Assets {
 		assets.add(as);
 	}
 
+	/**
+	 * Gets the first idle frame for a given asset
+	 * @param code The name of the asset
+	 * @return The first idle frame for the asset
+	 */
 	public static BufferedImage getImageForReference(String code)
 	{
 		for (Asset a : assets)
@@ -137,7 +147,9 @@ public class Assets {
 		return null;
 	}
 
-
+	/**
+	 * Parses ./src/game/assets and extracts the animations for each asset
+	 */
 	public void parseAssets(){
 
 
@@ -192,6 +204,11 @@ public class Assets {
 
 	}
 
+	/**
+	 * Gets all the animations for a given asset
+	 * @param name The name of the asset
+	 * @return All of the animations for all of the states of the given asset
+	 */
 	public static HashMap<AnimationStates,Animation> getAnimations(String name){
 
 		for (Asset a : assets)
@@ -203,6 +220,11 @@ public class Assets {
 		return null;
 	}
 
+	/**
+	 * Generates the urls for asset images extracted from the assets file
+	 * @param index An integer representing for which parsed asset line the image url is being created
+	 * @return A list of the image urls for the given line
+	 */
 	public String[] createURLS(int index)
 	{
 		//prepares a string array with the urls
@@ -215,6 +237,11 @@ public class Assets {
 		return arr;
 	}
 
+	/**
+	 * Horizontally flips every given image
+	 * @param imagesToFlip A list of images
+	 * @return A list of images that have been horizontally flipped
+	 */
 	public ArrayList<BufferedImage> flipHorizontally(ArrayList<BufferedImage> imagesToFlip)
 	{
 

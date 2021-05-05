@@ -1,7 +1,6 @@
 package game;
 
 import game.entities.GameObject;
-import game.entities.players.Player;
 import game.entities.areas.*;
 import game.entities.platforms.CrushingPlatform;
 import game.entities.platforms.MovingPlatform;
@@ -9,18 +8,14 @@ import game.entities.platforms.Platform;
 import game.entities.platforms.TimerPlatform;
 import game.graphics.GameMode;
 import game.graphics.Image;
-import game.graphics.LevelState;
 import game.graphics.MapMode;
 
-import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
-
-import static game.Level.getLevelState;
 
 public class Map {
 

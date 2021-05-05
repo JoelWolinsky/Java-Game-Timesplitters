@@ -17,6 +17,9 @@ public class TimerPlatform extends Platform {
 		this.startOffset=startOffset;
 	}
 	
+	/**
+	 * This uses a timer variable to calculate if the timer platform is currently active, and sets the collider appropriately
+	 */
 	public void tick() {
 
 		if (i<startOffset)

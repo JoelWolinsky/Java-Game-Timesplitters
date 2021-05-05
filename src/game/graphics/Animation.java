@@ -9,7 +9,7 @@ public class Animation {
 	
 	/**
 	 * @param ticksPerFrame The number of ticks before the next frame is shown, allows you to control the speed of animation
-	 * @param urls A sequence of urls of the frames of animation, in order
+	 * @param animList A list of images that make up the animation
 	 */
 	public Animation(int ticksPerFrame, ArrayList<BufferedImage> animList) {
 		frames = new ArrayList<BufferedImage>();
@@ -18,6 +18,10 @@ public class Animation {
 
 	}
 
+	/**
+	 * @param ticksPerFrame The number of ticks before the next frame is shown, allows you to control the speed of animation
+	 * @param urls A sequence of urls of the frames of animation, in order
+	 */
 	public Animation(int ticksPerFrame, String... urls) {
 
 		frames = new ArrayList<BufferedImage>();

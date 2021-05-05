@@ -6,7 +6,6 @@ import java.util.*;
 import game.Effect;
 import game.Game;
 import game.Item;
-import game.Level;
 import game.SoundHandler;
 import game.attributes.CollidingObject;
 import game.attributes.GravityObject;
@@ -28,10 +27,6 @@ import static game.InventoryBarController.selectFrame;
 import static game.Level.getLevelState;
 import static game.graphics.Assets.getAnimations;
 import static game.Level.getToBeAdded;
-
-import static game.Level.*;
-import static game.Game.*;
-import static game.display.Window.*;
 
 public class Player extends GameObject implements SolidCollider, GravityObject {
 
@@ -119,6 +114,10 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     	this.username = username;
     }
 
+    /**
+     * Called every frame, and is respondible for player's movement, calling items when used,
+     * and handling collision with platforms, traps, enemies, and the wall of death
+     */
     public void tick() {
         //Gather all collisions
     	if (this == Game.player || this instanceof AIPlayer) {
@@ -517,6 +516,10 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         JUMP_GRAVITY = jumpGravity;
     }
 
+    /**
+     * Sets run speed and jump height to default levels if there are no abilities that effect them
+     * @param z The locker game object to be checked
+     */
     public void normal(GameObject z) {
         if (this.locker == z) {
             RUN_SPEED = 3.5f;
@@ -524,6 +527,9 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         }
     }
 
+    /**
+     * @param code A string specifying the type of effect to be removed
+     */
     public void removeEffect(String code) {
 
         switch (code) {
@@ -545,6 +551,9 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         }
     }
 
+    /**
+     * When a player dies, this returns them to their previous checkpoint, and sets them as being invinvible for a short period of time
+     */
     public void respawn() {
         if (ghostMode == false && immunity == false && invincible == false) {
             this.x = respawnX;
@@ -690,6 +699,9 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         inventoryIndex++;
     }
 
+    /**
+     * @return The index of the first available space in the inventory, or -1 if the inventory is full
+     */
     public int firstFreeSpace() {
 
         for (int i = 0; i < INVENTORY_SIZE; i++) {
@@ -724,6 +736,12 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         locker = null;
     }
 
+    /**
+     * Responsible for displaying the current animation frame
+     * @param g The graphics object onto which the image will be rendered
+     * @param x The x-position of the player
+     * @param y The y-position of the player
+     */
     public void renderAnim(Graphics g, int x, int y) {
     	if(ghostMode == true) {
     		if (this.currentAnimation == null) {
@@ -772,6 +790,13 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         return objectModel;
     }
 
+    /**
+     * Checks if a movement will cause a collision with a given object, taking into account immunity and ghost mode
+     * @param o The object for which you want to test collisions
+     * @param vel The velocity of the movement
+     * @param xAxis A boolean indicating whether the movement is happening on the x-axis or not
+     * @return A boolean representing if a given movement will cause collision with the given object
+     */
     public boolean collide(CollidingObject o, double vel, boolean xAxis)
     {
         if (ghostMode || invincibleMove)

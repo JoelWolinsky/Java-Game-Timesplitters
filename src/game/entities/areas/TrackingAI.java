@@ -1,11 +1,8 @@
 package game.entities.areas;
 
 import game.entities.players.Player;
-import game.graphics.Animation;
 import game.graphics.AnimationStates;
 
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.util.LinkedList;
 
 import static game.Level.getPlayers;
