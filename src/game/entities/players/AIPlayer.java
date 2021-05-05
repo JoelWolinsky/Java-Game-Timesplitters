@@ -109,7 +109,7 @@ public class AIPlayer extends Player {
 					// Get the penultimate RespawnPoint that humanPlayer visited
 					penultimateRespawnPoint = humanPlayer.getRespawnPoints().get(humanPlayer.getRespawnPoints().size()-2);
 
-					if (this.humanPlayer.getX() - penultimateRespawnPoint.getX() > 350) {
+					if (this.humanPlayer.getX() - penultimateRespawnPoint.getX() > 400) {
 						this.invincibleMove = true;
 					}
 				}
@@ -119,14 +119,10 @@ public class AIPlayer extends Player {
 					// to make smooth transition on minimap
 					if (this.x < penultimateRespawnPoint.getX()) {
 						this.x += 3;
+						this.y = penultimateRespawnPoint.getY()-20;
 					} else { 
 						this.invincible = false; 
 						this.invincibleMove = false; 
-					}
-
-					// so that it only teleports once, and doesn't keep getting sent back
-					if (!this.getRespawnPoints().contains(penultimateRespawnPoint)) {
-						this.y = penultimateRespawnPoint.getY()-20;
 					} 	
 				}
 			}	
