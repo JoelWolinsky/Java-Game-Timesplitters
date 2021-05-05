@@ -82,7 +82,6 @@ public class GameClient extends Thread {
 				case INVALID:
 					break;
 				case LOGIN:
-					System.out.println("Client handle login");
 					packet = new Packet00Login(data);
 					handleLogin((Packet00Login) packet, address, port);
 					break;
@@ -91,12 +90,10 @@ public class GameClient extends Thread {
 					this.handleItem((Packet01Item)packet);
 					break;
 				case MOVE:
-					//System.out.println("client handle move");
 					packet = new Packet02Move(data);
 					handleMove((Packet02Move)packet);
 					break;
 				case MOVEWALL:
-					//System.out.println("receive wall packet");
 					packet = new Packet03MoveWall(data);
 					handleMove((Packet03MoveWall)packet);
 					break;
@@ -114,7 +111,11 @@ public class GameClient extends Thread {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/**
+	 * Handles the handleCapacity packet.
+	 * @param packet The handleCapacity packet.
+	 */
 	private void handleCapacity(Packet05Capacity packet) {
 		this.game.m.currentLevel.setMultiplayerCapacity(packet.getCapacity());
 		
@@ -125,8 +126,6 @@ public class GameClient extends Thread {
 	 * @param packet The handleItem packet.
 	 */
 	private void handleItem(Packet01Item packet) {
-		System.out.println("client add item");
-		System.out.println(packet.getX()+","+packet.getY());
 		Level.getToBeAdded().add(new AddedItem(packet.getX(),packet.getY(), 0, 0, Level.getSpecificPlayerMP(packet.getUsername()), packet.getEffect()));
 	}
 
@@ -135,7 +134,6 @@ public class GameClient extends Thread {
 	 * @param packet The StartGame packet.
 	 */
 	private void handleStartGame(Packet04StartGame packet) {
-		System.out.println("handleStartGame");
 		setLevelState(LevelState.InProgress);
 
 	}
@@ -196,7 +194,6 @@ public class GameClient extends Thread {
 		System.out.println("[" + address.getHostAddress() + ":" + port + "] " + (packet).getUsername() + " has joined the game...");
 		PlayerMP player = new PlayerMP (0, 350, address, port,"player2");
 		player.setUsername((packet).getUsername());
-
 		Level.addToAddQueue(player);
 	}
 

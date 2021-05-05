@@ -174,7 +174,6 @@ public class Game extends Canvas implements Runnable{
 
 				Packet00Login loginPacket = new Packet00Login(player.getUsername(), 0, 350);
 				if (socketServer != null) {
-					//socketServer.addConnection((PlayerMP) player, loginPacket);
 					loginPacket.writeData(socketServer);
 				}
 				loginPacket.writeData(socketClient);
@@ -187,7 +186,6 @@ public class Game extends Canvas implements Runnable{
 				break;
 			case SINGLEPLAYER:
 				player = new Player(0, 350, keyInput, 0 ,0,"player1");
-				Level.getToBeAdded().add(new AddedItem(-100,355, 0, 0, null,"fart"));
 				break;
 		}
 

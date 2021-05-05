@@ -67,7 +67,6 @@ public class GameServer extends Thread {
 		try {
 			String message = new String(data).trim();
 			PacketTypes type = Packet.lookupPacket(message.substring(0,2));
-	
 			Packet packet = null;
 			switch (type) {
 			default:
@@ -150,13 +149,10 @@ public class GameServer extends Thread {
 	 * @param packet The Login packet received.
 	 */
 	public void addConnection(PlayerMP player, Packet00Login packet) {
-		System.out.println("Ser add con");
-		System.out.println(packet.getUsername());
 		try {
 			boolean alreadyConnected = false;
 			// For each player in the game
 			for (String p : this.playerIDs) {
-				System.out.println(this.connectedPlayers.size());
 				// If player already in game
 				if(packet.getUsername().equalsIgnoreCase(p)) {
 					if(this.connectedPlayers.get(getPlayerMPIndex(p)).ipAddress == null) {
@@ -167,7 +163,6 @@ public class GameServer extends Thread {
 					}
 					alreadyConnected = true;
 				} else {
-					System.out.print("Adding and send \n");
 					sendData(packet.getData(),this.connectedPlayers.get(getPlayerMPIndex(p)).ipAddress, this.connectedPlayers.get(getPlayerMPIndex(p)).port);
 					
 					Packet00Login packet1 = new Packet00Login(this.connectedPlayers.get(getPlayerMPIndex(p)).getUsername(), this.connectedPlayers.get(getPlayerMPIndex(p)).getX(), this.connectedPlayers.get(getPlayerMPIndex(p)).getY());
@@ -179,14 +174,10 @@ public class GameServer extends Thread {
 
 				}
 			}
-			System.out.println("already connected = " + alreadyConnected);
 			if (!alreadyConnected) {
 	
 	            this.connectedPlayers.add(player);
-	            this.playerIDs.add(packet.getUsername());
-	            System.out.println("adding to ids " + packet.getUsername());
-	            
-	            System.out.println(this.connectedPlayers.size());
+	            this.playerIDs.add(packet.getUsername());       
 	        }
 		} catch (Exception e) {
 			System.out.println("Exception in GameServer.addConnection");
@@ -226,7 +217,6 @@ public class GameServer extends Thread {
 	public void sendData(byte[] data, InetAddress ipAddress, int port) {
 		if(port != -1) {
 			DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, port);
-
 			try {
 				this.socket.send(packet);
 			} catch (IOException e) {
