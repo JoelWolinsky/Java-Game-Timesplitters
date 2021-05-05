@@ -6,6 +6,7 @@ import java.util.*;
 
 import game.display.Window;
 import game.entities.GameObject;
+import game.entities.areas.AddedItem;
 import game.entities.players.Player;
 import game.entities.players.AIPlayer;
 import game.graphics.Assets;
@@ -186,6 +187,7 @@ public class Game extends Canvas implements Runnable{
 				break;
 			case SINGLEPLAYER:
 				player = new Player(0, 350, keyInput, 0 ,0,"player1");
+				Level.getToBeAdded().add(new AddedItem(-100,355, 0, 0, null,"fart"));
 				break;
 		}
 

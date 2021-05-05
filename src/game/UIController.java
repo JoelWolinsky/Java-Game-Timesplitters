@@ -68,6 +68,7 @@ public class UIController extends GameObject {
 	public void tick() {
 		if (getLevelState()==LevelState.InProgress) {
 			announcerMessage.setVisible(false);
+			announcer.setVisible(false);
 		} else {
 
 		if (announcer.isVisible())
@@ -94,7 +95,7 @@ public class UIController extends GameObject {
 
 			announcer.setImg(UIController.loading);
 		}
-	}
+	
 
 
 		if (startCountdown) {
@@ -160,7 +161,7 @@ public class UIController extends GameObject {
 		}
 
 
-
+		}
 	}
 
 	public void render(Graphics g, float xOffset, float yOffset) {

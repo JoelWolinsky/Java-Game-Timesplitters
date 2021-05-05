@@ -12,7 +12,7 @@ EventDamageZone 50 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 
 
 !EventDamageZone 180 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
-!EventDamageZone 260 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
+EventDamageZone 260 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
 EventDamageZone 380 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
@@ -27,7 +27,7 @@ EventDamageZone 20 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 
 
 !EventDamageZone 150 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
-!EventDamageZone 210 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
+EventDamageZone 210 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 
 EventDamageZone 350 330 10 40 notice.png 0 0 true statue 2 -40 -40 2 97 60 -40 2 97
 

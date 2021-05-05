@@ -91,8 +91,8 @@ Chunk 1 N segmentA14p1.png
 
 ----FIRST JUMP---
 Projectile 20 -500 0 10 1700 80 0 20 nopicture.png bookshelf
-Projectile 20 -500 0 5.0 1900 80 0 60 nopicture.png books
-Projectile 20 -500 0 5.0 2000 80 0 100 nopicture.png books
+Projectile 20 -500 0 7.0 1900 80 0 60 nopicture.png books
+Projectile 20 -500 0 7.0 2000 80 0 100 nopicture.png books
 
 ---diagonal ones---
 
@@ -191,13 +191,13 @@ Revert
 Chunk 1 N segmentA14p1.png
 
 
-Projectile 0 -600 0 5.0 1800 60 0 0 nopicture.png books
-Projectile 0 -600 0 5.0 1700 60 0 40 nopicture.png books
-Projectile 0 1000 0 5.0 1600 60 0 100 nopicture.png books
+Projectile 0 -600 0 7.0 1800 60 0 0 nopicture.png books
+Projectile 0 -600 0 7.0 1700 60 0 40 nopicture.png books
+Projectile 0 1000 0 7.0 1600 60 0 100 nopicture.png books
 
-Projectile 220 -600 0 5.0 1600 0 20 0 nopicture.png books
+Projectile 220 -600 0 7.0 1600 0 20 0 nopicture.png books
 Projectile 220 -600 0 10 1700 0 20 30 nopicture.png bookshelf
-Projectile 220 1000 0 5.0 1800 0 0 90 nopicture.png books
+Projectile 220 1000 0 7.0 1800 0 0 90 nopicture.png books
 
 Revert
 

@@ -46,15 +46,15 @@ Waypoint 352 310 flag3.png R N 10
 Projectile 350 170 -2 0 700 0 350 0 fog1.png ghost
 Projectile 350 170 -2 0 700 0 350 80 fog1.png ghost
 !Projectile 350 170 -1 0 700 0 350 40 fog1.png ghost
-!Projectile 350 170 -2 0 700 0 350 120 fog1.png ghost
+Projectile 350 170 -2 0 700 0 350 120 fog1.png ghost
 
 Projectile 350 170 -1 0 700 0 350 160 fog1.png ghost
-Projectile 350 170 -3 0 700 0 350 200 fog1.png ghost
+!Projectile 350 170 -3 0 700 0 350 200 fog1.png ghost
 
-!Projectile 350 350 -2 0 700 0 520 20 fog1.png ghost
-!Projectile 350 350 -2 0 700 0 520 100 fog1.png ghost
-Projectile 350 350 -1 0 700 0 520 60 fog1.png ghost
+Projectile 350 350 -2 0 700 0 520 20 fog1.png ghost
+Projectile 350 350 -2 0 700 0 520 100 fog1.png ghost
+!Projectile 350 350 -1 0 700 0 520 60 fog1.png ghost
 Projectile 350 350 -2 0 700 0 520 140 fog1.png ghost
 
-!Projectile 350 350 -3 0 700 0 520 180 fog1.png ghost
+Projectile 350 350 -3 0 700 0 520 180 fog1.png ghost
 !Projectile 350 350 -1 0 700 0 520 220 fog1.png ghost

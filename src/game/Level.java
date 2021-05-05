@@ -33,6 +33,9 @@ public class Level extends Canvas {
 	public static void setLevelState (LevelState levelStatee) {levelState = levelStatee; levelStateChanged=true;}
 	private double time1=0,time2;
 	private AnimationStates currentAnimState;
+
+	public int multiplayerCapacity = 4;
+	
 	private static boolean levelStateChanged=false;
 
 	public static boolean getLevelStateChanged() {
@@ -211,7 +214,7 @@ public class Level extends Canvas {
 					setLevelState(LevelState.Starting);
 				break;
 			case MULTIPLAYER:
-				if (getPlayers().size()==2)
+				if (getPlayers().size()==multiplayerCapacity)
 				{
 					if(time1==0)
 						automaticallySetTime1();
@@ -310,6 +313,10 @@ public class Level extends Canvas {
 				return blip;
 
 		return null;
+	}
+	public void setMultiplayerCapacity(int capacity) {
+		this.multiplayerCapacity = capacity;
+		
 	}
 
 
