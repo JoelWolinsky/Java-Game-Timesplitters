@@ -32,7 +32,6 @@ public class GameEndingObject extends AnimArea {
 					pp.setVelX(0);
 					pp.setVelY(0);
 					pp.setCanMove(false);
-					pp.setCurrentAnimState(AnimationStates.IDLE);
 				}
 
 				for (Blip b: getAllBlips())

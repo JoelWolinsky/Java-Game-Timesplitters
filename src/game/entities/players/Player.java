@@ -91,7 +91,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     
     public Boolean winner = false;
 
-
     public Player(float x, float y, KeyInput input, int width, int height,String url) {
         super(x, y, 2, width, height);
 
@@ -743,7 +742,8 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
      * @param y The y-position of the player
      */
     public void renderAnim(Graphics g, int x, int y) {
-    	if(ghostMode == true) {
+
+    	if(ghostMode) {
     		if (this.currentAnimation == null) {
     			this.setAnimations(getAnimations("GHOST_FORM"));
 			}
@@ -751,7 +751,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
     	
 	        if (currentAnimState != null) {
 	        	if(getLevelState() == LevelState.Finished && this.winner) {
-	        		this.currentAnimState = AnimationStates.SWAG;
+	        	    this.setCurrentAnimState(AnimationStates.SWAG);
 	        	} 
 
 	            currentAnimation = animations.get(currentAnimState);

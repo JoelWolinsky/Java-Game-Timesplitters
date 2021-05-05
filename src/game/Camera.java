@@ -12,7 +12,7 @@ public class Camera {
 	/**
 	 * The game object on which the camera will be centered.
 	 */
-	private GameObject target = null;
+	private static GameObject target = null;
 	
 	public Camera() {
 		Camera.xOffset = 0;
@@ -69,7 +69,7 @@ public class Camera {
 		return yOffset;
 	}
 
-	public GameObject getTarget() {
+	public static GameObject getTarget() {
 		return target;
 	}
 }

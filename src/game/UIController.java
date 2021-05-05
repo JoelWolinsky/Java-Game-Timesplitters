@@ -2,6 +2,7 @@ package game;
 
 import game.display.Window;
 import game.entities.GameObject;
+import game.entities.players.Player;
 import game.graphics.LevelState;
 import game.network.packets.Packet04StartGame;
 
@@ -22,7 +23,7 @@ public class UIController extends GameObject {
 	private int timer=0;
 	private boolean startCountdown=false;
 	private boolean endGameCelebration=false;
-	UIElement announcer,announcerMessage;
+	private UIElement announcer,announcerMessage,spectating, exit;
 	private double time1=0,time2;
 	private static BufferedImage loading, starting, winner, close;
 
@@ -57,9 +58,19 @@ public class UIController extends GameObject {
 		announcerMessage.setVisible(false);
 		announcerMessage.setY(announcerMessage.getY()-165);
 
+		spectating = new UIElement(x, y-200, 0, 0, "./img/spectating.png");
+		spectating.centerHorizontally();
+		spectating.centerVertically();
+		spectating.setVisible(false);
+		spectating.setY(spectating.getY()-165);
+
+		exit = new UIElement(this.x + 550 + 0 , this.y + 420, 0 , 0, "./img/exit.png");
+		exit.setVisible(false);
+
 		getGameObjects().add(announcer);
 		getGameObjects().add(announcerMessage);
-
+		getGameObjects().add(spectating);
+		getGameObjects().add(exit);
 	}
 
 	/**
@@ -68,6 +79,15 @@ public class UIController extends GameObject {
 	public void tick() {
 		if (getLevelState()==LevelState.InProgress) {
 			announcerMessage.setVisible(false);
+
+			if (((Player)Camera.getTarget()).isGhostMode()) {
+				if (!spectating.isVisible())
+				spectating.setVisible(true);
+
+				if (!exit.isVisible())
+					exit.setVisible(true);
+			}
+
 		} else {
 
 			if (announcer.isVisible()) {
