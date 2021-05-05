@@ -44,7 +44,7 @@ public class Window extends Canvas{
 	public JFrame frame;
 	private static Game game;
 	public static JPanel mainMenu;
-	public static JLabel back,backOptions,backMultiplayer;
+	public static JLabel back,backOptions,backMultiplayer,backControls;
 	public static Dimension d = new Dimension(WIDTH,HEIGHT);
 	
 	public static int createGamePlayers;
@@ -135,10 +135,10 @@ public class Window extends Canvas{
 		((FlowLayout)mainMenu.getLayout()).setVgap(panelHeight / 19);
 
 		JPanel optionButtonPanel = new JPanel(new FlowLayout());
-		optionButtonPanel.setBounds(WIDTH / 4, HEIGHT / 15, panelWidth, panelHeight * 2);
+		optionButtonPanel.setBounds(WIDTH / 4, HEIGHT / 18 - 8, panelWidth, panelHeight * 2 + 30);
 		optionButtonPanel.setOpaque(false);
 		optionButtonPanel.setVisible(false);
-		((FlowLayout)optionButtonPanel.getLayout()).setVgap(panelHeight / 8);
+		((FlowLayout)optionButtonPanel.getLayout()).setVgap(panelHeight / 10);
 
 		JPanel backButtonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		backButtonPanel.setBounds(WIDTH / 23, HEIGHT - (HEIGHT / 7), panelWidth, panelHeight / 4 + 20);
@@ -222,6 +222,12 @@ public class Window extends Canvas{
 	    backMultiplayer.setLayout(null);
 	    backMultiplayer.setBounds(0, 0, WIDTH, HEIGHT);
 	    backMultiplayer.setVisible(false);
+	    
+	    ImageIcon backgroundControls = new ImageIcon("./img/controls.png");
+	    backControls = new JLabel(backgroundControls);
+	    backControls.setLayout(null);
+	    backControls.setBounds(0, 0, WIDTH, HEIGHT);
+	    backControls.setVisible(false);
 
 		// Declaring buttons
 		JLabel singleplayerButton = new JLabel(button1Icon);
@@ -380,16 +386,23 @@ public class Window extends Canvas{
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				back.setVisible(true);
-				backButton.setIcon(BUTTON_2_INNER);
-				mainMenu.setVisible(true);
-		    	backButtonPanel.setVisible(false);
-		    	optionButtonPanel.setVisible(false);
-		    	multiplayerButtonPanel.setVisible(false);
-		    	backOptions.setVisible(false);
-		    	backMultiplayer.setVisible(false);
-		    	errorPanel.setVisible(false);
-		    	createGamePopupPanel.setVisible(false);
+				if (backControls.isVisible()) {
+					backControls.setVisible(false);
+					backOptions.setVisible(true);
+					optionButtonPanel.setVisible(true);
+				} else {
+					back.setVisible(true);
+					backButton.setIcon(BUTTON_2_INNER);
+					mainMenu.setVisible(true);
+			    	backButtonPanel.setVisible(false);
+			    	optionButtonPanel.setVisible(false);
+			    	multiplayerButtonPanel.setVisible(false);
+			    	backOptions.setVisible(false);
+			    	backMultiplayer.setVisible(false);
+			    	backControls.setVisible(false);
+			    	errorPanel.setVisible(false);
+			    	createGamePopupPanel.setVisible(false);
+				}
 			}
 
 			@Override
@@ -486,6 +499,40 @@ public class Window extends Canvas{
 			@Override
 			public void mouseExited(MouseEvent e) {
 				submitButton.setIcon(BUTTON_2_INNER);
+			}
+		});
+		
+		JLabel viewControlsButton = new JLabel(button3Icon);
+		viewControlsButton.setForeground(Color.black);
+		viewControlsButton.setFont(sizedFont);
+		viewControlsButton.setText("VIEW CONTROLS");
+		viewControlsButton.setHorizontalTextPosition(JLabel.CENTER);
+
+		viewControlsButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				viewControlsButton.setIcon(BUTTON_3_CLICKED_INNER);
+				SoundHandler.playSound("button1", 1f);
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				viewControlsButton.setIcon(BUTTON_3_HOVER_INNER);
+				back.setVisible(false);
+				backControls.setVisible(true);
+				backOptions.setVisible(false);
+				optionButtonPanel.setVisible(false);
+				mainMenu.setVisible(false);
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				viewControlsButton.setIcon(BUTTON_3_HOVER_INNER);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				viewControlsButton.setIcon(BUTTON_3_INNER);
 			}
 		});
 
@@ -840,6 +887,7 @@ public class Window extends Canvas{
 		optionButtonPanel.add(toggleMusicButton);
 		optionButtonPanel.add(toggleAmbienceButton);
 		optionButtonPanel.add(difficultyButton);
+		optionButtonPanel.add(viewControlsButton);
 		multiplayerButtonPanel.add(playVSComputerButton);
 		multiplayerButtonPanel.add(createGameButton);
 		multiplayerButtonPanel.add(joinGameButton);
@@ -857,6 +905,7 @@ public class Window extends Canvas{
 		c.add(back);
 		c.add(backOptions);
 		c.add(backMultiplayer);
+		c.add(backControls);
 
 		frame.add(game);
 		frame.pack();
