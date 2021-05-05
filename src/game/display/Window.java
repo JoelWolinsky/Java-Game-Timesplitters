@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import game.ConfigHandler.ConfigOption;
 import game.DifficultySettings;
@@ -44,6 +45,8 @@ public class Window extends Canvas{
 	public static JPanel mainMenu;
 	public static JLabel back,backOptions,backMultiplayer;
 	public static Dimension d = new Dimension(WIDTH,HEIGHT);
+	
+	public static int createGamePlayers;
 
 	/**
 	 * Sets up the window and UI elements and starts the game
@@ -165,7 +168,34 @@ public class Window extends Canvas{
 		errorPanelText.setFont(sizedFont);
 		errorPanelText.setHorizontalTextPosition(JLabel.CENTER);
 		errorPanelText.setForeground(Color.black);
+		
+		JPanel createGamePopupPanel = (new JPanel(new FlowLayout()) {
+			@Override
+			  protected void paintComponent(Graphics g) {
 
+			    super.paintComponent(g);
+			        g.drawImage(scaledErrorPanel, 0, 0, null);
+			}
+		});
+		
+		createGamePopupPanel.setBounds((WIDTH / 3) - 13, HEIGHT / 7, panelWidth - 80, panelHeight + 100);
+		createGamePopupPanel.setOpaque(false);
+		createGamePopupPanel.setVisible(false);
+		((FlowLayout)createGamePopupPanel.getLayout()).setVgap((panelHeight / 4) - 15);
+		
+		JLabel createGamePopupText = new JLabel();
+		createGamePopupText.setFont(sizedFont);
+		createGamePopupText.setHorizontalTextPosition(JLabel.CENTER);
+		createGamePopupText.setForeground(Color.black);
+		createGamePopupText.setText("<html><center><p style='margin-top:30'>Enter number<br><p style='margin-top:3'>of players:<br><p style='margin-top:3'></center></html>");
+
+		final JTextField playersField = new JTextField();
+		playersField.setFont(sizedFont);
+		playersField.setBackground(Color.DARK_GRAY);
+		playersField.setForeground(Color.white);
+		playersField.setHorizontalAlignment(JTextField.CENTER);
+		playersField.setPreferredSize(new Dimension(155,30));
+		
 		// Handling the main screen background images
 		ImageIcon backgroundMain = new ImageIcon("./img/backgroundMain.gif");
 	    Image temp = backgroundMain.getImage().getScaledInstance(WIDTH,HEIGHT,Image.SCALE_DEFAULT);
@@ -237,9 +267,7 @@ public class Window extends Canvas{
 			}
 		});
 
-
 		// The rest of the button behaviours are handled in the same way
-
 		JLabel multiplayerButton = new JLabel(button1Icon);
 		multiplayerButton.setForeground(Color.black);
 		multiplayerButton.setFont(sizedFont);
@@ -359,6 +387,7 @@ public class Window extends Canvas{
 		    	backOptions.setVisible(false);
 		    	backMultiplayer.setVisible(false);
 		    	errorPanel.setVisible(false);
+		    	createGamePopupPanel.setVisible(false);
 			}
 
 			@Override
@@ -400,6 +429,59 @@ public class Window extends Canvas{
 			@Override
 			public void mouseExited(MouseEvent e) {
 				backErrorButton.setIcon(BUTTON_2_INNER);
+			}
+		});
+		
+		JLabel submitButton = new JLabel(button2Icon);
+		submitButton.setForeground(Color.black);
+		submitButton.setFont(sizedFont);
+		submitButton.setText("SUBMIT");
+		submitButton.setHorizontalTextPosition(JLabel.CENTER);
+
+		submitButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				submitButton.setIcon(BUTTON_2_CLICKED_INNER);
+				SoundHandler.playSound("button1", 1f);
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				submitButton.setIcon(BUTTON_2_INNER);
+				
+				if (processInput(playersField.getText()) == 0) {
+					createGamePopupPanel.setVisible(false);
+					errorPanelText.setText("<html><center><p style='margin-top:50'>Number must be<br><p style='margin-top:3'>between 2 and 10.</center></html>");
+					errorPanel.setVisible(true);
+				} else {
+					createGamePlayers = processInput(playersField.getText());
+					Game.socketServer = new GameServer(game);
+
+					Game.socketServer.start();
+					Game.socketClient = new GameClient(game, "localhost");
+					Game.socketClient.start();
+
+					back.setVisible(false);
+			    	backButtonPanel.setVisible(false);
+			    	multiplayerButtonPanel.setVisible(false);
+			    	backOptions.setVisible(false);
+					backMultiplayer.setVisible(false);
+					createGamePopupPanel.setVisible(false);
+
+			    	game.setGameState(GameState.Playing);
+			    	game.setGameMode(GameMode.MULTIPLAYER);
+			    	game.start();
+				}
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				submitButton.setIcon(BUTTON_2_HOVER_INNER);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				submitButton.setIcon(BUTTON_2_INNER);
 			}
 		});
 
@@ -663,21 +745,9 @@ public class Window extends Canvas{
 				}
 
 				if(isAlive == false) {
-					Game.socketServer = new GameServer(game);
-
-					Game.socketServer.start();
-					Game.socketClient = new GameClient(game, "localhost");
-					Game.socketClient.start();
-
-					back.setVisible(false);
-			    	backButtonPanel.setVisible(false);
-			    	multiplayerButtonPanel.setVisible(false);
-			    	backOptions.setVisible(false);
-					backMultiplayer.setVisible(false);
-
-			    	game.setGameState(GameState.Playing);
-			    	game.setGameMode(GameMode.MULTIPLAYER);
-			    	game.start();
+					playersField.setText("");
+					multiplayerButtonPanel.setVisible(false);
+					createGamePopupPanel.setVisible(true);
 				} else {
 					multiplayerButtonPanel.setVisible(false);
 					errorPanelText.setText("<html><center><p style='margin-top:50'>A server is<br><p style='margin-top:3'>already running</center></html>");
@@ -771,11 +841,15 @@ public class Window extends Canvas{
 		multiplayerButtonPanel.add(joinGameButton);
 		errorPanel.add(errorPanelText);
 		errorPanel.add(backErrorButton);
+		createGamePopupPanel.add(createGamePopupText);
+		createGamePopupPanel.add(playersField);
+		createGamePopupPanel.add(submitButton);
 		c.add(mainMenu);
 		c.add(optionButtonPanel);
 		c.add(multiplayerButtonPanel);
 		c.add(backButtonPanel);
 		c.add(errorPanel);
+		c.add(createGamePopupPanel);
 		c.add(back);
 		c.add(backOptions);
 		c.add(backMultiplayer);
@@ -784,6 +858,29 @@ public class Window extends Canvas{
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+	}
+	
+	/**
+	 * Used to process the input from the createGamePopupPanel
+	 * @param input the String to process
+	 * @return the integer entered if it is valid, otherwise 0
+	 */
+	public static int processInput(String input) {
+		
+		int parsedInt;
+		try {
+			parsedInt = Integer.parseInt(input);
+		}
+		catch (NumberFormatException e)
+		{
+			return 0;
+		}
+		
+		if (parsedInt > 10 || parsedInt < 2) {
+			return 0;
+		}
+		
+		return parsedInt;
 	}
 
 	/**
