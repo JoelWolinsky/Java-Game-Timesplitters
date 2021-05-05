@@ -180,7 +180,6 @@ public class Map {
      * @param splitted     The splitted command into specific elements the interpreter can understand
      */
     public void interpret(Level currentLevel, String[] splitted) {
-    	System.out.println(splitted[0]);
 
         switch (splitted[0]) {
             case "Theme":

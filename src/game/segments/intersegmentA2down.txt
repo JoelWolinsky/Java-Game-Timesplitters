@@ -77,12 +77,12 @@ Chest 200 405 chest
 
 EventDamageZone 190 384 10 200 notice.png 0 0 false skele 1 -100 -100 200 1
 
-Projectile 120 -135 0 4.0 650 150 0 50 crack1.png stones
-Projectile 260 -135 0 4.0 700 285 0 20 crack1.png stones
-Projectile 120 -135 0 4.0 620 150 0 80 crack1.png stones
-Projectile 260 -135 0 4.0 600 285 0 110 crack1.png stones
-Projectile 120 -135 0 4.0 710 150 0 130 crack1.png stones
-Projectile 260 -135 0 4.0 640 285 0 150 crack1.png stones
-Projectile 120 -135 0 4.0 700 150 0 170 crack1.png stones
-Projectile 260 -135 0 4.0 620 285 0 190 crack1.png stones
+Projectile 120 -135 0 2.0 650 150 0 50 crack1.png stones
+Projectile 260 -135 0 2.0 700 285 0 20 crack1.png stones
+Projectile 120 -135 0 2.0 620 150 0 80 crack1.png stones
+Projectile 260 -135 0 2.0 600 285 0 110 crack1.png stones
+Projectile 120 -135 0 2.0 710 150 0 130 crack1.png stones
+Projectile 260 -135 0 2.0 640 285 0 150 crack1.png stones
+Projectile 120 -135 0 2.0 700 150 0 170 crack1.png stones
+Projectile 260 -135 0 2.0 620 285 0 190 crack1.png stones
 

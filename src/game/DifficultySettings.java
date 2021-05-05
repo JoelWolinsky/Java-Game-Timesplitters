@@ -26,9 +26,20 @@ public class DifficultySettings {
 	private ArrayList<Float> ghostSpeed;
 	private ArrayList<Float> bloodcellXSpeed;
 	private ArrayList<Float> bloodcellYSpeed;
+
+	private ArrayList<String> ghostGroup;
 	
 	private int ghostSpeedIndex;
 	private int bloodcellSpeedIndex;
+	
+	//EventDangerZone
+	private ArrayList<String>statueGroup;
+	
+	
+	//mindlessAI
+	private int maxChickenSpawn;
+	
+	
 	//load easy,medium,hard config file
 	public DifficultySettings(String difficulty) {
 		
@@ -46,13 +57,55 @@ public class DifficultySettings {
 		
 		ghostSpeed = getGroupDifficultyValue("ghostSpeed",difficultyConfig);
 		ghostSpeedIndex = ghostSpeed.size()-1;
+		ghostGroup = getGroupRawConfig("ghostGroup",difficultyConfig);
 		
 		bloodcellXSpeed = getGroupDifficultyValue("bloodcellXSpeed",difficultyConfig);
 		bloodcellYSpeed = getGroupDifficultyValue("bloodcellYSpeed",difficultyConfig);
 		bloodcellSpeedIndex = bloodcellXSpeed.size()-1;
+	
+		statueGroup = getGroupRawConfig("statueGroup",difficultyConfig);
+		maxChickenSpawn = (int) getDifficultyValue("maxChickenSpawn",difficultyConfig);
 		
+		//System.out.println(statueGroup.toString());
+		//System.out.println(ghostGroup.toString());
 		setDifficultyForAllFiles();
 	}
+	public ArrayList<String>getGroupRawConfig(String arg, File difficultyConfig){
+		
+		try {
+			Scanner sc = new Scanner(difficultyConfig);
+			ArrayList<String> returnArr = new ArrayList<String>();
+			while(sc.hasNextLine()) {
+				String line = sc.nextLine();
+				
+				if(line.equals("*STARTGROUP*")) {
+					String line2 = sc.nextLine();
+					boolean firstTime = true;
+					while(!line2.equals("*ENDGROUP*")&&sc.hasNextLine()) {
+						
+						if(firstTime && !line2.equals(arg)) {
+							
+							break;
+						}
+						else {
+							firstTime = false;
+							returnArr.add(line2);
+						}
+						
+						line2 = sc.nextLine();
+					}
+				}
+			}
+			sc.close();
+			return returnArr;
+		}
+		catch(IOException e){
+			System.out.println("File IO Error");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public ArrayList<Float> getGroupDifficultyValue(String arg, File difficultyConfig) {
 		try {
 			Scanner sc = new Scanner(difficultyConfig);
@@ -139,21 +192,15 @@ public class DifficultySettings {
 			ArrayList<String> lines = new ArrayList<String>();
             File segFile = new File("./src/game/segments/".concat(url).concat(".txt"));
             
-            System.out.println("Now at file: " + url );
+            //System.out.println("Now at file: " + url );
             
             Scanner sc = new Scanner(segFile);
             while (sc.hasNextLine()) {
                 String data = sc.nextLine();
                 String[] splitted =  data.split("\\s+");
                 //Settings Update
-                data = updateConfigStr(splitted);
-                switch(splitted[0]) {
                 
-                	case "Projectile":
-                		
-                		break;
-                		
-                }
+                data = updateConfigStr(splitted);
                 lines.add(data);
             }
             sc.close();
@@ -167,7 +214,7 @@ public class DifficultySettings {
             }
             out.flush();
             out.close();
-            System.out.println("End Of File");
+            //System.out.println("End Of File");
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -183,26 +230,80 @@ public class DifficultySettings {
 		
 		switch(splitted[0]) {
 		
+			case"MindlessAISpawner":
+				splitted[5] = Integer.toString(maxChickenSpawn);
+				break;
+		
+			case"!EventDamageZone":
+				switch(splitted[9]){
+					case"statue":
+						splitted[0] = "EventDamageZone";
+						String temp = joinStrArr(splitted);
+						if(statueGroup.contains(temp)) {
+							statueGroup.remove(temp);
+						}
+						else {
+							splitted[0]= "!EventDamageZone";
+						}
+						break;
+				}
+				break;
+		
+			case"EventDamageZone":
+				switch(splitted[9]) {
+					
+					case"statue":
+						
+						String temp = joinStrArr(splitted);
+						//System.out.println(statueGroup.get(3));
+						
+							if(statueGroup.contains(temp)){
+								statueGroup.remove(temp);
+							}
+							else {
+								splitted[0] = "!"+ splitted[0];
+							}
+						
+						break;
+				}
+				break;
+			
+			case"!Projectile":
+				switch(splitted[10]) {
+					case"ghost":
+						splitted[0] = "Projectile";
+						String temp = joinStrArr(splitted);
+						if(ghostGroup.contains(temp)) {
+							ghostGroup.remove(temp);
+						}
+						else {
+							splitted[0]= "!Projectile";
+						}
+						break;
+						
+				}
+				break;
+				
 			case"Projectile":
 				
 				switch(splitted[10]) {
 				
 					case "rocks":
-						System.out.print("Changed rocks from " + splitted[4]+ "to");
+					
 						splitted[4] = Float.toString(rocksSpeed);
-						System.out.println(splitted[4]);
+			
 						break;
 				
 					case "stones":
-						System.out.print("Changed stones from " + splitted[4]+ "to");
+						
 						splitted[4] = Float.toString(stonesSpeed);
-						System.out.println(splitted[4]);
+				
 						break;
 					
 					case "arrow":
-						System.out.print("Changed arrow from " + splitted[4]+ "to");
+			
 						splitted[4] = Float.toString(arrowSpeed);
-						System.out.println(splitted[4]);
+
 						break;
 						
 					case "books":
@@ -214,11 +315,25 @@ public class DifficultySettings {
 						break;
 						
 					case "ghost":
-						if(ghostSpeedIndex == -1) {
-							ghostSpeedIndex = ghostSpeed.size()-1;
+						
+						String temp = joinStrArr(splitted);
+						
+						
+						if(ghostGroup.contains(temp)){
+							ghostGroup.remove(temp);
 						}
-						splitted[3] = Float.toString(ghostSpeed.get(ghostSpeedIndex));
-						ghostSpeedIndex--;
+						else if (!ghostGroup.contains(temp)){
+							splitted[0] = "!"+ splitted[0];
+						}
+					
+						/*
+						 * if(ghostSpeedIndex == -1) { ghostSpeedIndex = ghostSpeed.size()-1; }
+						 * if(Launcher.cHandler.getDifficulty().equals("Hard")) { splitted[3] =
+						 * Float.toString(ghostSpeed.get(ghostSpeedIndex)); } else
+						 * if(Launcher.cHandler.getDifficulty().equals("Medium")) { splitted[3] =
+						 * Float.toString(ghostSpeed.get(ghostSpeedIndex)/1.5f); } else { splitted[3] =
+						 * Float.toString(ghostSpeed.get(ghostSpeedIndex)/2); } ghostSpeedIndex--;
+						 */
 						break;
 						
 					case "bloodcell":
@@ -234,13 +349,13 @@ public class DifficultySettings {
 							splitted[4] = Float.toString(bloodcellYSpeed.get(bloodcellSpeedIndex)/1.5f);
 						}
 						else {
-							splitted[3] = Float.toString(bloodcellXSpeed.get(bloodcellSpeedIndex)/2);
-							splitted[4] = Float.toString(bloodcellYSpeed.get(bloodcellSpeedIndex)/2);
+							splitted[3] = Float.toString(bloodcellXSpeed.get(bloodcellSpeedIndex)/2f);
+							splitted[4] = Float.toString(bloodcellYSpeed.get(bloodcellSpeedIndex)/2f);
 						}
 						bloodcellSpeedIndex--;
 						break;
 				}
-			break;
+				break;
 			
 		}
 		
@@ -250,8 +365,19 @@ public class DifficultySettings {
 		}
 		returnStr += (splitted[splitted.length-1]);
 		
-		System.out.println("return string: " + returnStr);
+		System.out.println(returnStr);
 		return returnStr;
+	}
+	
+	public String joinStrArr(String[] splitted) {
+		String tempStr = "";
+		
+		for(int i=0;i<splitted.length-1;i++) {
+			tempStr += (splitted[i]+ "\s");
+			
+		}
+		tempStr += splitted[splitted.length-1];
+		return tempStr;
 	}
 	
 	public void printConfig() {
