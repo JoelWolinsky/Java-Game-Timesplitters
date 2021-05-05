@@ -364,7 +364,7 @@ public class DifficultySettings {
 			returnStr += (splitted[i]+"\s");
 		}
 		returnStr += (splitted[splitted.length-1]);
-		System.out.println(returnStr);
+	
 		return returnStr;
 	}
 	
