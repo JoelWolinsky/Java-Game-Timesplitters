@@ -223,7 +223,7 @@ public class Window extends Canvas{
 	    backMultiplayer.setBounds(0, 0, WIDTH, HEIGHT);
 	    backMultiplayer.setVisible(false);
 	    
-	    ImageIcon backgroundControls = new ImageIcon("./img/controls.png");
+	    ImageIcon backgroundControls = new ImageIcon("./img/controls.gif");
 	    backControls = new JLabel(backgroundControls);
 	    backControls.setLayout(null);
 	    backControls.setBounds(0, 0, WIDTH, HEIGHT);
