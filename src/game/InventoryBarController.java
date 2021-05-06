@@ -10,6 +10,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 
+import static game.Level.addToAddQueue;
+
+/**
+ * This class handles the inventory's visual representation on screen during game time
+ */
+
 public class InventoryBarController extends GameObject {
 
 	private Player player;
@@ -18,7 +24,11 @@ public class InventoryBarController extends GameObject {
 	private int inventorySize=3;
 	private static BufferedImage frame, frameNotSelected;
 
-	public InventoryBarController(float x, float y, int width, int height, Player player, Level currentLevel) {
+	/**
+	 * Initializes the frames and slots of the inventory
+	 */
+
+	public InventoryBarController(float x, float y, int width, int height, Player player) {
 		super(x, y, 3, width, height);
 		this.player=player;
 		try {
@@ -33,8 +43,8 @@ public class InventoryBarController extends GameObject {
 			frames.add(new UIElement(this.x + 20 + (i*60) , this.y + 10, 50 , 50, "./img/frameNotSelected.png"));
 			slots.add(new UIElement(this.x + 20 + (i*60) + 12 , this.y + 10 + 12, 25 , 25, player.getInventory().get(i).getUrl()));
 
-			currentLevel.addToAddQueue(frames.get(i));
-			currentLevel.addToAddQueue(slots.get(i));
+			addToAddQueue(frames.get(i));
+			addToAddQueue(slots.get(i));
 		}
 
 		selectFrame(2,1);

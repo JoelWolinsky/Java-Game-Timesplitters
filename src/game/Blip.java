@@ -30,6 +30,10 @@ public class Blip extends GameObject {
 		}
 
 	}
+	/**
+	 * Called every frame, if the target is detected as moving then the position of the blip is modified to accurately
+	 * represent the target's position on the minimap
+	 */
 
 	public void tick() {
 

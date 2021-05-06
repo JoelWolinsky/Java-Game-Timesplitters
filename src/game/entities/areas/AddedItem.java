@@ -5,8 +5,9 @@ import game.entities.players.Player;
 import static game.Level.getPlayers;
 
 /**
- * Class for any objects that have been picked up by the player
+ * Class for inventory objects that have been added to the map by players eg. Banana,Fart
  */
+
 public class AddedItem extends AnimArea {
 
 	private boolean visibile=true;
@@ -21,8 +22,10 @@ public class AddedItem extends AnimArea {
 	}
 
 	/**
-	 * Called every frame, applies item effects to the player
+	 * Called every frame, responsible for detecting collision with players and applying the effect of this item
+	 * if the player is not the creator of the item
 	 */
+
 	public void tick() {
 
 		for (Player p: getPlayers())
@@ -37,6 +40,11 @@ public class AddedItem extends AnimArea {
 		}
 
 	}
+
+	/**
+	 * Gets the effect of the item and applies it to the player
+	 * @param k the player to which the effect will be applied to
+	 */
 
 	public void getEffect(Player k){
 

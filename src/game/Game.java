@@ -198,7 +198,7 @@ public class Game extends Canvas implements Runnable{
 		//GameProgress UI
 		m.currentLevel.addToAddQueue(new ProgressBarController(Game.camera.getXOffset(), Game.camera.getYOffset()+10, 0,0,m.currentLevel,m.mps));
 		//Inventorry UI
-		m.currentLevel.addToAddQueue(new InventoryBarController(Game.camera.getXOffset(), Game.camera.getYOffset()+400, 0,0,Game.player,m.currentLevel));
+		m.currentLevel.addToAddQueue(new InventoryBarController(Game.camera.getXOffset(), Game.camera.getYOffset()+400, 0,0,Game.player));
 		//Main UI Announcer eg. Countdown, End Game Celebration etc.
 		m.currentLevel.addToAddQueue(new UIController(Game.camera.getXOffset(), Game.camera.getYOffset()+10,0,0));
 

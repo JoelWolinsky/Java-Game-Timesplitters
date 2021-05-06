@@ -9,42 +9,36 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * This class represents an item in the player's inventory
+ */
+
 public class Item extends GameObject {
-	private boolean visible = true;
 	private Player player;
-	private float velX = 5;
-	private float velY = 5;
-	private int offset= 20;
-	private int totalNrBlocks;
-	private BufferedImage img;
 	private String url;
 	private boolean addItem = false;
 	private String itemToAdd = "";
 
+	/**
+	 * @param player the players with which this object will be associated
+	 * @param url identifies what the object will be eg. Shoes,Banana etc.
+	 */
 	public Item(float x, float y, int width, int height, Player player, String url) {
 		super(x, y, 3, width, height);
-
 		this.player=player;
 		this.url=url;
-
-		try
-		{
-			img = ImageIO.read( new File(url));
-		}
-		catch ( IOException exc )
-		{
-		}
-
 
 	}
 
 	public void tick() {
-
-
 	}
 
 	public void render(Graphics g, float xOffset, float yOffset) {
 	}
+
+	/**
+	 * This method gets the effect of the item based on the items url/identity
+	 */
 
 	public void getEffect(){
 

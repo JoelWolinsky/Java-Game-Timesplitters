@@ -7,11 +7,22 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * This class represents a UI Element that is going to be rendered and displayed during the game (while the game is in
+ * progress/running)
+ */
+
 public class UIElement extends GameObject {
 
 	private BufferedImage img;
 	private boolean visible = true;
 	private boolean newImg = false;
+
+	/**
+	 * Creates the UI Element with the following values
+	 * @param x x
+	 *
+	 */
 
 	public UIElement(float x, float y, int width, int height, String url) {
 		super(x, y, 3, width, height);

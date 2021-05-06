@@ -24,7 +24,8 @@ public class Portal extends AnimArea{
 	}
 
 	/**
-	 * Checks for players within interactable areas and moves the player to their respawn location.
+	 * Checks for players within interactable areas and moves the player to the specified location as well as setting
+	 * a respawn point on that location
 	 */
 	public void tick() {
 

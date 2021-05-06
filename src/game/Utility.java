@@ -2,6 +2,11 @@ package game;
 
 import java.util.Random;
 
+/**
+ * This class is used globally as a collection of utility methods and tools such as returning random values in ranges
+ * etc.
+ */
+
 public class Utility {
 
     public static int getRandomIntInRangeSeeded(int min, int max) {

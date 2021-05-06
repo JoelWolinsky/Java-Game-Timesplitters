@@ -4,6 +4,12 @@ import game.graphics.Image;
 
 import static game.Level.getPlayers;
 
+/**
+ * This class is used to further extend the y range of the respawn point when players have for example to move downwards
+ * This is due to the fact that any time a player will fall aproximately 300 blocks below the respawn point it will kill
+ * the player and this is to attenuate that.
+ */
+
 public class ExtendedRespawnPoint extends Area {
 
 	private boolean reached = false;

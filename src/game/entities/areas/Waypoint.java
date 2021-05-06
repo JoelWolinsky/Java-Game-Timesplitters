@@ -63,8 +63,8 @@ public class Waypoint extends Area {
 	/**
 	 * Renders the Waypoint flag, used for debugging.
      * @param g The Graphics object onto which the object will be rendered
-	 * @param f The xOffset of the object
-	 * @param h The yOffset of the object
+	 * @param xOffset The xOffset of the object
+	 * @param yOffset The yOffset of the object
 	 */
 	@Override
 	public void render(Graphics g, float xOffset, float yOffset) {
