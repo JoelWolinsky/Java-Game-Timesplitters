@@ -167,6 +167,7 @@ public class DifficultySettings {
 		setDifficultyForFile("intro1");
 		setDifficultyForFile("intro2");
 		setDifficultyForFile("introDimension");
+		//setDifficultyForFile("introOutDimension");
 		setDifficultyForFile("segmentA1");
 		setDifficultyForFile("segmentA2");
 		setDifficultyForFile("segmentA3");
@@ -183,6 +184,8 @@ public class DifficultySettings {
 		setDifficultyForFile("segmentA14");
 		setDifficultyForFile("segmentA15");
 		setDifficultyForFile("segmentA16");
+		//setDifficultyForFile("segmentA17");
+		//setDifficultyForFile("segmentB1");
 		setDifficultyForFile("segmentEND");
 		
 	}
@@ -361,10 +364,10 @@ public class DifficultySettings {
 		
 		String returnStr = "";
 		for(int i=0;i < splitted.length-1;i++) {
-			returnStr += (splitted[i]+"\s");
+			returnStr += (splitted[i]+" ");
 		}
 		returnStr += (splitted[splitted.length-1]);
-	
+		System.out.println(returnStr);
 		return returnStr;
 	}
 	
@@ -372,7 +375,7 @@ public class DifficultySettings {
 		String tempStr = "";
 		
 		for(int i=0;i<splitted.length-1;i++) {
-			tempStr += (splitted[i]+ "\s");
+			tempStr += (splitted[i]+ " ");
 			
 		}
 		tempStr += splitted[splitted.length-1];
