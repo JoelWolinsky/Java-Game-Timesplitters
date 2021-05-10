@@ -194,7 +194,7 @@ public class GameClient extends Thread {
 	 */
 	private void handleLogin(Packet00Login packet, InetAddress address, int port) {
 		System.out.println("[" + address.getHostAddress() + ":" + port + "] " + (packet).getUsername() + " has joined the game...");
-		PlayerMP player = new PlayerMP (0, 350, address, port,getRandomOutfitMP());
+		PlayerMP player = new PlayerMP (0, 350, address, port,(packet).getUrl());
 		player.setUsername((packet).getUsername());
 		Level.addToAddQueue(player);
 	}

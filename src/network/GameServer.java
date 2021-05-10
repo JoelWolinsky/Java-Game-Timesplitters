@@ -74,7 +74,8 @@ public class GameServer extends Thread {
 				break;
 			case LOGIN:
 				packet = new Packet00Login(data);
-				PlayerMP player = new PlayerMP (10, 0, address, port,"player1");
+				String url = ((Packet00Login) packet).getUrl();
+				PlayerMP player = new PlayerMP (10, 0, address, port, url);
 				player.setUsername(((Packet00Login) packet).getUsername());
 				this.addConnection(player, (Packet00Login) packet);
 				break;
@@ -165,7 +166,7 @@ public class GameServer extends Thread {
 				} else {
 					sendData(packet.getData(),this.connectedPlayers.get(getPlayerMPIndex(p)).ipAddress, this.connectedPlayers.get(getPlayerMPIndex(p)).port);
 					
-					Packet00Login packet1 = new Packet00Login(this.connectedPlayers.get(getPlayerMPIndex(p)).getUsername(), this.connectedPlayers.get(getPlayerMPIndex(p)).getX(), this.connectedPlayers.get(getPlayerMPIndex(p)).getY());
+					Packet00Login packet1 = new Packet00Login(this.connectedPlayers.get(getPlayerMPIndex(p)).getUsername(), this.connectedPlayers.get(getPlayerMPIndex(p)).getX(), this.connectedPlayers.get(getPlayerMPIndex(p)).getY(),this.connectedPlayers.get(getPlayerMPIndex(p)).getObjectModel());
 					sendData(packet1.getData(), player.ipAddress, player.port);
 					
 					Packet05Capacity packet2 = new Packet05Capacity(Window.createGamePlayers);

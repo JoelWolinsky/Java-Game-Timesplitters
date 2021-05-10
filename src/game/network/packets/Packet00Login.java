@@ -7,6 +7,7 @@ public class Packet00Login extends Packet {
 
 	private String username;
 	private float x,y;
+	private String url;
 	
 	/**
 	 * Creates a login packet when given data.
@@ -18,6 +19,8 @@ public class Packet00Login extends Packet {
 		this.username = dataArray[0];
 		this.x = Float.parseFloat(dataArray[1]);
 		this.y = Float.parseFloat(dataArray[2]);
+		this.url = dataArray[3];
+		
 
 	}
 	/**
@@ -26,11 +29,12 @@ public class Packet00Login extends Packet {
 	 * @param x The x coordinate of the joining player.
 	 * @param y The y coordinate of the joining player.
 	 */
-	public Packet00Login(String username, float x, float y) {
+	public Packet00Login(String username, float x, float y, String url) {
 		super(00);
 		this.username = username;
 		this.x = x;
 		this.y = y;
+		this.url = url;
 		
 	}
 
@@ -58,7 +62,7 @@ public class Packet00Login extends Packet {
 	 */
 	@Override
 	public byte[] getData() {
-		return ("00" + this.username+","+getX()+","+getY()).getBytes();
+		return ("00" + this.username+","+getX()+","+getY()+","+this.url).getBytes();
 	}
 
 	public String getUsername() {
@@ -71,5 +75,8 @@ public class Packet00Login extends Packet {
 	
 	public float getY() {
 		return y;
+	}
+	public String getUrl() {
+		return this.url;
 	}
 }

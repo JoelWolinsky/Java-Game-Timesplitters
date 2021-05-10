@@ -174,7 +174,7 @@ public class Game extends Canvas implements Runnable{
 			case MULTIPLAYER:
 				player = new PlayerMP(0, 350, keyInput, null, -1,getCurrentOutfitModel());
 
-				Packet00Login loginPacket = new Packet00Login(player.getUsername(), 0, 350);
+				Packet00Login loginPacket = new Packet00Login(player.getUsername(), 0, 350,getCurrentOutfitModel());
 				if (socketServer != null) {
 					loginPacket.writeData(socketServer);
 				}

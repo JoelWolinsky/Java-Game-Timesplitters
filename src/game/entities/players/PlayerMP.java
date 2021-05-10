@@ -3,6 +3,7 @@ package game.entities.players;
 import java.net.InetAddress;
 
 import game.input.KeyInput;
+import game.network.packets.Packet00Login;
 
 public class PlayerMP extends Player {
 	
@@ -25,5 +26,7 @@ public class PlayerMP extends Player {
 	public void tick() {
 		super.tick();
 	}
+
+	
 	
 }
