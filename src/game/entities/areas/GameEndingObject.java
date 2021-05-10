@@ -34,11 +34,6 @@ public class GameEndingObject extends AnimArea {
 					pp.setCanMove(false);
 				}
 
-				for (Blip b: getAllBlips())
-					b.setVisible(false);
-				for (UIElement uiElement: getProgressBarElements())
-					uiElement.setVisible(false);
-
 				setLevelState(LevelState.Finished);
 				p.setCurrentAnimState(AnimationStates.SWAG);
 				p.winner = true;

@@ -13,6 +13,7 @@ import game.graphics.AnimationStates;
 import game.graphics.LevelState;
 
 import static game.Game.getGameMode;
+import static game.Game.player;
 
 public class Level extends Canvas {
 
@@ -75,6 +76,9 @@ public class Level extends Canvas {
 
 		if (levelState==LevelState.Waiting)
 			checkAllPlayersConnected();
+
+		if (checkAllDead())
+			setLevelState(LevelState.Finished);
 
 	}
 	
@@ -229,6 +233,23 @@ public class Level extends Canvas {
 		}
 	}
 
+	public boolean checkAllDead()
+	{
+		for (Player p: getPlayers())
+			if (!p.isGhostMode())
+				return false;
+
+		return true;
+	}
+
+	public static Player getWinner()
+	{
+		for (Player p: getPlayers())
+			if (p.isWinner())
+				return p;
+
+		return null;
+	}
 
 	/**
 	 * @return The game ending object

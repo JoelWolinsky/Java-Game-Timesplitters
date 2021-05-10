@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static game.Level.*;
+import static game.ProgressBarController.getAllBlips;
+import static game.ProgressBarController.getProgressBarElements;
 
 public class UIController extends GameObject {
 
@@ -25,7 +27,7 @@ public class UIController extends GameObject {
 	private boolean endGameCelebration=false;
 	private UIElement announcer,announcerMessage,spectating, exit;
 	private double time1=0,time2;
-	private static BufferedImage loading, starting, winner, close;
+	private static BufferedImage loading, starting, winner, close, gameover;
 
 	public UIController(float x, float y, int width, int height) {
 		super(x, y, 4, width, height);
@@ -42,6 +44,9 @@ public class UIController extends GameObject {
 			}
 			if (UIController.close == null) {
 				UIController.close = ImageIO.read(new File("./img/close.png"));
+			}
+			if (UIController.gameover == null) {
+				UIController.gameover = ImageIO.read(new File("./img/gameover.png"));
 			}
 		} catch (IOException e) {
 		}
@@ -162,12 +167,23 @@ public class UIController extends GameObject {
 
 		if (endGameCelebration)
 		{
+
+			for (Blip b: getAllBlips())
+				b.setVisible(false);
+			for (UIElement uiElement: getProgressBarElements())
+				uiElement.setVisible(false);
+
+
 			if (!announcer.isVisible()) {
 				announcer.setVisible(true);
 				announcerMessage.setVisible(true);
 			}
 
-			announcer.setImg(UIController.winner);
+			if (getWinner()!=null)
+				announcer.setImg(UIController.winner);
+			else
+				announcer.setImg(UIController.gameover);
+
 			announcerMessage.setImg(UIController.close);
 			
 			announcer.setY(y-8);

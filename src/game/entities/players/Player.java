@@ -805,4 +805,7 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
             return SolidCollider.willCauseSolidCollision(o, vel, xAxis);
     }
 
+    public Boolean isWinner() {
+        return winner;
+    }
 }
