@@ -78,13 +78,23 @@ public class AIPlayer extends Player {
 	 */
 	private int interactionWait = 0;
 	
-	// private String username;
+	/**
+	 * The time for which the AIPlayer has not moved.
+	 */
+	private int stationaryTimer = 0;
+
+	/**
+	 * The x coordinate of the AIPlayer in the previous tick.
+	 */
+	private float oldX;
+
 
 	public AIPlayer(float x, float y, int width,int height, Player humanPlayer,String url) {
 		super(x, y, null, width, height,url);
 
 		this.humanPlayer = humanPlayer;
 		this.id = Character.getNumericValue(url.charAt(6));
+		this.oldX = x;
 	}
 
 	/**
@@ -96,6 +106,15 @@ public class AIPlayer extends Player {
 		super.tick();
 
 		this.dist_from_player = this.x - this.humanPlayer.getX();
+
+		if (getLevelState() == LevelState.InProgress){
+			if (this.oldX == this.x){
+				this.stationaryTimer++;
+			}
+			else {
+				this.stationaryTimer = 0;
+			}
+		}
 
 		if (this.isGhostMode() == false) {
 
@@ -111,13 +130,30 @@ public class AIPlayer extends Player {
 
 					if (this.humanPlayer.getX() - penultimateRespawnPoint.getX() > 400) {
 						this.invincibleMove = true;
+
+						if (this.stationaryTimer >= 300) {
+
+							this.x = penultimateRespawnPoint.getX();
+							this.y = penultimateRespawnPoint.getY()-20;
+							this.stationaryTimer = 0;
+			
+						}
+					} 
+				} else {
+
+					if (this.stationaryTimer >= 300) {
+
+						this.x = this.getRespawnPoints().getLast().getX();
+						this.y = this.getRespawnPoints().getLast().getY()-20;
+						this.stationaryTimer = 0;
 					}
+
 				}
 
 				if (this.invincibleMove == true) {
 
 					// to make smooth transition on minimap
-					if (this.x < penultimateRespawnPoint.getX()) {
+					if (this.x < penultimateRespawnPoint.getX()+10) {
 						this.x += 3;
 						this.y = penultimateRespawnPoint.getY()-20;
 					} else { 
@@ -125,7 +161,20 @@ public class AIPlayer extends Player {
 						this.invincibleMove = false; 
 					} 	
 				}
-			}	
+			}	else {
+					this.invincible = false;
+					this.invincibleMove = false;
+
+					if (this.stationaryTimer >= 300) {
+
+						this.x = this.getRespawnPoints().getLast().getX();
+						this.y = this.getRespawnPoints().getLast().getY()-20;
+						this.stationaryTimer = 0;
+		
+					}
+
+			}
+
 
 			if (getLevelState() == LevelState.InProgress){
 				for (AIPlayer p: getAIPlayers())	
@@ -133,16 +182,16 @@ public class AIPlayer extends Player {
 
 						this.interactionTimer += 3;
 
-						if (this.interactionTimer >= 200) {
+						if (this.interactionTimer >= 300) {
 
 							if (this.id < p.id) {
-								this.interactionWait += 20;
+								this.interactionWait += 25;
 							} else {
-								p.interactionWait += 20;
+								p.interactionWait += 25;
 							}
 
-							this.interactionTimer -= 200;
-							p.interactionTimer -= 200; 
+							this.interactionTimer -= 300;
+							p.interactionTimer -= 300; 
 
 						}
 					}
@@ -154,7 +203,7 @@ public class AIPlayer extends Player {
 
 			if (this.canMove == true && this.invincibleMove == false) {
 
-				if (this.interactionWait > 0){ // && !collide(this, 1, true) && !collide(this, 1, false)) {
+				if (this.interactionWait > 0){ 
 					this.interactionWait--;
 
 					if (collide(this, 2, true)) {
@@ -253,6 +302,8 @@ public class AIPlayer extends Player {
 						}
 					}
 			}
+
+			this.oldX = this.x;
 			
 		} else {	// If AIPlayer isGhostMode
 
