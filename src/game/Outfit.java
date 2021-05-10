@@ -17,6 +17,9 @@ public class Outfit {
 		GREEN
 	}
 	
+	/**
+	 * Cycles left between all outfits
+	 */
 	public static void cycleLeftOutfit() {
 		if (currentOutfit == Outfits.DEFAULT) {
 			
@@ -36,6 +39,9 @@ public class Outfit {
 		}
 	}
 	
+	/**
+	 * Cycles right between all outfits
+	 */
 	public static void cycleRightOutfit() {
 		if (currentOutfit == Outfits.DEFAULT) {
 			
@@ -55,6 +61,10 @@ public class Outfit {
 		}
 	}
 	
+	/**
+	 * Writes a string to the outfit config file
+	 * @param input the string to write
+	 */
 	public static void writeToFile(String input) {
 		createOutfitFile();
 				
@@ -66,10 +76,12 @@ public class Outfit {
 		} catch (IOException e) {
 				e.printStackTrace();
 		}
-		
-		System.out.println(input);
 	}
 	
+	/**
+	 * Reads the outfit that is contained in the outfit config file
+	 * @returns the Outfit that is in the file
+	 */
 	public static Outfits getOutfitFromFile() {
 		createOutfitFile();
 		
@@ -96,7 +108,11 @@ public class Outfit {
 		}
 		return currentOutfit;
 	}
-
+	
+	/**
+	 * Creates the outfit config file and populates it with the current outfit
+	 * @returns true if the file does not exist, false if the file already exists
+	 */
 	public static Boolean createOutfitFile() {
 		try {
 			File configFile = new File("outfit.txt");

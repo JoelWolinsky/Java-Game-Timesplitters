@@ -45,7 +45,7 @@ public class Window extends Canvas{
 	public JFrame frame;
 	private static Game game;
 	public static JPanel mainMenu;
-	public static JLabel back,backOptions,backMultiplayer,backControls,backOutfit;
+	public static JLabel back,backOptions,backMultiplayer,backControls,backOutfit,defaultRunningLabel;
 	public static Dimension d = new Dimension(WIDTH,HEIGHT);
 	
 	public static int createGamePlayers;
@@ -69,8 +69,6 @@ public class Window extends Canvas{
 		JLabel cycleRightOutfitButton = new JLabel();
 		
 		SoundHandler.playMusic("mainMenuMusic", 0.1f);
-		
-		System.out.println(Outfit.currentOutfit.name());
 
 		// Creating a new Font from the PressStart2P.ttf file that can be used in HTML JLabels
 		Font buttonFont = null;
@@ -146,6 +144,32 @@ public class Window extends Canvas{
 		
 		ImageIcon outfitButtonLeftDisabled = new ImageIcon("./img/outfitButtonLeftDisabled.png");
 		final ImageIcon OUTFIT_BUTTON_LEFT_DISABLED_INNER = outfitButtonLeftDisabled;
+		
+		ImageIcon defaultRunning = new ImageIcon("./img/defaultRunning.gif");
+	    Image temp3 = defaultRunning.getImage().getScaledInstance(140, 196, Image.SCALE_DEFAULT);
+	    defaultRunning = new ImageIcon(temp3);
+	    final ImageIcon DEFAULT_RUNNING_INNER = defaultRunning;
+	    
+	    ImageIcon purpleRunning = new ImageIcon("./img/purpleRunning.gif");
+	    Image temp5 = purpleRunning.getImage().getScaledInstance(140, 196, Image.SCALE_DEFAULT);
+	    purpleRunning = new ImageIcon(temp5);
+	    final ImageIcon PURPLE_RUNNING_INNER = purpleRunning;
+	    
+	    ImageIcon brownRunning = new ImageIcon("./img/brownRunning.gif");
+	    Image temp6 = brownRunning.getImage().getScaledInstance(140, 196, Image.SCALE_DEFAULT);
+	    brownRunning = new ImageIcon(temp6);
+	    final ImageIcon BROWN_RUNNING_INNER = brownRunning;
+	    
+	    ImageIcon greenRunning = new ImageIcon("./img/greenRunning.gif");
+	    Image temp7 = greenRunning.getImage().getScaledInstance(140, 196, Image.SCALE_DEFAULT);
+	    greenRunning = new ImageIcon(temp7);
+	    final ImageIcon GREEN_RUNNING_INNER = greenRunning;
+	    
+	    defaultRunningLabel = new JLabel();
+	    defaultRunningLabel.setLayout(null);
+	    defaultRunningLabel.setBounds(240, 240, 140, 196);
+	    defaultRunningLabel.setVisible(false);
+	    updateRunningGraphic(defaultRunningLabel, DEFAULT_RUNNING_INNER, PURPLE_RUNNING_INNER, BROWN_RUNNING_INNER, GREEN_RUNNING_INNER);
 
 		mainMenu = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		mainMenu.setBounds(WIDTH / 23, (HEIGHT / 2) + 50, panelWidth, panelHeight);
@@ -234,8 +258,8 @@ public class Window extends Canvas{
 	    backOptions.setVisible(false);
 
 	    ImageIcon backgroundMultiplayer = new ImageIcon("./img/backgroundMultiplayer.gif");
-	    Image temp3 = backgroundMultiplayer.getImage().getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
-	    backgroundMultiplayer = new ImageIcon(temp3);
+	    Image temp4 = backgroundMultiplayer.getImage().getScaledInstance(WIDTH, HEIGHT, Image.SCALE_DEFAULT);
+	    backgroundMultiplayer = new ImageIcon(temp4);
 	    backMultiplayer = new JLabel(backgroundMultiplayer);
 	    backMultiplayer.setLayout(null);
 	    backMultiplayer.setBounds(0, 0, WIDTH, HEIGHT);
@@ -418,6 +442,7 @@ public class Window extends Canvas{
 					cycleLeftOutfitButton.setVisible(false);
 					cycleRightOutfitButton.setVisible(false);
 					backOutfit.setVisible(false);
+					defaultRunningLabel.setVisible(false);
 					backOptions.setVisible(true);
 					optionButtonPanel.setVisible(true);
 				} else {
@@ -591,6 +616,7 @@ public class Window extends Canvas{
 					if (Outfit.currentOutfit == Outfit.Outfits.PURPLE) {
 						cycleRightOutfitButton.setIcon(OUTFIT_BUTTON_RIGHT_DISABLED_INNER);
 					}
+					updateRunningGraphic(defaultRunningLabel, DEFAULT_RUNNING_INNER, PURPLE_RUNNING_INNER, BROWN_RUNNING_INNER, GREEN_RUNNING_INNER);
 					cycleLeftOutfitButton.setIcon(OUTFIT_BUTTON_LEFT_INNER);
 				}
 			}
@@ -618,6 +644,7 @@ public class Window extends Canvas{
 				if (Outfit.currentOutfit != Outfit.Outfits.GREEN) {
 					cycleLeftOutfitButton.setIcon(OUTFIT_BUTTON_LEFT_INNER);
 					Outfit.cycleLeftOutfit();
+					updateRunningGraphic(defaultRunningLabel, DEFAULT_RUNNING_INNER, PURPLE_RUNNING_INNER, BROWN_RUNNING_INNER, GREEN_RUNNING_INNER);
 					if (Outfit.currentOutfit == Outfit.Outfits.GREEN) {
 						cycleLeftOutfitButton.setIcon(OUTFIT_BUTTON_LEFT_DISABLED_INNER);
 					}
@@ -648,6 +675,7 @@ public class Window extends Canvas{
 				backOutfit.setVisible(true);
 				cycleRightOutfitButton.setVisible(true);
 				cycleLeftOutfitButton.setVisible(true);
+				defaultRunningLabel.setVisible(true);
 			}
 
 			@Override
@@ -1022,6 +1050,7 @@ public class Window extends Canvas{
 		createGamePopupPanel.add(createGamePopupText);
 		createGamePopupPanel.add(playersField);
 		createGamePopupPanel.add(submitButton);
+		c.add(defaultRunningLabel);
 		c.add(cycleRightOutfitButton);
 		c.add(cycleLeftOutfitButton);
 		c.add(mainMenu);
@@ -1064,6 +1093,28 @@ public class Window extends Canvas{
 		}
 		
 		return parsedInt;
+	}
+	
+	/**
+	 * Used to update the running player .gif on the switch outfits menu
+	 * @param runningGraphicLabel the JLabel to update
+	 * @param defaultRunning the default running graphic
+	 * @param purpleRunning the purple running graphic
+	 * @param brownRunning the brown running graphic
+	 * @param greenRunning the green running graphic
+	 */
+	public static void updateRunningGraphic(JLabel runningGraphicLabel, ImageIcon defaultRunning, ImageIcon purpleRunning, ImageIcon brownRunning, ImageIcon greenRunning) {
+		
+		if (Outfit.currentOutfit == Outfit.Outfits.DEFAULT) {
+			runningGraphicLabel.setIcon(defaultRunning);
+		} else if (Outfit.currentOutfit == Outfit.Outfits.PURPLE) {
+			runningGraphicLabel.setIcon(purpleRunning);
+		} else if (Outfit.currentOutfit == Outfit.Outfits.BROWN) {
+			runningGraphicLabel.setIcon(brownRunning);
+		} else if (Outfit.currentOutfit == Outfit.Outfits.GREEN) {
+			runningGraphicLabel.setIcon(greenRunning);
+		}
+		
 	}
 
 	/**
