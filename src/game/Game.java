@@ -20,6 +20,8 @@ import network.GameServer;
 import game.entities.players.PlayerMP;
 
 import static game.Level.*;
+import static game.Outfit.getCurrentOutfitModel;
+import static game.Outfit.getRandomOutfit;
 
 public class Game extends Canvas implements Runnable{
 
@@ -170,7 +172,7 @@ public class Game extends Canvas implements Runnable{
 		switch (gameMode)
 		{
 			case MULTIPLAYER:
-				player = new PlayerMP(0, 350, keyInput, null, -1,"player1");
+				player = new PlayerMP(0, 350, keyInput, null, -1,getCurrentOutfitModel());
 
 				Packet00Login loginPacket = new Packet00Login(player.getUsername(), 0, 350);
 				if (socketServer != null) {
@@ -179,13 +181,13 @@ public class Game extends Canvas implements Runnable{
 				loginPacket.writeData(socketClient);
 				break;
 			case vsAI:
-				player = new Player(0, 350, keyInput, 0 ,0,"player1");
-				m.getCurrentLevel().addToAddQueue(new AIPlayer(30, 350, 0 ,0, player,"player2"));
-				m.getCurrentLevel().addToAddQueue(new AIPlayer(60, 350, 0 ,0, player,"player3"));
-				m.getCurrentLevel().addToAddQueue(new AIPlayer(90, 350, 0 ,0, player,"player4"));
+				player = new Player(0, 350, keyInput, 0 ,0,getCurrentOutfitModel());
+				m.getCurrentLevel().addToAddQueue(new AIPlayer(30, 350, 0 ,0, player,getRandomOutfit()));
+				m.getCurrentLevel().addToAddQueue(new AIPlayer(60, 350, 0 ,0, player,getRandomOutfit()));
+				m.getCurrentLevel().addToAddQueue(new AIPlayer(90, 350, 0 ,0, player,getRandomOutfit()));
 				break;
 			case SINGLEPLAYER:
-				player = new Player(0, 350, keyInput, 0 ,0,"player1");
+				player = new Player(0, 350, keyInput, 0 ,0,getCurrentOutfitModel());
 				break;
 		}
 

@@ -23,6 +23,8 @@ import game.network.packets.Packet04StartGame;
 import game.network.packets.Packet05Capacity;
 
 import static game.Level.*;
+import static game.Outfit.getRandomOutfit;
+import static game.Outfit.getRandomOutfitMP;
 
 public class GameClient extends Thread {
 	private InetAddress ipAddress;
@@ -192,7 +194,7 @@ public class GameClient extends Thread {
 	 */
 	private void handleLogin(Packet00Login packet, InetAddress address, int port) {
 		System.out.println("[" + address.getHostAddress() + ":" + port + "] " + (packet).getUsername() + " has joined the game...");
-		PlayerMP player = new PlayerMP (0, 350, address, port,"player2");
+		PlayerMP player = new PlayerMP (0, 350, address, port,getRandomOutfitMP());
 		player.setUsername((packet).getUsername());
 		Level.addToAddQueue(player);
 	}

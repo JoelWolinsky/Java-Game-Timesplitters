@@ -12,6 +12,7 @@ public class Launcher {
 		difficultySettings = new DifficultySettings(cHandler.getDifficulty());
 		
 		cHandler.createConfigFile();
+		Outfit.createOutfitFile();
 		
 		new Game();		
 	}	
