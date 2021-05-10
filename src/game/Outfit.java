@@ -4,7 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
+
+import static game.Utility.getRandomElementInRangeSeeded;
 
 public class Outfit {
 	
@@ -16,7 +21,9 @@ public class Outfit {
 		BROWN,
 		GREEN
 	}
-	
+
+	public static ArrayList<Outfits> availableOutfits = new ArrayList<>(Arrays.asList(Outfits.DEFAULT,Outfits.BROWN,Outfits.GREEN,Outfits.PURPLE));
+	public static ArrayList<Outfits> availableOutfitsMP = new ArrayList<>(Arrays.asList(Outfits.DEFAULT,Outfits.BROWN,Outfits.GREEN,Outfits.PURPLE));
 	/**
 	 * Cycles left between all outfits
 	 */
@@ -129,5 +136,43 @@ public class Outfit {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public static String chooseOutfit(Outfits model)
+	{
+		switch (model){
+			case BROWN:
+				availableOutfits.remove(Outfits.BROWN);
+				return "player3";
+			case GREEN:
+				availableOutfits.remove(Outfits.GREEN);
+				return "player4";
+			case DEFAULT:
+				availableOutfits.remove(Outfits.DEFAULT);
+				return "player1";
+			case PURPLE:
+				availableOutfits.remove(Outfits.PURPLE);
+				return "player2";
+		}
+
+		return "";
+	}
+
+	public static String getCurrentOutfitModel() {
+
+		return chooseOutfit(currentOutfit);
+	}
+
+	public static String getRandomOutfit()
+	{
+		Outfits random = availableOutfits.get(new Random(System.currentTimeMillis()).nextInt(availableOutfits.size()));
+		availableOutfits.remove(random);
+		return chooseOutfit(random);
+	}
+
+	public static String getRandomOutfitMP()
+	{
+		Outfits random = availableOutfitsMP.get(new Random(System.currentTimeMillis()).nextInt(availableOutfits.size()));
+		return chooseOutfit(random);
 	}
 }
