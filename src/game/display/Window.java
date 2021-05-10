@@ -27,6 +27,7 @@ import game.DifficultySettings;
 import game.Game;
 import game.GameState;
 import game.Launcher;
+import game.Outfit;
 import game.SoundHandler;
 import game.graphics.GameMode;
 import network.GameClient;
@@ -44,7 +45,7 @@ public class Window extends Canvas{
 	public JFrame frame;
 	private static Game game;
 	public static JPanel mainMenu;
-	public static JLabel back,backOptions,backMultiplayer,backControls;
+	public static JLabel back,backOptions,backMultiplayer,backControls,backOutfit;
 	public static Dimension d = new Dimension(WIDTH,HEIGHT);
 	
 	public static int createGamePlayers;
@@ -63,8 +64,13 @@ public class Window extends Canvas{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		c.setBackground(Color.BLACK);
-
+		
+		JLabel cycleLeftOutfitButton = new JLabel();
+		JLabel cycleRightOutfitButton = new JLabel();
+		
 		SoundHandler.playMusic("mainMenuMusic", 0.1f);
+		
+		System.out.println(Outfit.currentOutfit.name());
 
 		// Creating a new Font from the PressStart2P.ttf file that can be used in HTML JLabels
 		Font buttonFont = null;
@@ -128,6 +134,18 @@ public class Window extends Canvas{
 
 		ImageIcon errorPanelIcon = new ImageIcon("./img/errorPanel.png");
 		Image scaledErrorPanel = errorPanelIcon.getImage().getScaledInstance(panelWidth - 80, panelHeight + 100, Image.SCALE_SMOOTH);
+		
+		ImageIcon outfitButtonRight = new ImageIcon("./img/outfitButtonRight.png");
+		final ImageIcon OUTFIT_BUTTON_RIGHT_INNER = outfitButtonRight;
+		
+		ImageIcon outfitButtonRightDisabled = new ImageIcon("./img/outfitButtonRightDisabled.png");
+		final ImageIcon OUTFIT_BUTTON_RIGHT_DISABLED_INNER = outfitButtonRightDisabled;
+		
+		ImageIcon outfitButtonLeft = new ImageIcon("./img/outfitButtonLeft.png");
+		final ImageIcon OUTFIT_BUTTON_LEFT_INNER = outfitButtonLeft;
+		
+		ImageIcon outfitButtonLeftDisabled = new ImageIcon("./img/outfitButtonLeftDisabled.png");
+		final ImageIcon OUTFIT_BUTTON_LEFT_DISABLED_INNER = outfitButtonLeftDisabled;
 
 		mainMenu = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		mainMenu.setBounds(WIDTH / 23, (HEIGHT / 2) + 50, panelWidth, panelHeight);
@@ -135,7 +153,7 @@ public class Window extends Canvas{
 		((FlowLayout)mainMenu.getLayout()).setVgap(panelHeight / 19);
 
 		JPanel optionButtonPanel = new JPanel(new FlowLayout());
-		optionButtonPanel.setBounds(WIDTH / 4, HEIGHT / 18 - 8, panelWidth, panelHeight * 2 + 30);
+		optionButtonPanel.setBounds(0, HEIGHT / 7, WIDTH, panelHeight * 2 + 30);
 		optionButtonPanel.setOpaque(false);
 		optionButtonPanel.setVisible(false);
 		((FlowLayout)optionButtonPanel.getLayout()).setVgap(panelHeight / 10);
@@ -228,6 +246,12 @@ public class Window extends Canvas{
 	    backControls.setLayout(null);
 	    backControls.setBounds(0, 0, WIDTH, HEIGHT);
 	    backControls.setVisible(false);
+	    
+	    ImageIcon backgroundOutfit = new ImageIcon("./img/backgroundOutfit.png");
+	    backOutfit = new JLabel(backgroundOutfit);
+	    backOutfit.setLayout(null);
+	    backOutfit.setBounds(0, 0, WIDTH, HEIGHT);
+	    backOutfit.setVisible(false);
 
 		// Declaring buttons
 		JLabel singleplayerButton = new JLabel(button1Icon);
@@ -390,6 +414,12 @@ public class Window extends Canvas{
 					backControls.setVisible(false);
 					backOptions.setVisible(true);
 					optionButtonPanel.setVisible(true);
+				} else if (backOutfit.isVisible()) {
+					cycleLeftOutfitButton.setVisible(false);
+					cycleRightOutfitButton.setVisible(false);
+					backOutfit.setVisible(false);
+					backOptions.setVisible(true);
+					optionButtonPanel.setVisible(true);
 				} else {
 					back.setVisible(true);
 					backButton.setIcon(BUTTON_2_INNER);
@@ -533,6 +563,101 @@ public class Window extends Canvas{
 			@Override
 			public void mouseExited(MouseEvent e) {
 				viewControlsButton.setIcon(BUTTON_3_INNER);
+			}
+		});
+	
+		cycleRightOutfitButton.setIcon(outfitButtonRight);
+		cycleRightOutfitButton.setBounds(450, 180, 120, 207);
+		cycleRightOutfitButton.setVisible(false);
+		
+		if (Outfit.currentOutfit == Outfit.Outfits.PURPLE) {
+			cycleRightOutfitButton.setIcon(OUTFIT_BUTTON_RIGHT_DISABLED_INNER);
+		}
+		
+		cycleRightOutfitButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (Outfit.currentOutfit != Outfit.Outfits.PURPLE) {
+					cycleRightOutfitButton.setIcon(OUTFIT_BUTTON_RIGHT_DISABLED_INNER);
+					SoundHandler.playSound("button1", 1f);
+				}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (Outfit.currentOutfit != Outfit.Outfits.PURPLE) {
+					cycleRightOutfitButton.setIcon(OUTFIT_BUTTON_RIGHT_INNER);
+					Outfit.cycleRightOutfit();
+					if (Outfit.currentOutfit == Outfit.Outfits.PURPLE) {
+						cycleRightOutfitButton.setIcon(OUTFIT_BUTTON_RIGHT_DISABLED_INNER);
+					}
+					cycleLeftOutfitButton.setIcon(OUTFIT_BUTTON_LEFT_INNER);
+				}
+			}
+		});
+		
+		cycleLeftOutfitButton.setIcon(outfitButtonLeft);
+		cycleLeftOutfitButton.setBounds(70, 180, 120, 207);
+		cycleLeftOutfitButton.setVisible(false);
+		
+		if (Outfit.currentOutfit == Outfit.Outfits.GREEN) {
+			cycleLeftOutfitButton.setIcon(OUTFIT_BUTTON_LEFT_DISABLED_INNER);
+		}
+		
+		cycleLeftOutfitButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				if (Outfit.currentOutfit != Outfit.Outfits.GREEN) {
+					cycleLeftOutfitButton.setIcon(OUTFIT_BUTTON_LEFT_DISABLED_INNER);
+					SoundHandler.playSound("button1", 1f);
+				}
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if (Outfit.currentOutfit != Outfit.Outfits.GREEN) {
+					cycleLeftOutfitButton.setIcon(OUTFIT_BUTTON_LEFT_INNER);
+					Outfit.cycleLeftOutfit();
+					if (Outfit.currentOutfit == Outfit.Outfits.GREEN) {
+						cycleLeftOutfitButton.setIcon(OUTFIT_BUTTON_LEFT_DISABLED_INNER);
+					}
+					cycleRightOutfitButton.setIcon(OUTFIT_BUTTON_RIGHT_INNER);
+				}
+			}
+		});
+		
+		JLabel changeOutfitMenuButton = new JLabel(button3Icon);
+		changeOutfitMenuButton.setForeground(Color.black);
+		changeOutfitMenuButton.setFont(sizedFont);
+		changeOutfitMenuButton.setText("CHANGE OUTFIT");
+		changeOutfitMenuButton.setHorizontalTextPosition(JLabel.CENTER);
+
+		changeOutfitMenuButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				changeOutfitMenuButton.setIcon(BUTTON_3_CLICKED_INNER);
+				SoundHandler.playSound("button1", 1f);
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				changeOutfitMenuButton.setIcon(BUTTON_3_HOVER_INNER);
+				
+				backOptions.setVisible(false);
+				optionButtonPanel.setVisible(false);
+				backOutfit.setVisible(true);
+				cycleRightOutfitButton.setVisible(true);
+				cycleLeftOutfitButton.setVisible(true);
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				changeOutfitMenuButton.setIcon(BUTTON_3_HOVER_INNER);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				changeOutfitMenuButton.setIcon(BUTTON_3_INNER);
 			}
 		});
 
@@ -888,6 +1013,7 @@ public class Window extends Canvas{
 		optionButtonPanel.add(toggleAmbienceButton);
 		optionButtonPanel.add(difficultyButton);
 		optionButtonPanel.add(viewControlsButton);
+		optionButtonPanel.add(changeOutfitMenuButton);
 		multiplayerButtonPanel.add(playVSComputerButton);
 		multiplayerButtonPanel.add(createGameButton);
 		multiplayerButtonPanel.add(joinGameButton);
@@ -896,6 +1022,8 @@ public class Window extends Canvas{
 		createGamePopupPanel.add(createGamePopupText);
 		createGamePopupPanel.add(playersField);
 		createGamePopupPanel.add(submitButton);
+		c.add(cycleRightOutfitButton);
+		c.add(cycleLeftOutfitButton);
 		c.add(mainMenu);
 		c.add(optionButtonPanel);
 		c.add(multiplayerButtonPanel);
@@ -906,6 +1034,8 @@ public class Window extends Canvas{
 		c.add(backOptions);
 		c.add(backMultiplayer);
 		c.add(backControls);
+		c.add(backOutfit);
+		
 
 		frame.add(game);
 		frame.pack();
