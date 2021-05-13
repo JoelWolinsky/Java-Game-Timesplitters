@@ -401,18 +401,6 @@ public class Player extends GameObject implements SolidCollider, GravityObject {
         }
 
 
-        if (KeyInput.g.isPressed()) {
-            if (ghostMode) {
-                ghostMode = false;
-                RUN_SPEED = 3.5f;
-                JUMP_GRAVITY = -7.5f;
-            } else {
-                ghostMode = true;
-                RUN_SPEED = 7.6f;
-                JUMP_GRAVITY = -12.0f;
-            }
-        }
-
         if(getLevelState()==LevelState.Finished || ghostMode)
         if (KeyInput.esc.isPressed()) {
 
